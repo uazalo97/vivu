@@ -53,10 +53,10 @@ Từ thư mục gốc repo (`D:\FULearning\vivu`):
 
 ```bash
 # Bước 1: clean raw markdown + model_specs.json → intermediate JSONL
-python scripts/clean_to_jsonl.py --version v1
+python scripts/clean_data/clean_to_jsonl.py --version v1
 
 # Bước 2: tách cold (vector JSONL) + hot (Postgres CSV) + manifest
-python scripts/split_cold_hot.py --version v1 --commit $(git rev-parse --short HEAD)
+python scripts/clean_data/split_cold_hot.py --version v1 --commit $(git rev-parse --short HEAD)
 ```
 
 > `--version v1` đánh dấu đợt thu thập. Khi có dữ liệu mới toàn bộ, tạo `v2`, `v3`...
@@ -64,7 +64,7 @@ python scripts/split_cold_hot.py --version v1 --commit $(git rev-parse --short H
 
 ### 2.2. Tham số
 
-#### `clean_to_jsonl.py`
+#### `scripts/clean_data/clean_to_jsonl.py`
 
 | Tham số | Mặc định | Ý nghĩa |
 |---------|----------|---------|
@@ -72,7 +72,7 @@ python scripts/split_cold_hot.py --version v1 --commit $(git rev-parse --short H
 | `--target` | `1000` | Kích thước target chunk (chars) |
 | `--hard` | `1500` | Kích thước tối đa chunk (chars) |
 
-#### `split_cold_hot.py`
+#### `scripts/clean_data/split_cold_hot.py`
 
 | Tham số | Mặc định | Ý nghĩa |
 |---------|----------|---------|
@@ -84,7 +84,7 @@ python scripts/split_cold_hot.py --version v1 --commit $(git rev-parse --short H
 1. Crawl/cập nhật file `.md` hoặc `model_specs.json` trong `data/01..08/`.
 2. Chạy lại 2 lệnh trên với version mới (VD: `v2`).
 3. So sánh `_manifest.json` của `v2` với `v1` để biết thay đổi.
-4. Ingest `vector/*.jsonl` vào Qdrant, `postgres/*.csv` vào PostgreSQL theo diff.
+4. Ingest `vector/*.jsonl` vào Qdrant, `postgres/*.csv` vào PostgreSQL theo diff. Xem thêm `scripts/ingest/`.
 
 ---
 
@@ -217,4 +217,9 @@ Sau khi có `data/clean/<version>/`:
 2. **Postgres**: `COPY edition.csv`, `price_list.csv` vào bảng tương ứng, hoặc dùng `INSERT ... ON CONFLICT UPDATE`.
 3. **Link-only**: lấy từ `_manifest.json["link_only"]` để ghép vào prompt/response mà không cần query DB.
 
-> Script ingest DB sẽ được triển khai ở phase tiếp theo (UC-01 retrieval).
+Xem chi tiết trong `scripts/ingest/README.md` và các script:
+
+```bash
+python scripts/ingest/vector_ingest.py --version v1
+python scripts/ingest/postgres_ingest.py --version v1
+```

@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import Any
 
 # ── Paths ──────────────────────────────────────────────────────────────────
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = REPO_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 CLEAN_DIR = DATA_DIR / "clean"
