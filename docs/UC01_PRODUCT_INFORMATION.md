@@ -36,11 +36,12 @@ flowchart LR
 
 | Collection | Nội dung | Cập nhật |
 |---|---|---|
-| `vivu_specs` | Thông số kỹ thuật: kích thước, động cơ, pin, ADAS, nội/ngoại thất | Theo tháng/quý |
+| `vivu_specs` | Bảng so sánh thông số, ADAS, thông số kỹ thuật | Theo tháng/quý |
 | `vivu_product_info` | Mô tả sản phẩm, tính năng, màu sắc, công nghệ | Theo tháng/quý |
-| `vivu_policy` | Điều khoản pháp lý, chính sách bảo hành, thuê pin | Theo tháng/quý |
-| `vivu_faq` | FAQ bán hàng, lái thử | Theo tháng/quý |
-| `vivu_maintenance` | Link bảo dưỡng theo model + năm | Theo năm |
+| `vivu_policy` | Chính sách bảo hành, dịch vụ pin/sửa chữa/cứu hộ, sổ bảo hành PDF | Theo tháng/quý |
+| `vivu_maintenance` | Lịch trình & hạng mục bảo dưỡng | Theo năm |
+
+> Không còn `vivu_faq` — nguồn raw hiện tại không có dữ liệu FAQ.
 
 ### 2.2. PostgreSQL (Hot — hay đổi)
 
@@ -55,9 +56,7 @@ flowchart LR
 
 | Thông tin | Lý do không lưu |
 |---|---|
-| Chi phí lăn bánh | Phụ thuộc tỉnh, năm, nghị định |
-| Khuyến mãi chiến dịch | Thay đổi liên tục theo chiến dịch |
-| Showroom/trạm sạc | Đại lý mở/đóng/đổi địa chỉ thường xuyên |
+| Brochure PDF (8 file) | File nặng, không embed text — chỉ giữ URL trong `_manifest.json["link_only"]` |
 
 ---
 
@@ -76,12 +75,11 @@ flowchart LR
 1. Vector search trên `vivu_product_info`.
 2. Trả về chunk màu sắc (không cần Postgres).
 
-### 3.3. Ví dụ: "Lăn bánh HN 2026 có khuyến mãi gì?"
+### 3.3. Ví dụ: "Tải brochure VF 8"
 
 1. Không query DB lấy số liệu.
-2. Trả link nguồn từ `_manifest.json["link_only"]`:
-   - Chi phí lăn bánh: `https://shop.vinfastauto.com/vn_vi/chi-phi-lan-banh`
-   - Khuyến mãi: `https://vinfastauto.com/vn_vi/khuyen-mai`
+2. Trả link nguồn từ `_manifest.json["link_only"]["brochure_urls"]`:
+   - Brochure VF 8: `https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf`
 
 ---
 
@@ -115,22 +113,22 @@ Chi tiết chạy từng bước xem:
 
 ```json
 {
-  "id": "vivu_specs:vf9:eco:kich_thuoc:1",
+  "id": "vivu_specs:vf8:all:so_sanh:1",
   "collection": "vivu_specs",
   "vector_version": "v1",
-  "model_id": "VF9",
-  "edition_id": "Eco",
+  "model_id": "VF8",
+  "edition_id": null,
   "category": "thong_so_ky_thuat",
-  "section_path": ["Thông số kỹ thuật", "KÍCH THƯỚC & TẢI TRỌNG"],
-  "text": "VF 9 Eco — Dài × Rộng × Cao 5119 × 2254 × 1697 mm; ...",
-  "text_type": "key_value",
-  "structured": { "dimension": { "length_mm": 5119, ... } },
+  "section_path": ["thong_so_ky_thuat", "Hiệu suất và động cơ"],
+  "text": "VF8 Plus có công suất tối đa 300 kW (402 hp), mô-men xoắn cực đại 620 Nm...",
+  "text_type": "prose",
+  "structured": {},
   "language": "vi",
-  "tags": ["ky_thuat", "vf9", "kich_thuoc"],
-  "confidence": 1.0,
-  "source_file": "data/02_thong_so_ky_thuat/model_specs.json",
-  "source_url": "https://shop.vinfastauto.com/vn_vi/dat-coc-xe-vf9.html",
-  "source_type": "specs_json",
+  "tags": ["thong_soky_thuat", "vf8"],
+  "confidence": 0.8,
+  "source_file": "data/raw/so-sanh-vf8-eco-va-vf8-plus-p56_....txt",
+  "source_url": "https://www.vinfastmiennam.vn/so-sanh-vf8-eco-va-vf8-plus-p56",
+  "source_type": "raw_html",
   "fetched_at": "...",
   "ingested_at": "..."
 }
@@ -156,8 +154,8 @@ Chi tiết chạy từng bước xem:
 
 1. **Vector text không chứa giá tiền**. Số tiền chỉ nằm trong Postgres.
 2. **Giá ưu đãi lấy từ Postgres**, không từ embedding text.
-3. **Version** (`v1`, `v2`...) chỉ đánh khi toàn bộ đợt thu thập xong.
-4. **Showroom / khuyến mãi / lăn bánh chỉ trả link**, không trả số liệu cụ thể từ DB.
+3. **Giá chỉ trích từ trang chính thống** `vinfastauto.com` / `shop.vinfastauto.com` (page `dat-coc-*`).
+4. **Brochure PDF chỉ trả link** từ `_manifest.json["link_only"]`, không trả số liệu từ DB.
 5. **Mỗi model × edition = 1 row trong `edition.csv`**.
 6. **Stable IDs**: `collection:model:edition:section:seq` trong JSONL, chuyển thành UUIDv5 khi ingest Qdrant.
 
@@ -167,13 +165,16 @@ Chi tiết chạy từng bước xem:
 
 | Thành phần | Trạng thái |
 |---|---|
+| Nguồn dữ liệu | ✅ `data/raw/` (49 file: official + PDF + article) |
 | Clean pipeline | ✅ `scripts/clean_data/` |
-| Vector output | ✅ `data/clean/v1/vector/*.jsonl` |
-| Postgres CSV output | ✅ `data/clean/v1/postgres/*.csv` |
-| Ingest Qdrant local | ✅ `scripts/ingest/vector_ingest.py` |
+| Vector output | ✅ `data/clean/v1/vector/*.jsonl` (2333 chunks, 4 collections) |
+| Postgres CSV output | ✅ `data/clean/v1/postgres/*.csv` (14 edition + 14 price) |
+| Embedding | ✅ OpenRouter `openai/text-embedding-3-small` (1536-dim, .env) |
+| Ingest Qdrant (dense + sparse) | ✅ `scripts/ingest/vector_ingest.py` + `sparse_ingest.py` |
 | Ingest Postgres local | ✅ `scripts/ingest/postgres_ingest.py` |
+| Hybrid retriever (dense+sparse+RRF+rerank) | ✅ `backend/retriever/hybrid_retriever.py` |
+| LLM response (`--answer`, OpenRouter chat) | ✅ `deepseek/deepseek-v4-flash-0731` |
 | Docker Compose local DB | ✅ `docker-compose.yml` |
-| Retriever + LLM prompt | ⏳ Phase tiếp theo |
 | Maintenance schedule chi tiết | ⏳ Chờ data bổ sung |
 
 ---

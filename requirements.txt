@@ -1,4 +1,4 @@
-# Pipeline làm sạch brochure (mục 02) — Python 3.11+
+# Pipeline clean + ingest — Python 3.11+
 jinja2>=3.1
 pyyaml>=6.0
 python-dotenv>=1.0
@@ -6,8 +6,10 @@ python-dotenv>=1.0
 # Vector DB + PostgreSQL client (local ingest)
 qdrant-client>=1.9
 psycopg2-binary>=2.9
-sentence-transformers>=3.0
 
-# (Tùy chọn, cho bước parse PDF thô sau này)
-# pdfplumber>=0.11
-# pymupdf>=1.24
+# OpenRouter API (embedding + rerank + chat streaming)
+requests>=2.31
+
+# Backend FastAPI (SSE cho frontend)
+fastapi>=0.115
+uvicorn>=0.30

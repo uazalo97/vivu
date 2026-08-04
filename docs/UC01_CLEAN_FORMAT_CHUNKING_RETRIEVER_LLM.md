@@ -7,11 +7,11 @@
 ## 1. Tổng quan luồng
 
 ```text
-RAW (markdown + specs.json)
+RAW (data/raw/*.txt — crawl output)
         │
         ▼
 ┌─────────────────┐
-│     CLEAN       │  ← bỏ noise, ảnh, OCR typo, giá tiền
+│     CLEAN       │  ← bỏ noise, HTML comment, PDF cách chữ, giá tiền
 └─────────────────┘
         │
         ▼
@@ -21,17 +21,17 @@ RAW (markdown + specs.json)
         │
         ▼
 ┌─────────────────┐
-│    CHUNKING     │  ← chia theo heading, target 1000 chars, hard 1500 chars
+│    CHUNKING     │  ← theo heading, cắt theo câu, max_len 400, overlap câu cuối
 └─────────────────┘
         │
         ▼
 ┌─────────────────┐
-│    RETRIEVER    │  ← embed query, vector search, filter model/edition
+│    RETRIEVER    │  ← dense (OpenRouter embed) + sparse (BM25) → RRF → rerank
 └─────────────────┘
         │
         ▼
 ┌─────────────────┐
-│      LLM        │  ← ghép context + giá (Postgres) + link-only
+│      LLM        │  ← ghép context + giá (Postgres, tool) + link-only (brochure)
 └─────────────────┘
 ```
 
@@ -41,22 +41,30 @@ RAW (markdown + specs.json)
 
 ### 2.1. Input
 
-- Markdown từ `data/01_thong_tin_san_pham/`, `data/02_thong_so_ky_thuat/`, `data/04_ho_tro_mua_xe/`, `data/05_chinh_sach_dich_vu/`, `data/08_dat_lich_bao_duong/`.
-- `data/02_thong_so_ky_thuat/model_specs.json`.
+- `data/raw/*.txt` — crawl output của `scripts/crawl.py` (49 file hiện tại).
+- `data/raw/link_brochure.md` — URL brochure PDF (link-only).
+
+Mỗi file có header chuẩn:
+
+```text
+# Nguồn: <url>     # Crawl lúc: <timestamp>     # Loại: pdf|html
+================================================================================
+<body content>
+```
 
 ### 2.2. Các bước clean
 
 | # | Việc | Ví dụ | Lý do |
 |---|---|---|---|
-| C1 | Bỏ markdown images | `![alt](url)` | Ảnh không mang ngữ nghĩa search |
-| C2 | Bỏ HTML tags | `<div>`, `<span>` | Chỉ giữ text có ý nghĩa |
-| C3 | Bỏ internal notes | `> FAQ excerpt...`, `> Lưu ý ingest...` | Ghi chú nội bộ team |
-| C4 | Bỏ YAML frontmatter | `--- url: ... ---` | Đưa metadata vào field, không nhúng text |
-| C5 | Sửa lỗi OCR | `CÂM HƯNG` → `Cảm hứng`, `croundClearance` → `groundClearance` | Brochure PDF OCR lỗi font/dấu |
-| C6 | Chuẩn hóa số | `5.119 x 2.254` → `5119 × 2254` | Dễ lookup, tránh nhầm decimal |
-| C7 | Tách giá khỏi text vector | Đoạn "Giá bán từ 1.280.600.000 VNĐ" → bỏ | Giá hay đổi, không để trong embedding |
-| C8 | Bỏ navigation noise | `Đăng nhập / Đăng ký`, `Hero Background` | UI elements không phải nội dung |
-| C9 | Gộp fragment ngắn | `"VF 9"`, `"Lựa chọn"`, `"tận hưởng"` → `"VF 9 Lựa chọn tận hưởng"` | Tránh chunk vô nghĩa |
+| C1 | Parse header `# Nguồn/# Loại` | URL, timestamp → metadata | Không nhúng header vào text |
+| C2 | Bỏ HTML tags + HTML comments | `<div>`, `[if IE 9]> <![endif]` | Chỉ giữ text có ý nghĩa |
+| C3 | Bỏ PUA/Unicode lạ | `` (WingDings bullet) | Ký tự vô nghĩa từ PDF |
+| C4 | Bỏ navigation noise | breadcrumb, "Đăng nhập/Đăng ký", "Chọn địa chỉ nhận hàng", phone, email | UI elements không phải nội dung |
+| C5 | Dedupe dòng lặp (≥3 lần) | tên dealer lặp trong sidebar | Nav/sidebar lặp lại |
+| C6 | De-space PDF (theo dòng) | `"T h ô n g"` → `"Thông"` | Chỉ dòng Mục lục bị pdftotext cách chữ |
+| C7 | Chuẩn hóa số | `5.119 x 2.254` → `5119 × 2254` | Dễ lookup, tránh nhầm decimal |
+| C8 | Tách giá khỏi text vector | `613.700.000 VNĐ` → bỏ | Giá hay đổi, không để trong embedding |
+| C9 | Gộp fragment ngắn | `"VF 9"`, `"Lựa chọn"` → gộp | Tránh chunk vô nghĩa |
 
 ### 2.3. Quy tắc drop giá
 
@@ -66,6 +74,16 @@ Chỉ drop paragraph khi **đồng thời**:
 - VÀ có số tiền kèm đơn vị: `1.280.600.000 VNĐ`, `188 triệu`.
 
 Không drop số kỹ thuật như `626 km`, `123 kWh`, `402 hp` vì chúng không kèm đơn vị tiền.
+`strip_price_spans` xử lý thêm trường hợp số tiền tách dòng khỏi `VNĐ` (VD `613.700.000\n\nVNĐ\*`).
+
+### 2.4. Trích giá (chỉ từ nguồn chính thống)
+
+| Nguồn | Có trích giá không |
+|---|---|
+| `vinfastauto.com`, `shop.vinfastauto.com` — page `dat-coc-*` | ✅ → Postgres |
+| PDF, web article, dealer page | ❌ Không |
+
+Edition gán theo thứ tự giá tăng dần (`MODEL_EDITIONS`): block rẻ nhất = edition đầu (Eco/Base).
 
 ---
 
@@ -75,29 +93,23 @@ Không drop số kỹ thuật như `626 km`, `123 kWh`, `402 hp` vì chúng khô
 
 ```json
 {
-  "id": "vivu_specs:vf9:eco:kich_thuoc:1",
+  "id": "vivu_specs:vf9:all:thong_so_ky_thuat:1",
   "collection": "vivu_specs",
   "vector_version": "v1",
   "model_id": "VF9",
-  "edition_id": "Eco",
+  "edition_id": null,
   "category": "thong_so_ky_thuat",
-  "section_path": ["Thông số kỹ thuật", "KÍCH THƯỚC & TẢI TRỌNG"],
-  "text": "VF 9 Eco — Dài × Rộng × Cao 5119 × 2254 × 1697 mm; ...",
-  "text_type": "key_value",
-  "structured": {
-    "dimension": {
-      "length_mm": 5119,
-      "width_mm": 2254,
-      "height_mm": 1697
-    }
-  },
+  "section_path": ["thong_so_ky_thuat", "Hiệu suất và động cơ"],
+  "text": "VF8 Plus có công suất tối đa 300 kW (402 hp), mô-men xoắn cực đại 620 Nm...",
+  "text_type": "prose",
+  "structured": {},
   "language": "vi",
-  "tags": ["ky_thuat", "vf9", "kich_thuoc"],
-  "confidence": 1.0,
-  "source_file": "data/02_thong_so_ky_thuat/model_specs.json",
-  "source_url": "https://shop.vinfastauto.com/vn_vi/dat-coc-xe-vf9.html",
-  "source_type": "specs_json",
-  "fetched_at": "...",
+  "tags": ["thong_soky_thuat", "vf9"],
+  "confidence": 0.8,
+  "source_file": "data/raw/so-sanh-vf8-eco-va-vf8-plus-p56_....txt",
+  "source_url": "https://www.vinfastmiennam.vn/so-sanh-vf8-eco-va-vf8-plus-p56",
+  "source_type": "raw_html",
+  "fetched_at": "2026-07-30T22:56:26",
   "ingested_at": "..."
 }
 ```
@@ -109,26 +121,24 @@ Không drop số kỹ thuật như `626 km`, `123 kWh`, `402 hp` vì chúng khô
 | `prose` | Đoạn văn mô tả |
 | `table` | Bảng Markdown có `|` và `---` |
 | `list` | Danh sách item `-` hoặc `1. 2. 3.` |
-| `key_value` | Thông số kỹ thuật dạng `key: value` |
 | `qa_pair` | FAQ 1 câu hỏi + 1 câu trả lời |
-| `legal_clause` | Điều khoản pháp lý từng Điều |
-| `link_list` | Danh sách link bảo dưỡng |
 
 ### 3.3. Chuẩn hóa khóa
 
-- `model_id`: `VF9`, `VF8`, `VF7`, `VF5`, `VF3`, `VF2`, `VFMPV7`, `ECVAN`...
-- `edition_id`: `Eco`, `Plus`, `PlusCaptain`, `TieuChuan`...
-- Map từ raw: `Products-Car-VF9` → `VF9`, `NE3LV` → `Eco`.
+- `model_id`: `VF2`, `VF3`, `VF5`, `VF6`, `VF7`, `VF8`, `VF9`, `VFMPV7`, `VFE34`...
+- `edition_id`: `Eco`, `Plus`, `PlusCaptain`, `TieuChuan`, `NangCao`, `CaoCap`.
+- `model_id` infer từ tên file raw (vd `vinfast-vf9-*` → `VF9`).
 
 ### 3.4. Phân loại collection
 
-| Collection | Nguồn | Mục đích |
+| Collection | Nguồn raw | Mục đích |
 |---|---|---|
-| `vivu_specs` | `model_specs.json` + brochure | Trả lời thông số kỹ thuật |
-| `vivu_product_info` | `01_thong_tin_san_pham/*.md` | Trả lời mô tả, tính năng, màu sắc |
-| `vivu_faq` | `04_ho_tro_mua_xe/*.md` | Trả lời FAQ bán hàng, lái thử |
-| `vivu_policy` | `05_chinh_sach_dich_vu/*.md` | Trả lời chính sách, điều khoản |
-| `vivu_maintenance` | `08_dat_lich_bao_duong/*.md` | Trả link bảo dưỡng |
+| `vivu_specs` | `so-sanh-*`, `bang-doi-chieu-*`, `thong-so-ky-thuat-*` | Bảng so sánh thông số, ADAS |
+| `vivu_product_info` | `dat-coc-*`, `san-pham_*`, `product_*`, tin tức, dealer | Mô tả, tính năng, màu sắc |
+| `vivu_policy` | `chinh-sach-bao-hanh`, `dich-vu-pin/sua-chua/cuu-ho`, PDF sổ bảo hành | Chính sách, điều khoản bảo hành |
+| `vivu_maintenance` | `dich-vu-bao-duong-*` | Lịch trình & hạng mục bảo dưỡng |
+
+> Không còn `vivu_faq` — nguồn raw không có FAQ.
 
 ---
 
@@ -136,117 +146,162 @@ Không drop số kỹ thuật như `626 km`, `123 kWh`, `402 hp` vì chúng khô
 
 ### 4.1. Chiến lược
 
-- **Split theo heading hierarchy** (`#`, `##`, `###`).
-- **Target** ~1000 chars.
-- **Hard limit** 1500 chars.
-- **Overlap** 100 chars giữa các chunk liền kề (nếu split).
-- **Không cắt giữa bảng** — nếu bảng bị cắt, lặp lại header row.
-- **Không cắt giữa câu** — ưu tiên cắt ở dấu xuống dòng giữa các đoạn.
+- **Tầng 1 — theo heading** (`#`, `##`, `###`): 1 section heading = 1 chunk.
+- **Tầng 2 — cắt theo câu** khi chunk > `max_len` (400 chars):
+  - Gom câu tới khi thêm câu tiếp vượt 400 → cắt ở **biên câu**.
+  - Specs key:value không có dấu câu → cắt ở `; ` (giữ nguyên cặp `key: value`).
+  - **Overlap** = câu cuối hoàn chỉnh của chunk trước làm mở đầu chunk sau.
+  - Bảng markdown → lặp header row ở mỗi mảnh.
+- **max_len = 400** — hiện giữ từ bản đầu (khớp cửa sổ MiniLM cũ). Model mới `text-embedding-3-small`
+  có window 8191 token (rộng hơn nhiều), nên **có thể tăng max-len lên 1000-2000** để ít chunk hơn,
+  mỗi chunk mang nhiều ngữ nghĩa. Muốn đổi: chạy lại `clean_to_jsonl.py --max-len <n>` + re-ingest.
 
-### 4.2. Quy tắc đặc biệt theo loại dữ liệu
+### 4.2. Ví dụ
 
-| Loại dữ liệu | Quy tắc chunk |
-|---|---|
-| FAQ | 1 Q&A = 1 chunk (`qa_pair`) |
-| Legal | 1 Điều = 1 chunk (`legal_clause`) |
-| Specs JSON | 1 section = 1 chunk (dimension, powertrain, adas, exterior, interior, safety) |
-| Product info | Theo heading section |
-| Brochure OCR | Theo block/page, confidence thấp hơn |
-| Maintenance links | 1 model × 1 năm = 1 chunk |
+Section prose 750 chars, các câu dài 150/120/180/130/170:
+
+```text
+buf=""        +"A."(150) → 150   ✓
+              +"B."(120) → 270   ✓
+              +"C."(180) → 450 > 400 → emit "A. B."  ; buf = "B." + "C."
+              +"D."(130) → 430 > 400 → emit "B. C."  ; buf = "C." + "D."
+              +"E."(170) → 480 > 400 → emit "C. D."  ; buf = "D." + "E."
+  end → emit "D. E."
+
+Kết quả: ["A. B.", "B. C.", "C. D.", "D. E."] — mỗi chunk ≤400, overlap 1 câu.
+```
 
 ### 4.3. Stable ID
 
 ```text
 <collection>:<model_id_lower>:<edition_id_lower>:<section_slug>:<seq>
-
-vd:
-  vivu_specs:vf9:eco:kich_thuoc:1
-  vivu_faq:general:all:faq_lai_thu:5
-  vivu_maintenance:vf5:all:bao_duong_2026:1
 ```
 
 ---
 
-## 5. RETRIEVER — Tìm kiếm như thế nào?
+## 5. RETRIEVER — Luồng xử lý câu hỏi
+
+Retriever nhận câu hỏi user, phân tích intent rồi quyết định **trả lời bằng tool (fast-path)**
+hay **đi tìm kiếm vector**. Kết quả luôn là một dict gồm: model/edition detect được, danh sách
+collection, chunks (nếu có), giá, lịch bảo dưỡng, danh mục xe, brochure — để bước LLM ghép thành prompt.
 
 ### 5.1. Input
 
-Câu hỏi user, ví dụ: `"VF 9 Plus giá bao nhiêu, có ADAS gì?"`
+Câu hỏi user, ví dụ: "VF 9 Plus giá bao nhiêu, có ADAS gì?"
 
-### 5.2. Các bước
+### 5.2. Các bước xử lý
 
-1. **Embed query** bằng cùng model embedding (MiniLM-L12-v2).
-2. **Entity detection**: thử nhận diện `model_id`, `edition_id` từ query.
-   - VD: `VF 9` → `VF9`, `Plus` → `Plus`.
-3. **Chọn collection**:
-   - Hỏi thông số → `vivu_specs`
-   - Hỏi mô tả/tính năng/màu → `vivu_product_info`
-   - Hỏi chính sách/lái thử → `vivu_faq` / `vivu_policy`
-   - Nếu không rõ → search trên tất cả collection.
-4. **Vector search** với filter `model_id`/`edition_id` nếu detect được.
-5. **Trả về top-k** (k=3~5) chunks kèm metadata.
+1. **Entity detection** — nhận diện model/edition từ câu hỏi bằng regex.
+   VD: "VF 9 Plus" → model VF9, edition Plus.
+2. **Intent detection** — xác định chủ đề theo keyword:
+   - Thông số (kích thước, công suất, pin, ADAS…) → tìm trên `vivu_specs`
+   - Mô tả/tính năng/màu/thiết kế → `vivu_product_info`
+   - Chính sách/bảo hành/phí thuê pin → `vivu_policy`
+   - Bảo dưỡng → **tool fast-path** (bước 3)
+   - Hỏi danh mục dòng xe → **tool fast-path** (bước 3)
+   - Không khớp intent nào → tìm trên tất cả collection.
+3. **Tool fast-path** — hai loại câu hỏi KHÔNG tra vector, trả lời trực tiếp bằng tool:
+   - Bảo dưỡng → tool `get_maintenance_info`: lịch bảo dưỡng chung + link trang chính thức.
+   - Danh mục dòng xe → tool `get_model_list`: danh sách + số lượng dòng xe trong KB.
+   Lý do tách fast-path: dữ liệu vector của 2 chủ đề này dễ bị LLM tóm tắt/liệt kê sai
+   (lịch bảo dưỡng theo từng xe, danh mục xe lấy từ trang bên thứ ba).
+4. **Vector search** — cho các câu hỏi còn lại:
+   - **Dense**: nhúng câu hỏi qua OpenRouter (text-embedding) rồi tìm vector trên các
+     collection ứng với intent, lọc theo model/edition nếu detect được.
+   - **Sparse**: tokenize + BM25 trên collection sparse (chạy local, không tốn API).
+   - **RRF fusion**: gộp điểm 2 nguồn (reciprocal rank fusion) → chọn top-k chunk.
+   - (Bước rerank đã bỏ khỏi luồng.)
+   - Text lấy từ `data/clean/<version>/vector/*.jsonl` theo id — payload Qdrant không lưu text.
+5. **Giá** — nếu detect được model → gọi tool `get_price` lấy từ Postgres.
+6. **Brochure** — link brochure theo model detect; không detect được thì trả toàn bộ.
 
-### 5.3. Lấy giá từ Postgres
+### 5.3. Tool Registry
 
-Nếu chunk match có `model_id` + `edition_id`, thực hiện:
+Ba tool đăng ký trong `TOOL_REGISTRY`, gọi theo kiểu **deterministic fast-path** (detect
+intent/model bằng regex rồi gọi handler trực tiếp — không để LLM tự quyết định gọi tool):
 
-```sql
-SELECT price_list_vnd, price_promo_vnd, promo_label, updated_at
-FROM price_list
-WHERE model_id = 'VF9' AND edition_id = 'Plus'
-  AND (valid_to IS NULL OR valid_to >= CURRENT_DATE)
-ORDER BY valid_from DESC
-LIMIT 1;
-```
+| Tool | Tham số | Trả về | Khi nào gọi |
+|------|---------|--------|-------------|
+| `get_price` | model, edition | giá niêm yết + ưu đãi + nguồn | mọi câu hỏi detect được model |
+| `get_maintenance_info` | model (tùy chọn) | lịch bảo dưỡng chung + link chính thức | intent bảo dưỡng |
+| `get_model_list` | — | số lượng + danh sách dòng xe | hỏi danh mục xe |
+
+Cấu trúc registry sẵn sàng bật **LLM function-calling** (tool call) sau này mà không phải
+đổi kiến trúc.
+
+### 5.4. Tool get_price — giá từ Postgres
+
+Khi detect được model/edition, retriever gọi `get_price` đọc bảng `price_list` (Postgres):
+chỉ lấy bản giá mới nhất còn hiệu lực (valid_to trống hoặc từ hôm nay trở đi), ưu tiên theo
+ngày áp dụng gần nhất. Kết quả được gắn kèm model/edition để LLM biết giá thuộc đúng phiên
+bản nào, tránh suy diễn sang phiên bản khác.
 
 ---
 
 ## 6. LLM — Ghép prompt và trả lời
 
-### 6.1. Prompt template
+### 6.1. Cấu trúc prompt
 
-```text
-Thông tin xe từ cơ sở tri thức:
-{vector_context}
+Prompt gồm 2 phần: **system** (cố định) và **user** (ghép động theo kết quả retrieve).
 
-Giá hiện hành (cập nhật {updated_at}):
-- Niêm yết: {price_list_vnd}
-- Ưu đãi: {price_promo_vnd} ({promo_label})
+**System prompt** — vai trò và quy tắc ứng xử:
+- Vai trò: Trợ lý Vivu, tư vấn xe VinFast, trả lời bằng tiếng Việt.
+- Phong cách: tự nhiên, chi tiết, đầy đủ.
+- Giá: chỉ dùng số được cung cấp từ Postgres; không có giá thì nói rõ "chưa có giá hiện hành".
+- Không bịa số liệu, thông số, tính năng không có trong context.
+- Kèm nguồn (source_url) nếu có.
+- Không nhắc tới 'context', 'Postgres' hay quá trình nội bộ.
+- Luôn xưng hô là "Trợ lý Vivu".
 
-Tham khảo (link mới nhất):
-- Khuyến mãi: {promo_url}
-- Chi phí lăn bánh: {roadside_url}
-- Showroom: {showroom_url}
+**User message** — các phần ghép theo thứ tự (phần không có thì bỏ qua):
+1. **THÔNG TIN TỪ CƠ SỞ TRI THỨC** — từng chunk: [collection | model | section] + nội dung + (nguồn: url).
+2. **THÔNG TIN LỊCH BẢO DƯỠNG** — khi intent bảo dưỡng: tóm tắt lịch chung + link trang chính thức.
+3. **DANH MỤC DÒNG XE VINFAST** — khi hỏi danh mục: số lượng + danh sách dòng xe.
+4. **GIÁ HIỆN HÀNH cho model edition** — niêm yết, ưu đãi (tên chương trình), lưu ý giá chỉ áp dụng cho đúng phiên bản.
+5. **BROCHURE THAM KHẢO** — tối đa 3 link.
+6. **Câu hỏi** của user đặt ở cuối.
+- Nếu không có chunk cũng không có tool nào khớp: ghi rõ "(Không tìm thấy thông tin liên
+  quan trong cơ sở tri thức.)" để LLM thừa nhận thay vì bịa.
 
-Trả lời câu hỏi: "{user_query}"
-```
+### 6.2. Quy tắc response theo loại câu hỏi
 
-### 6.2. Quy tắc response
-
-- Trả lời bằng tiếng Việt.
-- Nếu hỏi giá: đọc số từ Postgres, không tự bịa.
-- Nếu hỏi showroom/lăn bánh/khuyến mãi: chỉ trả link, không trả số liệu cụ thể.
-- Nếu không tìm thấy thông tin: thừa nhận và gợi ý link nguồn.
-- Luôn kèm nguồn/thời điểm cập nhật nếu có.
+- **Giá**: đọc số từ Postgres, nói rõ phiên bản giá áp dụng, kèm nguồn.
+- **Bảo dưỡng**: trả lời lịch bảo dưỡng chung + link chính thức, không đi sâu theo từng xe.
+- **Danh mục xe**: liệt kê đầy đủ các dòng xe kèm số lượng.
+- **Không đủ context**: thừa nhận chưa có thông tin và gợi ý link nguồn/brochure.
+- Luôn kèm nguồn nếu có; không nhắc quy trình nội bộ.
 
 ### 6.3. Ví dụ output mong đợi
 
 **User:** "VF 9 Plus giá bao nhiêu?"
 
 **LLM:**
-> VF 9 Plus giá niêm yết 1.529.000.000 VNĐ, giá ưu đãi hiện hành 1.452.550.000 VNĐ (chương trình Ưu đãi đặt cọc 2026, cập nhật 2026-08-03).
-> Giá đã bao gồm VAT và pin.
-> Tham khảo chi phí lăn bánh và khuyến mãi mới nhất: [link].
+> VF 9 Plus giá niêm yết 1.529.000.000 VNĐ, giá ưu đãi hiện hành 1.452.550.000 VNĐ
+> (chương trình Ưu đãi đặt cọc 2026). Giá đã bao gồm VAT. Tải brochure tham khảo: [link].
+
+**User:** "bảo dưỡng xe"
+
+**LLM:**
+> Bảo dưỡng định kỳ là điều kiện cần để được hưởng bảo hành; lịch tính theo quãng đường
+> (km) hoặc thời gian theo tháng, tùy điều kiện nào đến trước, hạng mục cụ thể theo từng
+> dòng xe. Tra cứu lịch bảo dưỡng chi tiết: https://vinfastauto.com/vn_vi/dich-vu-bao-duong-oto
+
+**User:** "VinFast có mấy loại xe?"
+
+**LLM:**
+> VinFast có 9 dòng xe: VF 2, VF 3, VF 5, VF 6, VF 7, VF 8, VF 9, VF e34, VF MPV 7.
 
 ---
 
 ## 7. Tóm tắt các quy tắc bắt buộc
 
-1. **Clean**: text vector sạch, không ảnh, không noise, không giá.
-2. **Format**: schema cố định, khóa chuẩn hóa, metadata đầy đủ.
-3. **Chunking**: theo heading, target 1000/hard 1500, giữ nguyên bảng/Q&A/Điều.
-4. **Retriever**: embed query, search collection phù hợp, filter model/edition.
-5. **LLM**: ghép context + giá Postgres + link-only; không bịa số liệu.
+1. **Nguồn duy nhất**: `data/raw/`. Không dùng `data/01..08/`, `model_specs.json`.
+2. **Clean**: text vector sạch, không HTML comment/PUA/nav noise, không giá.
+3. **Giá**: chỉ trích từ trang chính thống `dat-coc-*`, nằm ở Postgres.
+4. **Chunking**: theo heading + câu, max_len 400, overlap câu cuối, giữ nguyên bảng.
+5. **Retriever**: bảo dưỡng & danh mục xe → tool fast-path (không tra vector); còn lại embed
+   query, search collection phù hợp, filter model/edition, join text theo id.
+6. **LLM**: ghép context + giá Postgres + link brochure + tool output (nếu có); không bịa số liệu.
 
 ---
 
@@ -254,5 +309,6 @@ Trả lời câu hỏi: "{user_query}"
 
 - `docs/UC01_PRODUCT_INFORMATION.md` — kiến trúc tổng thể.
 - `data/DATA_PIPELINE_GUIDE.md` — chạy clean pipeline.
-- `scripts/clean_data/clean_to_jsonl.py` — code clean/format.
-- `scripts/clean_data/split_cold_hot.py` — code chunking + split.
+- `scripts/clean_data/clean_to_jsonl.py` — code clean/format/chunking.
+- `scripts/clean_data/split_cold_hot.py` — code split cold/hot.
+- `docs/CHUNKING_PROPOSAL.md` — quyết định chunking (đã áp dụng).

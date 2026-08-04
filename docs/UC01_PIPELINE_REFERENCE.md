@@ -10,15 +10,16 @@
 
 ```text
 RAW DATA
-    ├── Markdown files (01..08)
-    └── model_specs.json
+    └── data/raw/*.txt (crawl output: html/pdf)
+        └── link_brochure.md (brochure URLs)
            │
            ▼
     ┌─────────────────────────────┐
     │  scripts/clean_data/        │
     │  clean_to_jsonl.py          │
-    │  • Clean ảnh, noise, OCR    │
-    │  • Tách giá ra khỏi text    │
+    │  • Parse header + classify  │
+    │  • Clean HTML/PDF noise     │
+    │  • Tách giá dat-coc → hot   │
     │  • Emit intermediate JSONL  │
     └─────────────────────────────┘
            │
@@ -34,17 +35,18 @@ RAW DATA
            ▼
     ┌─────────────────────────────┐
     │  scripts/ingest/            │
-    │  vector_ingest.py           │
-    │  postgres_ingest.py         │
-    │  • Embed + upsert Qdrant    │
-    │  • COPY/UPSERT PostgreSQL   │
+    │  vector_ingest.py           │  embed qua OpenRouter
+    │  sparse_ingest.py           │  (openai/text-embedding-3-small)
+    │  postgres_ingest.py         │  + BM25 sparse + Postgres
     └─────────────────────────────┘
            │
            ▼
     ┌─────────────────────────────┐
-    │  RETRIEVER + LLM            │
-    │  • Vector search lấy model  │
-    │  • Postgres JOIN lấy giá    │
+    │  backend/retriever/         │
+    │  hybrid_retriever.py        │
+    │  • Dense + Sparse + RRF     │
+    │  • Rerank (cohere/rerank)   │
+    │  • Tool get_price (Postgres)│
     │  • Ghép prompt → trả lời    │
     └─────────────────────────────┘
 ```
@@ -55,7 +57,7 @@ RAW DATA
 |---|---|
 | Tách 2 DB (Vector + Postgres) | Giá hay đổi, không nên re-embed liên tục |
 | Vector text không chứa số tiền | Tránh trả giá cũ, giá lỗi thời |
-| Showroom / khuyến mãi / lăn bánh chỉ trả link | Dữ liệu địa phương, thay đổi liên tục |
+| Brochure PDF chỉ trả link | File nặng, không embed text |
 | Version `v1`, `v2`... | Rollback dễ, so sánh đợt thu thập |
 | `model_id` + `edition_id` làm khóa join | Chuẩn hóa giữa 2 DB |
 
@@ -67,10 +69,10 @@ RAW DATA
 
 | # | Task | Mô tả | Trạng thái |
 |---|------|-------|-----------|
-| A1 | Chuẩn hóa `model_id` / `edition_id` | Map `Products-Car-VF9` → `VF9`, `NE3LV` → `Eco` | ✅ Done |
-| A2 | Clean markdown | Bỏ ảnh, noise, ghi chú nội bộ, giá tiền trong text | ✅ Done |
-| A3 | Parse `model_specs.json` | Tách specs → vector, price → hot rows | ✅ Done |
-| A4 | Chunk hóa dữ liệu | Theo section heading, target 1000 chars, hard 1500 | ✅ Done |
+| A1 | Chuẩn hóa `model_id` / `edition_id` | Infer từ tên file raw; edition theo thứ tự giá | ✅ Done |
+| A2 | Clean raw crawl | Parse header, bỏ HTML/PUA/nav noise, dedupe, de-space PDF | ✅ Done |
+| A3 | Trích giá dat-coc (chính thống) | `vinfastauto.com/shop` → hot rows; không lấy từ dealer | ✅ Done |
+| A4 | Chunk hóa dữ liệu | Theo heading → cắt theo câu, max_len 400, overlap câu cuối | ✅ Done |
 | A5 | Split cold / hot | Emit `vector/*.jsonl` + `postgres/*.csv` | ✅ Done |
 | A6 | Tạo `_manifest.json` | Index version, tracking thay đổi | ✅ Done |
 
@@ -79,19 +81,20 @@ RAW DATA
 | # | Task | Mô tả | Trạng thái |
 |---|------|-------|-----------|
 | B1 | Docker Compose Qdrant + Postgres | `docker-compose.yml` chạy local | ✅ Done |
-| B2 | Vector ingest | Embed text + upsert vào Qdrant collection | ✅ Done |
-| B3 | Postgres ingest | Tạo bảng, upsert `edition`, `price_list` | ✅ Done |
-| B4 | Tracking `ingest_version` | Ghi metadata vào Postgres | ✅ Done |
+| B2 | Vector ingest | Embed qua **OpenRouter** (`openai/text-embedding-3-small`, 1536-dim) → Qdrant | ✅ Done |
+| B3 | Sparse ingest | BM25/TF-IDF → collection `sparse` (không cần API) | ✅ Done |
+| B4 | Postgres ingest | Tạo bảng, upsert `edition`, `price_list` | ✅ Done |
+| B5 | Tracking `ingest_version` | Ghi metadata vào Postgres | ✅ Done |
 
 ### Phần C — Retrieval (tiếp theo)
 
 | # | Task | Mô tả | Trạng thái |
 |---|------|-------|-----------|
-| C1 | Vector retriever | Tìm chunk specs/product theo câu hỏi user | ⏳ Todo |
-| C2 | Entity extractor | Nhận diện `model_id` + `edition_id` từ query | ⏳ Todo |
-| C3 | Postgres JOIN | Lấy giá + chính sách theo khóa | ⏳ Todo |
-| C4 | Prompt builder | Ghép context + giá + link-only → prompt LLM | ⏳ Todo |
-| C5 | Response formatter | Trả lời tiếng Việt, không bịa số liệu | ⏳ Todo |
+| C1 | Hybrid retriever | Dense + Sparse + RRF + **rerank** (`backend/retriever/hybrid_retriever.py`) | ✅ Done |
+| C2 | Entity extractor | Regex detect `model_id` + `edition_id` từ query | ✅ Done |
+| C3 | Tool `get_price` | Postgres JOIN qua `TOOL_REGISTRY` (deterministic fast-path, sẵn sàng tool-call) | ✅ Done |
+| C4 | Context builder | Ghép chunk + giá + brochure → prompt LLM | ✅ Done |
+| C5 | LLM response | `--answer` gọi OpenRouter chat (`deepseek/deepseek-v4-flash-0731`) sinh câu trả lời | ✅ Done |
 
 ### Phần D — Vận hành & Kiểm thử
 

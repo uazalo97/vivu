@@ -135,7 +135,7 @@ def load_link_only(version_dir: Path) -> dict[str, list[str]]:
     path = version_dir / "intermediate" / "link_only.json"
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
-    return {"showroom_urls": [], "promotion_urls": [], "roadside_cost_urls": []}
+    return {"brochure_urls": [], "showroom_urls": [], "promotion_urls": [], "roadside_cost_urls": []}
 
 
 def build_manifest(
@@ -216,6 +216,13 @@ def main() -> int:
     # Load intermediate
     vector_rows = [json.loads(line) for line in (inter_dir / "vector.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
     hot_rows = [json.loads(line) for line in (inter_dir / "hot.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+
+    # Dọn output cũ (tránh file collection không còn trong version mới — VD vivu_faq)
+    for d in (vector_dir, postgres_dir):
+        if d.exists():
+            for f in d.iterdir():
+                if f.is_file():
+                    f.unlink()
 
     # Split vectors
     by_collection = split_vector_by_collection(vector_rows)
