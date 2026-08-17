@@ -58,20 +58,18 @@ export function InputBar() {
           aria-label={isStreaming ? "Dừng" : "Gửi"}
           className={
             "group relative flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full transition-all duration-200 " +
-            (isStreaming
-              ? "text-ink hover:bg-ink/10 active:scale-95"
-              : value.trim()
-                ? "text-primary hover:bg-primary/10 active:scale-95"
-                : "text-ink/30 bg-transparent disabled:cursor-not-allowed")
+            (isStreaming || value.trim()
+              ? "text-primary hover:bg-primary/10 active:scale-95"
+              : "text-ink/30 bg-transparent disabled:cursor-not-allowed")
           }
         >
           {isStreaming ? (
-            <Square fill="currentColor" size={20} />
+            <Square size={20} strokeWidth={2.5} />
           ) : (
-            <SendHorizontal size={24}/>
+            <SendHorizontal size={24} />
           )}
-          <span className="pointer-events-none absolute -top-8 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
-            {isStreaming ? "Dừng tạo câu trả lời" : "Gửi"}
+          <span className="pointer-events-none absolute -top-8 right-0 z-50 whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
+            {isStreaming ? "Dừng" : "Gửi"}
           </span>
         </button>
       </div>

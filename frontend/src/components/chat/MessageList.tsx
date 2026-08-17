@@ -39,9 +39,6 @@ export function MessageList() {
           />
         ))}
 
-        {/* Đang gọi tool (trước khi có token) */}
-        {isStreaming && <ToolsIndicator tools={toolCalls} />}
-
         {/* Gợi ý đầu hội thoại */}
         {showSuggestions && <SuggestionChips key={`suggestions-${messages[0]?.id}`} />}
       </div>
