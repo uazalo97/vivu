@@ -24,7 +24,7 @@ export function ChatHeader() {
         className="group relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <RotateCw size={18} />
-        <span className="pointer-events-none absolute -bottom-8 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
+        <span className="pointer-events-none absolute -bottom-8 right-0 z-50 hidden sm:block whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
           Làm mới
         </span>
       </button>
@@ -37,7 +37,7 @@ export function ChatHeader() {
         className="group relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-ink-soft transition-colors hover:bg-ink/5 hover:text-ink"
       >
         <X size={20} />
-        <span className="pointer-events-none absolute -bottom-8 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
+        <span className="pointer-events-none absolute -bottom-8 right-0 z-50 hidden sm:block whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
           Đóng
         </span>
       </button>

@@ -163,7 +163,7 @@ export function InputBar() {
             }`}
           >
             {isRecording ? <Square size={16} fill="currentColor" strokeWidth={3} /> : <Mic size={23} strokeWidth={2} />}
-            <span className="pointer-events-none absolute -top-8 z-50 whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
+            <span className="pointer-events-none absolute -top-8 z-50 hidden sm:block whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
               {isRecording ? "Dừng ghi âm" : "Ghi âm giọng nói"}
             </span>
           </button>
@@ -186,7 +186,7 @@ export function InputBar() {
             ) : (
               <SendHorizontal size={24} />
             )}
-            <span className="pointer-events-none absolute -top-8 right-0 z-50 whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
+            <span className="pointer-events-none absolute -top-8 right-0 z-50 hidden sm:block whitespace-nowrap rounded-md bg-ink/90 px-2 py-1 text-[11px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100">
               {isStreaming ? "Dừng" : "Gửi"}
             </span>
           </button>
