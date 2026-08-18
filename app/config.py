@@ -1,4 +1,4 @@
-from dotenv import dotenv_values
+﻿from dotenv import dotenv_values
 
 _env = dotenv_values(".env")
 
@@ -23,6 +23,12 @@ class Settings:
         self.rerank_model: str = _env.get("RERANK_MODEL", "cohere")
         self.rerank_top_k: int = int(_env.get("RERANK_TOP_K", "20"))
         self.cohere_api_key: str = _env.get("COHERE_API_KEY", "")
+
+        # Telemetry & Admin Metrics (Thêm mới, giữ nguyên 100% code gốc bên trên)
+        self.metrics_enabled: bool = _env.get("METRICS_ENABLED", "true").lower() == "true"
+        self.admin_api_key: str = _env.get("ADMIN_API_KEY", "")
+        self.usd_vnd_rate: float = float(_env.get("USD_VND_EXCHANGE_RATE", "25400.0"))
+        self.app_version: str = _env.get("APP_VERSION", "v1.0.0")
 
 
 settings = Settings()
