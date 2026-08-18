@@ -196,7 +196,7 @@ export function InputBar() {
         )}
       </div>
       <div className="mt-2 text-center text-[11px] font-medium text-ink-soft/60">
-        Phát triển bởi <span className="font-bold"><span className="text-[#E41A23]">V</span><span className="text-black">-</span><span className="text-[#1D4179]">Internship</span></span>
+        Powered by <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmynwflXpkE-oKuOuxkYuKMBZ-QTq7BOgGNQ&s" target="_blank" rel="noopener noreferrer" className="font-bold"><span className="text-[#E41A23]">V</span><span className="text-black"> - </span><span className="text-[#1D4179]">Internship</span></a> Core Team at <a href="https://vingroup.net/" target="_blank" rel="noopener noreferrer" className="font-bold"><span className="text-[#E41A23]">Vin</span><span className="text-[#99002F]">Group</span></a>
       </div>
     </div>
   );
