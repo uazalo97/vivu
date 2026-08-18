@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 import { useChatStore } from "../../store/chatStore";
 import { MessageBubble } from "./MessageBubble";
 import { SuggestionChips } from "./SuggestionChips";
-import { ToolsIndicator } from "./ToolsIndicator";
 
 export function MessageList() {
   const messages = useChatStore((s) => s.messages);

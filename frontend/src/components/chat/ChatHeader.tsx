@@ -2,7 +2,6 @@
  * Header của chat panel: avatar + tên bot + các thao tác (thu nhỏ, xóa, đóng).
  */
 import { useChatStore } from "../../store/chatStore";
-import { BRAND } from "../../config";
 import { RotateCw, X } from "lucide-react";
 import logoUrl from "../../assets/images/VinFast-logo-2026.png";
 

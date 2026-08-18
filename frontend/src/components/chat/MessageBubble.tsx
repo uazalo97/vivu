@@ -6,7 +6,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { ChatMessage } from "../../store/chatStore";
 import { useChatStore } from "../../store/chatStore";
-import { SourceChips } from "./SourceChips";
 import { TypingDots } from "./TypingDots";
 import { RotateCcw } from "lucide-react";
 import logoUrl from "../../assets/images/Vinfast-logo.png";

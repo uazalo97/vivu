@@ -3,7 +3,7 @@
  */
 import type { CSSProperties } from "react";
 
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 interface ChatLauncherProps {
   open: boolean;
