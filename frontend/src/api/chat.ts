@@ -15,10 +15,27 @@ export function setApiBase(base: string): void {
 }
 
 /**
+ * Đọc JSON lỗi từ FastAPI HTTPException: {detail: string}
+ */
+async function extractErrorDetail(res: Response): Promise<string> {
+  try {
+    const j = await res.json();
+    if (typeof j?.detail === "string") return j.detail;
+    if (Array.isArray(j?.detail)) {
+      return j.detail.map((d: { msg?: string }) => d.msg ?? "").join("; ");
+    }
+  } catch {
+    /* không phải JSON */
+  }
+  return `Lỗi máy chủ (HTTP ${res.status})`;
+}
+
+/**
  * Đọc toàn bộ stream SSE, gọi onEvent cho từng event hợp lệ.
  * Ném AbortError khi tín hiệu abort — caller tự xử lý.
  */
 export async function chatStream(
+  sessionId: string,
   message: string,
   history: ChatMessagePayload[],
   onEvent: (event: SseEvent) => void,
@@ -27,10 +44,13 @@ export async function chatStream(
   const res = await fetch(`${apiBase}/chat/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({ session_id: sessionId, message, history }),
     signal,
   });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  if (!res.ok) {
+    const errDetail = await extractErrorDetail(res);
+    throw new Error(errDetail);
+  }
   if (!res.body) throw new Error("Response không có body");
 
   const reader = res.body.getReader();
@@ -63,15 +83,19 @@ export async function chatStream(
 
 /** Fallback non-stream: POST /api/chat. */
 export async function chatOnce(
+  sessionId: string,
   message: string,
   history: ChatMessagePayload[]
 ): Promise<ChatResponse> {
   const res = await fetch(`${apiBase}/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message, history }),
+    body: JSON.stringify({ session_id: sessionId, message, history }),
   });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  if (!res.ok) {
+    const errDetail = await extractErrorDetail(res);
+    throw new Error(errDetail);
+  }
   const data: ChatResponse = await res.json();
   return data;
 }

@@ -3,6 +3,7 @@
  * Widget chat tự chứa store riêng → độc lập, dễ nhúng vào trang khác.
  */
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { chatOnce, chatStream, setApiBase } from "../api/chat";
 import type { SseEvent, Source } from "../api/types";
 import { BRAND, HISTORY_LIMIT, WELCOME_MESSAGE } from "../config";
@@ -17,6 +18,7 @@ export interface ChatMessage {
 }
 
 interface ChatState {
+  sessionId: string;
   open: boolean;
   messages: ChatMessage[];
   isStreaming: boolean;
@@ -40,7 +42,10 @@ function uid(): string {
 let abortController: AbortController | null = null;
 let lastAborted = false;
 
-export const useChatStore = create<ChatState>((set, get) => ({
+export const useChatStore = create<ChatState>()(
+  persist(
+    (set, get) => ({
+  sessionId: crypto.randomUUID(),
   open: false,
   messages: [{ id: uid(), role: "assistant", content: WELCOME_MESSAGE }],
   isStreaming: false,
@@ -54,6 +59,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
 
   clearChat: () =>
     set({
+      sessionId: crypto.randomUUID(), // Reset session id on clear chat
       messages: [{ id: uid(), role: "assistant", content: WELCOME_MESSAGE }],
       toolCalls: [],
       isStreaming: false,
@@ -91,6 +97,18 @@ export const useChatStore = create<ChatState>((set, get) => ({
         set((s) => ({ toolCalls: [...s.toolCalls, ev.content.tool] }));
         return;
       }
+      if (ev.type === "status") {
+        set((s) => ({ toolCalls: [...s.toolCalls, ev.content] }));
+        return;
+      }
+      if (ev.type === "error") {
+        set((s) => ({
+          messages: s.messages.map((m) =>
+            m.id === assistantMsg.id ? { ...m, content: ev.content, error: true } : m
+          ),
+        }));
+        return;
+      }
       if (ev.type === "token") {
         set((s) => ({
           messages: s.messages.map((m) =>
@@ -119,13 +137,13 @@ export const useChatStore = create<ChatState>((set, get) => ({
     };
 
     try {
-      await chatStream(trimmed, history, onEvent, abortController.signal);
+      await chatStream(get().sessionId, trimmed, history, onEvent, abortController.signal);
     } catch (err) {
       const isAbort = (err as Error)?.name === "AbortError";
       if (!isAbort) {
         // Fallback: thử lại bằng API non-stream
         try {
-          const res = await chatOnce(trimmed, history);
+          const res = await chatOnce(get().sessionId, trimmed, history);
           set((s) => ({
             messages: s.messages.map((m) =>
               m.id === assistantMsg.id
@@ -175,4 +193,13 @@ export const useChatStore = create<ChatState>((set, get) => ({
     const lastUser = [...messages].reverse().find((m) => m.role === "user");
     if (lastUser) void sendMessage(lastUser.content);
   },
-}));
+    }),
+    {
+      name: "vivu_chat_storage",
+      partialize: (state) => ({
+        sessionId: state.sessionId,
+        messages: state.messages,
+      }),
+    }
+  )
+);

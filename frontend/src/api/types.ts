@@ -8,6 +8,7 @@ export interface ChatMessagePayload {
 }
 
 export interface ChatRequest {
+  session_id: string;
   message: string;
   history: ChatMessagePayload[];
 }
@@ -15,7 +16,7 @@ export interface ChatRequest {
 export interface Source {
   text: string;
   url: string;
-  type: string;
+  type?: string;
   score?: number;
 }
 
@@ -32,10 +33,13 @@ export interface ChatResponse {
 /** Các event của POST /api/chat/stream (SSE — parse dòng `data: {...}`). */
 export type SseEvent =
   | { type: "decision"; content: string }
-  | { type: "classify"; content: { specificity: string; entities: Record<string, unknown> } }
+  | { type: "classify"; content: unknown }
+  | { type: "status"; content: string }
   | { type: "tool_call"; content: { tool: string; success: boolean } }
   | { type: "token"; content: string }
   | { type: "answer"; content: string }
   | { type: "clarify"; content: string }
   | { type: "sources"; content: Source[] }
+  | { type: "error"; content: string }
+  | { type: "ping" }
   | { type: "done"; content?: unknown };

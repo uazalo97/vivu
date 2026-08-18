@@ -11,7 +11,7 @@ export function ChatHeader() {
   const closeChat = useChatStore((s) => s.closeChat);
 
   return (
-    <header className="flex shrink-0 items-center gap-3 bg-transparent px-4 py-3 text-ink">
+    <header className="flex shrink-0 items-center gap-3 bg-transparent px-4 py-3 text-ink sm:rounded-t-2xl">
       {/* Logo */}
       <div className="flex-1 flex h-6 shrink-0 items-center justify-start">
         <img src={logoUrl} alt="VinFast Logo" className="h-full w-auto object-contain" />
