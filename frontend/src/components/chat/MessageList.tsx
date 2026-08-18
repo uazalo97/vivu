@@ -57,6 +57,12 @@ export function MessageList() {
 
         {/* Gợi ý đầu hội thoại */}
         {showSuggestions && <SuggestionChips key={`suggestions-${messages[0]?.id}`} />}
+
+        {messages.length > 0 && (
+          <div className="pt-2 text-center text-[12px] text-ink-soft/70">
+            Vivu có thể mắc lỗi. Hãy kiểm tra thông tin quan trọng.
+          </div>
+        )}
       </div>
     </div>
   );
