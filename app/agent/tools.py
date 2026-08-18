@@ -76,22 +76,25 @@ async def get_price(model_code: str, version: str = None) -> dict:
 
 
 async def get_colors(model_code: str, version: str = None) -> dict:
-    """Lấy danh sách màu sắc và nội thất từ car_colors."""
+    """Lấy danh sách màu sắc và nội thất từ car_colors_active."""
     conn = await _conn()
+    mid = _model_id(model_code)
 
     if version:
         rows = await conn.fetch(
-            "SELECT version_name, color_name, color_type, color_fee_vnd, interior_name "
-            "FROM car_colors WHERE model_code = $1 AND version_name = $2 "
+            "SELECT version_name, color_code, color_name, color_type, color_fee_vnd, "
+            "interior_code, interior_name, source_url "
+            "FROM car_colors_active WHERE model_id = $1 AND version_name = $2 "
             "ORDER BY color_name, interior_name",
-            model_code, version,
+            mid, version,
         )
     else:
         rows = await conn.fetch(
-            "SELECT version_name, color_name, color_type, color_fee_vnd, interior_name "
-            "FROM car_colors WHERE model_code = $1 "
+            "SELECT version_name, color_code, color_name, color_type, color_fee_vnd, "
+            "interior_code, interior_name, source_url "
+            "FROM car_colors_active WHERE model_id = $1 "
             "ORDER BY version_name, color_name, interior_name",
-            model_code,
+            mid,
         )
     await conn.close()
 
@@ -100,18 +103,67 @@ async def get_colors(model_code: str, version: str = None) -> dict:
 
     colors = sorted(set(r["color_name"] for r in rows if r["color_name"]))
     interiors = sorted(set(r["interior_name"] for r in rows if r["interior_name"]))
+    source_url = next((r["source_url"] for r in rows if r["source_url"]), "")
 
     return {
         "model_code": model_code,
+        "source_url": source_url,
         "colors": colors,
         "interiors": interiors,
         "variants": [
             {
                 "version": r["version_name"],
                 "color": r["color_name"],
+                "color_code": r.get("color_code") or "",
                 "color_type": r.get("color_type") or "",
                 "interior": r["interior_name"],
                 "color_fee_vnd": r["color_fee_vnd"] or 0,
+            }
+            for r in rows
+        ],
+    }
+
+
+async def get_options(model_code: str, version: str = None) -> dict:
+    """Lấy các tùy chọn (option group) từ car_options_active."""
+    conn = await _conn()
+    mid = _model_id(model_code)
+
+    if version:
+        rows = await conn.fetch(
+            "SELECT version_name, option_group, option_name, value_id, value_name, "
+            "price_extra_vnd, source_url "
+            "FROM car_options_active WHERE model_id = $1 AND version_name = $2 "
+            "ORDER BY option_group, option_name, value_name",
+            mid, version,
+        )
+    else:
+        rows = await conn.fetch(
+            "SELECT version_name, option_group, option_name, value_id, value_name, "
+            "price_extra_vnd, source_url "
+            "FROM car_options_active WHERE model_id = $1 "
+            "ORDER BY version_name, option_group, option_name, value_name",
+            mid,
+        )
+    await conn.close()
+
+    if not rows:
+        return {"model_code": model_code, "options": [], "groups": []}
+
+    groups = sorted(set(r["option_group"] for r in rows if r["option_group"]))
+    source_url = next((r["source_url"] for r in rows if r["source_url"]), "")
+
+    return {
+        "model_code": model_code,
+        "source_url": source_url,
+        "groups": groups,
+        "options": [
+            {
+                "version": r["version_name"],
+                "group": r["option_group"],
+                "option_name": r["option_name"],
+                "value_name": r["value_name"],
+                "price_extra_vnd": r["price_extra_vnd"] or 0,
             }
             for r in rows
         ],
@@ -136,6 +188,10 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
         idx += 1
 
     where = " AND ".join(conditions)
+    # No LIMIT here: return all matching rows. Relevance filtering is done by
+    # context_builder (query keyword -> categories); a hard LIMIT sorts by
+    # spec_category alphabetically and silently drops later categories
+    # (e.g. battery/range) when earlier ones (adas) exceed the cap.
     try:
         rows = await conn.fetch(
             f"SELECT version_name, version_code, spec_category, spec_key, spec_value, spec_unit, source_url, page "
@@ -299,6 +355,7 @@ async def ask_clarification(model_id: str = None, suggested_categories: list[str
 TOOL_REGISTRY = {
     "get_price": get_price,
     "get_colors": get_colors,
+    "get_options": get_options,
     "get_specs": get_specs,
     "search_knowledge_base": search_knowledge_base,
     "list_available_models": list_available_models,

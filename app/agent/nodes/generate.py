@@ -23,7 +23,11 @@ _llm_client: AsyncOpenAI | None = None
 def _get_llm() -> AsyncOpenAI:
     global _llm_client
     if _llm_client is None:
-        _llm_client = AsyncOpenAI(api_key=settings.openai_api_key, base_url=settings.openai_base_url)
+        _llm_client = AsyncOpenAI(
+            api_key=settings.openai_api_key,
+            base_url=settings.openai_base_url,
+            max_retries=0,  # Code handles retries manually; SDK retries cause 429 cascade
+        )
     return _llm_client
 
 
@@ -53,6 +57,9 @@ async def generate_node(state: AgentState) -> dict:
         full_query = query
 
     system_prompt = state["messages"][0]["content"] if state.get("messages") else ""
+    if not system_prompt:
+        from app.agent.prompts import get_system_prompt
+        system_prompt = await get_system_prompt()
 
     messages = [
         {"role": "system", "content": system_prompt},
@@ -62,21 +69,28 @@ async def generate_node(state: AgentState) -> dict:
     llm = _get_llm()
     t_generate_start = time.time()
 
-    try:
-        resp = await llm.chat.completions.create(
-            model=settings.llm_model,
-            messages=messages,
-        )
+    # qwen3.6-27b is a reasoning model; without reasoning_effort="none" the
+    # hidden reasoning consumes max_tokens and content can come back empty.
+    # reasoning_effort="none" disables the thinking block entirely (fast, no empty content).
+    for attempt, mt in enumerate((1024, 2048)):
+        try:
+            resp = await llm.chat.completions.create(
+                model=settings.llm_model,
+                messages=messages,
+                max_tokens=mt,
+                extra_body={"reasoning_format": "hidden", "reasoning_effort": "none"},
+            )
+        except Exception as e:
+            logger.error("generate_node LLM error (attempt %d): %s", attempt + 1, e)
+            break
+
         new_response = resp.choices[0].message.content or ""
         if new_response:
             final_response = new_response
-    except Exception as e:
-        logger.error("generate_node LLM error: %s", e)
-        return {
-            "final_response": final_response,
-            "t_generate_start": t_generate_start,
-            "t_generate_end": time.time(),
-        }
+            break
+
+        fr = resp.choices[0].finish_reason
+        logger.warning("generate_node: empty content (finish=%s, max_tokens=%d), retrying", fr, mt)
 
     return {
         "final_response": final_response,

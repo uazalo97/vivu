@@ -20,7 +20,11 @@ _llm_client: AsyncOpenAI | None = None
 def _get_llm() -> AsyncOpenAI:
     global _llm_client
     if _llm_client is None:
-        _llm_client = AsyncOpenAI(api_key=settings.openai_api_key, base_url=settings.openai_base_url)
+        _llm_client = AsyncOpenAI(
+            api_key=settings.openai_api_key,
+            base_url=settings.openai_base_url,
+            max_retries=0,  # Code handles retries manually; SDK retries cause 429 cascade
+        )
     return _llm_client
 
 
@@ -63,13 +67,16 @@ async def execute_tools_node(state: AgentState) -> dict:
 
     # Force tool calls on first iteration when classify decided "answer"
     decision = state.get("decision", "answer")
-    force_tool = "required" if (decision == "answer" and not tool_results) else "auto"
+    # DeepSeek models don't support tool_choice="required" in thinking mode
+    _model_lower = settings.llm_model.lower()
+    _no_force_tools = "deepseek" in _model_lower or "luna" in _model_lower or "o1" in _model_lower or "o3" in _model_lower
+    force_tool = "auto" if _no_force_tools else ("required" if (decision == "answer" and not tool_results) else "auto")
 
     # Retry once on rate limit / timeout
     resp = None
-    # Reasoning models (gpt-5.x-luna etc.) need reasoning_effort=none for function tools
+    # Reasoning models need reasoning_effort=none for function tools
     extra_kwargs = {}
-    if "luna" in settings.llm_model.lower() or "o1" in settings.llm_model.lower() or "o3" in settings.llm_model.lower():
+    if "luna" in _model_lower or "o1" in _model_lower or "o3" in _model_lower:
         extra_kwargs["reasoning_effort"] = "none"
 
     for attempt in range(2):
@@ -79,6 +86,7 @@ async def execute_tools_node(state: AgentState) -> dict:
                 messages=messages,
                 tools=tool_schemas,
                 tool_choice=force_tool,
+                max_tokens=4096,
                 **extra_kwargs,
             )
             break

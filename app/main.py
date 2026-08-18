@@ -3,6 +3,7 @@ import logging
 from app.tracing import setup_tracing
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.api.chat import router as chat_router
@@ -16,6 +17,16 @@ logging.basicConfig(
 logging.getLogger("bds").setLevel(logging.INFO)
 
 app = FastAPI(title="Vivu Chatbot")
+
+# Allow cross-origin calls from any frontend (API backend for external UIs)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(chat_router)
 app.mount("/", StaticFiles(directory="app/static", html=True))
 setup_tracing()

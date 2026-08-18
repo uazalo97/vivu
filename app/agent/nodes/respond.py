@@ -43,6 +43,8 @@ async def respond_node(state: AgentState) -> dict:
 
     if decision == "clarify":
         answer = response_text or "Bạn muốn tìm thông tin nào?"
+    elif decision == "greeting":
+        answer = response_text or "Xin chào! Tôi là trợ lý tư vấn xe VinFast."
     elif decision == "refuse":
         answer = response_text or final_response or "Mình chưa thể xác nhận thông tin này."
     elif decision == "out_of_scope":

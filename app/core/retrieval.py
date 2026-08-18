@@ -358,44 +358,67 @@ def _resolve_sparse_texts(qdrant: QdrantREST, sparse_results: list[dict]) -> lis
 
 
 # ── Main search ────────────────────────────────────────────────────────────
+import asyncio
+import concurrent.futures
+
+_thread_pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
+
+
 async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> list[dict]:
     qdrant = get_qdrant()
-    dense_vector = _openrouter_embed([query])[0]
     limit = top_k * 2
 
-    # 1. Dense search across all collections (via aliases → active version)
-    all_dense = []
-    for col in DENSE_COLLECTIONS:
+    # 1. Embed query + prepare sparse vector IN PARALLEL
+    loop = asyncio.get_event_loop()
+    embed_task = loop.run_in_executor(_thread_pool, _openrouter_embed, [query])
+    sparse_task = loop.run_in_executor(_thread_pool, _query_to_sparse, query)
+
+    dense_vector = (await embed_task)[0]
+    sparse_vec = await sparse_task
+
+    # 2. Dense search across ALL collections IN PARALLEL
+    async def _dense_search(col):
         try:
-            results = qdrant.search(col, dense_vector, model_id=model_id, limit=limit)
-            all_dense.extend(results)
+            return await loop.run_in_executor(
+                _thread_pool, qdrant.search, col, dense_vector, model_id, limit
+            )
         except Exception as e:
             logger.warning("search %s failed: %s", col, e)
+            return []
 
-    # 2. Sparse search (BM25) + resolve text from dense collections
+    dense_tasks = [_dense_search(col) for col in DENSE_COLLECTIONS]
+    dense_results = await asyncio.gather(*dense_tasks)
+    all_dense = [hit for results in dense_results for hit in results]
+
+    # 3. Sparse search (BM25) — in parallel with nothing (dense already done)
     sparse_results = []
-    sparse_vec = _query_to_sparse(query)
     if sparse_vec:
         try:
-            sparse_results = qdrant.search_sparse(SPARSE_COLLECTION, sparse_vec, model_id=model_id, limit=limit)
-            sparse_results = _resolve_sparse_texts(qdrant, sparse_results)
+            sparse_results = await loop.run_in_executor(
+                _thread_pool, qdrant.search_sparse, SPARSE_COLLECTION, sparse_vec, model_id, limit
+            )
+            sparse_results = await loop.run_in_executor(
+                _thread_pool, _resolve_sparse_texts, qdrant, sparse_results
+            )
         except Exception as e:
             logger.warning("sparse search failed: %s", e)
 
-    # 3. RRF fusion
+    # 4. RRF fusion
     if sparse_results:
         fused = _rrf_fusion([all_dense, sparse_results])
     else:
         fused = [(hit, hit.get("score", 0)) for hit in all_dense]
 
-    # 4. Rerank
+    # 5. Rerank
     reranker = get_reranker()
     if reranker and len(fused) > 0:
         pairs = [(query, hit.get("payload", {}).get("text", "")) for hit, _ in fused]
         non_empty = [(i, q, d) for i, (q, d) in enumerate(pairs) if d.strip()]
         if non_empty:
             rerank_pairs = [(q, d) for _, q, d in non_empty]
-            rerank_scores = reranker.predict(rerank_pairs)
+            rerank_scores = await loop.run_in_executor(
+                _thread_pool, reranker.predict, rerank_pairs
+            )
             # Only apply rerank if at least one score is non-zero (rerank succeeded)
             if any(s > 0 for s in rerank_scores):
                 scores = [0.0] * len(pairs)
@@ -404,7 +427,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
                 fused = [(hit, float(score)) for (hit, _), score in zip(fused, scores)]
                 fused.sort(key=lambda x: x[1], reverse=True)
 
-    # 5. Return top_k (skip chunks without text)
+    # 6. Return top_k (skip chunks without text)
     results = []
     for hit, score in fused:
         payload = hit.get("payload", {})

@@ -48,7 +48,7 @@ class AgentLoop:
                     }}
                     yielded_classify = True
 
-                elif node_name == "execute_tools":
+                elif node_name == "call_tools":
                     for tr in node_output.get("tool_results", []):
                         yield {"type": "tool_call", "content": {"tool": tr["tool"], "success": tr["success"]}}
 

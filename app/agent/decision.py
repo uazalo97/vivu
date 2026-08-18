@@ -91,6 +91,8 @@ _REASON_MAP = {
     "missing_topic": ReasonCode.MISSING_TOPIC,
     "missing_context": ReasonCode.AMBIGUOUS_CONTEXT,
     "sufficient_direct": ReasonCode.SUFFICIENT_DIRECT_EVIDENCE,
+    "unsupported_topic": ReasonCode.EXTERNAL_SOURCE_REQUESTED,
+    "utility_query": ReasonCode.SUFFICIENT_DIRECT_EVIDENCE,
 }
 
 
@@ -481,6 +483,7 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
     valid_sources = []
     has_direct = False
     has_partial = False
+    rank = 0
     qtokens = _query_tokens(query)
 
     for tr in tool_results:
@@ -515,7 +518,7 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
             colors = result.get("colors", [])
             interiors = result.get("interiors", [])
             rank += 1
-            chunks.append(RetrievedChunk(
+            valid_sources.append(RetrievedChunk(
                 rank=rank,
                 chunk_id=f"colors_{mc}",
                 source_id="car_colors",
@@ -533,6 +536,29 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
                 approval_status="approved",
                 retrieval_score=0.9,
             ).__dict__)
+
+        elif tool == "get_options" and result.get("options"):
+            mc = result.get("model_code", "")
+            for o in result["options"]:
+                rank += 1
+                valid_sources.append(RetrievedChunk(
+                    rank=rank,
+                    chunk_id=f"option_{mc}_{o.get('value_name', '')}",
+                    source_id="car_options",
+                    source_title=f"Option {mc}",
+                    source_url=result.get("source_url", ""),
+                    document_name="",
+                    page="",
+                    section=o.get("group", "options"),
+                    content=f"{o.get('option_name', '')}: {o.get('value_name', '')} (+{o.get('price_extra_vnd', 0)} VNĐ)",
+                    vehicle_model=mc,
+                    vehicle_version=o.get("version", "all_versions"),
+                    topic="tính_năng_nổi_bật",
+                    market="Vietnam",
+                    language="vi",
+                    approval_status="approved",
+                    retrieval_score=0.9,
+                ).__dict__)
 
         elif tool == "get_price" and result.get("prices"):
             score = _price_relevance_score(qtokens)
@@ -801,6 +827,29 @@ def build_retrieved_chunks(tool_results: list[dict], query: str = "", topic: str
                         retrieval_score=round(sc, 4),
                     ).__dict__)
 
+        elif tool == "get_options" and result.get("options"):
+            mc = result.get("model_code", "")
+            for o in result["options"]:
+                rank += 1
+                chunks.append(RetrievedChunk(
+                    rank=rank,
+                    chunk_id=f"option_{mc}_{o.get('value_name', '')}",
+                    source_id="car_options",
+                    source_title=f"Option {mc}",
+                    source_url=result.get("source_url", ""),
+                    document_name="",
+                    page="",
+                    section=o.get("group", "options"),
+                    content=f"{o.get('option_name', '')}: {o.get('value_name', '')} (+{o.get('price_extra_vnd', 0)} VNĐ)",
+                    vehicle_model=mc,
+                    vehicle_version=o.get("version", "all_versions"),
+                    topic="tính_năng_nổi_bật",
+                    market="Vietnam",
+                    language="vi",
+                    approval_status="approved",
+                    retrieval_score=0.9,
+                ).__dict__)
+
         elif tool == "get_price" and result.get("prices"):
             # Build text representations and score by embedding
             price_texts = [
@@ -841,6 +890,7 @@ def build_retrieved_chunks(tool_results: list[dict], query: str = "", topic: str
 
 def build_displayed_citations(citations: list[dict], retrieved_chunks: list[dict] | None = None) -> list[dict]:
     """Convert citations → P0 displayed_citations schema."""
+    MAX_CHUNKS_PER_CITATION = 10  # Limit chunk_ids per citation to avoid noise
     chunk_ids_by_url: dict[str, list[str]] = {}
     pages_by_url: dict[str, set[str]] = {}
     if retrieved_chunks:
@@ -874,6 +924,9 @@ def build_displayed_citations(citations: list[dict], retrieved_chunks: list[dict
         cids = chunk_ids_by_url.get(url, [])
         if not cids and c.get("chunk_id"):
             cids = [c["chunk_id"]]
+        # Limit chunk_ids to avoid noisy citations
+        if len(cids) > MAX_CHUNKS_PER_CITATION:
+            cids = cids[:MAX_CHUNKS_PER_CITATION]
         result.append(DisplayedCitation(
             citation_id=f"cit_{cit_counter:03d}",
             display_text=text,
