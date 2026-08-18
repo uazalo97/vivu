@@ -111,7 +111,7 @@ export function InputBar() {
   };
 
   return (
-    <div className="shrink-0 bg-white px-4 pb-4 pt-2 sm:rounded-b-2xl">
+    <div className="shrink-0 bg-white px-4 pb-2 pt-2 sm:rounded-b-2xl">
       <div className="mb-2 text-center text-[12px] text-ink-soft/70">
         Vivu có thể mắc lỗi. Hãy kiểm tra thông tin quan trọng.
       </div>
@@ -194,6 +194,9 @@ export function InputBar() {
             </span>
           </button>
         )}
+      </div>
+      <div className="mt-2 text-center text-[11px] font-medium text-ink-soft/60">
+        Phát triển bởi <span className="font-bold"><span className="text-[#E41A23]">V</span><span className="text-black">-</span><span className="text-[#1D4179]">Internship</span></span>
       </div>
     </div>
   );

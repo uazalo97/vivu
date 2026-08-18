@@ -1,0 +1,811 @@
+img {
+  max-width: 100%;
+  height: auto;
+  border: none;
+}
+
+#main {
+  padding: 0;
+}
+
+.block-margin {
+  margin-top: 5rem;
+}
+
+.block {
+  position: relative;
+}
+
+.block-padding {
+  padding: 6rem 0 0 0;
+}
+
+/* COMMON */
+h2.page-title {
+  font-weight: 500;
+  font-size: 3rem;
+  line-height: 125%;
+  color: #151515;
+}
+
+.block .block-title {
+  font-size: 3rem;
+  line-height: 3.75rem;
+  font-weight: 500;
+  color: #3C3C3C;
+  /* margin-bottom: 1rem; */
+  letter-spacing: -0.02em;
+}
+
+.block .block-desc {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.688rem;
+  color: #3c3c3c;
+}
+
+/* block Banner Home */
+
+.block {
+  min-height: 100%;
+  position: relative;
+}
+
+.block-home-banner {
+  position: relative;
+}
+
+.homepage-front-lcp-guard .swiper-home-banner:not(.homepage-lcp-ready) .swiper-slide:not(:first-child) {
+  display: none;
+}
+
+.homepage-front-lcp-guard .swiper-home-banner.homepage-lcp-ready .swiper-slide {
+  display: block;
+}
+
+.block-home-banner .swiper-slide a::after {
+  content: "";
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.60) 100%);
+  width: 100%;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 30vh;
+  z-index: 1;
+}
+
+.block-home-banner .swiper-slide h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.875rem;
+  color: #fff;
+  margin: 0;
+  position: absolute;
+  bottom: 5rem;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  padding: 1rem;
+}
+
+.homepage-front-lcp-guard .block-home-banner .swiper-slide picture {
+  display: block;
+  aspect-ratio: 1440 / 623;
+}
+
+.homepage-front-lcp-guard .block-home-banner .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.homepage-front-lcp-guard .vehicle-section .swiper-slide img,
+.homepage-front-lcp-guard #block-slide-accessory img {
+  content-visibility: auto;
+}
+
+.homepage-front-lcp-guard .carSwiper:not(.homepage-slider-ready) .swiper-slide:not(:first-child),
+.homepage-front-lcp-guard .bikeSwiper:not(.homepage-slider-ready) .swiper-slide:not(:first-child),
+.homepage-front-lcp-guard .accessorySwiper:not(.homepage-slider-ready) .swiper-slide:not(:first-child) {
+  display: none;
+}
+
+.homepage-front-lcp-guard .carSwiper.homepage-slider-ready .swiper-slide,
+.homepage-front-lcp-guard .bikeSwiper.homepage-slider-ready .swiper-slide,
+.homepage-front-lcp-guard .accessorySwiper.homepage-slider-ready .swiper-slide {
+  display: block;
+}
+
+/* CLS fix: reserve banner image space before it loads */
+@media only screen and (max-width:768px) {
+  .homepage-front-lcp-guard .block-home-banner .swiper-slide picture {
+    aspect-ratio: 750 / 1201;
+  }
+}
+
+.block-home-banner .slide-content-navigation {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.block-home-banner .slide-content-navigation .container {
+  position: relative;
+}
+
+.block-home-banner .swiper-button-prev,
+.block-home-banner .swiper-button-next {
+  width: 3rem;
+  height: 3rem;
+}
+
+.swiper-button-prev svg:hover>rect,
+.swiper-button-next svg:hover>rect {
+  fill-opacity: 1;
+  fill: #1464F4;
+  transition: all .5s;
+}
+
+.swiper-button-prev svg:hover>path,
+.swiper-button-next svg:hover>path {
+  fill: #fff;
+  transition: all .5s;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
+}
+
+.block-home-banner .swiper-button-prev {
+  left: 15px;
+}
+
+.block-home-banner .swiper-button-next {
+  right: 15px;
+}
+
+.block-home-banner .swiper-pagination .swiper-pagination-bullet {
+  background: #fff;
+  opacity: .5;
+  cursor: pointer;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.block-home-banner .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #fff;
+  opacity: 1;
+}
+
+.block-home-banner .swiper-pagination {
+  position: absolute;
+  width: unset;
+  bottom: 1.5rem;
+  left: 50%;
+  right: auto;
+  top: auto;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+/* Block Car Slide */
+.vehicle-section {
+  padding: 16px;
+  background: linear-gradient(0deg, #F7F9F9 0%, rgba(247, 249, 249, 0.00) 49.93%);
+}
+
+.vehicle-section .container {
+  display: flex;
+  align-items: center;
+}
+
+.vehicleThumbSwiper .swiper-slide {
+  text-align: center;
+}
+
+.vehicleThumbSwiper .swiper-slide .field-image {
+  border-bottom: 3px solid transparent;
+  display: inline-block;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.vehicleThumbSwiper .swiper-slide-thumb-active .field-image {
+  border-bottom: 3px solid #1464F4;
+}
+
+.vehicleThumbSwiper .swiper-slide-thumb-active .field-image svg path {
+  fill: #1464F4;
+}
+
+.vehicleSwiper {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* CLS fix: keep only the first slide in flow before Swiper initialises
+   so the stacked slides don't inflate the section height at first paint */
+.vehicleSwiper:not(.swiper-initialized) .swiper-slide:not(:first-child) {
+  display: none;
+}
+
+.vehicleSwiper .field-image {
+  margin: 0.75rem 0;
+}
+
+.vehicleSwiper .field-image img {
+  width: 100%;
+  /* CLS fix: reserve vehicle slide image space before it loads (assets are 848x500) */
+  aspect-ratio: 848 / 500;
+}
+
+.vehicleSwiper .field-specs {
+  padding-top: 0.75rem;
+  border-top: 1px solid #D9E1E2;
+}
+
+.vehicleSwiper .field-spec-item .field-spec-item--title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 150%;
+}
+
+.vehicleSwiper .field-spec-item .field-spec-item--desc {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.vehicleSwiper .field-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.875rem;
+  margin-top: 1.5rem;
+}
+
+.vehicleSwiper .field-buttons .btn {
+  width: 12.5rem;
+  border-radius: 3px;
+}
+
+.vehicleSwiper .slide-content-navigation .swiper-button-prev,
+.vehicleSwiper .slide-content-navigation .swiper-button-next {
+  width: unset;
+  height: auto;
+  margin: 0;
+  cursor: pointer;
+}
+
+.vehicleSwiper .swiper-pagination {
+  margin-top: 24px;
+  position: unset !important;
+}
+
+.vehicleSwiper .swiper-pagination .swiper-pagination-bullet {
+  background: #d8e1e2;
+  opacity: 1;
+  cursor: pointer;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.vehicleSwiper .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: #1464F4;
+  opacity: 1;
+}
+
+/* Block Battery */
+
+.card {
+  background: none;
+  word-wrap: unset;
+  border: none;
+  border-radius: unset;
+}
+
+.card .card-content {
+  padding: 1.875rem;
+}
+
+.card .field-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card .field-desc {
+  font-size: 1rem;
+  padding: 1rem 0 0 0;
+}
+
+.card .field-view-more {
+  padding: 1rem 0 0 0;
+}
+
+.card .field-view-more a {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.075rem;
+  line-height: normal;
+  text-transform: uppercase;
+  transition: none;
+}
+
+#block-battery .col-left {
+  gap: 1.875rem;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+#block-battery .col-left .card {
+  position: relative;
+  background-image: url("https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/pin-oto-2.webp");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-color: transparent;
+  background-size: cover;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+#block-battery .col-left .card a {
+  display: block;
+  height: 100%;
+}
+
+#block-battery .col-left .card-content {
+  background: linear-gradient(359deg, #000 0.54%, rgba(0, 0, 0, 0.00) 98.5%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(65%);
+  transition: ease-in-out 0.5s;
+  color: #fff;
+}
+
+#block-battery .col-left .card:hover .card-content {
+  transform: none;
+}
+
+#block-battery .col-left .card-content .field-view-more {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.075rem;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+#block-battery #battery-card-2.card {
+  background-image: url("https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/pin-xe-may.webp");
+}
+
+#block-battery .col-right #battery-card-3 {
+  background: #F7F9F9;
+}
+
+#battery-card-3 .card-content {
+  position: relative;
+}
+
+#battery-card-3 .field-title {
+  color: #3c3c3c;
+}
+
+#battery-card-3 .field-desc {
+  color: #3c3c3c;
+}
+
+#battery-card-3 .field-image {
+  margin-top: 3rem;
+}
+
+#battery-card-3 .field-image img {
+  width: 100%;
+}
+
+#battery-card-3 .field-view-more {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+/* End Block Battery */
+
+/* Block Service */
+
+#block-service {
+  background: url("https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/service-2.webp") no-repeat scroll right center transparent;
+  background-size: cover;
+  margin-top: 6rem;
+  height: 700px;
+}
+
+#block-service .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#block-service .card .card-content {
+  padding: 0;
+}
+
+#block-service .card .field-view-more {
+  display: flex;
+  gap: 1rem;
+}
+
+/* End Block Service */
+
+/* Block Green */
+
+#block-green-tree .container {
+  position: relative;
+}
+
+#block-green-tree .field-image {
+  background: url("https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/mlttvn.webp") no-repeat scroll center center transparent;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#block-green-tree .field-overlay {
+  background: linear-gradient(270deg, rgba(22, 22, 0, 0.80) 8.43%, rgba(22, 22, 0, 0.00) 100%);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#block-green-tree .card {
+  padding: 8rem 0;
+}
+
+#block-green-tree .card .field-title,
+#block-green-tree .card .field-desc {
+  color: #fff;
+}
+
+/* End Block Green */
+
+/* Block Community */
+
+#block-aftersales .card {
+  height: 354px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-color: transparent;
+}
+
+#aftersales-showroom {
+  background-image: url("https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/showroom.webp");
+}
+
+#aftersales-community {
+  background-image: url("https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/community.webp");
+}
+
+#block-aftersales .card {
+  overflow: hidden;
+  height: 354px;
+  width: 100%;
+  position: relative;
+}
+
+#block-aftersales .card a {
+  display: block;
+  height: 100%;
+}
+
+#block-aftersales .card .card-content {
+  background: linear-gradient(359deg, #000 0.54%, rgba(0, 0, 0, 0.00) 98.5%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(40%);
+  transition: ease-in-out 0.5s;
+  color: #fff;
+  padding: 1.875rem;
+}
+
+#block-aftersales .card a:hover .card-content {
+  transform: none;
+}
+
+#block-aftersales .card-content .field-view-more {
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.075rem;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+/* End Block Community */
+
+#block-slide-accessory {
+  position: relative;
+  padding-top: 72px;
+}
+
+#block-slide-accessory .title {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 100%;
+  color: #151515;
+}
+
+#block-slide-accessory .show-more {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: #1464F4;
+}
+
+#block-slide-accessory .slide-content-navigation {
+  position: relative;
+  height: 50px;
+  max-width: 10%;
+  margin: 0 auto;
+}
+
+#block-slide-accessory .swiper-pagination {
+  display: none;
+}
+
+#block-slide-accessory .product-card:hover {
+  transition: .3s;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+#block-slide-accessory .product-card:hover img {
+  scale: 1.1;
+  transition: .3s;
+}
+
+@media only screen and (max-width: 1440px) {
+  .vehicle-section .container {
+    height: 100%;
+    display: block;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .vehicle-section .container {
+    height: 100%;
+    display: block;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  #block-battery .col-left .card-content {
+    transform: translateY(68%);
+  }
+
+  #block-service {
+    height: 65vh;
+  }
+
+  footer .ecosystem-copy-right .bct-wrapper {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 992px) {}
+
+@media only screen and (max-width: 768px) {
+  .block-padding {
+    padding: 4rem 0 0 0;
+  }
+
+  .carLogoSwiper {
+    max-width: unset;
+    width: 100%;
+  }
+
+  .vehicleSwiper .field-specs .field-spec-item {
+    margin-bottom: 1rem;
+  }
+
+  .vehicleSwiper .field-buttons {
+    margin-top: 0.25rem;
+    gap: 1rem;
+  }
+
+  .vehicleSwiper .field-buttons .btn {
+    width: 100%;
+  }
+
+  #block-battery .col-left {
+    gap: 1rem;
+  }
+
+  #block-battery .col-left .card {
+    height: 343px;
+  }
+
+  #block-battery .col-left .card-content {
+    transform: translateY(65%);
+  }
+
+  #block-battery .col-right #battery-card-3 {
+    margin-top: 1rem;
+  }
+
+  #battery-card-3 .card-content {
+    padding: 1rem;
+  }
+
+  #battery-card-3 .field-image {
+    transform: unset;
+    position: unset;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  #block-service {
+    height: auto;
+    background: none;
+    margin-top: 4rem;
+    position: relative;
+    padding-bottom: 30vh;
+  }
+
+  #block-service::after {
+    content: '';
+    background: url("https://static-cms-prod.vinfastauto.com/statics/img/homepage-v2/service-2.webp") no-repeat scroll right bottom transparent;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 30vh;
+    width: 100%;
+    background-size: cover;
+  }
+
+  #block-service .container {
+    height: auto;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  #block-service .card .field-view-more .btn {
+    max-width: 100%;
+  }
+
+  #block-service .card .field-view-more .btn:first-child {
+    width: 60%;
+  }
+
+  #block-green-tree {
+    height: 100vh;
+  }
+
+  #block-green-tree .field-image {
+    margin: 0;
+    width: 100%;
+  }
+
+  #block-green-tree .container,
+  #block-green-tree .row,
+  #block-green-tree .col-lg-4 {
+    height: 100%;
+  }
+
+  #block-green-tree .field-overlay {
+    background: linear-gradient(0deg, #161600 8.43%, rgba(22, 22, 0, 0.00) 100%);
+  }
+
+  #block-green-tree .card {
+    text-align: center;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #block-green-tree .card .field-view-more a {
+    width: 100%;
+  }
+
+  #block-aftersales .row {
+    gap: 1rem;
+  }
+
+  #block-join-the-charge {
+    margin-top: 4rem;
+    background-position: center center;
+  }
+
+  #block-slide-accessory .accessorySwiper {
+    padding-bottom: 32px;
+  }
+
+  #block-slide-accessory .slide-content-navigation {
+    display: none;
+  }
+
+  #block-slide-accessory .swiper-pagination {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .block-home-banner .swiper-slide a::after {
+    height: 50vh;
+  }
+
+  .block-home-banner .swiper-slide h2 {
+    bottom: 8rem;
+  }
+
+  .vehicleSwiper .slide-content-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 0;
+  }
+
+  .vehicleSwiper .slide-content-navigation .swiper-button-prev,
+  .vehicleSwiper .slide-content-navigation .swiper-button-next {
+    position: unset;
+    display: inline-block;
+  }
+
+  .vehicleSwiper .field-specs {
+    margin-top: 5rem;
+  }
+
+  .vehicleSwiper .field-spec-item .field-spec-item--title {
+    font-size: 0.875rem;
+  }
+
+  .vehicleSwiper .field-spec-item .field-spec-item--desc {
+    font-size: 1rem;
+  }
+
+  .card .field-title {
+    font-size: 1.25rem;
+  }
+
+  .card .field-desc {
+    font-size: 1.125rem;
+  }
+
+  .card .field-view-more {
+    justify-content: space-between;
+  }
+
+  #block-battery .col-left .card-content {
+    transform: translateY(73%);
+  }
+}
