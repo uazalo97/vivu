@@ -92,6 +92,10 @@ export const useChatStore = create<ChatState>()(
     lastAborted = false;
     abortController = new AbortController();
 
+    let bufferedContent = "";
+    let bufferedSources: Source[] = [];
+    let isClarify = false;
+
     const onEvent = (ev: SseEvent) => {
       if (ev.type === "tool_call" && ev.content.success !== false) {
         set((s) => ({ toolCalls: [...s.toolCalls, ev.content.tool] }));
@@ -110,27 +114,24 @@ export const useChatStore = create<ChatState>()(
         return;
       }
       if (ev.type === "token") {
-        set((s) => ({
-          messages: s.messages.map((m) =>
-            m.id === assistantMsg.id ? { ...m, content: m.content + ev.content } : m
-          ),
-        }));
+        bufferedContent += ev.content;
         return;
       }
       if (ev.type === "answer" || ev.type === "clarify") {
-        set((s) => ({
-          messages: s.messages.map((m) =>
-            m.id === assistantMsg.id
-              ? { ...m, content: ev.content, clarify: ev.type === "clarify" }
-              : m
-          ),
-        }));
+        bufferedContent = ev.content;
+        isClarify = ev.type === "clarify";
         return;
       }
       if (ev.type === "sources") {
+        bufferedSources = ev.content;
+        return;
+      }
+      if (ev.type === "done") {
         set((s) => ({
           messages: s.messages.map((m) =>
-            m.id === assistantMsg.id ? { ...m, sources: ev.content } : m
+            m.id === assistantMsg.id
+              ? { ...m, content: bufferedContent, sources: bufferedSources, clarify: isClarify }
+              : m
           ),
         }));
       }
