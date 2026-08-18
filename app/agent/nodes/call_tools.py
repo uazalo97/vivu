@@ -68,14 +68,15 @@ async def call_tools_node(state: AgentState) -> dict:
     query = state.get("query", "")
     model_code = entities.get("model_code")
     version = entities.get("version")
+    state_models = state.get("model_codes") or []
     t_start = time.time()
 
     logger.info("CALL_TOOLS: category=%s model=%s version=%s", category, model_code, version)
 
     if category == "utility":
         tool_results = await _call_utility_tools(query)
-    elif len(_distinct_models(query)) >= 2 or (not model_code and _CROSS_MODEL_RE.search(query)):
-        tool_results = await _call_cross_model_tools(query)
+    elif len(state_models) >= 2 or len(_distinct_models(query)) >= 2 or (not model_code and _CROSS_MODEL_RE.search(query)):
+        tool_results = await _call_cross_model_tools(query, state_models)
     elif model_code:
         tool_results = await _call_model_tools(model_code, version, category, query)
     else:
@@ -146,13 +147,16 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
     return results
 
 
-async def _call_cross_model_tools(query: str) -> list[dict]:
-    """Call tools for cross-model / comparison queries."""
+async def _call_cross_model_tools(query: str, model_codes: list[str] | None = None) -> list[dict]:
+    """Call tools for cross-model / comparison queries.
+
+    model_codes: explicit models from state (multi-turn comparison follow-up).
+    """
     results = []
 
     is_price = re.search(r"(giá|price|rẻ|đắt|triệu|tỷ)", query, re.I)
     spec_cat = _refine_spec_category(query)
-    mentioned = _distinct_models(query)
+    mentioned = list(model_codes) if model_codes else _distinct_models(query)
 
     if mentioned:
         # Fetch specs/price for the models explicitly mentioned (vf6 hay vf8)

@@ -207,7 +207,7 @@ def _extract_history_context(history: list[dict]) -> dict:
     paired with its own model message (e.g. "The All New" from a "VF 8 All New"
     turn must NOT leak onto a later "VF 3" turn).
     """
-    ctx: dict = {"model_code": None, "version": None, "topic": None}
+    ctx: dict = {"model_code": None, "version": None, "topic": None, "models": []}
     classifier = get_classifier()
     for msg in reversed(history):
         if msg.get("role") != "user":
@@ -219,6 +219,11 @@ def _extract_history_context(history: list[dict]) -> dict:
             v = cr.entities.get("version")
         except Exception:
             m = v = None
+
+        # Collect ALL distinct models mentioned (for multi-model comparison context)
+        for mm in _distinct_models(text):
+            if mm not in ctx["models"]:
+                ctx["models"].append(mm)
 
         if m and not ctx["model_code"]:
             # First (most recent) model found — version pairs with it directly
@@ -326,6 +331,21 @@ async def classify_node(state: AgentState) -> dict:
             "specificity": "clear",
             "category": "so_sánh",
             "allowed_tools": {"list_available_models", "get_price", "get_specs"},
+            "model_codes": multi_models,
+        }
+
+    # Follow-up to a multi-model comparison (e.g. "vậy giá thì sao" after
+    # "so sánh VF 8 và VF 9") — query has no model but history had 2+ models.
+    hist_models = hist_ctx.get("models", [])
+    if not query_has_model and len(hist_models) >= 2:
+        return {
+            "decision": "answer",
+            "reason_code": "sufficient_direct_evidence",
+            "entities": {},
+            "specificity": "clear",
+            "category": "so_sánh",
+            "allowed_tools": {"list_available_models", "get_price", "get_specs"},
+            "model_codes": hist_models,
         }
 
     if not has_model:

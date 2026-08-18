@@ -20,6 +20,7 @@ class AgentState(TypedDict, total=False):
     specificity: str
     category: str | None
     allowed_tools: set[str] | None
+    model_codes: list[str]  # explicit models for cross-model follow-up (multi-turn comparison)
 
     assessment: str
     citations: list[dict[str, Any]]
