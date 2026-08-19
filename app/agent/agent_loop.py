@@ -11,10 +11,11 @@ class AgentLoop:
     def __init__(self):
         self.graph = get_compiled_graph()
 
-    async def run(self, query: str, history: list[dict]) -> AgentResult:
+    async def run(self, query: str, history: list[dict], current_context: dict = None) -> AgentResult:
         state = {
             "query": query,
             "history": history,
+            "current_context": current_context or {},
             "t0": time.time(),
         }
         final = await self.graph.ainvoke(state)
@@ -27,10 +28,11 @@ class AgentLoop:
             )
         return result
 
-    async def run_stream(self, query: str, history: list[dict]):
+    async def run_stream(self, query: str, history: list[dict], current_context: dict = None):
         state = {
             "query": query,
             "history": history,
+            "current_context": current_context or {},
             "t0": time.time(),
         }
 
@@ -45,12 +47,18 @@ class AgentLoop:
                     yield {"type": "classify", "content": {
                         "specificity": node_output.get("specificity", ""),
                         "entities": node_output.get("entities", {}),
+                        "category": node_output.get("category", ""),
                     }}
                     yielded_classify = True
 
                 elif node_name == "call_tools":
                     for tr in node_output.get("tool_results", []):
                         yield {"type": "tool_call", "content": {"tool": tr["tool"], "success": tr["success"]}}
+                    if node_output.get("cache_hit"):
+                        yield {"type": "cache", "content": {
+                            "hit": True,
+                            "type": node_output.get("cache_type", "") or "cache",
+                        }}
 
                 elif node_name == "generate":
                     fr = node_output.get("final_response", "")

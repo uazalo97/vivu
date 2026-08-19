@@ -14,6 +14,7 @@ class Settings:
         self.openrouter_embed_model: str = _env.get("OPENROUTER_EMBED_MODEL", "openai/text-embedding-3-small")
         # DB
         self.postgres_url: str = _env.get("POSTGRES_URL", "postgresql+asyncpg://vivu:vivu@localhost:5432/vivu")
+        self.redis_url: str = _env.get("REDIS_URL", "redis://localhost:6379/0")
         self.qdrant_url: str = _env.get("QDRANT_URL", "http://localhost:6333")
         self.qdrant_api_key: str = _env.get("QDRANT_API_KEY", "")
         self.qdrant_collection: str = _env.get("QDRANT_COLLECTION", "vivu_specs")
@@ -29,6 +30,9 @@ class Settings:
         self.admin_api_key: str = _env.get("ADMIN_API_KEY", "")
         self.usd_vnd_rate: float = float(_env.get("USD_VND_EXCHANGE_RATE", "25400.0"))
         self.app_version: str = _env.get("APP_VERSION", "v1.0.0")
+        # Cache & Rate Limit
+        self.cache_enabled: bool = _env.get("CACHE_ENABLED", "true").lower() == "true"
+        self.rate_limit_enabled: bool = _env.get("RATE_LIMIT_ENABLED", "true").lower() == "true"
 
 
 settings = Settings()

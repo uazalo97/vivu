@@ -16,6 +16,8 @@ class AgentResult:
     classify_result: dict = field(default_factory=dict)
     decision: str = "answer"
     decision_log: dict = field(default_factory=dict)
+    cache_hit: bool = False
+    cache_type: str = "none"
 
 
 def _build_classify_result(state: AgentState) -> dict:
@@ -104,5 +106,7 @@ async def respond_node(state: AgentState) -> dict:
             classify_result=_build_classify_result(state),
             decision=decision,
             decision_log=decision_log,
+            cache_hit=bool(state.get("cache_hit", False)),
+            cache_type=state.get("cache_type", "none") or "none",
         )
     }

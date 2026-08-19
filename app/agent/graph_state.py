@@ -8,6 +8,9 @@ from typing_extensions import TypedDict
 class AgentState(TypedDict, total=False):
     query: str
     history: list[dict]
+    current_context: dict[str, Any]
+    cache_hit: bool
+    cache_type: str
     messages: list[dict[str, Any]]
     tool_results: list[dict[str, Any]]
     final_response: str

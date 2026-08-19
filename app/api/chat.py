@@ -1,15 +1,19 @@
-﻿import json
+﻿import hashlib
+import json
 import time
 import uuid
 from typing import Optional
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel
 
 from app.agent.agent_loop import AgentLoop
 from app.agent.decision import log_store
 from app.config import settings
+from app.core.memory import (
+    load_session, save_turn, update_current_context, save_user_fact, get_redis,
+)
 from app.core.telemetry import log_metric_background, record_metric
 
 router = APIRouter()
@@ -27,6 +31,7 @@ def get_agent() -> AgentLoop:
 class ChatRequest(BaseModel):
     message: str
     session_id: Optional[str] = None
+    message_id: Optional[str] = None
     history: list[dict] = []
 
 
@@ -37,6 +42,7 @@ class ChatResponse(BaseModel):
     classify: dict = {}
     decision: str = "answer"
     decision_log: dict = {}
+    session_id: Optional[str] = None
 
 
 def _estimate_tokens(text: str) -> int:
@@ -47,26 +53,106 @@ def _estimate_tokens(text: str) -> int:
     return max(1, int(len(words) * 1.4))
 
 
+# ── Rate limit + Dedupe (fail-open: Redis down → pass-through) ────────────────
+
+_RATE_LIMIT_MSG = "Bạn gửi hơi nhanh, chờ vài giây rồi thử lại."
+_DEDUP_MSG = "Tin nhắn trùng lặp."
+
+
+async def _rate_limit_check(session_id: str, ip: str) -> str | None:
+    """Kiểm tra rate limit. Trả None nếu OK, trả error message nếu bị block."""
+    if not getattr(settings, "rate_limit_enabled", True):
+        return None
+    r = get_redis()
+    if not r:
+        return None
+    try:
+        now = int(time.time())
+        # Session: 10 msg / 10s
+        s_key = f"rl:s:{session_id}:{now // 10}"
+        s_count = await r.incr(s_key)
+        if s_count == 1:
+            await r.expire(s_key, 10)
+        if s_count > 10:
+            return _RATE_LIMIT_MSG
+        # IP: 30 msg / 60s
+        i_key = f"rl:ip:{ip}:{now // 60}"
+        i_count = await r.incr(i_key)
+        if i_count == 1:
+            await r.expire(i_key, 60)
+        if i_count > 30:
+            return _RATE_LIMIT_MSG
+    except Exception:
+        pass  # fail-open
+    return None
+
+
+async def _dedup_check(session_id: str, message_id: str) -> bool:
+    """True nếu request mới (OK), False nếu trùng lặp."""
+    r = get_redis()
+    if not r:
+        return True
+    try:
+        key = f"dedup:{hashlib.sha1(f'{session_id}|{message_id}'.encode()).hexdigest()}"
+        ok = await r.set(key, "1", nx=True, ex=3600)
+        return ok is not None  # None = key đã tồn tại = trùng
+    except Exception:
+        return True  # fail-open
+
+
 @router.post("/api/chat")
-async def chat(request: ChatRequest):
+async def chat(request: ChatRequest, http_request: Request):
     req_id = f"req_{uuid.uuid4().hex[:8]}"
     t0 = time.time()
+    session_id = request.session_id or str(uuid.uuid4())
+
+    # Rate limit (fail-open)
+    ip = http_request.client.host if http_request.client else "unknown"
+    rl_msg = await _rate_limit_check(session_id, ip)
+    if rl_msg:
+        return JSONResponse(status_code=429, content={"error": rl_msg})
+
+    # Dedupe (fail-open)
+    if request.message_id:
+        is_new = await _dedup_check(session_id, request.message_id)
+        if not is_new:
+            return JSONResponse(status_code=409, content={"error": _DEDUP_MSG})
+
+    session = await load_session(session_id)
+    history = session["history"] or request.history or []
+    current_context = session["current_context"]
+
     agent = get_agent()
-    result = await agent.run(request.message, request.history)
+    result = await agent.run(request.message, history, current_context)
     total_latency_ms = int((time.time() - t0) * 1000)
+
+    # Persist turn + context + long-term memory (fail-open)
+    await save_turn(session_id, request.message, result.response)
+    entities = (result.classify_result or {}).get("entities", {})
+    model_code = entities.get("model_code")
+    version = entities.get("version")
+    topic = (result.decision_log or {}).get("detected_topic")
+    await update_current_context(session_id, model_code=model_code, version=version, topic=topic)
+    if model_code:
+        await save_user_fact(session_id, "preferred_model", model_code)
+    if version:
+        await save_user_fact(session_id, "preferred_version", version)
+
+    cache_hit = bool(getattr(result, "cache_hit", False))
+    cache_type = getattr(result, "cache_type", "none") or "none"
 
     # Telemetry recording
     dlog = result.decision_log or {}
     intent = dlog.get("topic") or dlog.get("detected_topic") or result.classify_result.get("assessment") or "general"
     tools_used = [t.get("tool") for t in dlog.get("retrieved_chunks", []) if isinstance(t, dict) and t.get("tool")]
 
-    prompt_tok = _estimate_tokens(request.message) + sum(_estimate_tokens(h.get("content", "")) for h in request.history)
+    prompt_tok = _estimate_tokens(request.message) + sum(_estimate_tokens(h.get("content", "")) for h in history)
     comp_tok = _estimate_tokens(result.response)
 
     log_metric_background(
         record_metric(
             request_id=req_id,
-            session_id=request.session_id,
+            session_id=session_id,
             query_text=request.message,
             intent=intent,
             decision=result.decision,
@@ -76,8 +162,8 @@ async def chat(request: ChatRequest):
             completion_tokens=comp_tok,
             ttft_ms=int(total_latency_ms * 0.4),
             total_latency_ms=total_latency_ms,
-            cache_hit=False,
-            cache_type="none",
+            cache_hit=cache_hit,
+            cache_type=cache_type,
             tools_used=tools_used,
             status_code=200,
         )
@@ -90,13 +176,31 @@ async def chat(request: ChatRequest):
         classify=result.classify_result,
         decision=result.decision,
         decision_log=result.decision_log,
+        session_id=session_id,
     )
 
 
 @router.post("/api/chat/stream")
-async def chat_stream(request: ChatRequest):
+async def chat_stream(request: ChatRequest, http_request: Request):
     req_id = f"req_{uuid.uuid4().hex[:8]}"
     t0 = time.time()
+    session_id = request.session_id or str(uuid.uuid4())
+
+    # Rate limit (fail-open)
+    ip = http_request.client.host if http_request.client else "unknown"
+    rl_msg = await _rate_limit_check(session_id, ip)
+    if rl_msg:
+        return JSONResponse(status_code=429, content={"error": rl_msg})
+
+    # Dedupe (fail-open)
+    if request.message_id:
+        is_new = await _dedup_check(session_id, request.message_id)
+        if not is_new:
+            return JSONResponse(status_code=409, content={"error": _DEDUP_MSG})
+
+    session = await load_session(session_id)
+    history = session["history"] or request.history or []
+    current_context = session["current_context"]
     agent = get_agent()
 
     async def generate():
@@ -106,9 +210,15 @@ async def chat_stream(request: ChatRequest):
         decision = "answer"
         intent = "general"
         tools_used = []
+        cache_hit = False
+        cache_type = "none"
+        entities = {}
+        category = ""
+
+        yield f"data: {json.dumps({'type': 'session', 'content': session_id}, ensure_ascii=False)}\n\n"
 
         try:
-            async for event in agent.run_stream(request.message, request.history):
+            async for event in agent.run_stream(request.message, history, current_context):
                 etype = event.get("type")
                 if etype == "token" and first_token:
                     ttft_ms = int((time.time() - t0) * 1000)
@@ -120,6 +230,14 @@ async def chat_stream(request: ChatRequest):
                     accumulated_text.append(event.get("content", ""))
                 elif etype == "decision":
                     decision = event.get("content", "answer")
+                elif etype == "classify":
+                    entities = event.get("content", {}).get("entities", {}) or {}
+                    category = event.get("content", {}).get("category", "")
+                    if category:
+                        intent = category
+                elif etype == "cache":
+                    cache_hit = True
+                    cache_type = event.get("content", {}).get("type", "") or "cache"
                 elif etype == "tool_call":
                     tc = event.get("content", {})
                     if tc.get("tool"):
@@ -132,13 +250,28 @@ async def chat_stream(request: ChatRequest):
                 ttft_ms = total_latency_ms
 
             full_resp = "".join(accumulated_text)
-            prompt_tok = _estimate_tokens(request.message) + sum(_estimate_tokens(h.get("content", "")) for h in request.history)
+
+            # Persist turn + context + long-term memory (fail-open)
+            if full_resp:
+                await save_turn(session_id, request.message, full_resp)
+            model_code = entities.get("model_code")
+            version = entities.get("version")
+            await update_current_context(
+                session_id, model_code=model_code, version=version,
+                topic=category or None,
+            )
+            if model_code:
+                await save_user_fact(session_id, "preferred_model", model_code)
+            if version:
+                await save_user_fact(session_id, "preferred_version", version)
+
+            prompt_tok = _estimate_tokens(request.message) + sum(_estimate_tokens(h.get("content", "")) for h in history)
             comp_tok = _estimate_tokens(full_resp)
 
             log_metric_background(
                 record_metric(
                     request_id=req_id,
-                    session_id=request.session_id,
+                    session_id=session_id,
                     query_text=request.message,
                     intent=intent,
                     decision=decision,
@@ -148,8 +281,8 @@ async def chat_stream(request: ChatRequest):
                     completion_tokens=comp_tok,
                     ttft_ms=ttft_ms,
                     total_latency_ms=total_latency_ms,
-                    cache_hit=False,
-                    cache_type="none",
+                    cache_hit=cache_hit,
+                    cache_type=cache_type,
                     tools_used=tools_used,
                     status_code=200,
                 )

@@ -517,48 +517,28 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
             mc = result.get("model_code", "")
             colors = result.get("colors", [])
             interiors = result.get("interiors", [])
-            rank += 1
-            valid_sources.append(RetrievedChunk(
-                rank=rank,
-                chunk_id=f"colors_{mc}",
-                source_id="car_colors",
-                source_title=f"Màu sắc {mc}",
-                source_url="",
-                document_name="",
-                page="",
-                section="colors",
-                content=f"{len(colors)} màu ngoại thất, {len(interiors)} màu nội thất",
-                vehicle_model=mc,
-                vehicle_version="all_versions",
-                topic="ngoại_thất",
-                market="Vietnam",
-                language="vi",
-                approval_status="approved",
-                retrieval_score=0.9,
-            ).__dict__)
+            valid_sources.append({
+                "tool": tool,
+                "model_code": mc,
+                "text": f"{mc}: {len(colors)} màu ngoại thất, {len(interiors)} màu nội thất",
+                "source_url": result.get("source_url", ""),
+                "source_type": "colors",
+                "score": 0.9,
+            })
+            has_direct = True
 
         elif tool == "get_options" and result.get("options"):
             mc = result.get("model_code", "")
             for o in result["options"]:
-                rank += 1
-                valid_sources.append(RetrievedChunk(
-                    rank=rank,
-                    chunk_id=f"option_{mc}_{o.get('value_name', '')}",
-                    source_id="car_options",
-                    source_title=f"Option {mc}",
-                    source_url=result.get("source_url", ""),
-                    document_name="",
-                    page="",
-                    section=o.get("group", "options"),
-                    content=f"{o.get('option_name', '')}: {o.get('value_name', '')} (+{o.get('price_extra_vnd', 0)} VNĐ)",
-                    vehicle_model=mc,
-                    vehicle_version=o.get("version", "all_versions"),
-                    topic="tính_năng_nổi_bật",
-                    market="Vietnam",
-                    language="vi",
-                    approval_status="approved",
-                    retrieval_score=0.9,
-                ).__dict__)
+                valid_sources.append({
+                    "tool": tool,
+                    "model_code": mc,
+                    "text": f"{o.get('option_name', '')}: {o.get('value_name', '')} (+{o.get('price_extra_vnd', 0)} VNĐ)",
+                    "source_url": result.get("source_url", ""),
+                    "source_type": "options",
+                    "score": 0.9,
+                })
+            has_direct = True
 
         elif tool == "get_price" and result.get("prices"):
             score = _price_relevance_score(qtokens)
@@ -623,24 +603,6 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
                 found_any = True
             if found_any:
                 has_direct = True
-
-        elif tool == "get_colors" and result.get("colors"):
-            mc = result.get("model_code", "")
-            colors = result.get("colors", [])
-            interiors = result.get("interiors", [])
-            text = f"{mc}: {len(colors)} màu ngoại thất, {len(interiors)} màu nội thất"
-            # Use VinFast product page as source
-            model_slug = mc.lower().replace(" ", "")
-            source_url = f"https://shop.vinfastauto.com/vn_vi/dat-coc-xe-{model_slug}.html"
-            valid_sources.append({
-                "tool": tool,
-                "model_code": mc,
-                "text": text,
-                "source_url": source_url,
-                "source_type": "colors",
-                "score": 0.9,
-            })
-            has_direct = True
 
         # Catch-all: utility tools that return URLs (showroom, booking, loan, etc.)
         elif tool not in ("get_specs", "get_price", "search_knowledge_base",
@@ -813,7 +775,7 @@ def build_retrieved_chunks(tool_results: list[dict], query: str = "", topic: str
                         chunk_id=f"color_{mc}_{v.get('color', '')}_{v.get('interior', '')}",
                         source_id="car_colors",
                         source_title=f"Màu sắc {mc}",
-                        source_url="",
+                        source_url=result.get("source_url", ""),
                         document_name="",
                         page="",
                         section="colors",

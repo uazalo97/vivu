@@ -40,3 +40,6 @@ arize-phoenix>=4.0
 openinference-instrumentation-openai>=0.1
 opentelemetry-api>=1.20
 opentelemetry-sdk>=1.20
+
+# Redis (session store + tool-result cache)
+redis>=5.0

@@ -121,8 +121,8 @@ def _query_to_sparse(query: str) -> dict | None:
     return {"indices": [indices[i] for i in order], "values": [values[i] for i in order]}
 
 
-def _openrouter_embed(texts: list[str]) -> list[list[float]]:
-    """Embed texts using OpenAI SDK with built-in retry + connection pooling."""
+def _openrouter_embed_api(texts: list[str]) -> list[list[float]]:
+    """Pure sync: embed texts via OpenRouter API. Called in thread pool."""
     client = _get_embed_client()
     batch_size = 100
     all_embeddings = []
@@ -135,6 +135,47 @@ def _openrouter_embed(texts: list[str]) -> list[list[float]]:
         sorted_data = sorted(response.data, key=lambda x: x.index)
         all_embeddings.extend([d.embedding for d in sorted_data])
     return all_embeddings
+
+
+def _openrouter_embed(texts: list[str]) -> list[list[float]]:
+    """Sync embed (KHÔNG cache) — dùng bởi _rerank_texts (sync context).
+
+    API core tách riêng `_openrouter_embed_api`; cache embedding chỉ áp dụng
+    ở async wrapper `_embed_texts_cached` (dùng trong hybrid_search).
+    """
+    return _openrouter_embed_api(texts)
+
+
+async def _embed_texts_cached(texts: list[str]) -> list[list[float]]:
+    """Async wrapper: check embedding cache (emb:) first, miss → thread-pool API call + SET."""
+    from app.core.cache import get_embedding_cached, set_embedding_cached
+    import asyncio
+
+    results: list[list[float] | None] = [None] * len(texts)
+    uncached_indices: list[int] = []
+
+    # 1. Batch check cache
+    for i, text in enumerate(texts):
+        cached = await get_embedding_cached(text)
+        if cached is not None:
+            results[i] = cached
+        else:
+            uncached_indices.append(i)
+
+    # 2. Embed uncached texts in thread pool
+    if uncached_indices:
+        uncached_texts = [texts[i] for i in uncached_indices]
+        loop = asyncio.get_event_loop()
+        new_embeddings = await loop.run_in_executor(
+            _thread_pool, _openrouter_embed_api, uncached_texts,
+        )
+        # 3. Store in cache + fill results
+        for j, idx in enumerate(uncached_indices):
+            emb = new_embeddings[j]
+            results[idx] = emb
+            asyncio.create_task(set_embedding_cached(texts[idx], emb))
+
+    return results  # type: ignore[return-value]
 
 
 # ── Qdrant REST API helper ─────────────────────────────────────────────────
@@ -365,12 +406,23 @@ _thread_pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 
 
 async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> list[dict]:
+    from app.core.cache import get_hybrid_cached, set_hybrid_cached
+
+    skip_rerank = not settings.rerank_enabled
+
+    # 0. Check hybrid search cache (hs:) — skip entire pipeline on hit
+    cached = await get_hybrid_cached(query, model_id, top_k, skip_rerank)
+    if cached is not None:
+        logger.debug("hs cache hit")
+        return cached
+    logger.debug("hs cache miss")
+
     qdrant = get_qdrant()
     limit = top_k * 2
 
-    # 1. Embed query + prepare sparse vector IN PARALLEL
+    # 1. Embed query (async, checks emb: cache) + sparse vector (sync thread)
     loop = asyncio.get_event_loop()
-    embed_task = loop.run_in_executor(_thread_pool, _openrouter_embed, [query])
+    embed_task = _embed_texts_cached([query])
     sparse_task = loop.run_in_executor(_thread_pool, _query_to_sparse, query)
 
     dense_vector = (await embed_task)[0]
@@ -447,4 +499,6 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
         if len(results) >= top_k:
             break
 
+    # 7. Cache the full-pipeline result (hs:)
+    asyncio.create_task(set_hybrid_cached(query, model_id, top_k, skip_rerank, results))
     return results

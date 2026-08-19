@@ -18,6 +18,7 @@ Usage:
 """
 
 import argparse
+import asyncio
 import csv
 import json
 import sys
@@ -260,6 +261,20 @@ def record_manifest(conn, version: str, version_dir: Path) -> None:
     conn.commit()
 
 
+def _invalidate_cache() -> None:
+    """Fail-open: xóa tool-result cache (Redis) sau khi data thay đổi.
+
+    Đổi version active / rollback / full-refresh car_specs làm cache
+    specs/colors/options cũ lỗi thời → xóa proactively. Giá/khuyến mãi
+    không cache nên không cần hook riêng.
+    """
+    try:
+        from app.core.cache import invalidate_all
+        asyncio.run(invalidate_all())
+    except Exception as e:
+        print(f"[postgres_ingest] cache invalidation skipped: {e}", file=sys.stderr)
+
+
 def set_current(conn, version: str, rollback: bool = False) -> None:
     """Flip active version → `version` (cho promote/rollback). Đúng 1 row is_current=true."""
     cur = conn.cursor()
@@ -276,6 +291,8 @@ def set_current(conn, version: str, rollback: bool = False) -> None:
     if cur.rowcount == 0:
         raise RuntimeError(f"version {version} chưa ingest (không có row trong ingest_version)")
     conn.commit()
+    # Version active thay đổi → specs/colors/options cache cũ lỗi thời
+    _invalidate_cache()
 
 
 def run(version: str = "v1", dsn: str = DEFAULT_DSN) -> int:
@@ -308,6 +325,8 @@ def run(version: str = "v1", dsn: str = DEFAULT_DSN) -> int:
 
     print(f"[postgres_ingest] version={version}  edition={n_edition}  price_list={n_price}  "
           f"car_specs={n_specs}  (is_current=false)")
+    # car_specs full-refresh làm cache specs cũ lỗi thời (trước cả promote)
+    _invalidate_cache()
     conn.close()
     return 0
 

@@ -162,6 +162,7 @@ _TOPIC_TOOLS = {
     "phiên_bản": {"list_available_models", "get_specs", "ask_clarification"},
     "kích_thước": {"get_specs", "ask_clarification"},
     "giá": {"get_price", "ask_clarification"},
+    "tổng_quan": {"list_available_models", "get_price", "get_specs", "get_colors"},
     "general": None,
 }
 
@@ -278,6 +279,14 @@ async def classify_node(state: AgentState) -> dict:
 
     # ── Extract history context for multi-turn ──
     hist_ctx = _extract_history_context(history)
+    # Fallback sang current_context (Redis session store) khi history bị cắt
+    current_context = state.get("current_context") or {}
+    if not hist_ctx["model_code"]:
+        hist_ctx["model_code"] = current_context.get("model_code")
+    if not hist_ctx["version"]:
+        hist_ctx["version"] = current_context.get("version")
+    if not hist_ctx["topic"]:
+        hist_ctx["topic"] = current_context.get("topic") or current_context.get("last_topic")
     is_followup = _is_followup_to_clarify(history)
 
     # Capture query-only model/version BEFORE history merge (for OOS guard)
@@ -401,16 +410,16 @@ async def classify_node(state: AgentState) -> dict:
                 "category": "general",
             }
 
-    # Broad topic (model known, topic vague, NOT a follow-up)
+    # Broad/intro topic (model known, topic vague, NOT a follow-up)
+    # "giới thiệu về X", "cho tôi biết về X" → trả lời thông tin cơ bản luôn, không hỏi lại.
     if has_model and topic == "general" and _is_broad_topic(query) and not is_followup:
-        model = cr.entities["model_code"]
         return {
-            "decision": "clarify",
-            "reason_code": "missing_topic",
-            "response_text": f"Bạn muốn tìm thông tin nào về {model}?",
+            "decision": "answer",
+            "reason_code": "sufficient_direct_evidence",
             "entities": cr.entities,
             "specificity": "unclear",
-            "category": "general",
+            "category": "tổng_quan",
+            "allowed_tools": {"list_available_models", "get_price", "get_specs", "get_colors"},
         }
 
     # Missing version (only for version-dependent topics)

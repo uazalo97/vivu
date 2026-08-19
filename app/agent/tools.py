@@ -237,24 +237,9 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
 
 
 async def search_knowledge_base(query: str, model_id: str = None) -> dict:
-    from app.core.retrieval import hybrid_search
+    from app.core.cache import search_kb_cached
     mid = _model_id(model_id) if model_id else None
-    results = await hybrid_search(query, model_id=mid, top_k=5)
-
-    return {
-        "query": query,
-        "results": [
-            {
-                "text": r["text"],
-                "model_id": r["model_id"],
-                "text_type": r["text_type"],
-                "source_type": r["source_type"],
-                "source_url": r["source_url"],
-                "score": round(r["score"], 3),
-            }
-            for r in results
-        ],
-    }
+    return await search_kb_cached(query, mid)
 
 
 async def list_available_models() -> dict:

@@ -11,10 +11,13 @@ import time
 from app.agent.graph_state import AgentState
 from app.agent.prompts import get_system_prompt
 from app.agent.tools import (
-    get_specs, get_price, get_colors, get_options, list_available_models,
+    get_specs, get_price, list_available_models,
     search_knowledge_base, get_active_promotions, get_onroad_cost_link,
     get_loan_estimate_link, get_showroom_charging_link, get_booking_link,
     get_maintenance_link,
+)
+from app.core.cache import (
+    get_specs_cached, get_colors_cached, get_options_cached, list_models_cached,
 )
 from app.agent.nodes.classify import _CROSS_MODEL_RE, _distinct_models
 
@@ -73,12 +76,13 @@ async def call_tools_node(state: AgentState) -> dict:
 
     logger.info("CALL_TOOLS: category=%s model=%s version=%s", category, model_code, version)
 
+    cache_hits: set[str] = set()
     if category == "utility":
         tool_results = await _call_utility_tools(query)
     elif len(state_models) >= 2 or len(_distinct_models(query)) >= 2 or (not model_code and _CROSS_MODEL_RE.search(query)):
         tool_results = await _call_cross_model_tools(query, state_models)
     elif model_code:
-        tool_results = await _call_model_tools(model_code, version, category, query)
+        tool_results, cache_hits = await _call_model_tools(model_code, version, category, query)
     else:
         tool_results = []
 
@@ -86,8 +90,8 @@ async def call_tools_node(state: AgentState) -> dict:
     system_prompt = await get_system_prompt()
 
     t_end = time.time()
-    logger.info("CALL_TOOLS: done, %d tool results in %.0fms",
-                len(tool_results), (t_end - t_start) * 1000)
+    logger.info("CALL_TOOLS: done, %d tool results in %.0fms (cache_hits=%s)",
+                len(tool_results), (t_end - t_start) * 1000, sorted(cache_hits))
 
     return {
         "tool_results": tool_results,
@@ -95,33 +99,53 @@ async def call_tools_node(state: AgentState) -> dict:
         "iteration": 1,
         "t_retrieve_start": t_start,
         "t_retrieve_end": t_end,
+        "cache_hit": bool(cache_hits),
+        "cache_type": ",".join(sorted(cache_hits)),
     }
 
 
-async def _call_model_tools(model_code: str, version: str, category: str, query: str) -> list[dict]:
-    """Call tools for a specific model based on topic."""
-    results = []
+async def _call_model_tools(model_code: str, version: str, category: str, query: str) -> tuple[list[dict], set[str]]:
+    """Call tools for a specific model based on topic. Returns (results, cache_hit_types)."""
+    results: list[dict] = []
+    cache_hits: set[str] = set()
+
+    async def _cached(name: str, cache_type: str, func, *args):
+        try:
+            data, hit = await func(*args)
+            results.append({"tool": name, "result": data, "success": True, "cache_hit": hit})
+            if hit:
+                cache_hits.add(cache_type)
+        except Exception as e:
+            logger.warning("Tool %s failed: %s", name, e)
+            results.append({"tool": name, "result": {"error": str(e)}, "success": False})
 
     if category == "giá":
         r = await _safe_call("get_price", get_price, model_code, version)
         results.append(r)
 
+    elif category == "tổng_quan":
+        # Thông tin cơ bản: phiên bản + giá + thông số then chốt + màu sắc
+        await _cached("list_available_models", "list_models", list_models_cached)
+        r_price = await _safe_call("get_price", get_price, model_code, version)
+        results.append(r_price)
+        # Spec then chốt: công suất/tốc độ, pin/quãng đường, kích thước, nội thất (số chỗ)
+        for cat in ("powertrain", "battery", "dimension", "interior"):
+            await _cached("get_specs", "specs", get_specs_cached, model_code, version, cat)
+        await _cached("get_colors", "colors", get_colors_cached, model_code, version)
+
     elif category == "phiên_bản":
-        r1 = await _safe_call("list_available_models", list_available_models)
-        results.append(r1)
+        await _cached("list_available_models", "list_models", list_models_cached)
         # Only get version-related specs, not ALL specs
         r2 = await _safe_call("get_specs", get_specs, model_code, None, "powertrain")
         results.append(r2)
 
     elif category == "màu_sắc":
-        r = await _safe_call("get_colors", get_colors, model_code, version)
-        results.append(r)
+        await _cached("get_colors", "colors", get_colors_cached, model_code, version)
         r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
         results.append(r_kb)
 
     elif category == "option":
-        r = await _safe_call("get_options", get_options, model_code, version)
-        results.append(r)
+        await _cached("get_options", "options", get_options_cached, model_code, version)
         r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
         results.append(r_kb)
 
@@ -131,8 +155,7 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
         # Refine broad spec topics (thông_số_kỹ_thuật) by query keyword
         if spec_cat is None:
             spec_cat = _refine_spec_category(query)
-        r = await _safe_call("get_specs", get_specs, model_code, version, spec_cat)
-        results.append(r)
+        await _cached("get_specs", "specs", get_specs_cached, model_code, version, spec_cat)
 
         # Auto-inject KB for certain topics
         if category in _NEEDS_KB:
@@ -141,10 +164,9 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
 
         # Color queries under exterior
         if category == "ngoại_thất" and re.search(r"(màu|color)", query, re.I):
-            r_color = await _safe_call("get_colors", get_colors, model_code, version)
-            results.append(r_color)
+            await _cached("get_colors", "colors", get_colors_cached, model_code, version)
 
-    return results
+    return results, cache_hits
 
 
 async def _call_cross_model_tools(query: str, model_codes: list[str] | None = None) -> list[dict]:
