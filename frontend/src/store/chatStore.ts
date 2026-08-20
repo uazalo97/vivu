@@ -15,6 +15,7 @@ export interface ChatMessage {
   sources?: Source[];
   clarify?: boolean;
   error?: boolean;
+  status?: "sending" | "streaming" | "done" | "error";
 }
 
 interface ChatState {
@@ -114,23 +115,39 @@ export const useChatStore = create<ChatState>()(
         return;
       }
       if (ev.type === "token") {
+        // Stream thật: render NGAY từng token (không gom buffer chờ done)
         bufferedContent += ev.content;
+        set((s) => ({
+          messages: s.messages.map((m) =>
+            m.id === assistantMsg.id ? { ...m, content: bufferedContent, status: "streaming" } : m
+          ),
+        }));
         return;
       }
       if (ev.type === "answer" || ev.type === "clarify") {
         bufferedContent = ev.content;
         isClarify = ev.type === "clarify";
+        set((s) => ({
+          messages: s.messages.map((m) =>
+            m.id === assistantMsg.id ? { ...m, content: bufferedContent, clarify: isClarify, status: "streaming" } : m
+          ),
+        }));
         return;
       }
       if (ev.type === "sources") {
         bufferedSources = ev.content;
+        set((s) => ({
+          messages: s.messages.map((m) =>
+            m.id === assistantMsg.id ? { ...m, sources: bufferedSources } : m
+          ),
+        }));
         return;
       }
       if (ev.type === "done") {
         set((s) => ({
           messages: s.messages.map((m) =>
             m.id === assistantMsg.id
-              ? { ...m, content: bufferedContent, sources: bufferedSources, clarify: isClarify }
+              ? { ...m, content: bufferedContent, sources: bufferedSources, clarify: isClarify, status: "done" }
               : m
           ),
         }));
