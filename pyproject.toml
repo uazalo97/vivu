@@ -1,0 +1,30 @@
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+# Loại trừ .venv để ruff không scan thư viện + file md/txt/json
+exclude = [".venv", ".git", "__pycache__", "data", "docs", "plans", ".kilo", "*.md", "*.json"]
+
+[tool.ruff.lint]
+# Giai đoạn đầu chỉ check lỗi nghiêm trọng (E,F) để CI xanh, sau này bật thêm I,B... dần
+select = ["E", "F"]
+ignore = ["E501"]  # line too long do formatter lo
+fixable = ["I", "UP"]
+unfixable = []
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+asyncio_mode = "auto"
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["tests/*", "app/static/*", ".venv/*"]

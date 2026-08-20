@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "chore/ci", "feature/*", "fix/*"]
+  pull_request:
+    branches: [main]
+
+# Cancel previous runs when new commits pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install ruff
+        run: pip install ruff
+
+      # Giai đoạn đầu: chỉ cảnh báo, không fail CI để dọn dần 3k+ lỗi có sẵn
+      # Khi codebase sạch hơn, đổi thành `ruff check .` (remove || true)
+      - name: Ruff check
+        run: ruff check . --output-format=github || true
+
+      - name: Ruff format --check
+        run: ruff format --check --diff || true
+
+  test:
+    name: test (offline, no Docker)
+    runs-on: ubuntu-latest
+    # Không `needs: lint` để test vẫn chạy dù lint còn lỗi
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-asyncio
+
+      # Chỉ chạy các test thuần logic (classify) - không cần Postgres/Redis/Qdrant/LLM
+      # test_log_schema / test_an_toan_adas / test_cache_memory / test_e2e_flow cần DB -> bỏ qua ở Option A
+      - name: Run classify tests
+        run: python tests/test_classify.py
+
+      - name: Run classify intro tests
+        run: python tests/test_classify_intro.py
+
+      - name: Run version leak tests
+        run: python tests/test_version_leak.py
+
+      # Kiểm tra import cơ bản (smoke) - đảm bảo app import được
+      - name: Smoke import check
+        run: |
+          python -c "from app.agent.classifier import get_classifier; from app.agent.nodes.classify import classify_node; print('imports OK')"
+          python -c "import app.main; print('app.main OK')"
