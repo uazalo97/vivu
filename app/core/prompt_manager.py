@@ -7,6 +7,7 @@ Quản lý toàn bộ prompt templates của Vivu:
 - In-memory caching với cơ chế invalidation tức thì khi activate version mới
 - Seed tự động các default prompts (v1.0.0) khi khởi động hệ thống
 """
+
 import asyncio
 import hashlib
 import logging

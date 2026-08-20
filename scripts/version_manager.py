@@ -49,6 +49,7 @@ ALL_ALIASES = DENSE_ALIASES + [SPARSE_ALIAS]
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
+
 def _client() -> QdrantClient:
     return QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY or None)
 
@@ -94,12 +95,14 @@ def swap_aliases(client: QdrantClient, version: str) -> list[str]:
     for col in cols:
         physical = f"{col}__{version}"
         if not client.collection_exists(physical):
-            raise RuntimeError(f"collection vật lý chưa ingest: {physical} — chạy run_pipeline --version {version} trước")
+            raise RuntimeError(
+                f"collection vật lý chưa ingest: {physical} — chạy run_pipeline --version {version} trước"
+            )
         if col in cur_aliases:
-            ops.append(models.DeleteAliasOperation(
-                delete_alias=models.DeleteAlias(alias_name=col)))
-        ops.append(models.CreateAliasOperation(
-            create_alias=models.CreateAlias(alias_name=col, collection_name=physical)))
+            ops.append(models.DeleteAliasOperation(delete_alias=models.DeleteAlias(alias_name=col)))
+        ops.append(
+            models.CreateAliasOperation(create_alias=models.CreateAlias(alias_name=col, collection_name=physical))
+        )
     if ops:
         client.update_collection_aliases(change_aliases_operations=ops)
     return cols
@@ -118,6 +121,7 @@ def current_version_pg() -> str | None:
 
 # ── subcommands ──────────────────────────────────────────────────────────────
 
+
 def cmd_list(args=None) -> int:
     conn = _conn()
     try:
@@ -135,13 +139,17 @@ def cmd_list(args=None) -> int:
     if not rows:
         print("(chưa có version nào trong ingest_version)")
         return 0
-    print(f"{'version':<8} {'created_at':<22} {'current':<8} {'prev':<6} "
-          f"{'added':>6} {'mod':>5} {'rem':>5} {'pg':>4}  commit")
+    print(
+        f"{'version':<8} {'created_at':<22} {'current':<8} {'prev':<6} "
+        f"{'added':>6} {'mod':>5} {'rem':>5} {'pg':>4}  commit"
+    )
     for r in rows:
         v, ca, prev, cur, add, mod, rem, pg, commit = r
         ca_s = ca.strftime("%Y-%m-%d %H:%M:%S")[:19] if ca else ""
-        print(f"{v:<8} {ca_s:<22} {'★' if cur else '':<8} {(prev or '-'):<6} "
-              f"{(add or 0):>6} {(mod or 0):>5} {(rem or 0):>5} {(pg or 0):>4}  {commit or ''}")
+        print(
+            f"{v:<8} {ca_s:<22} {'★' if cur else '':<8} {(prev or '-'):<6} "
+            f"{(add or 0):>6} {(mod or 0):>5} {(rem or 0):>5} {(pg or 0):>4}  {commit or ''}"
+        )
     return 0
 
 
@@ -209,9 +217,11 @@ def cmd_delete(args) -> int:
     aliases = existing_aliases(client)
     dangling = [a for a, target in aliases.items() if target in cols]
     if dangling:
-        client.update_collection_aliases(change_aliases_operations=[
-            models.DeleteAliasOperation(delete_alias=models.DeleteAlias(alias_name=a)) for a in dangling
-        ])
+        client.update_collection_aliases(
+            change_aliases_operations=[
+                models.DeleteAliasOperation(delete_alias=models.DeleteAlias(alias_name=a)) for a in dangling
+            ]
+        )
     # PG rows
     conn = _conn()
     try:
@@ -228,7 +238,9 @@ def cmd_delete(args) -> int:
     print(f"[delete] version={version}")
     print(f"  dropped collections: {dropped}")
     print(f"  removed dangling aliases: {dangling}")
-    print(f"  deleted PG rows (edition/price_list/car_specs/car_colors/car_options/ingest_version) for version={version}")
+    print(
+        f"  deleted PG rows (edition/price_list/car_specs/car_colors/car_options/ingest_version) for version={version}"
+    )
     print(f"  (folder data/clean/{version}/ giữ nguyên — audit)")
     return 0
 
@@ -247,20 +259,17 @@ def _copy_collection(client: QdrantClient, src: str, dst: str) -> int:
             vectors_config = models.VectorParams(size=vc.size, distance=vc.distance)
     if getattr(params, "sparse_vectors", None):
         sparse_vectors_config = params.sparse_vectors
-    client.create_collection(dst, vectors_config=vectors_config,
-                             sparse_vectors_config=sparse_vectors_config)
+    client.create_collection(dst, vectors_config=vectors_config, sparse_vectors_config=sparse_vectors_config)
 
     n = 0
     offset = None
     while True:
-        records, offset = client.scroll(src, limit=500, offset=offset,
-                                        with_payload=True, with_vectors=True)
+        records, offset = client.scroll(src, limit=500, offset=offset, with_payload=True, with_vectors=True)
         if not records:
             break
-        points = [models.PointStruct(id=r.id, vector=r.vector, payload=r.payload)
-                  for r in records]
+        points = [models.PointStruct(id=r.id, vector=r.vector, payload=r.payload) for r in records]
         for i in range(0, len(points), 100):
-            client.upsert(dst, points=points[i:i + 100], wait=True)
+            client.upsert(dst, points=points[i : i + 100], wait=True)
         n += len(points)
         if offset is None:
             break
@@ -286,14 +295,14 @@ def _backfill_cache(client: QdrantClient, version: str) -> int:
         collection = f"{col}__{version}"
         if not client.collection_exists(collection):
             continue
-        chunks = [_json.loads(l) for l in f.read_text(encoding="utf-8").splitlines() if l.strip()]
+        chunks = [_json.loads(line) for line in f.read_text(encoding="utf-8").splitlines() if line.strip()]
         if not chunks:
             continue
         ids = [str(_uuid.uuid5(ns, c["id"])) for c in chunks]
         # retrieve vectors theo id (batch 100), put cache theo content_hash
         for i in range(0, len(ids), 100):
-            batch_ids = ids[i:i + 100]
-            batch_chunks = chunks[i:i + 100]
+            batch_ids = ids[i : i + 100]
+            batch_chunks = chunks[i : i + 100]
             records = client.retrieve(collection, ids=batch_ids, with_payload=False, with_vectors=True)
             vmap = {str(r.id): r.vector for r in records}
             for c, qid in zip(batch_chunks, batch_ids):
@@ -344,10 +353,8 @@ def cmd_migrate_v1(args=None) -> int:
     for dst in migrated:
         col = dst.rsplit("__", 1)[0]
         if col in existing_aliases(client):
-            ops.append(models.DeleteAliasOperation(
-                delete_alias=models.DeleteAlias(alias_name=col)))
-        ops.append(models.CreateAliasOperation(
-            create_alias=models.CreateAlias(alias_name=col, collection_name=dst)))
+            ops.append(models.DeleteAliasOperation(delete_alias=models.DeleteAlias(alias_name=col)))
+        ops.append(models.CreateAliasOperation(create_alias=models.CreateAlias(alias_name=col, collection_name=dst)))
     if ops:
         client.update_collection_aliases(change_aliases_operations=ops)
         print(f"  alias tạo: {[o.create_alias.alias_name for o in ops if isinstance(o, models.CreateAliasOperation)]}")
@@ -401,7 +408,7 @@ def cmd_recover(args=None) -> int:
         if not aliases:
             print("[recover] không có alias nào trong Qdrant")
             return 1
-        
+
         # Lấy version từ alias đầu tiên (tất cả alias phải cùng version)
         qdrant_version = None
         for alias_name, target in aliases.items():
@@ -414,21 +421,21 @@ def cmd_recover(args=None) -> int:
                     elif qdrant_version != v:
                         print(f"[recover] WARNING: alias trỏ đến nhiều version khác nhau: {qdrant_version} vs {v}")
                         return 1
-        
+
         if qdrant_version is None:
             print("[recover] không tìm thấy version từ alias")
             return 1
-        
+
         # 2) Đọc PG is_current
         pg_version = current_version_pg()
-        
+
         print(f"[recover] Qdrant alias → {qdrant_version}")
         print(f"[recover] PG is_current → {pg_version or 'None'}")
-        
+
         if pg_version == qdrant_version:
             print("[recover] ✓ already consistent")
             return 0
-        
+
         # 3) Sync PG → Qdrant
         print(f"[recover] syncing PG is_current → {qdrant_version}")
         postgres_ingest.set_current(conn, qdrant_version, rollback=False)
@@ -460,9 +467,13 @@ def main() -> int:
     p_del.add_argument("--version", required=True)
     p_del.set_defaults(func=cmd_delete)
 
-    sub.add_parser("migrate-v1", help="(1 lần) chuyển v1 unversioned → __v1 + alias, không re-embed").set_defaults(func=cmd_migrate_v1)
-    
-    sub.add_parser("recover", help="Recover 2-store consistency: sync PG is_current với Qdrant alias").set_defaults(func=cmd_recover)
+    sub.add_parser("migrate-v1", help="(1 lần) chuyển v1 unversioned → __v1 + alias, không re-embed").set_defaults(
+        func=cmd_migrate_v1
+    )
+
+    sub.add_parser("recover", help="Recover 2-store consistency: sync PG is_current với Qdrant alias").set_defaults(
+        func=cmd_recover
+    )
 
     args = ap.parse_args()
     return args.func(args)

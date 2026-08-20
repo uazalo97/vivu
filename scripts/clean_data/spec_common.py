@@ -59,8 +59,7 @@ def no_diacritics(s: str) -> str:
     Giữ nguyên hoa/thường, chỉ thay 'đ' thường → 'd' ('Đ' hoa giữ nguyên —
     caller muốn đổi cả 'Đ' thì .lower() trước).
     """
-    return "".join(c for c in unicodedata.normalize("NFD", s)
-                  if unicodedata.category(c) != "Mn").replace("đ", "d")
+    return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn").replace("đ", "d")
 
 
 def parse_raw_file(path: Path) -> tuple[dict[str, Any], str]:
@@ -90,14 +89,23 @@ def infer_model(path: Path) -> str | None:
     name = re.sub(r"[^a-z0-9]", "", path.stem.lower())
     # Sắp xếp key dài → ngắn để tránh false match:
     # VD "vf206" match "vf2" trước "vf6" → sai; "vf8theallnew" match trước "vf8".
-    _MODEL_KEYS = sorted([
-        ("mpv7", "VFMPV7"),
-        ("vf206", "VF6"), ("vf6", "VF6"),
-        ("vf2", "VF2"), ("vf3", "VF3"), ("vf5", "VF5"),
-        ("vf7", "VF7"), ("vf8theallnew", "VF8NEW"),
-        ("vf8thenew", "VF8NEW"), ("vf8allnew", "VF8NEW"),
-        ("vf8", "VF8"), ("vf9", "VF9"),
-    ], key=lambda x: -len(x[0]))
+    _MODEL_KEYS = sorted(
+        [
+            ("mpv7", "VFMPV7"),
+            ("vf206", "VF6"),
+            ("vf6", "VF6"),
+            ("vf2", "VF2"),
+            ("vf3", "VF3"),
+            ("vf5", "VF5"),
+            ("vf7", "VF7"),
+            ("vf8theallnew", "VF8NEW"),
+            ("vf8thenew", "VF8NEW"),
+            ("vf8allnew", "VF8NEW"),
+            ("vf8", "VF8"),
+            ("vf9", "VF9"),
+        ],
+        key=lambda x: -len(x[0]),
+    )
     for key, model in _MODEL_KEYS:
         if key in name:
             return model

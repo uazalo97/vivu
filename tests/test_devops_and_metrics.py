@@ -1,17 +1,13 @@
-import sys, os
+import sys
+import os
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from httpx import AsyncClient, ASGITransport
 
 from app.config import settings
 from app.core.telemetry import (
-    MODEL_PRICING,
     calculate_cost,
-    record_metric,
-    get_metrics_overview,
-    get_metrics_timeseries,
-    get_metrics_intents,
-    get_metrics_logs,
 )
 from app.main import app
 
@@ -22,7 +18,7 @@ def test_cost_calculation():
     prompt_tokens = 1000
     completion_tokens = 500
     usd, vnd = calculate_cost("deepseek-ai/DeepSeek-V4-Flash", prompt_tokens, completion_tokens)
-    
+
     expected_usd = (1000 / 1_000_000.0) * 0.14 + (500 / 1_000_000.0) * 0.28
     assert usd == round(expected_usd, 6)
     assert vnd == round(expected_usd * settings.usd_vnd_rate, 2)
@@ -85,7 +81,6 @@ async def test_admin_metrics_auth_protection():
         assert res_valid.status_code in (200, 500)
 
 
-
 async def test_prompt_registry_and_admin_api():
     """Kiểm tra Admin Prompt APIs: List, Get Detail, Test Render, Create & Activate."""
     transport = ASGITransport(app=app)
@@ -135,6 +130,5 @@ async def main():
 
 if __name__ == "__main__":
     import asyncio
+
     asyncio.run(main())
-
-

@@ -19,12 +19,12 @@ Usage:
     python eval/benchmark/run_benchmark.py --set eval/benchmark/benchmark_v1.json
     python eval/benchmark/run_benchmark.py --set ... --api-url http://localhost:8000
 """
+
 import argparse
 import asyncio
 import json
 import re
 import sys
-import time
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -32,6 +32,7 @@ sys.path.insert(0, str(REPO_ROOT))
 
 if sys.platform == "win32":
     import io
+
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 
@@ -42,13 +43,16 @@ async def _no_llm(query, history):
 
 def _norm_model(name):
     from app.agent.classifier import normalize_model
+
     return normalize_model(name) if name else None
 
 
 async def _classify_offline(query, history):
     import app.agent.nodes.classify as cf
+
     cf.llm_classify_fallback = _no_llm
     from app.agent.nodes.classify import classify_node
+
     return await classify_node({"query": query, "history": history})
 
 
@@ -56,6 +60,7 @@ async def _fetch_specs(st):
     """Execute tool plan (offline) → (spec_model, spec_text)."""
     from app.agent.direct_plan import build_tool_plan
     from app.agent.tools import get_specs
+
     plan = build_tool_plan(st)
     if not plan:
         return None, ""
@@ -80,14 +85,14 @@ def _check_routing(st, exp) -> dict:
     got_version = st.get("entities", {}).get("version")
 
     checks = {}
-    checks["decision"] = (got_decision == exp.get("decision"))
+    checks["decision"] = got_decision == exp.get("decision")
     checks["reason"] = (not exp.get("reason_code")) or (exp["reason_code"] in got_reason)
     checks["model"] = True
     e_model = exp.get("model")
     if e_model:
-        checks["model"] = (_norm_model(got_model) == _norm_model(e_model))
+        checks["model"] = _norm_model(got_model) == _norm_model(e_model)
     if exp.get("version"):
-        checks["version"] = (got_version == exp["version"])
+        checks["version"] = got_version == exp["version"]
     return checks, got_decision, got_reason, got_model, got_version
 
 
@@ -96,13 +101,11 @@ def _check_offline_content(st, exp, spec_model, spec_text) -> dict:
     # data lấy về đúng model kỳ vọng (chống trộn model)
     checks["grounded_model"] = True
     if exp.get("model") and (st.get("decision") == "answer") and spec_model:
-        checks["grounded_model"] = (_norm_model(spec_model) == _norm_model(exp["model"]))
+        checks["grounded_model"] = _norm_model(spec_model) == _norm_model(exp["model"])
 
     # expected_facts phải có trong data trả về
     facts = exp.get("facts") or []
-    checks["facts_present"] = (
-        all(f.lower() in spec_text.lower() for f in facts) if facts else True
-    )
+    checks["facts_present"] = all(f.lower() in spec_text.lower() for f in facts) if facts else True
 
     # anti-hallucination: các spec_key không-có-dữ-liệu phải ABSENT (không số giả)
     absent_keys = exp.get("absent_spec_keys") or []
@@ -138,15 +141,21 @@ async def _run_case_offline(case) -> dict:
     checks = {**r_checks, **c_checks}
 
     return {
-        "case": case.get("id", "?"), "query": query,
-        "decision": dec, "reason": reason, "model": model, "version": version,
-        "spec_model": spec_model, "checks": checks,
+        "case": case.get("id", "?"),
+        "query": query,
+        "decision": dec,
+        "reason": reason,
+        "model": model,
+        "version": version,
+        "spec_model": spec_model,
+        "checks": checks,
         "pass": all(checks.values()),
     }
 
 
 async def _run_case_live(case, api_url) -> dict:
     import requests
+
     query = case["query"]
     exp = case["expected"]
     payload = {"message": query, "history": case.get("history", [])}
@@ -167,8 +176,12 @@ async def _run_case_live(case, api_url) -> dict:
         **_check_live_answer(answer, exp),
     }
     return {
-        "case": case["id"], "query": query, "answer": answer[:120],
-        "decision": got_decision, "reason": got_reason, "checks": checks,
+        "case": case["id"],
+        "query": query,
+        "answer": answer[:120],
+        "decision": got_decision,
+        "reason": got_reason,
+        "checks": checks,
         "pass": all(checks.values()),
     }
 
@@ -194,15 +207,22 @@ async def run_benchmark(path: Path, api_url: str | None) -> int:
         for t in conv["turns"]:
             t["history"] = history
             res = await (_run_case_live(t, api_url) if api_url else _run_case_offline(t))
-            res["case"] = f"{conv['id']}-{conv['turns'].index(t)+1}"
+            res["case"] = f"{conv['id']}-{conv['turns'].index(t) + 1}"
             results.append(res)
             if not res["pass"]:
                 turn_ok = False
             history.append({"role": "user", "content": t["query"]})
             history.append({"role": "assistant", "content": "(assistant)"})
-        results.append({"case": f"{conv['id']}", "query": conv["name"], "group": True,
-                        "pass": turn_ok, "checks": {},
-                        "turns_ok": sum(1 for _ in conv['turns'])})
+        results.append(
+            {
+                "case": f"{conv['id']}",
+                "query": conv["name"],
+                "group": True,
+                "pass": turn_ok,
+                "checks": {},
+                "turns_ok": sum(1 for _ in conv["turns"]),
+            }
+        )
 
     # ── Metrics ──
     unit = [r for r in results if not r.get("group")]
@@ -227,9 +247,9 @@ async def run_benchmark(path: Path, api_url: str | None) -> int:
 
     print("=" * 66)
     tot = len(unit)
-    print(f"\n  Case pass          : {n_pass}/{tot} ({100*n_pass/tot:.0f}%)")
-    print(f"  Decision accuracy  : {decision_ok}/{tot} ({100*decision_ok/tot:.0f}%)")
-    print(f"  Fact present (recall): {fact_ok}/{tot} ({100*fact_ok/tot:.0f}%)")
+    print(f"\n  Case pass          : {n_pass}/{tot} ({100 * n_pass / tot:.0f}%)")
+    print(f"  Decision accuracy  : {decision_ok}/{tot} ({100 * decision_ok / tot:.0f}%)")
+    print(f"  Fact present (recall): {fact_ok}/{tot} ({100 * fact_ok / tot:.0f}%)")
     if neg_total:
         print(f"  Negative constraint: {neg_ok}/{neg_total}")
     if groups:

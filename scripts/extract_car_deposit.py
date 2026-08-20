@@ -78,16 +78,42 @@ def configurator_url(model_id: str) -> str:
 
 
 # Schema raw (đầu vào cho scripts/clean_data/parse_car_deposit.py) — 4 bảng
-EDITION_FIELDS = ["model_id", "edition_id", "variant_code", "is_option_variant",
-                  "base_edition_code", "updated_at"]
-PRICE_FIELDS = ["model_id", "edition_id", "price_list_vnd", "price_promo_vnd",
-                "promo_label", "vat_included", "battery_included",
-                "valid_from", "valid_to", "updated_at", "source_url"]
-COLOR_FIELDS = ["model_id", "edition_id", "variant_code", "color_code",
-                "color_name", "color_hex", "price_extra_vnd",
-                "interior_code", "interior_name", "updated_at"]
-OPTION_FIELDS = ["model_id", "edition_code", "option_id", "option_name", "value_id",
-                 "value_name", "price_extra_vnd", "updated_at"]
+EDITION_FIELDS = ["model_id", "edition_id", "variant_code", "is_option_variant", "base_edition_code", "updated_at"]
+PRICE_FIELDS = [
+    "model_id",
+    "edition_id",
+    "price_list_vnd",
+    "price_promo_vnd",
+    "promo_label",
+    "vat_included",
+    "battery_included",
+    "valid_from",
+    "valid_to",
+    "updated_at",
+    "source_url",
+]
+COLOR_FIELDS = [
+    "model_id",
+    "edition_id",
+    "variant_code",
+    "color_code",
+    "color_name",
+    "color_hex",
+    "price_extra_vnd",
+    "interior_code",
+    "interior_name",
+    "updated_at",
+]
+OPTION_FIELDS = [
+    "model_id",
+    "edition_code",
+    "option_id",
+    "option_name",
+    "value_id",
+    "value_name",
+    "price_extra_vnd",
+    "updated_at",
+]
 
 
 def crawl_html(headless: bool = True) -> str:
@@ -307,27 +333,31 @@ def build_rows(data: dict) -> dict[str, list[dict]]:
         ekey = (mid, ed)
         if ekey not in seen_edition:
             seen_edition.add(ekey)
-            edition_rows.append({
-                "model_id": mid,
-                "edition_id": ed,
-                "variant_code": vc,
-                "is_option_variant": is_opt,
-                "base_edition_code": base_code,
-                "updated_at": now,
-            })
-            price_rows.append({
-                "model_id": mid,
-                "edition_id": ed,
-                "price_list_vnd": v.get("price_vnd") or 0,
-                "price_promo_vnd": "",
-                "promo_label": "",
-                "vat_included": "t",
-                "battery_included": "t",
-                "valid_from": "2026-07-01",
-                "valid_to": "",
-                "updated_at": now,
-                "source_url": configurator_url(mid),
-            })
+            edition_rows.append(
+                {
+                    "model_id": mid,
+                    "edition_id": ed,
+                    "variant_code": vc,
+                    "is_option_variant": is_opt,
+                    "base_edition_code": base_code,
+                    "updated_at": now,
+                }
+            )
+            price_rows.append(
+                {
+                    "model_id": mid,
+                    "edition_id": ed,
+                    "price_list_vnd": v.get("price_vnd") or 0,
+                    "price_promo_vnd": "",
+                    "promo_label": "",
+                    "vat_included": "t",
+                    "battery_included": "t",
+                    "valid_from": "2026-07-01",
+                    "valid_to": "",
+                    "updated_at": now,
+                    "source_url": configurator_url(mid),
+                }
+            )
 
         # colors: chỉ base variant (option variant không có listColor)
         int_codes = ", ".join(i["code"] for i in v.get("interiors", []))
@@ -337,29 +367,35 @@ def build_rows(data: dict) -> dict[str, list[dict]]:
             if ckey in seen_color:
                 continue
             seen_color.add(ckey)
-            color_rows.append({
-                "model_id": mid,
-                "edition_id": ed,
-                "variant_code": vc,
-                "color_code": c["code"],
-                "color_name": c["label"],
-                "color_hex": c["hex"],
-                "price_extra_vnd": c["price_extra_vnd"],
-                "interior_code": int_codes,
-                "interior_name": int_names,
-                "updated_at": now,
-            })
+            color_rows.append(
+                {
+                    "model_id": mid,
+                    "edition_id": ed,
+                    "variant_code": vc,
+                    "color_code": c["code"],
+                    "color_name": c["label"],
+                    "color_hex": c["hex"],
+                    "price_extra_vnd": c["price_extra_vnd"],
+                    "interior_code": int_codes,
+                    "interior_name": int_names,
+                    "updated_at": now,
+                }
+            )
 
-    option_rows = [{
-        "model_id": _norm_model_id(o["model_id"]),
-        "edition_code": o.get("edition_code", ""),
-        "option_id": o["option_id"],
-        "option_name": o["option_name"],
-        "value_id": o["value_id"],
-        "value_name": o["value_name"],
-        "price_extra_vnd": o["price_extra"],
-        "updated_at": now,
-    } for o in options if _norm_model_id(o["model_id"]) in CONSUMER_MODELS]
+    option_rows = [
+        {
+            "model_id": _norm_model_id(o["model_id"]),
+            "edition_code": o.get("edition_code", ""),
+            "option_id": o["option_id"],
+            "option_name": o["option_name"],
+            "value_id": o["value_id"],
+            "value_name": o["value_name"],
+            "price_extra_vnd": o["price_extra"],
+            "updated_at": now,
+        }
+        for o in options
+        if _norm_model_id(o["model_id"]) in CONSUMER_MODELS
+    ]
 
     return {
         "edition": edition_rows,
@@ -380,12 +416,9 @@ def write_csv(path: Path, fields: list[str], rows: list[dict], delimiter: str = 
 
 
 def main():
-    ap = argparse.ArgumentParser(
-        description="Extract dữ liệu cấu hình xe từ carDeposit JS (VinFast configurator)"
-    )
+    ap = argparse.ArgumentParser(description="Extract dữ liệu cấu hình xe từ carDeposit JS (VinFast configurator)")
     ap.add_argument("--html", help="File HTML có sẵn (không có thì crawl tự động)")
-    ap.add_argument("--out", default=DEFAULT_OUT,
-                    help=f"Thư mục output (mặc định: {DEFAULT_OUT})")
+    ap.add_argument("--out", default=DEFAULT_OUT, help=f"Thư mục output (mặc định: {DEFAULT_OUT})")
     ap.add_argument("--no-crawl", action="store_true", help="Không crawl, chỉ extract từ --html")
     args = ap.parse_args()
 
@@ -412,8 +445,7 @@ def main():
     all_mids = {_norm_model_id(v["model_id"]) for v in data["variants"]}
     n_models = len(all_mids & CONSUMER_MODELS)
     skipped = sorted(all_mids - CONSUMER_MODELS)
-    print(f"  ✓ {len(data['variants'])} variants, {n_models} xe consumer, "
-          f"{len(data.get('options', []))} option values")
+    print(f"  ✓ {len(data['variants'])} variants, {n_models} xe consumer, {len(data.get('options', []))} option values")
     if skipped:
         print(f"  [skip commercial] {', '.join(skipped)} (loại chủ đích)")
 
@@ -424,13 +456,11 @@ def main():
         if mid not in CONSUMER_MODELS:
             continue
         tag = " [OPTION]" if v["is_option_variant"] else ""
-        print(f"  {mid} | {v['edition_name']} | {v['variant_code']} | "
-              f"{v['price_display']}{tag}")
+        print(f"  {mid} | {v['edition_name']} | {v['variant_code']} | {v['price_display']}{tag}")
     if data.get("options"):
         print("\n  Options:")
         for o in data["options"]:
-            print(f"    {_norm_model_id(o['model_id'])} | {o['option_id']} | "
-                  f"{o['value_name']} | +{o['price_extra']}")
+            print(f"    {_norm_model_id(o['model_id'])} | {o['option_id']} | {o['value_name']} | +{o['price_extra']}")
 
     # Lưu JSON đầy đủ (có timestamp để trace lịch sử)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")

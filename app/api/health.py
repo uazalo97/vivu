@@ -6,6 +6,7 @@ Endpoints:
 - /ready: Readiness probe (sâu) — kiểm tra kết nối PostgreSQL, Qdrant, Cache, LLM Config.
 - /api/health: Backward compatibility alias cho frontend status bar.
 """
+
 import datetime
 import logging
 import time
@@ -72,6 +73,7 @@ async def readiness_probe(response: Response):
     t0 = time.monotonic()
     try:
         from app.core.retrieval import get_qdrant_client
+
         q_client = get_qdrant_client()
         if q_client:
             cols = await q_client.get_collections()
@@ -96,6 +98,7 @@ async def readiness_probe(response: Response):
     # 3. Check Cache (Redis / Upstash)
     try:
         from app.core.cache import cache
+
         if cache.enabled:
             # Test cache ping / set-get
             test_key = "health:ping"

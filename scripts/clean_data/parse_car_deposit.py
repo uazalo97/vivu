@@ -46,8 +46,12 @@ if __package__ in (None, ""):
 from scripts.config import CLEAN_DIR, MODEL_DATA_DIR, RAW_DIR  # noqa: E402
 from scripts.clean_data.spec_common import MODEL_LABEL  # noqa: E402
 from scripts.clean_data.parse_specs import (  # noqa: E402
-    COLOR_FIELDS, EDITION_CSV_FIELDS, PRICE_CSV_FIELDS, _edition_from,
-    count_csv_rows, parse_colors_csv,
+    COLOR_FIELDS,
+    EDITION_CSV_FIELDS,
+    PRICE_CSV_FIELDS,
+    _edition_from,
+    count_csv_rows,
+    parse_colors_csv,
 )
 
 CAR_DEPOSIT_DIR = RAW_DIR / "car_deposit_extracted"
@@ -58,9 +62,19 @@ def configurator_url(model_id: str) -> str:
     """URL trang configurator kèm modelId per xe (đuôi để trace nguồn chính xác)."""
     return f"{CONFIGURATOR_BASE}?modelId=Products-Car-{model_id}"
 
-OPTION_FIELDS = ["model_id", "version_code", "version_name", "option_group",
-                 "option_name", "value_id", "value_name", "price_extra_vnd",
-                 "source_url", "updated_at"]
+
+OPTION_FIELDS = [
+    "model_id",
+    "version_code",
+    "version_name",
+    "option_group",
+    "option_name",
+    "value_id",
+    "value_name",
+    "price_extra_vnd",
+    "source_url",
+    "updated_at",
+]
 
 
 def _load_csv(path: Path, delimiter: str = "|") -> list[dict]:
@@ -95,14 +109,14 @@ def _manual_interior_lookup() -> dict[tuple[str, str, str], tuple[str, str]]:
     out = {}
     for r in parse_colors_csv(p):
         out[(r["model_id"], r["version_code"], r["color_code"])] = (
-            r["interior_code"], r["interior_name"],
+            r["interior_code"],
+            r["interior_name"],
         )
     return out
 
 
 def build_color_rows(raw_colors, raw_editions, manual_int) -> list[dict]:
-    code_lookup = {(r["model_id"], r["edition_id"]): r["variant_code"]
-                   for r in raw_editions}
+    code_lookup = {(r["model_id"], r["edition_id"]): r["variant_code"] for r in raw_editions}
     seen: set[tuple[str, str, str]] = set()
     rows: list[dict] = []
     for r in raw_colors:
@@ -125,18 +139,20 @@ def build_color_rows(raw_colors, raw_editions, manual_int) -> list[dict]:
         if key in seen:
             continue
         seen.add(key)
-        rows.append({
-            "model_id": mid,
-            "version_code": vc,
-            "version_name": edition,
-            "color_code": cc,
-            "color_name": r.get("color_name", "").strip(),
-            "color_type": "Nâng cao" if fee > 0 else "Cơ bản",
-            "color_fee_vnd": fee,
-            "interior_code": int_code,
-            "interior_name": int_name,
-            "source_url": configurator_url(mid),
-        })
+        rows.append(
+            {
+                "model_id": mid,
+                "version_code": vc,
+                "version_name": edition,
+                "color_code": cc,
+                "color_name": r.get("color_name", "").strip(),
+                "color_type": "Nâng cao" if fee > 0 else "Cơ bản",
+                "color_fee_vnd": fee,
+                "interior_code": int_code,
+                "interior_name": int_name,
+                "source_url": configurator_url(mid),
+            }
+        )
     return rows
 
 
@@ -147,8 +163,7 @@ def build_option_rows(raw_options, raw_editions) -> list[dict]:
     GC12V = Plus) — giữ nguyên nguồn truth từ configurator thay vì đoán qua
     value_id. Fallback: value_id nằm trong mã option-variant (GC12V_T023 → T023).
     """
-    edition_label = {(r["model_id"], r["variant_code"]): r["edition_id"]
-                     for r in raw_editions}
+    edition_label = {(r["model_id"], r["variant_code"]): r["edition_id"] for r in raw_editions}
     scopes: dict[tuple[str, str], tuple[str, str]] = {}
     for ed in raw_editions:
         if not _is_true(ed.get("is_option_variant")):
@@ -172,18 +187,20 @@ def build_option_rows(raw_options, raw_editions) -> list[dict]:
         if ec:
             vc = ec
             vname = _edition_from(mid, ec, edition_label.get((mid, ec), ""))
-        rows.append({
-            "model_id": mid,
-            "version_code": vc,
-            "version_name": vname,
-            "option_group": r.get("option_id", "").strip(),
-            "option_name": r.get("option_name", "").strip(),
-            "value_id": vid,
-            "value_name": r.get("value_name", "").strip(),
-            "price_extra_vnd": raw_price * 1000,  # nghìn đồng → VND
-            "source_url": configurator_url(mid),
-            "updated_at": r.get("updated_at") or now,
-        })
+        rows.append(
+            {
+                "model_id": mid,
+                "version_code": vc,
+                "version_name": vname,
+                "option_group": r.get("option_id", "").strip(),
+                "option_name": r.get("option_name", "").strip(),
+                "value_id": vid,
+                "value_name": r.get("value_name", "").strip(),
+                "price_extra_vnd": raw_price * 1000,  # nghìn đồng → VND
+                "source_url": configurator_url(mid),
+                "updated_at": r.get("updated_at") or now,
+            }
+        )
     return rows
 
 
@@ -203,13 +220,18 @@ def sync_editions(pg_dir: Path, raw_editions) -> int:
         if (mid, mapped) in keys:
             continue
         keys.add((mid, mapped))
-        rows.append({
-            "model_id": mid, "edition_id": mapped,
-            "model_label": MODEL_LABEL.get(mid, mid),
-            "edition_label": mapped,
-            "year_range": "2026", "is_active": "t",
-            "created_at": now, "updated_at": now,
-        })
+        rows.append(
+            {
+                "model_id": mid,
+                "edition_id": mapped,
+                "model_label": MODEL_LABEL.get(mid, mid),
+                "edition_label": mapped,
+                "year_range": "2026",
+                "is_active": "t",
+                "created_at": now,
+                "updated_at": now,
+            }
+        )
         added += 1
     _write_csv(ed_path, EDITION_CSV_FIELDS, rows)
     return added
@@ -217,8 +239,7 @@ def sync_editions(pg_dir: Path, raw_editions) -> int:
 
 def sync_prices(pg_dir: Path, raw_prices, raw_editions) -> tuple[int, int]:
     """Giá chuẩn từ carDeposit → price_list (min theo edition sau alias)."""
-    code_lookup = {(r["model_id"], r["edition_id"]): r["variant_code"]
-                   for r in raw_editions}
+    code_lookup = {(r["model_id"], r["edition_id"]): r["variant_code"] for r in raw_editions}
     cd_prices: dict[tuple[str, str], int] = {}
     for r in raw_prices:
         mid = r.get("model_id", "").strip()
@@ -249,13 +270,21 @@ def sync_prices(pg_dir: Path, raw_prices, raw_editions) -> tuple[int, int]:
             pr["updated_at"] = now
             pr["source_url"] = configurator_url(mid)
         else:
-            rows.append({
-                "model_id": mid, "edition_id": edition,
-                "price_list_vnd": price, "price_promo_vnd": "",
-                "promo_label": "", "vat_included": "t", "battery_included": "t",
-                "valid_from": "2026-07-01", "valid_to": "",
-                "updated_at": now, "source_url": configurator_url(mid),
-            })
+            rows.append(
+                {
+                    "model_id": mid,
+                    "edition_id": edition,
+                    "price_list_vnd": price,
+                    "price_promo_vnd": "",
+                    "promo_label": "",
+                    "vat_included": "t",
+                    "battery_included": "t",
+                    "valid_from": "2026-07-01",
+                    "valid_to": "",
+                    "updated_at": now,
+                    "source_url": configurator_url(mid),
+                }
+            )
             added += 1
     _write_csv(price_path, PRICE_CSV_FIELDS, rows)
     return updated, added
@@ -288,12 +317,8 @@ def update_manifest(version: str, n_colors: int, n_options: int) -> None:
                 "rows": n,
                 "upserted": n,
             }
-        m["postgres"]["total_rows_upserted"] = sum(
-            t.get("upserted", 0) for t in tables.values()
-        )
-        manifest_path.write_text(
-            json.dumps(m, ensure_ascii=False, indent=2), encoding="utf-8"
-        )
+        m["postgres"]["total_rows_upserted"] = sum(t.get("upserted", 0) for t in tables.values())
+        manifest_path.write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"  ✓ manifest updated (car_colors={n_colors}, car_options={n_options})")
     except Exception as e:  # noqa: BLE001
         print(f"  ⚠ failed to update manifest: {e}", file=sys.stderr)
@@ -304,16 +329,17 @@ def run(version: str = "v1") -> int:
     pg_dir.mkdir(parents=True, exist_ok=True)
 
     if not CAR_DEPOSIT_DIR.exists():
-        print(f"[parse_car_deposit] {CAR_DEPOSIT_DIR} not found — skip "
-              f"(giữ nguồn model_data thủ công)")
+        print(f"[parse_car_deposit] {CAR_DEPOSIT_DIR} not found — skip (giữ nguồn model_data thủ công)")
         return 0
 
     raw_colors = _load_csv(CAR_DEPOSIT_DIR / "colors.csv")
     raw_editions = _load_csv(CAR_DEPOSIT_DIR / "edition.csv")
     raw_options = _load_csv(CAR_DEPOSIT_DIR / "options.csv")
     raw_prices = _load_csv(CAR_DEPOSIT_DIR / "price_list.csv")
-    print(f"[parse_car_deposit] raw: colors={len(raw_colors)} edition={len(raw_editions)} "
-          f"options={len(raw_options)} price={len(raw_prices)}")
+    print(
+        f"[parse_car_deposit] raw: colors={len(raw_colors)} edition={len(raw_editions)} "
+        f"options={len(raw_options)} price={len(raw_prices)}"
+    )
 
     # 1. colors (override vinfast_color.csv — scrape là nguồn tự động)
     manual_int = _manual_interior_lookup()
@@ -329,8 +355,9 @@ def run(version: str = "v1") -> int:
         print(f"  ✓ postgres/options.csv: {len(option_rows)} rows")
         for r in option_rows:
             scope = f"  (scope {r['version_name']})" if r["version_name"] else ""
-            print(f"    {r['model_id']} | {r['option_group']} | {r['value_name']} "
-                  f"| +{int(r['price_extra_vnd']):,}{scope}")
+            print(
+                f"    {r['model_id']} | {r['option_group']} | {r['value_name']} | +{int(r['price_extra_vnd']):,}{scope}"
+            )
 
     # 3. sync edition + price_list
     if raw_editions:
@@ -341,8 +368,7 @@ def run(version: str = "v1") -> int:
         print(f"  ✓ price_list sync: {updated} giá cập nhật, +{added} mới")
 
     update_manifest(version, len(color_rows), len(option_rows))
-    print(f"[parse_car_deposit] version={version}  car_colors={len(color_rows)} "
-          f"car_options={len(option_rows)}")
+    print(f"[parse_car_deposit] version={version}  car_colors={len(color_rows)} car_options={len(option_rows)}")
     return 0
 
 

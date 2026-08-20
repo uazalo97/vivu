@@ -107,8 +107,13 @@ def apply_chunking(chunks: list[dict[str, Any]], max_len: int = 800) -> list[dic
             out.append(chunk)
             continue
         lines = chunk["text"].split("\n")
-        if lines and lines[0].lstrip().startswith("|") and len(lines) >= 2 \
-                and lines[1].strip().startswith("|") and "---" in lines[1]:
+        if (
+            lines
+            and lines[0].lstrip().startswith("|")
+            and len(lines) >= 2
+            and lines[1].strip().startswith("|")
+            and "---" in lines[1]
+        ):
             pieces = split_table(chunk["text"], max_len)
         else:
             pieces = split_by_sentences(chunk["text"], max_len)

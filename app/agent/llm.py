@@ -8,6 +8,7 @@ model chính lỗi TRƯỚC khi stream bất kỳ token nào.
 Lưu ý: follow-up sau tool call của Gemini trên DeepInfra luôn lỗi 400
 (thiếu thought_signature) → fallback Haiku xử lý tiếp được loop đó.
 """
+
 import logging
 
 from openai import AsyncOpenAI
@@ -23,15 +24,14 @@ def get_llm() -> AsyncOpenAI:
     """Client chat chính (DeepInfra, OpenAI-compatible) — dùng chung toàn app."""
     global _llm_client
     if _llm_client is None:
-        _llm_client = AsyncOpenAI(
-            api_key=settings.deepinfra_api_key, base_url=settings.deepinfra_base_url
-        )
+        _llm_client = AsyncOpenAI(api_key=settings.deepinfra_api_key, base_url=settings.deepinfra_base_url)
     return _llm_client
+
 
 # ── Token limits (có thể override qua .env) ───────────────────────────────
 # Output: cap độ dài câu trả lời/tool call → kiểm soát chi phí + latency,
 # không phụ thuộc default của provider (DeepInfra thường cap thấp hơn).
-OUTPUT_MAX_TOKENS: int = settings.llm_max_output_tokens       # câu trả lời chat cuối
+OUTPUT_MAX_TOKENS: int = settings.llm_max_output_tokens  # câu trả lời chat cuối
 TOOL_CALL_MAX_TOKENS: int = settings.llm_tool_call_max_tokens  # JSON tool call
 USER_INPUT_MAX_TOKENS: int = settings.llm_user_input_max_tokens  # 1 message người dùng tối đa
 # Input: tổng budget messages gửi lên model (system + history + query).
@@ -123,9 +123,7 @@ async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tup
     got_chunk = False
     word_buffer = ""
     try:
-        stream = await llm.chat.completions.create(
-            model=model, messages=messages, stream=True, **kwargs
-        )
+        stream = await llm.chat.completions.create(model=model, messages=messages, stream=True, **kwargs)
         async for chunk in stream:
             if not chunk.choices:
                 continue
@@ -144,8 +142,8 @@ async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tup
                         word_buffer.rfind("\t"),
                     )
                     if last_break != -1:
-                        to_emit = word_buffer[:last_break + 1]
-                        word_buffer = word_buffer[last_break + 1:]
+                        to_emit = word_buffer[: last_break + 1]
+                        word_buffer = word_buffer[last_break + 1 :]
                         if to_emit:
                             writer({"type": "token", "content": to_emit})
             if delta.tool_calls:
@@ -153,9 +151,7 @@ async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tup
                     writer({"type": "token", "content": word_buffer})
                     word_buffer = ""
                 for tc in delta.tool_calls:
-                    acc = tool_calls_acc.setdefault(
-                        tc.index or 0, {"id": "", "name": "", "arguments": ""}
-                    )
+                    acc = tool_calls_acc.setdefault(tc.index or 0, {"id": "", "name": "", "arguments": ""})
                     if tc.id:
                         acc["id"] = tc.id
                     if tc.function:
@@ -174,9 +170,7 @@ async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tup
     return "".join(content_parts), tool_calls_acc
 
 
-async def stream_chat_with_fallback(
-    llm, messages: list, writer=None, **kwargs
-) -> tuple[str, dict, str]:
+async def stream_chat_with_fallback(llm, messages: list, writer=None, **kwargs) -> tuple[str, dict, str]:
     """Thử lần lượt model chính → fallback.
 
     Trả (content, tool_calls_acc, model_used). Ném exception nếu cả chain lỗi

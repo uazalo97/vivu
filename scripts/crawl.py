@@ -46,25 +46,57 @@ HEADERS = {
 }
 
 # Các tag không mang nội dung text có ý nghĩa — bỏ đi cho text thô sạch hơn.
-DROP_TAGS = ["script", "style", "noscript", "iframe", "svg", "template",
-             "nav", "footer", "header", "form", "button"]
+DROP_TAGS = ["script", "style", "noscript", "iframe", "svg", "template", "nav", "footer", "header", "form", "button"]
 
 # Tag inline: text của chúng nằm cùng dòng, không tạo block mới.
-INLINE_TAGS = {"a", "span", "strong", "b", "em", "i", "u", "s", "small",
-               "sub", "sup", "mark", "code", "abbr", "cite", "q", "time",
-               "label", "font", "tt", "kbd"}
+INLINE_TAGS = {
+    "a",
+    "span",
+    "strong",
+    "b",
+    "em",
+    "i",
+    "u",
+    "s",
+    "small",
+    "sub",
+    "sup",
+    "mark",
+    "code",
+    "abbr",
+    "cite",
+    "q",
+    "time",
+    "label",
+    "font",
+    "tt",
+    "kbd",
+}
 
 # Tag block-level sẽ được render riêng; các tag container khác (div, section...)
 # được đệ quy vào con.
 HEADING_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6"}
-BLOCK_TAGS = HEADING_TAGS | {"p", "ul", "ol", "li", "table", "tr", "blockquote",
-                             "pre", "hr", "dl", "figure", "figcaption", "address"}
+BLOCK_TAGS = HEADING_TAGS | {
+    "p",
+    "ul",
+    "ol",
+    "li",
+    "table",
+    "tr",
+    "blockquote",
+    "pre",
+    "hr",
+    "dl",
+    "figure",
+    "figcaption",
+    "address",
+}
 
 
 def slugify(url: str) -> str:
     """Tạo tên file an toàn từ URL."""
     p = urlparse(url)
-    base = (p.path.strip("/").replace("/", "_") or p.netloc.replace(".", "_"))
+    base = p.path.strip("/").replace("/", "_") or p.netloc.replace(".", "_")
     base = re.sub(r"[^A-Za-z0-9_\-]", "_", base)
     return base[:80] or "page"
 
@@ -96,12 +128,11 @@ def fetch_firecrawl(url: str) -> tuple[str, str]:
     """
     import os
     from dotenv import load_dotenv
+
     load_dotenv(Path(__file__).resolve().parents[1] / ".env")
     key = os.environ.get("FIRECRAWL_API_KEY", "")
     if not key:
-        raise RuntimeError(
-            "FIRECRAWL_API_KEY chưa set trong .env (lấy tại https://firecrawl.dev)"
-        )
+        raise RuntimeError("FIRECRAWL_API_KEY chưa set trong .env (lấy tại https://firecrawl.dev)")
     resp = requests.post(
         "https://api.firecrawl.dev/v1/scrape",
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
@@ -110,15 +141,14 @@ def fetch_firecrawl(url: str) -> tuple[str, str]:
     )
     data = resp.json()
     if resp.status_code != 200 or not data.get("success"):
-        raise RuntimeError(f"Firecrawl API lỗi ({resp.status_code}): {data.get('error','')}")
+        raise RuntimeError(f"Firecrawl API lỗi ({resp.status_code}): {data.get('error', '')}")
     result = data.get("data", {}) or {}
     md = result.get("markdown", "")
     title = result.get("metadata", {}).get("title", "")
     return md, title
 
 
-def fetch_html(url: str, selector: str | None = None,
-               plain: bool = False) -> tuple[str, str, str, str]:
+def fetch_html(url: str, selector: str | None = None, plain: bool = False) -> tuple[str, str, str, str]:
     """Crawl HTML bằng requests + BeautifulSoup (không cần browser headless).
 
     Trả về (markdown sạch, title, marker_md, html gốc) — giữ đúng chữ ký
@@ -142,6 +172,7 @@ def extract_pdf_text(content: bytes) -> str:
     """Rút text thô từ PDF. Dùng pymupdf (nhanh), fallback pdfplumber."""
     try:
         import fitz  # pymupdf
+
         text_parts = []
         with fitz.open(stream=content, filetype="pdf") as doc:
             for i, page in enumerate(doc, 1):
@@ -152,6 +183,7 @@ def extract_pdf_text(content: bytes) -> str:
         try:
             import pdfplumber
             import io
+
             text_parts = []
             with pdfplumber.open(io.BytesIO(content)) as pdf:
                 for i, page in enumerate(pdf.pages, 1):
@@ -164,6 +196,7 @@ def extract_pdf_text(content: bytes) -> str:
 def _inline_text(node) -> str:
     """Gom text của một node inline (và các con inline), <br> thành dấu cách."""
     from bs4 import NavigableString
+
     parts = []
     for child in node.children:
         if isinstance(child, NavigableString):
@@ -275,6 +308,7 @@ def _render_block_md(node, stack) -> str:
 def _render_md(node, stack) -> str:
     """Duyệt con theo thứ tự document, gom inline text thành paragraph, render block."""
     from bs4 import NavigableString
+
     out, para = [], []
 
     def flush():
@@ -299,9 +333,16 @@ def _render_md(node, stack) -> str:
             t = _inline_text(child)
             if t:
                 para.append(t)
-        elif child.name in BLOCK_TAGS or child.name in ("div", "section", "article",
-                                                        "main", "aside", "figure",
-                                                        "figcaption", "span"):
+        elif child.name in BLOCK_TAGS or child.name in (
+            "div",
+            "section",
+            "article",
+            "main",
+            "aside",
+            "figure",
+            "figcaption",
+            "span",
+        ):
             flush()
             out.append(_render_block_md(child, stack))
         else:
@@ -339,7 +380,7 @@ def parse_chunks(md_text: str) -> list[dict]:
 
 def _clean_md(marker_md: str) -> str:
     """Bỏ các dòng marker chunk -> Markdown sạch để người đọc/verify."""
-    lines = [l for l in marker_md.splitlines() if not CHUNK_MARKER_RE.match(l.strip())]
+    lines = [line for line in marker_md.splitlines() if not CHUNK_MARKER_RE.match(line.strip())]
     md = "\n".join(lines)
     md = re.sub(r"[ \t]+\n", "\n", md)
     md = re.sub(r"\n{3,}", "\n\n", md)
@@ -359,15 +400,13 @@ def _split_oversized(chunk: dict, hard: int) -> list[dict]:
         add = len(line) + 1
         if cur and cur_len + add > hard:
             piece = (header + cur) if header else cur
-            pieces.append({"path": chunk["path"], "type": chunk["type"],
-                           "text": "\n".join(piece).strip()})
+            pieces.append({"path": chunk["path"], "type": chunk["type"], "text": "\n".join(piece).strip()})
             cur, cur_len = [], 0
         cur.append(line)
         cur_len += add
     if cur:
         piece = (header + cur) if header else cur
-        pieces.append({"path": chunk["path"], "type": chunk["type"],
-                       "text": "\n".join(piece).strip()})
+        pieces.append({"path": chunk["path"], "type": chunk["type"], "text": "\n".join(piece).strip()})
     return pieces or [chunk]
 
 
@@ -417,10 +456,7 @@ def process_html(html: str, selector: str | None = None, plain: bool = False):
     try:
         from bs4 import BeautifulSoup  # lazy: chỉ cần cho crawl HTML thường (không Firecrawl)
     except ModuleNotFoundError as exc:
-        raise RuntimeError(
-            "Thiếu dependency beautifulsoup4. Chạy: "
-            "python -m pip install -r requirements.txt"
-        ) from exc
+        raise RuntimeError("Thiếu dependency beautifulsoup4. Chạy: python -m pip install -r requirements.txt") from exc
     soup = BeautifulSoup(html, "html.parser")
     root = soup.select_one(selector) if selector else soup.body or soup
     if root is None:
@@ -429,7 +465,7 @@ def process_html(html: str, selector: str | None = None, plain: bool = False):
     for tag in root.find_all(DROP_TAGS):
         tag.decompose()
 
-    title = (soup.title.get_text(strip=True) if soup.title else "")
+    title = soup.title.get_text(strip=True) if soup.title else ""
     title = title.split("|")[0].strip()  # bỏ suffix tên site kiểu "... | VinFast"
 
     if plain:
@@ -451,14 +487,18 @@ def main() -> int:
     ap.add_argument("--selector", help="Selector CSS để chỉ crawl một vùng (vd: 'article', 'div.node-detail')")
     ap.add_argument("--html", action="store_true", help="Lưu thêm file HTML gốc")
     ap.add_argument("--print", action="store_true", help="In text thô ra stdout ngoài việc lưu file")
-    ap.add_argument("--plain", action="store_true",
-                    help="HTML: xuất text phẳng thay vì Markdown có cấu trúc")
-    ap.add_argument("--firecrawl", action="store_true",
-                    help="Crawl bằng Firecrawl API (scrape + JS render + markdown cloud). "
-                         "Cần FIRECRAWL_API_KEY trong .env")
-    ap.add_argument("--split", action="store_true",
-                    help="HTML (Markdown mode): tách thêm ra <out>.chunks.json — mỗi chunk "
-                         "{path, type, text} đã merge/split, sẵn sàng cho embedding")
+    ap.add_argument("--plain", action="store_true", help="HTML: xuất text phẳng thay vì Markdown có cấu trúc")
+    ap.add_argument(
+        "--firecrawl",
+        action="store_true",
+        help="Crawl bằng Firecrawl API (scrape + JS render + markdown cloud). Cần FIRECRAWL_API_KEY trong .env",
+    )
+    ap.add_argument(
+        "--split",
+        action="store_true",
+        help="HTML (Markdown mode): tách thêm ra <out>.chunks.json — mỗi chunk "
+        "{path, type, text} đã merge/split, sẵn sàng cho embedding",
+    )
     args = ap.parse_args()
 
     print(f"→ Đang tải: {args.url}")
@@ -476,17 +516,15 @@ def main() -> int:
         if urlparse(args.url).path.lower().endswith(".pdf"):
             resp = fetch(args.url)
             raw_bytes = resp.content
-            print(f"  Đã tải {len(raw_bytes):,} bytes ({resp.headers.get('Content-Type','?')})")
+            print(f"  Đã tải {len(raw_bytes):,} bytes ({resp.headers.get('Content-Type', '?')})")
         else:
             print("  → Crawl HTML bằng requests + BeautifulSoup...")
-            text, title, marker_md, html = fetch_html(
-                args.url, args.selector, plain=args.plain
-            )
+            text, title, marker_md, html = fetch_html(args.url, args.selector, plain=args.plain)
             raw_bytes = html.encode("utf-8")
             kind = "html"
             print(f"  Đã tải {len(raw_bytes):,} bytes (requests/BS4)")
 
-    if not args.firecrawl and 'resp' in locals() and is_pdf(resp, args.url):
+    if not args.firecrawl and "resp" in locals() and is_pdf(resp, args.url):
         print("  → Phát hiện PDF, đang rút text...")
         if args.selector:
             print("  (PDF bỏ qua --selector)")
@@ -524,6 +562,7 @@ def main() -> int:
         chunks = build_chunks(marker_md)
         out_json = os.path.splitext(out_txt)[0] + ".chunks.json"
         import json
+
         doc = {
             "url": args.url,
             "title": title,
@@ -537,8 +576,10 @@ def main() -> int:
         # Thống kê kích thước chunk.
         sizes = [len(c["text"]) for c in chunks]
         if sizes:
-            print(f"  ✓ Đã tách {len(chunks)} chunk → {out_json}  "
-                  f"(size: min {min(sizes)}, max {max(sizes)}, trung bình {sum(sizes)//len(sizes)})")
+            print(
+                f"  ✓ Đã tách {len(chunks)} chunk → {out_json}  "
+                f"(size: min {min(sizes)}, max {max(sizes)}, trung bình {sum(sizes) // len(sizes)})"
+            )
 
     if args.print:
         print("\n" + "=" * 80 + "\n")

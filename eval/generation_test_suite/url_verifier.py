@@ -2,12 +2,13 @@ import requests
 import json
 import re
 from typing import List, Dict
-from urllib.parse import urlparse
+
 
 def extract_urls(text: str) -> List[str]:
     """Trích xuất tất cả các URL từ văn bản."""
-    url_pattern = r'https?://[^\s\)\],]+'
+    url_pattern = r"https?://[^\s\)\],]+"
     return re.findall(url_pattern, text)
+
 
 def verify_urls(responses: List[Dict]) -> List[Dict]:
     """
@@ -19,7 +20,7 @@ def verify_urls(responses: List[Dict]) -> List[Dict]:
     results = []
 
     for idx, item in enumerate(responses):
-        response_text = item.get('response', '')
+        response_text = item.get("response", "")
         urls = extract_urls(response_text)
 
         url_status = []
@@ -33,27 +34,24 @@ def verify_urls(responses: List[Dict]) -> List[Dict]:
 
             url_status.append({"url": url, "status": status})
 
-        results.append({
-            "id": idx,
-            "query": item.get('query', ''),
-            "urls_found": len(urls),
-            "details": url_status,
-            "overall_url_status": "PASS" if all(u['status'] == "PASS" for u in url_status) and urls else "FAIL"
-        })
+        results.append(
+            {
+                "id": idx,
+                "query": item.get("query", ""),
+                "urls_found": len(urls),
+                "details": url_status,
+                "overall_url_status": "PASS" if all(u["status"] == "PASS" for u in url_status) and urls else "FAIL",
+            }
+        )
 
     return results
+
 
 if __name__ == "__main__":
     # Ví dụ dữ liệu test
     test_data = [
-        {
-            "query": "Giá gói A là bao nhiêu?",
-            "response": "Giá gói A là 100k. Xem chi tiết tại https://google.com"
-        },
-        {
-            "query": "Thông tin sai",
-            "response": "Đây là link lỗi: https://this-is-a-fake-url-12345.com"
-        }
+        {"query": "Giá gói A là bao nhiêu?", "response": "Giá gói A là 100k. Xem chi tiết tại https://google.com"},
+        {"query": "Thông tin sai", "response": "Đây là link lỗi: https://this-is-a-fake-url-12345.com"},
     ]
 
     print("--- Đang kiểm tra URLs ---")

@@ -110,8 +110,11 @@ for name, answer_hit_rate, tool_hit_rate in scenarios:
     print("    - {} LLM calls needed".format(cache_misses))
     print("    - DeepInfra free tier: ~10-20 RPM")
     print("    - DeepInfra paid tier: ~100-1000 RPM")
-    print("    - Time to process: {:.0f}s (free) or {:.1f}s (paid)".format(
-        cache_misses / 15 * 60, cache_misses / 500 * 60))
+    print(
+        "    - Time to process: {:.0f}s (free) or {:.1f}s (paid)".format(
+            cache_misses / 15 * 60, cache_misses / 500 * 60
+        )
+    )
     print()
 
 print("=" * 65)

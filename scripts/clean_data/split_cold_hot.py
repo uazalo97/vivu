@@ -108,8 +108,7 @@ def diff_chunks(
         added = len(curr_ids - prev_ids)
         removed = len(prev_ids - curr_ids)
         modified = sum(1 for cid in curr_ids & prev_ids if curr_map[cid] != prev_map[cid])
-        diff[col] = {"chunks": len(curr_rows), "added": added,
-                     "modified": modified, "removed": removed}
+        diff[col] = {"chunks": len(curr_rows), "added": added, "modified": modified, "removed": removed}
     return diff
 
 
@@ -190,16 +189,18 @@ def build_edition_rows(hot_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if key in seen:
             continue
         seen.add(key)
-        rows.append({
-            "model_id": h["model_id"],
-            "edition_id": h["edition_id"],
-            "model_label": h["model_label"],
-            "edition_label": h["edition_label"],
-            "year_range": h.get("year_range", "2025-2026"),
-            "is_active": "t" if h.get("is_active", True) else "f",
-            "created_at": created_at,
-            "updated_at": created_at,
-        })
+        rows.append(
+            {
+                "model_id": h["model_id"],
+                "edition_id": h["edition_id"],
+                "model_label": h["model_label"],
+                "edition_label": h["edition_label"],
+                "year_range": h.get("year_range", "2025-2026"),
+                "is_active": "t" if h.get("is_active", True) else "f",
+                "created_at": created_at,
+                "updated_at": created_at,
+            }
+        )
     return rows
 
 
@@ -207,19 +208,21 @@ def build_price_rows(hot_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
     updated_at = now_iso()
     for h in hot_rows:
-        rows.append({
-            "model_id": h["model_id"],
-            "edition_id": h["edition_id"],
-            "price_list_vnd": h.get("price_list_vnd") or "",
-            "price_promo_vnd": h.get("price_promo_vnd") or "",
-            "promo_label": h.get("promo_label", ""),
-            "vat_included": "t" if h.get("vat_included", True) else "f",
-            "battery_included": "t" if h.get("battery_included", True) else "f",
-            "valid_from": h.get("valid_from", ""),
-            "valid_to": h.get("valid_to") or "",
-            "updated_at": updated_at,
-            "source_url": h.get("source_url", ""),
-        })
+        rows.append(
+            {
+                "model_id": h["model_id"],
+                "edition_id": h["edition_id"],
+                "price_list_vnd": h.get("price_list_vnd") or "",
+                "price_promo_vnd": h.get("price_promo_vnd") or "",
+                "promo_label": h.get("promo_label", ""),
+                "vat_included": "t" if h.get("vat_included", True) else "f",
+                "battery_included": "t" if h.get("battery_included", True) else "f",
+                "valid_from": h.get("valid_from", ""),
+                "valid_to": h.get("valid_to") or "",
+                "updated_at": updated_at,
+                "source_url": h.get("source_url", ""),
+            }
+        )
     return rows
 
 
@@ -316,7 +319,11 @@ def run(version: str = "v1", commit: str = "", prev: str | None = None) -> int:
         return 1
 
     # Load intermediate
-    vector_rows = [json.loads(line) for line in (inter_dir / "vector.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    vector_rows = [
+        json.loads(line)
+        for line in (inter_dir / "vector.jsonl").read_text(encoding="utf-8").splitlines()
+        if line.strip()
+    ]
     hot_path = inter_dir / "hot.jsonl"
     hot_rows: list[dict[str, Any]] = []
     if hot_path.exists():
@@ -349,13 +356,33 @@ def run(version: str = "v1", commit: str = "", prev: str | None = None) -> int:
 
     write_csv(
         postgres_dir / "edition.csv",
-        ["model_id", "edition_id", "model_label", "edition_label", "year_range", "is_active", "created_at", "updated_at"],
+        [
+            "model_id",
+            "edition_id",
+            "model_label",
+            "edition_label",
+            "year_range",
+            "is_active",
+            "created_at",
+            "updated_at",
+        ],
         edition_rows,
     )
     write_csv(
         postgres_dir / "price_list.csv",
-        ["model_id", "edition_id", "price_list_vnd", "price_promo_vnd", "promo_label",
-         "vat_included", "battery_included", "valid_from", "valid_to", "updated_at", "source_url"],
+        [
+            "model_id",
+            "edition_id",
+            "price_list_vnd",
+            "price_promo_vnd",
+            "promo_label",
+            "vat_included",
+            "battery_included",
+            "valid_from",
+            "valid_to",
+            "updated_at",
+            "source_url",
+        ],
         price_rows,
     )
 
@@ -364,15 +391,16 @@ def run(version: str = "v1", commit: str = "", prev: str | None = None) -> int:
     if prev_version is None:
         prev_version = detect_prev_version(version)
     diff = diff_chunks(by_collection, prev_version)
-    manifest = build_manifest(version, by_collection, edition_rows, price_rows,
-                               link_only, commit, prev_version, diff)
+    manifest = build_manifest(version, by_collection, edition_rows, price_rows, link_only, commit, prev_version, diff)
     (version_dir / "_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"[split_cold_hot] version={version}  prev={prev_version}")
     print(f"  vector collections: {len(by_collection)}  total chunks: {manifest['vector']['total_chunks']}")
-    print(f"  diff: added={manifest['vector']['total_added']}  "
-          f"modified={manifest['vector']['total_modified']}  "
-          f"removed={manifest['vector']['total_removed']}")
+    print(
+        f"  diff: added={manifest['vector']['total_added']}  "
+        f"modified={manifest['vector']['total_modified']}  "
+        f"removed={manifest['vector']['total_removed']}"
+    )
     print(f"  postgres edition rows: {len(edition_rows)}  price rows: {len(price_rows)}")
     print(f"  output dir: {version_dir}")
     return 0
@@ -382,8 +410,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Split intermediate JSONL into cold vector + hot postgres CSV.")
     ap.add_argument("--version", default="v1", help="Version folder (default: v1)")
     ap.add_argument("--commit", default="", help="Repository commit hash")
-    ap.add_argument("--prev", default=None,
-                    help="Version trước để diff (mặc định: auto-detect từ manifest)")
+    ap.add_argument("--prev", default=None, help="Version trước để diff (mặc định: auto-detect từ manifest)")
     args = ap.parse_args()
     return run(args.version, args.commit, args.prev)
 

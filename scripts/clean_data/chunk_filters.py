@@ -18,9 +18,26 @@ from scripts.clean_data.spec_common import MODEL_LABEL, no_diacritics
 # (VD: bài VF2 kèm headline "Toyota Land Cruiser FJ ra mắt Việt Nam, giá đồng").
 # Drop để khỏi bẩn corpus — conservative: chỉ drop khi chắc chắn không nhắc model.
 COMPETING_BRANDS = (
-    "toyota", "honda", "hyundai", "kia", "mazda", "mitsubishi", "nissan",
-    "ford", "suzuki", "lexus", "bmw", "mercedes", "audi", "volkswagen",
-    "peugeot", "renault", "byd", "tesla", "geely", "wuling",
+    "toyota",
+    "honda",
+    "hyundai",
+    "kia",
+    "mazda",
+    "mitsubishi",
+    "nissan",
+    "ford",
+    "suzuki",
+    "lexus",
+    "bmw",
+    "mercedes",
+    "audi",
+    "volkswagen",
+    "peugeot",
+    "renault",
+    "byd",
+    "tesla",
+    "geely",
+    "wuling",
 )
 
 
@@ -52,10 +69,17 @@ def is_offmodel_noise(chunk: dict[str, Any]) -> bool:
 # cọc". Là điều hướng/form, KHÔNG phải thông tin xe → drop ở mức chunk (vì là
 # khối đa-dòng, lọc theo từng dòng bằng NOISE_PATTERNS không đủ).
 _JUNK_SECTION_NORM = {
-    "dang ky thanh cong", "kiem tra email", "kiem tra email de kich hoat tai khoan",
-    "doi mat khau thanh cong", "nhan bao gia uu dai moi nhat",
-    "dich vu khach hang", "speak-up hotline", "speak up hotline",
-    "tien ich", "mua sam", "theo doi",
+    "dang ky thanh cong",
+    "kiem tra email",
+    "kiem tra email de kich hoat tai khoan",
+    "doi mat khau thanh cong",
+    "nhan bao gia uu dai moi nhat",
+    "dich vu khach hang",
+    "speak-up hotline",
+    "speak up hotline",
+    "tien ich",
+    "mua sam",
+    "theo doi",
 }
 _JUNK_TEXT_RE = re.compile(
     r"icon-popup-success|"
@@ -95,17 +119,20 @@ def is_junk_chunk(chunk: dict[str, Any]) -> bool:
         if no_diacritics(sp).lower().strip() in _JUNK_SECTION_NORM:
             return True
     # (2) text khớp modal/newsletter/price-button
-    if (_JUNK_TEXT_RE.search(text)
-            or _JUNK_TEXT_NORM_RE.search(no_diacritics(text))):
+    if _JUNK_TEXT_RE.search(text) or _JUNK_TEXT_NORM_RE.search(no_diacritics(text)):
         return True
     # (3) nav menu leak: KHÔNG có section title (chunk gốc) + text là/mở đầu bằng nav items
     if len(chunk.get("section_path", [])) <= 1:
-        lines = [l.strip() for l in text.splitlines() if l.strip()]
-        nav_lines = [l for l in lines if _NAV_ITEM_RE.match(l)]
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        nav_lines = [line for line in lines if _NAV_ITEM_RE.match(line)]
         if len(nav_lines) >= 2 and len(nav_lines) / max(len(lines), 1) >= 0.5:
             return True
-        if re.search(r"^-\s*(gi[aá] b[aá]n|gi[ớo]i thi[ệe]u|ngo[ạa]i th[ấa]t|"
-                     r"n[ộo]i th[ấa]t|th[ôo]ng s[ốo])\s*\n", text, re.MULTILINE):
+        if re.search(
+            r"^-\s*(gi[aá] b[aá]n|gi[ớo]i thi[ệe]u|ngo[ạa]i th[ấa]t|"
+            r"n[ộo]i th[ấa]t|th[ôo]ng s[ốo])\s*\n",
+            text,
+            re.MULTILINE,
+        ):
             return True
     return False
 
@@ -120,12 +147,32 @@ def is_junk_chunk(chunk: dict[str, Any]) -> bool:
 #       (detector '|'+---' không nhận). Ngưỡng pipe bảo vệ prose mô tả
 #       ("VF 8 có công suất 150 kW" — 0 pipe → giữ).
 _SPEC_LABELS = (
-    "cong suat", "mo men", "mo-men", "dung luong pin", "loai pin",
-    "quang duong", "tai trong", "trong luong", "chieu dai co so",
-    "chieu dai", "chieu rong", "chieu cao", "khoang sang", "co so",
-    "toc do toi da", "tang toc", "so cho ngoi", "cho ngoi",
-    "dan dong", "he thong treo", "treo truoc", "treo sau",
-    "thoi gian nap", "sac day", "sac nhanh", "khoang chua hanh ly",
+    "cong suat",
+    "mo men",
+    "mo-men",
+    "dung luong pin",
+    "loai pin",
+    "quang duong",
+    "tai trong",
+    "trong luong",
+    "chieu dai co so",
+    "chieu dai",
+    "chieu rong",
+    "chieu cao",
+    "khoang sang",
+    "co so",
+    "toc do toi da",
+    "tang toc",
+    "so cho ngoi",
+    "cho ngoi",
+    "dan dong",
+    "he thong treo",
+    "treo truoc",
+    "treo sau",
+    "thoi gian nap",
+    "sac day",
+    "sac nhanh",
+    "khoang chua hanh ly",
 )
 
 

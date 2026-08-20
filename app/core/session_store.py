@@ -10,6 +10,7 @@ Mỗi request tốn 2 thao tác nhỏ:
   1 SELECT (đọc summary) + 1 UPSERT (tăng turn_count, cập nhật summary nếu có)
 → ~1-3ms trên Neon, không đáng kể so với 1 LLM call.
 """
+
 import asyncio
 import logging
 import uuid
@@ -50,6 +51,7 @@ async def ensure_schema() -> None:
     async with _ensure_lock:
         if _schema_ready:
             return
+
         async def _create_schema() -> None:
             pool = await get_pool()
             async with pool.acquire() as conn:
@@ -140,8 +142,7 @@ async def update_summary(session_id: str, summary: str | None, summary_tokens: i
         async def _update() -> None:
             pool = await get_pool()
             await pool.execute(
-                "UPDATE chat_sessions SET summary = $2, summary_tokens = $3, updated_at = now() "
-                "WHERE session_id = $1",
+                "UPDATE chat_sessions SET summary = $2, summary_tokens = $3, updated_at = now() WHERE session_id = $1",
                 parse_session_id(session_id),
                 summary,
                 summary_tokens,

@@ -240,8 +240,17 @@ def upsert_edition(conn, version: str, rows: list[dict[str, Any]]) -> int:
         updated_at = EXCLUDED.updated_at
     """
     values = [
-        (version, r["model_id"], r["edition_id"], r["model_label"], r["edition_label"],
-         r["year_range"], to_bool(r["is_active"]), r["created_at"], r["updated_at"])
+        (
+            version,
+            r["model_id"],
+            r["edition_id"],
+            r["model_label"],
+            r["edition_label"],
+            r["year_range"],
+            to_bool(r["is_active"]),
+            r["created_at"],
+            r["updated_at"],
+        )
         for r in rows
     ]
     execute_values(cur, sql, values)
@@ -268,20 +277,22 @@ def upsert_price_list(conn, version: str, rows: list[dict[str, Any]]) -> int:
     """
     values = []
     for r in rows:
-        values.append((
-            version,
-            r["model_id"],
-            r["edition_id"],
-            int(r["price_list_vnd"]) if r["price_list_vnd"] else None,
-            int(r["price_promo_vnd"]) if r["price_promo_vnd"] else None,
-            r["promo_label"] or None,
-            to_bool(r["vat_included"]),
-            to_bool(r["battery_included"]),
-            r["valid_from"] or "1970-01-01",  # NOT NULL; coerce empty → sentinel
-            r["valid_to"] or None,
-            r["updated_at"] or None,
-            r["source_url"] or None,
-        ))
+        values.append(
+            (
+                version,
+                r["model_id"],
+                r["edition_id"],
+                int(r["price_list_vnd"]) if r["price_list_vnd"] else None,
+                int(r["price_promo_vnd"]) if r["price_promo_vnd"] else None,
+                r["promo_label"] or None,
+                to_bool(r["vat_included"]),
+                to_bool(r["battery_included"]),
+                r["valid_from"] or "1970-01-01",  # NOT NULL; coerce empty → sentinel
+                r["valid_to"] or None,
+                r["updated_at"] or None,
+                r["source_url"] or None,
+            )
+        )
     execute_values(cur, sql, values)
     conn.commit()
     return len(rows)
@@ -300,12 +311,19 @@ def upsert_colors(conn, version: str, rows: list[dict[str, Any]]) -> int:
     VALUES %s
     """
     values = [
-        (version, r["model_id"], r.get("version_code") or None, r.get("version_name") or None,
-         r.get("color_code") or None, r.get("color_name") or None,
-         r.get("color_type") or None,
-         int(r["color_fee_vnd"]) if r.get("color_fee_vnd") else 0,
-         r.get("interior_code") or None, r.get("interior_name") or None,
-         r.get("source_url") or None)
+        (
+            version,
+            r["model_id"],
+            r.get("version_code") or None,
+            r.get("version_name") or None,
+            r.get("color_code") or None,
+            r.get("color_name") or None,
+            r.get("color_type") or None,
+            int(r["color_fee_vnd"]) if r.get("color_fee_vnd") else 0,
+            r.get("interior_code") or None,
+            r.get("interior_name") or None,
+            r.get("source_url") or None,
+        )
         for r in rows
     ]
     execute_values(cur, sql, values)
@@ -326,11 +344,19 @@ def upsert_options(conn, version: str, rows: list[dict[str, Any]]) -> int:
     VALUES %s
     """
     values = [
-        (version, r["model_id"], r.get("version_code") or None, r.get("version_name") or None,
-         r.get("option_group") or None, r.get("option_name") or None,
-         r.get("value_id") or None, r.get("value_name") or None,
-         int(r["price_extra_vnd"]) if r.get("price_extra_vnd") else 0,
-         r.get("source_url") or None, r.get("updated_at") or None)
+        (
+            version,
+            r["model_id"],
+            r.get("version_code") or None,
+            r.get("version_name") or None,
+            r.get("option_group") or None,
+            r.get("option_name") or None,
+            r.get("value_id") or None,
+            r.get("value_name") or None,
+            int(r["price_extra_vnd"]) if r.get("price_extra_vnd") else 0,
+            r.get("source_url") or None,
+            r.get("updated_at") or None,
+        )
         for r in rows
     ]
     execute_values(cur, sql, values)
@@ -354,10 +380,19 @@ def upsert_specs(conn, version: str, rows: list[dict[str, Any]]) -> int:
     VALUES %s
     """
     values = [
-        (version, r["model_code"], r["version_name"] or None, r["version_code"] or None,
-         r["spec_category"], r.get("spec_category_vn", ""),
-         r["spec_key"], r.get("spec_key_vn", ""),
-         r["spec_value"], r["spec_unit"] or None, r["source_url"] or None)
+        (
+            version,
+            r["model_code"],
+            r["version_name"] or None,
+            r["version_code"] or None,
+            r["spec_category"],
+            r.get("spec_category_vn", ""),
+            r["spec_key"],
+            r.get("spec_key_vn", ""),
+            r["spec_value"],
+            r["spec_unit"] or None,
+            r["source_url"] or None,
+        )
         for r in rows
     ]
     execute_values(cur, sql, values)
@@ -455,8 +490,10 @@ def run(version: str = "v1", dsn: str = PG_DSN) -> int:
     n_options = upsert_options(conn, version, options_rows)
     record_manifest(conn, version, version_dir)
 
-    print(f"[postgres_ingest] version={version}  edition={n_edition}  price_list={n_price}  "
-          f"car_specs={n_specs}  car_colors={n_colors}  car_options={n_options}  (is_current=false)")
+    print(
+        f"[postgres_ingest] version={version}  edition={n_edition}  price_list={n_price}  "
+        f"car_specs={n_specs}  car_colors={n_colors}  car_options={n_options}  (is_current=false)"
+    )
     conn.close()
     return 0
 

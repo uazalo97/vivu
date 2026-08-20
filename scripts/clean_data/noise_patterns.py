@@ -51,8 +51,8 @@ NOISE_PATTERNS = [
     r"^\s*Hãy thử lại với từ khoá khác\s*$",
     r"^\s*Chọn\s+\w+\s*$",
     # Contact / phone / date-only lines
-    r"^[\d.\s]{9,}$",                     # phone number
-    r"^\d{1,2}\s+\d{2}-\d{4}$",           # "30 07-2026"
+    r"^[\d.\s]{9,}$",  # phone number
+    r"^\d{1,2}\s+\d{2}-\d{4}$",  # "30 07-2026"
     r"^\s*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\s*$",  # email
     r"^\s*Xin hãy gọi ngay.*$",
 ]
@@ -67,8 +67,15 @@ PUA_RE = re.compile("[\ue000-\uf8ff]")
 HTML_COMMENT_RE = re.compile(r"<!\s*\[[^\]]*\]>|<![^>]{0,80}>")
 
 PRICE_KEYWORDS = [
-    "giá bán", "giá niêm yết", "giá ưu đãi", "giá xe", "triệu đồng", "vnđ",
-    "đặt cọc", "cọc", "lăn bánh",
+    "giá bán",
+    "giá niêm yết",
+    "giá ưu đãi",
+    "giá xe",
+    "triệu đồng",
+    "vnđ",
+    "đặt cọc",
+    "cọc",
+    "lăn bánh",
 ]
 
 # PDF-specific noise patterns (từ brochure PDF text-extract)
@@ -234,8 +241,7 @@ def _is_page_number(line: str) -> bool:
 
 def _is_footnote(line: str) -> bool:
     """True nếu dòng là footnote PDF (*Phiên bản, (**) ...)."""
-    return bool(FOOTNOTE_RE.match(line.strip())
-                or FOOTNOTE_PAREN_RE.match(line.strip()))
+    return bool(FOOTNOTE_RE.match(line.strip()) or FOOTNOTE_PAREN_RE.match(line.strip()))
 
 
 def clean_pdf_prose(text: str) -> str:

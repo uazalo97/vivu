@@ -21,8 +21,7 @@ from dotenv import load_dotenv
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-logging.basicConfig(level=logging.INFO,
-                    format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger("openrouter")
 # Giảm ồn từ thư viện bên thứ 3 (qdrant_client/httpx)
 for noisy in ("httpx", "qdrant_client.http", "urllib3"):
@@ -36,9 +35,14 @@ for noisy in ("httpx", "qdrant_client.http", "urllib3"):
 # connection pooled bị stale (server đóng ngầm) khi send trên Windows trả
 # `[Errno 22] Invalid argument` → urllib3 tự bỏ connection hỏng, mở connection
 # mới thay vì ném lỗi.
-_RETRY = Retry(total=4, connect=4, read=4, status=0, backoff_factor=0.5,
-               allowed_methods=frozenset({"GET", "POST", "PUT", "DELETE",
-                                          "HEAD", "OPTIONS"}))
+_RETRY = Retry(
+    total=4,
+    connect=4,
+    read=4,
+    status=0,
+    backoff_factor=0.5,
+    allowed_methods=frozenset({"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"}),
+)
 _SESSION = requests.Session()
 _adapter = HTTPAdapter(pool_connections=8, pool_maxsize=8, max_retries=_RETRY)
 _SESSION.mount("https://", _adapter)
@@ -48,19 +52,22 @@ _SESSION.mount("http://", _adapter)
 _METRICS: list[dict] = []
 
 
-def record_metric(op: str, model: str, start: float, usage: dict | None,
-                  batch: int | None = None, ttft: float | None = None) -> None:
+def record_metric(
+    op: str, model: str, start: float, usage: dict | None, batch: int | None = None, ttft: float | None = None
+) -> None:
     """Ghi latency + token usage (+ TTFT nếu streaming) của 1 API call."""
     usage = usage or {}
-    _METRICS.append({
-        "op": op,
-        "model": model,
-        "latency_ms": round((time.time() - start) * 1000, 1),
-        "ttft_ms": round(ttft * 1000, 1) if ttft is not None else None,
-        "input_tokens": usage.get("input_tokens") or usage.get("prompt_tokens"),
-        "output_tokens": usage.get("output_tokens") or usage.get("completion_tokens"),
-        "batch": batch,
-    })
+    _METRICS.append(
+        {
+            "op": op,
+            "model": model,
+            "latency_ms": round((time.time() - start) * 1000, 1),
+            "ttft_ms": round(ttft * 1000, 1) if ttft is not None else None,
+            "input_tokens": usage.get("input_tokens") or usage.get("prompt_tokens"),
+            "output_tokens": usage.get("output_tokens") or usage.get("completion_tokens"),
+            "batch": batch,
+        }
+    )
 
 
 def get_metrics() -> list[dict]:
@@ -70,14 +77,12 @@ def get_metrics() -> list[dict]:
 def summarize_metrics() -> dict:
     """Tổng hợp metrics: số call, tổng latency, TTFT trung bình, token theo op."""
     by_op: dict[str, dict] = {}
-    total = {"calls": 0, "latency_ms": 0.0,
-             "ttft_ms": 0.0, "ttft_calls": 0,
-             "input_tokens": 0, "output_tokens": 0}
+    total = {"calls": 0, "latency_ms": 0.0, "ttft_ms": 0.0, "ttft_calls": 0, "input_tokens": 0, "output_tokens": 0}
     for m in _METRICS:
         op = m["op"]
-        acc = by_op.setdefault(op, {"calls": 0, "latency_ms": 0.0,
-                                    "ttft_ms": 0.0, "ttft_calls": 0,
-                                    "input_tokens": 0, "output_tokens": 0})
+        acc = by_op.setdefault(
+            op, {"calls": 0, "latency_ms": 0.0, "ttft_ms": 0.0, "ttft_calls": 0, "input_tokens": 0, "output_tokens": 0}
+        )
         acc["calls"] += 1
         acc["latency_ms"] += m["latency_ms"]
         if m.get("ttft_ms") is not None:
@@ -93,6 +98,7 @@ def summarize_metrics() -> dict:
         total["input_tokens"] += m["input_tokens"] or 0
         total["output_tokens"] += m["output_tokens"] or 0
     return {"by_op": by_op, "total": total}
+
 
 # Load .env từ repo root (backend/lib/../../.env)
 load_dotenv(Path(__file__).resolve().parents[1] / ".env")
@@ -110,8 +116,7 @@ MAX_RETRIES = 4
 def require_key() -> None:
     if not API_KEY:
         raise RuntimeError(
-            "OPENROUTER_API_KEY chưa set. Tạo file .env với OPENROUTER_API_KEY=sk-or-v1-... "
-            "(xem .env.example)"
+            "OPENROUTER_API_KEY chưa set. Tạo file .env với OPENROUTER_API_KEY=sk-or-v1-... (xem .env.example)"
         )
 
 
@@ -134,7 +139,7 @@ def _post(url: str, body: dict, timeout: int) -> requests.Response:
                 time.sleep(2 * (attempt + 1))
                 continue
             r.raise_for_status()  # 4xx khác → không retry
-            _ = r.content          # đọc body ngay để bắt lỗi kết nối giữa chừng
+            _ = r.content  # đọc body ngay để bắt lỗi kết nối giữa chừng
             return r
         except requests.exceptions.RequestException as e:
             last = str(e)
@@ -152,11 +157,12 @@ def _embed_batch(batch: list[str], model: str) -> list[list[float]]:
     return [x["embedding"] for x in data]
 
 
-def embed_texts(texts: list[str], model: str = EMBED_MODEL,
-                batch_size: int = 64, workers: int = 8) -> list[list[float]]:
+def embed_texts(
+    texts: list[str], model: str = EMBED_MODEL, batch_size: int = 64, workers: int = 8
+) -> list[list[float]]:
     """Embed danh sách text → list vector. Batch lớn + chạy song song `workers` luồng
     (nhanh hơn nhiều so với tuần tự khi có 2000+ chunk)."""
-    batches = [texts[i:i + batch_size] for i in range(0, len(texts), batch_size)]
+    batches = [texts[i : i + batch_size] for i in range(0, len(texts), batch_size)]
     if len(batches) == 1:
         # Query-time: chỉ 1 batch → gọi TRỰC TIẾP trong chính thread hiện tại.
         # Tránh tạo socket trong worker thread của ThreadPoolExecutor — trên
@@ -171,9 +177,11 @@ def embed_texts(texts: list[str], model: str = EMBED_MODEL,
             i = futs[fut]
             results[i] = fut.result()  # lỗi → ném lên, task này chết
             done += 1
-            print(f"  [embed] {done}/{len(batches)} batches "
-                  f"({min(done * batch_size, len(texts))}/{len(texts)} chunks)",
-                  file=sys.stderr, flush=True)
+            print(
+                f"  [embed] {done}/{len(batches)} batches ({min(done * batch_size, len(texts))}/{len(texts)} chunks)",
+                file=sys.stderr,
+                flush=True,
+            )
     out: list[list[float]] = []
     for r in results:
         out.extend(r)  # type: ignore[arg-type]
@@ -184,12 +192,13 @@ def embed_text(text: str, model: str = EMBED_MODEL) -> list[float]:
     return embed_texts([text], model, batch_size=1)[0]
 
 
-def _chat_body(messages: list[dict], model: str, temperature: float,
-               max_tokens: int, stream: bool) -> dict:
+def _chat_body(messages: list[dict], model: str, temperature: float, max_tokens: int, stream: bool) -> dict:
     """Body cho /chat/completions — thêm `reasoning.effort` nếu được cấu hình."""
     body: dict = {
-        "model": model, "messages": messages,
-        "temperature": temperature, "max_tokens": max_tokens,
+        "model": model,
+        "messages": messages,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
         "stream": stream,
     }
     if CHAT_REASONING:  # "off" | "low" | "medium" | "high"
@@ -197,8 +206,9 @@ def _chat_body(messages: list[dict], model: str, temperature: float,
     return body
 
 
-def chat_completion_stream(messages: list[dict], model: str = CHAT_MODEL,
-                           temperature: float = 0.3, max_tokens: int = 4096):
+def chat_completion_stream(
+    messages: list[dict], model: str = CHAT_MODEL, temperature: float = 0.3, max_tokens: int = 4096
+):
     """Stream chat completions → yield TỪNG TOKEN câu trả lời (str).
 
     - Reasoning (delta.reasoning) tiêu thụ nội bộ, KHÔNG yield — chỉ dùng tính TTFT.
@@ -218,9 +228,9 @@ def chat_completion_stream(messages: list[dict], model: str = CHAT_MODEL,
 
     for attempt in range(MAX_RETRIES):
         try:
-            with _SESSION.post(f"{BASE_URL}/chat/completions",
-                               headers=_headers(), json=body,
-                               timeout=180, stream=True) as r:
+            with _SESSION.post(
+                f"{BASE_URL}/chat/completions", headers=_headers(), json=body, timeout=180, stream=True
+            ) as r:
                 if r.status_code == 429 or r.status_code >= 500:
                     last_err = f"HTTP {r.status_code}"
                     time.sleep(2 * (attempt + 1))
@@ -263,13 +273,13 @@ def chat_completion_stream(messages: list[dict], model: str = CHAT_MODEL,
     if usage.get("completion_tokens") is None:
         usage["completion_tokens"] = out_count
     record_metric("chat", model, t0, usage, ttft=ttft)
-    logger.info("chat  model=%s  ttft=%.0fms  tokens_out=%s",
-                model, (ttft or 0) * 1000, usage.get("completion_tokens"))
+    logger.info("chat  model=%s  ttft=%.0fms  tokens_out=%s", model, (ttft or 0) * 1000, usage.get("completion_tokens"))
     if not sent_any:
         raise RuntimeError(f"chat_completion_stream failed after {MAX_RETRIES}: {last_err or 'no content'}")
 
 
-def chat_completion(messages: list[dict], model: str = CHAT_MODEL,
-                    temperature: float = 0.3, max_tokens: int = 4096) -> str:
+def chat_completion(
+    messages: list[dict], model: str = CHAT_MODEL, temperature: float = 0.3, max_tokens: int = 4096
+) -> str:
     """Gọi OpenRouter chat completions (stream) → trả text answer đầy đủ."""
     return "".join(chat_completion_stream(messages, model, temperature, max_tokens)).strip()

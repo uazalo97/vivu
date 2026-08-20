@@ -6,6 +6,7 @@ tests/test_ai_smoke_eval.py — Automated AI Quality & Zero-Hallucination Regres
 2. Zero-Hallucination Spec & Price Precision (Ngưỡng: 100% đúng dữ liệu gốc từ DB)
 3. Safety Guardrails & Out-of-Scope Rejection (Chặn tuyệt đối off-topic, code, chính trị)
 """
+
 import asyncio
 import io
 import os
@@ -14,11 +15,11 @@ import time
 from typing import Any
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
-from app.agent.nodes.classify import classify_node
-from app.agent.graph_state import AgentState
-from app.agent.tools import get_specs, get_price
+from app.agent.nodes.classify import classify_node  # noqa: E402
+from app.agent.graph_state import AgentState  # noqa: E402
+from app.agent.tools import get_specs  # noqa: E402
 
 
 # 20 Test Cases cốt lõi bao phủ toàn bộ các nhóm tính năng AI
@@ -59,7 +60,6 @@ AI_SMOKE_CASES = [
         "expected_facts": ["3190", "1679"],
         "category": "specs",
     },
-
     {
         "id": "AI-SPEC-06",
         "query": "VF 6 Eco mô-men xoắn cực đại là bao nhiêu?",
@@ -67,7 +67,6 @@ AI_SMOKE_CASES = [
         "expected_facts": ["250", "Nm"],
         "category": "specs",
     },
-
     # ── Group 2: Giá xe & Chính sách (Pricing & Policy) ────────────────────────
     {
         "id": "AI-PRICE-01",
@@ -90,7 +89,6 @@ AI_SMOKE_CASES = [
         "expected_facts": [],
         "category": "deposit",
     },
-
     # ── Group 3: So sánh xe & Tiện ích (Comparison & Utility) ──────────────────
     {
         "id": "AI-COMP-01",
@@ -113,7 +111,6 @@ AI_SMOKE_CASES = [
         "expected_facts": [],
         "category": "utility",
     },
-
     # ── Group 4: Clarification (Câu hỏi mơ hồ / Thiếu model) ──────────────────
     {
         "id": "AI-CLAR-01",
@@ -143,7 +140,6 @@ AI_SMOKE_CASES = [
         "expected_facts": [],
         "category": "clarification",
     },
-
     # ── Group 5: Guardrails & Out-of-Scope (Chặn ngoài phạm vi) ────────────────
     {
         "id": "AI-OOS-01",
@@ -199,7 +195,7 @@ async def run_ai_smoke_evaluation() -> dict[str, Any]:
         try:
             cr = await classify_node(state)
             actual_decision = cr.get("decision", "answer")
-        except Exception as e:
+        except Exception:
             actual_decision = "error"
 
         # Check Decision
@@ -219,7 +215,6 @@ async def run_ai_smoke_evaluation() -> dict[str, Any]:
             specs_res = await get_specs(model_code=model_code)
             specs_text = str(specs_res)
 
-            
             for fact in case["expected_facts"]:
                 if fact.lower() not in specs_text.lower():
                     facts_match = False
@@ -230,20 +225,25 @@ async def run_ai_smoke_evaluation() -> dict[str, Any]:
         latency_ms = int((time.monotonic() - t0) * 1000)
         status = "[PASS]" if (decision_match and facts_match) else "[FAIL]"
 
-        results.append({
-            "id": case["id"],
-            "category": case["category"],
-            "query": case["query"],
-            "expected_decision": case["expected_decision"],
-            "actual_decision": actual_decision,
-            "decision_match": decision_match,
-            "facts_match": facts_match,
-            "missing_facts": missing_facts,
-            "latency_ms": latency_ms,
-            "status": status,
-        })
+        results.append(
+            {
+                "id": case["id"],
+                "category": case["category"],
+                "query": case["query"],
+                "expected_decision": case["expected_decision"],
+                "actual_decision": actual_decision,
+                "decision_match": decision_match,
+                "facts_match": facts_match,
+                "missing_facts": missing_facts,
+                "latency_ms": latency_ms,
+                "status": status,
+            }
+        )
 
-        print(f"  {status} {case['id']} | {case['category'].upper():<13} | {case['query'][:35]:<35} | {latency_ms}ms", flush=True)
+        print(
+            f"  {status} {case['id']} | {case['category'].upper():<13} | {case['query'][:35]:<35} | {latency_ms}ms",
+            flush=True,
+        )
 
     decision_acc_pct = round((passed_decisions / total_cases) * 100.0, 2)
     fact_precision_pct = round((passed_facts / fact_checked_cases * 100.0), 2) if fact_checked_cases > 0 else 100.0

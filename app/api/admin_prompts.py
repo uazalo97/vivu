@@ -3,6 +3,7 @@ app/api/admin_prompts.py — Admin REST API Endpoints for Prompt Registry & Vers
 
 Bảo mật: Yêu cầu Header `X-Admin-Key` khớp với `ADMIN_API_KEY` trong Settings.
 """
+
 import logging
 from typing import Optional
 

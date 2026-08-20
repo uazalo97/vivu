@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class Chunk(BaseModel):
     """Schema cho chunk trong JSONL (đầu vào ingest)."""
+
     id: str
     collection: str
     vector_version: str
@@ -60,6 +61,7 @@ class Chunk(BaseModel):
 
 class DensePayload(BaseModel):
     """Schema cho payload Qdrant dense (toàn bộ field trừ id/is_hot)."""
+
     collection: str
     vector_version: str
     model_id: Optional[str] = None
@@ -82,6 +84,7 @@ class DensePayload(BaseModel):
 
 class SparsePayload(BaseModel):
     """Schema cho payload Qdrant sparse (tối giản để filter)."""
+
     collection: str
     chunk_id: str
     model_id: Optional[str] = None

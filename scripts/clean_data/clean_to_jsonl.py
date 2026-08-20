@@ -37,11 +37,19 @@ if __package__ in (None, ""):
 from scripts.config import CLEAN_DIR, RAW_DIR, RAW_PDF_DIR, REPO_ROOT  # noqa: E402
 from scripts.clean_data.spec_common import infer_model, parse_raw_file  # noqa: E402
 from scripts.clean_data.noise_patterns import (  # noqa: E402
-    PAGE_MARKER_RE, clean_line, clean_pdf_prose, fix_pdf_spacing,
-    normalize_numbers, remove_money_sentences, strip_price_spans,
+    PAGE_MARKER_RE,
+    clean_line,
+    clean_pdf_prose,
+    fix_pdf_spacing,
+    normalize_numbers,
+    remove_money_sentences,
+    strip_price_spans,
 )
 from scripts.clean_data.chunk_filters import (  # noqa: E402
-    is_junk_chunk, is_offmodel_noise, is_spec_section, is_spec_table,
+    is_junk_chunk,
+    is_offmodel_noise,
+    is_spec_section,
+    is_spec_table,
 )
 from scripts.clean_data.chunking import apply_chunking  # noqa: E402
 
@@ -57,15 +65,19 @@ COLLECTION_BY_CATEGORY = {
 # Domain chính thống — chỉ những trang này mới được trích giá vào Postgres
 AUTHORITATIVE_DOMAINS = {"vinfastauto.com", "shop.vinfastauto.com"}
 
+
 # ── Helpers ────────────────────────────────────────────────────────────────
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
 
 def get_domain(url: str) -> str:
     m = re.search(r"https?://([^/]+)", url or "")
     return m.group(1).lower() if m else ""
 
+
 # ── Raw file parsing ───────────────────────────────────────────────────────
+
 
 def classify_raw(path: Path, meta: dict[str, Any]) -> dict[str, Any] | None:
     """Route a raw file to collection/category/model/confidence + authoritative."""
@@ -77,9 +89,14 @@ def classify_raw(path: Path, meta: dict[str, Any]) -> dict[str, Any] | None:
     model = infer_model(path)
 
     def route(collection, category, confidence, kind):
-        return {"collection": collection, "category": category,
-                "model_id": model, "confidence": confidence,
-                "authoritative": authoritative, "kind": kind}
+        return {
+            "collection": collection,
+            "category": category,
+            "model_id": model,
+            "confidence": confidence,
+            "authoritative": authoritative,
+            "kind": kind,
+        }
 
     # Official VinFast pages
     if authoritative:
@@ -87,9 +104,17 @@ def classify_raw(path: Path, meta: dict[str, Any]) -> dict[str, Any] | None:
             return route("vivu_product_info", "thong_tin_san_pham", 1.0, "dat-coc")
         if "dich-vu-bao-duong" in url:
             return route("vivu_maintenance", "dat_lich_bao_duong", 1.0, "service")
-        if any(k in url for k in ("dich-vu-pin", "dich-vu-sua-chua",
-                                  "chinh-sach-bao-hanh", "thong-tin-cuu-ho",
-                                  "ve-chung-toi", "chinh-sach")):
+        if any(
+            k in url
+            for k in (
+                "dich-vu-pin",
+                "dich-vu-sua-chua",
+                "chinh-sach-bao-hanh",
+                "thong-tin-cuu-ho",
+                "ve-chung-toi",
+                "chinh-sach",
+            )
+        ):
             return route("vivu_policy", "chinh_sach_dich_vu", 1.0, "policy")
         return route("vivu_product_info", "thong_tin_san_pham", 0.9, "other")
 
@@ -108,9 +133,9 @@ def classify_raw(path: Path, meta: dict[str, Any]) -> dict[str, Any] | None:
         return route("vivu_product_info", "thong_so_ky_thuat", 0.8, "specs-article")
     return route("vivu_product_info", "thong_tin_san_pham", 0.7, "article")
 
+
 # ── Text → chunks ──────────────────────────────────────────────────────────
-def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any],
-                     path: Path) -> list[dict[str, Any]]:
+def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any], path: Path) -> list[dict[str, Any]]:
     """Clean raw text + split by headings (and size) into vector chunks."""
     # Loại bỏ dòng noise, nhóm theo heading
     lines = []
@@ -123,16 +148,16 @@ def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any],
         lines.append(line)
 
     # Bỏ dòng lặp lại >=3 lần (nav/sidebar lặp) — giữ lần đầu
-    line_counts = Counter(clean_line(l) for l in lines)
+    line_counts = Counter(clean_line(line) for line in lines)
     seen_dup: set[str] = set()
     deduped: list[str] = []
-    for l in lines:
-        key = clean_line(l)
+    for line in lines:
+        key = clean_line(line)
         if line_counts.get(key, 0) >= 3:
             if key in seen_dup:
                 continue
             seen_dup.add(key)
-        deduped.append(l)
+        deduped.append(line)
     lines = deduped
 
     chunks: list[dict[str, Any]] = []
@@ -182,7 +207,11 @@ def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any],
         text_type = "prose"
         if "|" in body_text and "---" in body_text:
             text_type = "table"
-        elif all(line.strip().startswith(("- ", "1. ", "2. ", "3. ", "4. ", "5. ", "6. ", "7. ", "8. ", "9. ")) for line in body_text.splitlines() if line.strip()):
+        elif all(
+            line.strip().startswith(("- ", "1. ", "2. ", "3. ", "4. ", "5. ", "6. ", "7. ", "8. ", "9. "))
+            for line in body_text.splitlines()
+            if line.strip()
+        ):
             text_type = "list"
         elif "Q:" in body_text and "A:" in body_text:
             text_type = "qa_pair"
@@ -233,14 +262,22 @@ def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any],
 
     return chunks
 
+
 # ── Link-only (brochure URLs) ──────────────────────────────────────────────
 # `link_brochure.md`: mỗi dòng `<Model Label>: <URL>` (VD
 # "VF 8 All New: https://..."). Label brochure trùng model_id (MODEL_LABEL).
 _BROCHURE_LABEL_TO_MODEL = {
-    "VF 2": "VF2", "VF 3": "VF3", "VF 5": "VF5", "VF 6": "VF6",
-    "VF 7": "VF7", "VF 8": "VF8", "VF 8 All New": "VF8NEW",
-    "VF 9": "VF9", "VF MPV 7": "VFMPV7",
+    "VF 2": "VF2",
+    "VF 3": "VF3",
+    "VF 5": "VF5",
+    "VF 6": "VF6",
+    "VF 7": "VF7",
+    "VF 8": "VF8",
+    "VF 8 All New": "VF8NEW",
+    "VF 9": "VF9",
+    "VF MPV 7": "VFMPV7",
 }
+
 
 def link_only_files() -> dict[str, list[str]]:
     result: dict[str, list[str]] = {
@@ -273,6 +310,7 @@ def link_only_files() -> dict[str, list[str]]:
                 by_model[model].append(url)
         result["brochure_by_model"] = by_model
     return result
+
 
 # ── Run / Main ──────────────────────────────────────────────────────────────
 def run(version: str = "v1", max_len: int = 800) -> int:
@@ -350,8 +388,10 @@ def run(version: str = "v1", max_len: int = 800) -> int:
             continue
         kept.append(c)
     all_vector = kept
-    print(f"  dropped spec chunks: {n_section} (section) "
-          f"+ {n_spec_table} (spec-table pipe-delimited) | {pre} -> {len(all_vector)}")
+    print(
+        f"  dropped spec chunks: {n_section} (section) "
+        f"+ {n_spec_table} (spec-table pipe-delimited) | {pre} -> {len(all_vector)}"
+    )
 
     # Drop off-model noise (sidebar "tin liên quan" lạc tag — VD Toyota trong VF2)
     n_offmodel = 0
@@ -384,7 +424,8 @@ def run(version: str = "v1", max_len: int = 800) -> int:
 
     link_only = link_only_files()
     (intermediate_dir / "link_only.json").write_text(
-        json.dumps(link_only, ensure_ascii=False, indent=2), encoding="utf-8")
+        json.dumps(link_only, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
     print(f"[clean_to_jsonl] version={version}, files={n_files}")
     print(f"  vector chunks: {len(all_vector)}")
@@ -392,13 +433,16 @@ def run(version: str = "v1", max_len: int = 800) -> int:
     print(f"  output dir:    {intermediate_dir}")
     return 0
 
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Clean raw crawled files into intermediate JSONL.")
     ap.add_argument("--version", default="v1", help="Output version folder (default: v1)")
-    ap.add_argument("--max-len", type=int, default=800,
-                    help="Chunk max length in chars (default 800; use 400 for finer retrieval)")
+    ap.add_argument(
+        "--max-len", type=int, default=800, help="Chunk max length in chars (default 800; use 400 for finer retrieval)"
+    )
     args = ap.parse_args()
     return run(args.version, args.max_len)
+
 
 if __name__ == "__main__":
     sys.exit(main())

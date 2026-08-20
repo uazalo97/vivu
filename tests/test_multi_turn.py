@@ -16,7 +16,12 @@ Cover các bug/sửa đổi trong session:
 
 Run: python tests/test_multi_turn.py
 """
-import sys, os, io, asyncio, time
+
+import sys
+import os
+import io
+import asyncio
+import time
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if sys.platform == "win32":
@@ -44,6 +49,7 @@ async def _no_llm(query, history):
 
 def _install_offline_stub():
     import app.agent.nodes.classify as cf
+
     cf.llm_classify_fallback = _no_llm
 
 
@@ -181,7 +187,7 @@ async def main():
                     ok = False
                     detail += f", version={got_version} (exp {exp['version']})"
 
-            report(f"MT-{conv['name'].replace(' ','')[:12]}-T{turn_idx}", ok, "classify", detail)
+            report(f"MT-{conv['name'].replace(' ', '')[:12]}-T{turn_idx}", ok, "classify", detail)
 
             # build history (assistant placeholder — model/version đến từ user turn)
             history.append({"role": "user", "content": query})
