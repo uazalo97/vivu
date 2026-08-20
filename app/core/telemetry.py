@@ -79,18 +79,30 @@ CREATE TABLE IF NOT EXISTS request_metrics (
     cost_usd            NUMERIC(10, 6) DEFAULT 0.0,
     cost_vnd            NUMERIC(12, 2) DEFAULT 0.0,
     ttft_ms             INT DEFAULT 0,
+    ttot_ms             INT DEFAULT 0,
     total_latency_ms    INT DEFAULT 0,
+    latency_retrieval_ms INT DEFAULT 0,
+    latency_generation_ms INT DEFAULT 0,
     cache_hit           BOOLEAN DEFAULT false,
     cache_type          TEXT DEFAULT 'none',
     tools_used          JSONB DEFAULT '[]'::jsonb,
     status_code         INT DEFAULT 200,
-    error_message       TEXT
+    error_message       TEXT,
+    model_code          TEXT,
+    model_version       TEXT,
+    retrieval_status    TEXT,
+    chunks_retrieved    INT DEFAULT 0,
+    reasoning_tokens    INT DEFAULT 0,
+    user_feedback       SMALLINT,
+    feedback_comment    TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_req_metrics_created ON request_metrics(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_req_metrics_intent ON request_metrics(intent);
 CREATE INDEX IF NOT EXISTS idx_req_metrics_cache ON request_metrics(cache_hit);
 CREATE INDEX IF NOT EXISTS idx_req_metrics_session ON request_metrics(session_id);
+CREATE INDEX IF NOT EXISTS idx_req_metrics_model_code ON request_metrics(model_code);
+CREATE INDEX IF NOT EXISTS idx_req_metrics_decision ON request_metrics(decision);
 """
 
 _schema_ready = False
@@ -130,12 +142,20 @@ async def record_metric(
     prompt_tokens: int = 0,
     completion_tokens: int = 0,
     ttft_ms: int = 0,
+    ttot_ms: int = 0,
     total_latency_ms: int = 0,
+    latency_retrieval_ms: int = 0,
+    latency_generation_ms: int = 0,
     cache_hit: bool = False,
     cache_type: str = "none",
     tools_used: list[str] | None = None,
     status_code: int = 200,
     error_message: str | None = None,
+    model_code: str | None = None,
+    model_version: str | None = None,
+    retrieval_status: str | None = None,
+    chunks_retrieved: int = 0,
+    reasoning_tokens: int = 0,
 ) -> None:
     """Ghi nhận metric của một request vào PostgreSQL (non-blocking)."""
     if not getattr(settings, "metrics_enabled", True):
@@ -155,6 +175,34 @@ async def record_metric(
     try:
         await ensure_telemetry_schema()
 
+        # Backfill new columns if DB was created with old schema (idempotent)
+        async def _migrate_add_columns():
+            pool = await get_pool()
+            async with pool.acquire() as conn:
+                for stmt in [
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS ttot_ms INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS latency_retrieval_ms INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS latency_generation_ms INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS model_code TEXT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS model_version TEXT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS retrieval_status TEXT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS chunks_retrieved INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS reasoning_tokens INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS user_feedback SMALLINT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS feedback_comment TEXT",
+                    "CREATE INDEX IF NOT EXISTS idx_req_metrics_model_code ON request_metrics(model_code)",
+                    "CREATE INDEX IF NOT EXISTS idx_req_metrics_decision ON request_metrics(decision)",
+                ]:
+                    try:
+                        await conn.execute(stmt)
+                    except Exception:
+                        pass
+
+        try:
+            await _migrate_add_columns()
+        except Exception:
+            pass
+
         async def _insert():
             pool = await get_pool()
             await pool.execute(
@@ -162,13 +210,17 @@ async def record_metric(
                 INSERT INTO request_metrics (
                     request_id, session_id, query_text, intent, decision,
                     model_used, prompt_version, prompt_tokens, completion_tokens, total_tokens,
-                    cost_usd, cost_vnd, ttft_ms, total_latency_ms,
-                    cache_hit, cache_type, tools_used, status_code, error_message
+                    cost_usd, cost_vnd, ttft_ms, ttot_ms, total_latency_ms,
+                    latency_retrieval_ms, latency_generation_ms,
+                    cache_hit, cache_type, tools_used, status_code, error_message,
+                    model_code, model_version, retrieval_status, chunks_retrieved, reasoning_tokens
                 ) VALUES (
                     $1, $2, $3, $4, $5,
                     $6, $7, $8, $9, $10,
-                    $11, $12, $13, $14,
-                    $15, $16, $17::jsonb, $18, $19
+                    $11, $12, $13, $14, $15,
+                    $16, $17,
+                    $18, $19, $20::jsonb, $21, $22,
+                    $23, $24, $25, $26, $27
                 )
                 """,
                 request_id,
@@ -184,12 +236,20 @@ async def record_metric(
                 cost_usd,
                 cost_vnd,
                 ttft_ms,
+                ttot_ms,
                 total_latency_ms,
+                latency_retrieval_ms,
+                latency_generation_ms,
                 cache_hit,
                 cache_type,
                 tools_json,
                 status_code,
                 error_message,
+                model_code,
+                model_version,
+                retrieval_status,
+                chunks_retrieved,
+                reasoning_tokens,
             )
 
         await run_with_db_retry(_insert, label="record_metric")
@@ -384,8 +444,12 @@ async def get_metrics_logs(
         id, request_id, session_id, created_at, query_text, intent, decision,
         model_used, COALESCE(prompt_version, 'v1.0.0') as prompt_version,
         prompt_tokens, completion_tokens, total_tokens,
-        cost_usd, cost_vnd, ttft_ms, total_latency_ms, cache_hit, cache_type,
-        tools_used, status_code, error_message
+        cost_usd, cost_vnd, ttft_ms, ttot_ms, total_latency_ms,
+        latency_retrieval_ms, latency_generation_ms,
+        cache_hit, cache_type,
+        tools_used, status_code, error_message,
+        model_code, model_version, retrieval_status, chunks_retrieved, reasoning_tokens,
+        user_feedback, feedback_comment
     FROM request_metrics
     WHERE {where_clause}
     ORDER BY created_at DESC
@@ -427,13 +491,80 @@ async def get_metrics_logs(
                 "cost_usd": float(r["cost_usd"]),
                 "cost_vnd": float(r["cost_vnd"]),
                 "ttft_ms": r["ttft_ms"],
+                "ttot_ms": r["ttot_ms"] if "ttot_ms" in r else 0,
                 "total_latency_ms": r["total_latency_ms"],
+                "latency_retrieval_ms": r["latency_retrieval_ms"] if "latency_retrieval_ms" in r else 0,
+                "latency_generation_ms": r["latency_generation_ms"] if "latency_generation_ms" in r else 0,
                 "cache_hit": r["cache_hit"],
                 "cache_type": r["cache_type"],
                 "tools_used": tools,
                 "status_code": r["status_code"],
                 "error_message": r["error_message"],
+                "model_code": r["model_code"] if "model_code" in r else None,
+                "model_version": r["model_version"] if "model_version" in r else None,
+                "retrieval_status": r["retrieval_status"] if "retrieval_status" in r else None,
+                "chunks_retrieved": r["chunks_retrieved"] if "chunks_retrieved" in r else 0,
+                "reasoning_tokens": r["reasoning_tokens"] if "reasoning_tokens" in r else 0,
+                "user_feedback": r["user_feedback"] if "user_feedback" in r else None,
+                "feedback_comment": r["feedback_comment"] if "feedback_comment" in r else None,
             }
         )
 
     return {"total": total_count, "limit": limit, "offset": offset, "logs": logs}
+
+
+async def record_feedback(request_id: str, rating: int, comment: str | None = None) -> bool:
+    """Ghi feedback 👍/👎 cho request. rating 1/-1, comment optional."""
+    await ensure_telemetry_schema()
+    try:
+
+        async def _update():
+            pool = await get_pool()
+            await pool.execute(
+                "UPDATE request_metrics SET user_feedback=$1, feedback_comment=$2 WHERE request_id=$3",
+                rating,
+                comment,
+                request_id,
+            )
+
+        await run_with_db_retry(_update, label="record_feedback")
+        return True
+    except Exception as exc:
+        logger.warning("Failed to record feedback: %s", exc)
+        return False
+
+
+async def get_metrics_realtime(window_min: int = 5) -> dict[str, Any]:
+    """Realtime nhẹ: requests/min, avg latency, cache hit, errors trong vài phút gần nhất."""
+    await ensure_telemetry_schema()
+    query = """
+    SELECT
+        date_trunc('minute', created_at) AS bucket,
+        COUNT(*) AS requests,
+        COALESCE(AVG(total_latency_ms), 0) AS avg_latency_ms,
+        COALESCE(AVG(NULLIF(ttft_ms, 0)), 0) AS avg_ttft_ms,
+        COALESCE(COUNT(*) FILTER (WHERE cache_hit = true), 0) AS cache_hits,
+        COALESCE(COUNT(*) FILTER (WHERE status_code >= 400), 0) AS errors
+    FROM request_metrics
+    WHERE created_at >= now() - ($1 || ' minutes')::interval
+    GROUP BY bucket
+    ORDER BY bucket ASC
+    """
+
+    async def _fetch():
+        pool = await get_pool()
+        return await pool.fetch(query, str(window_min))
+
+    rows = await run_with_db_retry(_fetch, label="get_metrics_realtime")
+    points = [
+        {
+            "bucket": r["bucket"].isoformat() if r["bucket"] else "",
+            "requests": r["requests"],
+            "avg_latency_ms": round(float(r["avg_latency_ms"])),
+            "avg_ttft_ms": round(float(r["avg_ttft_ms"])),
+            "cache_hits": r["cache_hits"],
+            "errors": r["errors"],
+        }
+        for r in rows
+    ]
+    return {"status": "success", "window_min": window_min, "points": points}
