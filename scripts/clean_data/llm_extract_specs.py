@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 llm_extract_specs.py — LLM-powered extraction of vehicle specifications.
-Replaces the rule-based parse_specs.py with a semantic parser using DeepInfra (DeepSeek V4 Flash).
+Replaces the rule-based parse_specs.py with a semantic parser using OpenRouter (DeepSeek V4 Flash).
 Extracts values based on docs/SPEC_SCHEMA.md.
 """
 
@@ -10,7 +10,7 @@ import csv
 import json
 import os
 import re
-import sys
+import sys  # noqa: F401
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -25,16 +25,26 @@ RAW_BROCHURE_DIR = REPO_ROOT / "data" / "raw" / "brochure"
 CLEAN_DIR = REPO_ROOT / "data" / "clean"
 SCHEMA_PATH = REPO_ROOT / "docs" / "SPEC_SCHEMA.md"
 
-DEEPINFRA_API_KEY = os.environ.get("DEEPINFRA_API_KEY")
-MODEL_NAME = os.environ.get("DEEPINFRA_CHAT_MODEL", "deepseek-ai/DeepSeek-V4-Flash-0731")
+# Unified OpenAI key — fallback OPENROUTER_* để tương thích .env cũ
+OPENROUTER_API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY")
+OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+MODEL_NAME = os.environ.get("LLM_MODEL", "gpt-4o-mini")
 
 MAX_RETRIES = 3
 RETRY_DELAY = 2
 
 VALID_KEYS = {
-    "length_mm", "width_mm", "height_mm", "wheelbase_mm", "ground_clearance_mm",
-    "power_kw", "torque_nm", "drivetrain",
-    "battery_kwh", "range_km", "dc_charge_kw",
+    "length_mm",
+    "width_mm",
+    "height_mm",
+    "wheelbase_mm",
+    "ground_clearance_mm",
+    "power_kw",
+    "torque_nm",
+    "drivetrain",
+    "battery_kwh",
+    "range_km",
+    "dc_charge_kw",
     "seats",
 }
 
@@ -173,8 +183,8 @@ def parse_source_url(text: str, path: Path) -> str:
 
 
 def call_llm(messages: List[Dict[str, str]], temperature: float = 0.0) -> Optional[str]:
-    if not DEEPINFRA_API_KEY:
-        print("Error: DEEPINFRA_API_KEY not set.")
+    if not OPENROUTER_API_KEY:
+        print("Error: OPENAI_API_KEY not set.")
         return None
 
     payload: Dict[str, Any] = {
@@ -188,9 +198,9 @@ def call_llm(messages: List[Dict[str, str]], temperature: float = 0.0) -> Option
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             response = requests.post(
-                url="https://api.deepinfra.com/v1/openai/chat/completions",
+                url=f"{OPENAI_BASE_URL}/chat/completions",
                 headers={
-                    "Authorization": f"Bearer {DEEPINFRA_API_KEY}",
+                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
                     "Content-Type": "application/json",
                 },
                 data=json.dumps(payload),
@@ -233,8 +243,7 @@ def parse_llm_response(content: str) -> List[Dict[str, Any]]:
 def normalize_number(value: str) -> Optional[str]:
     """Normalize Vietnamese/OCR number formatting and strip an optional unit."""
     value = re.sub(r"[*`]", "", str(value or "")).strip()
-    value = re.sub(r"\s*(?:mm|kw|kwh|nm|km|inch|ghế|ghe)\b", "", value,
-                   flags=re.IGNORECASE).strip()
+    value = re.sub(r"\s*(?:mm|kw|kwh|nm|km|inch|ghế|ghe)\b", "", value, flags=re.IGNORECASE).strip()
     match = re.search(r"\d[\d.,]*", value)
     if not match:
         return None
@@ -312,12 +321,21 @@ def get_llm_specs(text: str, model_id: str, source_url: str) -> List[Dict[str, A
 def infer_model_id_from_path(path: Path) -> str:
     # Normalize separators so names such as vf8-the-new are recognized.
     name = re.sub(r"[^a-z0-9]", "", path.stem.lower())
-    for key, mid in [("vfe34", "VFE34"), ("mpv7", "VFMPV7"),
-                       ("vf2", "VF2"), ("vf3", "VF3"), ("vf5", "VF5"),
-                       ("vf6", "VF6"), ("vf7", "VF7"),
-                       ("vf8theallnew", "VF8NEW"), ("vf8thenew", "VF8NEW"),
-                       ("vf8allnew", "VF8NEW"), ("vf8new", "VF8NEW"),
-                       ("vf8", "VF8"), ("vf9", "VF9")]:
+    for key, mid in [
+        ("vfe34", "VFE34"),
+        ("mpv7", "VFMPV7"),
+        ("vf2", "VF2"),
+        ("vf3", "VF3"),
+        ("vf5", "VF5"),
+        ("vf6", "VF6"),
+        ("vf7", "VF7"),
+        ("vf8theallnew", "VF8NEW"),
+        ("vf8thenew", "VF8NEW"),
+        ("vf8allnew", "VF8NEW"),
+        ("vf8new", "VF8NEW"),
+        ("vf8", "VF8"),
+        ("vf9", "VF9"),
+    ]:
         if key in name:
             return mid
     return "Unknown"
@@ -371,8 +389,18 @@ def main():
 
     with open(output_file, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f, delimiter="|")
-        writer.writerow(["model_code", "version_name", "version_code", "spec_category",
-                         "spec_key", "spec_value", "spec_unit", "source_url"])
+        writer.writerow(
+            [
+                "model_code",
+                "version_name",
+                "version_code",
+                "spec_category",
+                "spec_key",
+                "spec_value",
+                "spec_unit",
+                "source_url",
+            ]
+        )
         writer.writerows(all_extracted)
 
     print(f"\nDone! Saved {len(all_extracted)} spec rows to {output_file}")

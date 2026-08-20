@@ -1,58 +1,58 @@
-﻿import json
+import json
 import logging
 import re
-import time
 import unicodedata
 from collections import Counter
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import requests
 from requests.adapters import HTTPAdapter
 
 from app.config import settings
-from app.core.cache import cache, make_embed_key, make_hs_key
 
 logger = logging.getLogger("retrieval")
 
-# TTL cache
-EMB_CACHE_TTL = 7 * 86400      # embedding: deterministic theo (model, text)
-HS_CACHE_TTL = 2 * 3600        # hybrid_search: data_version key đã tự invalidate
-
 _reranker = None
 _sparse_index = None
-_sparse_index_loaded_at = 0.0
-_SPARSE_INDEX_TTL = 300  # re-check disk mỗi 5 phút để nhận version mới sau promote
 _embed_client = None
 
 
 def _get_embed_client():
-    """OpenAI-compatible client for embeddings with built-in retry + connection pooling."""
+    """OpenAI client for embeddings — single OpenAI key (OPENAI_API_KEY)."""
     global _embed_client
     if _embed_client is None:
         from openai import OpenAI
+
         _embed_client = OpenAI(
-            api_key=settings.openrouter_api_key,
-            base_url="https://openrouter.ai/api/v1",
+            api_key=settings.openai_api_key,
+            base_url=settings.openai_base_url,
             max_retries=3,
             timeout=60.0,
         )
     return _embed_client
 
+
 # Collections to search. Override via QDRANT_DENSE_COLLECTIONS env var.
-import os as _os
+import os as _os  # noqa: E402
+
 _dense_env = _os.environ.get("QDRANT_DENSE_COLLECTIONS", "")
-DENSE_COLLECTIONS = [c.strip() for c in _dense_env.split(",") if c.strip()] if _dense_env else ["vivu_product_info", "vivu_policy", "vivu_maintenance"]
+DENSE_COLLECTIONS = (
+    [c.strip() for c in _dense_env.split(",") if c.strip()]
+    if _dense_env
+    else ["vivu_product_info", "vivu_policy", "vivu_maintenance"]
+)
 SPARSE_COLLECTION = "sparse"
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_CLEAN_DIR = REPO_ROOT / "data" / "clean"
 
-STOPWORDS = set("""
+STOPWORDS = set(
+    """
 và của là đã đang sẽ được với cho từ đến tại cũng như hay hoặc nhưng nếu thì
 khi mà nên vì thế nên để lại vẫn còn rất chỉ mỗi này kia nào đó đây những các
 tất mọi người tôi bạn chúng ta họ nó ông bà anh chị em cùng thôi cần nếu đúng
-xin quý""".split())
+xin quý""".split()
+)
 
 TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 
@@ -62,12 +62,67 @@ def tokenize(text: str) -> list[str]:
     return [t for t in TOKEN_RE.findall(text) if t not in STOPWORDS and len(t) > 1]
 
 
-# ── Sparse index auto-detection ──────────────────────────────────────────────
+# ── Sparse index auto-detection (DB is source of truth) ─────────────────────
+_pg_current_version: str | None = None
+_pg_version_checked = False
+
+
+def _get_current_version_from_db() -> str | None:
+    """Đọc version is_current từ PG ingest_version — DB là source of truth."""
+    global _pg_current_version, _pg_version_checked
+    if _pg_version_checked and _pg_current_version is not None:
+        return _pg_current_version
+    try:
+        import psycopg2
+
+        pg_url = settings.postgres_url.replace("+asyncpg", "")
+        # Fallback PG_DSN như app/core/db.py (Neon cloud)
+        if "localhost:5432" in pg_url:
+            from dotenv import dotenv_values
+
+            _env2 = dotenv_values(REPO_ROOT / ".env")
+            cloud_dsn = _env2.get("PG_DSN") or _env2.get("POSTGRES_URL")
+            if cloud_dsn:
+                pg_url = cloud_dsn.replace("+asyncpg://", "postgresql://")
+        conn = psycopg2.connect(pg_url)
+        cur = conn.cursor()
+        cur.execute("SELECT version FROM ingest_version WHERE is_current LIMIT 1")
+        row = cur.fetchone()
+        conn.close()
+        if row and row[0]:
+            _pg_current_version = str(row[0]).strip()
+            _pg_version_checked = True
+            return _pg_current_version
+    except Exception as e:
+        logger.debug("PG current version query failed (fallback to file scan): %s", e)
+    _pg_version_checked = True
+    return None
+
+
 def _find_latest_sparse_index() -> Path | None:
-    """Scan data/clean/*/sparse_index.json, return path with highest version number."""
+    """Ưu tiên DB is_current, fallback scan file."""
     global _sparse_index
     if not DATA_CLEAN_DIR.exists():
         return None
+    # 1. Thử lấy version active từ DB — đây là source of truth (PG v2 nhưng file chỉ v1 là lệch pipeline)
+    db_ver = _get_current_version_from_db()
+    if db_ver:
+        db_path = DATA_CLEAN_DIR / db_ver / "sparse_index.json"
+        if db_path.exists():
+            try:
+                raw = db_path.read_text(encoding="utf-8")
+                idx = json.loads(raw)
+                _sparse_index = idx
+                return db_path
+            except Exception as e:
+                logger.warning("Failed to load DB version sparse_index %s: %s, falling back to scan", db_path, e)
+        else:
+            logger.warning(
+                "DB is_current=%s nhưng file %s không tồn tại — pipeline chưa build v2, fallback scan file cũ",
+                db_ver,
+                db_path,
+            )
+    # 2. Fallback: scan file lấy version cao nhất (hành vi cũ)
     best_num = -1
     best_path = None
     for p in DATA_CLEAN_DIR.glob("*/sparse_index.json"):
@@ -86,26 +141,18 @@ def _find_latest_sparse_index() -> Path | None:
 
 
 def _load_sparse_index() -> dict:
-    """Load sparse index, reload mỗi _SPARSE_INDEX_TTL giây.
-
-    Quan trọng: sau khi pipeline promote version mới, file sparse_index.json
-    mới xuất hiện trên disk. Nếu cache vĩnh viễn (check `is None`), process
-    đang chạy sẽ kẹt vocab version cũ → sparse vector sai lệch âm thầm.
-    """
-    global _sparse_index, _sparse_index_loaded_at
-    now = time.time()
-    if _sparse_index is not None and (now - _sparse_index_loaded_at) <= _SPARSE_INDEX_TTL:
-        return _sparse_index or {}
-
-    old_ver = (_sparse_index or {}).get("version")
-    path = _find_latest_sparse_index()
-    if path is None and _sparse_index is None:
-        _sparse_index = {}
-    elif path is not None:
-        logger.info("Loaded sparse index from %s (version=%s)", path, _sparse_index.get("version"))
-    if (_sparse_index or {}).get("version") != old_ver:
-        logger.info("Sparse index version change: %s -> %s", old_ver, (_sparse_index or {}).get("version"))
-    _sparse_index_loaded_at = now
+    global _sparse_index
+    if _sparse_index is None:
+        path = _find_latest_sparse_index()
+        if path is None:
+            _sparse_index = {}
+        else:
+            src = (
+                "DB is_current"
+                if _pg_current_version and path.name == "sparse_index.json" and path.parent.name == _pg_current_version
+                else "file scan"
+            )
+            logger.info("Loaded sparse index from %s (version=%s, src=%s)", path, _sparse_index.get("version"), src)
     return _sparse_index or {}
 
 
@@ -143,40 +190,66 @@ def _query_to_sparse(query: str) -> dict | None:
     return {"indices": [indices[i] for i in order], "values": [values[i] for i in order]}
 
 
-def _openrouter_embed(texts: list[str]) -> list[list[float]]:
-    """Embed texts using OpenAI SDK with built-in retry + connection pooling.
-
-    Cache theo (model, text thô) — TTL 7 ngày, deterministic nên zero-risk.
-    Chạy trong executor thread → dùng sync redis client.
-    """
+def _openrouter_embed_api(texts: list[str]) -> list[list[float]]:
+    """Pure sync: embed texts via OpenAI API (compat name kept). Called in thread pool."""
     client = _get_embed_client()
     batch_size = 100
-    all_embeddings: dict[int, list[float]] = {}
-    to_embed: list[int] = []
-    for i, t in enumerate(texts):
-        key = make_embed_key(t)
-        hit = cache.sync_get_json(key)
-        if hit is not None:
-            all_embeddings[i] = hit
+    all_embeddings = []
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i : i + batch_size]
+        response = client.embeddings.create(
+            model=settings.openai_embed_model,
+            input=batch,
+        )
+        sorted_data = sorted(response.data, key=lambda x: x.index)
+        all_embeddings.extend([d.embedding for d in sorted_data])
+    return all_embeddings
+
+
+# Compat aliases — giữ tên cũ để không vỡ import ngoài
+_openai_embed_api = _openrouter_embed_api
+
+
+def _openrouter_embed(texts: list[str]) -> list[list[float]]:
+    """Sync embed (KHÔNG cache) — dùng bởi _rerank_texts (sync context)."""
+    return _openrouter_embed_api(texts)
+
+
+_openai_embed = _openrouter_embed
+
+
+async def _embed_texts_cached(texts: list[str]) -> list[list[float]]:
+    """Async wrapper: check embedding cache (emb:) first, miss → thread-pool API call + SET."""
+    from app.core.cache import get_embedding_cached, set_embedding_cached
+    import asyncio
+
+    results: list[list[float] | None] = [None] * len(texts)
+    uncached_indices: list[int] = []
+
+    # 1. Batch check cache
+    for i, text in enumerate(texts):
+        cached = await get_embedding_cached(text)
+        if cached is not None:
+            results[i] = cached
         else:
-            to_embed.append(i)
+            uncached_indices.append(i)
 
-    if to_embed:
-        for j in range(0, len(to_embed), batch_size):
-            batch_idx = to_embed[j:j + batch_size]
-            batch_texts = [texts[i] for i in batch_idx]
-            response = client.embeddings.create(
-                model=settings.openrouter_embed_model,
-                input=batch_texts,
-            )
-            sorted_data = sorted(response.data, key=lambda x: x.index)
-            for k, d in zip(batch_idx, sorted_data):
-                emb = d.embedding
-                all_embeddings[k] = emb
-                cache.sync_set_json(make_embed_key(texts[k]), emb, EMB_CACHE_TTL)
+    # 2. Embed uncached texts in thread pool
+    if uncached_indices:
+        uncached_texts = [texts[i] for i in uncached_indices]
+        loop = asyncio.get_event_loop()
+        new_embeddings = await loop.run_in_executor(
+            _thread_pool,
+            _openrouter_embed_api,
+            uncached_texts,
+        )
+        # 3. Store in cache + fill results
+        for j, idx in enumerate(uncached_indices):
+            emb = new_embeddings[j]
+            results[idx] = emb
+            asyncio.create_task(set_embedding_cached(texts[idx], emb))
 
-    # Giữ thứ tự gốc
-    return [all_embeddings[i] for i in range(len(texts))]
+    return results  # type: ignore[return-value]
 
 
 # ── Qdrant REST API helper ─────────────────────────────────────────────────
@@ -196,19 +269,7 @@ class QdrantREST:
     def _build_filter(self, model_id: str = None) -> dict | None:
         if not model_id:
             return None
-        # QUAN TRỌNG: chunks GENERAL (model_id null — chính sách bảo hành, bảo dưỡng,
-        # kiến thức chung) phải áp dụng cho MỌI model. Filter cũ (match chính xác)
-        # loại chúng → "bảo hành VF 2" không bao giờ thấy policy chung → refuse.
-        # Fix: (model_id = X OR model_id IS NULL)
-        return {
-            "min_should": {
-                "conditions": [
-                    {"key": "model_id", "match": {"value": model_id}},
-                    {"key": "model_id", "is_null": True},
-                ],
-                "min_count": 1,
-            }
-        }
+        return {"must": [{"key": "model_id", "match": {"value": model_id}}]}
 
     def search(self, collection: str, vector: list[float], model_id: str = None, limit: int = 10) -> list[dict]:
         body = {
@@ -242,15 +303,11 @@ class QdrantREST:
             raise
 
     def search_sparse(self, collection: str, sparse: dict, model_id: str = None, limit: int = 10) -> list[dict]:
-        # NamedVectorStruct: sparse vector phải lồng trong "vector", không đặt
-        # indices/values ngang hàng với "name" (Qdrant sẽ trả 400).
         body = {
             "vector": {
                 "name": "sparse",
-                "vector": {
-                    "indices": sparse["indices"],
-                    "values": sparse["values"],
-                },
+                "indices": sparse["indices"],
+                "values": sparse["values"],
             },
             "limit": limit,
             "with_payload": True,
@@ -268,8 +325,7 @@ class QdrantREST:
             )
             r.raise_for_status()
             return r.json().get("result", [])
-        except Exception as e:
-            logger.warning("sparse search %s failed: %s", collection, e)
+        except Exception:
             return []
 
     def retrieve(self, collection: str, ids: list[str]) -> list[dict]:
@@ -291,9 +347,6 @@ class QdrantREST:
 
 _qdrant: QdrantREST | None = None
 
-# Thread pool cho các blocking call (requests) trong async context
-_pool = ThreadPoolExecutor(max_workers=8)
-
 
 def get_qdrant() -> QdrantREST:
     global _qdrant
@@ -303,56 +356,54 @@ def get_qdrant() -> QdrantREST:
 
 
 # ── Reranker ───────────────────────────────────────────────────────────────
-class DeepInfraReranker:
-    """Rerank qua DeepInfra. Trả scores theo thứ tự documents.
-
-    Lưu ý: các reranker đang host (Qwen3-Reranker, nemotron) nhận field
-    "queries" (số nhiều), KHÔNG phải "query" như ví dụ docs cũ (cross-encoder).
-    Response: {"scores": [0..1], ...} cùng thứ tự với documents.
-    """
-
-    def __init__(self, api_key: str, model: str):
+class CohereReranker:
+    def __init__(self, api_key: str):
         self.api_key = api_key
-        self.model = model
-        self.base_url = f"https://api.deepinfra.com/v1/inference/{model}"
+        self.base_url = "https://api.cohere.ai/v1/rerank"
         self.session = requests.Session()
-        self.session.headers.update({
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        })
+        self.session.headers.update(
+            {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            }
+        )
 
     def predict(self, pairs: list[tuple[str, str]]) -> list[float]:
         if not pairs:
             return []
         query = pairs[0][0]
         documents = [doc for _, doc in pairs]
-        last_err = None
-        # DeepInfra thỉnh thoảng drop connection (RemoteDisconnected) dù endpoint
-        # nhanh (~1s/batch) → retry 1 lần thay vì fallback ngay.
-        for attempt in range(2):
-            try:
-                r = self.session.post(
-                    self.base_url,
-                    json={"queries": query, "documents": documents},
-                    timeout=(5, 25),
-                )
-                r.raise_for_status()
-                scores = r.json().get("scores", [])
-                if len(scores) != len(pairs):
-                    logger.warning("DeepInfra rerank returned %d scores for %d docs", len(scores), len(pairs))
-                    return [0.0] * len(pairs)
-                return [float(s) for s in scores]
-            except Exception as e:
-                last_err = e
-                logger.warning("DeepInfra rerank attempt %d failed: %s", attempt + 1, e)
-        logger.warning("DeepInfra rerank gave up after retries: %s", last_err)
-        return [0.0] * len(pairs)
+        try:
+            r = self.session.post(
+                self.base_url,
+                json={
+                    "model": "rerank-multilingual-v3.0",
+                    "query": query,
+                    "documents": documents,
+                    "top_n": len(documents),
+                },
+                timeout=30,
+            )
+            r.raise_for_status()
+            results = r.json().get("results", [])
+            scores = [0.0] * len(pairs)
+            for item in results:
+                scores[item.get("index", 0)] = item.get("relevance_score", 0.0)
+            return scores
+        except Exception as e:
+            logger.warning("Cohere rerank failed: %s", e)
+            return [0.0] * len(pairs)
 
 
 def get_reranker():
     global _reranker
-    if _reranker is None and settings.rerank_enabled and settings.deepinfra_api_key:
-        _reranker = DeepInfraReranker(settings.deepinfra_api_key, settings.rerank_model)
+    if _reranker is None and settings.rerank_enabled:
+        if settings.cohere_api_key:
+            _reranker = CohereReranker(settings.cohere_api_key)
+        else:
+            from sentence_transformers import CrossEncoder
+
+            _reranker = CrossEncoder(settings.rerank_model)
     return _reranker
 
 
@@ -365,7 +416,7 @@ def _rrf_fusion(result_lists: list[list], k: int = 60) -> list[tuple]:
     scores = {}
     hit_data = {}
     for results in result_lists:
-        for rank, hit in enumerate(results, start=1):  # rank bắt đầu từ 1 (chuẩn RRF)
+        for rank, hit in enumerate(results):
             pid = hit.get("id", "")
             scores[pid] = scores.get(pid, 0) + _rrf_score(rank, k)
             if pid not in hit_data:
@@ -374,196 +425,135 @@ def _rrf_fusion(result_lists: list[list], k: int = 60) -> list[tuple]:
     return [(hit_data[pid], scores[pid]) for pid in sorted_ids]
 
 
-def _dedup_fused(fused: list[tuple]) -> list[tuple]:
-    """Bỏ chunk trùng text (cùng 1 chunk có thể nằm ở nhiều collection)."""
-    seen = set()
-    out = []
-    for hit, score in fused:
-        text = re.sub(r"\s+", " ", (hit.get("payload", {}).get("text") or "").strip().lower())
-        if not text or text in seen:
-            continue
-        seen.add(text)
-        out.append((hit, score))
-    return out
-
-
-def _embed_cosine_scores(query: str, texts: list[str]) -> list[float] | None:
-    """Fallback relevance score (0..1) bằng embedding cosine — dùng khi reranker
-    không khả dụng, để score luôn cùng thang [0,1] với ngưỡng evidence (0.3/0.5)."""
-    if not texts:
-        return []
-    try:
-        embeddings = _openrouter_embed([query] + texts)
-        if len(embeddings) < len(texts) + 1:
-            return None
-        import numpy as np
-        q = np.array(embeddings[0])
-        qn = np.linalg.norm(q)
-        if qn == 0:
-            return None
-        scores = []
-        for emb in embeddings[1:]:
-            d = np.array(emb)
-            dn = np.linalg.norm(d)
-            sim = float(np.dot(q, d) / (qn * dn)) if dn else 0.0
-            scores.append(max(0.0, min(1.0, sim)))
-        return scores
-    except Exception as e:
-        logger.warning("embed cosine scoring failed: %s", e)
-        return None
-
-
 # ── Sparse text resolution ──────────────────────────────────────────────────
 def _resolve_sparse_texts(qdrant: QdrantREST, sparse_results: list[dict]) -> list[dict]:
-    """Làm giàu sparse hits từ dense collections.
+    """Resolve sparse results that lack 'text' by fetching from dense collections.
 
-    Sparse payload thiếu text (bản reference-only) và LUÔN thiếu metadata
-    citation (source_url, source_type, page...). Dense point có cùng id
-    (đều sinh từ chunk_id qua uuid5) → fetch về để điền chỗ thiếu.
+    Sparse v2+ stores reference-only payloads {collection, chunk_id, model_id}.
+    Dense collections (via alias) contain the actual text. Point IDs are the same
+    across sparse and dense (both derived from chunk_id via uuid5).
     """
-    needs = []
-    complete = []
+    needs_text = []
+    has_text = []
     for hit in sparse_results:
         payload = hit.get("payload", {})
-        if payload.get("text", "").strip() and payload.get("source_url"):
-            complete.append(hit)
+        if payload.get("text", "").strip():
+            has_text.append(hit)
         else:
-            needs.append(hit)
+            needs_text.append(hit)
 
-    if not needs:
+    if not needs_text:
         return sparse_results
 
     # Group IDs by their source dense collection
     by_collection: dict[str, list[str]] = {}
-    for hit in needs:
+    for hit in needs_text:
         col = hit.get("payload", {}).get("collection", "")
         if col:
             by_collection.setdefault(col, []).append(hit["id"])
 
     # Batch fetch from each dense collection
-    extra_map: dict[str, dict] = {}
+    text_map: dict[str, dict] = {}
     for col, ids in by_collection.items():
         records = qdrant.retrieve(col, ids)
         for rec in records:
             payload = rec.get("payload", {})
-            extra_map[rec["id"]] = {
+            text_map[rec["id"]] = {
                 "text": payload.get("text", ""),
                 "source_type": payload.get("source_type", ""),
                 "source_url": payload.get("source_url", ""),
                 "edition_id": payload.get("edition_id", ""),
                 "text_type": payload.get("text_type", ""),
                 "page": payload.get("page", ""),
-                "section_path": payload.get("section_path", ""),
             }
 
-    # Merge: chỉ điền field còn thiếu, giữ text sparse nếu có
+    # Inject text into sparse results
     resolved = []
-    for hit in needs:
-        extra = extra_map.get(hit["id"], {})
-        p = hit.setdefault("payload", {})
-        for k, v in extra.items():
-            if v and not p.get(k):
-                p[k] = v
-        if p.get("text", "").strip():
+    for hit in needs_text:
+        extra = text_map.get(hit["id"], {})
+        if extra.get("text"):
+            hit.setdefault("payload", {}).update(extra)
             resolved.append(hit)
         else:
             logger.debug("Could not resolve text for sparse point %s", hit["id"])
 
-    return complete + resolved
+    return has_text + resolved
 
 
 # ── Main search ────────────────────────────────────────────────────────────
-async def hybrid_search(query: str, model_id: str = None, top_k: int = 5, skip_rerank: bool = False) -> list[dict]:
-    # hs: cache theo (data_version, query chuẩn hoá, model, top_k, skip_rerank)
-    # hs_key=None khi PG unreachable → skip cache (miss pass-through)
-    hs_key = await make_hs_key(query, model_id, top_k, skip_rerank)
-    if hs_key is not None:
-        hit = await cache.get_json(hs_key)
-        if hit is not None:
-            return hit
+import asyncio  # noqa: E402
+import concurrent.futures  # noqa: E402
 
-    import asyncio
-    loop = asyncio.get_running_loop()
+_thread_pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
+
+
+async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> list[dict]:
+    from app.core.cache import get_hybrid_cached, set_hybrid_cached
+
+    skip_rerank = not settings.rerank_enabled
+
+    # 0. Check hybrid search cache (hs:) — skip entire pipeline on hit
+    cached = await get_hybrid_cached(query, model_id, top_k, skip_rerank)
+    if cached is not None:
+        logger.debug("hs cache hit")
+        return cached
+    logger.debug("hs cache miss")
+
     qdrant = get_qdrant()
     limit = top_k * 2
 
-    # 1. Song song: embed query (OpenRouter ~2-3s) + sparse BM25 (local + Qdrant ~0.3s)
-    sparse_vec = _query_to_sparse(query)
-    embed_fut = loop.run_in_executor(_pool, _openrouter_embed, [query])
-    sparse_fut = (
-        loop.run_in_executor(_pool, qdrant.search_sparse, SPARSE_COLLECTION, sparse_vec, model_id, limit)
-        if sparse_vec else None
-    )
+    # 1. Embed query (async, checks emb: cache) + sparse vector (sync thread)
+    loop = asyncio.get_event_loop()
+    embed_task = _embed_texts_cached([query])
+    sparse_task = loop.run_in_executor(_thread_pool, _query_to_sparse, query)
 
-    dense_vector = (await embed_fut)[0]
+    dense_vector = (await embed_task)[0]
+    sparse_vec = await sparse_task
 
-    # 2. Dense search SONG SONG across all collections (via aliases → active version)
-    dense_futs = [
-        loop.run_in_executor(_pool, qdrant.search, col, dense_vector, model_id, limit)
-        for col in DENSE_COLLECTIONS
-    ]
-    dense_results = await asyncio.gather(*dense_futs, return_exceptions=True)
-    all_dense = []
-    for col, res in zip(DENSE_COLLECTIONS, dense_results):
-        if isinstance(res, Exception):
-            logger.warning("search %s failed: %s", col, res)
-        else:
-            all_dense.extend(res)
-
-    # 3. Sparse results + resolve metadata từ dense collections
-    sparse_results = []
-    if sparse_fut is not None:
+    # 2. Dense search across ALL collections IN PARALLEL
+    async def _dense_search(col):
         try:
-            sparse_results = await sparse_fut
-            if sparse_results:
-                sparse_results = await loop.run_in_executor(_pool, _resolve_sparse_texts, qdrant, sparse_results)
+            return await loop.run_in_executor(_thread_pool, qdrant.search, col, dense_vector, model_id, limit)
+        except Exception as e:
+            logger.warning("search %s failed: %s", col, e)
+            return []
+
+    dense_tasks = [_dense_search(col) for col in DENSE_COLLECTIONS]
+    dense_results = await asyncio.gather(*dense_tasks)
+    all_dense = [hit for results in dense_results for hit in results]
+
+    # 3. Sparse search (BM25) — in parallel with nothing (dense already done)
+    sparse_results = []
+    if sparse_vec:
+        try:
+            sparse_results = await loop.run_in_executor(
+                _thread_pool, qdrant.search_sparse, SPARSE_COLLECTION, sparse_vec, model_id, limit
+            )
+            sparse_results = await loop.run_in_executor(_thread_pool, _resolve_sparse_texts, qdrant, sparse_results)
         except Exception as e:
             logger.warning("sparse search failed: %s", e)
 
-    # 4. RRF fusion + dedup trùng text
+    # 4. RRF fusion
     if sparse_results:
         fused = _rrf_fusion([all_dense, sparse_results])
     else:
         fused = [(hit, hit.get("score", 0)) for hit in all_dense]
-    fused = _dedup_fused(fused)
 
-    # 5. Rescore về thang [0,1]. Ưu tiên DeepInfra reranker; nếu không có
-    # (chưa set key / lỗi) thì fallback embedding cosine. Bắt buộc vì
-    # ngưỡng evidence trong assess_evidence là 0.3/0.5 — score RRF thô
-    # (~0.016) sẽ khiến mọi kết quả KB bị coi là insufficient.
-    scored = False
+    # 5. Rerank
     reranker = get_reranker()
-    if not skip_rerank and reranker and len(fused) > 0:
-        # Chỉ rerank top 10 từ RRF fusion để giảm thời gian
-        rerank_candidates = fused[:10]
-        pairs = [(query, hit.get("payload", {}).get("text", "")) for hit, _ in rerank_candidates]
+    if reranker and len(fused) > 0:
+        pairs = [(query, hit.get("payload", {}).get("text", "")) for hit, _ in fused]
         non_empty = [(i, q, d) for i, (q, d) in enumerate(pairs) if d.strip()]
         if non_empty:
             rerank_pairs = [(q, d) for _, q, d in non_empty]
-            rerank_scores = reranker.predict(rerank_pairs)
-            # Chỉ áp rerank nếu có ít nhất 1 score > 0 (rerank thành công)
+            rerank_scores = await loop.run_in_executor(_thread_pool, reranker.predict, rerank_pairs)
+            # Only apply rerank if at least one score is non-zero (rerank succeeded)
             if any(s > 0 for s in rerank_scores):
-                # Gán rerank scores cho top 10
                 scores = [0.0] * len(pairs)
                 for j, (orig_idx, _, _) in enumerate(non_empty):
                     scores[orig_idx] = rerank_scores[j]
-                # Cập nhật fused: top 10 có rerank scores, phần còn lại giữ RRF score
-                fused_top = [(hit, float(score)) for (hit, _), score in zip(rerank_candidates, scores)]
-                fused_rest = fused[10:]  # giữ nguyên RRF scores
-                fused = fused_top + fused_rest
+                fused = [(hit, float(score)) for (hit, _), score in zip(fused, scores)]
                 fused.sort(key=lambda x: x[1], reverse=True)
-                scored = True
-
-    if not scored and fused:
-        texts = [hit.get("payload", {}).get("text", "") for hit, _ in fused]
-        cos_scores = _embed_cosine_scores(query, texts)
-        if cos_scores is not None and len(cos_scores) == len(fused):
-            fused = [(hit, s) for (hit, _), s in zip(fused, cos_scores)]
-            fused.sort(key=lambda x: x[1], reverse=True)
-        elif sparse_results:
-            # Không embed được: chuẩn hóa RRF về (0,1] theo max để giữ thứ tự
-            mx = max(s for _, s in fused) or 1.0
-            fused = [(hit, s / mx) for hit, s in fused]
 
     # 6. Return top_k (skip chunks without text)
     results = []
@@ -572,22 +562,21 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5, skip_r
         text = payload.get("text", "")
         if not text or not text.strip():
             continue
-        results.append({
-            "id": hit.get("id", ""),
-            "text": text,
-            "model_id": payload.get("model_id"),
-            "edition_id": payload.get("edition_id"),
-            "text_type": payload.get("text_type", ""),
-            "source_type": payload.get("source_type", ""),
-            "source_url": payload.get("source_url", ""),
-            "page": payload.get("page", ""),
-            "section": payload.get("section_path", ""),
-            "score": round(score, 4),
-        })
+        results.append(
+            {
+                "text": text,
+                "model_id": payload.get("model_id"),
+                "edition_id": payload.get("edition_id"),
+                "text_type": payload.get("text_type", ""),
+                "source_type": payload.get("source_type", ""),
+                "source_url": payload.get("source_url", ""),
+                "page": payload.get("page", ""),
+                "score": round(score, 4),
+            }
+        )
         if len(results) >= top_k:
             break
 
-    # Set sau khi có kết quả (miss → đã tính xong). Skip nếu hs_key=None (PG down)
-    if hs_key is not None:
-        await cache.set_json(hs_key, results, HS_CACHE_TTL)
+    # 7. Cache the full-pipeline result (hs:)
+    asyncio.create_task(set_hybrid_cached(query, model_id, top_k, skip_rerank, results))
     return results
