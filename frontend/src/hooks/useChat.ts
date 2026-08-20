@@ -49,7 +49,7 @@ export function useChat() {
   // Thay vào đó gom buffer, CHỈ xả khi trọn 1 TỪ (đến dấu cách/xuống dòng)
   // → tiếng Việt hiển thị mượt, không lộ từ dở dang.
   // `force=true` (khi done/stop) thì xả hết cả phần đuôi bất kể chưa trọn từ.
-  const flushTimerRef = useRef<number | null>(null)
+  const flushTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const flushRef = useRef<(force?: boolean) => void>(() => {})
   const pendingRef = useRef('')
   const lastReleaseRef = useRef(Date.now())
