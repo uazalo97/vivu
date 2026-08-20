@@ -25,7 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from qdrant_client import QdrantClient
 from scripts.config import QDRANT_URL, QDRANT_API_KEY, QDRANT_TIMEOUT
-from lib.openrouter import embed_texts
+from lib.openai_client import embed_texts
 
 GOLDEN_SET_PATH = Path(__file__).parent / "golden_set.json"
 DENSE_COLLECTIONS = ["vivu_product_info", "vivu_policy", "vivu_maintenance"]

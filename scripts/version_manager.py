@@ -284,7 +284,7 @@ def _backfill_cache(client: QdrantClient, version: str) -> int:
     import json as _json
     import uuid as _uuid
     from lib.vector_cache import VectorCache, content_hash
-    from lib.openrouter import EMBED_MODEL
+    from lib.openai_client import EMBED_MODEL
 
     cache = VectorCache()
     ns = _uuid.UUID("6ba7b810-9dad-11d1-80b4-00c04fd430c8")

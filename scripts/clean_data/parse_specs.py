@@ -63,6 +63,12 @@ from scripts.clean_data.spec_common import (  # noqa: E402
 
 EDITION_KEYWORDS = ["PlusCaptain", "Plus", "Eco", "TieuChuan", "NangCao", "CaoCap", "Base"]
 
+
+def _strip_prefix(m: str) -> str:
+    m = m.strip()
+    return m.split("/", 1)[-1] if "/" in m else m
+
+
 RAW_DIR = REPO_ROOT / "data" / "raw"
 CLEAN_DIR = REPO_ROOT / "data" / "clean"
 
@@ -817,8 +823,9 @@ def _vision_extract_brochure(url: str, model_id: str, schema: dict) -> list[dict
                 }
             )
 
-    _api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY", "")
+    _api_key = os.environ.get("OPENAI_API_KEY", "")
     _base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+    _model = _strip_prefix(os.environ.get("LLM_MODEL") or os.environ.get("OPENAI_CHAT_MODEL") or "gpt-4o-mini")
     result = requests.post(
         f"{_base}/chat/completions",
         headers={
@@ -826,7 +833,7 @@ def _vision_extract_brochure(url: str, model_id: str, schema: dict) -> list[dict
             "Content-Type": "application/json",
         },
         json={
-            "model": os.environ.get("LLM_MODEL") or os.environ.get("OPENROUTER_CHAT_MODEL", "gpt-4o-mini"),
+            "model": _model,
             "messages": [{"role": "user", "content": content}],
             "response_format": {"type": "json_object"},
             "temperature": 0,
@@ -893,13 +900,13 @@ async def _crawl_brochure_specs(urls: list[tuple[str, str]]) -> list[dict[str, A
         "For kW/Hp use the kW token, not Hp. Prefer NEDC over WLTP. "
         "Detect Eco, Plus, PlusCaptain editions from table columns. Never guess."
     )
-    provider = os.environ.get("LLM_MODEL") or os.environ.get("OPENROUTER_CHAT_MODEL", "gpt-4o-mini")
-    _llm_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY", "")
+    provider = _strip_prefix(os.environ.get("LLM_MODEL") or os.environ.get("OPENAI_CHAT_MODEL") or "gpt-4o-mini")
+    _llm_key = os.environ.get("OPENAI_API_KEY", "")  # noqa: F841
     _llm_base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
     llm = LLMExtractionStrategy(
         llm_config=LLMConfig(
             provider=provider,
-            api_token="env:OPENAI_API_KEY" if os.environ.get("OPENAI_API_KEY") else "env:OPENROUTER_API_KEY",
+            api_token="env:OPENAI_API_KEY",
             base_url=_llm_base,
             temperature=0,
         ),
@@ -958,7 +965,7 @@ async def _crawl_brochure_specs(urls: list[tuple[str, str]]) -> list[dict[str, A
 
 def crawl_brochure_specs() -> list[dict[str, Any]]:
     load_dotenv(REPO_ROOT / ".env")
-    if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY")):
+    if not os.environ.get("OPENAI_API_KEY", ""):
         raise RuntimeError("OPENAI_API_KEY is required for --crawl-brochures")
     return asyncio.run(_crawl_brochure_specs(_crawl_brochure_urls()))
 

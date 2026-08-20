@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 llm_extract_specs.py — LLM-powered extraction of vehicle specifications.
-Replaces the rule-based parse_specs.py with a semantic parser using OpenRouter (DeepSeek V4 Flash).
+Replaces the rule-based parse_specs.py with a semantic parser using OpenAI.
 Extracts values based on docs/SPEC_SCHEMA.md.
 """
 
@@ -25,10 +25,16 @@ RAW_BROCHURE_DIR = REPO_ROOT / "data" / "raw" / "brochure"
 CLEAN_DIR = REPO_ROOT / "data" / "clean"
 SCHEMA_PATH = REPO_ROOT / "docs" / "SPEC_SCHEMA.md"
 
-# Unified OpenAI key — fallback OPENROUTER_* để tương thích .env cũ
-OPENROUTER_API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY")
+API_KEY = os.environ.get("OPENAI_API_KEY", "")
 OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
-MODEL_NAME = os.environ.get("LLM_MODEL", "gpt-4o-mini")
+
+
+def _strip_prefix(m: str) -> str:
+    m = m.strip()
+    return m.split("/", 1)[-1] if "/" in m else m
+
+
+MODEL_NAME = _strip_prefix(os.environ.get("LLM_MODEL") or os.environ.get("OPENAI_CHAT_MODEL") or "gpt-4o-mini")
 
 MAX_RETRIES = 3
 RETRY_DELAY = 2
@@ -183,7 +189,7 @@ def parse_source_url(text: str, path: Path) -> str:
 
 
 def call_llm(messages: List[Dict[str, str]], temperature: float = 0.0) -> Optional[str]:
-    if not OPENROUTER_API_KEY:
+    if not API_KEY:
         print("Error: OPENAI_API_KEY not set.")
         return None
 
@@ -200,7 +206,7 @@ def call_llm(messages: List[Dict[str, str]], temperature: float = 0.0) -> Option
             response = requests.post(
                 url=f"{OPENAI_BASE_URL}/chat/completions",
                 headers={
-                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Authorization": f"Bearer {API_KEY}",
                     "Content-Type": "application/json",
                 },
                 data=json.dumps(payload),
