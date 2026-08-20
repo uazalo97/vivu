@@ -1,17 +1,16 @@
 """
 app/api/admin_prompts.py — Admin REST API Endpoints for Prompt Registry & Version Management.
 
-Bảo mật: Yêu cầu Header `X-Admin-Key` khớp với `ADMIN_API_KEY` trong Settings.
+Hiện tại mở hoàn toàn (không yêu cầu X-Admin-Key) — đúng như yêu cầu "vào admin ko cần key".
 """
 
 import logging
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query, Security, status
+from fastapi import APIRouter, HTTPException, Query, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from app.api.metrics import verify_admin_key
 from app.core.prompt_manager import prompt_manager
 
 logger = logging.getLogger("bds.prompts_api")
@@ -37,7 +36,6 @@ class TestRenderRequest(BaseModel):
 @router.get("", summary="Liệt kê toàn bộ Prompt và các phiên bản")
 async def list_prompts(
     prompt_type: Optional[str] = Query(None, description="Lọc theo loại prompt (system, synthesize, ...)"),
-    _: bool = Security(verify_admin_key),
 ):
     """Liệt kê danh sách tất cả các phiên bản prompt đã đăng ký."""
     try:
@@ -49,7 +47,7 @@ async def list_prompts(
 
 
 @router.get("/active", summary="Lấy danh sách các Version đang Active")
-async def get_active_versions(_: bool = Security(verify_admin_key)):
+async def get_active_versions():
     """Trả về bảng map các version prompt đang chạy thực tế trên production."""
     try:
         active_map = await prompt_manager.get_active_versions_map()
@@ -63,7 +61,6 @@ async def get_active_versions(_: bool = Security(verify_admin_key)):
 async def get_prompt_detail(
     prompt_type: str,
     version: str,
-    _: bool = Security(verify_admin_key),
 ):
     """Xem đầy đủ nội dung template và metadata của một phiên bản cụ thể."""
     try:
@@ -84,7 +81,6 @@ async def get_prompt_detail(
 @router.post("", summary="Tạo mới một phiên bản Prompt")
 async def create_prompt_version(
     payload: CreatePromptRequest,
-    _: bool = Security(verify_admin_key),
 ):
     """Tạo một phiên bản prompt mới (hỗ trợ test A/B hoặc cập nhật quy tắc tư vấn)."""
     try:
@@ -109,7 +105,6 @@ async def create_prompt_version(
 async def activate_prompt_version(
     prompt_type: str,
     version: str,
-    _: bool = Security(verify_admin_key),
 ):
     """Chuyển đổi tức thì phiên bản prompt đang chạy trên live mà không cần restart server."""
     try:
@@ -135,7 +130,6 @@ async def activate_prompt_version(
 @router.post("/test-render", summary="Thử nghiệm render template prompt")
 async def test_render_prompt(
     payload: TestRenderRequest,
-    _: bool = Security(verify_admin_key),
 ):
     """Thử render template với các biến mẫu để kiểm tra lỗi format trước khi deploy."""
     try:

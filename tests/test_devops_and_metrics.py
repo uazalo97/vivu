@@ -52,43 +52,26 @@ async def test_legacy_health():
 
 
 async def test_admin_metrics_auth_protection():
-    """Kiểm tra các endpoint /api/admin/metrics/* bắt buộc Header X-Admin-Key."""
+    """Kiểm tra /api/admin/metrics/* mở hoàn toàn (không yêu cầu X-Admin-Key) — đúng yêu cầu hiện tại."""
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
-        # Nếu chưa set key -> vào thẳng 200/500
-        if not settings.admin_api_key:
-            res_open = await ac.get("/api/admin/metrics/overview")
-            assert res_open.status_code in (200, 500)
-            return
-
-        # Khi có cấu hình key: Không truyền header -> 401
-        res = await ac.get("/api/admin/metrics/overview")
-        assert res.status_code == 401
-
-        # Truyền sai header -> 401
-        res_wrong = await ac.get(
+        # Metrics mở thẳng, không cần key — luôn 200/500 dù có hay không có ADMIN_API_KEY
+        res_open = await ac.get("/api/admin/metrics/overview")
+        assert res_open.status_code in (200, 500)
+        # Gửi key dù sai vẫn vào được (open)
+        res_any = await ac.get(
             "/api/admin/metrics/overview",
-            headers={"X-Admin-Key": "invalid-secret-key"},
+            headers={"X-Admin-Key": "any"},
         )
-        assert res_wrong.status_code == 401
-
-        # Truyền đúng header
-        correct_key = settings.admin_api_key
-        res_valid = await ac.get(
-            "/api/admin/metrics/overview",
-            headers={"X-Admin-Key": correct_key},
-        )
-        assert res_valid.status_code in (200, 500)
+        assert res_any.status_code in (200, 500)
 
 
 async def test_prompt_registry_and_admin_api():
-    """Kiểm tra Admin Prompt APIs: List, Get Detail, Test Render, Create & Activate."""
+    """Kiểm tra Admin Prompt APIs: List, Get Detail, Test Render — mở không cần key."""
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
-        headers = {"X-Admin-Key": settings.admin_api_key}
-
-        # 1. List active versions
-        res_active = await ac.get("/api/admin/prompts/active", headers=headers)
+        # Không cần header — admin mở hoàn toàn
+        res_active = await ac.get("/api/admin/prompts/active")
         assert res_active.status_code == 200
         data = res_active.json()
         assert "active_versions" in data
@@ -97,7 +80,6 @@ async def test_prompt_registry_and_admin_api():
         # 2. Test render endpoint
         res_render = await ac.post(
             "/api/admin/prompts/test-render",
-            headers=headers,
             json={
                 "prompt_type": "synthesize",
                 "variables": {"context": "VF 8 Eco pin 87.7 kWh", "query": "Pin VF 8 thế nào?"},

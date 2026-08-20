@@ -6,7 +6,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from app.api.admin_prompts import router as admin_prompts_router
 from app.api.chat import router as chat_router
+from app.api.health import router as health_router
 from app.api.metrics import router as metrics_router
 
 # Configure logging so bds.* loggers appear in terminal
@@ -28,7 +30,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(health_router)
 app.include_router(chat_router)
 app.include_router(metrics_router)
+app.include_router(admin_prompts_router)
 app.mount("/", StaticFiles(directory="app/static", html=True))
 setup_tracing()
