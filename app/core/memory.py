@@ -23,7 +23,7 @@ from app.config import settings
 logger = logging.getLogger("bds.memory")
 
 SESSION_TTL = timedelta(hours=6)
-MAX_TURNS = 10          # sliding window history (số cặp user/assistant)
+MAX_TURNS = 10  # sliding window history (số cặp user/assistant)
 LTM_TTL = timedelta(days=30)
 
 _client = None
@@ -39,6 +39,7 @@ def get_redis():
         return None
     try:
         import redis.asyncio as aioredis
+
         _client = aioredis.from_url(
             settings.redis_url,
             decode_responses=True,
@@ -77,6 +78,7 @@ def _profile_key(user_id: str) -> str:
 
 # ── Session store (short-term) ────────────────────────────────────────────────
 
+
 async def load_session(session_id: str) -> dict:
     """Trả {"history": [...], "current_context": {...}}. Default khi Redis tắt.
 
@@ -91,7 +93,8 @@ async def load_session(session_id: str) -> dict:
     ctx_key = _context_key(session_id)
     try:
         items, raw_ctx = await asyncio.gather(
-            r.lrange(hist_key, 0, -1), r.hgetall(ctx_key),
+            r.lrange(hist_key, 0, -1),
+            r.hgetall(ctx_key),
         )
         history = [json.loads(i) for i in items if i]
     except Exception:
@@ -166,6 +169,7 @@ async def update_current_context(
 
 
 # ── Long-term memory (keyed by user_id) ──────────────────────────────────────
+
 
 async def load_user_facts(user_id: str) -> dict:
     """Đọc toàn bộ fact từ hash user:{uid}:profile."""

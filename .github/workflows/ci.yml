@@ -27,13 +27,11 @@ jobs:
       - name: Install ruff
         run: pip install ruff
 
-      # Giai đoạn đầu: chỉ cảnh báo, không fail CI để dọn dần 3k+ lỗi có sẵn
-      # Khi codebase sạch hơn, đổi thành `ruff check .` (remove || true)
       - name: Ruff check
-        run: ruff check . --output-format=github || true
+        run: ruff check . --output-format=github
 
       - name: Ruff format --check
-        run: ruff format --check --diff || true
+        run: ruff format --check --diff
 
   test:
     name: test (offline, no Docker)

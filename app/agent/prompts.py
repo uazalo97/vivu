@@ -86,5 +86,5 @@ async def get_system_prompt() -> str:
 def get_prompt_hash() -> str:
     global _prompt_hash
     if _prompt_hash is None:
-        _prompt_hash = hashlib.sha256(SYSTEM_PROMPT.encode('utf-8')).hexdigest()[:12]
+        _prompt_hash = hashlib.sha256(SYSTEM_PROMPT.encode("utf-8")).hexdigest()[:12]
     return _prompt_hash

@@ -1,6 +1,6 @@
-import asyncio
-import json
-from collections import Counter
+import asyncio  # noqa: F401
+import json  # noqa: F401
+from collections import Counter  # noqa: F401
 
 import asyncpg
 
@@ -29,7 +29,8 @@ async def get_price(model_code: str, version: str = None) -> dict:
         rows = await conn.fetch(
             "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
             "FROM price_list_active WHERE model_id=$1 AND edition_id=$2 ORDER BY price_list_vnd",
-            mid, version,
+            mid,
+            version,
         )
     else:
         rows = await conn.fetch(
@@ -52,11 +53,13 @@ async def get_price(model_code: str, version: str = None) -> dict:
         rm = r["model_id"]
         if rm not in seen:
             seen.add(rm)
-            related_models.append({
-                "model_code": rm,
-                "price_vnd": r["price_list_vnd"],
-                "version_name": r["edition_id"],
-            })
+            related_models.append(
+                {
+                    "model_code": rm,
+                    "price_vnd": r["price_list_vnd"],
+                    "version_name": r["edition_id"],
+                }
+            )
 
     return {
         "model_code": model_code,
@@ -86,7 +89,8 @@ async def get_colors(model_code: str, version: str = None) -> dict:
             "interior_code, interior_name, source_url "
             "FROM car_colors_active WHERE model_id = $1 AND version_name = $2 "
             "ORDER BY color_name, interior_name",
-            mid, version,
+            mid,
+            version,
         )
     else:
         rows = await conn.fetch(
@@ -135,7 +139,8 @@ async def get_options(model_code: str, version: str = None) -> dict:
             "price_extra_vnd, source_url "
             "FROM car_options_active WHERE model_id = $1 AND version_name = $2 "
             "ORDER BY option_group, option_name, value_name",
-            mid, version,
+            mid,
+            version,
         )
     else:
         rows = await conn.fetch(
@@ -238,6 +243,7 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
 
 async def search_knowledge_base(query: str, model_id: str = None) -> dict:
     from app.core.cache import search_kb_cached
+
     mid = _model_id(model_id) if model_id else None
     return await search_kb_cached(query, mid)
 
@@ -273,12 +279,24 @@ async def list_available_models() -> dict:
 
 
 UTILITY_LINKS = {
-    "onroad_cost": {"url": "https://shop.vinfastauto.com/vn_vi/du-toan-chi-phi-lan-banh", "label": "Dự toán chi phí lăn bánh"},
+    "onroad_cost": {
+        "url": "https://shop.vinfastauto.com/vn_vi/du-toan-chi-phi-lan-banh",
+        "label": "Dự toán chi phí lăn bánh",
+    },
     "loan_estimate": {"url": "https://shop.vinfastauto.com/vn_vi/du-toan-chi-phi-tra-gop", "label": "Dự toán trả góp"},
     "loan_appraisal": {"url": "https://shop.vinfastauto.com/vn_vi/tham-dinh-vay", "label": "Thẩm định vay"},
-    "showroom_charging": {"url": "https://vinfastauto.com/vn_vi/tim-kiem-showroom-tram-sac", "label": "Tìm Showroom & Trạm sạc"},
-    "maintenance_booking": {"url": "https://shop.vinfastauto.com/vn_vi/dat-lich-dich-vu-bao-duong.html", "label": "Đặt lịch bảo dưỡng"},
-    "test_drive_booking": {"url": "https://shop.vinfastauto.com/vn_vi/dang-ky-lai-thu.html", "label": "Đăng ký lái thử"},
+    "showroom_charging": {
+        "url": "https://vinfastauto.com/vn_vi/tim-kiem-showroom-tram-sac",
+        "label": "Tìm Showroom & Trạm sạc",
+    },
+    "maintenance_booking": {
+        "url": "https://shop.vinfastauto.com/vn_vi/dat-lich-dich-vu-bao-duong.html",
+        "label": "Đặt lịch bảo dưỡng",
+    },
+    "test_drive_booking": {
+        "url": "https://shop.vinfastauto.com/vn_vi/dang-ky-lai-thu.html",
+        "label": "Đăng ký lái thử",
+    },
     "promotions": {"url": "https://shop.vinfastauto.com/vn_vi", "label": "Khuyến mãi đang áp dụng"},
 }
 
@@ -318,9 +336,15 @@ async def get_maintenance_link(car_model: str, year: int = None) -> dict:
 async def ask_clarification(model_id: str = None, suggested_categories: list[str] = None) -> dict:
     """LLM calls this when query is too broad or missing version. Returns available categories for the model."""
     categories = suggested_categories or [
-        "phiên_bản", "thông_số_kỹ_thuật", "kích_thước",
-        "pin_sạc", "phạm_vi_di_chuyển", "an_toàn",
-        "nội_thất", "ngoại_thất", "tính_năng"
+        "phiên_bản",
+        "thông_số_kỹ_thuật",
+        "kích_thước",
+        "pin_sạc",
+        "phạm_vi_di_chuyển",
+        "an_toàn",
+        "nội_thất",
+        "ngoại_thất",
+        "tính_năng",
     ]
     if model_id:
         return {

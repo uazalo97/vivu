@@ -30,16 +30,21 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import dotenv_values
+
 _env = dotenv_values(Path(__file__).resolve().parents[2] / ".env")
 os.environ.setdefault("QDRANT_URL", _env.get("QDRANT_URL", ""))
 os.environ.setdefault("QDRANT_API_KEY", _env.get("QDRANT_API_KEY", ""))
 
-from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, PointStruct, VectorParams
+from qdrant_client import QdrantClient  # noqa: E402
+from qdrant_client.models import Distance, PointStruct, VectorParams  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "backend"))
-from lib.openrouter import (API_KEY, EMBED_MODEL, embed_texts,  # noqa: E402
-                            summarize_metrics)
+from lib.openrouter import (  # noqa: E402
+    API_KEY,
+    EMBED_MODEL,
+    embed_texts,  # noqa: E402
+    summarize_metrics,
+)
 from lib.vector_cache import VectorCache, content_hash  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -82,16 +87,16 @@ def existing_ids(client: QdrantClient, name: str) -> set[str]:
     ids: set[str] = set()
     offset = None
     while True:
-        records, offset = client.scroll(name, limit=256, offset=offset,
-                                        with_payload=False, with_vectors=False)
+        records, offset = client.scroll(name, limit=256, offset=offset, with_payload=False, with_vectors=False)
         ids.update(r.id for r in records)
         if offset is None:
             break
     return ids
 
 
-def ingest_file(client: QdrantClient, path: Path, recreate: bool,
-                version: str, cache: VectorCache) -> tuple[int, int, int, int]:
+def ingest_file(
+    client: QdrantClient, path: Path, recreate: bool, version: str, cache: VectorCache
+) -> tuple[int, int, int, int]:
     """Trả (total_points, embedded_miss, cached_hit, deleted_orphans)."""
     collection_name = f"{path.stem}__{version}"
     print(f"[vector_ingest] processing {collection_name} ...")
@@ -158,8 +163,7 @@ def ingest_file(client: QdrantClient, path: Path, recreate: bool,
         for i, c in enumerate(chunks)
     ]
     for i in range(0, len(points), UPSERT_BATCH):
-        client.upsert(collection_name=collection_name,
-                      points=points[i:i + UPSERT_BATCH], wait=True)
+        client.upsert(collection_name=collection_name, points=points[i : i + UPSERT_BATCH], wait=True)
 
     # Xóa orphan (chunk bị bỏ ở version này) — chỉ khi KHÔNG recreate
     deleted = 0
@@ -167,8 +171,7 @@ def ingest_file(client: QdrantClient, path: Path, recreate: bool,
         wanted = {qdrant_id(c["id"]) for c in chunks}
         orphans = list(existing_ids(client, collection_name) - wanted)
         for i in range(0, len(orphans), UPSERT_BATCH):
-            client.delete(collection_name=collection_name,
-                           points_selector=orphans[i:i + UPSERT_BATCH], wait=True)
+            client.delete(collection_name=collection_name, points_selector=orphans[i : i + UPSERT_BATCH], wait=True)
         deleted = len(orphans)
 
     print(f"  upserted {len(points)}  embedded={embedded_miss}  cached={cached_hit}  deleted_orphans={deleted}")
@@ -201,8 +204,7 @@ def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = Fal
     total_deleted = 0
     try:
         for jsonl in sorted(vector_dir.glob("*.jsonl")):
-            pts, emb, cached, deleted = ingest_file(
-                client, jsonl, recreate, version, cache)
+            pts, emb, cached, deleted = ingest_file(client, jsonl, recreate, version, cache)
             total_points += pts
             total_embedded += emb
             total_cached += cached
@@ -213,8 +215,8 @@ def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = Fal
     # Create model_id index for all collections (required for filtering)
     if recreate:
         from qdrant_client.models import PayloadSchemaType
-        all_cols = [f"vivu_product_info__{version}", f"vivu_policy__{version}",
-                    f"vivu_maintenance__{version}"]
+
+        all_cols = [f"vivu_product_info__{version}", f"vivu_policy__{version}", f"vivu_maintenance__{version}"]
         for col in all_cols:
             try:
                 client.create_payload_index(
@@ -228,11 +230,15 @@ def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = Fal
 
     sm = summarize_metrics()
     tot = sm["total"]
-    print(f"[vector_ingest] done. points={total_points}  "
-          f"embedded={total_embedded}  cached={total_cached}  "
-          f"deleted_orphans={total_deleted}  time={time.time()-t0:.1f}s")
-    print(f"  API: {tot['calls']} embed calls  {tot['latency_ms']/1000:.1f}s  "
-          f"tokens in={tot['input_tokens']}  out={tot['output_tokens']}")
+    print(
+        f"[vector_ingest] done. points={total_points}  "
+        f"embedded={total_embedded}  cached={total_cached}  "
+        f"deleted_orphans={total_deleted}  time={time.time() - t0:.1f}s"
+    )
+    print(
+        f"  API: {tot['calls']} embed calls  {tot['latency_ms'] / 1000:.1f}s  "
+        f"tokens in={tot['input_tokens']}  out={tot['output_tokens']}"
+    )
     return 0
 
 
@@ -240,8 +246,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Ingest vector JSONL into Qdrant (versioned + incremental).")
     ap.add_argument("--version", default="v1")
     ap.add_argument("--url", default=DEFAULT_QDRANT_URL)
-    ap.add_argument("--recreate", action="store_true",
-                    help="Drop collection + ignore cache (rebuild sạch)")
+    ap.add_argument("--recreate", action="store_true", help="Drop collection + ignore cache (rebuild sạch)")
     args = ap.parse_args()
     return run(args.version, args.url, args.recreate)
 

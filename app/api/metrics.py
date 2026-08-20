@@ -1,9 +1,10 @@
-﻿"""
+"""
 app/api/metrics.py — Admin Metrics REST API Endpoints for Monitoring & Stakeholder Dashboard.
 
 Toàn bộ Endpoint mở trực tiếp cho Frontend / Dashboard gọi lấy dữ liệu mà không cần xác thực header.
 Tự động fallback về dữ liệu mặc định nếu Database chưa kết nối hoặc chưa có data.
 """
+
 import logging
 from typing import Optional
 
@@ -48,19 +49,21 @@ async def metrics_overview(
         return JSONResponse(content=data)
     except Exception as e:
         logger.warning("Metrics overview fallback due to: %s", e)
-        return JSONResponse(content={
-            "status": "success",
-            "window_hours": hours,
-            "total_requests": 0,
-            "successful_requests": 0,
-            "failed_requests": 0,
-            "error_rate_pct": 0.0,
-            "tokens": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
-            "costs": {"total_cost_usd": 0.0, "total_cost_vnd": 0.0},
-            "latency_ms": {"avg": 0, "p50": 0, "p95": 0, "p99": 0},
-            "ttft_ms": {"avg": 0, "p50": 0, "p95": 0},
-            "caching": {"cache_hits": 0, "cache_hit_rate_pct": 0.0},
-        })
+        return JSONResponse(
+            content={
+                "status": "success",
+                "window_hours": hours,
+                "total_requests": 0,
+                "successful_requests": 0,
+                "failed_requests": 0,
+                "error_rate_pct": 0.0,
+                "tokens": {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+                "costs": {"total_cost_usd": 0.0, "total_cost_vnd": 0.0},
+                "latency_ms": {"avg": 0, "p50": 0, "p95": 0, "p99": 0},
+                "ttft_ms": {"avg": 0, "p50": 0, "p95": 0},
+                "caching": {"cache_hits": 0, "cache_hit_rate_pct": 0.0},
+            }
+        )
 
 
 @router.get("/timeseries", summary="Chuỗi thời gian (Requests, Latency, Cost)")
@@ -98,9 +101,7 @@ async def metrics_logs(
 ):
     """Truy vấn danh sách request logs chi tiết có phân trang và bộ lọc."""
     try:
-        data = await get_metrics_logs(
-            limit=limit, offset=offset, intent=intent, cache_only=cache_only
-        )
+        data = await get_metrics_logs(limit=limit, offset=offset, intent=intent, cache_only=cache_only)
         return JSONResponse(content=data)
     except Exception as e:
         logger.warning("Metrics logs fallback due to: %s", e)

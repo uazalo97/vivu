@@ -191,7 +191,7 @@ def run_smoke(input_path: str, output_path: str, api_url: str) -> int:
     print(f"  SMOKE TEST — {run_id}")
     print("=" * 60)
     print(f"  Total:          {total}")
-    print(f"  Decision PASS:  {total_pass}/{total} ({100*total_pass/total:.0f}%)" if total else "  No cases")
+    print(f"  Decision PASS:  {total_pass}/{total} ({100 * total_pass / total:.0f}%)" if total else "  No cases")
     print(f"  Decision FAIL:  {total_fail}/{total}")
     print()
 

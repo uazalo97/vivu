@@ -42,6 +42,7 @@ def content_hash(text: str, structured: dict | None, embed_model: str) -> str:
     """Hash ổn định theo content + embed_model (dùng làm cache key)."""
     import hashlib
     import json
+
     body = json.dumps(structured or {}, sort_keys=True, ensure_ascii=False)
     return hashlib.sha1(f"{embed_model}\x1f{text}\x1f{body}".encode("utf-8")).hexdigest()
 
@@ -57,9 +58,7 @@ class VectorCache:
         self.misses = 0
 
     def get(self, h: str) -> list[float] | None:
-        row = self._conn.execute(
-            "SELECT vector FROM vector_cache WHERE hash = ?", (h,)
-        ).fetchone()
+        row = self._conn.execute("SELECT vector FROM vector_cache WHERE hash = ?", (h,)).fetchone()
         if row is None:
             self.misses += 1
             return None
@@ -68,8 +67,7 @@ class VectorCache:
         a.frombytes(row[0])
         return a.tolist()
 
-    def put(self, h: str, collection: str, embed_model: str,
-            vec: list[float]) -> None:
+    def put(self, h: str, collection: str, embed_model: str, vec: list[float]) -> None:
         blob = array.array("f", vec).tobytes()
         self._conn.execute(
             "INSERT OR REPLACE INTO vector_cache (hash, collection, embed_model, dim, vector, created_at) "

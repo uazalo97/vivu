@@ -3,6 +3,7 @@ Direct tool calls based on classify_node output.
 No LLM call — routes tool calls by topic/entities deterministically.
 Replaces build_messages_node + execute_tools_node (saves 1 LLM call).
 """
+
 import asyncio
 import logging
 import re
@@ -11,13 +12,22 @@ import time
 from app.agent.graph_state import AgentState
 from app.agent.prompts import get_system_prompt
 from app.agent.tools import (
-    get_specs, get_price, list_available_models,
-    search_knowledge_base, get_active_promotions, get_onroad_cost_link,
-    get_loan_estimate_link, get_showroom_charging_link, get_booking_link,
+    get_specs,
+    get_price,
+    list_available_models,
+    search_knowledge_base,
+    get_active_promotions,
+    get_onroad_cost_link,
+    get_loan_estimate_link,
+    get_showroom_charging_link,
+    get_booking_link,
     get_maintenance_link,
 )
 from app.core.cache import (
-    get_specs_cached, get_colors_cached, get_options_cached, list_models_cached,
+    get_specs_cached,
+    get_colors_cached,
+    get_options_cached,
+    list_models_cached,
 )
 from app.agent.nodes.classify import _CROSS_MODEL_RE, _distinct_models
 
@@ -44,15 +54,30 @@ _NEEDS_KB = {"an_toàn", "nội_thất", "ngoại_thất", "tính_năng_nổi_b�
 # Query → spec-category refinement for thông_số_kỹ_thuật (broad topic).
 # Order matters: first match wins.
 _QUERY_SPEC_REFINE = [
-    (re.compile(
-        r"(công\s*suất|mô[\s-]*men|xoắn|tăng\s*tốc|tốc\s*độ|"
-        r"power|torque|acceleration|speed|km/h|\bkW\b|\bNm\b)", re.I), "powertrain"),
-    (re.compile(
-        r"(pin|battery|sạc|charge|dung\s*lượng|kwh|range|"
-        r"đi\s*được|quãng\s*đường|bao\s*xa|xa\s*hơn)", re.I), "battery"),
-    (re.compile(
-        r"(kích\s*thước|dài|rộng|cao|trọng\s*lượng|wheelbase|"
-        r"khoảng\s*sáng|gầm|cốp|ground\s*clearance|weight)", re.I), "dimension"),
+    (
+        re.compile(
+            r"(công\s*suất|mô[\s-]*men|xoắn|tăng\s*tốc|tốc\s*độ|"
+            r"power|torque|acceleration|speed|km/h|\bkW\b|\bNm\b)",
+            re.I,
+        ),
+        "powertrain",
+    ),
+    (
+        re.compile(
+            r"(pin|battery|sạc|charge|dung\s*lượng|kwh|range|"
+            r"đi\s*được|quãng\s*đường|bao\s*xa|xa\s*hơn)",
+            re.I,
+        ),
+        "battery",
+    ),
+    (
+        re.compile(
+            r"(kích\s*thước|dài|rộng|cao|trọng\s*lượng|wheelbase|"
+            r"khoảng\s*sáng|gầm|cốp|ground\s*clearance|weight)",
+            re.I,
+        ),
+        "dimension",
+    ),
 ]
 
 
@@ -80,7 +105,11 @@ async def call_tools_node(state: AgentState) -> dict:
     cache_hits: set[str] = set()
     if category == "utility":
         tool_results = await _call_utility_tools(query)
-    elif len(state_models) >= 2 or len(_distinct_models(query)) >= 2 or (not model_code and _CROSS_MODEL_RE.search(query)):
+    elif (
+        len(state_models) >= 2
+        or len(_distinct_models(query)) >= 2
+        or (not model_code and _CROSS_MODEL_RE.search(query))
+    ):
         tool_results = await _call_cross_model_tools(query, state_models)
     elif model_code:
         tool_results, cache_hits = await _call_model_tools(model_code, version, category, query)
@@ -91,8 +120,12 @@ async def call_tools_node(state: AgentState) -> dict:
     system_prompt = await get_system_prompt()
 
     t_end = time.time()
-    logger.info("CALL_TOOLS: done, %d tool results in %.0fms (cache_hits=%s)",
-                len(tool_results), (t_end - t_start) * 1000, sorted(cache_hits))
+    logger.info(
+        "CALL_TOOLS: done, %d tool results in %.0fms (cache_hits=%s)",
+        len(tool_results),
+        (t_end - t_start) * 1000,
+        sorted(cache_hits),
+    )
 
     return {
         "tool_results": tool_results,
@@ -224,21 +257,30 @@ async def _call_utility_tools(query: str) -> list[dict]:
     results = []
 
     _PATTERNS = [
-        (r"(showroom|trạm\s*sạc|đại\s*lý|cửa\s*hàng|chi\s*nhánh|hotline|liên\s*hệ|gặp\s*sales)",
-         [("get_showroom_charging_link", get_showroom_charging_link)]),
-        (r"(lái\s*thử|test\s*drive|đăng\s*ký\s*lái)",
-         [("get_booking_link", get_booking_link, "test_drive")]),
-        (r"(bảo\s*dưỡng|đặt\s*lịch|booking)",
-         [("get_booking_link", get_booking_link, "maintenance"),
-          ("get_maintenance_link", get_maintenance_link, "all")]),
-        (r"(trả\s*góp|vay|thẩm\s*định|lăn\s*bánh)",
-         [("get_loan_estimate_link", get_loan_estimate_link),
-          ("get_onroad_cost_link", get_onroad_cost_link)]),
-        (r"(khuyến\s*mãi|ưu\s*đãi|voucher)",
-         [("get_active_promotions", get_active_promotions)]),
-        (r"(báo\s*lỗi|sửa\s*chữa|hỏng|trục\s*trặc|bảo\s*hành|tự\s*xử\s*lý)",
-         [("get_maintenance_link", get_maintenance_link, "all"),
-          ("get_showroom_charging_link", get_showroom_charging_link)]),
+        (
+            r"(showroom|trạm\s*sạc|đại\s*lý|cửa\s*hàng|chi\s*nhánh|hotline|liên\s*hệ|gặp\s*sales)",
+            [("get_showroom_charging_link", get_showroom_charging_link)],
+        ),
+        (r"(lái\s*thử|test\s*drive|đăng\s*ký\s*lái)", [("get_booking_link", get_booking_link, "test_drive")]),
+        (
+            r"(bảo\s*dưỡng|đặt\s*lịch|booking)",
+            [
+                ("get_booking_link", get_booking_link, "maintenance"),
+                ("get_maintenance_link", get_maintenance_link, "all"),
+            ],
+        ),
+        (
+            r"(trả\s*góp|vay|thẩm\s*định|lăn\s*bánh)",
+            [("get_loan_estimate_link", get_loan_estimate_link), ("get_onroad_cost_link", get_onroad_cost_link)],
+        ),
+        (r"(khuyến\s*mãi|ưu\s*đãi|voucher)", [("get_active_promotions", get_active_promotions)]),
+        (
+            r"(báo\s*lỗi|sửa\s*chữa|hỏng|trục\s*trặc|bảo\s*hành|tự\s*xử\s*lý)",
+            [
+                ("get_maintenance_link", get_maintenance_link, "all"),
+                ("get_showroom_charging_link", get_showroom_charging_link),
+            ],
+        ),
     ]
 
     matched = False

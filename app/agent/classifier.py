@@ -10,14 +10,26 @@ MODEL_RE = re.compile(
 )
 
 VERSION_ALIASES = {
-    "eco": "Eco", "bản eco": "Eco", "ban eco": "Eco",
-    "plus": "Plus", "bản plus": "Plus", "ban plus": "Plus",
-    "tiêu chuẩn": "TieuChuan", "tieuchuan": "TieuChuan", "tiêu_chuẩn": "TieuChuan",
-    "nâng cao": "NangCao", "nangcao": "NangCao",
-    "cao cấp": "CaoCap", "caocap": "CaoCap",
-    "pluscaptain": "PlusCaptain", "plus captain": "PlusCaptain",
-    "the all new": "The All New", "all new": "The All New", "thenew": "The All New",
-    "plus awd": "Plus AWD", "plusawd": "Plus AWD",
+    "eco": "Eco",
+    "bản eco": "Eco",
+    "ban eco": "Eco",
+    "plus": "Plus",
+    "bản plus": "Plus",
+    "ban plus": "Plus",
+    "tiêu chuẩn": "TieuChuan",
+    "tieuchuan": "TieuChuan",
+    "tiêu_chuẩn": "TieuChuan",
+    "nâng cao": "NangCao",
+    "nangcao": "NangCao",
+    "cao cấp": "CaoCap",
+    "caocap": "CaoCap",
+    "pluscaptain": "PlusCaptain",
+    "plus captain": "PlusCaptain",
+    "the all new": "The All New",
+    "all new": "The All New",
+    "thenew": "The All New",
+    "plus awd": "Plus AWD",
+    "plusawd": "Plus AWD",
 }
 
 
@@ -63,7 +75,8 @@ class QueryClassifier:
             r"N[ââ]ng\s*[Cc]ao|NangCao|"
             r"Cao\s*[Cc][ấấ]?p|CaoCap|"
             r"The\s*All\s*New|All\s*New)",
-            query, re.IGNORECASE,
+            query,
+            re.IGNORECASE,
         )
         if version_match:
             nv = _normalize_version(version_match.group(1))

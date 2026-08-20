@@ -44,21 +44,27 @@ class AgentLoop:
                 if node_name == "classify":
                     dec = node_output.get("decision", "answer")
                     yield {"type": "decision", "content": dec}
-                    yield {"type": "classify", "content": {
-                        "specificity": node_output.get("specificity", ""),
-                        "entities": node_output.get("entities", {}),
-                        "category": node_output.get("category", ""),
-                    }}
-                    yielded_classify = True
+                    yield {
+                        "type": "classify",
+                        "content": {
+                            "specificity": node_output.get("specificity", ""),
+                            "entities": node_output.get("entities", {}),
+                            "category": node_output.get("category", ""),
+                        },
+                    }
+                    yielded_classify = True  # noqa: F841
 
                 elif node_name == "call_tools":
                     for tr in node_output.get("tool_results", []):
                         yield {"type": "tool_call", "content": {"tool": tr["tool"], "success": tr["success"]}}
                     if node_output.get("cache_hit"):
-                        yield {"type": "cache", "content": {
-                            "hit": True,
-                            "type": node_output.get("cache_type", "") or "cache",
-                        }}
+                        yield {
+                            "type": "cache",
+                            "content": {
+                                "hit": True,
+                                "type": node_output.get("cache_type", "") or "cache",
+                            },
+                        }
 
                 elif node_name == "generate":
                     fr = node_output.get("final_response", "")

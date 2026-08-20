@@ -49,9 +49,7 @@ async def generate_node(state: AgentState) -> dict:
     # Build history-aware query for multi-turn
     history = state.get("history", [])
     if history:
-        history_context = "\n".join(
-            f"{m['role']}: {m['content']}" for m in history[-4:]
-        )
+        history_context = "\n".join(f"{m['role']}: {m['content']}" for m in history[-4:])
         full_query = f"Lịch sử hội thoại:\n{history_context}\n\nCâu hỏi hiện tại: {query}"
     else:
         full_query = query
@@ -59,6 +57,7 @@ async def generate_node(state: AgentState) -> dict:
     system_prompt = state["messages"][0]["content"] if state.get("messages") else ""
     if not system_prompt:
         from app.agent.prompts import get_system_prompt
+
         system_prompt = await get_system_prompt()
 
     messages = [

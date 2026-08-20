@@ -30,10 +30,11 @@ for _stream in (sys.stdout, sys.stderr):
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # noqa: E402
+
 load_dotenv(REPO_ROOT / ".env")
 
-import uuid as _uuid
+import uuid as _uuid  # noqa: E402
 
 
 def _uniq() -> str:
@@ -41,6 +42,7 @@ def _uniq() -> str:
 
 
 # ── Session store ──────────────────────────────────────────────────────────────
+
 
 async def test_session_roundtrip():
     from app.core.memory import load_session, save_turn
@@ -70,7 +72,7 @@ async def test_session_sliding_window():
     # Oldest retained turn should be the (15-10)=5th turn
     assert s["history"][0]["content"] == "question 5"
     assert s["history"][-1]["content"] == "answer 14"
-    print(f"  [PASS] test_session_sliding_window: trimmed to {MAX_TURNS*2} msgs")
+    print(f"  [PASS] test_session_sliding_window: trimmed to {MAX_TURNS * 2} msgs")
 
 
 async def test_session_context_non_null():
@@ -103,9 +105,7 @@ async def test_session_concurrent_save():
     from app.core.memory import load_session, save_turn
 
     sid = _uniq()
-    await asyncio.gather(*[
-        save_turn(sid, f"q{i}", f"a{i}") for i in range(10)
-    ])
+    await asyncio.gather(*[save_turn(sid, f"q{i}", f"a{i}") for i in range(10)])
     s = await load_session(sid)
     assert isinstance(s["history"], list)
     # May have lost some turns due to race, but structure must be valid
@@ -115,6 +115,7 @@ async def test_session_concurrent_save():
 
 
 # ── Long-term memory ───────────────────────────────────────────────────────────
+
 
 async def test_ltm_facts():
     from app.core.memory import load_user_facts, save_user_fact
@@ -130,6 +131,7 @@ async def test_ltm_facts():
 
 
 # ── Tool cache ─────────────────────────────────────────────────────────────────
+
 
 async def test_tool_cache_miss_hit():
     from app.core.cache import get_specs_cached, get_colors_cached
@@ -166,7 +168,10 @@ async def test_tool_cache_versions_isolated():
 
 async def test_invalidate_model_and_all():
     from app.core.cache import (
-        get_specs_cached, get_colors_cached, invalidate_model, invalidate_all,
+        get_specs_cached,
+        get_colors_cached,
+        invalidate_model,
+        invalidate_all,
     )
 
     model = _uniq()
@@ -190,6 +195,7 @@ async def test_invalidate_model_and_all():
 
 
 # ── Embedding + hybrid cache ───────────────────────────────────────────────────
+
 
 async def test_embedding_cache():
     from app.core.cache import get_embedding_cached, set_embedding_cached
@@ -235,6 +241,7 @@ async def test_data_version():
 
 # ── Rate limit + dedupe ────────────────────────────────────────────────────────
 
+
 async def test_rate_limit_dedupe():
     from app.api.chat import _rate_limit_check, _dedup_check
 
@@ -244,7 +251,7 @@ async def test_rate_limit_dedupe():
     assert await _rate_limit_check(sid, ip) is None
     # dedupe
     msg_id = _uniq()
-    assert await _dedup_check(sid, msg_id) is True   # new
+    assert await _dedup_check(sid, msg_id) is True  # new
     assert await _dedup_check(sid, msg_id) is False  # duplicate
     assert await _dedup_check(sid, _uniq()) is True  # different id → new
     print("  [PASS] test_rate_limit_dedupe: first-request + dedup new/dup/new")
@@ -277,6 +284,7 @@ async def test_rate_limit_threshold():
 
 # ── classify current_context fallback (multi-turn ellipsis) ────────────────────
 
+
 async def test_classify_context_fallback():
     from app.agent.nodes.classify import classify_node
 
@@ -307,6 +315,7 @@ async def test_classify_history_wins_over_context():
 
 
 # ── Edge cases ─────────────────────────────────────────────────────────────────
+
 
 async def test_unicodetone():
     from app.core.cache import _norm_query
@@ -354,7 +363,7 @@ async def main():
         except Exception as e:
             failed += 1
             print(f"  [FAIL] {t.__name__}: {type(e).__name__}: {e}")
-    print(f"\n{'='*60}\n{len(tests)-failed}/{len(tests)} tests passed\n{'='*60}")
+    print(f"\n{'=' * 60}\n{len(tests) - failed}/{len(tests)} tests passed\n{'=' * 60}")
     return 1 if failed else 0
 
 

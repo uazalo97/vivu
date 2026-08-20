@@ -30,8 +30,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from qdrant_client import QdrantClient
-from qdrant_client.models import (PointStruct, SparseIndexParams,
-                                  SparseVector, SparseVectorParams)
+from qdrant_client.models import PointStruct, SparseIndexParams, SparseVector, SparseVectorParams
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 load_dotenv(REPO_ROOT / ".env")
@@ -46,12 +45,14 @@ K1 = 1.5
 B = 0.75
 
 # Stopword tiếng Việt cơ bản
-STOPWORDS = set("""
+STOPWORDS = set(
+    """
 của và có là trong với cho khi từ không những các một được sẽ đã đang này đó thì
 để về ra theo tại cũng như nên vào đến nhưng bởi vì hay hoặc gì rất hơn hết cả đều
 sau trước mới lại còn phải bị do qua lên xuống ngay chỉ mà nữa đây ấy nào bao nhiêu
 mình bạn tôi nó họ chúng ta ông bà anh chị em cùng thôi cần nếu đúng xin quý
-""".split())
+""".split()
+)
 
 TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 
@@ -129,13 +130,19 @@ def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = Fal
         order = sorted(range(len(indices)), key=lambda i: indices[i])
         indices = [indices[i] for i in order]
         values = [values[i] for i in order]
-        points.append(PointStruct(
-            id=qdrant_id(cid),
-            vector={"sparse": SparseVector(indices=indices, values=values)},
-            payload={"collection": col, "chunk_id": cid, "model_id": c.get("model_id"),
-                      "vector_version": c.get("vector_version", version),
-                      "text": c.get("text", "")},
-        ))
+        points.append(
+            PointStruct(
+                id=qdrant_id(cid),
+                vector={"sparse": SparseVector(indices=indices, values=values)},
+                payload={
+                    "collection": col,
+                    "chunk_id": cid,
+                    "model_id": c.get("model_id"),
+                    "vector_version": c.get("vector_version", version),
+                    "text": c.get("text", ""),
+                },
+            )
+        )
         if len(points) >= 256:
             client.upsert(collection_name=sparse_collection, points=points, wait=True)
             points = []
@@ -147,15 +154,21 @@ def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = Fal
     index_path.parent.mkdir(parents=True, exist_ok=True)
     # idf lưu dạng list aligned theo vocab index cho gọn
     idf_list = [idf[t] for t, i in sorted(idf.items(), key=lambda kv: vocab[kv[0]])]
-    index_path.write_text(json.dumps({
-        "version": version,
-        "vocab": vocab,
-        "idf": idf_list,
-        "avgdl": avgdl,
-        "n_docs": N,
-        "k1": K1,
-        "b": B,
-    }, ensure_ascii=False), encoding="utf-8")
+    index_path.write_text(
+        json.dumps(
+            {
+                "version": version,
+                "vocab": vocab,
+                "idf": idf_list,
+                "avgdl": avgdl,
+                "n_docs": N,
+                "k1": K1,
+                "b": B,
+            },
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
 
     total = client.count(collection_name=sparse_collection).count
     print(f"[sparse_ingest] done. sparse points: {total}  collection={sparse_collection}")
@@ -164,6 +177,7 @@ def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = Fal
     # Create model_id index for sparse collection
     if recreate:
         from qdrant_client.models import PayloadSchemaType
+
         try:
             client.create_payload_index(
                 collection_name=sparse_collection,

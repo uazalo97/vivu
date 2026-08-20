@@ -52,27 +52,26 @@ def preflight(version: str, want_qdrant: bool, want_pg: bool) -> int:
         return 1
 
     if not openrouter.API_KEY:
-        print("[preflight] OPENROUTER_API_KEY chưa set trong .env (xem .env.example)",
-              file=sys.stderr)
+        print("[preflight] OPENROUTER_API_KEY chưa set trong .env (xem .env.example)", file=sys.stderr)
         return 1
 
     if want_qdrant:
         try:
             from qdrant_client import QdrantClient
+
             QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY or None).get_collections()
         except Exception as e:  # noqa: BLE001
-            print(f"[preflight] không kết nối được Qdrant tại {QDRANT_URL}: {e}",
-                  file=sys.stderr)
+            print(f"[preflight] không kết nối được Qdrant tại {QDRANT_URL}: {e}", file=sys.stderr)
             print("  hint: docker compose up -d", file=sys.stderr)
             return 1
 
     if want_pg:
         try:
             import psycopg2
+
             psycopg2.connect(PG_DSN).close()
         except Exception as e:  # noqa: BLE001
-            print(f"[preflight] không kết nối được Postgres tại {PG_DSN}: {e}",
-                  file=sys.stderr)
+            print(f"[preflight] không kết nối được Postgres tại {PG_DSN}: {e}", file=sys.stderr)
             print("  hint: docker compose up -d", file=sys.stderr)
             return 1
 
@@ -90,9 +89,16 @@ def _step(idx: str, label: str, fn, *args, **kwargs) -> int:
     return rc
 
 
-def run(version: str, recreate: bool, no_sparse: bool, commit: str,
-       max_len: int = 800, prev: str | None = None, promote: bool = False,
-       crawl_brochures: bool = True) -> int:
+def run(
+    version: str,
+    recreate: bool,
+    no_sparse: bool,
+    commit: str,
+    max_len: int = 800,
+    prev: str | None = None,
+    promote: bool = False,
+    crawl_brochures: bool = True,
+) -> int:
     want_qdrant = True
     want_pg = True
     if preflight(version, want_qdrant, want_pg) != 0:
@@ -102,27 +108,53 @@ def run(version: str, recreate: bool, no_sparse: bool, commit: str,
     print(_bar(f"END-TO-END DATA PIPELINE  version={version}"))
 
     steps = [
-        ("1/6", "clean (raw → intermediate)", clean_to_jsonl.run,
-         (version,), {"max_len": max_len}),
-        ("2/6", "split cold/hot → vector + postgres CSV", split_cold_hot.run,
-        (version,), {"commit": commit, "prev": prev}),
-        ("3/6", "parse_specs → postgres/specs.csv (car_specs)", parse_specs.run,
-         (version,), {"crawl_brochures": crawl_brochures}),
-        ("4/6", "embed + ingest Qdrant dense (incremental)", vector_ingest.run,
-         (version,), {"url": QDRANT_URL, "recreate": recreate}),
+        ("1/6", "clean (raw → intermediate)", clean_to_jsonl.run, (version,), {"max_len": max_len}),
+        (
+            "2/6",
+            "split cold/hot → vector + postgres CSV",
+            split_cold_hot.run,
+            (version,),
+            {"commit": commit, "prev": prev},
+        ),
+        (
+            "3/6",
+            "parse_specs → postgres/specs.csv (car_specs)",
+            parse_specs.run,
+            (version,),
+            {"crawl_brochures": crawl_brochures},
+        ),
+        (
+            "4/6",
+            "embed + ingest Qdrant dense (incremental)",
+            vector_ingest.run,
+            (version,),
+            {"url": QDRANT_URL, "recreate": recreate},
+        ),
     ]
     if not no_sparse:
-        steps.append(("5/6", "BM25 sparse → Qdrant sparse", sparse_ingest.run,
-                      (version,), {"url": QDRANT_URL, "recreate": recreate}))
-    steps.append(("6/6" if not no_sparse else "5/5",
-                  "UPSERT PostgreSQL (versioned)", postgres_ingest.run,
-                  (version,), {"dsn": PG_DSN}))
+        steps.append(
+            (
+                "5/6",
+                "BM25 sparse → Qdrant sparse",
+                sparse_ingest.run,
+                (version,),
+                {"url": QDRANT_URL, "recreate": recreate},
+            )
+        )
+    steps.append(
+        (
+            "6/6" if not no_sparse else "5/5",
+            "UPSERT PostgreSQL (versioned)",
+            postgres_ingest.run,
+            (version,),
+            {"dsn": PG_DSN},
+        )
+    )
 
     for idx, label, fn, args, kwargs in steps:
         rc = _step(idx, label, fn, *args, **kwargs)
         if rc != 0:
-            print(f"\n[run_pipeline] DỪNG ở bước {idx} ({label}). Các bước sau KHÔNG chạy.",
-                  file=sys.stderr)
+            print(f"\n[run_pipeline] DỪNG ở bước {idx} ({label}). Các bước sau KHÔNG chạy.", file=sys.stderr)
             return rc
 
     print(_bar(f"XONG ingest  version={version}  ({time.time() - t_total:.1f}s)"))
@@ -132,13 +164,11 @@ def run(version: str, recreate: bool, no_sparse: bool, commit: str,
         print(_bar(f"PROMOTE → active={version}"))
         rc = version_manager._activate(version, rollback=False)
         if rc != 0:
-            print("[run_pipeline] promote FAIL — version đã ingest nhưng chưa active.",
-                  file=sys.stderr)
-            print(f"  sửa rồi chạy: version_manager.py promote --version {version}",
-                  file=sys.stderr)
+            print("[run_pipeline] promote FAIL — version đã ingest nhưng chưa active.", file=sys.stderr)
+            print(f"  sửa rồi chạy: version_manager.py promote --version {version}", file=sys.stderr)
         return rc
     print("Verify:")
-    print(f"  python scripts/version_manager.py status")
+    print(f"  python scripts/version_manager.py status")  # noqa: F541
     print(f"  cat data/clean/{version}/_manifest.json")
     return 0
 
@@ -146,23 +176,32 @@ def run(version: str, recreate: bool, no_sparse: bool, commit: str,
 def main() -> int:
     ap = argparse.ArgumentParser(description="End-to-end data pipeline (dữ liệu hiện có).")
     ap.add_argument("--version", default="v1", help="Version folder (mặc định v1)")
-    ap.add_argument("--recreate", action="store_true",
-                    help="Xóa collection __version + bỏ qua cache (rebuild sạch)")
-    ap.add_argument("--no-sparse", action="store_true",
-                    help="Bỏ qua BM25 sparse (chỉ dense + PostgreSQL)")
-    ap.add_argument("--commit", default="",
-                    help="Repo commit hash ghi vào _manifest / ingest_version")
-    ap.add_argument("--max-len", type=int, default=800,
-                    help="Chunk max length chars (mặc định 800; dùng 400 nếu cần chunk nhỏ hơn)")
-    ap.add_argument("--prev", default=None,
-                    help="Version trước để diff (mặc định: auto-detect)")
-    ap.add_argument("--promote", action="store_true",
-                    help="Sau khi ingest xong, tự activate version (alias swap + is_current)")
-    ap.add_argument("--no-crawl-brochures", action="store_true",
-                    help="Bỏ qua Crawl4AI/vision brochure (chạy nhanh, dùng raw fallback)")
+    ap.add_argument("--recreate", action="store_true", help="Xóa collection __version + bỏ qua cache (rebuild sạch)")
+    ap.add_argument("--no-sparse", action="store_true", help="Bỏ qua BM25 sparse (chỉ dense + PostgreSQL)")
+    ap.add_argument("--commit", default="", help="Repo commit hash ghi vào _manifest / ingest_version")
+    ap.add_argument(
+        "--max-len", type=int, default=800, help="Chunk max length chars (mặc định 800; dùng 400 nếu cần chunk nhỏ hơn)"
+    )
+    ap.add_argument("--prev", default=None, help="Version trước để diff (mặc định: auto-detect)")
+    ap.add_argument(
+        "--promote", action="store_true", help="Sau khi ingest xong, tự activate version (alias swap + is_current)"
+    )
+    ap.add_argument(
+        "--no-crawl-brochures",
+        action="store_true",
+        help="Bỏ qua Crawl4AI/vision brochure (chạy nhanh, dùng raw fallback)",
+    )
     args = ap.parse_args()
-    return run(args.version, args.recreate, args.no_sparse, args.commit,
-               args.max_len, args.prev, args.promote, not args.no_crawl_brochures)
+    return run(
+        args.version,
+        args.recreate,
+        args.no_sparse,
+        args.commit,
+        args.max_len,
+        args.prev,
+        args.promote,
+        not args.no_crawl_brochures,
+    )
 
 
 if __name__ == "__main__":

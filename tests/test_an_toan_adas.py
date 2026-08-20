@@ -5,8 +5,8 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from app.agent.nodes.classify import classify_node
-from app.agent.nodes.call_tools import _call_model_tools
+from app.agent.nodes.classify import classify_node  # noqa: E402
+from app.agent.nodes.call_tools import _call_model_tools  # noqa: E402
 
 
 async def main():
@@ -30,7 +30,7 @@ async def main():
     camera_found = False
     for r in results:
         tool = r.get("tool")
-        success = r.get("success")
+        success = r.get("success")  # noqa: F841
         specs = r.get("result", {}).get("specs", [])
         cats = set(s["category"] for s in specs) if specs else set()
         keys = [s["key"] for s in specs if "camera" in s["key"].lower() or "surround" in s["key"].lower()]

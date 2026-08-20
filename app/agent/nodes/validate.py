@@ -72,6 +72,7 @@ def _get_spec_key_vi_map() -> dict[str, set[str]]:
     if _SPEC_KEY_TO_VI is not None:
         return _SPEC_KEY_TO_VI
     from app.agent.decision import _SPEC_QUERY_KEYWORDS
+
     _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
     key_to_vi: dict[str, set[str]] = {}
     for _group, tokens in _SPEC_QUERY_KEYWORDS.items():
@@ -205,7 +206,9 @@ def _check_text_grounding(response: str, tool_results: list[dict], query: str = 
 
     ratio = len(unmatched) / len(response_features)
     if ratio >= 0.5:
-        logger.warning("Text grounding fail: unmatched features %s / total %s (%.0f%%)", unmatched, response_features, ratio * 100)
+        logger.warning(
+            "Text grounding fail: unmatched features %s / total %s (%.0f%%)", unmatched, response_features, ratio * 100
+        )
         return False
 
     return True
@@ -276,7 +279,7 @@ def _check_grounding(response: str, tool_results: list[dict], query: str = "") -
 
 
 async def validate_node(state: AgentState) -> dict:
-    final_response = state.get("final_response", "")
+    final_response = state.get("final_response", "")  # noqa: F841
     tool_results = state.get("tool_results", [])
     decision = state.get("decision", "answer")
 
@@ -295,9 +298,14 @@ async def validate_node(state: AgentState) -> dict:
     assessment, valid_sources = assess_evidence(tool_results, scoring_query)
     citations = validate_citations(valid_sources, scoring_query)
 
-    logger.info("VALIDATE: query=%s assessment=%s sources=%d citations=%d tools=%s",
-                query, assessment, len(valid_sources), len(citations),
-                [tr.get("tool") for tr in tool_results if tr.get("success")])
+    logger.info(
+        "VALIDATE: query=%s assessment=%s sources=%d citations=%d tools=%s",
+        query,
+        assessment,
+        len(valid_sources),
+        len(citations),
+        [tr.get("tool") for tr in tool_results if tr.get("success")],
+    )
 
     # Only block on insufficient evidence — no grounding check (deferred to guardrails)
     if assessment == "insufficient":

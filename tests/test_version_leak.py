@@ -10,7 +10,7 @@ for s in (sys.stdout, sys.stderr):
 
 sys.path.insert(0, ".")
 
-from app.agent.nodes.classify import classify_node
+from app.agent.nodes.classify import classify_node  # noqa: E402
 
 
 async def run(q, history, ctx):

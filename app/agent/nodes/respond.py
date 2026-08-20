@@ -2,7 +2,7 @@ import logging
 import time
 from dataclasses import dataclass, field
 
-from app.agent.decision import make_decision_log, log_store, get_clarify_messages
+from app.agent.decision import make_decision_log, log_store, get_clarify_messages  # noqa: F401
 from app.agent.graph_state import AgentState
 
 logger = logging.getLogger("bds.graph.respond")
@@ -39,9 +39,13 @@ async def respond_node(state: AgentState) -> dict:
     entities = state.get("entities", {})
     assessment = state.get("assessment", "")
 
-    logger.info("RESPOND: decision=%s reason=%s assessment=%s tools=%s",
-                decision, reason_code, assessment,
-                [t.get("tool") for t in tool_results if t.get("success")])
+    logger.info(
+        "RESPOND: decision=%s reason=%s assessment=%s tools=%s",
+        decision,
+        reason_code,
+        assessment,
+        [t.get("tool") for t in tool_results if t.get("success")],
+    )
 
     if decision == "clarify":
         answer = response_text or "Bạn muốn tìm thông tin nào?"
@@ -72,6 +76,7 @@ async def respond_node(state: AgentState) -> dict:
 
     try:
         from app.agent.classifier import ClassifyResult
+
         cr = ClassifyResult(
             decision=decision,
             reason=reason_code,
@@ -79,7 +84,11 @@ async def respond_node(state: AgentState) -> dict:
             specificity=state.get("specificity", "unknown"),
         )
         dlog = make_decision_log(
-            state["query"], cr, tool_results, answer, citations,
+            state["query"],
+            cr,
+            tool_results,
+            answer,
+            citations,
             latency_ms=latency_ms,
             latency_retrieval_ms=latency_retrieval_ms,
             latency_generation_ms=latency_generation_ms,

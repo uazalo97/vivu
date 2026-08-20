@@ -20,12 +20,48 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 # ── Tầng 1: Cyrillic homoglyph → Latin ──────────────────────────────────────
 _CYR = {
-    "О": "O", "о": "o", "А": "A", "а": "a", "Н": "H", "н": "h", "С": "C", "с": "c",
-    "Е": "E", "е": "e", "Р": "P", "р": "p", "Т": "T", "т": "t", "Х": "X", "х": "x",
-    "М": "M", "м": "m", "В": "B", "в": "b", "К": "K", "к": "k", "І": "I", "і": "i",
-    "Ѕ": "S", "ѕ": "s", "У": "Y", "у": "y", "Д": "D", "д": "d", "И": "N", "и": "n",
-    "П": "P", "п": "n", "Г": "r", "г": "r", "Л": "J", "л": "j", "Ё": "E", "ё": "e",
-    "Æ": "AE", "æ": "ae",
+    "О": "O",
+    "о": "o",
+    "А": "A",
+    "а": "a",
+    "Н": "H",
+    "н": "h",
+    "С": "C",
+    "с": "c",
+    "Е": "E",
+    "е": "e",
+    "Р": "P",
+    "р": "p",
+    "Т": "T",
+    "т": "t",
+    "Х": "X",
+    "х": "x",
+    "М": "M",
+    "м": "m",
+    "В": "B",
+    "в": "b",
+    "К": "K",
+    "к": "k",
+    "І": "I",
+    "і": "i",
+    "Ѕ": "S",
+    "ѕ": "s",
+    "У": "Y",
+    "у": "y",
+    "Д": "D",
+    "д": "d",
+    "И": "N",
+    "и": "n",
+    "П": "P",
+    "п": "n",
+    "Г": "r",
+    "г": "r",
+    "Л": "J",
+    "л": "j",
+    "Ё": "E",
+    "ё": "e",
+    "Æ": "AE",
+    "æ": "ae",
 }
 
 
@@ -69,20 +105,13 @@ _SHARED = {
     "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế": "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế",
     "Hinh anh mang tinh chát minh hoa": "Hình ảnh mang tính chất minh họa",
     "Hình ảnh mang tính chất minh hoạ": "Hình ảnh mang tính chất minh họa",
-    "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.":
-        "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.",
-    "Các tinh nâng, dãc diêm, thông số ký thuật của xe có thể dûç_DIEU chính bội Nhà Sân Xuát mà khổ thông báo trúc.":
-        "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.",
-    "Các tinh nâng, dãc diêm, thông số ký thuật của xe có thể dãuc díeu chinh bôi Nhà Sân Xuất mà không thông báo trúac.":
-        "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.",
-    "Hình ánh mang tính chât minh hoa và có thekhác so với tc té":
-        "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế",
-    "Hinh anh mang tính chât minh hoa và có thekhóc so voi tc té":
-        "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế",
-    "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước":
-        "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước",
-    "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.":
-        "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế.",
+    "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.": "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.",
+    "Các tinh nâng, dãc diêm, thông số ký thuật của xe có thể dûç_DIEU chính bội Nhà Sân Xuát mà khổ thông báo trúc.": "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.",
+    "Các tinh nâng, dãc diêm, thông số ký thuật của xe có thể dãuc díeu chinh bôi Nhà Sân Xuất mà không thông báo trúac.": "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.",
+    "Hình ánh mang tính chât minh hoa và có thekhác so với tc té": "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế",
+    "Hinh anh mang tính chât minh hoa và có thekhóc so voi tc té": "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế",
+    "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước": "Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước",
+    "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế Các tính năng, đặc điểm, thông số kỹ thuật của xe có thể được điều chỉnh bởi Nhà Sản Xuất mà không thông báo trước.": "Hình ảnh mang tính chất minh họa và có thể khác so với thực tế.",
     # thuật ngữ lặp lại dùng chung (spec)
     "Công suất tối đa (kW)": "Công suất tối đa (kW)",
     "Mô men xoắn cực đại (Nm)": "Mô men xoắn cực đại (Nm)",
@@ -153,12 +182,9 @@ _VF3 = {
     "## 36 PHÚT (10% - 70% PIN)": "36 PHÚT (10% - 70% PIN)",
     "KHOÀNG SÁNG GAM XE": "KHOẢNG SÁNG GẦM XE",
     "CAO(175MM)**": "CAO (175MM)**",
-    "*Quảng duông di chuyén duoc tinh toan duda trên két qua kiém dinh theo quy chuán toàn cấu (NEDC)":
-        "*Quãng đường di chuyển được tính toán dựa trên kết quả kiểm định theo quy chuẩn toàn cầu (NEDC)",
-    "Quảng duông di chuyén thuc tê có thể giám so với két qua kiém dinh, phu thuốc vao toc do lái xe, nhiệt dô, dia hình, thủ quen":
-        "Quãng đường di chuyển thực tế có thể giảm so với kết quả kiểm định, phụ thuộc vào tốc độ lái xe, nhiệt độ, địa hình, thói quen",
-    "sù dung của nguoi lái, ché dô lái duoc cai dôi, sà luong hạnh khách, vá các dieuKIEN giao thông khúc":
-        "sử dụng của người lái, chế độ lái được cài đổi, số lượng hành khách, và các điều kiện giao thông khác",
+    "*Quảng duông di chuyén duoc tinh toan duda trên két qua kiém dinh theo quy chuán toàn cấu (NEDC)": "*Quãng đường di chuyển được tính toán dựa trên kết quả kiểm định theo quy chuẩn toàn cầu (NEDC)",
+    "Quảng duông di chuyén thuc tê có thể giám so với két qua kiém dinh, phu thuốc vao toc do lái xe, nhiệt dô, dia hình, thủ quen": "Quãng đường di chuyển thực tế có thể giảm so với kết quả kiểm định, phụ thuộc vào tốc độ lái xe, nhiệt độ, địa hình, thói quen",
+    "sù dung của nguoi lái, ché dô lái duoc cai dôi, sà luong hạnh khách, vá các dieuKIEN giao thông khúc": "sử dụng của người lái, chế độ lái được cài đổi, số lượng hành khách, và các điều kiện giao thông khác",
     "**Khoang sang gâm xe không tài.": "**Khoảng sáng gầm xe không tải.",
     "TRÀI NGHIỆM": "TRẢI NGHIỆM",
     "KHÔNG GIÁN ĐOẌN": "KHÔNG GIÁN ĐOẠN",
@@ -183,10 +209,8 @@ _VF3 = {
     "XANH DUỐNG (SKY BLUE)": "XANH DƯƠNG (SKY BLUE)",
     "XANH LÁ NHAT": "XANH LÁ NHẠT",
     "BỆNG MÀU CO' BÀN": "BẢNG MÀU CƠ BẢN",
-    "**Luu ý: Màu Đô (Solar Ruby) sẽ thay thể mài Đô (Crimson Red) khi hét hang dê dâm bào tiên độ":
-        "**Lưu ý: Màu Đỏ (Solar Ruby) sẽ thay thế màu Đỏ (Crimson Red) khi hết hàng để đảm bảo tiến độ",
-    "bàn giao xe. Xín vui lòng liên hệ với dài lý phản phối gân nhật dê duỘc hố trợ.":
-        "bàn giao xe. Xin vui lòng liên hệ với đại lý phân phối gần nhất để được hỗ trợ.",
+    "**Luu ý: Màu Đô (Solar Ruby) sẽ thay thể mài Đô (Crimson Red) khi hét hang dê dâm bào tiên độ": "**Lưu ý: Màu Đỏ (Solar Ruby) sẽ thay thế màu Đỏ (Crimson Red) khi hết hàng để đảm bảo tiến độ",
+    "bàn giao xe. Xín vui lòng liên hệ với dài lý phản phối gân nhật dê duỘc hố trợ.": "bàn giao xe. Xin vui lòng liên hệ với đại lý phân phối gần nhất để được hỗ trợ.",
     "HÂU MÃI VỤ ĐOÔI": "HẬU MÃI VÀ ĐỔI",
     "BÃO HÀNH XE MÓI*": "BẢO HÀNH XE MỚI*",
     "BÃO HÀNH PIN CAO ÁP*": "BẢO HÀNH PIN CAO ÁP*",
@@ -404,17 +428,12 @@ _VF5 = {
     "6 tí nh năng hỗ trợ lá i và 19 tí nh năng": "6 tính năng hỗ trợ lái và 19 tính năng",
     "thông minh": "thông minh",
     "Cảnh báo phương tiện cắt ngang phía sau: Hỗ trợ phá t hiệ n vậ t cả n hay": "Cảnh báo phương tiện cắt ngang phía sau: Hỗ trợ phát hiện vật cản hay",
-    "phương tiệ n di chuyển từ phí a sau hoặc hai bên, đặc biệ t là cá c điểm mù.":
-        "phương tiện di chuyển từ phía sau hoặc hai bên, đặc biệt là các điểm mù.",
-    "Cảnh báo mở cửa: Hỗ trợ và cả nh bá o khi có chướng ngạ i vậ t, xe hoặc ngườ i từ":
-        "Cảnh báo mở cửa: Hỗ trợ và cảnh báo khi có chướng ngại vật, xe hoặc người từ",
+    "phương tiệ n di chuyển từ phí a sau hoặc hai bên, đặc biệ t là cá c điểm mù.": "phương tiện di chuyển từ phía sau hoặc hai bên, đặc biệt là các điểm mù.",
+    "Cảnh báo mở cửa: Hỗ trợ và cả nh bá o khi có chướng ngạ i vậ t, xe hoặc ngườ i từ": "Cảnh báo mở cửa: Hỗ trợ và cảnh báo khi có chướng ngại vật, xe hoặc người từ",
     "hai bên hoặc phí a sau, giúp trá nh va chạ m khi mở cửa xe.": "hai bên hoặc phía sau, giúp tránh va chạm khi mở cửa xe.",
-    "Cảnh báo điểm mù: Cả m biế n giúp phá t hiệ n ngườ i hoặc xe từ phí a sau, đưa ra":
-        "Cảnh báo điểm mù: Cảm biến giúp phát hiện người hoặc xe từ phía sau, đưa ra",
-    "cả nh bá o để ngườ i lá i chú ý quan sá t và xử lý tì nh huố ng.":
-        "cảnh báo để người lái chú ý quan sát và xử lý tình huống.",
-    "Hỗ trợ đỗ phía sau: Cụ m cả m biế n phí a sau phá t hiệ n chướng ngạ i vậ t và gửi":
-        "Hỗ trợ đỗ phía sau: Cụm cảm biến phía sau phát hiện chướng ngại vật và gửi",
+    "Cảnh báo điểm mù: Cả m biế n giúp phá t hiệ n ngườ i hoặc xe từ phí a sau, đưa ra": "Cảnh báo điểm mù: Cảm biến giúp phát hiện người hoặc xe từ phía sau, đưa ra",
+    "cả nh bá o để ngườ i lá i chú ý quan sá t và xử lý tì nh huố ng.": "cảnh báo để người lái chú ý quan sát và xử lý tình huống.",
+    "Hỗ trợ đỗ phía sau: Cụ m cả m biế n phí a sau phá t hiệ n chướng ngạ i vậ t và gửi": "Hỗ trợ đỗ phía sau: Cụm cảm biến phía sau phát hiện chướng ngại vật và gửi",
     "cả nh bá o, hỗ trợ bạ n đỗ xe an toà n.": "cảnh báo, hỗ trợ bạn đỗ xe an toàn.",
     "Trợ lý ảo ViVi  đượ c tí ch hợ p AI": "Trợ lý ảo ViVi được tích hợp AI",
     "tạ o sinh, nhằm giúp xử lý nhiều": "tạo sinh, nhằm giúp xử lý nhiều",
@@ -427,14 +446,10 @@ _VF5 = {
     "n diệ Nghe hiểu đượ c ngôn ngữ": "n dịệ Nghe hiểu được ngôn ngữ",
     "tiế ng Việ t đa vùng miền": "tiếng Việt đa vùng miền",
     "ở nhiều tỉnh thà nh khá c nhau.": "ở nhiều tỉnh thành khác nhau.",
-    "Trợ lý ả o ViVi giúp điều khiển dễ dà ng cá c tí nh năng trên xe như":
-        "Trợ lý ảo ViVi giúp điều khiển dễ dàng các tính năng trên xe như",
-    "điều hòa, giả i trí, bả n đồ và nhiều hơn thế, chỉ bằng giọng nói.":
-        "điều hòa, giải trí, bản đồ và nhiều hơn thế, chỉ bằng giọng nói.",
-    "Trợ lý ả o ViVi có khả năng hỏi đá p những câu hỏi cơ bả n như":
-        "Trợ lý ảo ViVi có khả năng hỏi đáp những câu hỏi cơ bản như",
-    "tin tức, thờ i tiế t, truyệ n cườ i – mang đế n trả i nghiệ m lá i xe":
-        "tin tức, thời tiết, truyện cười – mang đến trải nghiệm lái xe",
+    "Trợ lý ả o ViVi giúp điều khiển dễ dà ng cá c tí nh năng trên xe như": "Trợ lý ảo ViVi giúp điều khiển dễ dàng các tính năng trên xe như",
+    "điều hòa, giả i trí, bả n đồ và nhiều hơn thế, chỉ bằng giọng nói.": "điều hòa, giải trí, bản đồ và nhiều hơn thế, chỉ bằng giọng nói.",
+    "Trợ lý ả o ViVi có khả năng hỏi đá p những câu hỏi cơ bả n như": "Trợ lý ảo ViVi có khả năng hỏi đáp những câu hỏi cơ bản như",
+    "tin tức, thờ i tiế t, truyệ n cườ i – mang đế n trả i nghiệ m lá i xe": "tin tức, thời tiết, truyện cười – mang đến trải nghiệm lái xe",
     "sinh độ ng và trọn vẹn hơn.": "sinh động và trọn vẹn hơn.",
     "Đuôi xe *VF 5* có thiết kế vuông vứ c,": "Đuôi xe *VF 5* có thiết kế vuông vức,",
     "tối giản điểm nhấn là dả i chữ V đượ c là m từ": "tối giản điểm nhấn là dải chữ V được làm từ",
@@ -454,10 +469,8 @@ _VF5 = {
     "Gương chiếu hậu": "Gương chiếu hậu",
     "chỉnh điện": "chỉnh điện",
     "Thiế t kế nộ i thất ô tô điệ n VinFast *VF 5* hướng tới sự": "Thiết kế nội thất ô tô điện VinFast *VF 5* hướng tới sự",
-    "tố i giả n với cá ch phố i mà u nộ i thất đồng điệ u với ngoạ i thất":
-        "tối giản với cách phối màu nội thất đồng điệu với ngoại thất",
-    "là m nổi bậ t lên vẻ cuố n hút nhờ cá c đườ ng viền bắt mắt.":
-        "làm nổi bật lên vẻ cuốn hút nhờ các đường viền bắt mắt.",
+    "tố i giả n với cá ch phố i mà u nộ i thất đồng điệ u với ngoạ i thất": "tối giản với cách phối màu nội thất đồng điệu với ngoại thất",
+    "là m nổi bậ t lên vẻ cuố n hút nhờ cá c đườ ng viền bắt mắt.": "làm nổi bật lên vẻ cuốn hút nhờ các đường viền bắt mắt.",
     "Bả ng đồng hồ kỹ thuậ t số": "Bảng đồng hồ kỹ thuật số",
     "sau vô lăng 7 inch và mà n hì nh": "sau vô lăng 7 inch và màn hình",
     "trung tâm cả m ứng 8 inch": "trung tâm cảm ứng 8 inch",
@@ -472,22 +485,17 @@ _VF5 = {
     "đạ i vớ i *hơn 11 chức năng* an toàn": "đại với *hơn 11 chức năng* an toàn",
     "nổ i trội, nhằm đả m bả o an toà n khi tham gia": "nổi trội, nhằm đảm bảo an toàn khi tham gia",
     "giao thông cho ngườ i dùng, cụ thể:": "giao thông cho người dùng, cụ thể:",
-    "Sạ c mọi lúc tạ i nhà và trên mọi hà nh trì nh với bộ sạ c di độ ng tiệ n lợ i.":
-        "Sạc mọi lúc tại nhà và trên mọi hành trình với bộ sạc di động tiện lợi.",
-    "Hệ thố ng tram sạ c nhanh phủ khắp toà n quố c, với khoả ng cá ch trung bì nh":
-        "Hệ thống trạm sạc nhanh phủ khắp toàn quốc, với khoảng cách trung bình",
-    "là 3.5 km giữa cá c trạ m. (cậ p nhậ t đế n thá ng 09/2023)":
-        "là 3.5 km giữa các trạm. (cập nhật đến tháng 09/2023)",
+    "Sạ c mọi lúc tạ i nhà và trên mọi hà nh trì nh với bộ sạ c di độ ng tiệ n lợ i.": "Sạc mọi lúc tại nhà và trên mọi hành trình với bộ sạc di động tiện lợi.",
+    "Hệ thố ng tram sạ c nhanh phủ khắp toà n quố c, với khoả ng cá ch trung bì nh": "Hệ thống trạm sạc nhanh phủ khắp toàn quốc, với khoảng cách trung bình",
+    "là 3.5 km giữa cá c trạ m. (cậ p nhậ t đế n thá ng 09/2023)": "là 3.5 km giữa các trạm. (cập nhật đến tháng 09/2023)",
     "Tạ i mà n hì nh trang chủ Ứng dụ ng VinFast,": "Tại màn hình trang chủ Ứng dụng VinFast,",
     "chọn mụ c “Pin và sạ c” để tì m kiế m danh sá ch": "chọn mục “Pin và sạc” để tìm kiếm danh sách",
     "cá c trạ m sạ c gầ n đó.": "các trạm sạc gần đó.",
     "Bấm chọn trạ m sạ c trong danh sá ch": "Bấm chọn trạm sạc trong danh sách",
     "có sẵn tạ i mụ c “Pin và Sạ c”": "có sẵn tại mục “Pin và Sạc”",
-    "Trạ m sạ c đã chọn sẽ hiển thị bả n đồ di chuyển trên":
-        "Trạm sạc đã chọn sẽ hiển thị bản đồ di chuyển trên",
+    "Trạ m sạ c đã chọn sẽ hiển thị bả n đồ di chuyển trên": "Trạm sạc đã chọn sẽ hiển thị bản đồ di chuyển trên",
     "mà n hì nh ứng dụ ng.": "màn hình ứng dụng.",
-    "Bấm “Chỉ đườ ng” và điều khiển xe theo hướng dẫn củ a":
-        "Bấm “Chỉ đường” và điều khiển xe theo hướng dẫn của",
+    "Bấm “Chỉ đườ ng” và điều khiển xe theo hướng dẫn củ a": "Bấm “Chỉ đường” và điều khiển xe theo hướng dẫn của",
     "ứng dụ ng để tì m đế n trạ m sạ c nà y.": "ứng dụng để tìm đến trạm sạc này.",
     "Chính sách bảo hành": "Chính sách bảo hành",
     "Dịch vụ hậu mãi xuất sắc": "Dịch vụ hậu mãi xuất sắc",
@@ -503,25 +511,17 @@ _VF5 = {
 
 _VF6 = {
     # prose đầu
-    "MANH MÊ, NĂNG ĐỔNG,\nSUỐ LÚA CHỎN LY TUỂNG CỬA GIA ĐìNH TRÉ!":
-        "MẠNH MẼ, NĂNG ĐỘNG,\nSỨ LỬA CHỌN LÝ TƯỞNG CỦA GIA ĐÌNH TRẺ!",
-    "MANH MÉ, NĂNG ĐỔNG,\nSỨ LỬA CHỐN LY TUỂNG CÙA GIA ĐìNH TRÊ!":
-        "MẠNH MẼ, NĂNG ĐỘNG,\nSỨ LỬA CHỌN LÝ TƯỞNG CỦA GIA ĐÌNH TRẺ!",
+    "MANH MÊ, NĂNG ĐỔNG,\nSUỐ LÚA CHỎN LY TUỂNG CỬA GIA ĐìNH TRÉ!": "MẠNH MẼ, NĂNG ĐỘNG,\nSỨ LỬA CHỌN LÝ TƯỞNG CỦA GIA ĐÌNH TRẺ!",
+    "MANH MÉ, NĂNG ĐỔNG,\nSỨ LỬA CHỐN LY TUỂNG CÙA GIA ĐìNH TRÊ!": "MẠNH MẼ, NĂNG ĐỘNG,\nSỨ LỬA CHỌN LÝ TƯỞNG CỦA GIA ĐÌNH TRẺ!",
     "VОI KIЁU DÁNG ĐÚỔNG ĐАI YỆ": "VỚI KIỂU DÁNG ĐƯỜNG ĐAI VỆ",
-    "VF 6 mang đâm dâu ăn hiên dài và thanh lich, được sáng táo bôi":
-        "VF 6 mang đậm dấu ấn hiện đại và thanh lịch, được sáng tạo bởi",
-    "Studio Torino Design – nhưng chuyèn gia hàng đAu thê giói.":
-        "Studio Torino Design – những chuyên gia hàng đầu thế giới.",
-    "Tùng đuǒng nét đeu toát lên suú dõt phá, phù hợp với phong cách của":
-        "Từng đường nét đều toát lên sự đột phá, phù hợp với phong cách của",
+    "VF 6 mang đâm dâu ăn hiên dài và thanh lich, được sáng táo bôi": "VF 6 mang đậm dấu ấn hiện đại và thanh lịch, được sáng tạo bởi",
+    "Studio Torino Design – nhưng chuyèn gia hàng đAu thê giói.": "Studio Torino Design – những chuyên gia hàng đầu thế giới.",
+    "Tùng đuǒng nét đeu toát lên suú dõt phá, phù hợp với phong cách của": "Từng đường nét đều toát lên sự đột phá, phù hợp với phong cách của",
     "gia đính trè.": "gia đình trẻ.",
-    "Không gian nội thất rông rải, tinh tế cua VF 6 mang đён càm giác":
-        "Không gian nội thất rộng rãi, tinh tế của VF 6 mang đến cảm giác",
-    "thoaMi mái và sang trong, huý một ngôinhà thu hai lý tuǒng cho":
-        "thoải mái và sang trọng, như một ngôi nhà thứ hai lý tưởng cho",
+    "Không gian nội thất rông rải, tinh tế cua VF 6 mang đён càm giác": "Không gian nội thất rộng rãi, tinh tế của VF 6 mang đến cảm giác",
+    "thoaMi mái và sang trong, huý một ngôinhà thu hai lý tuǒng cho": "thoải mái và sang trọng, như một ngôi nhà thứ hai lý tưởng cho",
     "những chuyến dişi dây y nghïa.": "những chuyến đi đầy ý nghĩa.",
-    "Giài thuảng do Người tiêu dung va Hội đồng thăm định binh chon":
-        "Giải thưởng do Người tiêu dùng và Hội đồng thẩm định bình chọn",
+    "Giài thuảng do Người tiêu dung va Hội đồng thăm định binh chon": "Giải thưởng do Người tiêu dùng và Hội đồng thẩm định bình chọn",
     "BETTER CHOICE AWARDS 2024": "BETTER CHOICE AWARDS 2024",
     "3 Chế Độ Lái": "3 Chế Độ Lái",
     "ECO / NORMAL / SPORT": "ECO / NORMAL / SPORT",
@@ -536,10 +536,8 @@ _VF6 = {
     "*Phanh tự động khẩn cấp trước**": "*Phanh tự động khẩn cấp trước**",
     "*Cảnh báo điểm mù*": "*Cảnh báo điểm mù*",
     "*Nhận biết biển báo giao thông**": "*Nhận biết biển báo giao thông**",
-    "*Để biết chi tiết hơn về hệ thống ADAS trŒn VF 6, khÆch hng vui lòng liên hệ*":
-        "*Để biết chi tiết hơn về hệ thống ADAS trên VF 6, khách hàng vui lòng liên hệ*",
-    "*tư vấn bán hàng tại Showroom gần nhất hoặc Hotline 1900 23 23 89*":
-        "*tư vấn bán hàng tại Showroom gần nhất hoặc Hotline 1900 23 23 89*",
+    "*Để biết chi tiết hơn về hệ thống ADAS trŒn VF 6, khÆch hng vui lòng liên hệ*": "*Để biết chi tiết hơn về hệ thống ADAS trên VF 6, khách hàng vui lòng liên hệ*",
+    "*tư vấn bán hàng tại Showroom gần nhất hoặc Hotline 1900 23 23 89*": "*tư vấn bán hàng tại Showroom gần nhất hoặc Hotline 1900 23 23 89*",
     "*MN HNH HUD**": "*MÀN HÌNH HUD**",
     "*HỆ THỐNG*": "*HỆ THỐNG*",
     "*CHỐNG LẬT ROM*": "*CHỐNG LẬT ROM*",
@@ -593,8 +591,7 @@ _VF6 = {
     "| Dèn nhnan điện thuong hiêu phla sau |": "| Đèn nhận diện thương hiệu phía sau |",
     "| NGOAI THẾT KHÁC |": "| NGOẠI THẤT KHÁC |",
     "| Guang chiêu hậu chinh diên, tích hgp den bao rê |": "| Gương chiếu hậu chỉnh điện, tích hợp đèn báo rẽ |",
-    "| Guang chiêu hậu gập diên, sóy mát guǒng, tư động chính phla hànkhách khi lui |":
-        "| Gương chiếu hậu gập điện, sấy mát gương, tự động chính phía hành khách khi lui |",
+    "| Guang chiêu hậu gập diên, sóy mát guǒng, tư động chính phla hànkhách khi lui |": "| Gương chiếu hậu gập điện, sấy mát gương, tự động chính phía hành khách khi lui |",
     "| Gat müa trước tư dòng |": "| Gạt mưa trước tự động |",
     "| Chia khoa thông minh |": "| Chìa khóa thông minh |",
     "| NОI THẾT & TIEN NGHI |": "| NỘI THẤT & TIỆN NGHI |",
@@ -668,10 +665,8 @@ _VF6 = {
     "Cam kết cung cấp": "Cam kết cung cấp",
     "phủ tùng trong 24 gið": "phụ tùng trong 24 giờ",
     "## VỚI GIẢI PHÁP SẠC DI ĐỘNG VINFAST": "## VỚI GIẢI PHÁP SẠC DI ĐỘNG VINFAST",
-    "*Nhằm giúp người dùng chủ động kế hoạch di chuyển, tiết kiệm thời gian v chi*":
-        "*Nhằm giúp người dùng chủ động kế hoạch di chuyển, tiết kiệm thời gian và chi phí*",
-    "*ph, VinFast cung cấp giải phÆp sạc di động theo xe đáp ứng những tiêu chuẩn*":
-        "*phí, VinFast cung cấp giải pháp sạc di động theo xe đáp ứng những tiêu chuẩn*",
+    "*Nhằm giúp người dùng chủ động kế hoạch di chuyển, tiết kiệm thời gian v chi*": "*Nhằm giúp người dùng chủ động kế hoạch di chuyển, tiết kiệm thời gian và chi phí*",
+    "*ph, VinFast cung cấp giải phÆp sạc di động theo xe đáp ứng những tiêu chuẩn*": "*phí, VinFast cung cấp giải pháp sạc di động theo xe đáp ứng những tiêu chuẩn*",
     "## 01": "## 01",
     "Cắm trực tiếp phch chắm của bộ sạc vo ổ": "Cắm trực tiếp phích cắm của bộ sạc vào ổ",
     "điện loại E/F v chờ đến khi đèn LED mu xanh": "điện loại E/F và chờ đến khi đèn LED màu xanh",
@@ -689,37 +684,28 @@ _VF6 = {
 
 _VF7 = {
     # boilerplate / footer
-    "Hinh anh mang tinh minh hoa, su dung hinh anh của sán phạm trong giài doan tiên thưởng mai. Các thavg tin sân phạm có thể thay đổi mô khương cán bdo truoc":
-        "Hình ảnh mang tính minh họa, sử dụng hình ảnh của sản phẩm trong giai đoạn tiền thương mại. Các thông tin sản phẩm có thể thay đổi mà không cần báo trước",
+    "Hinh anh mang tinh minh hoa, su dung hinh anh của sán phạm trong giài doan tiên thưởng mai. Các thavg tin sân phạm có thể thay đổi mô khương cán bdo truoc": "Hình ảnh mang tính minh họa, sử dụng hình ảnh của sản phẩm trong giai đoạn tiền thương mại. Các thông tin sản phẩm có thể thay đổi mà không cần báo trước",
     # summary table (giá/spec trước)
-    "| Công suất cước đài | 130 kW/174 m² lúc |  | 260 kW/349 m² lúc |":
-        "| Công suất tối đa | 130 kW/174 mã lực |  | 260 kW/349 mã lực |",
+    "| Công suất cước đài | 130 kW/174 m² lúc |  | 260 kW/349 m² lúc |": "| Công suất tối đa | 130 kW/174 mã lực |  | 260 kW/349 mã lực |",
     "| Mô men xoán tôi da | 250 Nm |  | 500 Nm |": "| Mô men xoắn tối đa | 250 Nm |  | 500 Nm |",
     "Hệ{dân}{dòng}": "Hệ dẫn động",
-    "| Quảng{dυong}{di}{chuyén}/1{lần}{sqc}{đáy} | 430 km |  | 496 km |":
-        "| Quãng đường di chuyển/1 lần sạc đầy | 430 km |  | 496 km |",
+    "| Quảng{dυong}{di}{chuyén}/1{lần}{sqc}{đáy} | 430 km |  | 496 km |": "| Quãng đường di chuyển/1 lần sạc đầy | 430 km |  | 496 km |",
     "| Dung luçng pin khà{dung} | 59,6 kWh |  | 75,3 kWh |": "| Dung lượng pin khả dụng | 59,6 kWh |  | 75,3 kWh |",
     "| Tăng{Tóc}{0}-100km/h} | 10 s |  | 5,8 s |": "| Tăng tốc 0-100 km/h | 10 s |  | 5,8 s |",
-    "| Giá{niêm}{yét}{không}{góm}{pin} | 850 triều{dòng} |  | 999 triều{dòng} |":
-        "| Giá niêm yết không gồm pin | 850 triệu đồng |  | 999 triệu đồng |",
-    "| Giá{niêm}{yет}{bao}{góm}{pin} | 999 triều{dòng} |  | 1,199 triều{dòng} |":
-        "| Giá niêm yết bao gồm pin | 999 triệu đồng |  | 1,199 triệu đồng |",
+    "| Giá{niêm}{yét}{không}{góm}{pin} | 850 triều{dòng} |  | 999 triều{dòng} |": "| Giá niêm yết không gồm pin | 850 triệu đồng |  | 999 triệu đồng |",
+    "| Giá{niêm}{yет}{bao}{góm}{pin} | 999 triều{dòng} |  | 1,199 triều{dòng} |": "| Giá niêm yết bao gồm pin | 999 triệu đồng |  | 1,199 triệu đồng |",
     "| Tüy{chợ}{trần}{kính} |  |  | 25 triều{dòng} |": "| Tùy chọn trần kính |  |  | 25 triệu đồng |",
     "| Chi phí sqc pin |": "| Chi phí sạc pin |",
     "| NÓ THAT & TEN NGHI |": "| NỘI THẤT & TIỆN NGHI |",
-    "Bảng thông số (KÍCH THƯỚC & TẢI TRỌNG)":
-        "Bảng thông số (KÍCH THƯỚC & TẢI TRỌNG)",
+    "Bảng thông số (KÍCH THƯỚC & TẢI TRỌNG)": "Bảng thông số (KÍCH THƯỚC & TẢI TRỌNG)",
     # spec table — KÍCH THƯỚC
     "| Công khoản cach mm | 2,840 | 2,840 |": "| Chiều dài cơ sở (mm) | 2,840 | 2,840 |",
     "| Dai rẻng cao (mm) |": "| Dài x Rộng x Cao (mm) |",
     "| Khód sàng gам xe không tái (mm) | 190 | 190 |": "| Khoảng sáng gầm xe không tải (mm) | 190 | 190 |",
-    "| Dung tích khoaeng chula hanh y (L)- Cô ghế cuudi | 403 | 403 |":
-        "| Dung tích khoang chứa hành lý (L) - Có ghế cuối | 403 | 403 |",
-    "| Dung tích khoaeng chula hanh y (L)- Gáp ghế cuudi | 1,275 | 1,275 |":
-        "| Dung tích khoang chứa hành lý (L) - Gập ghế cuối | 1,275 | 1,275 |",
+    "| Dung tích khoaeng chula hanh y (L)- Cô ghế cuudi | 403 | 403 |": "| Dung tích khoang chứa hành lý (L) - Có ghế cuối | 403 | 403 |",
+    "| Dung tích khoaeng chula hanh y (L)- Gáp ghế cuudi | 1,275 | 1,275 |": "| Dung tích khoang chứa hành lý (L) - Gập ghế cuối | 1,275 | 1,275 |",
     "| Dung kinh quay dù tâ thêu m) | 11.3 | 11.3 |": "| Bán kính quay đầu tối thiểu (m) | 11.3 | 11.3 |",
-    "| Trung kương khiong tái (kg) | 2.085 (muc tuku) | 2.205 (muc tuku) |":
-        "| Trọng lượng không tải (kg) | 2.085 (mục tiêu) | 2.205 (mục tiêu) |",
+    "| Trung kương khiong tái (kg) | 2.085 (muc tuku) | 2.205 (muc tuku) |": "| Trọng lượng không tải (kg) | 2.085 (mục tiêu) | 2.205 (mục tiêu) |",
     "| Tạ tróng (kg) | 375 | 375 |": "| Tải trọng (kg) | 375 | 375 |",
     "| Tạ tróng hạnh lv nxc xe (kg) | 75 | 75 |": "| Tải trọng hành lý nóc xe (kg) | 75 | 75 |",
     # HỆ THỐNG TRUYỀN ĐỘNG
@@ -732,14 +718,10 @@ _VF7 = {
     "| Trang tác dị 100 km/h (s) | 10-115 | 9.55 (OTP 5.8) |": "| Tăng tốc 0-100 km/h (s) | 10-11.5 | 9.55 (OTP 5.8) |",
     "| Múc đèn ndingtuição thu (Whkm) | 118.2 | 211 |": "| Mức tiêu thụ năng lượng (Wh/km) | 118.2 | 211 |",
     # PIN
-    "| Loại pin | Gолium LFP (PB pin 2) | CATL (PB pin 1)/ New Golium (PB pin 3) tháng 9/2025 |":
-        "| Loại pin | Golium LFP (PB pin 2) | CATL (PB pin 1)/ New Golium (PB pin 3) tháng 9/2025 |",
-    "| Dung luận pin (kWh) – thái dung | 59.6 | 75.3 (ODO 94%) |":
-        "| Dung lượng pin (kWh) – khả dụng | 59.6 | 75.3 (ODC 94%) |",
-    "| Chủ động chạy chayı mtj tái sap dý (km) – tiêu chuán NEDCC\\*\\*\\* | 430 | 430 |":
-        "| Quãng đường chạy một lần sạc đầy (km) – tiêu chuẩn NEDC*** | 430 | 430 |",
-    "| Chủ động chạy chayı mtj tái sap dý (km) – tiêu chuán NEDCC\\*\\*\\* | 430 | 430 |":
-        "| Quãng đường chạy một lần sạc đầy (km) – tiêu chuẩn NEDC*** | 430 | 430 |",
+    "| Loại pin | Gолium LFP (PB pin 2) | CATL (PB pin 1)/ New Golium (PB pin 3) tháng 9/2025 |": "| Loại pin | Golium LFP (PB pin 2) | CATL (PB pin 1)/ New Golium (PB pin 3) tháng 9/2025 |",
+    "| Dung luận pin (kWh) – thái dung | 59.6 | 75.3 (ODO 94%) |": "| Dung lượng pin (kWh) – khả dụng | 59.6 | 75.3 (ODC 94%) |",
+    "| Chủ động chạy chayı mtj tái sap dý (km) – tiêu chuán NEDCC\\*\\*\\* | 430 | 430 |": "| Quãng đường chạy một lần sạc đầy (km) – tiêu chuẩn NEDC*** | 430 | 430 |",
+    "| Chủ động chạy chayı mtj tái sap dý (km) – tiêu chuán NEDCC\\*\\*\\* | 430 | 430 |": "| Quãng đường chạy một lần sạc đầy (km) – tiêu chuẩn NEDC*** | 430 | 430 |",  # noqa: F601
     "| Chủ động trans sac cóng công |": "| Chủ động trạm sạc công cộng |",
     "| Dày sac di đàng |": "| Dây sạc di động |",
     "| Bố sac tịnh nhã |": "| Bộ sạc tại nhà |",
@@ -750,8 +732,7 @@ _VF7 = {
     "| Thị gia napan pin binh th修士 (ph汁) |": "| Thời gian nạp pin nhanh (phút) |",
     # THÔNG SỐ TRUYỀN ĐỘNG KHÁC
     "| THÍCH TRUVEN DONG KHAC |": "| THÔNG SỐ TRUYỀN ĐỘNG KHÁC |",
-    "| Dân dòng | FW/D/Cu được | FW/D/Cu được - OTP - AWD/2 c舟 toàn thi |":
-        "| Dẫn động | FWD/Cầu trước | FWD/Cầu trước - OTP - AWD/2 cầu toàn thời gian |",
+    "| Dân dòng | FW/D/Cu được | FW/D/Cu được - OTP - AWD/2 c舟 toàn thi |": "| Dẫn động | FWD/Cầu trước | FWD/Cầu trước - OTP - AWD/2 cầu toàn thời gian |",
     "| Chơn che dĩ bã | EcoNormal/Sport | GIan |": "| Chọn chế độ lái | Eco/Normal/Sport | - |",
     "| Kiêm sót hánh tình co bã | Có | EcoNormal/Sport |": "| Kiểm soát hành trình cơ bản | Có | Eco/Normal/Sport |",
     "| Giao tốc dĩ\\* | Có | - |": "| Giới hạn tốc độ* | Có | - |",
@@ -762,8 +743,7 @@ _VF7 = {
     "| Phân trúc | Día | Día |": "| Phanh trước | Đĩa | Đĩa |",
     "| Phân sau | Día | Día |": "| Phanh sau | Đĩa | Đĩa |",
     "| VANH VÀ LÖP BАН XE |": "| VÀNH VÀ LỐP BÁNH XE |",
-    "| Kích thước la-zéd\\* | 19 inch | 20 inch (OPT 21 inch tháng 1/2025) |":
-        "| Kích thước la-zăng* | 19 inch | 20 inch (OPT 21 inch tháng 1/2025) |",
+    "| Kích thước la-zéd\\* | 19 inch | 20 inch (OPT 21 inch tháng 1/2025) |": "| Kích thước la-zăng* | 19 inch | 20 inch (OPT 21 inch tháng 1/2025) |",
     "| Loai la-zéd | Háp kim | Háp kim |": "| Loại la-zăng | Hợp kim | Hợp kim |",
     "| Láp du phong | Athersales | Athersales |": "| Lốp dự phòng | Aftersales | Aftersales |",
     "| Bố va lóp | Athersales | Athersales |": "| Bộ vành lốp | Aftersales | Aftersales |",
@@ -800,12 +780,10 @@ _VF7 = {
     "| Số chỗ ngôn | 5 | 5 |": "| Số chỗ ngồi | 5 | 5 |",
     "| Chhai bóc ghé | Da nhàn tao | Da nhàn tao |": "| Chất liệu bọc ghế | Da nhân tạo | Da nhân tạo |",
     "| GHE KI |": "| GHẾ LÁI |",
-    "| Ghe lai - dile chinh huding | Chinh dèn 8 hudung | Chinh dèn 8 hudung |":
-        "| Ghế lái - điều chỉnh hướng | Chỉnh điện 8 hướng | Chỉnh điện 8 hướng |",
+    "| Ghe lai - dile chinh huding | Chinh dèn 8 hudung | Chinh dèn 8 hudung |": "| Ghế lái - điều chỉnh hướng | Chỉnh điện 8 hướng | Chỉnh điện 8 hướng |",
     "| Tua dûh ghe lai | Chinh cα cao tháp | Chinh cα cao tháp |": "| Tựa đầu ghế lái | Chỉnh cơ cao thấp | Chỉnh cơ cao thấp |",
     "| BIE PHU |": "| GHẾ PHỤ |",
-    "| Ghe phu - dile chinh huding | Chinh cα 4 hudung | Chinh dèn 6 hudung |":
-        "| Ghế phụ - điều chỉnh hướng | Chỉnh cơ 4 hướng | Chỉnh điện 6 hướng |",
+    "| Ghe phu - dile chinh huding | Chinh cα 4 hudung | Chinh dèn 6 hudung |": "| Ghế phụ - điều chỉnh hướng | Chỉnh cơ 4 hướng | Chỉnh điện 6 hướng |",
     "| Tua dûh ghe phu | Chinh cα cao tháp | Chinh cα cao tháp |": "| Tựa đầu ghế phụ | Chỉnh cơ cao thấp | Chỉnh cơ cao thấp |",
     "| GHE HANG 2 |": "| GHẾ HÀNG 2 |",
     "| Hang ghe thu 2 dile chinh gap tù lê | 60:40 | 60:40 |": "| Hàng ghế thứ 2 điều chỉnh gập tỷ lệ | 60:40 | 60:40 |",
@@ -857,18 +835,14 @@ _VF7 = {
     "| Tui khi bào vê chán hung ghé trúc | - | 1 (philo nguôi lái) |": "| Túi khí bảo vệ chân hàng ghế trước | - | 1 (phía người lái) |",
     "| CÁC TINH NANG ADAS | 4 | 2.2 |": "| CÁC TÍNH NĂNG ADAS | 4 | 2.2 |",
     "| TRỌ LAI TRÉN CAO TOC |": "| TRỢ LÁI TRÊN CAO TỐC |",
-    "| Guing chieu huar tù deйctb hiếu khi lái | OFT | OFT |":
-        "| Gương chiếu hậu tự động hiệu chỉnh khi lái | OPT | OPT |",
+    "| Guing chieu huar tù deйctb hiếu khi lái | OFT | OFT |": "| Gương chiếu hậu tự động hiệu chỉnh khi lái | OPT | OPT |",
 }
 
 _VF8 = {
     # boilerplate
-    "Hình anh mang tinh chat minh hoa và có thể khác so võt xe thuc tê. Tính păng, dắc diêm, thông số ký thuát có the thay doi mà không thông báo truác":
-        "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước",
-    "Hình anh mang tính chât minh hòa và có thể khác so với xe thực tế. Tính nâng, dắc diêm, thông số ký thuột có thể thay đổi mà không thông báo trước.":
-        "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước.",
-    "Hinh anh mang tinh chat minh hoa và có thể khác so với xe thực tế. Tính nâng, dắc diêm, thông số ký thuật có thể thay đổi mà không thông báo trước.":
-        "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước.",
+    "Hình anh mang tinh chat minh hoa và có thể khác so võt xe thuc tê. Tính păng, dắc diêm, thông số ký thuát có the thay doi mà không thông báo truác": "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước",
+    "Hình anh mang tính chât minh hòa và có thể khác so với xe thực tế. Tính nâng, dắc diêm, thông số ký thuột có thể thay đổi mà không thông báo trước.": "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước.",
+    "Hinh anh mang tinh chat minh hoa và có thể khác so với xe thực tế. Tính nâng, dắc diêm, thông số ký thuật có thể thay đổi mà không thông báo trước.": "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước.",
     "ĐẶT CÓC NGAY": "ĐẶT CỌC NGAY",
     "SỨ LỬA CHỐN XÚNG TÂM\nTRONG PHÂN KHÚC\nSUV 5 CHÔ": "SỨ LỬA CHỌN XỨNG TẦM\nTRONG PHÂN KHÚC\nSUV 5 CHỖ",
     # exterior/prose
@@ -878,8 +852,7 @@ _VF8 = {
     "Dai x Róng x Cao (mm)": "Dài x Rộng x Cao (mm)",
     "Khód sông gám xe không tái (mm)": "Khoảng sáng gầm xe không tải (mm)",
     # spec table — ngoại thất
-    "| Dèn phoa | LED, Tu dừng bột/dát, dieu chinh gốc chu島 thông minh |":
-        "| Đèn pha | LED, Tự động bật/tắt, điều chỉnh góc chiếu thông minh |",
+    "| Dèn phoa | LED, Tu dừng bột/dát, dieu chinh gốc chu島 thông minh |": "| Đèn pha | LED, Tự động bật/tắt, điều chỉnh góc chiếu thông minh |",
     "| Dèn chiều sông banNgby | LED | LED |": "| Đèn chiếu sáng ban ngày | LED | LED |",
     "| Dèn hulu | LED | LED |": "| Đèn hậu | LED | LED |",
     "| Guang chihu hulu | Chinh dien, góp diên |": "| Gương chiếu hậu | Chỉnh điện, gập điện |",
@@ -890,17 +863,14 @@ _VF8 = {
     # spec table — HỆ TRUYỀN ĐỘNG
     "| HÉ THONG TRUVÉN DONG |": "| HỆ THỐNG TRUYỀN ĐỘNG |",
     "| DŒNG CO |": "| ĐỘNG CƠ |",
-    "| Hê đàm dòng | FWD/Cdu trước | AWD/2 cùu toán thải gian |":
-        "| Hệ dẫn động | FWD/Cầu trước | AWD/2 cầu toàn thời gian |",
+    "| Hê đàm dòng | FWD/Cdu trước | AWD/2 cùu toán thải gian |": "| Hệ dẫn động | FWD/Cầu trước | AWD/2 cầu toàn thời gian |",
     "| Cộng sudtú dôi (kW/Hp) | 150/201 | 300/402 |": "| Công suất tối đa (kW/Hp) | 150/201 | 300/402 |",
     "| Mó men xoen cúc dû (Nm) | 310 | 620 |": "| Mô men xoắn cực đại (Nm) | 310 | 620 |",
     "| Tảng toc 0-100Km/h (s) | 11.8 | 5.58 |": "| Tăng tốc 0-100 km/h (s) | 11.8 | 5.58 |",
     # PIN
     "| Dung liong pin kinh dung (kWh) | 87.7 | 87.7 |": "| Dung lượng pin khả dụng (kWh) | 87.7 | 87.7 |",
-    "| Quảng dương chay mát lân sac (dkm) | 562 (NEDC) | 457 (WLTP) |":
-        "| Quãng đường chạy một lần sạc đầy (km) | 562 (NEDC) | 457 (WLTP) |",
-    "| Thủ gian nop pin rhnhh nhật (tú 10 đến 70%) (phút) | 31 | 31 |":
-        "| Thời gian nạp pin nhanh nhất (từ 10 đến 70%) (phút) | 31 | 31 |",
+    "| Quảng dương chay mát lân sac (dkm) | 562 (NEDC) | 457 (WLTP) |": "| Quãng đường chạy một lần sạc đầy (km) | 562 (NEDC) | 457 (WLTP) |",
+    "| Thủ gian nop pin rhnhh nhật (tú 10 đến 70%) (phút) | 31 | 31 |": "| Thời gian nạp pin nhanh nhất (từ 10 đến 70%) (phút) | 31 | 31 |",
     # THÔNG SỐ TRUYỀN ĐỘNG KHÁC
     "| THÔNG SÓ TRUVÉN DONG KHAC |": "| THÔNG SỐ TRUYỀN ĐỘNG KHÁC |",
     "| Chon chữ dà lái | EcoNormal/Sport | EcoNormal/Sport |": "| Chọn chế độ lái | Eco/Normal/Sport | Eco/Normal/Sport |",
@@ -908,8 +878,7 @@ _VF8 = {
     # KHUNG GẦM
     "| Hê thông treo – trữdc |": "| Hệ thống treo - trước |",
     "| Hê thông treo – sou |": "| Hệ thống treo - sau |",
-    "| Hê thông phanth trudio/sau | Dia thông guí/Dia thông gío |":
-        "| Hệ thống phanh trước/sau | Đĩa thông gió/Đĩa thông gió |",
+    "| Hê thông phanth trudio/sau | Dia thông guí/Dia thông gío |": "| Hệ thống phanh trước/sau | Đĩa thông gió/Đĩa thông gió |",
     "| Loral lu chng | Háp km 120ch | Háp km 20ch |": "| Loại la-zăng | Hợp kim 19/20 inch | Hợp kim 20 inch |",
     "| Trsat luc lái | Trsat luc dên | Trsat luc dên |": "| Trợ lực lái | Trợ lực điện | Trợ lực điện |",
     # NỘI THẤT
@@ -963,8 +932,7 @@ _VF8 = {
     "| Hồ tro gũ lân | Không | Có |": "| Hỗ trợ giữ làn | Không | Có |",
     "| Kiem soát di giza lân | Không | Có |": "| Kiểm soát di giữa làn | Không | Có |",
     "| HÓ TRỌ HANN TRINH |": "| HỖ TRỢ HÀNH TRÌNH |",
-    "| Kiem soaat hinh trinh | Ga tu dòng co bàn | Ga tu dòng thick ung |":
-        "| Kiểm soát hành trình | Ga tự động cơ bản | Ga tự động thích ứng |",
+    "| Kiem soaat hinh trinh | Ga tu dòng co bàn | Ga tu dòng thick ung |": "| Kiểm soát hành trình | Ga tự động cơ bản | Ga tự động thích ứng |",
     "| Điều chính toc, độ thông minh | Không | Có |": "| Điều chỉnh tốc độ thông minh | Không | Có |",
     "| Nhận biết biên biao giao thông | Không | Có |": "| Nhận biết biển báo giao thông | Không | Có |",
     "| CAMH KIO VE CHAM |": "| CẢNH BÁO VA CHẠM |",
@@ -981,8 +949,7 @@ _VF8 = {
     "| Hồ trong camera 360 dû glam sat xung quanh | Có | Có |": "| Hệ thống camera 360 độ giám sát xung quanh | Có | Có |",
     "| THUNG NOI MOGNUN VIEN |": "| THÔNG TIN NỘI DUNG |",
     "| HE THONG TU GIA TI TRN XE |": "| HỆ THỐNG GIẢI TRÍ TRÊN XE |",
-    "| Che do xe co bàn. Càm trai, Ngũi la, Thuo Cung, Rua Xe | Có | Có |":
-        "| Chế độ xe cơ bản. Cắm trại, Ngủ lái, Thú cưng, Rửa xe | Có | Có |",
+    "| Che do xe co bàn. Càm trai, Ngũi la, Thuo Cung, Rua Xe | Có | Có |": "| Chế độ xe cơ bản. Cắm trại, Ngủ lái, Thú cưng, Rửa xe | Có | Có |",
     "| Gái tin co bàn (Bai FM, Bluetooth, USB) | Có | Có |": "| Giải trí cơ bản (Đài FM, Bluetooth, USB) | Có | Có |",
     "| Kết niú Android Auto via Apple Carplay | Có | Có |": "| Kết nối Android Auto và Apple Carplay | Có | Có |",
     "| Trinh duyet web | Có | Có |": "| Trình duyệt web | Có | Có |",
@@ -990,27 +957,21 @@ _VF8 = {
     "| Hồ druđu bén識 các chúc ngxe co bàn | Có | Có |": "| Hỗ trợ điều khiển các chức năng xe cơ bản | Có | Có |",
     "| Cáp nhật phán mém tù xa | Có | Có |": "| Cập nhật phần mềm từ xa | Có | Có |",
     "| UNG DUNG DIEN THOAI |": "| ỨNG DỤNG ĐIỆN THOẠI |",
-    "| Dông bổ tài khoản, ứng dụng, phàn quyên tài xế | Có | Có |":
-        "| Đồng bộ tài khoản, ứng dụng, phân quyền tài xế | Có | Có |",
+    "| Dông bổ tài khoản, ứng dụng, phàn quyên tài xế | Có | Có |": "| Đồng bộ tài khoản, ứng dụng, phân quyền tài xế | Có | Có |",
     "| Quán lý sqc &amp; thanh toán phí sqc | Có | Có |": "| Quản lý sạc & thanh toán phí sạc | Có | Có |",
     "| Bn độ trạm sqc | Có | Có |": "| Bản đồ trạm sạc | Có | Có |",
-    "| Dịch vụ hậu mài: dặt lich sùa chừa, lái thủ | Có | Có |":
-        "| Dịch vụ hậu mãi: đặt lịch sửa chữa, lái thử | Có | Có |",
+    "| Dịch vụ hậu mài: dặt lich sùa chừa, lái thủ | Có | Có |": "| Dịch vụ hậu mãi: đặt lịch sửa chữa, lái thử | Có | Có |",
     "| Mua bán phy kiên | Có | Có |": "| Mua bán phụ kiện | Có | Có |",
     "| Dinh vj xe tù xa |  |  |": "| Định vị xe từ xa |  |  |",
-    "Hình anh mang tính chât minh hоя và có thể khác so với xe thực tế. Tính năng, đ薬 diêm, thông só ký thuật có thể thay dối mà không thông báo truóc.":
-        "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước.",
+    "Hình anh mang tính chât minh hоя và có thể khác so với xe thực tế. Tính năng, đ薬 diêm, thông só ký thuật có thể thay dối mà không thông báo truóc.": "Hình ảnh mang tính chất minh họa và có thể khác so với xe thực tế. Tính năng, đặc điểm, thông số kỹ thuật có thể thay đổi mà không thông báo trước.",
 }
 
 _VF9 = {
     # boilerplate
     "SỨ LUỆA CHỐN\nCÙA NGUỒI THÀNH ĐАT, TIẾN PHONG": "SỨ LỬA CHỌN\nCỦA NGƯỜI THÀNH ĐẠT, TIẾN PHONG",
-    "* Hình anh xe VF 9 phiên bản PLUS tqai thị trưởng khác. Phiên bản cho thị trương Viêt Nam có thể có những khác biét nhật dїnh":
-        "* Hình ảnh xe VF 9 phiên bản PLUS tại thị trường khác. Phiên bản cho thị trường Việt Nam có thể có những khác biệt nhất định",
-    "* Hình anh xe VF 9 phiên bản PLUS tai thi trưởng khác. Phiên bàn cho thi trương Viêt Nam có thể có những khác biên nhát định":
-        "* Hình ảnh xe VF 9 phiên bản PLUS tại thị trường khác. Phiên bản cho thị trường Việt Nam có thể có những khác biệt nhất định",
-    "(*) Hình anh hiên thị chí mang tính chat minh hòa, sán phạm thực tế có thể khác.":
-        "(*) Hình ảnh hiển thị chỉ mang tính chất minh họa, sản phẩm thực tế có thể khác.",
+    "* Hình anh xe VF 9 phiên bản PLUS tqai thị trưởng khác. Phiên bản cho thị trương Viêt Nam có thể có những khác biét nhật dїnh": "* Hình ảnh xe VF 9 phiên bản PLUS tại thị trường khác. Phiên bản cho thị trường Việt Nam có thể có những khác biệt nhất định",
+    "* Hình anh xe VF 9 phiên bản PLUS tai thi trưởng khác. Phiên bàn cho thi trương Viêt Nam có thể có những khác biên nhát định": "* Hình ảnh xe VF 9 phiên bản PLUS tại thị trường khác. Phiên bản cho thị trường Việt Nam có thể có những khác biệt nhất định",
+    "(*) Hình anh hiên thị chí mang tính chat minh hòa, sán phạm thực tế có thể khác.": "(*) Hình ảnh hiển thị chỉ mang tính chất minh họa, sản phẩm thực tế có thể khác.",
     "Thông minh vước trội": "Thông minh vượt trội",
     "Câm hưng thiêt kê\nCân băng dòng": "Cảm hứng thiết kế\nCân bằng động",
     "Công suất tội da\n402 hp": "Công suất tối đa\n402 hp",
@@ -1021,18 +982,13 @@ _VF9 = {
     "| KICH THUOC &amp; TAI TRONG |": "| KÍCH THƯỚC & TẢI TRỌNG |",
     "| KICH THUOC |": "| KÍCH THƯỚC |",
     "| Chiêu dài cα só (mm) | 3.149 |  | 3.149 |": "| Chiều dài cơ sở (mm) | 3.149 |  | 3.149 |",
-    "| Dai x Rong x Cao (mm) | 5.119 x 2.254 x 1.697 |  | 5.119 x 2.254 x 1.697 |":
-        "| Dài x Rộng x Cao (mm) | 5.119 x 2.254 x 1.697 |  | 5.119 x 2.254 x 1.697 |",
+    "| Dai x Rong x Cao (mm) | 5.119 x 2.254 x 1.697 |  | 5.119 x 2.254 x 1.697 |": "| Dài x Rộng x Cao (mm) | 5.119 x 2.254 x 1.697 |  | 5.119 x 2.254 x 1.697 |",
     "| Khoàng sáng gám xe khòng tái (mm) | 174 |  | 184 |": "| Khoảng sáng gầm xe không tải (mm) | 174 |  | 184 |",
-    "| Dung tich khoang chua hanh lý (L)-Có hang ghé cuoí | 212 |  | 212 |":
-        "| Dung tích khoang chứa hành lý (L)-Có hàng ghế cuối | 212 |  | 212 |",
-    "| Dung tich khoang chua hanh lý (L)-Gáp hang ghé cuoí | 926 |  | 926 |":
-        "| Dung tích khoang chứa hành lý (L)-Gập hàng ghế cuối | 926 |  | 926 |",
-    "| Dung tich khoang chua hanh lý (L)-Phia truoc | 100 |  | 100 |":
-        "| Dung tích khoang chứa hành lý (L)-Phía trước | 100 |  | 100 |",
+    "| Dung tich khoang chua hanh lý (L)-Có hang ghé cuoí | 212 |  | 212 |": "| Dung tích khoang chứa hành lý (L)-Có hàng ghế cuối | 212 |  | 212 |",
+    "| Dung tich khoang chua hanh lý (L)-Gáp hang ghé cuoí | 926 |  | 926 |": "| Dung tích khoang chứa hành lý (L)-Gập hàng ghế cuối | 926 |  | 926 |",
+    "| Dung tich khoang chua hanh lý (L)-Phia truoc | 100 |  | 100 |": "| Dung tích khoang chứa hành lý (L)-Phía trước | 100 |  | 100 |",
     "| TAI TRONG |": "| TẢI TRỌNG |",
-    "| Trong luong khong tái (kg) | 2.911 |  | 7 chô:2.968|6 chô:2.932 |":
-        "| Trọng lượng không tải (kg) | 2.911 |  | 7 chỗ:2.968|6 chỗ:2.932 |",
+    "| Trong luong khong tái (kg) | 2.911 |  | 7 chô:2.968|6 chô:2.932 |": "| Trọng lượng không tải (kg) | 2.911 |  | 7 chỗ:2.968|6 chỗ:2.932 |",
     "| Tai trong (kg) | 550 |  | 7 chô:550|6 chô:475 |": "| Tải trọng (kg) | 550 |  | 7 chỗ:550|6 chỗ:475 |",
     "| Tai trong hánh lý nóc xe (kg) | 75 |  | 75 |": "| Tải trọng hành lý nóc xe (kg) | 75 |  | 75 |",
     # HỆ THỐNG TRUYỀN ĐỘNG
@@ -1045,28 +1001,21 @@ _VF9 = {
     # PIN
     "| Loai pin | CATL |  | CATL |": "| Loại pin | CATL |  | CATL |",
     "| Dung luong pin (kWh)-khà dung | 123 |  | 123 |": "| Dung lượng pin (kWh)-khả dụng | 123 |  | 123 |",
-    "| Quảng duông chay một lân sac dây (km)-Điều kiên tiêu chuán châu Âu (WLTP) | 626 |  | 602 |":
-        "| Quãng đường chạy một lần sạc đầy (km)-Điều kiện tiêu chuẩn châu Âu (WLTP) | 626 |  | 602 |",
-    "| Cóng suát sac AC toi da (kW) | 6.6 kW 1 pha,11 kW 3 pha |  | 6.6 kW 1 pha,11 kW 3 pha |":
-        "| Công suất sạc AC tối đa (kW) | 6.6 kW 1 pha,11 kW 3 pha |  | 6.6 kW 1 pha,11 kW 3 pha |",
-    "| Hê thông phanth tái sinh | Có (Tât, Tháp, Trung binh, Cao) |  | Có (Tât, Tháp, Trung binh, Cao) |":
-        "| Hệ thống phanh tái sinh | Có (Tắt, Thấp, Trung bình, Cao) |  | Có (Tắt, Thấp, Trung bình, Cao) |",
-    "| Thoi gian nap pin nhanh nhật (phút) | 35 phút(10-70%) |  | 35 phút(10-70%) |":
-        "| Thời gian nạp pin nhanh nhất (phút) | 35 phút (10-70%) |  | 35 phút (10-70%) |",
+    "| Quảng duông chay một lân sac dây (km)-Điều kiên tiêu chuán châu Âu (WLTP) | 626 |  | 602 |": "| Quãng đường chạy một lần sạc đầy (km)-Điều kiện tiêu chuẩn châu Âu (WLTP) | 626 |  | 602 |",
+    "| Cóng suát sac AC toi da (kW) | 6.6 kW 1 pha,11 kW 3 pha |  | 6.6 kW 1 pha,11 kW 3 pha |": "| Công suất sạc AC tối đa (kW) | 6.6 kW 1 pha,11 kW 3 pha |  | 6.6 kW 1 pha,11 kW 3 pha |",
+    "| Hê thông phanth tái sinh | Có (Tât, Tháp, Trung binh, Cao) |  | Có (Tât, Tháp, Trung binh, Cao) |": "| Hệ thống phanh tái sinh | Có (Tắt, Thấp, Trung bình, Cao) |  | Có (Tắt, Thấp, Trung bình, Cao) |",
+    "| Thoi gian nap pin nhanh nhật (phút) | 35 phút(10-70%) |  | 35 phút(10-70%) |": "| Thời gian nạp pin nhanh nhất (phút) | 35 phút (10-70%) |  | 35 phút (10-70%) |",
     # THÔNG SỐ TRUYỀN ĐỘNG KHÁC
     "| THONG SÓ TRUYEN DONG KHAC |": "| THÔNG SỐ TRUYỀN ĐỘNG KHÁC |",
     "| Cách chuyén só | Nut bãm |  | Nut bãm |": "| Cách chuyển số | Nút bấm |  | Nút bấm |",
-    "| Dăn dòng | AWD/2 cái toàn thời gian |  | AWD/2 cái toàn thhljsian |":
-        "| Dẫn động | AWD/2 cầu toàn thời gian |  | AWD/2 cầu toàn thời gian |",
+    "| Dăn dòng | AWD/2 cái toàn thời gian |  | AWD/2 cái toàn thhljsian |": "| Dẫn động | AWD/2 cầu toàn thời gian |  | AWD/2 cầu toàn thời gian |",
     "| Chon ché dô lái | Eco/Normal/Sport |  | Eco/Normal/Sport |": "| Chọn chế độ lái | Eco/Normal/Sport |  | Eco/Normal/Sport |",
     "| Ché dô thay dối tóc dô dé düng | Có |  | Có |": "| Chế độ thay đổi tốc độ dễ dàng | Có |  | Có |",
     # KHUNG GẦM
     "| KHUNG GAM |": "| KHUNG GẦM |",
     "| GIAM XOC |": "| GIẢM XÓC |",
-    "| Hê thông treo - truoc | Dọc lap, tay dôn kép |  | D-doc lap, tay dôn kEP |":
-        "| Hệ thống treo - trước | Độc lập, tay đòn kép |  | Độc lập, tay đòn kép |",
-    "| Hê thông treo - sau | Lièn két da diém, giam chän khi nén |  | Lièn két da diém, giam chän khi nén |":
-        "| Hệ thống treo - sau | Liên kết đa điểm, giảm chấn khí nén |  | Liên kết đa điểm, giảm chấn khí nén |",
+    "| Hê thông treo - truoc | Dọc lap, tay dôn kép |  | D-doc lap, tay dôn kEP |": "| Hệ thống treo - trước | Độc lập, tay đòn kép |  | Độc lập, tay đòn kép |",
+    "| Hê thông treo - sau | Lièn két da diém, giam chän khi nén |  | Lièn két da diém, giam chän khi nén |": "| Hệ thống treo - sau | Liên kết đa điểm, giảm chấn khí nén |  | Liên kết đa điểm, giảm chấn khí nén |",
     "| PHANH |": "| PHANH |",
     "| Phanh truoc | Día thông gió |  | Día thông gió |": "| Phanh trước | Đĩa thông gió |  | Đĩa thông gió |",
     "| Phanh sau | Día thông gió |  | Día thông gió |": "| Phanh sau | Đĩa thông gió |  | Đĩa thông gió |",
@@ -1079,28 +1028,22 @@ _VF9 = {
     "| Số chô ngói | 7 | 7 hoãc 6 |": "| Số chỗ ngồi | 7 | 7 hoặc 6 |",
     "| Chât liEU boc ghé | Da nhàn tao | Da nhàn tao cao cáp |": "| Chất liệu bọc ghế | Da nhân tạo | Da nhân tạo cao cấp |",
     "| GHE LAI |": "| GHẾ LÁI |",
-    "| Ghe lai - diEU chinh huông | Chinh diên 8 huông | Chinh diên 12 huông |":
-        "| Ghế lái - điều chỉnh hướng | Chỉnh điện 8 hướng | Chỉnh điện 12 hướng |",
+    "| Ghe lai - diEU chinh huông | Chinh diên 8 huông | Chinh diên 12 huông |": "| Ghế lái - điều chỉnh hướng | Chỉnh điện 8 hướng | Chỉnh điện 12 hướng |",
     "| Ghe lai nho vi tri | Không | Có |": "| Ghế lái nhớ vị trí | Không | Có |",
     "| Ghe lai co massage | Không | Có |": "| Ghế lái có massage | Không | Có |",
     "| Ghe lai co thông gió | Không | Có |": "| Ghế lái có thông gió | Không | Có |",
     "| Ghe lai co suài | Có | Có |": "| Ghế lái có sưởi | Có | Có |",
     "| GHE PHU |": "| GHẾ PHỤ |",
-    "| Ghe phu - diEU chinh huông | Chinh diên 6 huông | Chinh diên 10 huông |":
-        "| Ghế phụ - điều chỉnh hướng | Chỉnh điện 6 hướng | Chỉnh điện 10 hướng |",
+    "| Ghe phu - diEU chinh huông | Chinh diên 6 huông | Chinh diên 10 huông |": "| Ghế phụ - điều chỉnh hướng | Chỉnh điện 6 hướng | Chỉnh điện 10 hướng |",
     "| GHÉ HANG 2 |": "| GHẾ HÀNG 2 |",
-    "| Hang ghé thu 2 diếu chinh huóng | Chinh diên 4 huóng | Chinh diên 8 huóng |":
-        "| Hàng ghế thứ 2 điều chỉnh hướng | Chỉnh điện 4 hướng | Chỉnh điện 8 hướng |",
-    "| Hang ghé thu 2 diếu chinh gap ty lè | 40:20:40, hô trág dé vao hang 3 |":
-        "| Hàng ghế thứ 2 điều chỉnh gập tỷ lệ | 40:20:40, hỗ trợ để vào hàng 3 |",
+    "| Hang ghé thu 2 diếu chinh huóng | Chinh diên 4 huóng | Chinh diên 8 huóng |": "| Hàng ghế thứ 2 điều chỉnh hướng | Chỉnh điện 4 hướng | Chỉnh điện 8 hướng |",
+    "| Hang ghé thu 2 diếu chinh gap ty lè | 40:20:40, hô trág dé vao hang 3 |": "| Hàng ghế thứ 2 điều chỉnh gập tỷ lệ | 40:20:40, hỗ trợ để vào hàng 3 |",
     "| Hang ghé thu 2 cò thông gió | Không | Có |": "| Hàng ghế thứ 2 có thông gió | Không | Có |",
     "| Hang ghé thu 2 cò suoi | Không | Có |": "| Hàng ghế thứ 2 có sưởi | Không | Có |",
     "| Hang ghé thu 2 cò massage | Không | Có |": "| Hàng ghế thứ 2 có massage | Không | Có |",
     "| GHÉ VIP |": "| GHẾ VIP |",
-    "| Ghe VIP chinh dièn | Không | 6 chóc. Chinh dièn 8 huóng7 chóc. Không |":
-        "| Ghế VIP chỉnh điện | Không | 6 chỗ. Chỉnh điện 8 hướng/7 chỗ. Không |",
-    "| Hóp dό hàng ghé sau | Không | 6 chóc. Có, tich hop sac khòng day7 chóc. Không |":
-        "| Hộp đồ hàng ghế sau | Không | 6 chỗ. Có, tích hợp sạc không dây/7 chỗ. Không |",
+    "| Ghe VIP chinh dièn | Không | 6 chóc. Chinh dièn 8 huóng7 chóc. Không |": "| Ghế VIP chỉnh điện | Không | 6 chỗ. Chỉnh điện 8 hướng/7 chỗ. Không |",
+    "| Hóp dό hàng ghé sau | Không | 6 chóc. Có, tich hop sac khòng day7 chóc. Không |": "| Hộp đồ hàng ghế sau | Không | 6 chỗ. Có, tích hợp sạc không dây/7 chỗ. Không |",
     "| Ghé VIP massage | Không | Có |": "| Ghế VIP massage | Không | Có |",
     "| Ghé VIP cò thông gió | Không | Có |": "| Ghế VIP có thông gió | Không | Có |",
     "| Ghé VIP cò suoi | Không | Có |": "| Ghế VIP có sưởi | Không | Có |",
@@ -1118,8 +1061,7 @@ _VF9 = {
     "| Man hinh giài tri câm ung hang ghé sau | Không | 8 Inch |": "| Màn hình giải trí cảm ứng hàng ghế sau | Không | 8 Inch |",
     "| Man hinh hiên thi HUD | Có | Có |": "| Màn hình hiển thị HUD | Có | Có |",
     "| Cóng két noi USB loai A hang ghé lái | 2 | 2 |": "| Cổng kết nối USB loại A hàng ghế lái | 2 | 2 |",
-    "| Cóng két noi USB loai A hang ghé thu 2 | 2 | 7 chóc: 2 | 6 chóc: 4 |":
-        "| Cổng kết nối USB loại A hàng ghế thứ 2 | 2 | 7 chỗ: 2 | 6 chỗ: 4 |",
+    "| Cóng két noi USB loai A hang ghé thu 2 | 2 | 7 chóc: 2 | 6 chóc: 4 |": "| Cổng kết nối USB loại A hàng ghế thứ 2 | 2 | 7 chỗ: 2 | 6 chỗ: 4 |",
     "| Cóng két noi USB loai A hang ghé thu 3 | 2 | 2 |": "| Cổng kết nối USB loại A hàng ghế thứ 3 | 2 | 2 |",
     "| Cóng két noi USB loai C | Có | Có |": "| Cổng kết nối USB loại C | Có | Có |",
     "| Cóng sac 12V khoang hanh lý | Có | Có |": "| Cổng sạc 12V khoang hành lý | Có | Có |",
@@ -1135,8 +1077,7 @@ _VF9 = {
     "| Tãm che nâng, có guong | Ghé lái và ghé phuo, thêm dèn |": "| Tấm che nắng, có gương | Ghế lái và ghế phụ, thêm đèn |",
     "| NOI THÂT &amp; TIēN NGHI KHAC |": "| NỘI THẤT & TIỆN NGHI KHÁC |",
     "| Phanh tay | Diên tũ | Diên tũ |": "| Phanh tay | Điện tử | Điện tử |",
-    "| Guong chiêu hâu trong xe | Chóng choi tu dòng | Chng choi tu dòng |":
-        "| Gương chiếu hậu trong xe | Chống chói tự động | Chống chói tự động |",
+    "| Guong chiêu hâu trong xe | Chóng choi tu dòng | Chng choi tu dòng |": "| Gương chiếu hậu trong xe | Chống chói tự động | Chống chói tự động |",
     # AN TOÀN
     "| AN TOAN &amp; AN NINH |": "| AN TOÀN & AN NINH |",
     "| Hê thông chồng bo cùng phanth ABS | Có | Có |": "| Hệ thống chống bó cứng phanh ABS | Có | Có |",
@@ -1193,12 +1134,10 @@ _VF9 = {
     "| Boc vò lâng | Da thành thiên môi truONG |": "| Bọc vô lăng | Da thân thiện môi trường |",
     "| CÁC TINH NÂNG DIEU KHIEN THONG MINH (*) |": "| CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*) |",
     "| Lua chon ché dô vàn hánh dác biêt | Có | Có |": "| Lựa chọn chế độ vận hành đặc biệt | Có | Có |",
-    "| Cà dát Gioi han thơi gian hoat dòng &amp; khu vúc hoat dòng cua xe | Có | Có |":
-        "| Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe | Có | Có |",
+    "| Cà dát Gioi han thơi gian hoat dòng &amp; khu vúc hoat dòng cua xe | Có | Có |": "| Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe | Có | Có |",
     "| Giãt trí truc tuyến | Có | Có |": "| Giải trí trực tuyến | Có | Có |",
     "| Trô choi | Có | Có |": "| Trò chơi | Có | Có |",
-    "| Diêu huong và dân duong trn màn hình trung tâm | Có | Có |":
-        "| Điều hướng và dẫn đường trên màn hình trung tâm | Có | Có |",
+    "| Diêu huong và dân duong trn màn hình trung tâm | Có | Có |": "| Điều hướng và dẫn đường trên màn hình trung tâm | Có | Có |",
     "| Trinh duyёт web | Có | Có |": "| Trình duyệt web | Có | Có |",
     "| Tu chán doan lòi | Có | Có |": "| Tự chẩn đoán lỗi | Có | Có |",
     "| Hói dアップ lý áo | Có | Có |": "| Hỏi đáp trợ lý ảo | Có | Có |",
@@ -1211,46 +1150,33 @@ _VF9 = {
     "Báo hành xe mói 10 năm": "Bảo hành xe mới 10 năm",
     "Báo hành pin 10 năm\nhoặc 200.000 km": "Bảo hành pin 10 năm\nhoặc 200.000 km",
     "Dịch vụ Hậu mãi\nxuất sắc": "Dịch vụ Hậu mãi\nxuất sắc",
-    "Sừa chủa luuu đông (Mobile\nService) & Cúu hô 24/7 trong\nsuột thời gian bảo hành":
-        "Sửa chữa lưu động (Mobile\nService) & Cứu hộ 24/7 trong\nsuốt thời gian bảo hành",
-    "Mảng luối 150.000 công sạc\nphù rộng 34/34 tính, thành phố":
-        "Mạng lưới 150.000 cổng sạc\nphủ rộng 34/34 tỉnh, thành phố",
-    "Hệ thống showroom,\nxuống dích vụ không\nngùng được mở rộng.":
-        "Hệ thống showroom,\nxưởng dịch vụ không\nngừng được mở rộng.",
-    "Hệ thống Showroom/Nha phàn phối/\nXuống Dịch vụ và trạm sác VinFast liên\ntúc mô rông và không ngùng\nphát triên trên kháp cà nuóc, nhàm\ntói uu hóa trai nghiem của khách\nhàng, tùng buócKIEN táo nèn\ntuồng lai xanh tái Việt Nam.":
-        "Hệ thống Showroom/Nhà phân phối/\nXưởng Dịch vụ và trạm sạc VinFast liên\ntục mở rộng và không ngừng\nphát triển trên khắp cả nước, nhằm\ntối ưu hóa trải nghiệm của khách\nhàng, từng bước kiến tạo nên\ntương lai xanh tại Việt Nam.",
+    "Sừa chủa luuu đông (Mobile\nService) & Cúu hô 24/7 trong\nsuột thời gian bảo hành": "Sửa chữa lưu động (Mobile\nService) & Cứu hộ 24/7 trong\nsuốt thời gian bảo hành",
+    "Mảng luối 150.000 công sạc\nphù rộng 34/34 tính, thành phố": "Mạng lưới 150.000 cổng sạc\nphủ rộng 34/34 tỉnh, thành phố",
+    "Hệ thống showroom,\nxuống dích vụ không\nngùng được mở rộng.": "Hệ thống showroom,\nxưởng dịch vụ không\nngừng được mở rộng.",
+    "Hệ thống Showroom/Nha phàn phối/\nXuống Dịch vụ và trạm sác VinFast liên\ntúc mô rông và không ngùng\nphát triên trên kháp cà nuóc, nhàm\ntói uu hóa trai nghiem của khách\nhàng, tùng buócKIEN táo nèn\ntuồng lai xanh tái Việt Nam.": "Hệ thống Showroom/Nhà phân phối/\nXưởng Dịch vụ và trạm sạc VinFast liên\ntục mở rộng và không ngừng\nphát triển trên khắp cả nước, nhằm\ntối ưu hóa trải nghiệm của khách\nhàng, từng bước kiến tạo nên\ntương lai xanh tại Việt Nam.",
     "QUÂN ĐАО\nHOÀNG SA": "QUÂN ĐẢO\nHOÀNG SA",
     "QUÂN ĐАО\nTRUỂNG SA": "QUÂN ĐẢO\nTRƯỜNG SA",
     # màu
     "# Nng cao": "# Nâng cao",
     "# Tiêu chuẩn": "# Tiêu chuẩn",
-    "Miễn ph giao nhận xe tại địa điểm theo yŒu cầu của qu khÆch \n(trong giờ hnh chnh, phạm vi 30 km từ xưởng dịch vụ\nVinFast gần nhất).":
-        "Miễn phí giao nhận xe tại địa điểm theo yêu cầu của quý khách \n(trong giờ hành chính, phạm vi 30 km từ xưởng dịch vụ\nVinFast gần nhất).",
-    "Hỗ trợ chi ph sửa chữa cho đại l, đảm bảo qu khÆch được phục \nvụ nhanh chng v hiệu quả nhất.":
-        "Hỗ trợ chi phí sửa chữa cho đại lý, đảm bảo quý khách được phục \nvụ nhanh chóng và hiệu quả nhất.",
-    "Được tiếp đn v tư vấn bởi đội ngũ cố vấn dịch vụ, kỹ thuật viŒn giu \nkinh nghiệm v c tay nghề cao nhất.":
-        "Được tiếp đón và tư vấn bởi đội ngũ cố vấn dịch vụ, kỹ thuật viên giàu \nkinh nghiệm và có tay nghề cao nhất.",
-    "Qu khÆch sẽ được ưu tiŒn sắp xếp lịch bảo dưỡng, sửa chữa theo thời \ngian v nhu cầu của bản thn.":
-        "Quý khách sẽ được ưu tiên sắp xếp lịch bảo dưỡng, sửa chữa theo thời \ngian và nhu cầu của bản thân.",
+    "Miễn ph giao nhận xe tại địa điểm theo yŒu cầu của qu khÆch \n(trong giờ hnh chnh, phạm vi 30 km từ xưởng dịch vụ\nVinFast gần nhất).": "Miễn phí giao nhận xe tại địa điểm theo yêu cầu của quý khách \n(trong giờ hành chính, phạm vi 30 km từ xưởng dịch vụ\nVinFast gần nhất).",
+    "Hỗ trợ chi ph sửa chữa cho đại l, đảm bảo qu khÆch được phục \nvụ nhanh chng v hiệu quả nhất.": "Hỗ trợ chi phí sửa chữa cho đại lý, đảm bảo quý khách được phục \nvụ nhanh chóng và hiệu quả nhất.",
+    "Được tiếp đn v tư vấn bởi đội ngũ cố vấn dịch vụ, kỹ thuật viŒn giu \nkinh nghiệm v c tay nghề cao nhất.": "Được tiếp đón và tư vấn bởi đội ngũ cố vấn dịch vụ, kỹ thuật viên giàu \nkinh nghiệm và có tay nghề cao nhất.",
+    "Qu khÆch sẽ được ưu tiŒn sắp xếp lịch bảo dưỡng, sửa chữa theo thời \ngian v nhu cầu của bản thn.": "Quý khách sẽ được ưu tiên sắp xếp lịch bảo dưỡng, sửa chữa theo thời \ngian và nhu cầu của bản thân.",
     "CHẤT LƯỢNG ĐẲNG CẤP": "CHẤT LƯỢNG ĐẲNG CẤP",
     "CAM KẾT ĐỒNG HÀNH TRỌN VẸN": "CAM KẾT ĐỒNG HÀNH TRỌN VẸN",
     "TRẢI NGHIỆM XỨNG TẦM TINH HOA": "TRẢI NGHIỆM XỨNG TẦM TINH HOA",
-    "01. TIẾP CẬN DỊCH VỤ SỬA CHỮA\n      NHANH CHNG V THUẬN TIỆN":
-        "01. TIẾP CẬN DỊCH VỤ SỬA CHỮA\n      NHANH CHÓNG VÀ THUẬN TIỆN",
-    "02. TRẢI NGHIỆM VIP TẠI\n\n## XƯỞNG DỊCH VỤ VINFAST":
-        "02. TRẢI NGHIỆM VIP TẠI\n\n## XƯỞNG DỊCH VỤ VINFAST",
-    "03. DỊCH VỤ CHĂM SC KH`CH HNG TẬN T´M, CHU Đ`O":
-        "03. DỊCH VỤ CHĂM SÓC KHÁCH HÀNG TẬN TÂM, CHU ĐÁO",
+    "01. TIẾP CẬN DỊCH VỤ SỬA CHỮA\n      NHANH CHNG V THUẬN TIỆN": "01. TIẾP CẬN DỊCH VỤ SỬA CHỮA\n      NHANH CHÓNG VÀ THUẬN TIỆN",
+    "02. TRẢI NGHIỆM VIP TẠI\n\n## XƯỞNG DỊCH VỤ VINFAST": "02. TRẢI NGHIỆM VIP TẠI\n\n## XƯỞNG DỊCH VỤ VINFAST",
+    "03. DỊCH VỤ CHĂM SC KH`CH HNG TẬN T´M, CHU Đ`O": "03. DỊCH VỤ CHĂM SÓC KHÁCH HÀNG TẬN TÂM, CHU ĐÁO",
     "04. SẠC ĐIỆN MIỄN PHÍ 2 NĂM": "04. SẠC ĐIỆN MIỄN PHÍ 2 NĂM",
-    "Miễn ph 2 năm sạc điện tại hệ thống trạm sạc cng cộng VinFast trŒn \nton quốc tới 30/06/2027.":
-        "Miễn phí 2 năm sạc điện tại hệ thống trạm sạc công cộng VinFast trên \ntoàn quốc tới 30/06/2027.",
+    "Miễn ph 2 năm sạc điện tại hệ thống trạm sạc cng cộng VinFast trŒn \nton quốc tới 30/06/2027.": "Miễn phí 2 năm sạc điện tại hệ thống trạm sạc công cộng VinFast trên \ntoàn quốc tới 30/06/2027.",
     "Cùng bạn\nbút phá mội giói h quan": "Cùng bạn\nbút phá mọi giới hạn",
 }
 
 _VF2 = {
     "Hình anh chi mang tính chát minh hoq.": "Hình ảnh chỉ mang tính chất minh họa.",
-    "Ồ Tô ĐÂU ĐỒI\nUỐC MÓ'\nTRONG TÀM VỔI\nDÉ DÙNG\nDÉ MUA\nDÉ NUỔI\nDÉ THÍCH":
-        "Ô TÔ ĐẦU ĐỜI\nƯỚC MƠ\nTRONG TẦM VỚI\nDỄ DÙNG\nDỄ MUA\nDỄ NUÔI\nDỄ THÍCH",
+    "Ồ Tô ĐÂU ĐỒI\nUỐC MÓ'\nTRONG TÀM VỔI\nDÉ DÙNG\nDÉ MUA\nDÉ NUỔI\nDÉ THÍCH": "Ô TÔ ĐẦU ĐỜI\nƯỚC MƠ\nTRONG TẦM VỚI\nDỄ DÙNG\nDỄ MUA\nDỄ NUÔI\nDỄ THÍCH",
     "(phœt)": "(phút)",
     "| DÂN DÔNG | RWD/CÂU SAU |": "| DẪN ĐỘNG | RWD/CẦU SAU |",
     "| HÉ THONG PHANH TÁI SINH | CÓ |": "| HỆ THỐNG PHANH TÁI SINH | CÓ |",
@@ -1282,7 +1208,8 @@ FILE_DICTS = {
 
 def _build_apply(files: list[str]) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
     """Ghép shared + file dict thành list (bad, good) theo độ dài giảm dần."""
-    import re
+    import re  # noqa: F401
+
     shared = list(_SHARED.items())
     file_entries = []
     for f in files:

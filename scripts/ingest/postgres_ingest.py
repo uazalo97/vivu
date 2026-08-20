@@ -154,8 +154,17 @@ def upsert_edition(conn, version: str, rows: list[dict[str, Any]]) -> int:
         updated_at = EXCLUDED.updated_at
     """
     values = [
-        (version, r["model_id"], r["edition_id"], r["model_label"], r["edition_label"],
-         r["year_range"], to_bool(r["is_active"]), r["created_at"], r["updated_at"])
+        (
+            version,
+            r["model_id"],
+            r["edition_id"],
+            r["model_label"],
+            r["edition_label"],
+            r["year_range"],
+            to_bool(r["is_active"]),
+            r["created_at"],
+            r["updated_at"],
+        )
         for r in rows
     ]
     execute_values(cur, sql, values)
@@ -182,20 +191,22 @@ def upsert_price_list(conn, version: str, rows: list[dict[str, Any]]) -> int:
     """
     values = []
     for r in rows:
-        values.append((
-            version,
-            r["model_id"],
-            r["edition_id"],
-            int(r["price_list_vnd"]) if r["price_list_vnd"] else None,
-            int(r["price_promo_vnd"]) if r["price_promo_vnd"] else None,
-            r["promo_label"] or None,
-            to_bool(r["vat_included"]),
-            to_bool(r["battery_included"]),
-            r["valid_from"] or "1970-01-01",  # NOT NULL; coerce empty → sentinel
-            r["valid_to"] or None,
-            r["updated_at"] or None,
-            r["source_url"] or None,
-        ))
+        values.append(
+            (
+                version,
+                r["model_id"],
+                r["edition_id"],
+                int(r["price_list_vnd"]) if r["price_list_vnd"] else None,
+                int(r["price_promo_vnd"]) if r["price_promo_vnd"] else None,
+                r["promo_label"] or None,
+                to_bool(r["vat_included"]),
+                to_bool(r["battery_included"]),
+                r["valid_from"] or "1970-01-01",  # NOT NULL; coerce empty → sentinel
+                r["valid_to"] or None,
+                r["updated_at"] or None,
+                r["source_url"] or None,
+            )
+        )
     execute_values(cur, sql, values)
     conn.commit()
     return len(rows)
@@ -213,9 +224,16 @@ def upsert_specs(conn, rows: list[dict[str, Any]]) -> int:
     VALUES %s
     """
     values = [
-        (r["model_code"], r["version_name"] or None, r["version_code"] or None,
-         r["spec_category"], r["spec_key"], r["spec_value"],
-         r["spec_unit"] or None, r["source_url"] or None)
+        (
+            r["model_code"],
+            r["version_name"] or None,
+            r["version_code"] or None,
+            r["spec_category"],
+            r["spec_key"],
+            r["spec_value"],
+            r["spec_unit"] or None,
+            r["source_url"] or None,
+        )
         for r in rows
     ]
     execute_values(cur, sql, values)
@@ -270,6 +288,7 @@ def _invalidate_cache() -> None:
     """
     try:
         from app.core.cache import invalidate_all
+
         asyncio.run(invalidate_all())
     except Exception as e:
         print(f"[postgres_ingest] cache invalidation skipped: {e}", file=sys.stderr)
@@ -323,8 +342,10 @@ def run(version: str = "v1", dsn: str = DEFAULT_DSN) -> int:
     n_specs = upsert_specs(conn, specs_rows)
     record_manifest(conn, version, version_dir)
 
-    print(f"[postgres_ingest] version={version}  edition={n_edition}  price_list={n_price}  "
-          f"car_specs={n_specs}  (is_current=false)")
+    print(
+        f"[postgres_ingest] version={version}  edition={n_edition}  price_list={n_price}  "
+        f"car_specs={n_specs}  (is_current=false)"
+    )
     # car_specs full-refresh làm cache specs cũ lỗi thời (trước cả promote)
     _invalidate_cache()
     conn.close()

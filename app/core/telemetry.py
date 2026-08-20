@@ -1,4 +1,4 @@
-﻿"""
+"""
 app/core/telemetry.py — Telemetry, Token Cost & Latency Tracking Engine.
 
 Theo dõi chỉ số vận hành của chatbot:
@@ -8,10 +8,11 @@ Theo dõi chỉ số vận hành của chatbot:
 - Tỷ lệ Cache Hit/Miss
 - Phân bổ Intent & Tool calls
 """
+
 import asyncio
 import json
 import logging
-import time
+import time  # noqa: F401
 import uuid
 from typing import Any
 
@@ -104,6 +105,7 @@ async def ensure_telemetry_schema() -> None:
     async with _ensure_lock:
         if _schema_ready:
             return
+
         async def _create():
             pool = await get_pool()
             async with pool.acquire() as conn:
@@ -111,6 +113,7 @@ async def ensure_telemetry_schema() -> None:
                     stmt = stmt.strip()
                     if stmt:
                         await conn.execute(stmt)
+
         await run_with_db_retry(_create, label="ensure request_metrics schema")
         _schema_ready = True
 
@@ -205,6 +208,7 @@ def log_metric_background(task_coro):
 
 
 # ── Analytics & Aggregation Queries for Admin API ────────────────────────────
+
 
 async def get_metrics_overview(hours: int = 24) -> dict[str, Any]:
     """Lấy số liệu KPI tổng quan trong N giờ qua."""
@@ -406,28 +410,30 @@ async def get_metrics_logs(
                 tools = json.loads(tools)
             except Exception:
                 tools = []
-        logs.append({
-            "id": r["id"],
-            "request_id": r["request_id"],
-            "session_id": str(r["session_id"]) if r["session_id"] else None,
-            "created_at": r["created_at"].isoformat() if r["created_at"] else "",
-            "query_text": r["query_text"],
-            "intent": r["intent"],
-            "decision": r["decision"],
-            "model_used": r["model_used"],
-            "prompt_version": r["prompt_version"],
-            "prompt_tokens": r["prompt_tokens"],
-            "completion_tokens": r["completion_tokens"],
-            "total_tokens": r["total_tokens"],
-            "cost_usd": float(r["cost_usd"]),
-            "cost_vnd": float(r["cost_vnd"]),
-            "ttft_ms": r["ttft_ms"],
-            "total_latency_ms": r["total_latency_ms"],
-            "cache_hit": r["cache_hit"],
-            "cache_type": r["cache_type"],
-            "tools_used": tools,
-            "status_code": r["status_code"],
-            "error_message": r["error_message"],
-        })
+        logs.append(
+            {
+                "id": r["id"],
+                "request_id": r["request_id"],
+                "session_id": str(r["session_id"]) if r["session_id"] else None,
+                "created_at": r["created_at"].isoformat() if r["created_at"] else "",
+                "query_text": r["query_text"],
+                "intent": r["intent"],
+                "decision": r["decision"],
+                "model_used": r["model_used"],
+                "prompt_version": r["prompt_version"],
+                "prompt_tokens": r["prompt_tokens"],
+                "completion_tokens": r["completion_tokens"],
+                "total_tokens": r["total_tokens"],
+                "cost_usd": float(r["cost_usd"]),
+                "cost_vnd": float(r["cost_vnd"]),
+                "ttft_ms": r["ttft_ms"],
+                "total_latency_ms": r["total_latency_ms"],
+                "cache_hit": r["cache_hit"],
+                "cache_type": r["cache_type"],
+                "tools_used": tools,
+                "status_code": r["status_code"],
+                "error_message": r["error_message"],
+            }
+        )
 
     return {"total": total_count, "limit": limit, "offset": offset, "logs": logs}

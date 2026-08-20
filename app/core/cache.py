@@ -38,9 +38,9 @@ COLORS_TTL = 6 * 3600
 OPTIONS_TTL = 6 * 3600
 LIST_MODELS_TTL = 1 * 3600
 KB_TTL = 2 * 3600
-EMBEDDING_TTL = 7 * 24 * 3600    # 7 ngày — embedding deterministic
-HYBRID_TTL = 2 * 3600             # 2 giờ — dense+sparse+rerank pipeline
-ANS_TTL = 30 * 60                 # 30 phút — answer single-turn (PHASE SAU)
+EMBEDDING_TTL = 7 * 24 * 3600  # 7 ngày — embedding deterministic
+HYBRID_TTL = 2 * 3600  # 2 giờ — dense+sparse+rerank pipeline
+ANS_TTL = 30 * 60  # 30 phút — answer single-turn (PHASE SAU)
 
 # TTL phân tầng theo topic (volatility axis). `None` = KHÔNG cache (query trực tiếp).
 CACHE_TTL_BY_TOPIC = {
@@ -53,8 +53,8 @@ CACHE_TTL_BY_TOPIC = {
     "phạm_vi_di_chuyển": 6 * 3600,
     "màu_sắc": 6 * 3600,
     "option": 6 * 3600,
-    "giá": None,           # không cache — invalidation chủ động
-    "khuyến_mãi": None,    # không cache
+    "giá": None,  # không cache — invalidation chủ động
+    "khuyến_mãi": None,  # không cache
     "list_models": LIST_MODELS_TTL,
 }
 
@@ -79,10 +79,9 @@ async def data_version() -> str:
         return _dv_cache
     try:
         from app.core.db import get_pool
+
         pool = await get_pool()
-        ver = await pool.fetchval(
-            "SELECT version FROM ingest_version WHERE is_current LIMIT 1"
-        )
+        ver = await pool.fetchval("SELECT version FROM ingest_version WHERE is_current LIMIT 1")
         if ver:
             _dv_cache = ver
             _dv_cache_time = now
@@ -148,6 +147,7 @@ def _hs_key(dv: str, query: str, model_id: str | None, top_k: int, skip_rerank: 
 
 # ── Redis get/set/delete (fail-open) ─────────────────────────────────────────
 
+
 async def _get_json(key: str) -> Any | None:
     r = get_redis()
     if not r:
@@ -201,6 +201,7 @@ async def _delete_by_pattern(pattern: str) -> int:
 
 # ── Embedding cache (emb:) ───────────────────────────────────────────────────
 
+
 async def get_embedding_cached(text: str) -> list[float] | None:
     """Lấy cached embedding vector. None nếu miss."""
     key = _emb_key(text)
@@ -221,6 +222,7 @@ async def set_embedding_cached(text: str, embedding: list[float]) -> None:
 
 # ── Hybrid search cache (hs:) ────────────────────────────────────────────────
 
+
 async def get_hybrid_cached(query: str, model_id: str | None, top_k: int, skip_rerank: bool) -> list[dict] | None:
     """Lấy cached hybrid_search kết quả. None nếu miss."""
     dv = await data_version()
@@ -228,13 +230,16 @@ async def get_hybrid_cached(query: str, model_id: str | None, top_k: int, skip_r
     return await _get_json(key)
 
 
-async def set_hybrid_cached(query: str, model_id: str | None, top_k: int, skip_rerank: bool, results: list[dict]) -> None:
+async def set_hybrid_cached(
+    query: str, model_id: str | None, top_k: int, skip_rerank: bool, results: list[dict]
+) -> None:
     dv = await data_version()
     key = _hs_key(dv, query, model_id, top_k, skip_rerank)
     await _set_json(key, results, HYBRID_TTL)
 
 
 # ── Entity-keyed cached tools ─────────────────────────────────────────────────
+
 
 async def get_specs_cached(model_code: str, version: str | None = None, category: str | None = None):
     dv = await data_version()
@@ -244,6 +249,7 @@ async def get_specs_cached(model_code: str, version: str | None = None, category
         return cached, True
 
     from app.agent.tools import get_specs
+
     data = await get_specs(model_code, version, category)
     await _set_json(key, data, _specs_ttl(category))
     return data, False
@@ -257,6 +263,7 @@ async def get_colors_cached(model_code: str, version: str | None = None):
         return cached, True
 
     from app.agent.tools import get_colors
+
     data = await get_colors(model_code, version)
     await _set_json(key, data, COLORS_TTL)
     return data, False
@@ -270,6 +277,7 @@ async def get_options_cached(model_code: str, version: str | None = None):
         return cached, True
 
     from app.agent.tools import get_options
+
     data = await get_options(model_code, version)
     await _set_json(key, data, OPTIONS_TTL)
     return data, False
@@ -283,6 +291,7 @@ async def list_models_cached():
         return cached, True
 
     from app.agent.tools import list_available_models
+
     data = await list_available_models()
     await _set_json(lm_key, data, LIST_MODELS_TTL)
     return data, False
@@ -297,6 +306,7 @@ async def search_kb_cached(query: str, model_id: str | None = None) -> dict:
         return cached
 
     from app.core.retrieval import hybrid_search
+
     results = await hybrid_search(query, model_id=model_id, top_k=5)
     data = {
         "query": query,
@@ -317,6 +327,7 @@ async def search_kb_cached(query: str, model_id: str | None = None) -> dict:
 
 
 # ── Invalidation ──────────────────────────────────────────────────────────────
+
 
 async def invalidate_entity(cache_key: str) -> None:
     """Xóa 1 key cache cụ thể."""

@@ -55,7 +55,11 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.clean_data.clean_to_jsonl import (  # noqa: E402
-    parse_raw_file, infer_model_raw, MODEL_LABEL, MODEL_EDITIONS, EDITION_KEYWORDS,
+    parse_raw_file,
+    infer_model_raw,
+    MODEL_LABEL,
+    MODEL_EDITIONS,  # noqa: F401
+    EDITION_KEYWORDS,
 )
 
 RAW_DIR = REPO_ROOT / "data" / "raw"
@@ -68,8 +72,7 @@ BROCHURE_LINKS = REPO_ROOT / "data" / "raw" / "link_brochure.md"
 
 # ── Normalize ───────────────────────────────────────────────────────────────
 def no_diacritics(s: str) -> str:
-    return "".join(c for c in unicodedata.normalize("NFD", s)
-                  if unicodedata.category(c) != "Mn")
+    return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn")
 
 
 def norm(s: str) -> str:
@@ -99,15 +102,13 @@ _A = {
     "quang duong di chuyen (wltp)": ("range_km", "km", "powertrain"),
     "quang duong di chuyen (nedc)": ("range_km", "km", "powertrain"),
     "quang duong di chuyen": ("range_km", "km", "powertrain"),
-    "quang duong chay mot lan sac day (km) - dieu kien tieu chuan chau au (wltp)":
-        ("range_km", "km", "powertrain"),
+    "quang duong chay mot lan sac day (km) - dieu kien tieu chuan chau au (wltp)": ("range_km", "km", "powertrain"),
     "quang duong": ("range_km", "km", "powertrain"),
     "thoi gian nap pin nhanh nhat": ("fast_charge_min", "phút", "powertrain"),
     "thoi gian nap pin nhanh nhat (10%-70%)": ("fast_charge_min", "phút", "powertrain"),
     "thoi gian nap pin nhanh nhat (phut)": ("fast_charge_min", "phút", "powertrain"),
     "thoi gian sac nhanh (10-70%)": ("fast_charge_min", "phút", "powertrain"),
-    "thoi gian nap pin nhanh nhat (tu 10 den 70%) (phut)":
-        ("fast_charge_min", "phút", "powertrain"),
+    "thoi gian nap pin nhanh nhat (tu 10 den 70%) (phut)": ("fast_charge_min", "phút", "powertrain"),
     "dung luong pin kha dung": ("battery_kwh", "kWh", "powertrain"),
     "dung luong pin kha dung (kwh)": ("battery_kwh", "kWh", "powertrain"),
     "dung luong pin (kwh) - kha dung": ("battery_kwh", "kWh", "powertrain"),
@@ -122,8 +123,7 @@ _A = {
     "toc do toi da": ("top_speed_kmh", "km/h", "powertrain"),
     "tang toc 0-100 km/h": ("acceleration_0_100_s", "s", "powertrain"),
     "tang toc 0-100km/h (s)": ("acceleration_0_100_s", "s", "powertrain"),
-    "kha nang tang toc tu 0-100km/h (s) - muc tieu du kien":
-        ("acceleration_0_100_s", "s", "powertrain"),
+    "kha nang tang toc tu 0-100km/h (s) - muc tieu du kien": ("acceleration_0_100_s", "s", "powertrain"),
     "cong suat sac nhanh dc toi da": ("dc_charge_kw", "kW", "powertrain"),
     "cong suat sac ac toi da (kw)": ("ac_charge_kw", "kW", "powertrain"),
     "muc tieu thu nhien lieu cong khai": ("consumption", "", "powertrain"),
@@ -190,37 +190,66 @@ _ALIASES_BY_LEN = sorted(LABEL_MAP.keys(), key=len, reverse=True)
 # category: dimension | powertrain | battery | interior
 BASIC_SPECS: dict[str, tuple[str, str]] = {
     # key:                      (category, unit)
-    "length_mm":            ("dimension", "mm"),
-    "width_mm":             ("dimension", "mm"),
-    "height_mm":            ("dimension", "mm"),
-    "wheelbase_mm":         ("dimension", "mm"),
-    "ground_clearance_mm":  ("dimension", "mm"),
-    "power_kw":             ("powertrain", "kW"),
-    "torque_nm":            ("powertrain", "Nm"),
-    "drivetrain":           ("powertrain", ""),
-    "battery_kwh":          ("battery",   "kWh"),
-    "range_km":             ("battery",   "km"),
-    "dc_charge_kw":         ("battery",   "kW"),
-    "seats":                ("interior",  ""),
+    "length_mm": ("dimension", "mm"),
+    "width_mm": ("dimension", "mm"),
+    "height_mm": ("dimension", "mm"),
+    "wheelbase_mm": ("dimension", "mm"),
+    "ground_clearance_mm": ("dimension", "mm"),
+    "power_kw": ("powertrain", "kW"),
+    "torque_nm": ("powertrain", "Nm"),
+    "drivetrain": ("powertrain", ""),
+    "battery_kwh": ("battery", "kWh"),
+    "range_km": ("battery", "km"),
+    "dc_charge_kw": ("battery", "kW"),
+    "seats": ("interior", ""),
 }
 
 
 # spec_key có giá trị số → chỉ giữ phần số. Còn lại giữ nguyên text (định tính).
 NUMERIC_KEYS = {
-    "power_kw", "torque_nm", "range_km", "battery_kwh", "fast_charge_min",
-    "top_speed_kmh", "acceleration_0_100_s", "dc_charge_kw", "ac_charge_kw",
-    "wheelbase_mm", "ground_clearance_mm", "wheel_size_inch", "seats",
-    "trunk_capacity", "display_inch", "speakers", "airbags",
+    "power_kw",
+    "torque_nm",
+    "range_km",
+    "battery_kwh",
+    "fast_charge_min",
+    "top_speed_kmh",
+    "acceleration_0_100_s",
+    "dc_charge_kw",
+    "ac_charge_kw",
+    "wheelbase_mm",
+    "ground_clearance_mm",
+    "wheel_size_inch",
+    "seats",
+    "trunk_capacity",
+    "display_inch",
+    "speakers",
+    "airbags",
 }
 # Dimension triple → tách 3 row length/width/height (dot = phân cách hàng nghìn → bỏ).
 DIMENSION_KEYS = ("length_mm", "width_mm", "height_mm")
 
 # Section divider trong table (PIN, KHUNG GẦM, NGOẠI THẤT...) — value rỗng, skip.
 SECTION_HEADERS = {
-    "pin", "khung gam", "ngoai that", "ngoai that den pha", "noi that & tien nghi",
-    "noi that", "thong so truyen dong khac", "giam xoc", "phanh",
-    "vanh va lop banh xe", "ghe toan xe", "ghe lai", "ghe phu", "khung gam khac",
-    "phiên ban", "phien ban", "thong so", "dau xe", "hong xe", "duoi xe",
+    "pin",
+    "khung gam",
+    "ngoai that",
+    "ngoai that den pha",
+    "noi that & tien nghi",
+    "noi that",
+    "thong so truyen dong khac",
+    "giam xoc",
+    "phanh",
+    "vanh va lop banh xe",
+    "ghe toan xe",
+    "ghe lai",
+    "ghe phu",
+    "khung gam khac",
+    "phiên ban",
+    "phien ban",
+    "thong so",
+    "dau xe",
+    "hong xe",
+    "duoi xe",
 }
 PRICE_LABELS = ("gia", "lan bangh", "lan bang", "niem yet", "gia ban", "phien ban")
 
@@ -266,9 +295,9 @@ def parse_number(s: str) -> tuple[str, float] | None:
     if not m:
         return None
     tok = m.group(0)
-    if re.fullmatch(r"\d{1,3}(\.\d{3})+(,\d+)?", tok):       # 2.950 / 1.234,5
+    if re.fullmatch(r"\d{1,3}(\.\d{3})+(,\d+)?", tok):  # 2.950 / 1.234,5
         tok = tok.replace(".", "").replace(",", ".")
-    elif re.fullmatch(r"\d+,\d+", tok):                       # 87,7
+    elif re.fullmatch(r"\d+,\d+", tok):  # 87,7
         tok = tok.replace(",", ".")
     # else: \d+\.\d+ (7.5) hoặc \d+ → giữ nguyên
     try:
@@ -282,13 +311,26 @@ def parse_number(s: str) -> tuple[str, float] | None:
 
 # Khoảng hợp lý cho spec số liệu — value ngoài khoảng = junk → drop.
 SANITY_RANGES = {
-    "power_kw": (5, 600), "torque_nm": (30, 1500), "range_km": (50, 1000),
-    "battery_kwh": (3, 300), "fast_charge_min": (5, 600), "top_speed_kmh": (50, 400),
-    "acceleration_0_100_s": (1, 30), "dc_charge_kw": (1, 500), "ac_charge_kw": (1, 500),
-    "wheelbase_mm": (1500, 4000), "ground_clearance_mm": (50, 500),
-    "wheel_size_inch": (12, 30), "seats": (2, 9), "trunk_capacity": (50, 3000),
-    "display_inch": (5, 30), "speakers": (1, 30), "airbags": (1, 20),
-    "length_mm": (2000, 6000), "width_mm": (1000, 3000), "height_mm": (1000, 3000),
+    "power_kw": (5, 600),
+    "torque_nm": (30, 1500),
+    "range_km": (50, 1000),
+    "battery_kwh": (3, 300),
+    "fast_charge_min": (5, 600),
+    "top_speed_kmh": (50, 400),
+    "acceleration_0_100_s": (1, 30),
+    "dc_charge_kw": (1, 500),
+    "ac_charge_kw": (1, 500),
+    "wheelbase_mm": (1500, 4000),
+    "ground_clearance_mm": (50, 500),
+    "wheel_size_inch": (12, 30),
+    "seats": (2, 9),
+    "trunk_capacity": (50, 3000),
+    "display_inch": (5, 30),
+    "speakers": (1, 30),
+    "airbags": (1, 20),
+    "length_mm": (2000, 6000),
+    "width_mm": (1000, 3000),
+    "height_mm": (1000, 3000),
 }
 
 
@@ -347,8 +389,7 @@ def parse_tables(body: str) -> list[tuple[str, str, str | None]]:
     lines = body.splitlines()
     i = 0
     while i < len(lines):
-        if not (TABLE_ROW_RE.match(lines[i]) and i + 1 < len(lines)
-                and SEP_RE.match(lines[i + 1])):
+        if not (TABLE_ROW_RE.match(lines[i]) and i + 1 < len(lines) and SEP_RE.match(lines[i + 1])):
             i += 1
             continue
         # header = dòng i, separator = i+1, data rows từ i+2
@@ -407,8 +448,7 @@ def parse_inline(body: str) -> list[tuple[str, str, str | None]]:
         # Vì norm có thể co/giãn độ dài (dấu tiếng Việt → 1 char), tìm vị trí cắt
         # bằng cách norm từng prefix đến khi khớp alias.
         value_text = _value_after_alias(line, alias)
-        if value_text and not is_section_header(norm(value_text)) \
-                and not _looks_like_label(value_text):
+        if value_text and not is_section_header(norm(value_text)) and not _looks_like_label(value_text):
             out.append((alias, value_text, None))
             continue
         # Format C: label đứng riêng → value = dòng kế không rỗng.
@@ -520,8 +560,7 @@ def parse_label_then_values(body: str) -> list[tuple[str, str, str | None]]:
             if not v:
                 j += 1
                 continue
-            if TABLE_ROW_RE.match(v) or v.startswith("#") or len(v) > 40 \
-                    or not re.match(r"^[0-9]", v):
+            if TABLE_ROW_RE.match(v) or v.startswith("#") or len(v) > 40 or not re.match(r"^[0-9]", v):
                 break
             values.append(v)
             j += 1
@@ -541,8 +580,11 @@ def _value_matches_spec(value: str, spec_key: str) -> bool:
     Tránh lấy nhầm value của spec khác khi bảng sau trộn format (VD "Số ghế ngồi"
     bên dưới 1 giá trị dimension)."""
     v = value.lower()
-    dim = ("dimension",) if spec_key.startswith("length") or spec_key.startswith("width") \
-        or spec_key.startswith("height") else ()
+    dim = (  # noqa: F841
+        ("dimension",)
+        if spec_key.startswith("length") or spec_key.startswith("width") or spec_key.startswith("height")
+        else ()
+    )
     if spec_key in ("length_mm", "width_mm", "height_mm"):
         return "x" in v
     if spec_key in ("power_kw", "dc_charge_kw", "ac_charge_kw"):
@@ -597,7 +639,7 @@ def parse_value_first(body: str) -> list[tuple[str, str, str | None]]:
         m = re.match(r"^\s*([\d.,]+)(?:\s*/\s*[\d.,]+)?\s*(kW|Nm|kWh|km)?", line, re.IGNORECASE)
         if not m:
             continue
-        rest = line[m.end():].strip()
+        rest = line[m.end() :].strip()
         if not rest:
             continue
         alias = _find_alias_anywhere(rest)
@@ -628,8 +670,8 @@ def extract_specs_from_file(path: Path) -> list[dict[str, Any]]:
     # value-trên-label (VF8 All New) chạy TRƯỚC để aggregate ưu tiên giá trị đúng
     # khi cùng label bị parse_inline/label_then_values đọc nhầm value bên dưới.
     raw_pairs.extend(parse_value_above_label(body))
-    raw_pairs.extend(parse_value_first(body))        # hero card value-first (VF6)
-    raw_pairs.extend(parse_inline(body))             # label-first B/C
+    raw_pairs.extend(parse_value_first(body))  # hero card value-first (VF6)
+    raw_pairs.extend(parse_inline(body))  # label-first B/C
     raw_pairs.extend(parse_label_then_values(body))  # bảng spec 2 cột (VF6/VF7/VF8)
 
     rows: list[dict[str, Any]] = []
@@ -650,8 +692,7 @@ def extract_specs_from_file(path: Path) -> list[dict[str, Any]]:
                 if k in seen:
                     continue
                 seen.add(k)
-                rows.append(_row(model_code, edition, "dimension", sub_key,
-                                 sub_val, "mm", source_url))
+                rows.append(_row(model_code, edition, "dimension", sub_key, sub_val, "mm", source_url))
             continue
         value = clean_value(spec_key, value_raw)
         if value is None:  # junk (sai format / ngoài sanity range) → drop
@@ -662,8 +703,7 @@ def extract_specs_from_file(path: Path) -> list[dict[str, Any]]:
         seen.add(k)
         # category/unit lấy từ BASIC_SPECS (canonical) — bỏ qua mapped của LABEL_MAP.
         cat, unit = BASIC_SPECS.get(spec_key, (category, spec_unit))
-        rows.append(_row(model_code, edition, cat, spec_key, value,
-                         unit, source_url))
+        rows.append(_row(model_code, edition, cat, spec_key, value, unit, source_url))
     return rows
 
 
@@ -684,7 +724,7 @@ def _row(model_code, edition, category, key, value, unit, source_url) -> dict[st
 def _llm_label_to_key(label: str, value: str) -> str | None:
     """Map occasional LLM labels back to the strict BASIC_SPECS whitelist."""
     n = norm(label)
-    v = norm(value)
+    v = norm(value)  # noqa: F841
     if n in BASIC_SPECS:
         return n
     if n in ("dai x rong x cao", "kich thuoc") and re.search(r"[xX×]", value):
@@ -718,8 +758,12 @@ def _normalize_edition(value: Any) -> str | None:
         return None
     text = str(value).strip().lower()
     aliases = {
-        "pluscaptain": "PlusCaptain", "plus": "Plus", "eco": "Eco",
-        "tieuchuan": "TieuChuan", "nangcao": "NangCao", "caocap": "CaoCap",
+        "pluscaptain": "PlusCaptain",
+        "plus": "Plus",
+        "eco": "Eco",
+        "tieuchuan": "TieuChuan",
+        "nangcao": "NangCao",
+        "caocap": "CaoCap",
     }
     if text in aliases:
         return aliases[text]
@@ -752,7 +796,7 @@ def _vision_extract_brochure(url: str, model_id: str, schema: dict) -> list[dict
     response.raise_for_status()
     prompt = (
         f"Read these brochure pages for VinFast {model_id}. OCR the page images and "
-        "extract only explicit basic vehicle specs. Return JSON object {\"specs\": "
+        'extract only explicit basic vehicle specs. Return JSON object {"specs": '
         "[...]} with spec_key, spec_value, edition. Allowed keys: "
         "length_mm, width_mm, height_mm, wheelbase_mm, ground_clearance_mm, "
         "power_kw, torque_nm, drivetrain, battery_kwh, range_km, dc_charge_kw, seats. "
@@ -765,10 +809,12 @@ def _vision_extract_brochure(url: str, model_id: str, schema: dict) -> list[dict
             pix = page.get_pixmap(matrix=fitz.Matrix(1.2, 1.2), alpha=False)
             image = io.BytesIO(pix.tobytes("jpeg", jpg_quality=70))
             encoded = base64.b64encode(image.getvalue()).decode("ascii")
-            content.append({
-                "type": "image_url",
-                "image_url": {"url": f"data:image/jpeg;base64,{encoded}"},
-            })
+            content.append(
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/jpeg;base64,{encoded}"},
+                }
+            )
 
     result = requests.post(
         "https://openrouter.ai/api/v1/chat/completions",
@@ -791,7 +837,14 @@ def _vision_extract_brochure(url: str, model_id: str, schema: dict) -> list[dict
 
 
 BROCHURE_MODEL_ORDER = [
-    "VF2", "VF3", "VF5", "VF6", "VF7", "VF8", "VF8NEW", "VF9",
+    "VF2",
+    "VF3",
+    "VF5",
+    "VF6",
+    "VF7",
+    "VF8",
+    "VF8NEW",
+    "VF9",
 ]
 
 
@@ -810,9 +863,15 @@ def _crawl_brochure_urls() -> list[tuple[str, str]]:
 
 async def _crawl_brochure_specs(urls: list[tuple[str, str]]) -> list[dict[str, Any]]:
     """Crawl brochure PDFs with Crawl4AI and return validated raw spec rows."""
-    from crawl4ai import (AsyncWebCrawler, BrowserConfig, CacheMode,
-                          CrawlerRunConfig, LLMConfig, LLMExtractionStrategy,
-                          PDFContentScrapingStrategy)
+    from crawl4ai import (
+        AsyncWebCrawler,
+        BrowserConfig,
+        CacheMode,
+        CrawlerRunConfig,
+        LLMConfig,
+        LLMExtractionStrategy,
+        PDFContentScrapingStrategy,
+    )
     from crawl4ai.processors.pdf import PDFCrawlerStrategy
 
     schema = {
@@ -871,8 +930,7 @@ async def _crawl_brochure_specs(urls: list[tuple[str, str]]) -> list[dict[str, A
             for item in raw_items:
                 if not isinstance(item, dict) or item.get("error"):
                     continue
-                key = _llm_label_to_key(str(item.get("spec_key", "")),
-                                        str(item.get("spec_value", "")))
+                key = _llm_label_to_key(str(item.get("spec_key", "")), str(item.get("spec_value", "")))
                 value = str(item.get("spec_value", "")).strip()
                 edition = _normalize_edition(item.get("edition"))
                 if not key:
@@ -884,16 +942,12 @@ async def _crawl_brochure_specs(urls: list[tuple[str, str]]) -> list[dict[str, A
                     values = [(key, cleaned)] if cleaned else []
                 for final_key, final_value in values:
                     cat, unit = BASIC_SPECS[final_key]
-                    rows.append(_row(MODEL_LABEL[model_id], edition, cat, final_key,
-                                     final_value, unit, url))
+                    rows.append(_row(MODEL_LABEL[model_id], edition, cat, final_key, final_value, unit, url))
                     count += 1
             if count:
                 print(f"  [crawl4ai] {model_id}: {count} validated specs from {url}")
             else:
-                print(
-                    f"  [crawl4ai] {model_id}: brochure has no extractable text; "
-                    "keep dat-coc/raw fallback specs"
-                )
+                print(f"  [crawl4ai] {model_id}: brochure has no extractable text; keep dat-coc/raw fallback specs")
     return rows
 
 
@@ -960,8 +1014,16 @@ def aggregate(all_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 # ── Run ─────────────────────────────────────────────────────────────────────
-CSV_FIELDS = ["model_code", "version_name", "version_code", "spec_category",
-              "spec_key", "spec_value", "spec_unit", "source_url"]
+CSV_FIELDS = [
+    "model_code",
+    "version_name",
+    "version_code",
+    "spec_category",
+    "spec_key",
+    "spec_value",
+    "spec_unit",
+    "source_url",
+]
 
 
 def run(version: str = "v1", crawl_brochures: bool = False) -> int:
@@ -1014,8 +1076,9 @@ def run(version: str = "v1", crawl_brochures: bool = False) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Trích spec kỹ thuật từ raw → specs.csv")
     ap.add_argument("--version", default="v1", help="Output version folder (default v1)")
-    ap.add_argument("--crawl-brochures", action="store_true",
-                    help="Crawl PDF brochure URLs with Crawl4AI + LLM extraction")
+    ap.add_argument(
+        "--crawl-brochures", action="store_true", help="Crawl PDF brochure URLs with Crawl4AI + LLM extraction"
+    )
     args = ap.parse_args()
     return run(args.version, crawl_brochures=args.crawl_brochures)
 

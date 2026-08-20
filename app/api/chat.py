@@ -1,4 +1,4 @@
-﻿import hashlib
+import hashlib
 import json
 import time
 import uuid
@@ -12,7 +12,11 @@ from app.agent.agent_loop import AgentLoop
 from app.agent.decision import log_store
 from app.config import settings
 from app.core.memory import (
-    load_session, save_turn, update_current_context, save_user_fact, get_redis,
+    load_session,
+    save_turn,
+    update_current_context,
+    save_user_fact,
+    get_redis,
 )
 from app.core.telemetry import log_metric_background, record_metric
 
@@ -257,7 +261,9 @@ async def chat_stream(request: ChatRequest, http_request: Request):
             model_code = entities.get("model_code")
             version = entities.get("version")
             await update_current_context(
-                session_id, model_code=model_code, version=version,
+                session_id,
+                model_code=model_code,
+                version=version,
                 topic=category or None,
             )
             if model_code:
@@ -265,7 +271,9 @@ async def chat_stream(request: ChatRequest, http_request: Request):
             if version:
                 await save_user_fact(session_id, "preferred_version", version)
 
-            prompt_tok = _estimate_tokens(request.message) + sum(_estimate_tokens(h.get("content", "")) for h in history)
+            prompt_tok = _estimate_tokens(request.message) + sum(
+                _estimate_tokens(h.get("content", "")) for h in history
+            )
             comp_tok = _estimate_tokens(full_resp)
 
             log_metric_background(
@@ -306,7 +314,7 @@ async def export_logs(run_id: str = None):
         logs = log_store.get_by_run(run_id)
     else:
         logs = log_store.get_all()
-    lines = [json.dumps(l, ensure_ascii=False) for l in logs]
+    lines = [json.dumps(l, ensure_ascii=False) for l in logs]  # noqa: E741
     content = "\n".join(lines) + "\n" if lines else ""
     fname = "logs_" + (run_id or "all") + ".jsonl"
     return StreamingResponse(

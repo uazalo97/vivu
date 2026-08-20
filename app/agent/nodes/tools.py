@@ -69,7 +69,9 @@ async def execute_tools_node(state: AgentState) -> dict:
     decision = state.get("decision", "answer")
     # DeepSeek models don't support tool_choice="required" in thinking mode
     _model_lower = settings.llm_model.lower()
-    _no_force_tools = "deepseek" in _model_lower or "luna" in _model_lower or "o1" in _model_lower or "o3" in _model_lower
+    _no_force_tools = (
+        "deepseek" in _model_lower or "luna" in _model_lower or "o1" in _model_lower or "o3" in _model_lower
+    )
     force_tool = "auto" if _no_force_tools else ("required" if (decision == "answer" and not tool_results) else "auto")
 
     # Retry once on rate limit / timeout
@@ -129,32 +131,38 @@ async def execute_tools_node(state: AgentState) -> dict:
                 args = json.loads(tc.function.arguments)
                 model_code = args.get("model_code", "")
                 if model_code:
-                    auto_kb_calls.append({
-                        "model_id": model_code,
-                        "query": state.get("query", ""),
-                        "tool_call_id": f"auto_kb_{tc.id}",
-                    })
+                    auto_kb_calls.append(
+                        {
+                            "model_id": model_code,
+                            "query": state.get("query", ""),
+                            "tool_call_id": f"auto_kb_{tc.id}",
+                        }
+                    )
                     break  # One KB call per model is enough
 
     if auto_kb_calls:
         from app.agent.tools import search_knowledge_base
-        kb_tasks = [
-            search_knowledge_base(kb["query"], model_id=kb["model_id"])
-            for kb in auto_kb_calls
-        ]
+
+        kb_tasks = [search_knowledge_base(kb["query"], model_id=kb["model_id"]) for kb in auto_kb_calls]
         kb_results = await asyncio.gather(*kb_tasks, return_exceptions=True)
         for kb, kb_result in zip(auto_kb_calls, kb_results):
             if isinstance(kb_result, Exception):
                 logger.warning("Auto-inject KB failed: %s", kb_result)
                 continue
-            results.append({
-                "tool": "search_knowledge_base",
-                "result": kb_result,
-                "success": True,
-                "auto_injected": True,  # Label: supplementary, not primary
-            })
-            logger.info("Auto-inject KB: topic=%s model=%s results=%d",
-                        category, kb["model_id"], len(kb_result.get("results", [])))
+            results.append(
+                {
+                    "tool": "search_knowledge_base",
+                    "result": kb_result,
+                    "success": True,
+                    "auto_injected": True,  # Label: supplementary, not primary
+                }
+            )
+            logger.info(
+                "Auto-inject KB: topic=%s model=%s results=%d",
+                category,
+                kb["model_id"],
+                len(kb_result.get("results", [])),
+            )
 
     tool_results.extend(results)
 
@@ -164,18 +172,25 @@ async def execute_tools_node(state: AgentState) -> dict:
     # tool_calls in the assistant message, so adding them as 'tool' role
     # breaks OpenAI API contract.
     new_messages = messages + [choice.message]
-    for tc, res in zip(choice.message.tool_calls, results[:len(choice.message.tool_calls)]):
-        new_messages.append({
-            "role": "tool",
-            "tool_call_id": tc.id,
-            "content": json.dumps(res["result"], ensure_ascii=False),
-        })
+    for tc, res in zip(choice.message.tool_calls, results[: len(choice.message.tool_calls)]):
+        new_messages.append(
+            {
+                "role": "tool",
+                "tool_call_id": tc.id,
+                "content": json.dumps(res["result"], ensure_ascii=False),
+            }
+        )
 
     # Handle ask_clarification: override if classify already decided answer
     # with a version-independent topic
     _VERSION_INDEPENDENT = {
-        "kích_thước", "phiên_bản", "pin_và_sạc",
-        "tính_năng_nổi_bật", "an_toàn", "nội_thất", "ngoại_thất",
+        "kích_thước",
+        "phiên_bản",
+        "pin_và_sạc",
+        "tính_năng_nổi_bật",
+        "an_toàn",
+        "nội_thất",
+        "ngoại_thất",
     }
     category = state.get("category", "general")
 
@@ -183,17 +198,21 @@ async def execute_tools_node(state: AgentState) -> dict:
         if tc.function.name == "ask_clarification" and res.get("success"):
             if has_model and category in _VERSION_INDEPENDENT:
                 logger.info("ask_clarification overridden: version-independent topic=%s", category)
-                new_messages.append({
-                    "role": "user",
-                    "content": f"Thông tin '{category}' áp dụng cho cả hai phiên bản. Trả lời trực tiếp. KHÔNG gọi lại ask_clarification.",
-                })
+                new_messages.append(
+                    {
+                        "role": "user",
+                        "content": f"Thông tin '{category}' áp dụng cho cả hai phiên bản. Trả lời trực tiếp. KHÔNG gọi lại ask_clarification.",
+                    }
+                )
                 break
             elif has_model and has_version:
                 logger.info("ask_clarification overridden: model+version known")
-                new_messages.append({
-                    "role": "user",
-                    "content": "Câu hỏi đã có model và version rõ ràng. Trả lời trực tiếp bằng tool. KHÔNG gọi lại ask_clarification.",
-                })
+                new_messages.append(
+                    {
+                        "role": "user",
+                        "content": "Câu hỏi đã có model và version rõ ràng. Trả lời trực tiếp bằng tool. KHÔNG gọi lại ask_clarification.",
+                    }
+                )
                 break
             else:
                 clarify_msg = res["result"].get("message", "Bạn muốn tìm thông tin nào?")

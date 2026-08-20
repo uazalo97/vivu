@@ -19,24 +19,26 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # noqa: E402
+
 load_dotenv(REPO_ROOT / ".env")
 
 
 PREFIXES = [
-    "cache:",           # tool cache (cache:{dv}:specs/colors/options/list_models)
-    "hs:",              # hybrid search cache
-    "emb:",             # embedding cache
-    "ans:",             # answer cache (future)
-    "session:",         # session store
-    "user:",            # long-term memory
-    "rl:",              # rate limit counters
-    "dedup:",           # dedupe keys
+    "cache:",  # tool cache (cache:{dv}:specs/colors/options/list_models)
+    "hs:",  # hybrid search cache
+    "emb:",  # embedding cache
+    "ans:",  # answer cache (future)
+    "session:",  # session store
+    "user:",  # long-term memory
+    "rl:",  # rate limit counters
+    "dedup:",  # dedupe keys
 ]
 
 
 async def stats():
     from app.core.memory import get_redis
+
     r = get_redis()
     if not r:
         print("Redis unavailable")
@@ -61,6 +63,7 @@ async def stats():
 
 async def clear(prefix: str | None = None):
     from app.core.memory import get_redis
+
     r = get_redis()
     if not r:
         print("Redis unavailable")
@@ -84,6 +87,7 @@ async def clear(prefix: str | None = None):
 
 async def version():
     from app.core.cache import data_version
+
     ver = await data_version()
     print(f"Current data version: {ver}")
 

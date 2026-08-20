@@ -29,8 +29,9 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 # ── must_not_do assertion checker ───────────────────────────────────────────
-def check_must_not_do(answer: str, must_not_do: list[str], decision: str,
-                      retrieved_chunks: list[dict], citations: list[dict]) -> list[dict]:
+def check_must_not_do(
+    answer: str, must_not_do: list[str], decision: str, retrieved_chunks: list[dict], citations: list[dict]
+) -> list[dict]:
     """Check answer against must_not_do constraints. Returns list of violations."""
     # Skip checks for OOS and refuse — these are system messages, not LLM answers
     if decision in ("out_of_scope", "refuse", "clarify"):
@@ -125,11 +126,13 @@ def check_must_not_do(answer: str, must_not_do: list[str], decision: str,
                 reason = "Answer contains repair/diagnosis instructions"
 
         if violated:
-            violations.append({
-                "rule": rule,
-                "reason": reason,
-                "severity": "blocker",
-            })
+            violations.append(
+                {
+                    "rule": rule,
+                    "reason": reason,
+                    "severity": "blocker",
+                }
+            )
 
     return violations
 
@@ -225,7 +228,7 @@ def run_eval(input_path: str, output_path: str, api_url: str):
     print(f"  EVAL SUMMARY — {run_id}")
     print("=" * 60)
     print(f"  Total cases:       {total}")
-    print(f"  Decision PASS:     {total_pass}/{total} ({100*total_pass/total:.0f}%)")
+    print(f"  Decision PASS:     {total_pass}/{total} ({100 * total_pass / total:.0f}%)")
     print(f"  Decision FAIL:     {total_fail}/{total}")
     print(f"  must_not_do violations: {total_violations}")
     print()
@@ -235,7 +238,9 @@ def run_eval(input_path: str, output_path: str, api_url: str):
     if failures:
         print("  FAILURES:")
         for r in failures:
-            print(f"    {r['test_id']}: expected={r['expected_decision']} got={r['actual_decision']} | {r['query'][:50]}")
+            print(
+                f"    {r['test_id']}: expected={r['expected_decision']} got={r['actual_decision']} | {r['query'][:50]}"
+            )
             if r.get("violations"):
                 for v in r["violations"]:
                     print(f"      VIOLATION: {v['rule'][:60]}")

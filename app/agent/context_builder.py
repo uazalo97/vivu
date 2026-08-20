@@ -5,56 +5,130 @@ _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 # Query keywords → relevant spec categories
 _QUERY_TOPIC_MAP = {
     # battery
-    "sạc": ["battery"], "pin": ["battery"], "charge": ["battery"], "kwh": ["battery"],
-    "range": ["battery"], "phạm vi": ["battery"], "đi được": ["battery"], "quãng đường": ["battery"],
+    "sạc": ["battery"],
+    "pin": ["battery"],
+    "charge": ["battery"],
+    "kwh": ["battery"],
+    "range": ["battery"],
+    "phạm vi": ["battery"],
+    "đi được": ["battery"],
+    "quãng đường": ["battery"],
     # powertrain
-    "công suất": ["powertrain"], "power": ["powertrain"], "torque": ["powertrain"],
-    "mô-men": ["powertrain"], "xoắn": ["powertrain"], "tốc độ": ["powertrain"],
-    "tăng tốc": ["powertrain"], "acceleration": ["powertrain"], "drivetrain": ["powertrain"],
-    "mô tơ": ["powertrain"], "dẫn động": ["powertrain"],
+    "công suất": ["powertrain"],
+    "power": ["powertrain"],
+    "torque": ["powertrain"],
+    "mô-men": ["powertrain"],
+    "xoắn": ["powertrain"],
+    "tốc độ": ["powertrain"],
+    "tăng tốc": ["powertrain"],
+    "acceleration": ["powertrain"],
+    "drivetrain": ["powertrain"],
+    "mô tơ": ["powertrain"],
+    "dẫn động": ["powertrain"],
     # dimension
-    "kích thước": ["dimension"], "chiều dài": ["dimension"], "chiều rộng": ["dimension"],
-    "chiều cao": ["dimension"], "trọng lượng": ["dimension"], "wheelbase": ["dimension"],
-    "khoảng sáng gầm": ["dimension"], "cốp": ["dimension"], "trunk": ["dimension"],
+    "kích thước": ["dimension"],
+    "chiều dài": ["dimension"],
+    "chiều rộng": ["dimension"],
+    "chiều cao": ["dimension"],
+    "trọng lượng": ["dimension"],
+    "wheelbase": ["dimension"],
+    "khoảng sáng gầm": ["dimension"],
+    "cốp": ["dimension"],
+    "trunk": ["dimension"],
     # safety
-    "túi khí": ["safety"], "airbag": ["safety"], "phanh": ["safety"], "abs": ["safety"],
-    "esc": ["safety"], "an toàn": ["safety"], "isofix": ["safety"], "tpms": ["safety"],
-    "seatbelt": ["safety"], "đai an toàn": ["safety"],
+    "túi khí": ["safety"],
+    "airbag": ["safety"],
+    "phanh": ["safety"],
+    "abs": ["safety"],
+    "esc": ["safety"],
+    "an toàn": ["safety"],
+    "isofix": ["safety"],
+    "tpms": ["safety"],
+    "seatbelt": ["safety"],
+    "đai an toàn": ["safety"],
     # adas
-    "adas": ["adas"], "cruise": ["adas"], "lane": ["adas"], "collision": ["adas"],
-    "aeb": ["adas"], "blind spot": ["adas"], "parking": ["adas"],
-    "tự lái": ["adas"], "hỗ trợ lái": ["adas"], "ga tự động": ["adas"],
+    "adas": ["adas"],
+    "cruise": ["adas"],
+    "lane": ["adas"],
+    "collision": ["adas"],
+    "aeb": ["adas"],
+    "blind spot": ["adas"],
+    "parking": ["adas"],
+    "tự lái": ["adas"],
+    "hỗ trợ lái": ["adas"],
+    "ga tự động": ["adas"],
     # interior
-    "nội thất": ["interior"], "ghế": ["interior"], "màn hình": ["interior"],
-    "loa": ["interior"], "điều hòa": ["interior"], "hud": ["interior"], "display": ["interior"],
-    "vô lăng": ["interior"], "âm thanh": ["interior"], "sưởi": ["interior"],
-    "thông gió": ["interior"], "massage": ["interior"], "cửa sổ trời": ["interior"],
+    "nội thất": ["interior"],
+    "ghế": ["interior"],
+    "màn hình": ["interior"],
+    "loa": ["interior"],
+    "điều hòa": ["interior"],
+    "hud": ["interior"],
+    "display": ["interior"],
+    "vô lăng": ["interior"],
+    "âm thanh": ["interior"],
+    "sưởi": ["interior"],
+    "thông gió": ["interior"],
+    "massage": ["interior"],
+    "cửa sổ trời": ["interior"],
     # exterior
-    "ngoại thất": ["exterior"], "đèn": ["exterior"], "mâm": ["exterior"],
-    "wheel": ["exterior"], "la-zăng": ["exterior"], "headlight": ["exterior"],
-    "màu xe": ["exterior"], "gương": ["exterior"], "lốp": ["exterior"],
+    "ngoại thất": ["exterior"],
+    "đèn": ["exterior"],
+    "mâm": ["exterior"],
+    "wheel": ["exterior"],
+    "la-zăng": ["exterior"],
+    "headlight": ["exterior"],
+    "màu xe": ["exterior"],
+    "gương": ["exterior"],
+    "lốp": ["exterior"],
     # infotainment
-    "navigation": ["infotainment"], "bản đồ": ["infotainment"], "bluetooth": ["infotainment"],
-    "gaming": ["infotainment"], "trò chơi": ["infotainment"], "ota": ["infotainment"],
-    "cập nhật": ["infotainment"], "trợ lý ảo": ["infotainment"], "voice": ["infotainment"],
-    "giọng nói": ["infotainment"], "karaoke": ["infotainment"], "web": ["infotainment"],
-    "app": ["infotainment"], "ứng dụng": ["infotainment"], "kết nối": ["infotainment"],
+    "navigation": ["infotainment"],
+    "bản đồ": ["infotainment"],
+    "bluetooth": ["infotainment"],
+    "gaming": ["infotainment"],
+    "trò chơi": ["infotainment"],
+    "ota": ["infotainment"],
+    "cập nhật": ["infotainment"],
+    "trợ lý ảo": ["infotainment"],
+    "voice": ["infotainment"],
+    "giọng nói": ["infotainment"],
+    "karaoke": ["infotainment"],
+    "web": ["infotainment"],
+    "app": ["infotainment"],
+    "ứng dụng": ["infotainment"],
+    "kết nối": ["infotainment"],
     # chassis
-    "phanh": ["chassis", "safety"], "giảm xóc": ["chassis"], "suspension": ["chassis"],
-    "lái": ["chassis"], "handling": ["chassis"], "vô lăng": ["chassis", "interior"],
+    "phanh": ["chassis", "safety"],  # noqa: F601
+    "giảm xóc": ["chassis"],
+    "suspension": ["chassis"],
+    "lái": ["chassis"],
+    "handling": ["chassis"],
+    "vô lăng": ["chassis", "interior"],  # noqa: F601
     # connected
-    "sạc từ xa": ["connected"], "quản lý sạc": ["connected"], "điều khiển từ xa": ["connected"],
-    "theo dõi": ["connected"], "gps": ["connected"], "esim": ["connected"],
+    "sạc từ xa": ["connected"],
+    "quản lý sạc": ["connected"],
+    "điều khiển từ xa": ["connected"],
+    "theo dõi": ["connected"],
+    "gps": ["connected"],
+    "esim": ["connected"],
     # security
-    "chống trộm": ["security"], "khóa": ["security"], "immobilizer": ["security"],
-    "báo động": ["security"], "alarm": ["security"],
+    "chống trộm": ["security"],
+    "khóa": ["security"],
+    "immobilizer": ["security"],
+    "báo động": ["security"],
+    "alarm": ["security"],
     # convenience
-    "phanh tay điện": ["convenience"], "epb": ["convenience"], "auto hold": ["convenience"],
+    "phanh tay điện": ["convenience"],
+    "epb": ["convenience"],
+    "auto hold": ["convenience"],
     # price
-    "giá": ["price"], "price": ["price"],
+    "giá": ["price"],
+    "price": ["price"],
     # all categories
-    "phiên bản": [], "version": [],  # All categories
-    "so sánh": [], "compare": [],  # All categories
+    "phiên bản": [],
+    "version": [],  # All categories
+    "so sánh": [],
+    "compare": [],  # All categories
     "tính năng": ["adas", "interior", "exterior", "safety", "infotainment", "connected", "security", "convenience"],
     "trang bị": ["adas", "interior", "exterior", "safety", "infotainment", "connected", "security", "convenience"],
 }
@@ -194,7 +268,7 @@ def _format_colors(result: dict) -> str:
     if variants:
         # Group by color to show fee
         seen = set()
-        lines.append(f"\n  Chi tiết màu:")
+        lines.append(f"\n  Chi tiết màu:")  # noqa: F541
         for v in variants:
             key = f"{v['color']}|{v['interior']}"
             if key in seen:
@@ -245,8 +319,7 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
     source_url = result.get("source_url", "")
     lines = [f"Thông số kỹ thuật {result['model_code']}:"]
 
-    specs = [s for s in result.get("specs", [])
-             if relevant_cats is None or s["category"] in relevant_cats]
+    specs = [s for s in result.get("specs", []) if relevant_cats is None or s["category"] in relevant_cats]
 
     # Group by (category, key) while preserving order
     grouped: dict[tuple, list] = {}
@@ -297,7 +370,7 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
 
 
 def _format_search_results(result: dict) -> str:
-    lines = [f"Kết quả tìm kiếm cho: \"{result['query']}\":"]
+    lines = [f'Kết quả tìm kiếm cho: "{result["query"]}":']
     for i, r in enumerate(result.get("results", []), 1):
         src = r.get("source_url", "")
         lines.append(f"\n  [{i}] ({r['source_type']}, score={r['score']})")
@@ -337,7 +410,7 @@ def _format_links(result: dict, label: str) -> str:
     if not links:
         return f"Không tìm thấy link {label}."
     lines = [f"Link {label}:"]
-    for l in links:
+    for l in links:  # noqa: E741
         lines.append(f"  - {l['label']}: {l['url']}")
     return "\n".join(lines)
 
@@ -347,6 +420,6 @@ def _format_maintenance(result: dict) -> str:
     if not links:
         return "Không tìm thấy link bảo dưỡng."
     lines = ["Link bảo dưỡng:"]
-    for l in links:
+    for l in links:  # noqa: E741
         lines.append(f"  - Năm {l['year']}: {l['source_url']}")
     return "\n".join(lines)

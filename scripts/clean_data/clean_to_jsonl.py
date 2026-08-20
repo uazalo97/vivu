@@ -130,6 +130,7 @@ MODEL_EDITIONS = {
 # Domain chính thống — chỉ những trang này mới được trích giá vào Postgres
 AUTHORITATIVE_DOMAINS = {"vinfastauto.com", "shop.vinfastauto.com"}
 
+
 # ── Helpers ────────────────────────────────────────────────────────────────
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -137,8 +138,7 @@ def now_iso() -> str:
 
 def no_diacritics(s: str) -> str:
     """Bỏ dấu tiếng Việt → so khớp label/section không phân biệt dấu."""
-    return "".join(c for c in unicodedata.normalize("NFD", s)
-                  if unicodedata.category(c) != "Mn").replace("đ", "d")
+    return "".join(c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn").replace("đ", "d")
 
 
 def to_model_id(raw: str) -> str:
@@ -201,11 +201,20 @@ def infer_model_raw(path: Path) -> str | None:
     """Infer model_id from raw filename (vf3, vf5, vf8-the-all-new, mpv7, e34...)."""
     name = re.sub(r"[^a-z0-9]", "", path.stem.lower())
     # thứ tự quan trọng: e34 trước vf3, mpv7 trước vf7
-    for key, model in [("vfe34", "VFE34"), ("mpv7", "VFMPV7"),
-                       ("vf2", "VF2"), ("vf3", "VF3"), ("vf5", "VF5"),
-                       ("vf6", "VF6"), ("vf7", "VF7"),
-                       ("vf8theallnew", "VF8NEW"), ("vf8thenew", "VF8NEW"),
-                       ("vf8allnew", "VF8NEW"), ("vf8", "VF8"), ("vf9", "VF9")]:
+    for key, model in [
+        ("vfe34", "VFE34"),
+        ("mpv7", "VFMPV7"),
+        ("vf2", "VF2"),
+        ("vf3", "VF3"),
+        ("vf5", "VF5"),
+        ("vf6", "VF6"),
+        ("vf7", "VF7"),
+        ("vf8theallnew", "VF8NEW"),
+        ("vf8thenew", "VF8NEW"),
+        ("vf8allnew", "VF8NEW"),
+        ("vf8", "VF8"),
+        ("vf9", "VF9"),
+    ]:
         if key in name:
             return model
     return None
@@ -221,9 +230,14 @@ def classify_raw(path: Path, meta: dict[str, Any]) -> dict[str, Any] | None:
     model = infer_model_raw(path)
 
     def route(collection, category, confidence, kind):
-        return {"collection": collection, "category": category,
-                "model_id": model, "confidence": confidence,
-                "authoritative": authoritative, "kind": kind}
+        return {
+            "collection": collection,
+            "category": category,
+            "model_id": model,
+            "confidence": confidence,
+            "authoritative": authoritative,
+            "kind": kind,
+        }
 
     # Official VinFast pages
     if authoritative:
@@ -231,9 +245,17 @@ def classify_raw(path: Path, meta: dict[str, Any]) -> dict[str, Any] | None:
             return route("vivu_product_info", "thong_tin_san_pham", 1.0, "dat-coc")
         if "dich-vu-bao-duong" in url:
             return route("vivu_maintenance", "dat_lich_bao_duong", 1.0, "service")
-        if any(k in url for k in ("dich-vu-pin", "dich-vu-sua-chua",
-                                  "chinh-sach-bao-hanh", "thong-tin-cuu-ho",
-                                  "ve-chung-toi", "chinh-sach")):
+        if any(
+            k in url
+            for k in (
+                "dich-vu-pin",
+                "dich-vu-sua-chua",
+                "chinh-sach-bao-hanh",
+                "thong-tin-cuu-ho",
+                "ve-chung-toi",
+                "chinh-sach",
+            )
+        ):
             return route("vivu_policy", "chinh_sach_dich_vu", 1.0, "policy")
         return route("vivu_product_info", "thong_tin_san_pham", 0.9, "other")
 
@@ -290,8 +312,8 @@ NOISE_PATTERNS = [
     r"^\s*Hãy thử lại với từ khoá khác\s*$",
     r"^\s*Chọn\s+\w+\s*$",
     # Contact / phone / date-only lines
-    r"^[\d.\s]{9,}$",                     # phone number
-    r"^\d{1,2}\s+\d{2}-\d{4}$",           # "30 07-2026"
+    r"^[\d.\s]{9,}$",  # phone number
+    r"^\d{1,2}\s+\d{2}-\d{4}$",  # "30 07-2026"
     r"^\s*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\s*$",  # email
     r"^\s*Xin hãy gọi ngay.*$",
 ]
@@ -306,8 +328,15 @@ MONEY_RE = re.compile(
     flags=re.IGNORECASE,
 )
 PRICE_KEYWORDS = [
-    "giá bán", "giá niêm yết", "giá ưu đãi", "giá xe", "triệu đồng", "vnđ",
-    "đặt cọc", "cọc", "lăn bánh",
+    "giá bán",
+    "giá niêm yết",
+    "giá ưu đãi",
+    "giá xe",
+    "triệu đồng",
+    "vnđ",
+    "đặt cọc",
+    "cọc",
+    "lăn bánh",
 ]
 
 
@@ -384,9 +413,26 @@ def strip_price_spans(text: str) -> str:
 # (VD: bài VF2 kèm headline "Toyota Land Cruiser FJ ra mắt Việt Nam, giá đồng").
 # Drop để khỏi bẩn corpus — conservative: chỉ drop khi chắc chắn không nhắc model.
 COMPETING_BRANDS = (
-    "toyota", "honda", "hyundai", "kia", "mazda", "mitsubishi", "nissan",
-    "ford", "suzuki", "lexus", "bmw", "mercedes", "audi", "volkswagen",
-    "peugeot", "renault", "byd", "tesla", "geely", "wuling",
+    "toyota",
+    "honda",
+    "hyundai",
+    "kia",
+    "mazda",
+    "mitsubishi",
+    "nissan",
+    "ford",
+    "suzuki",
+    "lexus",
+    "bmw",
+    "mercedes",
+    "audi",
+    "volkswagen",
+    "peugeot",
+    "renault",
+    "byd",
+    "tesla",
+    "geely",
+    "wuling",
 )
 
 
@@ -418,10 +464,17 @@ def _is_offmodel_noise(chunk: dict[str, Any]) -> bool:
 # cọc". Là điều hướng/form, KHÔNG phải thông tin xe → drop ở mức chunk (vì là
 # khối đa-dòng, lọc theo từng dòng bằng NOISE_PATTERNS không đủ).
 _JUNK_SECTION_NORM = {
-    "dang ky thanh cong", "kiem tra email", "kiem tra email de kich hoat tai khoan",
-    "doi mat khau thanh cong", "nhan bao gia uu dai moi nhat",
-    "dich vu khach hang", "speak-up hotline", "speak up hotline",
-    "tien ich", "mua sam", "theo doi",
+    "dang ky thanh cong",
+    "kiem tra email",
+    "kiem tra email de kich hoat tai khoan",
+    "doi mat khau thanh cong",
+    "nhan bao gia uu dai moi nhat",
+    "dich vu khach hang",
+    "speak-up hotline",
+    "speak up hotline",
+    "tien ich",
+    "mua sam",
+    "theo doi",
 }
 _JUNK_TEXT_RE = re.compile(
     r"icon-popup-success|"
@@ -461,17 +514,20 @@ def _is_junk_chunk(chunk: dict[str, Any]) -> bool:
         if no_diacritics(sp).lower().strip() in _JUNK_SECTION_NORM:
             return True
     # (2) text khớp modal/newsletter/price-button
-    if (_JUNK_TEXT_RE.search(text)
-            or _JUNK_TEXT_NORM_RE.search(no_diacritics(text))):
+    if _JUNK_TEXT_RE.search(text) or _JUNK_TEXT_NORM_RE.search(no_diacritics(text)):
         return True
     # (3) nav menu leak: KHÔNG có section title (chunk gốc) + text là/mở đầu bằng nav items
     if len(chunk.get("section_path", [])) <= 1:
-        lines = [l.strip() for l in text.splitlines() if l.strip()]
-        nav_lines = [l for l in lines if _NAV_ITEM_RE.match(l)]
+        lines = [l.strip() for l in text.splitlines() if l.strip()]  # noqa: E741
+        nav_lines = [l for l in lines if _NAV_ITEM_RE.match(l)]  # noqa: E741
         if len(nav_lines) >= 2 and len(nav_lines) / max(len(lines), 1) >= 0.5:
             return True
-        if re.search(r"^-\s*(gi[aá] b[aá]n|gi[ớo]i thi[ệe]u|ngo[ạa]i th[ấa]t|"
-                     r"n[ộo]i th[ấa]t|th[ôo]ng s[ốo])\s*\n", text, re.MULTILINE):
+        if re.search(
+            r"^-\s*(gi[aá] b[aá]n|gi[ớo]i thi[ệe]u|ngo[ạa]i th[ấa]t|"
+            r"n[ộo]i th[ấa]t|th[ôo]ng s[ốo])\s*\n",
+            text,
+            re.MULTILINE,
+        ):
             return True
     return False
 
@@ -528,8 +584,7 @@ def extract_dat_coc_prices(text: str) -> list[dict[str, Any]]:
         flags=re.IGNORECASE,
     )
     for m in pat1.finditer(text):
-        rows.append({"label": (m.group(1) or "").strip().strip("-* "),
-                     "promo": m.group(2), "list": m.group(3)})
+        rows.append({"label": (m.group(1) or "").strip().strip("-* "), "promo": m.group(2), "list": m.group(3)})
     # Pattern 2: inline "Giá bán từ: A VNĐ* B VNĐ" trên cùng dòng
     pat2 = re.compile(
         r"(?:([^\n]{2,35})\n)?"
@@ -538,8 +593,7 @@ def extract_dat_coc_prices(text: str) -> list[dict[str, Any]]:
         flags=re.IGNORECASE,
     )
     for m in pat2.finditer(text):
-        rows.append({"label": (m.group(1) or "").strip().strip("-* "),
-                     "promo": m.group(2), "list": m.group(3)})
+        rows.append({"label": (m.group(1) or "").strip().strip("-* "), "promo": m.group(2), "list": m.group(3)})
     # Pattern 3: bold "- **Giá bán từ**: A VNĐ*" (promo only, vf7) — amount CÙNG DÒNG.
     # [ \t]* (không \s*) để không qua dòng mới; lookahead tránh trùng inline 2 giá (pat2).
     pat3 = re.compile(
@@ -553,8 +607,7 @@ def extract_dat_coc_prices(text: str) -> list[dict[str, Any]]:
         if key in seen:
             continue
         seen.add(key)
-        rows.append({"label": (m.group(1) or "").strip().strip("-* "),
-                     "promo": m.group(2), "list": m.group(2)})
+        rows.append({"label": (m.group(1) or "").strip().strip("-* "), "promo": m.group(2), "list": m.group(2)})
     # Dedupe rows by (promo, list)
     uniq: list[dict[str, Any]] = []
     seen_keys = set()
@@ -571,8 +624,9 @@ def extract_dat_coc_prices(text: str) -> list[dict[str, Any]]:
     return uniq
 
 
-def prices_to_hot_rows(prices: list[dict[str, Any]], model_id: str | None,
-                       meta: dict[str, Any]) -> list[dict[str, Any]]:
+def prices_to_hot_rows(
+    prices: list[dict[str, Any]], model_id: str | None, meta: dict[str, Any]
+) -> list[dict[str, Any]]:
     """Convert extracted prices to hot rows (edition + price_list schema).
 
     Edition được gán theo thứ tự giá tăng dần (block rẻ nhất = edition đầu của
@@ -581,9 +635,11 @@ def prices_to_hot_rows(prices: list[dict[str, Any]], model_id: str | None,
     if not model_id:
         return []
     editions = MODEL_EDITIONS.get(model_id, ["TieuChuan"])
+
     # Sắp theo list price tăng dần (fallback promo nếu list trùng)
     def price_key(p: dict[str, Any]) -> int:
         return parse_price(p.get("list")) or parse_price(p.get("promo")) or 0
+
     blocks = sorted(prices, key=price_key)
 
     rows = []
@@ -591,29 +647,30 @@ def prices_to_hot_rows(prices: list[dict[str, Any]], model_id: str | None,
         edition_id = editions[i] if i < len(editions) else "TieuChuan"
         list_vnd = parse_price(p.get("list"))
         promo_vnd = parse_price(p.get("promo"))
-        rows.append({
-            "model_id": model_id,
-            "edition_id": edition_id,
-            "model_label": MODEL_LABEL.get(model_id, model_id),
-            "edition_label": edition_id,
-            "year_range": "2026",
-            "is_active": True,
-            "price_list_vnd": list_vnd,
-            "price_promo_vnd": promo_vnd if promo_vnd and promo_vnd != list_vnd else None,
-            "promo_label": "Ưu đãi đặt cọc 2026" if promo_vnd and promo_vnd != list_vnd else "",
-            "vat_included": True,
-            "battery_included": True,
-            "valid_from": "2026-07-01",
-            "valid_to": None,
-            "updated_at": now_iso(),
-            "source_url": meta.get("source_url", ""),
-        })
+        rows.append(
+            {
+                "model_id": model_id,
+                "edition_id": edition_id,
+                "model_label": MODEL_LABEL.get(model_id, model_id),
+                "edition_label": edition_id,
+                "year_range": "2026",
+                "is_active": True,
+                "price_list_vnd": list_vnd,
+                "price_promo_vnd": promo_vnd if promo_vnd and promo_vnd != list_vnd else None,
+                "promo_label": "Ưu đãi đặt cọc 2026" if promo_vnd and promo_vnd != list_vnd else "",
+                "vat_included": True,
+                "battery_included": True,
+                "valid_from": "2026-07-01",
+                "valid_to": None,
+                "updated_at": now_iso(),
+                "source_url": meta.get("source_url", ""),
+            }
+        )
     return rows
 
 
 # ── Text → chunks ──────────────────────────────────────────────────────────
-def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any],
-                     path: Path) -> list[dict[str, Any]]:
+def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any], path: Path) -> list[dict[str, Any]]:
     """Clean raw text + split by headings (and size) into vector chunks."""
     # Loại bỏ dòng noise, nhóm theo heading
     lines = []
@@ -627,10 +684,11 @@ def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any],
 
     # Bỏ dòng lặp lại >=3 lần (nav/sidebar lặp) — giữ lần đầu
     from collections import Counter
-    line_counts = Counter(clean_line(l) for l in lines)
+
+    line_counts = Counter(clean_line(l) for l in lines)  # noqa: E741
     seen_dup: set[str] = set()
     deduped: list[str] = []
-    for l in lines:
+    for l in lines:  # noqa: E741
         key = clean_line(l)
         if line_counts.get(key, 0) >= 3:
             if key in seen_dup:
@@ -685,7 +743,11 @@ def chunks_from_text(text: str, meta: dict[str, Any], cls: dict[str, Any],
         text_type = "prose"
         if "|" in body_text and "---" in body_text:
             text_type = "table"
-        elif all(line.strip().startswith(("- ", "1. ", "2. ", "3. ", "4. ", "5. ", "6. ", "7. ", "8. ", "9. ")) for line in body_text.splitlines() if line.strip()):
+        elif all(
+            line.strip().startswith(("- ", "1. ", "2. ", "3. ", "4. ", "5. ", "6. ", "7. ", "8. ", "9. "))
+            for line in body_text.splitlines()
+            if line.strip()
+        ):
             text_type = "list"
         elif "Q:" in body_text and "A:" in body_text:
             text_type = "qa_pair"
@@ -826,8 +888,13 @@ def apply_chunking(chunks: list[dict[str, Any]], max_len: int = 800) -> list[dic
             out.append(chunk)
             continue
         lines = chunk["text"].split("\n")
-        if lines and lines[0].lstrip().startswith("|") and len(lines) >= 2 \
-                and lines[1].strip().startswith("|") and "---" in lines[1]:
+        if (
+            lines
+            and lines[0].lstrip().startswith("|")
+            and len(lines) >= 2
+            and lines[1].strip().startswith("|")
+            and "---" in lines[1]
+        ):
             pieces = split_table(chunk["text"], max_len)
         else:
             pieces = split_by_sentences(chunk["text"], max_len)
@@ -841,8 +908,13 @@ def apply_chunking(chunks: list[dict[str, Any]], max_len: int = 800) -> list[dic
 # ví dụ: `https://.../vf634chxm5b.pdf (vf6)` — label để phân loại theo model.
 _BROCHURE_LABEL_RE = re.compile(r"\(([a-z0-9\-]+)\)\s*$", re.I)
 _BROCHURE_LABEL_TO_MODEL = {
-    "vf2": "VF2", "vf3": "VF3", "vf5": "VF5", "vf6": "VF6",
-    "vf7": "VF7", "vf8": "VF8", "vf8-the-new": "VF8",
+    "vf2": "VF2",
+    "vf3": "VF3",
+    "vf5": "VF5",
+    "vf6": "VF6",
+    "vf7": "VF7",
+    "vf8": "VF8",
+    "vf8-the-new": "VF8",
     "vf9": "VF9",
 }
 
@@ -944,12 +1016,32 @@ def run(version: str = "v1", max_len: int = 800) -> int:
         return False
 
     _SPEC_LABELS = (
-        "cong suat", "mo men", "mo-men", "dung luong pin", "loai pin",
-        "quang duong", "tai trong", "trong luong", "chieu dai co so",
-        "chieu dai", "chieu rong", "chieu cao", "khoang sang", "co so",
-        "toc do toi da", "tang toc", "so cho ngoi", "cho ngoi",
-        "dan dong", "he thong treo", "treo truoc", "treo sau",
-        "thoi gian nap", "sac day", "sac nhanh", "khoang chua hanh ly",
+        "cong suat",
+        "mo men",
+        "mo-men",
+        "dung luong pin",
+        "loai pin",
+        "quang duong",
+        "tai trong",
+        "trong luong",
+        "chieu dai co so",
+        "chieu dai",
+        "chieu rong",
+        "chieu cao",
+        "khoang sang",
+        "co so",
+        "toc do toi da",
+        "tang toc",
+        "so cho ngoi",
+        "cho ngoi",
+        "dan dong",
+        "he thong treo",
+        "treo truoc",
+        "treo sau",
+        "thoi gian nap",
+        "sac day",
+        "sac nhanh",
+        "khoang chua hanh ly",
     )
 
     def _is_spec_table(chunk: dict[str, Any]) -> bool:
@@ -974,8 +1066,10 @@ def run(version: str = "v1", max_len: int = 800) -> int:
             continue
         kept.append(c)
     all_vector = kept
-    print(f"  dropped spec chunks: {n_section} (section) "
-          f"+ {n_spec_table} (spec-table pipe-delimited) | {pre} -> {len(all_vector)}")
+    print(
+        f"  dropped spec chunks: {n_section} (section) "
+        f"+ {n_spec_table} (spec-table pipe-delimited) | {pre} -> {len(all_vector)}"
+    )
 
     # Drop off-model noise (sidebar "tin liên quan" lạc tag — VD Toyota trong VF2)
     n_offmodel = 0
@@ -1009,7 +1103,8 @@ def run(version: str = "v1", max_len: int = 800) -> int:
 
     link_only = link_only_files()
     (intermediate_dir / "link_only.json").write_text(
-        json.dumps(link_only, ensure_ascii=False, indent=2), encoding="utf-8")
+        json.dumps(link_only, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
 
     print(f"[clean_to_jsonl] version={version}, files={n_files}")
     print(f"  vector chunks: {len(all_vector)}")
@@ -1022,8 +1117,9 @@ def run(version: str = "v1", max_len: int = 800) -> int:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Clean raw crawled files into intermediate JSONL.")
     ap.add_argument("--version", default="v1", help="Output version folder (default: v1)")
-    ap.add_argument("--max-len", type=int, default=800,
-                    help="Chunk max length in chars (default 800; use 400 for finer retrieval)")
+    ap.add_argument(
+        "--max-len", type=int, default=800, help="Chunk max length in chars (default 800; use 400 for finer retrieval)"
+    )
     args = ap.parse_args()
     return run(args.version, args.max_len)
 

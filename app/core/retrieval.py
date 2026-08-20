@@ -1,4 +1,4 @@
-﻿import json
+import json
 import logging
 import re
 import unicodedata
@@ -22,6 +22,7 @@ def _get_embed_client():
     global _embed_client
     if _embed_client is None:
         from openai import OpenAI
+
         _embed_client = OpenAI(
             api_key=settings.openrouter_api_key,
             base_url="https://openrouter.ai/api/v1",
@@ -30,20 +31,28 @@ def _get_embed_client():
         )
     return _embed_client
 
+
 # Collections to search. Override via QDRANT_DENSE_COLLECTIONS env var.
-import os as _os
+import os as _os  # noqa: E402
+
 _dense_env = _os.environ.get("QDRANT_DENSE_COLLECTIONS", "")
-DENSE_COLLECTIONS = [c.strip() for c in _dense_env.split(",") if c.strip()] if _dense_env else ["vivu_product_info", "vivu_policy", "vivu_maintenance"]
+DENSE_COLLECTIONS = (
+    [c.strip() for c in _dense_env.split(",") if c.strip()]
+    if _dense_env
+    else ["vivu_product_info", "vivu_policy", "vivu_maintenance"]
+)
 SPARSE_COLLECTION = "sparse"
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DATA_CLEAN_DIR = REPO_ROOT / "data" / "clean"
 
-STOPWORDS = set("""
+STOPWORDS = set(
+    """
 và của là đã đang sẽ được với cho từ đến tại cũng như hay hoặc nhưng nếu thì
 khi mà nên vì thế nên để lại vẫn còn rất chỉ mỗi này kia nào đó đây những các
 tất mọi người tôi bạn chúng ta họ nó ông bà anh chị em cùng thôi cần nếu đúng
-xin quý""".split())
+xin quý""".split()
+)
 
 TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 
@@ -127,7 +136,7 @@ def _openrouter_embed_api(texts: list[str]) -> list[list[float]]:
     batch_size = 100
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
-        batch = texts[i:i + batch_size]
+        batch = texts[i : i + batch_size]
         response = client.embeddings.create(
             model=settings.openrouter_embed_model,
             input=batch,
@@ -167,7 +176,9 @@ async def _embed_texts_cached(texts: list[str]) -> list[list[float]]:
         uncached_texts = [texts[i] for i in uncached_indices]
         loop = asyncio.get_event_loop()
         new_embeddings = await loop.run_in_executor(
-            _thread_pool, _openrouter_embed_api, uncached_texts,
+            _thread_pool,
+            _openrouter_embed_api,
+            uncached_texts,
         )
         # 3. Store in cache + fill results
         for j, idx in enumerate(uncached_indices):
@@ -287,10 +298,12 @@ class CohereReranker:
         self.api_key = api_key
         self.base_url = "https://api.cohere.ai/v1/rerank"
         self.session = requests.Session()
-        self.session.headers.update({
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json",
-        })
+        self.session.headers.update(
+            {
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            }
+        )
 
     def predict(self, pairs: list[tuple[str, str]]) -> list[float]:
         if not pairs:
@@ -300,7 +313,12 @@ class CohereReranker:
         try:
             r = self.session.post(
                 self.base_url,
-                json={"model": "rerank-multilingual-v3.0", "query": query, "documents": documents, "top_n": len(documents)},
+                json={
+                    "model": "rerank-multilingual-v3.0",
+                    "query": query,
+                    "documents": documents,
+                    "top_n": len(documents),
+                },
                 timeout=30,
             )
             r.raise_for_status()
@@ -321,6 +339,7 @@ def get_reranker():
             _reranker = CohereReranker(settings.cohere_api_key)
         else:
             from sentence_transformers import CrossEncoder
+
             _reranker = CrossEncoder(settings.rerank_model)
     return _reranker
 
@@ -399,8 +418,8 @@ def _resolve_sparse_texts(qdrant: QdrantREST, sparse_results: list[dict]) -> lis
 
 
 # ── Main search ────────────────────────────────────────────────────────────
-import asyncio
-import concurrent.futures
+import asyncio  # noqa: E402
+import concurrent.futures  # noqa: E402
 
 _thread_pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 
@@ -431,9 +450,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
     # 2. Dense search across ALL collections IN PARALLEL
     async def _dense_search(col):
         try:
-            return await loop.run_in_executor(
-                _thread_pool, qdrant.search, col, dense_vector, model_id, limit
-            )
+            return await loop.run_in_executor(_thread_pool, qdrant.search, col, dense_vector, model_id, limit)
         except Exception as e:
             logger.warning("search %s failed: %s", col, e)
             return []
@@ -449,9 +466,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
             sparse_results = await loop.run_in_executor(
                 _thread_pool, qdrant.search_sparse, SPARSE_COLLECTION, sparse_vec, model_id, limit
             )
-            sparse_results = await loop.run_in_executor(
-                _thread_pool, _resolve_sparse_texts, qdrant, sparse_results
-            )
+            sparse_results = await loop.run_in_executor(_thread_pool, _resolve_sparse_texts, qdrant, sparse_results)
         except Exception as e:
             logger.warning("sparse search failed: %s", e)
 
@@ -468,9 +483,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
         non_empty = [(i, q, d) for i, (q, d) in enumerate(pairs) if d.strip()]
         if non_empty:
             rerank_pairs = [(q, d) for _, q, d in non_empty]
-            rerank_scores = await loop.run_in_executor(
-                _thread_pool, reranker.predict, rerank_pairs
-            )
+            rerank_scores = await loop.run_in_executor(_thread_pool, reranker.predict, rerank_pairs)
             # Only apply rerank if at least one score is non-zero (rerank succeeded)
             if any(s > 0 for s in rerank_scores):
                 scores = [0.0] * len(pairs)
@@ -486,16 +499,18 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
         text = payload.get("text", "")
         if not text or not text.strip():
             continue
-        results.append({
-            "text": text,
-            "model_id": payload.get("model_id"),
-            "edition_id": payload.get("edition_id"),
-            "text_type": payload.get("text_type", ""),
-            "source_type": payload.get("source_type", ""),
-            "source_url": payload.get("source_url", ""),
-            "page": payload.get("page", ""),
-            "score": round(score, 4),
-        })
+        results.append(
+            {
+                "text": text,
+                "model_id": payload.get("model_id"),
+                "edition_id": payload.get("edition_id"),
+                "text_type": payload.get("text_type", ""),
+                "source_type": payload.get("source_type", ""),
+                "source_url": payload.get("source_url", ""),
+                "page": payload.get("page", ""),
+                "score": round(score, 4),
+            }
+        )
         if len(results) >= top_k:
             break
 

@@ -21,11 +21,15 @@ def build_graph() -> StateGraph:
     g.set_entry_point("classify")
 
     # classify → clarify/oos → respond | answer → call_tools
-    g.add_conditional_edges("classify", route_after_classify, {
-        "out_of_scope": "respond",
-        "respond": "respond",
-        "call_tools": "call_tools",
-    })
+    g.add_conditional_edges(
+        "classify",
+        route_after_classify,
+        {
+            "out_of_scope": "respond",
+            "respond": "respond",
+            "call_tools": "call_tools",
+        },
+    )
 
     # call_tools → generate (always, single LLM call)
     g.add_edge("call_tools", "generate")
@@ -34,9 +38,13 @@ def build_graph() -> StateGraph:
     g.add_edge("generate", "validate")
 
     # validate → respond
-    g.add_conditional_edges("validate", route_after_validate, {
-        "respond": "respond",
-    })
+    g.add_conditional_edges(
+        "validate",
+        route_after_validate,
+        {
+            "respond": "respond",
+        },
+    )
 
     g.add_edge("respond", END)
 

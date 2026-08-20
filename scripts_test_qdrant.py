@@ -14,10 +14,10 @@ for col in client.get_collections().collections:
         with_vectors=False,
     )
     for i, p in enumerate(points):
-        print(f"  Point {i+1}:")
+        print(f"  Point {i + 1}:")
         print(f"    ID: {p.id}")
         print(f"    Payload keys: {sorted(p.payload.keys())}")
-        
+
         # Check ALL values
         for k, v in sorted(p.payload.items()):
             if v is None:

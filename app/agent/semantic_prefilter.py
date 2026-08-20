@@ -190,8 +190,12 @@ def classify_specificity(query: str) -> SpecificityResult:
 
     except Exception as e:
         import logging
+
         logging.getLogger("semantic_prefilter").warning("Failed: %s", e)
         return SpecificityResult(
-            specific=False, category=None,
-            top_score=0.0, gap=0.0, all_scores={},
+            specific=False,
+            category=None,
+            top_score=0.0,
+            gap=0.0,
+            all_scores={},
         )

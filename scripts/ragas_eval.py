@@ -54,14 +54,16 @@ def load_test_cases(input_path: str) -> list[dict]:
             if not ground_truth:
                 continue
 
-            cases.append({
-                "test_id": test_id,
-                "query": query,
-                "ground_truth": ground_truth,
-                "expected_decision": expected_decision,
-                "conversation_id": row.get("conversation_id", "").strip(),
-                "turn_index": int(row.get("turn_index", 1) or 1),
-            })
+            cases.append(
+                {
+                    "test_id": test_id,
+                    "query": query,
+                    "ground_truth": ground_truth,
+                    "expected_decision": expected_decision,
+                    "conversation_id": row.get("conversation_id", "").strip(),
+                    "turn_index": int(row.get("turn_index", 1) or 1),
+                }
+            )
 
     return cases
 
@@ -143,12 +145,14 @@ def run_eval(input_path: str, output_path: str, api_url: str):
         from ragas.metrics import faithfulness, answer_relevancy, context_precision, context_recall
         from datasets import Dataset
 
-        eval_dataset = Dataset.from_dict({
-            "question": questions,
-            "answer": answers,
-            "contexts": contexts_list,
-            "ground_truth": ground_truths,
-        })
+        eval_dataset = Dataset.from_dict(
+            {
+                "question": questions,
+                "answer": answers,
+                "contexts": contexts_list,
+                "ground_truth": ground_truths,
+            }
+        )
 
         result = evaluate(
             eval_dataset,

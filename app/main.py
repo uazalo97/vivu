@@ -1,4 +1,4 @@
-﻿import logging
+import logging
 
 from app.tracing import setup_tracing
 
