@@ -23,11 +23,12 @@ from app.agent.nodes.classify import _CROSS_MODEL_RE, _distinct_models
 
 logger = logging.getLogger("bds.graph.call_tools")
 
-# Topic → spec category filter for get_specs
+# Topic → spec category filter for get_specs.
+# Tuple = query multiple categories (an_toàn spans safety + adas).
 _TOPIC_SPEC_CATEGORY = {
     "pin_và_sạc": "battery",
     "phạm_vi_di_chuyển": "battery",
-    "an_toàn": "safety",
+    "an_toàn": ("safety", "adas"),  # ADAS keywords (camera 360, camera lùi, ADAS...) nằm ở adas
     "nội_thất": "interior",
     "ngoại_thất": "exterior",
     "tính_năng_nổi_bật": None,  # spans adas + infotainment + connected + security + convenience
@@ -151,11 +152,16 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
 
     else:
         # Spec-based topics
-        spec_cat = _TOPIC_SPEC_CATEGORY.get(category)  # None = all categories
+        spec_cat = _TOPIC_SPEC_CATEGORY.get(category)  # None = all categories; tuple = multiple
         # Refine broad spec topics (thông_số_kỹ_thuật) by query keyword
         if spec_cat is None:
             spec_cat = _refine_spec_category(query)
-        await _cached("get_specs", "specs", get_specs_cached, model_code, version, spec_cat)
+        # an_toàn spans safety + adas (camera 360, ADAS in adas; airbags, ABS in safety)
+        if isinstance(spec_cat, (list, tuple)):
+            for sc in spec_cat:
+                await _cached("get_specs", "specs", get_specs_cached, model_code, version, sc)
+        else:
+            await _cached("get_specs", "specs", get_specs_cached, model_code, version, spec_cat)
 
         # Auto-inject KB for certain topics
         if category in _NEEDS_KB:

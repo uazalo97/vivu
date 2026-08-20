@@ -422,9 +422,13 @@ async def classify_node(state: AgentState) -> dict:
             "allowed_tools": {"list_available_models", "get_price", "get_specs", "get_colors"},
         }
 
-    # Missing version (only for version-dependent topics)
-    if has_model and not has_version and not VERSION_QUERY_RE.search(query):
-        if topic in _VERSION_DEPENDENT_TOPICS:
+    # Missing version (only for version-dependent topics).
+    # Query tự nêu model + KHÔNG nêu version → câu hỏi "mới": làm rõ phiên bản lại,
+    # KHÔNG kế thừa version từ turn trước (tránh leak cache của VF 8 Plus khi user
+    # hỏi lại "VF 8 đi được bao nhiêu km").
+    if not VERSION_QUERY_RE.search(query) and topic in _VERSION_DEPENDENT_TOPICS:
+        missing_version = (query_has_model and not query_has_version) or (has_model and not has_version)
+        if missing_version:
             model = cr.entities["model_code"]
             return {
                 "decision": "clarify",
