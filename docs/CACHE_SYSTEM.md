@@ -459,6 +459,36 @@ Giả sử 1000 requests/ngày, 30% cache hit rate:
 
 ---
 
-**Cập nhật lần cuối**: 2026-03-17  
-**Version**: 1.0  
+## Hiện trạng implement (nhánh `feature/admin`) — khớp code `app/core/cache.py`
+
+### TTL phân tầng hiện tại
+
+| Tầng | Key | TTL | Ghi chú |
+|---|---|---|---|
+| Answer single-turn | `ans:{dv}:{prompt_hash}:{model}:{sha1}` | 30 phút | CHỈ khi `history==[]` |
+| Giá | `cache:{dv}:price:{model}:{version}` | **15 phút** | `get_price_cached()` (trước đây `None` = không cache — đã fix theo `CACHING_DESIGN.md`) |
+| Specs / colors / options | `cache:{dv}:specs/colors/options:{...}` | **24 giờ** | `SPECS_TTL/COLORS_TTL/OPTIONS_TTL = 24*3600` |
+| list_models | `cache:{dv}:list_models` | 1 giờ | |
+| Hybrid search | `hs:{dv}:{sha1}:{model}:{top_k}:{rerank}` | 2 giờ | |
+| Embedding | `emb:{model}:{sha1(text)}` | 7 ngày | |
+| KB search | `cache:kb:{dv}:{model}:{sha1}` | 2 giờ | |
+| Dedupe | `dedup:{sha1(session\|msg_id)}` | 1 giờ | `SET NX` |
+| Rate limit | `rl:s:<session>:<win>` / `rl:ip:<ip>:<win>` | theo cửa sổ | 10 msg/10s + 30 msg/60s |
+
+`CACHE_TTL_BY_TOPIC` đã đổi `"giá"`/`"khuyến_mãi"` từ `None` → `15*60` (theo docs). `get_price_cached()` được dùng trong `call_tools` cho `giá`/`tổng_quan`/so-sánh → hỏi giá lần 2 sẽ `cache_hit=price`.
+
+### Fail-open & data_version
+
+- `data_version()` đọc `SELECT version FROM ingest_version WHERE is_current` (cache in-memory 60s) — promote ≤60s key tự đổi.
+- Redis lỗi → mọi `get/set` no-op (fail-open), không crash.
+- `invalidate_all()` SCAN+UNLINK theo prefix khi promote.
+
+### Tại sao vẫn thấy `miss` với giá
+
+Do TTL 15 phút mới áp dụng từ `3bf0893`; các request trước đó (schema cũ) `cache_type=none`. Với `giá`/`khuyến_mãi`, TTL ngắn là chủ ý (data biến động).
+
+---
+
+**Cập nhật lần cuối**: 2026-08-20 (feature/admin)
+**Version**: 2.0  
 **Author**: Vivu Team
