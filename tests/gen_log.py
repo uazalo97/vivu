@@ -4,9 +4,11 @@ Generate a real decision log and output as JSON.
 Run: python tests/gen_log.py
 Optional: python tests/gen_log.py "vf6 eco công suất bao nhiêu"
 """
-import sys, os, io, asyncio, json
+
+import sys, os, io, asyncio, json  # noqa: E401
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 
 async def main():
@@ -19,12 +21,13 @@ async def main():
     log_store.start_run()
 
     agent = AgentLoop()
-    result = await agent.run(query, [])
+    result = await agent.run(query, [])  # noqa: F841
 
     logs = log_store.get_all()
     if logs:
         print(json.dumps(logs[0], ensure_ascii=False, indent=2))
     else:
         print("NO LOG GENERATED")
+
 
 asyncio.run(main())

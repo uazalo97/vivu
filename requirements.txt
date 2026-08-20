@@ -1,21 +1,45 @@
-# Web API Framework
-fastapi>=0.110.0
-uvicorn[standard]>=0.28.0
-pydantic>=2.6.0
-python-dotenv>=1.0.0
+# Pipeline data end-to-end — Python 3.11+
 
-# LLM & Agent
-openai>=1.14.0
-langgraph>=0.0.26
+# Crawl (scripts/crawl.py)
+requests>=2.31
+beautifulsoup4>=4.12
+crawl4ai>=0.9.2
+pypdf>=5.0            # Crawl4AI PDF content strategy
+pymupdf>=1.24            # rút text PDF (fitz)
+# pdfplumber>=0.11       # fallback PDF (tuỳ chọn)
 
-# Database & Cache
-asyncpg>=0.29.0
-psycopg2-binary>=2.9.9
-redis>=5.0.0
-upstash-redis>=1.0.0
-qdrant-client>=1.10.0
+# OpenRouter API (embed / chat) — backend/lib/openrouter.py
+python-dotenv>=1.0
 
-# Crawl & PDF Processing
-requests>=2.31.0
-beautifulsoup4>=4.12.0
-pymupdf>=1.24.0
+# Vector DB
+qdrant-client>=1.10
+
+# PostgreSQL
+psycopg2-binary>=2.9
+
+# (cũ) clean brochure mục 02
+jinja2>=3.1
+pyyaml>=6.0
+
+# App (FastAPI)
+fastapi>=0.104
+uvicorn>=0.24
+asyncpg>=0.29
+openai>=1.6
+
+# Agent graph
+langgraph>=0.2
+
+# Eval
+ragas>=0.1
+datasets>=2.14
+pandas>=2.0
+
+# Tracing (optional)
+arize-phoenix>=4.0
+openinference-instrumentation-openai>=0.1
+opentelemetry-api>=1.20
+opentelemetry-sdk>=1.20
+
+# Redis (session store + tool-result cache)
+redis>=5.0

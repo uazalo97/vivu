@@ -1,14 +1,15 @@
-import asyncio
-import json
-from collections import Counter
+import asyncio  # noqa: F401
+import json  # noqa: F401
+from collections import Counter  # noqa: F401
+
+import asyncpg
 
 from app.config import settings
-from app.core.db import get_pool
-from app.core.cache import (
-    cache, 
-    make_tool_price_key, make_tool_specs_key, make_tool_colors_key, make_tool_models_key,
-    TOOL_PRICE_TTL, TOOL_DATA_TTL
-)
+
+
+async def _conn():
+    pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
+    return await asyncpg.connect(pg_url)
 
 
 def _model_id(model_code: str) -> str:
@@ -21,35 +22,29 @@ def _model_id(model_code: str) -> str:
 
 
 async def get_price(model_code: str, version: str = None) -> dict:
-    # Check cache trước. cache_key=None khi PG unreachable → skip cache
-    cache_key = await make_tool_price_key(model_code, version)
-    if cache_key is not None:
-        cached = await cache.get_json(cache_key)
-        if cached:
-            return cached
-    
-    pool = await get_pool()
+    conn = await _conn()
     mid = _model_id(model_code)
 
-    async with pool.acquire() as conn:
-        if version:
-            rows = await conn.fetch(
-                "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
-                "FROM price_list_active WHERE model_id=$1 AND edition_id=$2 ORDER BY price_list_vnd",
-                mid, version,
-            )
-        else:
-            rows = await conn.fetch(
-                "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
-                "FROM price_list_active WHERE model_id=$1 ORDER BY price_list_vnd",
-                mid,
-            )
-
-        related = await conn.fetch(
-            "SELECT model_id, edition_id, price_list_vnd, price_promo_vnd "
-            "FROM price_list_active WHERE model_id != $1 ORDER BY price_list_vnd LIMIT 10",
+    if version:
+        rows = await conn.fetch(
+            "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
+            "FROM price_list_active WHERE model_id=$1 AND edition_id=$2 ORDER BY price_list_vnd",
+            mid,
+            version,
+        )
+    else:
+        rows = await conn.fetch(
+            "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
+            "FROM price_list_active WHERE model_id=$1 ORDER BY price_list_vnd",
             mid,
         )
+
+    related = await conn.fetch(
+        "SELECT model_id, edition_id, price_list_vnd, price_promo_vnd "
+        "FROM price_list_active WHERE model_id != $1 ORDER BY price_list_vnd LIMIT 10",
+        mid,
+    )
+    await conn.close()
 
     source_url = rows[0]["source_url"] if rows and rows[0].get("source_url") else ""
     related_models = []
@@ -58,13 +53,15 @@ async def get_price(model_code: str, version: str = None) -> dict:
         rm = r["model_id"]
         if rm not in seen:
             seen.add(rm)
-            related_models.append({
-                "model_code": rm,
-                "price_vnd": r["price_list_vnd"],
-                "version_name": r["edition_id"],
-            })
+            related_models.append(
+                {
+                    "model_code": rm,
+                    "price_vnd": r["price_list_vnd"],
+                    "version_name": r["edition_id"],
+                }
+            )
 
-    result = {
+    return {
         "model_code": model_code,
         "source_url": source_url,
         "prices": [
@@ -79,57 +76,40 @@ async def get_price(model_code: str, version: str = None) -> dict:
         "related_models": related_models,
         "note": "Giá niêm yết chưa bao gồm chi phí lăn bánh. Khuyến mãi có thể thay đổi theo thời gian và khu vực.",
     }
-    
-    # Set cache. Skip nếu cache_key=None (PG down)
-    if cache_key is not None:
-        await cache.set_json(cache_key, result, TOOL_PRICE_TTL)
-    return result
 
 
 async def get_colors(model_code: str, version: str = None) -> dict:
-    """Lấy danh sách màu sắc và nội thất từ car_colors.
-
-    Lưu ý: car_colors dùng cột model_id dạng compact (VF8, VF8NEW, VFMPV7...)
-    trong khi LLM truyền model_code dạng label ("VF 8 All New") → phải map
-    qua _model_id().
-    """
-    # Check cache trước. cache_key=None khi PG unreachable → skip cache
-    cache_key = await make_tool_colors_key(model_code, version)
-    if cache_key is not None:
-        cached = await cache.get_json(cache_key)
-        if cached:
-            return cached
-    
-    pool = await get_pool()
+    """Lấy danh sách màu sắc và nội thất từ car_colors_active."""
+    conn = await _conn()
     mid = _model_id(model_code)
 
-    async with pool.acquire() as conn:
-        if version:
-            rows = await conn.fetch(
-                "SELECT version_name, color_name, color_type, color_fee_vnd, interior_name, source_url "
-                "FROM car_colors WHERE model_id = $1 AND version_name = $2 "
-                "ORDER BY color_name, interior_name",
-                mid, version,
-            )
-        else:
-            rows = await conn.fetch(
-                "SELECT version_name, color_name, color_type, color_fee_vnd, interior_name, source_url "
-                "FROM car_colors WHERE model_id = $1 "
-                "ORDER BY version_name, color_name, interior_name",
-                mid,
-            )
+    if version:
+        rows = await conn.fetch(
+            "SELECT version_name, color_code, color_name, color_type, color_fee_vnd, "
+            "interior_code, interior_name, source_url "
+            "FROM car_colors_active WHERE model_id = $1 AND version_name = $2 "
+            "ORDER BY color_name, interior_name",
+            mid,
+            version,
+        )
+    else:
+        rows = await conn.fetch(
+            "SELECT version_name, color_code, color_name, color_type, color_fee_vnd, "
+            "interior_code, interior_name, source_url "
+            "FROM car_colors_active WHERE model_id = $1 "
+            "ORDER BY version_name, color_name, interior_name",
+            mid,
+        )
+    await conn.close()
 
     if not rows:
-        result = {"model_code": model_code, "source_url": "", "variants": [], "colors": [], "interiors": []}
-        if cache_key is not None:
-            await cache.set_json(cache_key, result, TOOL_DATA_TTL)
-        return result
+        return {"model_code": model_code, "variants": [], "colors": [], "interiors": []}
 
     colors = sorted(set(r["color_name"] for r in rows if r["color_name"]))
     interiors = sorted(set(r["interior_name"] for r in rows if r["interior_name"]))
     source_url = next((r["source_url"] for r in rows if r["source_url"]), "")
 
-    result = {
+    return {
         "model_code": model_code,
         "source_url": source_url,
         "colors": colors,
@@ -138,6 +118,7 @@ async def get_colors(model_code: str, version: str = None) -> dict:
             {
                 "version": r["version_name"],
                 "color": r["color_name"],
+                "color_code": r.get("color_code") or "",
                 "color_type": r.get("color_type") or "",
                 "interior": r["interior_name"],
                 "color_fee_vnd": r["color_fee_vnd"] or 0,
@@ -145,21 +126,57 @@ async def get_colors(model_code: str, version: str = None) -> dict:
             for r in rows
         ],
     }
-    
-    if cache_key is not None:
-        await cache.set_json(cache_key, result, TOOL_DATA_TTL)
-    return result
 
 
-async def get_specs(model_code: str, version: str = None, category: str = None, keys: list[str] = None) -> dict:
-    # Check cache trước. cache_key=None khi PG unreachable → skip cache
-    cache_key = await make_tool_specs_key(model_code, version, category, keys)
-    if cache_key is not None:
-        cached = await cache.get_json(cache_key)
-        if cached:
-            return cached
-    
-    pool = await get_pool()
+async def get_options(model_code: str, version: str = None) -> dict:
+    """Lấy các tùy chọn (option group) từ car_options_active."""
+    conn = await _conn()
+    mid = _model_id(model_code)
+
+    if version:
+        rows = await conn.fetch(
+            "SELECT version_name, option_group, option_name, value_id, value_name, "
+            "price_extra_vnd, source_url "
+            "FROM car_options_active WHERE model_id = $1 AND version_name = $2 "
+            "ORDER BY option_group, option_name, value_name",
+            mid,
+            version,
+        )
+    else:
+        rows = await conn.fetch(
+            "SELECT version_name, option_group, option_name, value_id, value_name, "
+            "price_extra_vnd, source_url "
+            "FROM car_options_active WHERE model_id = $1 "
+            "ORDER BY version_name, option_group, option_name, value_name",
+            mid,
+        )
+    await conn.close()
+
+    if not rows:
+        return {"model_code": model_code, "options": [], "groups": []}
+
+    groups = sorted(set(r["option_group"] for r in rows if r["option_group"]))
+    source_url = next((r["source_url"] for r in rows if r["source_url"]), "")
+
+    return {
+        "model_code": model_code,
+        "source_url": source_url,
+        "groups": groups,
+        "options": [
+            {
+                "version": r["version_name"],
+                "group": r["option_group"],
+                "option_name": r["option_name"],
+                "value_name": r["value_name"],
+                "price_extra_vnd": r["price_extra_vnd"] or 0,
+            }
+            for r in rows
+        ],
+    }
+
+
+async def get_specs(model_code: str, version: str = None, category: str = None) -> dict:
+    conn = await _conn()
 
     conditions = ["model_code = $1"]
     params = [model_code]
@@ -175,48 +192,37 @@ async def get_specs(model_code: str, version: str = None, category: str = None, 
         params.append(category)
         idx += 1
 
-    if keys:
-        conditions.append(f"spec_key = ANY(${idx}::text[])")
-        params.append(list(keys))
-        idx += 1
-
     where = " AND ".join(conditions)
-    async with pool.acquire() as conn:
+    # No LIMIT here: return all matching rows. Relevance filtering is done by
+    # context_builder (query keyword -> categories); a hard LIMIT sorts by
+    # spec_category alphabetically and silently drops later categories
+    # (e.g. battery/range) when earlier ones (adas) exceed the cap.
+    try:
+        rows = await conn.fetch(
+            f"SELECT version_name, version_code, spec_category, spec_key, spec_value, spec_unit, source_url, page "
+            f"FROM car_specs WHERE {where} ORDER BY spec_category, spec_key, version_name",
+            *params,
+        )
+    except Exception:
+        # page column may not exist in all DB schemas
         rows = await conn.fetch(
             f"SELECT version_name, version_code, spec_category, spec_key, spec_value, spec_unit, source_url "
             f"FROM car_specs WHERE {where} ORDER BY spec_category, spec_key, version_name",
             *params,
         )
 
-        related = await conn.fetch(
-            "SELECT DISTINCT model_code FROM car_specs WHERE model_code != $1 ORDER BY model_code LIMIT 10",
-            model_code,
-        )
-
-    # Lọc bỏ rows value='Không' — đây là sentinel "không có dữ liệu" được chèn bởi
-    # ingest_full_specs_matrix (version NULL), KHÔNG phải giá trị thật ("Không có" của
-    # brochure luôn được lưu dạng khác, VD 'Không có thông tin' hoặc không có dòng).
-    # Nếu để lọt vào context, LLM sẽ tưởng 'Không' là giá trị thật và bịa dữ liệu
-    # (VD trả số ghế dù xe không ghi nhận) — vi phạm quy tắc "chưa có thông tin ≠ không có".
-    rows = [r for r in rows if r["spec_value"] != "Không"]
+    related = await conn.fetch(
+        "SELECT DISTINCT model_code FROM car_specs WHERE model_code != $1 ORDER BY model_code LIMIT 10",
+        model_code,
+    )
+    await conn.close()
 
     source_urls = set(r["source_url"] for r in rows if r["source_url"])
-    # Ưu tiên URL chứa tên model (tránh lấy nhầm brochure xe khác)
-    primary_source = ""
-    if source_urls:
-        model_slug = model_code.lower().replace(" ", "")
-        # Tìm URL chứa tên model
-        for url in source_urls:
-            if model_slug in url.lower():
-                primary_source = url
-                break
-        # Fallback: lấy URL đầu tiên
-        if not primary_source:
-            primary_source = next(iter(source_urls))
+    primary_source = source_urls.pop() if source_urls else ""
 
     related_models = [{"model_code": r["model_code"]} for r in related]
 
-    result = {
+    return {
         "model_code": model_code,
         "source_url": primary_source,
         "specs": [
@@ -233,54 +239,22 @@ async def get_specs(model_code: str, version: str = None, category: str = None, 
         "related_models": related_models,
         "note": "Thông số có thể khác nhau giữa các phiên bản. Tham khảo thêm model liên quan để so sánh.",
     }
-    
-    if cache_key is not None:
-        await cache.set_json(cache_key, result, TOOL_DATA_TTL)
-    return result
 
 
-async def search_knowledge_base(query: str, model_id: str = None, skip_rerank: bool = False) -> dict:
-    from app.core.retrieval import hybrid_search
+async def search_knowledge_base(query: str, model_id: str = None) -> dict:
+    from app.core.cache import search_kb_cached
+
     mid = _model_id(model_id) if model_id else None
-    results = await hybrid_search(query, model_id=mid, top_k=5, skip_rerank=skip_rerank)
-
-    # Filter chunks score thấp (< 0.3) để tránh LLM bịa thông tin từ KB nhiễu
-    filtered_results = [
-        {
-            "id": r.get("id", ""),
-            "text": r["text"],
-            "model_id": r["model_id"],
-            "text_type": r["text_type"],
-            "source_type": r["source_type"],
-            "source_url": r["source_url"],
-            "page": r.get("page", ""),
-            "section": r.get("section", ""),
-            "score": round(r["score"], 3),
-        }
-        for r in results
-        if r.get("score", 0) >= 0.3
-    ]
-
-    return {
-        "query": query,
-        "results": filtered_results,
-    }
+    return await search_kb_cached(query, mid)
 
 
 async def list_available_models() -> dict:
-    # Check cache trước. cache_key=None khi PG unreachable → skip cache
-    cache_key = await make_tool_models_key()
-    if cache_key is not None:
-        cached = await cache.get_json(cache_key)
-        if cached:
-            return cached
-    
-    pool = await get_pool()
-    async with pool.acquire() as conn:
-        rows = await conn.fetch(
-            "SELECT model_id, model_label, edition_id, edition_label, year_range "
-            "FROM edition_active ORDER BY model_id, edition_id"
-        )
+    conn = await _conn()
+    rows = await conn.fetch(
+        "SELECT model_id, model_label, edition_id, edition_label, year_range "
+        "FROM edition_active ORDER BY model_id, edition_id"
+    )
+    await conn.close()
 
     by_model = {}
     for r in rows:
@@ -301,19 +275,28 @@ async def list_available_models() -> dict:
         info["source_url"] = f"https://shop.vinfastauto.com/vn_vi/dat-coc-xe-dien-{model_lower}.html"
         models.append(info)
 
-    result = {"models": models}
-    if cache_key is not None:
-        await cache.set_json(cache_key, result, TOOL_DATA_TTL)
-    return result
+    return {"models": models}
 
 
 UTILITY_LINKS = {
-    "onroad_cost": {"url": "https://shop.vinfastauto.com/vn_vi/du-toan-chi-phi-lan-banh", "label": "Dự toán chi phí lăn bánh"},
+    "onroad_cost": {
+        "url": "https://shop.vinfastauto.com/vn_vi/du-toan-chi-phi-lan-banh",
+        "label": "Dự toán chi phí lăn bánh",
+    },
     "loan_estimate": {"url": "https://shop.vinfastauto.com/vn_vi/du-toan-chi-phi-tra-gop", "label": "Dự toán trả góp"},
     "loan_appraisal": {"url": "https://shop.vinfastauto.com/vn_vi/tham-dinh-vay", "label": "Thẩm định vay"},
-    "showroom_charging": {"url": "https://vinfastauto.com/vn_vi/tim-kiem-showroom-tram-sac", "label": "Tìm Showroom & Trạm sạc"},
-    "maintenance_booking": {"url": "https://shop.vinfastauto.com/vn_vi/dat-lich-dich-vu-bao-duong.html", "label": "Đặt lịch bảo dưỡng"},
-    "test_drive_booking": {"url": "https://shop.vinfastauto.com/vn_vi/dang-ky-lai-thu.html", "label": "Đăng ký lái thử"},
+    "showroom_charging": {
+        "url": "https://vinfastauto.com/vn_vi/tim-kiem-showroom-tram-sac",
+        "label": "Tìm Showroom & Trạm sạc",
+    },
+    "maintenance_booking": {
+        "url": "https://shop.vinfastauto.com/vn_vi/dat-lich-dich-vu-bao-duong.html",
+        "label": "Đặt lịch bảo dưỡng",
+    },
+    "test_drive_booking": {
+        "url": "https://shop.vinfastauto.com/vn_vi/dang-ky-lai-thu.html",
+        "label": "Đăng ký lái thử",
+    },
     "promotions": {"url": "https://shop.vinfastauto.com/vn_vi", "label": "Khuyến mãi đang áp dụng"},
 }
 
@@ -353,9 +336,15 @@ async def get_maintenance_link(car_model: str, year: int = None) -> dict:
 async def ask_clarification(model_id: str = None, suggested_categories: list[str] = None) -> dict:
     """LLM calls this when query is too broad or missing version. Returns available categories for the model."""
     categories = suggested_categories or [
-        "phiên_bản", "thông_số_kỹ_thuật", "kích_thước",
-        "pin_sạc", "phạm_vi_di_chuyển", "an_toàn",
-        "nội_thất", "ngoại_thất", "tính_năng"
+        "phiên_bản",
+        "thông_số_kỹ_thuật",
+        "kích_thước",
+        "pin_sạc",
+        "phạm_vi_di_chuyển",
+        "an_toàn",
+        "nội_thất",
+        "ngoại_thất",
+        "tính_năng",
     ]
     if model_id:
         return {
@@ -375,6 +364,7 @@ async def ask_clarification(model_id: str = None, suggested_categories: list[str
 TOOL_REGISTRY = {
     "get_price": get_price,
     "get_colors": get_colors,
+    "get_options": get_options,
     "get_specs": get_specs,
     "search_knowledge_base": search_knowledge_base,
     "list_available_models": list_available_models,

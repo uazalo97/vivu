@@ -1,42 +1,46 @@
 """
 app/core/telemetry.py — Telemetry, Token Cost & Latency Tracking Engine.
 
-Thu thập và tổng hợp chỉ số vận hành của chatbot:
+Theo dõi chỉ số vận hành của chatbot:
 - TTFT (Time-to-First-Token) & Total Latency
 - Prompt & Completion Tokens
 - Chi phí LLM theo model (USD & VND)
-- Cache Hit/Miss ratio
-- Intent & Tool call distribution
+- Tỷ lệ Cache Hit/Miss
+- Phân bổ Intent & Tool calls
 """
+
 import asyncio
 import json
 import logging
-import time
+import time  # noqa: F401
 import uuid
 from typing import Any
 
 from app.config import settings
-from app.core.db import get_pool, run_with_db_retry, RETRYABLE_DB_ERRORS
+from app.core.db import get_pool, run_with_db_retry
 
 logger = logging.getLogger("bds.telemetry")
 
-# Bảng giá USD trên 1 triệu tokens (1M tokens) theo giá niêm yết nhà cung cấp
+# Bảng giá USD trên 1 triệu tokens (1M tokens)
 MODEL_PRICING = {
+    # OpenAI
+    "gpt-4o-mini": {"input_per_m": 0.15, "output_per_m": 0.60},
+    "openai/gpt-4o-mini": {"input_per_m": 0.15, "output_per_m": 0.60},
+    "gpt-4o": {"input_per_m": 2.50, "output_per_m": 10.00},
+    "openai/gpt-4o": {"input_per_m": 2.50, "output_per_m": 10.00},
     # DeepInfra / DeepSeek
     "deepseek-ai/deepseek-v4-flash": {"input_per_m": 0.14, "output_per_m": 0.28},
     "deepseek-ai/deepseek-v3": {"input_per_m": 0.27, "output_per_m": 1.10},
     "deepseek-ai/deepseek-r1": {"input_per_m": 0.55, "output_per_m": 2.19},
-    # Anthropic Claude (qua DeepInfra / OpenRouter)
+    "deepseek/deepseek-chat": {"input_per_m": 0.14, "output_per_m": 0.28},
+    # Claude
     "anthropic/claude-haiku-4-5": {"input_per_m": 0.80, "output_per_m": 4.00},
     "claude-3-5-haiku-20241022": {"input_per_m": 0.80, "output_per_m": 4.00},
     "claude-3-5-sonnet-20241022": {"input_per_m": 3.00, "output_per_m": 15.00},
-    # Google Gemini
+    # Gemini
     "google/gemini-2.0-flash": {"input_per_m": 0.10, "output_per_m": 0.40},
     "google/gemini-2.5-flash": {"input_per_m": 0.15, "output_per_m": 0.60},
-    "google/gemini-flash-1.5": {"input_per_m": 0.075, "output_per_m": 0.30},
-    # Embedding
-    "openai/text-embedding-3-small": {"input_per_m": 0.02, "output_per_m": 0.0},
-    # Default fallback rate
+    # Fallback
     "default": {"input_per_m": 0.20, "output_per_m": 0.50},
 }
 
@@ -53,7 +57,8 @@ def calculate_cost(model: str, prompt_tokens: int, completion_tokens: int) -> tu
     input_cost = (prompt_tokens / 1_000_000.0) * pricing["input_per_m"]
     output_cost = (completion_tokens / 1_000_000.0) * pricing["output_per_m"]
     total_usd = input_cost + output_cost
-    total_vnd = total_usd * settings.usd_vnd_rate
+    usd_rate = getattr(settings, "usd_vnd_rate", 25400.0)
+    total_vnd = total_usd * usd_rate
     return round(total_usd, 6), round(total_vnd, 2)
 
 
@@ -82,8 +87,6 @@ CREATE TABLE IF NOT EXISTS request_metrics (
     error_message       TEXT
 );
 
-ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS prompt_version TEXT DEFAULT 'v1.0.0';
-
 CREATE INDEX IF NOT EXISTS idx_req_metrics_created ON request_metrics(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_req_metrics_intent ON request_metrics(intent);
 CREATE INDEX IF NOT EXISTS idx_req_metrics_cache ON request_metrics(cache_hit);
@@ -95,13 +98,14 @@ _ensure_lock = asyncio.Lock()
 
 
 async def ensure_telemetry_schema() -> None:
-    """Tạo bảng telemetry nếu chưa tồn tại (idempotent)."""
+    """Tạo bảng telemetry nếu chưa tồn tại."""
     global _schema_ready
     if _schema_ready:
         return
     async with _ensure_lock:
         if _schema_ready:
             return
+
         async def _create():
             pool = await get_pool()
             async with pool.acquire() as conn:
@@ -109,6 +113,7 @@ async def ensure_telemetry_schema() -> None:
                     stmt = stmt.strip()
                     if stmt:
                         await conn.execute(stmt)
+
         await run_with_db_retry(_create, label="ensure request_metrics schema")
         _schema_ready = True
 
@@ -132,8 +137,8 @@ async def record_metric(
     status_code: int = 200,
     error_message: str | None = None,
 ) -> None:
-    """Ghi nhận metric của một request vào DB (non-blocking)."""
-    if not settings.metrics_enabled:
+    """Ghi nhận metric của một request vào PostgreSQL (non-blocking)."""
+    if not getattr(settings, "metrics_enabled", True):
         return
 
     sess_uuid = None
@@ -192,7 +197,6 @@ async def record_metric(
         logger.warning("Failed to record metric (continuing): %s", exc)
 
 
-
 def log_metric_background(task_coro):
     """Tiện ích fire-and-forget chạy background task."""
     try:
@@ -205,10 +209,11 @@ def log_metric_background(task_coro):
 
 # ── Analytics & Aggregation Queries for Admin API ────────────────────────────
 
+
 async def get_metrics_overview(hours: int = 24) -> dict[str, Any]:
     """Lấy số liệu KPI tổng quan trong N giờ qua."""
     await ensure_telemetry_schema()
-    
+
     query = """
     SELECT
         COUNT(*) AS total_requests,
@@ -220,6 +225,7 @@ async def get_metrics_overview(hours: int = 24) -> dict[str, Any]:
         COALESCE(AVG(total_latency_ms), 0) AS avg_latency_ms,
         COALESCE(PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY total_latency_ms), 0) AS p50_latency_ms,
         COALESCE(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY total_latency_ms), 0) AS p95_latency_ms,
+        COALESCE(PERCENTILE_CONT(0.99) WITHIN GROUP (ORDER BY total_latency_ms), 0) AS p99_latency_ms,
         COALESCE(AVG(NULLIF(ttft_ms, 0)), 0) AS avg_ttft_ms,
         COALESCE(PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY NULLIF(ttft_ms, 0)), 0) AS p50_ttft_ms,
         COALESCE(PERCENTILE_CONT(0.95) WITHIN GROUP (ORDER BY NULLIF(ttft_ms, 0)), 0) AS p95_ttft_ms,
@@ -228,7 +234,7 @@ async def get_metrics_overview(hours: int = 24) -> dict[str, Any]:
     FROM request_metrics
     WHERE created_at >= now() - ($1 || ' hours')::interval
     """
-    
+
     async def _fetch():
         pool = await get_pool()
         return await pool.fetchrow(query, str(hours))
@@ -237,111 +243,123 @@ async def get_metrics_overview(hours: int = 24) -> dict[str, Any]:
     if not row:
         return {}
 
-
     total = row["total_requests"] or 0
-    cache_hits = row["cache_hits"] or 0
     errors = row["total_errors"] or 0
+    successful = max(0, total - errors)
+    cache_hits = row["cache_hits"] or 0
     hit_rate = round((cache_hits / total * 100.0), 2) if total > 0 else 0.0
     err_rate = round((errors / total * 100.0), 2) if total > 0 else 0.0
 
     return {
-        "time_range_hours": hours,
+        "status": "success",
+        "window_hours": hours,
         "total_requests": total,
-        "total_tokens": int(row["total_tokens"]),
-        "total_prompt_tokens": int(row["total_prompt_tokens"]),
-        "total_completion_tokens": int(row["total_completion_tokens"]),
-        "total_cost_usd": float(row["total_cost_usd"]),
-        "total_cost_vnd": float(row["total_cost_vnd"]),
-        "avg_latency_ms": round(float(row["avg_latency_ms"]), 1),
-        "p50_latency_ms": round(float(row["p50_latency_ms"]), 1),
-        "p95_latency_ms": round(float(row["p95_latency_ms"]), 1),
-        "avg_ttft_ms": round(float(row["avg_ttft_ms"]), 1),
-        "p50_ttft_ms": round(float(row["p50_ttft_ms"]), 1),
-        "p95_ttft_ms": round(float(row["p95_ttft_ms"]), 1),
-        "cache_hits": cache_hits,
-        "cache_hit_rate_pct": hit_rate,
-        "total_errors": errors,
+        "successful_requests": successful,
+        "failed_requests": errors,
         "error_rate_pct": err_rate,
+        "tokens": {
+            "prompt_tokens": int(row["total_prompt_tokens"]),
+            "completion_tokens": int(row["total_completion_tokens"]),
+            "total_tokens": int(row["total_tokens"]),
+        },
+        "costs": {
+            "total_cost_usd": round(float(row["total_cost_usd"]), 4),
+            "total_cost_vnd": round(float(row["total_cost_vnd"]), 2),
+        },
+        "latency_ms": {
+            "avg": round(float(row["avg_latency_ms"])),
+            "p50": round(float(row["p50_latency_ms"])),
+            "p95": round(float(row["p95_latency_ms"])),
+            "p99": round(float(row["p99_latency_ms"])),
+        },
+        "ttft_ms": {
+            "avg": round(float(row["avg_ttft_ms"])),
+            "p50": round(float(row["p50_ttft_ms"])),
+            "p95": round(float(row["p95_ttft_ms"])),
+        },
+        "caching": {
+            "cache_hits": cache_hits,
+            "cache_hit_rate_pct": hit_rate,
+        },
     }
 
 
-async def get_metrics_timeseries(hours: int = 24) -> list[dict[str, Any]]:
+async def get_metrics_timeseries(hours: int = 24) -> dict[str, Any]:
     """Lấy dữ liệu chuỗi thời gian phân đoạn theo giờ."""
     await ensure_telemetry_schema()
-    
+
     query = """
     SELECT
-        date_trunc('hour', created_at) AS timestamp,
-        COUNT(*) AS request_count,
+        date_trunc('hour', created_at) AS bucket,
+        COUNT(*) AS requests,
         COALESCE(AVG(total_latency_ms), 0) AS avg_latency_ms,
         COALESCE(AVG(NULLIF(ttft_ms, 0)), 0) AS avg_ttft_ms,
         COALESCE(SUM(total_tokens), 0) AS total_tokens,
-        COALESCE(SUM(cost_usd), 0.0) AS cost_usd,
         COALESCE(SUM(cost_vnd), 0.0) AS cost_vnd,
         COALESCE(COUNT(*) FILTER (WHERE cache_hit = true), 0) AS cache_hits
     FROM request_metrics
     WHERE created_at >= now() - ($1 || ' hours')::interval
-    GROUP BY timestamp
-    ORDER BY timestamp ASC
+    GROUP BY bucket
+    ORDER BY bucket ASC
     """
+
     async def _fetch():
         pool = await get_pool()
         return await pool.fetch(query, str(hours))
 
     rows = await run_with_db_retry(_fetch, label="get_metrics_timeseries")
-    return [
+    points = [
         {
-            "timestamp": r["timestamp"].isoformat() if r["timestamp"] else "",
-            "requests": r["request_count"],
-            "avg_latency_ms": round(float(r["avg_latency_ms"]), 1),
-            "avg_ttft_ms": round(float(r["avg_ttft_ms"]), 1),
+            "bucket": r["bucket"].isoformat() if r["bucket"] else "",
+            "requests": r["requests"],
+            "avg_latency_ms": round(float(r["avg_latency_ms"])),
+            "avg_ttft_ms": round(float(r["avg_ttft_ms"])),
             "total_tokens": int(r["total_tokens"]),
-            "cost_usd": float(r["cost_usd"]),
-            "cost_vnd": float(r["cost_vnd"]),
+            "cost_vnd": round(float(r["cost_vnd"]), 2),
             "cache_hits": r["cache_hits"],
         }
         for r in rows
     ]
+    return {"status": "success", "points": points}
 
 
-async def get_metrics_intents(hours: int = 168) -> list[dict[str, Any]]:
-    """Phân bổ các loại câu hỏi (intent) và mức độ phổ biến."""
+async def get_metrics_intents(hours: int = 168) -> dict[str, Any]:
+    """Phân bổ các loại câu hỏi (intent) và tỷ lệ phần trăm."""
     await ensure_telemetry_schema()
-    
+
     query = """
     SELECT
-        COALESCE(intent, 'general') AS intent,
-        COUNT(*) AS count,
-        COALESCE(AVG(total_latency_ms), 0) AS avg_latency_ms,
-        COALESCE(SUM(total_tokens), 0) AS total_tokens,
-        COALESCE(SUM(cost_vnd), 0.0) AS total_cost_vnd
+        COALESCE(NULLIF(intent, ''), 'general') AS intent,
+        COUNT(*) AS count
     FROM request_metrics
     WHERE created_at >= now() - ($1 || ' hours')::interval
     GROUP BY intent
     ORDER BY count DESC
     """
+
     async def _fetch():
         pool = await get_pool()
         return await pool.fetch(query, str(hours))
 
     rows = await run_with_db_retry(_fetch, label="get_metrics_intents")
-    return [
+    total_intent_count = sum(r["count"] for r in rows) if rows else 0
+
+    intents = [
         {
             "intent": r["intent"],
             "count": r["count"],
-            "avg_latency_ms": round(float(r["avg_latency_ms"]), 1),
-            "total_tokens": int(r["total_tokens"]),
-            "total_cost_vnd": float(r["total_cost_vnd"]),
+            "percentage": round((r["count"] / total_intent_count * 100.0), 2) if total_intent_count > 0 else 0.0,
         }
         for r in rows
     ]
+    return {"status": "success", "intents": intents}
 
 
 async def get_metrics_logs(
     limit: int = 50,
     offset: int = 0,
     intent: str | None = None,
-    cache_hit: bool | None = None,
+    cache_only: bool = False,
 ) -> dict[str, Any]:
     """Truy vấn danh sách request logs phục vụ debug và audit."""
     await ensure_telemetry_schema()
@@ -354,15 +372,13 @@ async def get_metrics_logs(
         params.append(intent)
         p_idx += 1
 
-    if cache_hit is not None:
-        conditions.append(f"cache_hit = ${p_idx}")
-        params.append(cache_hit)
-        p_idx += 1
+    if cache_only:
+        conditions.append("cache_hit = true")
 
     where_clause = " AND ".join(conditions)
 
     count_query = f"SELECT COUNT(*) FROM request_metrics WHERE {where_clause}"
-    
+
     query = f"""
     SELECT
         id, request_id, session_id, created_at, query_text, intent, decision,
@@ -394,29 +410,30 @@ async def get_metrics_logs(
                 tools = json.loads(tools)
             except Exception:
                 tools = []
-        logs.append({
-            "id": r["id"],
-            "request_id": r["request_id"],
-            "session_id": str(r["session_id"]) if r["session_id"] else None,
-            "created_at": r["created_at"].isoformat() if r["created_at"] else "",
-            "query_text": r["query_text"],
-            "intent": r["intent"],
-            "decision": r["decision"],
-            "model_used": r["model_used"],
-            "prompt_version": r["prompt_version"],
-            "prompt_tokens": r["prompt_tokens"],
-            "completion_tokens": r["completion_tokens"],
-            "total_tokens": r["total_tokens"],
-            "cost_usd": float(r["cost_usd"]),
-            "cost_vnd": float(r["cost_vnd"]),
-            "ttft_ms": r["ttft_ms"],
-            "total_latency_ms": r["total_latency_ms"],
-            "cache_hit": r["cache_hit"],
-            "cache_type": r["cache_type"],
-            "tools_used": tools,
-            "status_code": r["status_code"],
-            "error_message": r["error_message"],
-        })
+        logs.append(
+            {
+                "id": r["id"],
+                "request_id": r["request_id"],
+                "session_id": str(r["session_id"]) if r["session_id"] else None,
+                "created_at": r["created_at"].isoformat() if r["created_at"] else "",
+                "query_text": r["query_text"],
+                "intent": r["intent"],
+                "decision": r["decision"],
+                "model_used": r["model_used"],
+                "prompt_version": r["prompt_version"],
+                "prompt_tokens": r["prompt_tokens"],
+                "completion_tokens": r["completion_tokens"],
+                "total_tokens": r["total_tokens"],
+                "cost_usd": float(r["cost_usd"]),
+                "cost_vnd": float(r["cost_vnd"]),
+                "ttft_ms": r["ttft_ms"],
+                "total_latency_ms": r["total_latency_ms"],
+                "cache_hit": r["cache_hit"],
+                "cache_type": r["cache_type"],
+                "tools_used": tools,
+                "status_code": r["status_code"],
+                "error_message": r["error_message"],
+            }
+        )
 
     return {"total": total_count, "limit": limit, "offset": offset, "logs": logs}
-

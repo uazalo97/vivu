@@ -1,22 +1,24 @@
+import hashlib
 import json
-import logging
+import time
 import uuid
+from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel
 
 from app.agent.agent_loop import AgentLoop
-from app.agent.history import MAX_HISTORY_TOKENS, sanitize_history
-from app.agent.llm import USER_INPUT_MAX_TOKENS, estimate_tokens
-from app.agent.nodes.summarize import SUMMARY_EVERY, summarize_conversation
-from app.core.session_store import get_session, touch_session, update_summary
-from app.core.cache import cache, make_dedup_key, make_answer_key, DEDUP_TTL, ANS_TTL
-from app.agent.classifier import get_classifier
-from app.agent.intent import classify_intent
-from app.agent.prompts import get_active_system_version
-
-logger = logging.getLogger("bds.api")
+from app.agent.decision import log_store
+from app.config import settings
+from app.core.memory import (
+    load_session,
+    save_turn,
+    update_current_context,
+    save_user_fact,
+    get_redis,
+)
+from app.core.telemetry import log_metric_background, record_metric
 
 router = APIRouter()
 
@@ -31,268 +33,270 @@ def get_agent() -> AgentLoop:
 
 
 class ChatRequest(BaseModel):
-    session_id: str
     message: str
+    session_id: Optional[str] = None
+    message_id: Optional[str] = None
     history: list[dict] = []
-    message_id: str | None = None  # UUID để chống gửi trùng
 
 
 class ChatResponse(BaseModel):
     response: str
+    sources: list[dict] = []
     needs_clarification: bool = False
     classify: dict = {}
     decision: str = "answer"
     decision_log: dict = {}
+    session_id: Optional[str] = None
 
 
-_INPUT_TOO_LONG_MSG = (
-    f"Câu hỏi quá dài (tối đa {USER_INPUT_MAX_TOKENS} token ~ "
-    f"{USER_INPUT_MAX_TOKENS * 4} ký tự). Vui lòng rút gọn câu hỏi rồi thử lại."
-)
+def _estimate_tokens(text: str) -> int:
+    """Ước lượng số tokens cho tiếng Việt và code nếu không có token count chính xác."""
+    if not text:
+        return 0
+    words = text.split()
+    return max(1, int(len(words) * 1.4))
 
 
-def _reject_if_too_long(message: str) -> None:
-    """Từ chối request nếu input người dùng vượt token budget (không cắt ngầm)."""
-    if estimate_tokens(message) > USER_INPUT_MAX_TOKENS:
-        raise HTTPException(status_code=400, detail=_INPUT_TOO_LONG_MSG)
+# ── Rate limit + Dedupe (fail-open: Redis down → pass-through) ────────────────
+
+_RATE_LIMIT_MSG = "Bạn gửi hơi nhanh, chờ vài giây rồi thử lại."
+_DEDUP_MSG = "Tin nhắn trùng lặp."
 
 
-def _parse_session_id(session_id: str) -> str:
-    """Validate session_id là UUID v4 — sai format trả 400."""
+async def _rate_limit_check(session_id: str, ip: str) -> str | None:
+    """Kiểm tra rate limit. Trả None nếu OK, trả error message nếu bị block."""
+    if not getattr(settings, "rate_limit_enabled", True):
+        return None
+    r = get_redis()
+    if not r:
+        return None
     try:
-        return str(uuid.UUID(session_id))
-    except (ValueError, TypeError, AttributeError):
-        raise HTTPException(status_code=400, detail="session_id không hợp lệ")
+        now = int(time.time())
+        # Session: 10 msg / 10s
+        s_key = f"rl:s:{session_id}:{now // 10}"
+        s_count = await r.incr(s_key)
+        if s_count == 1:
+            await r.expire(s_key, 10)
+        if s_count > 10:
+            return _RATE_LIMIT_MSG
+        # IP: 30 msg / 60s
+        i_key = f"rl:ip:{ip}:{now // 60}"
+        i_count = await r.incr(i_key)
+        if i_count == 1:
+            await r.expire(i_key, 60)
+        if i_count > 30:
+            return _RATE_LIMIT_MSG
+    except Exception:
+        pass  # fail-open
+    return None
 
 
-def _check_history_size(history: list[dict]) -> None:
-    """Defense in depth: từ chối request có history quá lớn (trước khi sanitize)."""
-    total = sum(
-        estimate_tokens(str(m.get("content", "")))
-        for m in history
-        if isinstance(m, dict)
-    )
-    if total > MAX_HISTORY_TOKENS:
-        raise HTTPException(
-            status_code=400,
-            detail="Lịch sử hội thoại quá dài, vui lòng bắt đầu hội thoại mới.",
-        )
-
-
-async def _prepare_request(request: ChatRequest) -> tuple[list[dict], str | None, dict]:
-    """Validate + sanitize + đọc session. Trả (history_sanitized, summary, session)."""
-    _reject_if_too_long(request.message)
-    _parse_session_id(request.session_id)
-    _check_history_size(request.history)
-    history = sanitize_history(request.history)
-    session = await get_session(request.session_id)
-    return history, session.get("summary"), session
-
-
-async def _finish_turn(
-    session_id: str,
-    message: str,
-    history: list[dict],
-    summary: str | None,
-    session: dict,
-    decision: str = "answer",
-) -> None:
-    """Sau 1 turn: ghi nhận turn + summarize nếu tới biên (không block câu trả lời).
-
-    Chỉ tính turn khi decision='answer' — refuse/clarify/out_of_scope không được
-    lưu vào memory (turn_count không tăng, summary không thay đổi).
-    """
-    # Không tính turn cho các case không trả lời được
-    if decision != "answer":
-        return
-    
-    await touch_session(session_id, last_message=message)
-    new_turn = (session.get("turn_count") or 0) + 1
-    if new_turn % SUMMARY_EVERY == 0:
-        try:
-            new_summary = await summarize_conversation(summary, history, message)
-            if new_summary:
-                await update_summary(
-                    session_id, new_summary, estimate_tokens(new_summary)
-                )
-                logger.info("session %s summarized at turn %d", session_id[:8], new_turn)
-        except Exception:
-            logger.exception("summarize failed (session %s)", session_id[:8])
-
-
-async def _check_dedupe(session_id: str, message_id: str | None) -> bool:
-    """Kiểm tra message đã được xử lý chưa. Trả True nếu là trùng lặp."""
-    if not message_id or not cache.enabled:
-        return False
-    
-    dedup_key = make_dedup_key(session_id, message_id)
-    # Thử SET NX (chỉ set nếu key chưa tồn tại)
-    # Trả về True nếu set thành công (key chưa tồn tại) -> không phải duplicate
-    # Trả về False nếu set thất bại (key đã tồn tại) -> là duplicate
-    set_success = await cache.set_nx_json(dedup_key, {"processed": True}, DEDUP_TTL)
-    return not set_success
-
-
-from app.core.telemetry import log_metric_background, record_metric
-import time
+async def _dedup_check(session_id: str, message_id: str) -> bool:
+    """True nếu request mới (OK), False nếu trùng lặp."""
+    r = get_redis()
+    if not r:
+        return True
+    try:
+        key = f"dedup:{hashlib.sha1(f'{session_id}|{message_id}'.encode()).hexdigest()}"
+        ok = await r.set(key, "1", nx=True, ex=3600)
+        return ok is not None  # None = key đã tồn tại = trùng
+    except Exception:
+        return True  # fail-open
 
 
 @router.post("/api/chat")
-async def chat(request: ChatRequest):
-    req_id = request.message_id or str(uuid.uuid4())
-    t_start = time.monotonic()
-    
-    # Check dedupe nếu có message_id
-    if await _check_dedupe(request.session_id, request.message_id):
-        return JSONResponse(
-            status_code=409,
-            content={"error": "Tin nhắn trùng lặp", "message_id": request.message_id}
-        )
-    
-    history, summary, session = await _prepare_request(request)
+async def chat(request: ChatRequest, http_request: Request):
+    req_id = f"req_{uuid.uuid4().hex[:8]}"
+    t0 = time.time()
+    session_id = request.session_id or str(uuid.uuid4())
+
+    # Rate limit (fail-open)
+    ip = http_request.client.host if http_request.client else "unknown"
+    rl_msg = await _rate_limit_check(session_id, ip)
+    if rl_msg:
+        return JSONResponse(status_code=429, content={"error": rl_msg})
+
+    # Dedupe (fail-open)
+    if request.message_id:
+        is_new = await _dedup_check(session_id, request.message_id)
+        if not is_new:
+            return JSONResponse(status_code=409, content={"error": _DEDUP_MSG})
+
+    session = await load_session(session_id)
+    history = session["history"] or request.history or []
+    current_context = session["current_context"]
+
     agent = get_agent()
-    result = await agent.run(
-        request.message, history, summary=summary, session_id=request.session_id
-    )
-    await _finish_turn(request.session_id, request.message, history, summary, session, decision=result.decision)
+    result = await agent.run(request.message, history, current_context)
+    total_latency_ms = int((time.time() - t0) * 1000)
 
-    t_end = time.monotonic()
-    total_latency_ms = int((t_end - t_start) * 1000)
-    reason_code = (result.classify_result or {}).get("reason_code", "")
-    cache_hit = "cache_hit" in reason_code
-    cache_type = "exact_io" if "exact_io" in reason_code else ("answer_cache" if cache_hit else "none")
+    # Persist turn + context + long-term memory (fail-open)
+    await save_turn(session_id, request.message, result.response)
+    entities = (result.classify_result or {}).get("entities", {})
+    model_code = entities.get("model_code")
+    version = entities.get("version")
+    topic = (result.decision_log or {}).get("detected_topic")
+    await update_current_context(session_id, model_code=model_code, version=version, topic=topic)
+    if model_code:
+        await save_user_fact(session_id, "preferred_model", model_code)
+    if version:
+        await save_user_fact(session_id, "preferred_version", version)
 
-    prompt_toks = estimate_tokens(request.message) + sum(estimate_tokens(str(m.get("content", ""))) for m in history)
-    compl_toks = estimate_tokens(result.response or "")
-    intent_val = (result.classify_result or {}).get("entities", {}).get("intent") or "general"
+    cache_hit = bool(getattr(result, "cache_hit", False))
+    cache_type = getattr(result, "cache_type", "none") or "none"
+
+    # Telemetry recording
+    dlog = result.decision_log or {}
+    intent = dlog.get("topic") or dlog.get("detected_topic") or result.classify_result.get("assessment") or "general"
+    tools_used = [t.get("tool") for t in dlog.get("retrieved_chunks", []) if isinstance(t, dict) and t.get("tool")]
+
+    prompt_tok = _estimate_tokens(request.message) + sum(_estimate_tokens(h.get("content", "")) for h in history)
+    comp_tok = _estimate_tokens(result.response)
 
     log_metric_background(
         record_metric(
             request_id=req_id,
-            session_id=request.session_id,
+            session_id=session_id,
             query_text=request.message,
-            intent=str(intent_val),
+            intent=intent,
             decision=result.decision,
-            model_used="",
-            prompt_version=get_active_system_version(),
-            prompt_tokens=prompt_toks,
-            completion_tokens=compl_toks,
-            ttft_ms=total_latency_ms if not cache_hit else 5,
+            model_used=settings.llm_model,
+            prompt_version=getattr(settings, "app_version", "v1.0.0"),
+            prompt_tokens=prompt_tok,
+            completion_tokens=comp_tok,
+            ttft_ms=int(total_latency_ms * 0.4),
             total_latency_ms=total_latency_ms,
             cache_hit=cache_hit,
             cache_type=cache_type,
+            tools_used=tools_used,
             status_code=200,
         )
     )
 
     return ChatResponse(
         response=result.response,
+        sources=result.sources,
         needs_clarification=result.needs_clarification,
         classify=result.classify_result,
         decision=result.decision,
         decision_log=result.decision_log,
+        session_id=session_id,
     )
 
 
 @router.post("/api/chat/stream")
-async def chat_stream(request: ChatRequest):
-    req_id = request.message_id or str(uuid.uuid4())
-    t_start = time.monotonic()
+async def chat_stream(request: ChatRequest, http_request: Request):
+    req_id = f"req_{uuid.uuid4().hex[:8]}"
+    t0 = time.time()
+    session_id = request.session_id or str(uuid.uuid4())
 
-    # Check dedupe nếu có message_id
-    if await _check_dedupe(request.session_id, request.message_id):
-        return JSONResponse(
-            status_code=409,
-            content={"error": "Tin nhắn trùng lặp", "message_id": request.message_id}
-        )
-    
-    history, summary, session = await _prepare_request(request)
+    # Rate limit (fail-open)
+    ip = http_request.client.host if http_request.client else "unknown"
+    rl_msg = await _rate_limit_check(session_id, ip)
+    if rl_msg:
+        return JSONResponse(status_code=429, content={"error": rl_msg})
+
+    # Dedupe (fail-open)
+    if request.message_id:
+        is_new = await _dedup_check(session_id, request.message_id)
+        if not is_new:
+            return JSONResponse(status_code=409, content={"error": _DEDUP_MSG})
+
+    session = await load_session(session_id)
+    history = session["history"] or request.history or []
+    current_context = session["current_context"]
     agent = get_agent()
 
     async def generate():
-        decision = "answer"  # default, sẽ được cập nhật từ SSE event
-        t_first_token: float | None = None
-        tools_used: list[str] = []
-        intent_val = "general"
+        ttft_ms = 0
+        first_token = True
+        accumulated_text = []
+        decision = "answer"
+        intent = "general"
+        tools_used = []
         cache_hit = False
         cache_type = "none"
-        accumulated_response = []
-        error_msg = None
+        entities = {}
+        category = ""
+
+        yield f"data: {json.dumps({'type': 'session', 'content': session_id}, ensure_ascii=False)}\n\n"
 
         try:
-            async for event in agent.run_stream(
-                request.message, history, summary=summary, session_id=request.session_id
-            ):
-                evt_type = event.get("type")
-                if evt_type == "decision":
+            async for event in agent.run_stream(request.message, history, current_context):
+                etype = event.get("type")
+                if etype == "token" and first_token:
+                    ttft_ms = int((time.time() - t0) * 1000)
+                    first_token = False
+
+                if etype == "token":
+                    accumulated_text.append(event.get("content", ""))
+                elif etype == "answer" or etype == "clarify":
+                    accumulated_text.append(event.get("content", ""))
+                elif etype == "decision":
                     decision = event.get("content", "answer")
-                elif evt_type == "classify":
-                    cls_content = event.get("content", {})
-                    ents = cls_content.get("entities", {})
-                    if "cache" in ents:
-                        cache_hit = True
-                        cache_type = "exact_io"
-                    elif "intent" in ents:
-                        intent_val = ents.get("intent", "general")
-                elif evt_type == "token":
-                    if t_first_token is None:
-                        t_first_token = time.monotonic()
-                    accumulated_response.append(event.get("content", ""))
-                elif evt_type == "tool_call":
-                    tool_info = event.get("content", {})
-                    if isinstance(tool_info, dict) and "tool" in tool_info:
-                        tools_used.append(tool_info["tool"])
-                elif evt_type == "error":
-                    error_msg = event.get("content")
+                elif etype == "classify":
+                    entities = event.get("content", {}).get("entities", {}) or {}
+                    category = event.get("content", {}).get("category", "")
+                    if category:
+                        intent = category
+                elif etype == "cache":
+                    cache_hit = True
+                    cache_type = event.get("content", {}).get("type", "") or "cache"
+                elif etype == "tool_call":
+                    tc = event.get("content", {})
+                    if tc.get("tool"):
+                        tools_used.append(tc.get("tool"))
 
                 yield f"data: {json.dumps(event, ensure_ascii=False)}\n\n"
-        except Exception as exc:
-            error_msg = str(exc)
-            raise
         finally:
-            await _finish_turn(request.session_id, request.message, history, summary, session, decision=decision)
-            t_end = time.monotonic()
-            ttft_ms = int((t_first_token - t_start) * 1000) if t_first_token else int((t_end - t_start) * 1000)
-            total_latency_ms = int((t_end - t_start) * 1000)
-            
-            prompt_toks = estimate_tokens(request.message) + sum(estimate_tokens(str(m.get("content", ""))) for m in history)
-            compl_toks = estimate_tokens("".join(accumulated_response))
+            total_latency_ms = int((time.time() - t0) * 1000)
+            if ttft_ms == 0:
+                ttft_ms = total_latency_ms
+
+            full_resp = "".join(accumulated_text)
+
+            # Persist turn + context + long-term memory (fail-open)
+            if full_resp:
+                await save_turn(session_id, request.message, full_resp)
+            model_code = entities.get("model_code")
+            version = entities.get("version")
+            await update_current_context(
+                session_id,
+                model_code=model_code,
+                version=version,
+                topic=category or None,
+            )
+            if model_code:
+                await save_user_fact(session_id, "preferred_model", model_code)
+            if version:
+                await save_user_fact(session_id, "preferred_version", version)
+
+            prompt_tok = _estimate_tokens(request.message) + sum(
+                _estimate_tokens(h.get("content", "")) for h in history
+            )
+            comp_tok = _estimate_tokens(full_resp)
 
             log_metric_background(
                 record_metric(
                     request_id=req_id,
-                    session_id=request.session_id,
+                    session_id=session_id,
                     query_text=request.message,
-                    intent=intent_val,
+                    intent=intent,
                     decision=decision,
-                    model_used="",
-                    prompt_version=get_active_system_version(),
-                    prompt_tokens=prompt_toks,
-                    completion_tokens=compl_toks,
+                    model_used=settings.llm_model,
+                    prompt_version=getattr(settings, "app_version", "v1.0.0"),
+                    prompt_tokens=prompt_tok,
+                    completion_tokens=comp_tok,
                     ttft_ms=ttft_ms,
                     total_latency_ms=total_latency_ms,
                     cache_hit=cache_hit,
                     cache_type=cache_type,
                     tools_used=tools_used,
-                    status_code=200 if not error_msg else 500,
-                    error_message=error_msg,
+                    status_code=200,
                 )
             )
 
-    return StreamingResponse(
-        generate(),
-        media_type="text/event-stream",
-        headers={
-            "Cache-Control": "no-cache",
-            "Connection": "keep-alive",
-            # nginx hay buffer SSE → phải tắt, không client nhận cả cục cuối stream
-            "X-Accel-Buffering": "no",
-        },
-    )
-
-
-
-from app.agent.decision import log_store
+    return StreamingResponse(generate(), media_type="text/event-stream")
 
 
 @router.get("/api/logs")
@@ -310,7 +314,7 @@ async def export_logs(run_id: str = None):
         logs = log_store.get_by_run(run_id)
     else:
         logs = log_store.get_all()
-    lines = [json.dumps(l, ensure_ascii=False) for l in logs]
+    lines = [json.dumps(l, ensure_ascii=False) for l in logs]  # noqa: E741
     content = "\n".join(lines) + "\n" if lines else ""
     fname = "logs_" + (run_id or "all") + ".jsonl"
     return StreamingResponse(

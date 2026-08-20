@@ -2,41 +2,135 @@ import re
 
 _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 
-# Nguồn tham khảo hiển thị qua SourcesBox (UI) — KHÔNG để URL lọt vào context
-# để tránh LLM copy thành "Chi tiết: ..." / "Nguồn: ..." inline.
-_URL_RE = re.compile(r"\[([^\]]+)\]\([^)]+\)")  # markdown link [text](url) → text
-_BARE_URL_RE = re.compile(r"https?://\S+")  # url trần
-
-
-def _strip_urls(text: str) -> str:
-    """Bỏ URL khỏi text context (giữ label text của markdown link)."""
-    text = _URL_RE.sub(r"\1", text)
-    text = _BARE_URL_RE.sub("", text)
-    return text
-
 # Query keywords → relevant spec categories
 _QUERY_TOPIC_MAP = {
-    "sạc": ["battery"], "pin": ["battery"], "charge": ["battery"], "kwh": ["battery"],
-    "range": ["battery"], "phạm vi": ["battery"], "đi được": ["battery"], "quãng đường": ["battery"],
-    "công suất": ["powertrain"], "power": ["powertrain"], "torque": ["powertrain"],
-    "mô-men": ["powertrain"], "xoắn": ["powertrain"], "tốc độ": ["powertrain"],
-    "tăng tốc": ["powertrain"], "acceleration": ["powertrain"], "drivetrain": ["powertrain"],
-    "kích thước": ["dimension"], "chiều dài": ["dimension"], "chiều rộng": ["dimension"],
-    "chiều cao": ["dimension"], "trọng lượng": ["dimension"], "wheelbase": ["dimension"],
-    "túi khí": ["safety"], "airbag": ["safety"], "phanh": ["safety"], "abs": ["safety"],
-    "esc": ["safety"], "an toàn": ["safety"], "an toàn": ["safety"],
-    "adas": ["adas"], "cruise": ["adas"], "lane": ["adas"], "collision": ["adas"],
-    "aeb": ["adas"], "blind spot": ["adas"], "parking": ["adas"],
-    "nội thất": ["interior"], "ghế": ["interior"], "chỗ ngồi": ["interior"], "số chỗ": ["interior"], "màn hình": ["interior"],
-    "loa": ["interior"], "điều hòa": ["interior"], "hud": ["interior"], "display": ["interior"],
-    "cửa sổ trời": ["interior"], "kính trần": ["interior"], "sunroof": ["interior"], "panoramic": ["interior"],
-    "ngoại thất": ["exterior"], "đèn": ["exterior"], "mâm": ["exterior"],
-    "wheel": ["exterior"], "la-zăng": ["exterior"], "headlight": ["exterior"],
-    "giá": ["price"], "price": ["price"],
-    "phiên bản": [], "version": [],  # All categories
-    "so sánh": [], "compare": [],  # All categories
-    "tính năng": ["adas", "interior", "exterior", "safety", "infotainment"],
-    "trang bị": ["adas", "interior", "exterior", "safety", "infotainment"],
+    # battery
+    "sạc": ["battery"],
+    "pin": ["battery"],
+    "charge": ["battery"],
+    "kwh": ["battery"],
+    "range": ["battery"],
+    "phạm vi": ["battery"],
+    "đi được": ["battery"],
+    "quãng đường": ["battery"],
+    # powertrain
+    "công suất": ["powertrain"],
+    "power": ["powertrain"],
+    "torque": ["powertrain"],
+    "mô-men": ["powertrain"],
+    "xoắn": ["powertrain"],
+    "tốc độ": ["powertrain"],
+    "tăng tốc": ["powertrain"],
+    "acceleration": ["powertrain"],
+    "drivetrain": ["powertrain"],
+    "mô tơ": ["powertrain"],
+    "dẫn động": ["powertrain"],
+    # dimension
+    "kích thước": ["dimension"],
+    "chiều dài": ["dimension"],
+    "chiều rộng": ["dimension"],
+    "chiều cao": ["dimension"],
+    "trọng lượng": ["dimension"],
+    "wheelbase": ["dimension"],
+    "khoảng sáng gầm": ["dimension"],
+    "cốp": ["dimension"],
+    "trunk": ["dimension"],
+    # safety
+    "túi khí": ["safety"],
+    "airbag": ["safety"],
+    "phanh": ["safety"],
+    "abs": ["safety"],
+    "esc": ["safety"],
+    "an toàn": ["safety"],
+    "isofix": ["safety"],
+    "tpms": ["safety"],
+    "seatbelt": ["safety"],
+    "đai an toàn": ["safety"],
+    # adas
+    "adas": ["adas"],
+    "cruise": ["adas"],
+    "lane": ["adas"],
+    "collision": ["adas"],
+    "aeb": ["adas"],
+    "blind spot": ["adas"],
+    "parking": ["adas"],
+    "tự lái": ["adas"],
+    "hỗ trợ lái": ["adas"],
+    "ga tự động": ["adas"],
+    # interior
+    "nội thất": ["interior"],
+    "ghế": ["interior"],
+    "màn hình": ["interior"],
+    "loa": ["interior"],
+    "điều hòa": ["interior"],
+    "hud": ["interior"],
+    "display": ["interior"],
+    "vô lăng": ["interior"],
+    "âm thanh": ["interior"],
+    "sưởi": ["interior"],
+    "thông gió": ["interior"],
+    "massage": ["interior"],
+    "cửa sổ trời": ["interior"],
+    # exterior
+    "ngoại thất": ["exterior"],
+    "đèn": ["exterior"],
+    "mâm": ["exterior"],
+    "wheel": ["exterior"],
+    "la-zăng": ["exterior"],
+    "headlight": ["exterior"],
+    "màu xe": ["exterior"],
+    "gương": ["exterior"],
+    "lốp": ["exterior"],
+    # infotainment
+    "navigation": ["infotainment"],
+    "bản đồ": ["infotainment"],
+    "bluetooth": ["infotainment"],
+    "gaming": ["infotainment"],
+    "trò chơi": ["infotainment"],
+    "ota": ["infotainment"],
+    "cập nhật": ["infotainment"],
+    "trợ lý ảo": ["infotainment"],
+    "voice": ["infotainment"],
+    "giọng nói": ["infotainment"],
+    "karaoke": ["infotainment"],
+    "web": ["infotainment"],
+    "app": ["infotainment"],
+    "ứng dụng": ["infotainment"],
+    "kết nối": ["infotainment"],
+    # chassis
+    "phanh": ["chassis", "safety"],  # noqa: F601
+    "giảm xóc": ["chassis"],
+    "suspension": ["chassis"],
+    "lái": ["chassis"],
+    "handling": ["chassis"],
+    "vô lăng": ["chassis", "interior"],  # noqa: F601
+    # connected
+    "sạc từ xa": ["connected"],
+    "quản lý sạc": ["connected"],
+    "điều khiển từ xa": ["connected"],
+    "theo dõi": ["connected"],
+    "gps": ["connected"],
+    "esim": ["connected"],
+    # security
+    "chống trộm": ["security"],
+    "khóa": ["security"],
+    "immobilizer": ["security"],
+    "báo động": ["security"],
+    "alarm": ["security"],
+    # convenience
+    "phanh tay điện": ["convenience"],
+    "epb": ["convenience"],
+    "auto hold": ["convenience"],
+    # price
+    "giá": ["price"],
+    "price": ["price"],
+    # all categories
+    "phiên bản": [],
+    "version": [],  # All categories
+    "so sánh": [],
+    "compare": [],  # All categories
+    "tính năng": ["adas", "interior", "exterior", "safety", "infotainment", "connected", "security", "convenience"],
+    "trang bị": ["adas", "interior", "exterior", "safety", "infotainment", "connected", "security", "convenience"],
 }
 
 
@@ -73,6 +167,8 @@ def build_structured_context(tool_results: list[dict], query: str = "") -> str:
             sections.append(_format_search_results(result))
         elif tool == "get_colors":
             sections.append(_format_colors(result))
+        elif tool == "get_options":
+            sections.append(_format_options(result))
         elif tool == "list_available_models":
             sections.append(_format_models(result))
         elif tool == "get_active_promotions":
@@ -92,11 +188,14 @@ def build_structured_context(tool_results: list[dict], query: str = "") -> str:
 
 
 def _format_prices(result: dict) -> str:
+    source_url = result.get("source_url", "")
     lines = [f"Giá xe {result['model_code']}:"]
     for p in result.get("prices", []):
         promo = f"{p['promo_price_vnd']:,} VNĐ" if p.get("promo_price_vnd") else "N/A"
         price = f"{p['price_vnd']:,} VNĐ" if p.get("price_vnd") else "N/A"
         lines.append(f"  - {p['version_name']}: Giá niêm yết {price} | Giá ưu đãi {promo}")
+    if source_url:
+        lines.append(f"\n  Nguồn: {source_url}")
     related = result.get("related_models", [])
     if related:
         lines.append("\n  Model liên quan:")
@@ -169,7 +268,7 @@ def _format_colors(result: dict) -> str:
     if variants:
         # Group by color to show fee
         seen = set()
-        lines.append(f"\n  Chi tiết màu:")
+        lines.append(f"\n  Chi tiết màu:")  # noqa: F541
         for v in variants:
             key = f"{v['color']}|{v['interior']}"
             if key in seen:
@@ -184,31 +283,86 @@ def _format_colors(result: dict) -> str:
     return "\n".join(lines)
 
 
+_OPTION_GROUP_LABELS = {
+    "wheel": "Mâm/lazang",
+    "hud": "Màn hình HUD",
+    "driveTypes": "Hệ dẫn động",
+    "options": "Tùy chọn khác",
+    "roof": "Trần xe",
+    "interior": "Nội thất",
+    "color": "Màu",
+}
+
+
+def _format_options(result: dict) -> str:
+    lines = [f"Tùy chọn (option) {result.get('model_code', '')}:"]
+    cur_group = None
+    for o in result.get("options", []):
+        g = o.get("group", "")
+        if g != cur_group:
+            cur_group = g
+            label = _OPTION_GROUP_LABELS.get(g, g)
+            lines.append(f"\n  [{label}]")
+        fee = o.get("price_extra_vnd") or 0
+        fee_str = f" (+{fee:,} VNĐ)" if fee else ""
+        ver = o.get("version", "")
+        ver_str = f"{ver} — " if ver else ""
+        lines.append(f"    {ver_str}{o.get('value_name', '')}{fee_str}")
+    source_url = result.get("source_url", "")
+    if source_url:
+        lines.append(f"\n  Nguồn: {source_url}")
+    return "\n".join(lines)
+
+
 def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
+    """Format specs, deduplicating identical values across versions to cut tokens."""
+    source_url = result.get("source_url", "")
     lines = [f"Thông số kỹ thuật {result['model_code']}:"]
+
+    specs = [s for s in result.get("specs", []) if relevant_cats is None or s["category"] in relevant_cats]
+
+    # Group by (category, key) while preserving order
+    grouped: dict[tuple, list] = {}
+    for s in specs:
+        grouped.setdefault((s["category"], s["key"]), []).append(s)
+
     current_cat = None
-    for s in result.get("specs", []):
-        # Filter: only show relevant categories when query is specific
-        if relevant_cats is not None and s["category"] not in relevant_cats:
-            continue
-        if s["category"] != current_cat:
-            current_cat = s["category"]
+    count = 0
+    MAX_SPEC_KEYS = 30  # cap total spec lines to keep context small (TPM budget)
+    for (cat, key), rows in grouped.items():
+        if count >= MAX_SPEC_KEYS:
+            lines.append("\n  ... (còn nhiều thông số khác)")
+            break
+        count += 1
+        if cat != current_cat:
+            current_cat = cat
             lines.append(f"\n  [{current_cat.upper()}]")
-        unit = f" {s['unit']}" if s["unit"] else ""
-        page = f" [trang {s['page']}]" if s.get("page") else ""
-        ver = s["version_name"]
-        key = s["key"]
+        unit = f" {rows[0]['unit']}" if rows[0].get("unit") else ""
         label = _SPEC_KEY_LABELS.get(key, "")
         label_str = f" ({label})" if label else ""
-        if ver == "ALL":
-            lines.append(f"    {key}{label_str}: {s['value']}{unit}{page}")
+
+        # All versions share the same value → collapse to one line
+        first_val = rows[0]["value"]
+        if all(r["value"] == first_val for r in rows):
+            vers = sorted({r["version_name"] for r in rows})
+            if vers == ["ALL"]:
+                lines.append(f"    {key}{label_str}: {first_val}{unit}")
+            else:
+                lines.append(f"    {key}{label_str}: {first_val}{unit} (mọi phiên bản)")
         else:
-            lines.append(f"    {ver} — {key}{label_str}: {s['value']}{unit}{page}")
-    related = result.get("related_models", [])
-    if related:
-        lines.append("\n  Model liên quan:")
-        for rm in related:
-            lines.append(f"    - {rm['model_code']}")
+            # Values differ → show per-version, but dedupe identical values
+            seen = {}
+            for r in rows:
+                v = r["value"]
+                if v in seen:
+                    continue
+                seen[v] = True
+                vers = sorted({x["version_name"] for x in rows if x["value"] == v})
+                ver_str = ", ".join(vers)
+                lines.append(f"    {ver_str} — {key}{label_str}: {v}{unit}")
+
+    if source_url:
+        lines.append(f"\n  Nguồn: {source_url}")
     note = result.get("note", "")
     if note:
         lines.append(f"\n  Lưu ý: {note}")
@@ -216,11 +370,13 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
 
 
 def _format_search_results(result: dict) -> str:
-    lines = [f"Kết quả tìm kiếm cho: \"{result['query']}\":"]
+    lines = [f'Kết quả tìm kiếm cho: "{result["query"]}":']
     for i, r in enumerate(result.get("results", []), 1):
+        src = r.get("source_url", "")
         lines.append(f"\n  [{i}] ({r['source_type']}, score={r['score']})")
-        # strip URL khỏi text — tránh LLM copy link inline
-        lines.append(f"      {_strip_urls(r['text'])}")
+        lines.append(f"      {r['text']}")
+        if src:
+            lines.append(f"      Nguồn: {src}")
     return "\n".join(lines)
 
 
@@ -254,7 +410,7 @@ def _format_links(result: dict, label: str) -> str:
     if not links:
         return f"Không tìm thấy link {label}."
     lines = [f"Link {label}:"]
-    for l in links:
+    for l in links:  # noqa: E741
         lines.append(f"  - {l['label']}: {l['url']}")
     return "\n".join(lines)
 
@@ -264,6 +420,6 @@ def _format_maintenance(result: dict) -> str:
     if not links:
         return "Không tìm thấy link bảo dưỡng."
     lines = ["Link bảo dưỡng:"]
-    for l in links:
+    for l in links:  # noqa: E741
         lines.append(f"  - Năm {l['year']}: {l['source_url']}")
     return "\n".join(lines)

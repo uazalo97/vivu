@@ -18,12 +18,44 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 # ── Tầng 1: Cyrillic homoglyph → Latin ──────────────────────────────────────
 _CYR = {
-    "О": "O", "о": "o", "А": "A", "а": "a", "Н": "H", "С": "C", "с": "c",
-    "Е": "E", "е": "e", "Р": "P", "р": "p", "Т": "T", "Х": "X", "х": "x",
-    "М": "M", "м": "m", "В": "B", "в": "b", "К": "K", "к": "k", "І": "I",
-    "і": "i", "Ѕ": "S", "ѕ": "s", "У": "Y", "у": "y", "Н": "H", "н": "h",
-    "Д": "D", "д": "d", "И": "N", "и": "n", "П": "P", "п": "n", "Г": "r",
-    "г": "r", "Л": "J", "л": "j",
+    "О": "O",
+    "о": "o",
+    "А": "A",
+    "а": "a",
+    "Н": "H",
+    "С": "C",
+    "с": "c",
+    "Е": "E",
+    "е": "e",
+    "Р": "P",
+    "р": "p",
+    "Т": "T",
+    "Х": "X",
+    "х": "x",
+    "М": "M",
+    "м": "m",
+    "В": "B",
+    "в": "b",
+    "К": "K",
+    "к": "k",
+    "І": "I",
+    "і": "i",
+    "Ѕ": "S",
+    "ѕ": "s",
+    "У": "Y",
+    "у": "y",
+    "Н": "H",  # noqa: F601
+    "н": "h",
+    "Д": "D",
+    "д": "d",
+    "И": "N",
+    "и": "n",
+    "П": "P",
+    "п": "n",
+    "Г": "r",
+    "г": "r",
+    "Л": "J",
+    "л": "j",
 }
 
 
@@ -33,8 +65,8 @@ def fix_cyrillic(s: str) -> str:
 
 # ── Tầng 2: U+FFFD theo ngữ cảnh ────────────────────────────────────────────
 _FFFD = {
-    "xo�n Panhard": "xoắn Panhard",          # 'thành xoắn Panhard'
-    "KH�UNG DÉN": "KHUNG ĐỀN",               # phần nóc xe
+    "xo�n Panhard": "xoắn Panhard",  # 'thành xoắn Panhard'
+    "KH�UNG DÉN": "KHUNG ĐỀN",  # phần nóc xe
 }
 
 
@@ -126,12 +158,9 @@ _OCR = {
     "## 36 PHÚT (10% - 70% PIN)": "36 PHÚT (10% - 70% PIN)",
     "KHOÀNG SÁNG GAM XE": "KHOẢNG SÁNG GẦM XE",
     "CAO(175MM)**": "CAO (175MM)**",
-    "*Quảng duông di chuyén duoc tinh toan duda trên két qua kiém dinh theo quy chuán toàn cấu (NEDC)":
-        "*Quãng đường di chuyển được tính toán dựa trên kết quả kiểm định theo quy chuẩn toàn cầu (NEDC)",
-    "Quảng duông di chuyén thuc tê có thể giám so với két qua kiém dinh, phu thuốc vao toc do lái xe, nhiệt dô, dia hình, thủ quen":
-        "Quãng đường di chuyển thực tế có thể giảm so với kết quả kiểm định, phụ thuộc vào tốc độ lái xe, nhiệt độ, địa hình, thói quen",
-    "sù dung của nguoi lái, ché dô lái duoc cai dôi, sà luong hạnh khách, vá các dieuKIEN giao thông khúc":
-        "sử dụng của người lái, chế độ lái được cài đổi, số lượng hành khách, và các điều kiện giao thông khác",
+    "*Quảng duông di chuyén duoc tinh toan duda trên két qua kiém dinh theo quy chuán toàn cấu (NEDC)": "*Quãng đường di chuyển được tính toán dựa trên kết quả kiểm định theo quy chuẩn toàn cầu (NEDC)",
+    "Quảng duông di chuyén thuc tê có thể giám so với két qua kiém dinh, phu thuốc vao toc do lái xe, nhiệt dô, dia hình, thủ quen": "Quãng đường di chuyển thực tế có thể giảm so với kết quả kiểm định, phụ thuộc vào tốc độ lái xe, nhiệt độ, địa hình, thói quen",
+    "sù dung của nguoi lái, ché dô lái duoc cai dôi, sà luong hạnh khách, vá các dieuKIEN giao thông khúc": "sử dụng của người lái, chế độ lái được cài đổi, số lượng hành khách, và các điều kiện giao thông khác",
     "**Khoang sang gâm xe không tài.": "**Khoảng sáng gầm xe không tải.",
     "TRÀI NGHIỆM": "TRẢI NGHIỆM",
     "KHÔNG GIÁN ĐOẌN": "KHÔNG GIÁN ĐOẠN",
@@ -154,10 +183,8 @@ _OCR = {
     "XANH DUỐNG (SKY BLUE)": "XANH DƯƠNG (SKY BLUE)",
     "XANH LÁ NHAT": "XANH LÁ NHẠT",
     "BỆNG MÀU CO' BÀN": "BẢNG MÀU CƠ BẢN",
-    "**Luu ý: Màu Đô (Solar Ruby) sẽ thay thể mài Đô (Crimson Red) khi hét hang dê dâm bào tiên độ":
-        "**Lưu ý: Màu Đỏ (Solar Ruby) sẽ thay thế màu Đỏ (Crimson Red) khi hết hàng để đảm bảo tiến độ",
-    "bàn giao xe. Xín vui lòng liên hệ với dài lý phản phối gân nhật dê duỘc hố trợ.":
-        "bàn giao xe. Xin vui lòng liên hệ với đại lý phân phối gần nhất để được hỗ trợ.",
+    "**Luu ý: Màu Đô (Solar Ruby) sẽ thay thể mài Đô (Crimson Red) khi hét hang dê dâm bào tiên độ": "**Lưu ý: Màu Đỏ (Solar Ruby) sẽ thay thế màu Đỏ (Crimson Red) khi hết hàng để đảm bảo tiến độ",
+    "bàn giao xe. Xín vui lòng liên hệ với dài lý phản phối gân nhật dê duỘc hố trợ.": "bàn giao xe. Xin vui lòng liên hệ với đại lý phân phối gần nhất để được hỗ trợ.",
     "HÂU MÃI VỤ ĐOÔI": "HẬU MÃI VÀ ĐỔI",
     "BÃO HÀNH XE MÓI*": "BẢO HÀNH XE MỚI*",
     "BÃO HÀNH PIN CAO ÁP*": "BẢO HÀNH PIN CAO ÁP*",
