@@ -1,15 +1,24 @@
-/**
- * App mặc định: Landing page (trắng) + ChatWidget nhúng nổi.
- * ChatWidget hoàn toàn độc lập — có thể lấy ra dùng riêng trên trang chính thức.
- */
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LandingPage } from "./components/landing/LandingPage";
 import { ChatWidget } from "./components/chat";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
-export default function App() {
+function LandingWithChat() {
   return (
     <div className="relative min-h-screen bg-white">
       <LandingPage />
       <ChatWidget />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/*" element={<LandingWithChat />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
