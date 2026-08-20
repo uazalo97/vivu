@@ -1,5 +1,7 @@
+import asyncio
 import hashlib
 import json
+import logging
 import time
 import uuid
 from typing import Optional
@@ -19,6 +21,8 @@ from app.core.memory import (
     get_redis,
 )
 from app.core.telemetry import log_metric_background, record_metric
+
+logger = logging.getLogger("bds.api")
 
 router = APIRouter()
 
@@ -273,22 +277,33 @@ async def chat_stream(request: ChatRequest, http_request: Request):
                 ttft_ms = total_latency_ms
 
             full_resp = "".join(accumulated_text)
+            model_code = entities.get("model_code") if isinstance(entities, dict) else None
+            version = entities.get("version") if isinstance(entities, dict) else None
 
             # Persist turn + context + long-term memory (fail-open)
-            if full_resp:
-                await save_turn(session_id, request.message, full_resp)
-            model_code = entities.get("model_code")
-            version = entities.get("version")
-            await update_current_context(
-                session_id,
-                model_code=model_code,
-                version=version,
-                topic=category or None,
-            )
-            if model_code:
-                await save_user_fact(session_id, "preferred_model", model_code)
-            if version:
-                await save_user_fact(session_id, "preferred_version", version)
+            # Background task — KHÔNG await ở đây để đóng kết nối SSE ngay sau `done`
+            # (chờ Redis/PG sẽ làm UI "đang load" thêm 200-500ms dù đã có đủ câu trả lời)
+            async def _persist():
+                try:
+                    if full_resp:
+                        await save_turn(session_id, request.message, full_resp)
+                    await update_current_context(
+                        session_id,
+                        model_code=model_code,
+                        version=version,
+                        topic=category or None,
+                    )
+                    if model_code:
+                        await save_user_fact(session_id, "preferred_model", model_code)
+                    if version:
+                        await save_user_fact(session_id, "preferred_version", version)
+                except Exception as exc:
+                    logger.warning("persist turn background failed (non-blocking): %s", exc)
+
+            try:
+                asyncio.create_task(_persist())
+            except Exception:
+                pass
 
             prompt_tok = _estimate_tokens(request.message) + sum(
                 _estimate_tokens(h.get("content", "")) for h in history
