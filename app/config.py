@@ -57,9 +57,29 @@ class Settings:
         self.admin_api_key: str = _env.get("ADMIN_API_KEY", "")
         self.usd_vnd_rate: float = float(_env.get("USD_VND_EXCHANGE_RATE", "25400.0"))
         self.app_version: str = _env.get("APP_VERSION", "v1.0.0")
+        # LLM token limits (fallback nếu .env chưa có, dùng cho llm.py)
+        self.llm_max_output_tokens: int = int(_env.get("LLM_MAX_OUTPUT_TOKENS", "1024"))
+        self.llm_tool_call_max_tokens: int = int(_env.get("LLM_TOOL_CALL_MAX_TOKENS", "512"))
+        self.llm_user_input_max_tokens: int = int(_env.get("LLM_USER_INPUT_MAX_TOKENS", "4000"))
+        self.llm_input_max_tokens: int = int(_env.get("LLM_INPUT_MAX_TOKENS", "8000"))
+        # DeepInfra compat — trỏ về OpenAI để llm.py cũ không vỡ
+        self.deepinfra_api_key: str = self.openai_api_key
+        self.deepinfra_base_url: str = self.openai_base_url
+        self.langfuse_enabled: bool = False
+        self.langfuse_public_key: str = ""
+        self.langfuse_secret_key: str = ""
+        self.langfuse_host: str = ""
         # Cache & Rate Limit
         self.cache_enabled: bool = _env.get("CACHE_ENABLED", "true").lower() == "true"
         self.rate_limit_enabled: bool = _env.get("RATE_LIMIT_ENABLED", "true").lower() == "true"
+
+
+def llm_extra_kwargs(model: str) -> dict:
+    # reasoning chỉ cho model reasoning, gpt-* sẽ 400 nếu gửi
+    if model and not model.lower().startswith("gpt-"):
+        # có thể đọc OPENROUTER_CHAT_REASONING nếu cần, hiện tắt
+        return {}
+    return {}
 
 
 settings = Settings()

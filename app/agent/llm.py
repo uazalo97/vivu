@@ -13,7 +13,16 @@ import logging
 
 from openai import AsyncOpenAI
 
-from app.config import settings, llm_extra_kwargs
+from app.config import settings
+
+try:
+    from app.config import llm_extra_kwargs  # type: ignore
+
+except ImportError:
+
+    def llm_extra_kwargs(model: str) -> dict:  # fallback khi config chưa có
+        return {}
+
 
 logger = logging.getLogger("bds.llm")
 
@@ -21,22 +30,20 @@ _llm_client: "AsyncOpenAI | None" = None
 
 
 def get_llm() -> AsyncOpenAI:
-    """Client chat chính (DeepInfra, OpenAI-compatible) — dùng chung toàn app."""
+    """Client chat chính (OpenAI) — dùng chung toàn app."""
     global _llm_client
     if _llm_client is None:
-        _llm_client = AsyncOpenAI(api_key=settings.deepinfra_api_key, base_url=settings.deepinfra_base_url)
+        _llm_client = AsyncOpenAI(api_key=settings.openai_api_key, base_url=settings.openai_base_url)
     return _llm_client
 
 
 # ── Token limits (có thể override qua .env) ───────────────────────────────
 # Output: cap độ dài câu trả lời/tool call → kiểm soát chi phí + latency,
 # không phụ thuộc default của provider (DeepInfra thường cap thấp hơn).
-OUTPUT_MAX_TOKENS: int = settings.llm_max_output_tokens  # câu trả lời chat cuối
-TOOL_CALL_MAX_TOKENS: int = settings.llm_tool_call_max_tokens  # JSON tool call
-USER_INPUT_MAX_TOKENS: int = settings.llm_user_input_max_tokens  # 1 message người dùng tối đa
-# Input: tổng budget messages gửi lên model (system + history + query).
-# Context retrieved chunks (RAG) tính riêng — xử lý sau ở tầng retrieval/top-k.
-INPUT_MAX_TOKENS: int = settings.llm_input_max_tokens
+OUTPUT_MAX_TOKENS: int = getattr(settings, "llm_max_output_tokens", 1024)
+TOOL_CALL_MAX_TOKENS: int = getattr(settings, "llm_tool_call_max_tokens", 512)
+USER_INPUT_MAX_TOKENS: int = getattr(settings, "llm_user_input_max_tokens", 4000)
+INPUT_MAX_TOKENS: int = getattr(settings, "llm_input_max_tokens", 8000)
 
 
 def estimate_tokens(text: str) -> int:

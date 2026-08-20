@@ -4,10 +4,11 @@ import time
 
 from openai import AsyncOpenAI
 
-from app.config import settings
-from app.agent.graph_state import AgentState
 from app.agent.context_builder import build_structured_context
+from app.agent.graph_state import AgentState
+from app.agent.llm import OUTPUT_MAX_TOKENS, stream_chat_with_fallback
 from app.agent.prompts import SYNTHESIZE_PROMPT
+from app.config import settings
 
 logger = logging.getLogger("bds.graph.generate")
 
@@ -23,11 +24,7 @@ _llm_client: AsyncOpenAI | None = None
 def _get_llm() -> AsyncOpenAI:
     global _llm_client
     if _llm_client is None:
-        _llm_client = AsyncOpenAI(
-            api_key=settings.openai_api_key,
-            base_url=settings.openai_base_url,
-            max_retries=0,  # Code handles retries manually; SDK retries cause 429 cascade
-        )
+        _llm_client = AsyncOpenAI(api_key=settings.openai_api_key, base_url=settings.openai_base_url)
     return _llm_client
 
 
@@ -68,27 +65,17 @@ async def generate_node(state: AgentState) -> dict:
     llm = _get_llm()
     t_generate_start = time.time()
 
-    # Reasoning params chỉ cần cho qwen/deepseek/luna; OpenAI gpt-* sẽ 400 nếu gửi
-    _model_lower = settings.llm_model.lower()
-    _is_reasoning = any(k in _model_lower for k in ("luna", "qwen", "deepseek", "reasoning"))
-    reasoning_extra = {"reasoning_format": "hidden", "reasoning_effort": "none"} if _is_reasoning else {}
-    for attempt, mt in enumerate((1024, 2048)):
-        try:
-            kwargs = dict(model=settings.llm_model, messages=messages, max_tokens=mt)
-            if reasoning_extra:
-                kwargs["extra_body"] = reasoning_extra
-            resp = await llm.chat.completions.create(**kwargs)
-        except Exception as e:
-            logger.error("generate_node LLM error (attempt %d): %s", attempt + 1, e)
-            break
-
-        new_response = resp.choices[0].message.content or ""
+    try:
+        new_response, _, _ = await stream_chat_with_fallback(llm, messages, max_tokens=OUTPUT_MAX_TOKENS)
         if new_response:
             final_response = new_response
-            break
-
-        fr = resp.choices[0].finish_reason
-        logger.warning("generate_node: empty content (finish=%s, max_tokens=%d), retrying", fr, mt)
+    except Exception as e:
+        logger.error("generate_node LLM error (all models): %s", e)
+        return {
+            "final_response": final_response,
+            "t_generate_start": t_generate_start,
+            "t_generate_end": time.time(),
+        }
 
     return {
         "final_response": final_response,
