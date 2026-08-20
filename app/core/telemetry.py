@@ -110,7 +110,7 @@ _ensure_lock = asyncio.Lock()
 
 
 async def ensure_telemetry_schema() -> None:
-    """Tạo bảng telemetry nếu chưa tồn tại."""
+    """Tạo bảng telemetry nếu chưa tồn tại + tự migrate cột mới (idempotent)."""
     global _schema_ready
     if _schema_ready:
         return
@@ -125,6 +125,25 @@ async def ensure_telemetry_schema() -> None:
                     stmt = stmt.strip()
                     if stmt:
                         await conn.execute(stmt)
+                # Backfill cột mới cho DB cũ (idempotent) — chạy ngay sau CREATE
+                for stmt in [
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS ttot_ms INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS latency_retrieval_ms INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS latency_generation_ms INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS model_code TEXT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS model_version TEXT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS retrieval_status TEXT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS chunks_retrieved INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS reasoning_tokens INT DEFAULT 0",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS user_feedback SMALLINT",
+                    "ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS feedback_comment TEXT",
+                    "CREATE INDEX IF NOT EXISTS idx_req_metrics_model_code ON request_metrics(model_code)",
+                    "CREATE INDEX IF NOT EXISTS idx_req_metrics_decision ON request_metrics(decision)",
+                ]:
+                    try:
+                        await conn.execute(stmt)
+                    except Exception as e:
+                        logger.debug("migrate %s: %s", stmt, e)
 
         await run_with_db_retry(_create, label="ensure request_metrics schema")
         _schema_ready = True
@@ -172,11 +191,9 @@ async def record_metric(
     cost_usd, cost_vnd = calculate_cost(model_used, prompt_tokens, completion_tokens)
     tools_json = json.dumps(tools_used or [], ensure_ascii=False)
 
-    try:
-        await ensure_telemetry_schema()
-
-        # Backfill new columns if DB was created with old schema (idempotent)
-        async def _migrate_add_columns():
+    # Đảm bảo cột mới tồn tại trước khi INSERT (idempotent, chạy mỗi lần để fix DB cũ)
+    async def _ensure_new_columns():
+        try:
             pool = await get_pool()
             async with pool.acquire() as conn:
                 for stmt in [
@@ -195,13 +212,14 @@ async def record_metric(
                 ]:
                     try:
                         await conn.execute(stmt)
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logger.debug("migrate %s: %s", stmt, e)
+        except Exception as e:
+            logger.debug("ensure columns failed: %s", e)
 
-        try:
-            await _migrate_add_columns()
-        except Exception:
-            pass
+    try:
+        await ensure_telemetry_schema()
+        await _ensure_new_columns()
 
         async def _insert():
             pool = await get_pool()
@@ -252,7 +270,16 @@ async def record_metric(
                 reasoning_tokens,
             )
 
-        await run_with_db_retry(_insert, label="record_metric")
+        try:
+            await run_with_db_retry(_insert, label="record_metric")
+        except Exception as e:
+            # Nếu thiếu cột (DB cũ chưa migrate kịp) → chạy migrate rồi retry 1 lần
+            if "does not exist" in str(e) and "column" in str(e):
+                logger.warning("record_metric missing column, migrating and retry: %s", e)
+                await _ensure_new_columns()
+                await run_with_db_retry(_insert, label="record_metric retry")
+            else:
+                raise
     except Exception as exc:
         logger.warning("Failed to record metric (continuing): %s", exc)
 
