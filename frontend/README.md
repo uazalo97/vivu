@@ -1,32 +1,68 @@
-# React + TypeScript + Vite
+# Vivu Chat UI — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Chatbox tư vấn xe VinFast, kết nối backend FastAPI (branch `Trust-Foundation/Bao`).
+Chatbox được thiết kế **độc lập** — dễ nhúng vào landing page chính thức.
 
-Currently, two official plugins are available:
+## Chạy
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev      # http://localhost:5173 (proxy /api → localhost:8000)
+npm run build    # build production (đầu ra dist/)
+npm run preview  # xem thử build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+> Backend cần chạy trên `:8000` (xem `GUIDE.md` ở backend) để chat chạy được.
+
+## Cấu trúc thư mục
+
+```
+src/
+├─ config.ts                 # Brand, API base, suggestions, welcome message (dễ chỉnh)
+├─ api/
+│  ├─ types.ts               # Types khớp contract backend (SseEvent, Source...)
+│  └─ chat.ts                # chatStream() SSE + chatOnce() fallback
+├─ store/
+│  └─ chatStore.ts           # Zustand: messages, streaming, tools, actions
+└─ components/
+   ├─ landing/
+   │  └─ LandingPage.tsx     # Landing page (TẠM ĐỂ TRẮNG — sẽ thiết kế sau)
+   └─ chat/                  # TOÀN BỘ widget chat, độc lập
+      ├─ ChatWidget.tsx      # ĐIỂM VÀO nhúng (floating button + panel)
+      ├─ ChatPanel.tsx       # Khung chat (header + list + input)
+      ├─ ChatHeader.tsx      # Avatar, tên bot, xóa hội thoại, đóng
+      ├─ MessageList.tsx     # Danh sách + auto-scroll
+      ├─ MessageBubble.tsx   # Bubble user/bot, markdown, streaming, sources, error
+      ├─ SourceChips.tsx     # Chips nguồn tham khảo
+      ├─ ToolsIndicator.tsx  # "Đang tra cứu ..." khi agent gọi tool
+      ├─ SuggestionChips.tsx # Gợi ý câu hỏi đầu hội thoại
+      ├─ InputBar.tsx        # Textarea + nút gửi/dừng
+      └─ index.ts            # Public exports cho việc nhúng
+```
+
+## Nhúng vào trang chính thức
+
+```tsx
+import { ChatWidget } from "./components/chat";
+
+<ChatWidget apiBase="/api" />   // mặc định /api, đổi được lúc runtime
+```
+
+- **Cùng origin**: để `apiBase="/api"`, cấu hình proxy/reverse trên server trang chính thức trỏ về backend.
+- **Khác origin**: đổi `apiBase="https://api.example.com"` và backend phải thêm **CORS middleware** (hiện backend chưa có).
+
+## Design tokens (đã chốt)
+
+| Token              | Giá trị   |
+| ------------------ | ----------- |
+| `color-primary`  | `#2C72C6` |
+| `color-bg`       | `#FFFFFF` |
+| `font-family`    | Mulish      |
+| `font-size-base` | `16px`    |
+
+Xem chi tiết plan: [`plan.md`](./plan.md).
+
+## Việc còn lại
+
+- [ ] Thiết kế landing page chính thức (đang để trắng).
+- [ ] Nếu chạy production khác origin: thêm CORS vào backend.
