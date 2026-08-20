@@ -54,13 +54,14 @@ for _stream in (sys.stdout, sys.stderr):
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.clean_data.clean_to_jsonl import (  # noqa: E402
-    parse_raw_file,
-    infer_model_raw,
+from scripts.clean_data.spec_common import (  # noqa: E402
     MODEL_LABEL,
     MODEL_EDITIONS,  # noqa: F401
-    EDITION_KEYWORDS,
+    infer_model as infer_model_raw,
+    parse_raw_file,
 )
+
+EDITION_KEYWORDS = ["PlusCaptain", "Plus", "Eco", "TieuChuan", "NangCao", "CaoCap", "Base"]
 
 RAW_DIR = REPO_ROOT / "data" / "raw"
 CLEAN_DIR = REPO_ROOT / "data" / "clean"
