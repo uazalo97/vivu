@@ -181,7 +181,7 @@ def ingest_file(
 def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = False) -> int:
     """Embed + upsert Qdrant dense collections (versioned, incremental). Trả 0/1."""
     if not API_KEY:
-        print("[vector_ingest] OPENROUTER_API_KEY chưa set trong .env", file=sys.stderr)
+        print("[vector_ingest] OPENAI_API_KEY chưa set trong .env", file=sys.stderr)
         return 1
 
     vector_dir = Path(str(VECTOR_DIR).format(version=version))

@@ -76,10 +76,12 @@ async def execute_tools_node(state: AgentState) -> dict:
 
     # Retry once on rate limit / timeout
     resp = None
-    # Reasoning models need reasoning_effort=none for function tools
+    # Reasoning params chỉ cho luna/qwen/deepseek; OpenAI sẽ 400 nếu gửi
     extra_kwargs = {}
-    if "luna" in _model_lower or "o1" in _model_lower or "o3" in _model_lower:
-        extra_kwargs["reasoning_effort"] = "none"
+    if any(k in _model_lower for k in ("luna", "qwen", "deepseek", "reasoning", "o1", "o3")):
+        # OpenAI gpt-* không hỗ trợ reasoning_effort, chỉ reasoning models cần
+        if "gpt" not in _model_lower:
+            extra_kwargs["reasoning_effort"] = "none"
 
     for attempt in range(2):
         try:

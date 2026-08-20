@@ -18,14 +18,14 @@ _embed_client = None
 
 
 def _get_embed_client():
-    """OpenAI-compatible client for embeddings with built-in retry + connection pooling."""
+    """OpenAI client for embeddings — single OpenAI key (OPENAI_API_KEY)."""
     global _embed_client
     if _embed_client is None:
         from openai import OpenAI
 
         _embed_client = OpenAI(
-            api_key=settings.openrouter_api_key,
-            base_url="https://openrouter.ai/api/v1",
+            api_key=settings.openai_api_key,
+            base_url=settings.openai_base_url,
             max_retries=3,
             timeout=60.0,
         )
@@ -62,12 +62,67 @@ def tokenize(text: str) -> list[str]:
     return [t for t in TOKEN_RE.findall(text) if t not in STOPWORDS and len(t) > 1]
 
 
-# ── Sparse index auto-detection ──────────────────────────────────────────────
+# ── Sparse index auto-detection (DB is source of truth) ─────────────────────
+_pg_current_version: str | None = None
+_pg_version_checked = False
+
+
+def _get_current_version_from_db() -> str | None:
+    """Đọc version is_current từ PG ingest_version — DB là source of truth."""
+    global _pg_current_version, _pg_version_checked
+    if _pg_version_checked and _pg_current_version is not None:
+        return _pg_current_version
+    try:
+        import psycopg2
+
+        pg_url = settings.postgres_url.replace("+asyncpg", "")
+        # Fallback PG_DSN như app/core/db.py (Neon cloud)
+        if "localhost:5432" in pg_url:
+            from dotenv import dotenv_values
+
+            _env2 = dotenv_values(REPO_ROOT / ".env")
+            cloud_dsn = _env2.get("PG_DSN") or _env2.get("POSTGRES_URL")
+            if cloud_dsn:
+                pg_url = cloud_dsn.replace("+asyncpg://", "postgresql://")
+        conn = psycopg2.connect(pg_url)
+        cur = conn.cursor()
+        cur.execute("SELECT version FROM ingest_version WHERE is_current LIMIT 1")
+        row = cur.fetchone()
+        conn.close()
+        if row and row[0]:
+            _pg_current_version = str(row[0]).strip()
+            _pg_version_checked = True
+            return _pg_current_version
+    except Exception as e:
+        logger.debug("PG current version query failed (fallback to file scan): %s", e)
+    _pg_version_checked = True
+    return None
+
+
 def _find_latest_sparse_index() -> Path | None:
-    """Scan data/clean/*/sparse_index.json, return path with highest version number."""
+    """Ưu tiên DB is_current, fallback scan file."""
     global _sparse_index
     if not DATA_CLEAN_DIR.exists():
         return None
+    # 1. Thử lấy version active từ DB — đây là source of truth (PG v2 nhưng file chỉ v1 là lệch pipeline)
+    db_ver = _get_current_version_from_db()
+    if db_ver:
+        db_path = DATA_CLEAN_DIR / db_ver / "sparse_index.json"
+        if db_path.exists():
+            try:
+                raw = db_path.read_text(encoding="utf-8")
+                idx = json.loads(raw)
+                _sparse_index = idx
+                return db_path
+            except Exception as e:
+                logger.warning("Failed to load DB version sparse_index %s: %s, falling back to scan", db_path, e)
+        else:
+            logger.warning(
+                "DB is_current=%s nhưng file %s không tồn tại — pipeline chưa build v2, fallback scan file cũ",
+                db_ver,
+                db_path,
+            )
+    # 2. Fallback: scan file lấy version cao nhất (hành vi cũ)
     best_num = -1
     best_path = None
     for p in DATA_CLEAN_DIR.glob("*/sparse_index.json"):
@@ -92,7 +147,12 @@ def _load_sparse_index() -> dict:
         if path is None:
             _sparse_index = {}
         else:
-            logger.info("Loaded sparse index from %s (version=%s)", path, _sparse_index.get("version"))
+            src = (
+                "DB is_current"
+                if _pg_current_version and path.name == "sparse_index.json" and path.parent.name == _pg_current_version
+                else "file scan"
+            )
+            logger.info("Loaded sparse index from %s (version=%s, src=%s)", path, _sparse_index.get("version"), src)
     return _sparse_index or {}
 
 
@@ -131,14 +191,14 @@ def _query_to_sparse(query: str) -> dict | None:
 
 
 def _openrouter_embed_api(texts: list[str]) -> list[list[float]]:
-    """Pure sync: embed texts via OpenRouter API. Called in thread pool."""
+    """Pure sync: embed texts via OpenAI API (compat name kept). Called in thread pool."""
     client = _get_embed_client()
     batch_size = 100
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
         batch = texts[i : i + batch_size]
         response = client.embeddings.create(
-            model=settings.openrouter_embed_model,
+            model=settings.openai_embed_model,
             input=batch,
         )
         sorted_data = sorted(response.data, key=lambda x: x.index)
@@ -146,13 +206,16 @@ def _openrouter_embed_api(texts: list[str]) -> list[list[float]]:
     return all_embeddings
 
 
-def _openrouter_embed(texts: list[str]) -> list[list[float]]:
-    """Sync embed (KHÔNG cache) — dùng bởi _rerank_texts (sync context).
+# Compat aliases — giữ tên cũ để không vỡ import ngoài
+_openai_embed_api = _openrouter_embed_api
 
-    API core tách riêng `_openrouter_embed_api`; cache embedding chỉ áp dụng
-    ở async wrapper `_embed_texts_cached` (dùng trong hybrid_search).
-    """
+
+def _openrouter_embed(texts: list[str]) -> list[list[float]]:
+    """Sync embed (KHÔNG cache) — dùng bởi _rerank_texts (sync context)."""
     return _openrouter_embed_api(texts)
+
+
+_openai_embed = _openrouter_embed
 
 
 async def _embed_texts_cached(texts: list[str]) -> list[list[float]]:

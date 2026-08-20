@@ -52,7 +52,7 @@ def preflight(version: str, want_qdrant: bool, want_pg: bool) -> int:
         return 1
 
     if not openrouter.API_KEY:
-        print("[preflight] OPENROUTER_API_KEY chưa set trong .env (xem .env.example)", file=sys.stderr)
+        print("[preflight] OPENAI_API_KEY chưa set trong .env (xem .env.example)", file=sys.stderr)
         return 1
 
     if want_qdrant:

@@ -68,17 +68,16 @@ async def generate_node(state: AgentState) -> dict:
     llm = _get_llm()
     t_generate_start = time.time()
 
-    # qwen3.6-27b is a reasoning model; without reasoning_effort="none" the
-    # hidden reasoning consumes max_tokens and content can come back empty.
-    # reasoning_effort="none" disables the thinking block entirely (fast, no empty content).
+    # Reasoning params chỉ cần cho qwen/deepseek/luna; OpenAI gpt-* sẽ 400 nếu gửi
+    _model_lower = settings.llm_model.lower()
+    _is_reasoning = any(k in _model_lower for k in ("luna", "qwen", "deepseek", "reasoning"))
+    reasoning_extra = {"reasoning_format": "hidden", "reasoning_effort": "none"} if _is_reasoning else {}
     for attempt, mt in enumerate((1024, 2048)):
         try:
-            resp = await llm.chat.completions.create(
-                model=settings.llm_model,
-                messages=messages,
-                max_tokens=mt,
-                extra_body={"reasoning_format": "hidden", "reasoning_effort": "none"},
-            )
+            kwargs = dict(model=settings.llm_model, messages=messages, max_tokens=mt)
+            if reasoning_extra:
+                kwargs["extra_body"] = reasoning_extra
+            resp = await llm.chat.completions.create(**kwargs)
         except Exception as e:
             logger.error("generate_node LLM error (attempt %d): %s", attempt + 1, e)
             break

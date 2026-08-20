@@ -25,8 +25,10 @@ RAW_BROCHURE_DIR = REPO_ROOT / "data" / "raw" / "brochure"
 CLEAN_DIR = REPO_ROOT / "data" / "clean"
 SCHEMA_PATH = REPO_ROOT / "docs" / "SPEC_SCHEMA.md"
 
-OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
-MODEL_NAME = "deepseek/deepseek-v4-flash-0731"
+# Unified OpenAI key — fallback OPENROUTER_* để tương thích .env cũ
+OPENROUTER_API_KEY = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY")
+OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+MODEL_NAME = os.environ.get("LLM_MODEL", "gpt-4o-mini")
 
 MAX_RETRIES = 3
 RETRY_DELAY = 2
@@ -182,7 +184,7 @@ def parse_source_url(text: str, path: Path) -> str:
 
 def call_llm(messages: List[Dict[str, str]], temperature: float = 0.0) -> Optional[str]:
     if not OPENROUTER_API_KEY:
-        print("Error: OPENROUTER_API_KEY not set.")
+        print("Error: OPENAI_API_KEY not set.")
         return None
 
     payload: Dict[str, Any] = {
@@ -196,11 +198,9 @@ def call_llm(messages: List[Dict[str, str]], temperature: float = 0.0) -> Option
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             response = requests.post(
-                url="https://openrouter.ai/api/v1/chat/completions",
+                url=f"{OPENAI_BASE_URL}/chat/completions",
                 headers={
                     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-                    "HTTP-Referer": "https://vinfast-specs-extractor.local",
-                    "X-Title": "VinFast Specs Extractor",
                     "Content-Type": "application/json",
                 },
                 data=json.dumps(payload),

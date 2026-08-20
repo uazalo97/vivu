@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """
-openrouter.py — Helpers dùng chung cho OpenRouter API (embedding + chat).
+openrouter.py — Helpers dùng chung cho OpenAI API (compat name kept).
 
-Đọc key từ .env (python-dotenv). Model mặc định:
-  - Embed : openai/text-embedding-3-small  (1536 chiều)
-  - Chat  : openai/gpt-4o-mini
-Có thể ghi đè qua biến môi trường OPENROUTER_EMBED_MODEL / OPENROUTER_CHAT_MODEL.
+Trước đây dùng OpenRouter, nay thống nhất về 1 OpenAI key duy nhất
+(OPENAI_API_KEY + OPENAI_BASE_URL). File giữ tên cũ để không vỡ import.
+
+Model mặc định:
+  - Embed : text-embedding-3-small  (1536 chiều)
+  - Chat  : gpt-4o-mini
+Có thể ghi đè qua OPENAI_EMBED_MODEL / LLM_MODEL / OPENAI_CHAT_MODEL.
 """
 
 import json
@@ -109,10 +112,29 @@ def summarize_metrics() -> dict:
 # Load .env từ repo root (backend/lib/../../.env)
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 
-BASE_URL = "https://openrouter.ai/api/v1"
-API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
-EMBED_MODEL = os.environ.get("OPENROUTER_EMBED_MODEL", "openai/text-embedding-3-small")
-CHAT_MODEL = os.environ.get("OPENROUTER_CHAT_MODEL", "openai/gpt-4o-mini")
+# Unified OpenAI config — ưu tiên OPENAI_*, fallback OPENROUTER_* để tương thích .env cũ
+BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
+API_KEY = os.environ.get("OPENAI_API_KEY", "") or os.environ.get("OPENROUTER_API_KEY", "")
+
+
+def _strip_prefix(m: str) -> str:
+    m = m.strip()
+    return m.split("/", 1)[-1] if "/" in m else m
+
+
+EMBED_MODEL = _strip_prefix(
+    os.environ.get("OPENAI_EMBED_MODEL")
+    or os.environ.get("OPENROUTER_EMBED_MODEL")
+    or os.environ.get("EMBEDDING_MODEL")
+    or "text-embedding-3-small"
+)
+# Chat model: LLM_MODEL là canonical, OPENROUTER_CHAT_MODEL chỉ fallback
+CHAT_MODEL = _strip_prefix(
+    os.environ.get("LLM_MODEL")
+    or os.environ.get("OPENAI_CHAT_MODEL")
+    or os.environ.get("OPENROUTER_CHAT_MODEL")
+    or "gpt-4o-mini"
+)
 # Reasoning của chat model: "" (không gửi param — giữ nguyên mặc định của model)
 #   | "off" (tắt reasoning → TTFT giảm mạnh) | "low" | "high" | "max"
 CHAT_REASONING = os.environ.get("OPENROUTER_CHAT_REASONING", "").strip().lower()
@@ -121,9 +143,7 @@ MAX_RETRIES = 4
 
 def require_key() -> None:
     if not API_KEY:
-        raise RuntimeError(
-            "OPENROUTER_API_KEY chưa set. Tạo file .env với OPENROUTER_API_KEY=sk-or-v1-... (xem .env.example)"
-        )
+        raise RuntimeError("OPENAI_API_KEY chưa set. Tạo file .env với OPENAI_API_KEY=sk-... (xem .env.example)")
 
 
 def _headers() -> dict:
@@ -199,7 +219,7 @@ def embed_text(text: str, model: str = EMBED_MODEL) -> list[float]:
 
 
 def _chat_body(messages: list[dict], model: str, temperature: float, max_tokens: int, stream: bool) -> dict:
-    """Body cho /chat/completions — thêm `reasoning.effort` nếu được cấu hình."""
+    """Body cho /chat/completions — chỉ thêm reasoning khi model thực sự cần."""
     body: dict = {
         "model": model,
         "messages": messages,
@@ -207,7 +227,8 @@ def _chat_body(messages: list[dict], model: str, temperature: float, max_tokens:
         "max_tokens": max_tokens,
         "stream": stream,
     }
-    if CHAT_REASONING:  # "off" | "low" | "medium" | "high"
+    # CHAT_REASONING chỉ áp dụng cho reasoning models; gpt-* của OpenAI sẽ 400 nếu gửi
+    if CHAT_REASONING and not model.lower().startswith("gpt-"):
         body["reasoning"] = {"effort": CHAT_REASONING}
     return body
 
@@ -287,5 +308,10 @@ def chat_completion_stream(
 def chat_completion(
     messages: list[dict], model: str = CHAT_MODEL, temperature: float = 0.3, max_tokens: int = 4096
 ) -> str:
-    """Gọi OpenRouter chat completions (stream) → trả text answer đầy đủ."""
+    """Gọi OpenAI chat completions (stream) → trả text answer đầy đủ."""
     return "".join(chat_completion_stream(messages, model, temperature, max_tokens)).strip()
+
+
+# Aliases cho code mới import theo tên OpenAI
+openai_embed_model = EMBED_MODEL
+openai_chat_model = CHAT_MODEL

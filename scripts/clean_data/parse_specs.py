@@ -816,14 +816,16 @@ def _vision_extract_brochure(url: str, model_id: str, schema: dict) -> list[dict
                 }
             )
 
+    _api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY", "")
+    _base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
     result = requests.post(
-        "https://openrouter.ai/api/v1/chat/completions",
+        f"{_base}/chat/completions",
         headers={
-            "Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}",
+            "Authorization": f"Bearer {_api_key}",
             "Content-Type": "application/json",
         },
         json={
-            "model": os.environ.get("OPENROUTER_CHAT_MODEL", "openai/gpt-4o-mini"),
+            "model": os.environ.get("LLM_MODEL") or os.environ.get("OPENROUTER_CHAT_MODEL", "gpt-4o-mini"),
             "messages": [{"role": "user", "content": content}],
             "response_format": {"type": "json_object"},
             "temperature": 0,
@@ -890,12 +892,14 @@ async def _crawl_brochure_specs(urls: list[tuple[str, str]]) -> list[dict[str, A
         "For kW/Hp use the kW token, not Hp. Prefer NEDC over WLTP. "
         "Detect Eco, Plus, PlusCaptain editions from table columns. Never guess."
     )
-    provider = os.environ.get("OPENROUTER_CHAT_MODEL", "openai/gpt-4o-mini")
+    provider = os.environ.get("LLM_MODEL") or os.environ.get("OPENROUTER_CHAT_MODEL", "gpt-4o-mini")
+    _llm_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY", "")
+    _llm_base = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1").rstrip("/")
     llm = LLMExtractionStrategy(
         llm_config=LLMConfig(
             provider=provider,
-            api_token="env:OPENROUTER_API_KEY",
-            base_url="https://openrouter.ai/api/v1",
+            api_token="env:OPENAI_API_KEY" if os.environ.get("OPENAI_API_KEY") else "env:OPENROUTER_API_KEY",
+            base_url=_llm_base,
             temperature=0,
         ),
         schema=schema,
@@ -953,8 +957,8 @@ async def _crawl_brochure_specs(urls: list[tuple[str, str]]) -> list[dict[str, A
 
 def crawl_brochure_specs() -> list[dict[str, Any]]:
     load_dotenv(REPO_ROOT / ".env")
-    if not os.environ.get("OPENROUTER_API_KEY"):
-        raise RuntimeError("OPENROUTER_API_KEY is required for --crawl-brochures")
+    if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("OPENROUTER_API_KEY")):
+        raise RuntimeError("OPENAI_API_KEY is required for --crawl-brochures")
     return asyncio.run(_crawl_brochure_specs(_crawl_brochure_urls()))
 
 
