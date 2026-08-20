@@ -57,6 +57,10 @@ class Settings:
         self.admin_api_key: str = _env.get("ADMIN_API_KEY", "")
         self.usd_vnd_rate: float = float(_env.get("USD_VND_EXCHANGE_RATE", "25400.0"))
         self.app_version: str = _env.get("APP_VERSION", "v1.0.0")
+        # LLM fallback model (dùng khi model chính lỗi trước khi stream)
+        raw_fallback = _env.get("LLM_FALLBACK_MODEL", "") or _env.get("DEEPINFRA_FALLBACK_MODEL", "")
+        raw_fallback = raw_fallback.strip()
+        self.llm_fallback_model: str = raw_fallback.split("/", 1)[-1] if "/" in raw_fallback else raw_fallback
         # LLM token limits (fallback nếu .env chưa có, dùng cho llm.py)
         self.llm_max_output_tokens: int = int(_env.get("LLM_MAX_OUTPUT_TOKENS", "1024"))
         self.llm_tool_call_max_tokens: int = int(_env.get("LLM_TOOL_CALL_MAX_TOKENS", "512"))
