@@ -136,7 +136,7 @@ def _kb_key(dv: str, query: str, model_id: str | None) -> str:
 
 
 def _emb_key(text: str) -> str:
-    return f"emb:{settings.openrouter_embed_model}:{_sha1(text)}"
+    return f"emb:{settings.embedding_model}:{_sha1(text)}"
 
 
 def _hs_key(dv: str, query: str, model_id: str | None, top_k: int, skip_rerank: bool) -> str:

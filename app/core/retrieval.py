@@ -24,8 +24,8 @@ def _get_embed_client():
         from openai import OpenAI
 
         _embed_client = OpenAI(
-            api_key=settings.openrouter_api_key,
-            base_url="https://openrouter.ai/api/v1",
+            api_key=settings.openai_api_key,
+            base_url=settings.openai_base_url,
             max_retries=3,
             timeout=60.0,
         )
@@ -130,15 +130,15 @@ def _query_to_sparse(query: str) -> dict | None:
     return {"indices": [indices[i] for i in order], "values": [values[i] for i in order]}
 
 
-def _openrouter_embed_api(texts: list[str]) -> list[list[float]]:
-    """Pure sync: embed texts via OpenRouter API. Called in thread pool."""
+def _embed_texts_api(texts: list[str]) -> list[list[float]]:
+    """Pure sync: embed texts via OpenAI API. Called in thread pool."""
     client = _get_embed_client()
     batch_size = 100
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
         batch = texts[i : i + batch_size]
         response = client.embeddings.create(
-            model=settings.openrouter_embed_model,
+            model=settings.embedding_model,
             input=batch,
         )
         sorted_data = sorted(response.data, key=lambda x: x.index)
@@ -146,13 +146,13 @@ def _openrouter_embed_api(texts: list[str]) -> list[list[float]]:
     return all_embeddings
 
 
-def _openrouter_embed(texts: list[str]) -> list[list[float]]:
+def _embed_texts(texts: list[str]) -> list[list[float]]:
     """Sync embed (KHÔNG cache) — dùng bởi _rerank_texts (sync context).
 
-    API core tách riêng `_openrouter_embed_api`; cache embedding chỉ áp dụng
+    API core tách riêng `_embed_texts_api`; cache embedding chỉ áp dụng
     ở async wrapper `_embed_texts_cached` (dùng trong hybrid_search).
     """
-    return _openrouter_embed_api(texts)
+    return _embed_texts_api(texts)
 
 
 async def _embed_texts_cached(texts: list[str]) -> list[list[float]]:
@@ -177,7 +177,7 @@ async def _embed_texts_cached(texts: list[str]) -> list[list[float]]:
         loop = asyncio.get_event_loop()
         new_embeddings = await loop.run_in_executor(
             _thread_pool,
-            _openrouter_embed_api,
+            _embed_texts_api,
             uncached_texts,
         )
         # 3. Store in cache + fill results

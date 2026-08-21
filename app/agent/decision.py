@@ -559,10 +559,10 @@ def _rerank_texts(query: str, texts: list[str]) -> list[float] | None:
     if not texts:
         return None
     try:
-        from app.core.retrieval import _openrouter_embed
+        from app.core.retrieval import _embed_texts
 
         all_texts = [query] + texts
-        embeddings = _openrouter_embed(all_texts)
+        embeddings = _embed_texts(all_texts)
         if len(embeddings) < len(all_texts):
             return None
         query_emb = embeddings[0]

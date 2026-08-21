@@ -18,7 +18,8 @@ class Settings:
         self.qdrant_url: str = _env.get("QDRANT_URL", "http://localhost:6333")
         self.qdrant_api_key: str = _env.get("QDRANT_API_KEY", "")
         self.qdrant_collection: str = _env.get("QDRANT_COLLECTION", "vivu_specs")
-        self.embedding_model: str = _env.get("EMBEDDING_MODEL", "nvidia/llama-nemotron-embed-vl-1b-v2:free")
+        # Embedding (OpenAI direct — dùng chung OPENAI_API_KEY)
+        self.embedding_model: str = _env.get("EMBEDDING_MODEL", "text-embedding-3-small")
         self.embedding_dim: int = int(_env.get("EMBEDDING_DIM", "2048"))
         self.rerank_enabled: bool = _env.get("RERANK_ENABLED", "true").lower() == "true"
         self.rerank_model: str = _env.get("RERANK_MODEL", "cohere")

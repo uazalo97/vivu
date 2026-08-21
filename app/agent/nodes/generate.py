@@ -73,12 +73,16 @@ async def generate_node(state: AgentState) -> dict:
     # reasoning_effort="none" disables the thinking block entirely (fast, no empty content).
     for attempt, mt in enumerate((1024, 2048)):
         try:
-            resp = await llm.chat.completions.create(
-                model=settings.llm_model,
-                messages=messages,
-                max_tokens=mt,
-                extra_body={"reasoning_format": "hidden", "reasoning_effort": "none"},
-            )
+            create_kwargs = {
+                "model": settings.llm_model,
+                "messages": messages,
+                "max_tokens": mt,
+            }
+            # Groq's qwen reasoning models dump hidden reasoning into max_tokens;
+            # reasoning_effort="none" disables it. OpenAI models reject these args.
+            if "groq" in settings.openai_base_url:
+                create_kwargs["extra_body"] = {"reasoning_format": "hidden", "reasoning_effort": "none"}
+            resp = await llm.chat.completions.create(**create_kwargs)
         except Exception as e:
             logger.error("generate_node LLM error (attempt %d): %s", attempt + 1, e)
             break
