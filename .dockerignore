@@ -1,41 +1,19 @@
-# Git & IDE
-.git
+﻿.git
 .gitignore
-.idea
-.vscode
-*.swp
-*.swo
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-.venv/
-env/
-venv/
-.pytest_cache/
-.coverage
-htmlcov/
-dist/
-build/
-*.egg-info/
-.deepeval/
-
-# Node / Frontend source (chỉ giữ static đã build nếu cần)
-frontend/node_modules/
-frontend/src/
-frontend/public/
-frontend/package*.json
-frontend/tsconfig*.json
-frontend/vite.config.ts
-
-# Logs & temporary files
-*.log
-data/.vector_cache/
-eval/results/
-eval/smoke_results.jsonl
-scratch/
-
-# Local sensitive env
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
 .env
-.env.local
+.env.*
+!.env.example
+.pytest_cache
+.ruff_cache
+node_modules
+frontend/node_modules
+frontend/dist
+.DS_Store
+Thumbs.db
+*.log
+scratch/
