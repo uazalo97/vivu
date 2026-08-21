@@ -1,5 +1,4 @@
-// ── Gọi SSE POST /api/chat/stream — parse event + xử lý lỗi 3 tầng ────────
-
+import { API_BASE } from './config'
 import type { Source } from './types'
 
 export interface StreamHandlers {
@@ -40,7 +39,8 @@ export async function streamChat(
 ): Promise<void> {
   let res: Response
   try {
-    res = await fetch('/api/chat/stream', {
+    const streamUrl = `${API_BASE.replace(/\/+$/, '')}/chat/stream`
+    res = await fetch(streamUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ session_id: sessionId, message, history }),

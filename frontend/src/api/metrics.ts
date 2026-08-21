@@ -1,5 +1,10 @@
+import { API_BASE } from "../config";
+
 /** Admin Metrics API client — gọi 6 endpoint backend (overview, timeseries, intents, logs, realtime, feedback) */
-const BASE = "";
+const cleanApiBase = API_BASE.replace(/\/+$/, "");
+const BASE = cleanApiBase.endsWith("/api")
+  ? cleanApiBase.slice(0, -4)
+  : (cleanApiBase === "/api" ? "" : cleanApiBase);
 
 export type MetricsOverview = {
   status: string;
