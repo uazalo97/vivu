@@ -1,6 +1,9 @@
+import os
 from dotenv import dotenv_values
 
-_env = dotenv_values(".env")
+_file_env = dotenv_values(".env") if os.path.exists(".env") else {}
+# os.environ (Render/Docker/System) có độ ưu tiên cao hơn file .env
+_env = {**_file_env, **{k: v for k, v in os.environ.items() if v is not None}}
 
 
 class Settings:

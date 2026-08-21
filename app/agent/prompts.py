@@ -61,15 +61,6 @@ async def get_system_prompt() -> str:
     # Fail-open: nếu PG không kết nối được (local dev chưa chạy PG) -> dùng fallback model_list
     try:
         pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
-        # Hỗ trợ PG_DSN fallback như app/core/db.py (Neon cloud)
-        if "localhost:5432" in pg_url:
-            from dotenv import dotenv_values
-            from pathlib import Path
-
-            _env2 = dotenv_values(Path(__file__).resolve().parents[2] / ".env")
-            cloud_dsn = _env2.get("PG_DSN") or _env2.get("POSTGRES_URL")
-            if cloud_dsn:
-                pg_url = cloud_dsn.replace("postgresql+asyncpg://", "postgresql://")
         conn = await asyncpg.connect(pg_url)
 
         rows = await conn.fetch(

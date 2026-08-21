@@ -33,13 +33,7 @@ _stats = {"created_at": 0.0, "acquire_count": 0}
 
 
 def _pg_url() -> str:
-    url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
-    if "localhost:5432" in url:
-        _env = dotenv_values(".env")
-        cloud_dsn = _env.get("PG_DSN") or _env.get("POSTGRES_URL")
-        if cloud_dsn:
-            url = cloud_dsn.replace("postgresql+asyncpg://", "postgresql://")
-    return url
+    return settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
 
 
 async def get_pool() -> asyncpg.Pool:

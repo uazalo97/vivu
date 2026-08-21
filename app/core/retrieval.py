@@ -75,15 +75,7 @@ def _get_current_version_from_db() -> str | None:
     try:
         import psycopg2
 
-        pg_url = settings.postgres_url.replace("+asyncpg", "")
-        # Fallback PG_DSN như app/core/db.py (Neon cloud)
-        if "localhost:5432" in pg_url:
-            from dotenv import dotenv_values
-
-            _env2 = dotenv_values(REPO_ROOT / ".env")
-            cloud_dsn = _env2.get("PG_DSN") or _env2.get("POSTGRES_URL")
-            if cloud_dsn:
-                pg_url = cloud_dsn.replace("+asyncpg://", "postgresql://")
+        pg_url = settings.postgres_url.replace("+asyncpg://", "postgresql://").replace("+asyncpg", "")
         conn = psycopg2.connect(pg_url)
         cur = conn.cursor()
         cur.execute("SELECT version FROM ingest_version WHERE is_current LIMIT 1")
