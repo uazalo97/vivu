@@ -130,19 +130,23 @@ def _specs_ttl(category: str | None) -> int:
     return _SPEC_CATEGORY_TTL.get(category, SPECS_TTL)
 
 
-def _kb_key(dv: str, query: str, model_id: str | None) -> str:
+def _kb_key(dv: str, query: str, model_id: str | None, collections: list[str] | None = None) -> str:
     digest = hashlib.sha256(_norm_query(query).encode("utf-8")).hexdigest()[:16]
-    return f"cache:kb:{dv}:{_norm(model_id)}:{digest}"
+    cols = _sha1("|".join(sorted(collections))) if collections else "all"
+    return f"cache:kb:{dv}:{_norm(model_id)}:{digest}:{cols}"
 
 
 def _emb_key(text: str) -> str:
     return f"emb:{settings.embedding_model}:{_sha1(text)}"
 
 
-def _hs_key(dv: str, query: str, model_id: str | None, top_k: int, skip_rerank: bool) -> str:
+def _hs_key(
+    dv: str, query: str, model_id: str | None, top_k: int, skip_rerank: bool, collections: list[str] | None = None
+) -> str:
     qh = _sha1(_norm_query(query))
     mid = _norm(model_id)
-    return f"hs:{dv}:{qh}:{mid}:{top_k}:{int(skip_rerank)}"
+    cols = _sha1("|".join(sorted(collections))) if collections else "all"
+    return f"hs:{dv}:{qh}:{mid}:{top_k}:{int(skip_rerank)}:{cols}"
 
 
 # ── Redis get/set/delete (fail-open) ─────────────────────────────────────────
@@ -223,18 +227,25 @@ async def set_embedding_cached(text: str, embedding: list[float]) -> None:
 # ── Hybrid search cache (hs:) ────────────────────────────────────────────────
 
 
-async def get_hybrid_cached(query: str, model_id: str | None, top_k: int, skip_rerank: bool) -> list[dict] | None:
+async def get_hybrid_cached(
+    query: str, model_id: str | None, top_k: int, skip_rerank: bool, collections: list[str] | None = None
+) -> list[dict] | None:
     """Lấy cached hybrid_search kết quả. None nếu miss."""
     dv = await data_version()
-    key = _hs_key(dv, query, model_id, top_k, skip_rerank)
+    key = _hs_key(dv, query, model_id, top_k, skip_rerank, collections)
     return await _get_json(key)
 
 
 async def set_hybrid_cached(
-    query: str, model_id: str | None, top_k: int, skip_rerank: bool, results: list[dict]
+    query: str,
+    model_id: str | None,
+    top_k: int,
+    skip_rerank: bool,
+    results: list[dict],
+    collections: list[str] | None = None,
 ) -> None:
     dv = await data_version()
-    key = _hs_key(dv, query, model_id, top_k, skip_rerank)
+    key = _hs_key(dv, query, model_id, top_k, skip_rerank, collections)
     await _set_json(key, results, HYBRID_TTL)
 
 
@@ -297,17 +308,17 @@ async def list_models_cached():
     return data, False
 
 
-async def search_kb_cached(query: str, model_id: str | None = None) -> dict:
+async def search_kb_cached(query: str, model_id: str | None = None, collections: list[str] | None = None) -> dict:
     """KB search cache (TTL 2h). `model_id` đã được chuẩn hóa `_model_id` ở tools."""
     dv = await data_version()
-    key = _kb_key(dv, query, model_id)
+    key = _kb_key(dv, query, model_id, collections)
     cached = await _get_json(key)
     if cached is not None:
         return cached
 
     from app.core.retrieval import hybrid_search
 
-    results = await hybrid_search(query, model_id=model_id, top_k=5)
+    results = await hybrid_search(query, model_id=model_id, top_k=5, collections=collections)
     data = {
         "query": query,
         "results": [

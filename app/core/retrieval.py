@@ -326,6 +326,7 @@ class CohereReranker:
             scores = [0.0] * len(pairs)
             for item in results:
                 scores[item.get("index", 0)] = item.get("relevance_score", 0.0)
+            logger.info("RERANK(Cohere): %d docs, top=%s", len(documents), sorted(scores, reverse=True)[:3])
             return scores
         except Exception as e:
             logger.warning("Cohere rerank failed: %s", e)
@@ -424,13 +425,16 @@ import concurrent.futures  # noqa: E402
 _thread_pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 
 
-async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> list[dict]:
+async def hybrid_search(
+    query: str, model_id: str = None, top_k: int = 5, collections: list[str] | None = None
+) -> list[dict]:
     from app.core.cache import get_hybrid_cached, set_hybrid_cached
 
     skip_rerank = not settings.rerank_enabled
+    cols = list(collections) if collections else DENSE_COLLECTIONS
 
     # 0. Check hybrid search cache (hs:) — skip entire pipeline on hit
-    cached = await get_hybrid_cached(query, model_id, top_k, skip_rerank)
+    cached = await get_hybrid_cached(query, model_id, top_k, skip_rerank, cols)
     if cached is not None:
         logger.debug("hs cache hit")
         return cached
@@ -455,7 +459,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
             logger.warning("search %s failed: %s", col, e)
             return []
 
-    dense_tasks = [_dense_search(col) for col in DENSE_COLLECTIONS]
+    dense_tasks = [_dense_search(col) for col in cols]
     dense_results = await asyncio.gather(*dense_tasks)
     all_dense = [hit for results in dense_results for hit in results]
 
@@ -475,6 +479,25 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
         fused = _rrf_fusion([all_dense, sparse_results])
     else:
         fused = [(hit, hit.get("score", 0)) for hit in all_dense]
+
+    # 4.5 Dedup + lọc chunk nav-menu (low-value, false-positive cao: liệt kê tên xe)
+    _seen_texts: set[str] = set()
+    _deduped = []
+    for hit, score in fused:
+        payload = hit.get("payload", {}) or {}
+        text = payload.get("text", "")
+        if not text or text in _seen_texts:
+            continue
+        # Breadcrumb/nav (raw_html): nhiều " - " separator = danh sách tên model,
+        # hoặc breadcrumb forum "Thảo luận * [..](..)" — không phải nội dung so sánh
+        if payload.get("source_type") == "raw_html":
+            if text.count(" - ") >= 5:
+                continue
+            if text.startswith("Thảo luận") and "](" in text:
+                continue
+        _seen_texts.add(text)
+        _deduped.append((hit, score))
+    fused = _deduped
 
     # 5. Rerank
     reranker = get_reranker()
@@ -515,5 +538,5 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
             break
 
     # 7. Cache the full-pipeline result (hs:)
-    asyncio.create_task(set_hybrid_cached(query, model_id, top_k, skip_rerank, results))
+    asyncio.create_task(set_hybrid_cached(query, model_id, top_k, skip_rerank, results, cols))
     return results

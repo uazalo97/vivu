@@ -241,11 +241,11 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
     }
 
 
-async def search_knowledge_base(query: str, model_id: str = None) -> dict:
+async def search_knowledge_base(query: str, model_id: str = None, collections: list[str] | None = None) -> dict:
     from app.core.cache import search_kb_cached
 
     mid = _model_id(model_id) if model_id else None
-    return await search_kb_cached(query, mid)
+    return await search_kb_cached(query, mid, collections)
 
 
 async def list_available_models() -> dict:

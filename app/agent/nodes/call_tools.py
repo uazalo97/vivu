@@ -245,8 +245,9 @@ async def _call_cross_model_tools(query: str, model_codes: list[str] | None = No
                     tasks.append(_safe_call("get_specs", get_specs, mc))
             results.extend(await asyncio.gather(*tasks))
 
-    # Comparison/recommendation benefit from knowledge base context
-    r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query)
+    # Comparison/recommendation benefit from knowledge base context.
+    # Chỉ search vivu_product_info — tránh nhiễu từ policy/maintenance (bảo hành, cứu hộ).
+    r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, None, ["vivu_product_info"])
     results.append(r_kb)
 
     return results

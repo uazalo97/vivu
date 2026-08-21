@@ -11,6 +11,14 @@ VERSION_QUERY_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Match ONE version name (dùng để đếm version trong query cho so sánh version-pair)
+_VERSION_TOKEN_RE = re.compile(
+    r"(PlusCaptain|Plus\s*AWD|Plus|Eco|"
+    r"Ti[êe]u\s*[Cc]hu[ẩẩ]?n|N[ââ]ng\s*[Cc]ao|Cao\s*[Cc][ấấ]?p|"
+    r"The\s*All\s*New|All\s*New)",
+    re.IGNORECASE,
+)
+
 _AMBIGUOUS_PRONOUN_RE = re.compile(
     r"(xe\s*này|mẫu\s*này|chiếc\s*này|em\s*này)",
     re.IGNORECASE,
@@ -315,6 +323,16 @@ def _distinct_models(query: str) -> list[str]:
     return seen
 
 
+def _distinct_versions(query: str) -> list[str]:
+    """Return distinct version names mentioned in the query (dùng cho so sánh version-pair)."""
+    seen: list[str] = []
+    for m in _VERSION_TOKEN_RE.finditer(query):
+        key = m.group(1).strip().lower().replace(" ", "")
+        if key not in seen:
+            seen.append(key)
+    return seen
+
+
 def _is_broad_topic(query: str) -> bool:
     """Check if query is too broad (BDS-05)."""
     broad_patterns = [
@@ -432,6 +450,11 @@ async def classify_node(state: AgentState) -> dict:
     has_version = bool(cr.entities.get("version"))
     topic = _classify_topic(query)
     raw_topic = topic  # Before history inheritance — used for OOS check
+
+    # Version-pair comparison ("vf8 eco và plus", "eco vs plus") → phiên_bản
+    # (chỉ khi query không có topic cụ thể; topic feature như giá/camera vẫn thắng)
+    if topic == "general" and len(_distinct_versions(query)) >= 2:
+        topic = "phiên_bản"
 
     # Inherit topic from history if current query topic is general
     if topic == "general" and hist_ctx["topic"]:
