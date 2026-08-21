@@ -2,14 +2,26 @@ import asyncio  # noqa: F401
 import json  # noqa: F401
 from collections import Counter  # noqa: F401
 
-import asyncpg
-
-from app.config import settings
+from app.config import settings  # noqa: F401
 
 
 async def _conn():
-    pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
-    return await asyncpg.connect(pg_url)
+    """Lấy connection từ pool (không mở connection mới mỗi lần — tránh latency Neon)."""
+    from app.core.db import get_pool
+
+    pool = await get_pool()
+    return await pool.acquire()
+
+
+async def _release(conn) -> None:
+    """Trả connection về pool (KHÔNG đóng hẳn — pool tái dùng connection)."""
+    from app.core.db import get_pool
+
+    try:
+        pool = await get_pool()
+        await pool.release(conn)
+    except Exception:
+        pass  # connection hỏng → pool tự bổ sung
 
 
 def _model_id(model_code: str) -> str:
@@ -44,7 +56,7 @@ async def get_price(model_code: str, version: str = None) -> dict:
         "FROM price_list_active WHERE model_id != $1 ORDER BY price_list_vnd LIMIT 10",
         mid,
     )
-    await conn.close()
+    await _release(conn)
 
     source_url = rows[0]["source_url"] if rows and rows[0].get("source_url") else ""
     related_models = []
@@ -100,7 +112,7 @@ async def get_colors(model_code: str, version: str = None) -> dict:
             "ORDER BY version_name, color_name, interior_name",
             mid,
         )
-    await conn.close()
+    await _release(conn)
 
     if not rows:
         return {"model_code": model_code, "variants": [], "colors": [], "interiors": []}
@@ -150,7 +162,7 @@ async def get_options(model_code: str, version: str = None) -> dict:
             "ORDER BY version_name, option_group, option_name, value_name",
             mid,
         )
-    await conn.close()
+    await _release(conn)
 
     if not rows:
         return {"model_code": model_code, "options": [], "groups": []}
@@ -215,7 +227,7 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
         "SELECT DISTINCT model_code FROM car_specs WHERE model_code != $1 ORDER BY model_code LIMIT 10",
         model_code,
     )
-    await conn.close()
+    await _release(conn)
 
     source_urls = set(r["source_url"] for r in rows if r["source_url"])
     primary_source = source_urls.pop() if source_urls else ""
@@ -254,7 +266,7 @@ async def list_available_models() -> dict:
         "SELECT model_id, model_label, edition_id, edition_label, year_range "
         "FROM edition_active ORDER BY model_id, edition_id"
     )
-    await conn.close()
+    await _release(conn)
 
     by_model = {}
     for r in rows:

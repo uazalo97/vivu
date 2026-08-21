@@ -1,4 +1,5 @@
 import logging
+from contextlib import asynccontextmanager
 
 from app.tracing import setup_tracing
 
@@ -19,7 +20,25 @@ logging.basicConfig(
 )
 logging.getLogger("bds").setLevel(logging.INFO)
 
-app = FastAPI(title="Vivu Chatbot & Telemetry API")
+logger = logging.getLogger("bds.main")
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    """Warm connections at startup — tránh first-request latency (Neon cold + pool init + data_version)."""
+    try:
+        from app.core.cache import data_version
+        from app.core.db import get_pool
+
+        await get_pool()
+        await data_version()
+        logger.info("Warmup done: PG pool + data_version")
+    except Exception as e:  # non-blocking
+        logger.warning("Warmup failed (non-blocking): %s", e)
+    yield
+
+
+app = FastAPI(title="Vivu Chatbot & Telemetry API", lifespan=lifespan)
 
 # Allow cross-origin calls from any frontend
 app.add_middleware(

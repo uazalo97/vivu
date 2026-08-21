@@ -190,20 +190,39 @@ def _query_to_sparse(query: str) -> dict | None:
     return {"indices": [indices[i] for i in order], "values": [values[i] for i in order]}
 
 
+# In-memory memo cho spec-text embedding (deterministic, lặp lại giữa request).
+# Giảm đáng kể API embedding calls trong validate/respond (spec scoring).
+_EMBED_MEMO: dict[str, list[float]] = {}
+_EMBED_MEMO_LIMIT = 8000
+
+
 def _embed_texts_api(texts: list[str]) -> list[list[float]]:
-    """Pure sync: embed texts via OpenAI API. Called in thread pool."""
-    client = _get_embed_client()
-    batch_size = 100
-    all_embeddings = []
-    for i in range(0, len(texts), batch_size):
-        batch = texts[i : i + batch_size]
-        response = client.embeddings.create(
-            model=settings.openai_embed_model,
-            input=batch,
-        )
-        sorted_data = sorted(response.data, key=lambda x: x.index)
-        all_embeddings.extend([d.embedding for d in sorted_data])
-    return all_embeddings
+    """Pure sync: embed texts via OpenAI API (có in-memory memo). Called in thread pool."""
+    results: list[list[float] | None] = [None] * len(texts)
+    uncached: list[tuple[int, str]] = []
+    for i, t in enumerate(texts):
+        emb = _EMBED_MEMO.get(t)
+        if emb is not None:
+            results[i] = emb
+        else:
+            uncached.append((i, t))
+
+    if uncached:
+        client = _get_embed_client()
+        batch_size = 100
+        for start in range(0, len(uncached), batch_size):
+            chunk = uncached[start : start + batch_size]
+            response = client.embeddings.create(
+                model=settings.openai_embed_model,
+                input=[t for _, t in chunk],
+            )
+            sorted_data = sorted(response.data, key=lambda x: x.index)
+            for (i, t), d in zip(chunk, sorted_data):
+                emb = d.embedding
+                results[i] = emb
+                if len(_EMBED_MEMO) < _EMBED_MEMO_LIMIT:
+                    _EMBED_MEMO[t] = emb
+    return results  # type: ignore[return-value]
 
 
 # Compat aliases — giữ tên cũ để không vỡ import ngoài

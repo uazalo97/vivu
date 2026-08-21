@@ -158,29 +158,37 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
         await _cached("get_price", "price", get_price_cached, model_code, version)
 
     elif category == "tổng_quan":
-        # Thông tin cơ bản: phiên bản + giá + thông số then chốt + màu sắc
-        await _cached("list_available_models", "list_models", list_models_cached)
-        await _cached("get_price", "price", get_price_cached, model_code, version)
-        # Spec then chốt: công suất/tốc độ, pin/quãng đường, kích thước, nội thất (số chỗ)
-        for cat in ("powertrain", "battery", "dimension", "interior"):
-            await _cached("get_specs", "specs", get_specs_cached, model_code, version, cat)
-        await _cached("get_colors", "colors", get_colors_cached, model_code, version)
+        # Thông tin cơ bản: phiên bản + giá + thông số then chốt + màu sắc (chạy SONG SONG)
+        await asyncio.gather(
+            _cached("list_available_models", "list_models", list_models_cached),
+            _cached("get_price", "price", get_price_cached, model_code, version),
+            _cached("get_specs", "specs", get_specs_cached, model_code, version, "powertrain"),
+            _cached("get_specs", "specs", get_specs_cached, model_code, version, "battery"),
+            _cached("get_specs", "specs", get_specs_cached, model_code, version, "dimension"),
+            _cached("get_specs", "specs", get_specs_cached, model_code, version, "interior"),
+            _cached("get_colors", "colors", get_colors_cached, model_code, version),
+        )
 
     elif category == "phiên_bản":
-        await _cached("list_available_models", "list_models", list_models_cached)
-        # Only get version-related specs, not ALL specs
-        r2 = await _safe_call("get_specs", get_specs, model_code, None, "powertrain")
-        results.append(r2)
+        _, spec_r = await asyncio.gather(
+            _cached("list_available_models", "list_models", list_models_cached),
+            _safe_call("get_specs", get_specs, model_code, None, "powertrain"),
+        )
+        results.append(spec_r)
 
     elif category == "màu_sắc":
-        await _cached("get_colors", "colors", get_colors_cached, model_code, version)
-        r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
-        results.append(r_kb)
+        _, kb_r = await asyncio.gather(
+            _cached("get_colors", "colors", get_colors_cached, model_code, version),
+            _safe_call("search_knowledge_base", search_knowledge_base, query, model_code),
+        )
+        results.append(kb_r)
 
     elif category == "option":
-        await _cached("get_options", "options", get_options_cached, model_code, version)
-        r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
-        results.append(r_kb)
+        _, kb_r = await asyncio.gather(
+            _cached("get_options", "options", get_options_cached, model_code, version),
+            _safe_call("search_knowledge_base", search_knowledge_base, query, model_code),
+        )
+        results.append(kb_r)
 
     else:
         # Spec-based topics
@@ -190,8 +198,9 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
             spec_cat = _refine_spec_category(query)
         # an_toàn spans safety + adas (camera 360, ADAS in adas; airbags, ABS in safety)
         if isinstance(spec_cat, (list, tuple)):
-            for sc in spec_cat:
-                await _cached("get_specs", "specs", get_specs_cached, model_code, version, sc)
+            await asyncio.gather(
+                *[_cached("get_specs", "specs", get_specs_cached, model_code, version, sc) for sc in spec_cat]
+            )
         else:
             await _cached("get_specs", "specs", get_specs_cached, model_code, version, spec_cat)
 
