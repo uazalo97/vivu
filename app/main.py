@@ -2,8 +2,11 @@ import logging
 
 from app.tracing import setup_tracing
 
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from app.api.admin_prompts import router as admin_prompts_router
@@ -34,5 +37,24 @@ app.include_router(health_router)
 app.include_router(chat_router)
 app.include_router(metrics_router)
 app.include_router(admin_prompts_router)
-app.mount("/", StaticFiles(directory="app/static", html=True))
+
+# Phục vụ static files & SPA fallback cho React Router (hỗ trợ truy cập trực tiếp /admin)
+_STATIC_DIR = Path("app/static")
+if (_STATIC_DIR / "assets").is_dir():
+    app.mount("/assets", StaticFiles(directory=str(_STATIC_DIR / "assets")), name="assets")
+
+
+@app.get("/{full_path:path}")
+async def serve_spa(full_path: str):
+    if not _STATIC_DIR.exists():
+        return JSONResponse({"error": "Static directory not found"}, status_code=404)
+    target = _STATIC_DIR / full_path
+    if target.is_file():
+        return FileResponse(target)
+    index_file = _STATIC_DIR / "index.html"
+    if index_file.is_file():
+        return FileResponse(index_file)
+    return JSONResponse({"error": "Not Found"}, status_code=404)
+
+
 setup_tracing()
