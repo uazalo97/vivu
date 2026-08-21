@@ -10,12 +10,15 @@ from typing import Optional
 
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 
 from app.core.telemetry import (
     get_metrics_intents,
     get_metrics_logs,
     get_metrics_overview,
+    get_metrics_realtime,
     get_metrics_timeseries,
+    record_feedback,
 )
 
 logger = logging.getLogger("bds.metrics_api")
@@ -106,3 +109,31 @@ async def metrics_logs(
     except Exception as e:
         logger.warning("Metrics logs fallback due to: %s", e)
         return JSONResponse(content={"total": 0, "limit": limit, "offset": offset, "logs": []})
+
+
+class FeedbackRequest(BaseModel):
+    request_id: str
+    rating: int  # 1 = 👍, -1 = 👎
+    comment: Optional[str] = None
+
+
+@router.post("/feedback", summary="Ghi feedback 👍/👎 cho request")
+async def metrics_feedback(body: FeedbackRequest):
+    if body.rating not in (1, -1):
+        return JSONResponse(status_code=400, content={"status": "error", "message": "rating must be 1 or -1"})
+    ok = await record_feedback(body.request_id, body.rating, body.comment)
+    if ok:
+        return JSONResponse(content={"status": "success", "request_id": body.request_id, "rating": body.rating})
+    return JSONResponse(status_code=500, content={"status": "error", "message": "failed to record feedback"})
+
+
+@router.get("/realtime", summary="Realtime nhẹ: requests/min trong vài phút gần nhất")
+async def metrics_realtime(
+    window_min: int = Query(5, ge=1, le=60, description="Cửa sổ realtime tính theo phút (1-60)"),
+):
+    try:
+        data = await get_metrics_realtime(window_min=window_min)
+        return JSONResponse(content=data)
+    except Exception as e:
+        logger.warning("Metrics realtime fallback due to: %s", e)
+        return JSONResponse(content={"status": "success", "window_min": window_min, "points": []})

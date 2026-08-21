@@ -14,7 +14,7 @@ Các tầng cache:
   - ans:     — answer cache single-turn (30 phút, PHASE SAU)
 
 Các hàm `*_cached` trả tuple `(data, cache_hit)`.
-Không cache `get_price` / `get_active_promotions` (data volatile).
+`get_price` cache 15 phút (theo docs), `get_active_promotions` không cache (link tĩnh).
 """
 
 from __future__ import annotations
@@ -33,28 +33,30 @@ from app.core.memory import get_redis
 logger = logging.getLogger("bds.cache")
 
 # ── TTL phân tầng ─────────────────────────────────────────────────────────────
-SPECS_TTL = 6 * 3600
-COLORS_TTL = 6 * 3600
-OPTIONS_TTL = 6 * 3600
+SPECS_TTL = 24 * 3600
+COLORS_TTL = 24 * 3600
+OPTIONS_TTL = 24 * 3600
 LIST_MODELS_TTL = 1 * 3600
 KB_TTL = 2 * 3600
+TOOL_PRICE_TTL = 15 * 60  # 15 phút cho giá — theo docs
 EMBEDDING_TTL = 7 * 24 * 3600  # 7 ngày — embedding deterministic
 HYBRID_TTL = 2 * 3600  # 2 giờ — dense+sparse+rerank pipeline
 ANS_TTL = 30 * 60  # 30 phút — answer single-turn (PHASE SAU)
 
-# TTL phân tầng theo topic (volatility axis). `None` = KHÔNG cache (query trực tiếp).
+# TTL phân tầng theo topic (volatility axis) — theo docs/CACHE_SYSTEM.md & CACHING_DESIGN.md
+# Docs chuẩn: price/khuyến_mãi 15 phút, specs/colors 24h, list_models 1h, ans 30m, hs 2h, emb 7d
 CACHE_TTL_BY_TOPIC = {
-    "thông_số_kỹ_thuật": 6 * 3600,
+    "thông_số_kỹ_thuật": 24 * 3600,
     "kích_thước": 24 * 3600,
-    "an_toàn": 6 * 3600,
-    "nội_thất": 6 * 3600,
-    "ngoại_thất": 6 * 3600,
-    "pin_và_sạc": 6 * 3600,
-    "phạm_vi_di_chuyển": 6 * 3600,
-    "màu_sắc": 6 * 3600,
-    "option": 6 * 3600,
-    "giá": None,  # không cache — invalidation chủ động
-    "khuyến_mãi": None,  # không cache
+    "an_toàn": 24 * 3600,
+    "nội_thất": 24 * 3600,
+    "ngoại_thất": 24 * 3600,
+    "pin_và_sạc": 24 * 3600,
+    "phạm_vi_di_chuyển": 24 * 3600,
+    "màu_sắc": 24 * 3600,
+    "option": 24 * 3600,
+    "giá": 15 * 60,  # 15 phút theo docs — trước đây None
+    "khuyến_mãi": 15 * 60,
     "list_models": LIST_MODELS_TTL,
 }
 
@@ -137,7 +139,8 @@ def _kb_key(dv: str, query: str, model_id: str | None, collections: list[str] | 
 
 
 def _emb_key(text: str) -> str:
-    return f"emb:{settings.embedding_model}:{_sha1(text)}"
+    # Unified key — dùng openai_embed_model (alias openrouter_embed_model vẫn trỏ cùng giá trị)
+    return f"emb:{settings.openai_embed_model}:{_sha1(text)}"
 
 
 def _hs_key(
@@ -250,6 +253,21 @@ async def set_hybrid_cached(
 
 
 # ── Entity-keyed cached tools ─────────────────────────────────────────────────
+
+
+async def get_price_cached(model_code: str, version: str | None = None):
+    """Cache get_price 15 phút — theo docs/CACHE_SYSTEM.md (tool:price)."""
+    dv = await data_version()
+    # key riêng cho price: cache:{dv}:price:{model}:{version}
+    key = f"cache:{dv}:price:{_norm(model_code)}:{_norm(version)}"
+    cached = await _get_json(key)
+    if cached is not None:
+        return cached, True
+    from app.agent.tools import get_price
+
+    data = await get_price(model_code, version)
+    await _set_json(key, data, TOOL_PRICE_TTL)
+    return data, False
 
 
 async def get_specs_cached(model_code: str, version: str | None = None, category: str | None = None):

@@ -12,7 +12,7 @@ embed + cache. Cuối cùng xóa orphan points (chunk bị bỏ ở version mớ
 `--recreate` = drop collection + BỎ QUA cache (rebuild sạch, hiếm — đổi embed
 model). Mặc định (không recreate) = incremental UPSERT + cache.
 
-Embed bằng OpenRouter API (mặc định openai/text-embedding-3-small, 1536 chiều).
+Embed bằng OpenAI API (mặc định text-embedding-3-small, 1536 chiều).
 Đọc: data/clean/<version>/vector/*.jsonl  →  Qdrant collection `<stem>__<version>`
 
 Usage:
@@ -39,7 +39,7 @@ from qdrant_client import QdrantClient  # noqa: E402
 from qdrant_client.models import Distance, PointStruct, VectorParams  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "backend"))
-from lib.openrouter import (  # noqa: E402
+from lib.openai_client import (  # noqa: E402
     API_KEY,
     EMBED_MODEL,
     embed_texts,  # noqa: E402
@@ -137,7 +137,7 @@ def ingest_file(
         )
         print(f"  created {collection_name} (dim={dim})")
 
-    # Embed miss qua OpenRouter
+    # Embed miss qua OpenAI
     embedded_miss = 0
     if miss_idx:
         print(f"  embedding {len(miss_idx)} chunks (cache miss) ...")
@@ -181,7 +181,7 @@ def ingest_file(
 def run(version: str = "v1", url: str = DEFAULT_QDRANT_URL, recreate: bool = False) -> int:
     """Embed + upsert Qdrant dense collections (versioned, incremental). Trả 0/1."""
     if not API_KEY:
-        print("[vector_ingest] OPENROUTER_API_KEY chưa set trong .env", file=sys.stderr)
+        print("[vector_ingest] OPENAI_API_KEY chưa set trong .env", file=sys.stderr)
         return 1
 
     vector_dir = Path(str(VECTOR_DIR).format(version=version))

@@ -49,38 +49,60 @@ async def get_system_prompt() -> str:
     if _prompt_cache and (time.time() - _prompt_cache_time) < _CACHE_TTL:
         return _prompt_cache
 
-    pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
-    conn = await asyncpg.connect(pg_url)
+    # Fail-open: nếu PG không kết nối được (local dev chưa chạy PG) -> dùng fallback model_list
+    try:
+        pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
+        # Hỗ trợ PG_DSN fallback như app/core/db.py (Neon cloud)
+        if "localhost:5432" in pg_url:
+            from dotenv import dotenv_values
+            from pathlib import Path
 
-    rows = await conn.fetch(
-        "SELECT model_id, model_label, year_range, "
-        "STRING_AGG(edition_id, ', ' ORDER BY edition_id) as editions "
-        "FROM edition_active "
-        "GROUP BY model_id, model_label, year_range "
-        "UNION "
-        "SELECT '' as model_id, model_code AS model_label, '' as year_range, "
-        "STRING_AGG(DISTINCT version_name, ', ' ORDER BY version_name) as editions "
-        "FROM car_specs "
-        "WHERE model_code NOT IN (SELECT DISTINCT model_label FROM edition_active) "
-        "AND model_code IS NOT NULL AND version_name IS NOT NULL "
-        "GROUP BY model_code "
-        "ORDER BY model_label"
-    )
+            _env2 = dotenv_values(Path(__file__).resolve().parents[2] / ".env")
+            cloud_dsn = _env2.get("PG_DSN") or _env2.get("POSTGRES_URL")
+            if cloud_dsn:
+                pg_url = cloud_dsn.replace("postgresql+asyncpg://", "postgresql://")
+        conn = await asyncpg.connect(pg_url)
 
-    await conn.close()
+        rows = await conn.fetch(
+            "SELECT model_id, model_label, year_range, "
+            "STRING_AGG(edition_id, ', ' ORDER BY edition_id) as editions "
+            "FROM edition_active "
+            "GROUP BY model_id, model_label, year_range "
+            "UNION "
+            "SELECT '' as model_id, model_code AS model_label, '' as year_range, "
+            "STRING_AGG(DISTINCT version_name, ', ' ORDER BY version_name) as editions "
+            "FROM car_specs "
+            "WHERE model_code NOT IN (SELECT DISTINCT model_label FROM edition_active) "
+            "AND model_code IS NOT NULL AND version_name IS NOT NULL "
+            "GROUP BY model_code "
+            "ORDER BY model_label"
+        )
 
-    lines = []
-    for r in rows:
-        yr = f" ({r['year_range']})" if r["year_range"] else ""
-        editions = r["editions"] or ""
-        lines.append(f"- {r['model_label']}{yr} — Phiên bản: {editions}")
+        await conn.close()
 
-    model_list = "\n".join(lines) if lines else "- Chưa có model nào trong hệ thống"
+        lines = []
+        for r in rows:
+            yr = f" ({r['year_range']})" if r["year_range"] else ""
+            editions = r["editions"] or ""
+            lines.append(f"- {r['model_label']}{yr} — Phiên bản: {editions}")
 
-    result = SYSTEM_PROMPT.format(model_list=model_list)
-    _prompt_cache = result
-    _prompt_cache_time = time.time()
-    return result
+        model_list = "\n".join(lines) if lines else "- Chưa có model nào trong hệ thống"
+
+        result = SYSTEM_PROMPT.format(model_list=model_list)
+        _prompt_cache = result
+        _prompt_cache_time = time.time()
+        return result
+    except Exception as e:
+        import logging
+
+        logging.getLogger("bds.prompts").warning("get_system_prompt PG failed (fail-open): %s", e)
+        # Fallback tĩnh — không làm sập request /api/chat
+        fallback_list = "- VF 6 — Phiên bản: Eco, Plus\n- VF 8 — Phiên bản: Eco, Plus"
+        result = SYSTEM_PROMPT.format(model_list=fallback_list)
+        # Cache ngắn 60s để retry PG sau đó
+        _prompt_cache = result
+        _prompt_cache_time = time.time() - (_CACHE_TTL - 60)
+        return result
 
 
 def get_prompt_hash() -> str:

@@ -32,7 +32,7 @@ sys.path.insert(0, str(REPO_ROOT / "backend"))
 
 from scripts.clean_data import clean_to_jsonl, split_cold_hot, parse_specs  # noqa: E402
 from scripts.ingest import vector_ingest, sparse_ingest, postgres_ingest  # noqa: E402
-from lib import openrouter  # noqa: E402
+from lib import openai_client  # noqa: E402
 from scripts import version_manager  # noqa: E402
 
 QDRANT_URL = os.environ.get("QDRANT_URL", "http://localhost:6333")
@@ -51,8 +51,8 @@ def preflight(version: str, want_qdrant: bool, want_pg: bool) -> int:
         print(f"[preflight] data/raw rỗng hoặc không tồn tại: {raw}", file=sys.stderr)
         return 1
 
-    if not openrouter.API_KEY:
-        print("[preflight] OPENROUTER_API_KEY chưa set trong .env (xem .env.example)", file=sys.stderr)
+    if not openai_client.API_KEY:
+        print("[preflight] OPENAI_API_KEY chưa set trong .env (xem .env.example)", file=sys.stderr)
         return 1
 
     if want_qdrant:

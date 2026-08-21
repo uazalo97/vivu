@@ -29,6 +29,9 @@ class AgentLoop:
         return result
 
     async def run_stream(self, query: str, history: list[dict], current_context: dict = None):
+        """True streaming: token LLM được đẩy qua custom stream mode ngay khi sinh."""
+        import asyncio
+
         state = {
             "query": query,
             "history": history,
@@ -36,82 +39,103 @@ class AgentLoop:
             "t0": time.time(),
         }
 
-        yielded_classify = False
         yielded_tokens = False
+        queue: asyncio.Queue = asyncio.Queue()
+        _SENTINEL = object()
+        graph_error: Exception | None = None
 
-        async for event in self.graph.astream(state, stream_mode="updates"):
-            for node_name, node_output in event.items():
-                if node_name == "classify":
-                    dec = node_output.get("decision", "answer")
-                    yield {"type": "decision", "content": dec}
-                    yield {
-                        "type": "classify",
-                        "content": {
-                            "specificity": node_output.get("specificity", ""),
-                            "entities": node_output.get("entities", {}),
-                            "category": node_output.get("category", ""),
-                        },
-                    }
-                    yielded_classify = True  # noqa: F841
+        async def _producer():
+            nonlocal graph_error
+            try:
+                async for mode, payload in self.graph.astream(state, stream_mode=["updates", "custom"]):
+                    await queue.put((mode, payload))
+            except Exception as e:
+                graph_error = e
+            finally:
+                await queue.put(_SENTINEL)
 
-                elif node_name == "call_tools":
-                    for tr in node_output.get("tool_results", []):
-                        yield {"type": "tool_call", "content": {"tool": tr["tool"], "success": tr["success"]}}
-                    if node_output.get("cache_hit"):
+        task = asyncio.create_task(_producer())
+        try:
+            while True:
+                try:
+                    item = await asyncio.wait_for(queue.get(), timeout=3.0)
+                except asyncio.TimeoutError:
+                    yield {"type": "ping"}
+                    continue
+                if item is _SENTINEL:
+                    break
+                mode, payload = item
+                if mode == "custom":
+                    if isinstance(payload, dict) and payload.get("type") == "token":
+                        yielded_tokens = True
+                    yield payload
+                    continue
+                for node_name, node_output in payload.items():
+                    if node_name == "classify":
+                        dec = node_output.get("decision", "answer")
+                        yield {"type": "decision", "content": dec}
                         yield {
-                            "type": "cache",
+                            "type": "classify",
                             "content": {
-                                "hit": True,
-                                "type": node_output.get("cache_type", "") or "cache",
+                                "specificity": node_output.get("specificity", ""),
+                                "entities": node_output.get("entities", {}),
+                                "category": node_output.get("category", ""),
                             },
                         }
-
-                elif node_name == "generate":
-                    fr = node_output.get("final_response", "")
-                    if fr:
-                        yield {"type": "token", "content": fr}
-                        yielded_tokens = True
-
-                elif node_name == "validate":
-                    pass
-
-                elif node_name == "respond":
-                    result = node_output.get("result")
-                    if result is None:
-                        continue
-
-                    if result.decision == "out_of_scope":
-                        yield {"type": "answer", "content": result.response}
-                    elif result.decision == "clarify":
-                        yield {"type": "clarify", "content": result.response}
-                        yield {"type": "sources", "content": []}
-                    elif result.decision == "refuse":
-                        if not yielded_tokens:
+                    elif node_name == "call_tools":
+                        for tr in node_output.get("tool_results", []):
+                            yield {"type": "tool_call", "content": {"tool": tr["tool"], "success": tr["success"]}}
+                        if node_output.get("cache_hit"):
+                            yield {
+                                "type": "cache",
+                                "content": {
+                                    "hit": True,
+                                    "type": node_output.get("cache_type", "") or "cache",
+                                },
+                            }
+                    elif node_name == "generate":
+                        # Với stream thật, token đã được đẩy qua custom, không yield cả cục nữa
+                        pass
+                    elif node_name == "validate":
+                        pass
+                    elif node_name == "respond":
+                        result = node_output.get("result")
+                        if result is None:
+                            continue
+                        if result.decision == "out_of_scope":
+                            yield {"type": "answer", "content": result.response}
+                        elif result.decision == "clarify":
+                            yield {"type": "clarify", "content": result.response}
+                            yield {"type": "sources", "content": []}
+                        elif result.decision == "refuse":
+                            if not yielded_tokens:
+                                yield {"type": "token", "content": result.response}
+                        elif not yielded_tokens:
                             yield {"type": "token", "content": result.response}
-                    elif not yielded_tokens:
-                        yield {"type": "token", "content": result.response}
-
-                    if result.sources and result.decision == "answer":
-                        seen = set()
-                        formatted = []
-                        for c in sorted(result.sources, key=lambda x: x.get("score", 0), reverse=True):
-                            url = c.get("source_url", "")
-                            # Fallback: if source_url is file path, use VinFast product page
-                            if url and not url.startswith("http"):
+                        if result.sources and result.decision == "answer":
+                            seen = set()
+                            formatted = []
+                            for c in sorted(result.sources, key=lambda x: x.get("score", 0), reverse=True):
+                                url = c.get("source_url", "")
+                                if url and not url.startswith("http"):
+                                    model = c.get("model_code", "")
+                                    model_slug = model.lower().replace(" ", "")
+                                    url = f"https://shop.vinfastauto.com/vn_vi/dat-coc-xe-{model_slug}.html"
+                                if not url or url in seen:
+                                    continue
+                                seen.add(url)
                                 model = c.get("model_code", "")
-                                model_slug = model.lower().replace(" ", "")
-                                url = f"https://shop.vinfastauto.com/vn_vi/dat-coc-xe-{model_slug}.html"
-                            if not url or url in seen:
-                                continue
-                            seen.add(url)
-                            model = c.get("model_code", "")
-                            label = c.get("source_type", "")
-                            score = round(c.get("score", 0), 3)
-                            text = f"{model} — {label}" if model and label else (label or url)
-                            formatted.append({"text": text, "url": url, "type": label, "score": score})
-                            if len(formatted) >= 5:
-                                break
-                        if formatted:
-                            yield {"type": "sources", "content": formatted}
-
+                                label = c.get("source_type", "")
+                                score = round(c.get("score", 0), 3)
+                                text = f"{model} — {label}" if model and label else (label or url)
+                                formatted.append({"text": text, "url": url, "type": label, "score": score})
+                                if len(formatted) >= 5:
+                                    break
+                            if formatted:
+                                yield {"type": "sources", "content": formatted}
+            if graph_error is not None:
+                yield {"type": "error", "content": "Có lỗi xảy ra khi xử lý câu hỏi. Vui lòng thử lại."}
+        finally:
+            if not task.done():
+                task.cancel()
         yield {"type": "done"}

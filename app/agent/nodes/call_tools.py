@@ -13,7 +13,7 @@ from app.agent.graph_state import AgentState
 from app.agent.prompts import get_system_prompt
 from app.agent.tools import (
     get_specs,
-    get_price,
+    get_price,  # noqa: F401 — kept for _safe_call fallback, primary is get_price_cached
     list_available_models,
     search_knowledge_base,
     get_active_promotions,
@@ -24,6 +24,7 @@ from app.agent.tools import (
     get_maintenance_link,
 )
 from app.core.cache import (
+    get_price_cached,
     get_specs_cached,
     get_colors_cached,
     get_options_cached,
@@ -154,14 +155,12 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
             results.append({"tool": name, "result": {"error": str(e)}, "success": False})
 
     if category == "giá":
-        r = await _safe_call("get_price", get_price, model_code, version)
-        results.append(r)
+        await _cached("get_price", "price", get_price_cached, model_code, version)
 
     elif category == "tổng_quan":
         # Thông tin cơ bản: phiên bản + giá + thông số then chốt + màu sắc
         await _cached("list_available_models", "list_models", list_models_cached)
-        r_price = await _safe_call("get_price", get_price, model_code, version)
-        results.append(r_price)
+        await _cached("get_price", "price", get_price_cached, model_code, version)
         # Spec then chốt: công suất/tốc độ, pin/quãng đường, kích thước, nội thất (số chỗ)
         for cat in ("powertrain", "battery", "dimension", "interior"):
             await _cached("get_specs", "specs", get_specs_cached, model_code, version, cat)
@@ -224,7 +223,12 @@ async def _call_cross_model_tools(query: str, model_codes: list[str] | None = No
         tasks = []
         for mc in mentioned:
             if is_price:
-                tasks.append(_safe_call("get_price", get_price, mc))
+                # Price cache 15m theo docs — wrap get_price_cached (trả tuple)
+                async def _price_task(m=mc):
+                    data, _hit = await get_price_cached(m)
+                    return {"tool": "get_price", "result": data, "success": True}
+
+                tasks.append(_price_task())
             else:
                 tasks.append(_safe_call("get_specs", get_specs, mc, None, spec_cat))
         results.extend(await asyncio.gather(*tasks))
@@ -240,7 +244,12 @@ async def _call_cross_model_tools(query: str, model_codes: list[str] | None = No
                 if not mc:
                     continue
                 if is_price:
-                    tasks.append(_safe_call("get_price", get_price, mc))
+
+                    async def _price_task(m=mc):
+                        data, _hit = await get_price_cached(m)
+                        return {"tool": "get_price", "result": data, "success": True}
+
+                    tasks.append(_price_task())
                 else:
                     tasks.append(_safe_call("get_specs", get_specs, mc))
             results.extend(await asyncio.gather(*tasks))

@@ -1,5 +1,7 @@
+import asyncio
 import hashlib
 import json
+import logging
 import time
 import uuid
 from typing import Optional
@@ -19,6 +21,8 @@ from app.core.memory import (
     get_redis,
 )
 from app.core.telemetry import log_metric_background, record_metric
+
+logger = logging.getLogger("bds.api")
 
 router = APIRouter()
 
@@ -145,14 +149,25 @@ async def chat(request: ChatRequest, http_request: Request):
     cache_hit = bool(getattr(result, "cache_hit", False))
     cache_type = getattr(result, "cache_type", "none") or "none"
 
-    # Telemetry recording
+    # Telemetry recording — dùng số liệu THẬT từ decision_log (bỏ ttft*0.4 giả)
     dlog = result.decision_log or {}
-    intent = dlog.get("topic") or dlog.get("detected_topic") or result.classify_result.get("assessment") or "general"
+    intent = (
+        dlog.get("topic") or dlog.get("detected_topic") or (result.classify_result or {}).get("assessment") or "general"
+    )
     tools_used = [t.get("tool") for t in dlog.get("retrieved_chunks", []) if isinstance(t, dict) and t.get("tool")]
-
     prompt_tok = _estimate_tokens(request.message) + sum(_estimate_tokens(h.get("content", "")) for h in history)
     comp_tok = _estimate_tokens(result.response)
-
+    latency_retrieval_ms = int(dlog.get("latency_retrieval_ms") or dlog.get("latency_ms") or 0)
+    latency_generation_ms = int(dlog.get("latency_generation_ms") or 0)
+    ttot_ms = int(dlog.get("latency_total_ms") or dlog.get("ttot_ms") or total_latency_ms)
+    ttft_ms = int(dlog.get("ttft_ms") or 0)
+    if ttft_ms == 0 and latency_retrieval_ms:
+        ttft_ms = latency_retrieval_ms
+    model_code = entities.get("model_code")
+    model_version = entities.get("version")
+    retrieval_status = "success" if dlog.get("retrieved_chunks") else "none"
+    chunks_retrieved = len(dlog.get("retrieved_chunks") or dlog.get("chunks") or [])
+    reasoning_tokens = int(dlog.get("reasoning_tokens") or 0)
     log_metric_background(
         record_metric(
             request_id=req_id,
@@ -164,12 +179,20 @@ async def chat(request: ChatRequest, http_request: Request):
             prompt_version=getattr(settings, "app_version", "v1.0.0"),
             prompt_tokens=prompt_tok,
             completion_tokens=comp_tok,
-            ttft_ms=int(total_latency_ms * 0.4),
+            ttft_ms=ttft_ms,
+            ttot_ms=ttot_ms,
             total_latency_ms=total_latency_ms,
+            latency_retrieval_ms=latency_retrieval_ms,
+            latency_generation_ms=latency_generation_ms,
             cache_hit=cache_hit,
             cache_type=cache_type,
             tools_used=tools_used,
             status_code=200,
+            model_code=model_code,
+            model_version=model_version,
+            retrieval_status=retrieval_status,
+            chunks_retrieved=chunks_retrieved,
+            reasoning_tokens=reasoning_tokens,
         )
     )
 
@@ -254,28 +277,40 @@ async def chat_stream(request: ChatRequest, http_request: Request):
                 ttft_ms = total_latency_ms
 
             full_resp = "".join(accumulated_text)
+            model_code = entities.get("model_code") if isinstance(entities, dict) else None
+            version = entities.get("version") if isinstance(entities, dict) else None
 
             # Persist turn + context + long-term memory (fail-open)
-            if full_resp:
-                await save_turn(session_id, request.message, full_resp)
-            model_code = entities.get("model_code")
-            version = entities.get("version")
-            await update_current_context(
-                session_id,
-                model_code=model_code,
-                version=version,
-                topic=category or None,
-            )
-            if model_code:
-                await save_user_fact(session_id, "preferred_model", model_code)
-            if version:
-                await save_user_fact(session_id, "preferred_version", version)
+            # Background task — KHÔNG await ở đây để đóng kết nối SSE ngay sau `done`
+            # (chờ Redis/PG sẽ làm UI "đang load" thêm 200-500ms dù đã có đủ câu trả lời)
+            async def _persist():
+                try:
+                    if full_resp:
+                        await save_turn(session_id, request.message, full_resp)
+                    await update_current_context(
+                        session_id,
+                        model_code=model_code,
+                        version=version,
+                        topic=category or None,
+                    )
+                    if model_code:
+                        await save_user_fact(session_id, "preferred_model", model_code)
+                    if version:
+                        await save_user_fact(session_id, "preferred_version", version)
+                except Exception as exc:
+                    logger.warning("persist turn background failed (non-blocking): %s", exc)
+
+            try:
+                asyncio.create_task(_persist())
+            except Exception:
+                pass
 
             prompt_tok = _estimate_tokens(request.message) + sum(
                 _estimate_tokens(h.get("content", "")) for h in history
             )
             comp_tok = _estimate_tokens(full_resp)
-
+            model_code = entities.get("model_code") if isinstance(entities, dict) else None
+            model_version = entities.get("version") if isinstance(entities, dict) else None
             log_metric_background(
                 record_metric(
                     request_id=req_id,
@@ -288,11 +323,19 @@ async def chat_stream(request: ChatRequest, http_request: Request):
                     prompt_tokens=prompt_tok,
                     completion_tokens=comp_tok,
                     ttft_ms=ttft_ms,
+                    ttot_ms=total_latency_ms,
                     total_latency_ms=total_latency_ms,
+                    latency_retrieval_ms=0,
+                    latency_generation_ms=0,
                     cache_hit=cache_hit,
                     cache_type=cache_type,
                     tools_used=tools_used,
                     status_code=200,
+                    model_code=model_code,
+                    model_version=model_version,
+                    retrieval_status="success" if tools_used else "none",
+                    chunks_retrieved=len(tools_used),
+                    reasoning_tokens=0,
                 )
             )
 

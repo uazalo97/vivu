@@ -92,14 +92,14 @@ _example_embeddings: dict[str, list[list[float]]] | None = None
 
 
 def _embed_texts(texts: list[str]) -> list[list[float]]:
-    """Embed texts using OpenAI API."""
+    """Embed texts using OpenAI API — single OPENAI_API_KEY."""
     r = requests.post(
-        f"{settings.openai_base_url}/embeddings",
+        f"{settings.openai_base_url.rstrip('/')}/embeddings",
         headers={
             "Authorization": f"Bearer {settings.openai_api_key}",
             "Content-Type": "application/json",
         },
-        json={"model": settings.embedding_model, "input": texts},
+        json={"model": settings.openai_embed_model, "input": texts},
         timeout=30,
     )
     r.raise_for_status()

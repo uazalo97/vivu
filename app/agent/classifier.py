@@ -46,6 +46,13 @@ def _normalize_version(raw: str) -> str | None:
     return VERSION_ALIASES.get(clean)
 
 
+def normalize_model(raw: str) -> str:
+    """Chuẩn hóa model code về dạng DB: 'vf8' → 'VF 8', 'vf 8 all new' → 'VF 8 All New'."""
+    clean = re.sub(r"(VF)\s*(\d+)", r"\1 \2", (raw or "").strip(), flags=re.IGNORECASE).strip()
+    parts = clean.split()
+    return " ".join(p.upper() if p.upper().startswith("VF") or p.isdigit() else p.capitalize() for p in parts)
+
+
 class QueryClassifier:
     """Detect model + version from query. No OOS gating — all models supported."""
 
@@ -53,12 +60,7 @@ class QueryClassifier:
         m = MODEL_RE.search(query)
         if m:
             raw = m.group(1).strip()
-            # Normalize: "VF8 All New" → "VF 8 All New", "vf 8" → "VF 8"
-            clean = re.sub(r"(VF)\s*(\d+)", r"\1 \2", raw, flags=re.IGNORECASE).strip()
-            # Title-case to match DB format: "vf 8 all new" → "VF 8 All New"
-            parts = clean.split()
-            clean = " ".join(p.upper() if p.upper().startswith("VF") or p.isdigit() else p.capitalize() for p in parts)
-            return clean, raw
+            return normalize_model(raw), raw
         return None, None
 
     def classify(self, query: str, history: list[dict] = None) -> ClassifyResult:

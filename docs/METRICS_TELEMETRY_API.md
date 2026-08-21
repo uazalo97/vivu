@@ -243,3 +243,64 @@ export async function fetchOverviewKPI(hours = 24): Promise<MetricsOverview> {
   return res.json();
 }
 ```
+
+---
+
+## 6. Sprint 1 (nhánh `feature/admin`) — Cột mới & số liệu THẬT
+
+### 6.1 Bỏ TTFT giả
+
+Trước đây `app/api/chat.py` tính `ttft_ms = total_latency_ms * 0.4` (số giả). Now:
+
+- **Stream** (`/api/chat/stream`): `ttft_ms` đo lúc **token đầu tiên** xuất hiện; `ttot_ms = total_latency` (token cuối).
+- **Non-stream** (`/api/chat`): lấy `ttft/ttot/latency_*` từ `decision_log`; nếu thiếu `ttft` → fallback `latency_retrieval_ms`.
+
+### 6.2 Cột mới trong `request_metrics` (tự migrate idempotent)
+
+```sql
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS ttot_ms INT DEFAULT 0;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS latency_retrieval_ms INT DEFAULT 0;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS latency_generation_ms INT DEFAULT 0;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS model_code TEXT;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS model_version TEXT;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS retrieval_status TEXT;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS chunks_retrieved INT DEFAULT 0;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS reasoning_tokens INT DEFAULT 0;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS user_feedback SMALLINT;
+ALTER TABLE request_metrics ADD COLUMN IF NOT EXISTS feedback_comment TEXT;
+CREATE INDEX IF NOT EXISTS idx_req_metrics_model_code ON request_metrics(model_code);
+CREATE INDEX IF NOT EXISTS idx_req_metrics_decision ON request_metrics(decision);
+```
+
+`record_metric()` nhận thêm các tham số: `ttot_ms, latency_retrieval_ms, latency_generation_ms, model_code, model_version, retrieval_status, chunks_retrieved, reasoning_tokens`. Nếu INSERT lỗi `column does not exist` → tự migrate + retry 1 lần (fix lỗi `Failed to record metric: column model_code does not exist`).
+
+`GET /logs` trả thêm: `ttot_ms, latency_retrieval_ms, latency_generation_ms, model_code, model_version, retrieval_status, chunks_retrieved, reasoning_tokens, user_feedback, feedback_comment`.
+
+---
+
+## 7. Endpoint mới (Sprint 1)
+
+### 7.1 Ghi feedback 👍/👎 — `POST /api/admin/metrics/feedback`
+
+```
+POST /api/admin/metrics/feedback   (mở, không cần key)
+Body: { "request_id": "req_...", "rating": 1| -1, "comment": "optional" }
+→ UPDATE request_metrics SET user_feedback=$rating, feedback_comment=$comment WHERE request_id=$request_id
+```
+`rating` chỉ nhận `1` (👍) hoặc `-1` (👎), khác → `400`.
+
+### 7.2 Realtime nhẹ — `GET /api/admin/metrics/realtime?window_min=5`
+
+```
+GET /api/admin/metrics/realtime?window_min=5   (1..60)
+→ { status, window_min, points: [ { bucket, requests, avg_latency_ms, avg_ttft_ms, cache_hits, errors } ] }
+```
+Nhóm theo phút trong cửa sổ gần nhất — dashboard poll 5-10s cho line realtime.
+
+---
+
+## 8. Auth / quyền truy cập
+
+Toàn bộ `/api/admin/metrics/*` và `/api/admin/prompts/*` hiện **MỞ HOÀN TOÀN** (không gửi `X-Admin-Key`, không 401). Trước đây `test_admin_metrics_auth_protection` đòi 401 khi set `ADMIN_API_KEY` → đã sửa về open (`3f2e3b1`). Admin dashboard frontend `metrics.ts` không gửi header.
+
+Khi cần chặn, gắn lại middleware/security theo mục này (để sau).
