@@ -772,7 +772,20 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
 
         elif tool == "list_available_models" and result.get("models"):
             mentioned = _query_models(query)
-            is_catalog_query = any(k in query.lower() for k in ("danh sách", "những dòng xe", "những mẫu xe", "có những xe nào", "các dòng xe", "các mẫu xe", "tất cả xe", "mẫu xe nào", "dòng xe nào"))
+            is_catalog_query = any(
+                k in query.lower()
+                for k in (
+                    "danh sách",
+                    "những dòng xe",
+                    "những mẫu xe",
+                    "có những xe nào",
+                    "các dòng xe",
+                    "các mẫu xe",
+                    "tất cả xe",
+                    "mẫu xe nào",
+                    "dòng xe nào",
+                )
+            )
             found_any = False
             for m in result["models"]:
                 mc = m.get("model_code", "")
@@ -825,9 +838,34 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
 
 
 _CITATION_STOP_WORDS = {
-    "xe", "vinfast", "vf", "của", "và", "là", "cho", "tôi", "bạn",
-    "có", "không", "nào", "gì", "mấy", "ở", "với", "được", "các",
-    "những", "như", "thế", "này", "đó", "ra", "sao", "thì", "bao", "nhiêu",
+    "xe",
+    "vinfast",
+    "vf",
+    "của",
+    "và",
+    "là",
+    "cho",
+    "tôi",
+    "bạn",
+    "có",
+    "không",
+    "nào",
+    "gì",
+    "mấy",
+    "ở",
+    "với",
+    "được",
+    "các",
+    "những",
+    "như",
+    "thế",
+    "này",
+    "đó",
+    "ra",
+    "sao",
+    "thì",
+    "bao",
+    "nhiêu",
 }
 
 
