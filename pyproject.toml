@@ -8,7 +8,7 @@ exclude = [".venv", ".git", "__pycache__", "data", "docs", "plans", ".kilo", "*.
 # Giai đoạn đầu chỉ check lỗi nghiêm trọng (E,F) để CI xanh, sau này bật thêm I,B... dần
 select = ["E", "F"]
 ignore = ["E501"]  # line too long do formatter lo
-fixable = ["I", "UP"]
+fixable = ["ALL"]
 unfixable = []
 
 [tool.ruff.lint.pydocstyle]

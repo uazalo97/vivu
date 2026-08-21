@@ -11,24 +11,33 @@ Inspects each page in a PDF to collect structural signals:
 - Page classification & extraction strategy recommendation
 """
 
-import io
-import math
-import os
-import re
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 
 import fitz  # PyMuPDF
-from PIL import Image
 
-from scripts.harness.schemas import BBox, PageSignals
+from scripts.harness.schemas import PageSignals
 
 # Keywords indicating technical specifications or table layouts
 SPEC_KEYWORDS = [
-    "thông số", "thong so", "kích thước", "kich thuoc", "chiều dài cơ sở",
-    "công suất tối đa", "mô men xoắn", "dung lượng pin", "quãng đường",
-    "động cơ", "hệ thống truyền động", "khung gầm", "tiện nghi", "an toàn",
-    "dài x rộng x cao", "khoảng sáng gầm", "la-zăng", "túi khí"
+    "thông số",
+    "thong so",
+    "kích thước",
+    "kich thuoc",
+    "chiều dài cơ sở",
+    "công suất tối đa",
+    "mô men xoắn",
+    "dung lượng pin",
+    "quãng đường",
+    "động cơ",
+    "hệ thống truyền động",
+    "khung gầm",
+    "tiện nghi",
+    "an toàn",
+    "dài x rộng x cao",
+    "khoảng sáng gầm",
+    "la-zăng",
+    "túi khí",
 ]
 
 
@@ -67,9 +76,8 @@ class PDFInspector:
             rendered_images.append(img_path)
 
             # 2. Extract structural elements
-            rect = page.rect
             blocks = page.get_text("blocks")  # (x0, y0, x1, y1, text, block_no, block_type)
-            words = page.get_text("words")    # (x0, y0, x1, y1, word, block_no, line_no, word_no)
+            words = page.get_text("words")  # (x0, y0, x1, y1, word, block_no, line_no, word_no)
             images = page.get_images(full=True)
             drawings = page.get_drawings()
 
@@ -93,15 +101,13 @@ class PDFInspector:
             overlap_ratio = round(overlap_count / max(1, words_count), 3)
 
             # 4. Detect scan / image-only
-            is_scanned = (words_count < 15 and images_count >= 1)
+            is_scanned = words_count < 15 and images_count >= 1
 
             # 5. Detect table structure / technical specs
             full_text = page.get_text().lower()
             spec_matches = sum(1 for kw in SPEC_KEYWORDS if kw in full_text)
             has_table_structure = (
-                spec_matches >= 3 or
-                (drawings_count >= 8 and words_count > 30) or
-                "thông số kỹ thuật" in full_text
+                spec_matches >= 3 or (drawings_count >= 8 and words_count > 30) or "thông số kỹ thuật" in full_text
             )
 
             # 6. Classify page type & recommended strategy

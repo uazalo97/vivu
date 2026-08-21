@@ -1,11 +1,9 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 batch_runner.py — Batch Runner for Brochure Ingestion across all 9 VinFast models.
 """
 
 import argparse
-import json
-import os
 import sys
 import time
 import urllib.request
@@ -15,7 +13,7 @@ from typing import Any, Dict, List, Optional
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from scripts.harness.config import BROCHURE_CATALOG, CANONICAL_DIR, DATA_V2_DIR, RAW_PDF_DIR, STRUCTURED_DIR
+from scripts.harness.config import BROCHURE_CATALOG, DATA_V2_DIR
 from scripts.harness.orchestrator import DocumentHarnessOrchestrator
 from scripts.harness.sinks.postgres import PostgresSink
 
@@ -95,7 +93,14 @@ def run_brochure_batch(
                 model_code=m_code,
                 source_url=url,
             )
-            stats.append({"model": m_code, "status": "SUCCESS", "pages": len(canonical_doc.pages), "specs": len(canonical_doc.get_all_spec_items())})
+            stats.append(
+                {
+                    "model": m_code,
+                    "status": "SUCCESS",
+                    "pages": len(canonical_doc.pages),
+                    "specs": len(canonical_doc.get_all_spec_items()),
+                }
+            )
         except Exception as e:
             print(f"[ERROR] Failed processing {m_code}: {e}")
             stats.append({"model": m_code, "status": "ERROR", "error": str(e)})

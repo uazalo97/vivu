@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 semantic.py — Unified Semantic Chunker for Document & Web data.
 Splits prose into section-aware chunks and synthesizes natural-language representations for tables.
@@ -58,7 +58,9 @@ class SemanticChunker:
                 "source_file": doc.document.source_file,
                 "source_url": doc.document.source_url,
                 "source_type": "pdf_brochure",
-                "deep_link": block.evidence.deep_link if block.evidence else (f"{doc.document.source_url}#page={page_num}" if doc.document.source_url else None),
+                "deep_link": block.evidence.deep_link
+                if block.evidence
+                else (f"{doc.document.source_url}#page={page_num}" if doc.document.source_url else None),
             },
         }
 
@@ -80,28 +82,36 @@ class SemanticChunker:
                     if prose_buffer:
                         text = " ".join(prose_buffer).strip()
                         if text:
-                            chunks.append({
-                                "id": f"{doc_id}_p{page_num:02d}_c{len(chunks)+1:02d}",
-                                "text": text,
-                                "collection": "vivu_product_info",
-                                "metadata": {
+                            chunks.append(
+                                {
+                                    "id": f"{doc_id}_p{page_num:02d}_c{len(chunks) + 1:02d}",
+                                    "text": text,
                                     "collection": "vivu_product_info",
-                                    "category": "thong_tin_san_pham",
-                                    "document_id": doc_id,
-                                    "model_id": model_id,
-                                    "model_code": model_name,
-                                    "edition_id": None,
-                                    "section_path": ["thong_tin_san_pham", current_section],
-                                    "page": page_num,
-                                    "text_type": "prose",
-                                    "confidence": 1.0,
-                                    "source_file": doc.document.source_file,
-                                    "source_url": doc.document.source_url,
-                                    "source_type": "pdf_brochure",
-                                    "source_blocks": list(source_blocks_buffer),
-                                    "deep_link": block.evidence.deep_link if block.evidence else (f"{doc.document.source_url}#page={page_num}" if doc.document.source_url else None),
-                                },
-                            })
+                                    "metadata": {
+                                        "collection": "vivu_product_info",
+                                        "category": "thong_tin_san_pham",
+                                        "document_id": doc_id,
+                                        "model_id": model_id,
+                                        "model_code": model_name,
+                                        "edition_id": None,
+                                        "section_path": ["thong_tin_san_pham", current_section],
+                                        "page": page_num,
+                                        "text_type": "prose",
+                                        "confidence": 1.0,
+                                        "source_file": doc.document.source_file,
+                                        "source_url": doc.document.source_url,
+                                        "source_type": "pdf_brochure",
+                                        "source_blocks": list(source_blocks_buffer),
+                                        "deep_link": block.evidence.deep_link
+                                        if block.evidence
+                                        else (
+                                            f"{doc.document.source_url}#page={page_num}"
+                                            if doc.document.source_url
+                                            else None
+                                        ),
+                                    },
+                                }
+                            )
                         prose_buffer = []
                         source_blocks_buffer = []
 
@@ -116,28 +126,36 @@ class SemanticChunker:
 
                         if sum(len(p) for p in prose_buffer) > self.max_chunk_chars:
                             text = " ".join(prose_buffer).strip()
-                            chunks.append({
-                                "id": f"{doc_id}_p{page_num:02d}_c{len(chunks)+1:02d}",
-                                "text": text,
-                                "collection": "vivu_product_info",
-                                "metadata": {
+                            chunks.append(
+                                {
+                                    "id": f"{doc_id}_p{page_num:02d}_c{len(chunks) + 1:02d}",
+                                    "text": text,
                                     "collection": "vivu_product_info",
-                                    "category": "thong_tin_san_pham",
-                                    "document_id": doc_id,
-                                    "model_id": model_id,
-                                    "model_code": model_name,
-                                    "edition_id": None,
-                                    "section_path": ["thong_tin_san_pham", current_section],
-                                    "page": page_num,
-                                    "text_type": "prose",
-                                    "confidence": 1.0,
-                                    "source_file": doc.document.source_file,
-                                    "source_url": doc.document.source_url,
-                                    "source_type": "pdf_brochure",
-                                    "source_blocks": list(source_blocks_buffer),
-                                    "deep_link": block.evidence.deep_link if block.evidence else (f"{doc.document.source_url}#page={page_num}" if doc.document.source_url else None),
-                                },
-                            })
+                                    "metadata": {
+                                        "collection": "vivu_product_info",
+                                        "category": "thong_tin_san_pham",
+                                        "document_id": doc_id,
+                                        "model_id": model_id,
+                                        "model_code": model_name,
+                                        "edition_id": None,
+                                        "section_path": ["thong_tin_san_pham", current_section],
+                                        "page": page_num,
+                                        "text_type": "prose",
+                                        "confidence": 1.0,
+                                        "source_file": doc.document.source_file,
+                                        "source_url": doc.document.source_url,
+                                        "source_type": "pdf_brochure",
+                                        "source_blocks": list(source_blocks_buffer),
+                                        "deep_link": block.evidence.deep_link
+                                        if block.evidence
+                                        else (
+                                            f"{doc.document.source_url}#page={page_num}"
+                                            if doc.document.source_url
+                                            else None
+                                        ),
+                                    },
+                                }
+                            )
                             prose_buffer = [f"{current_section}:"]
                             source_blocks_buffer = []
 
@@ -149,27 +167,31 @@ class SemanticChunker:
             if prose_buffer and len(prose_buffer) > 1:
                 text = " ".join(prose_buffer).strip()
                 if text:
-                    chunks.append({
-                        "id": f"{doc_id}_p{page_num:02d}_c{len(chunks)+1:02d}",
-                        "text": text,
-                        "collection": "vivu_product_info",
-                        "metadata": {
+                    chunks.append(
+                        {
+                            "id": f"{doc_id}_p{page_num:02d}_c{len(chunks) + 1:02d}",
+                            "text": text,
                             "collection": "vivu_product_info",
-                            "category": "thong_tin_san_pham",
-                            "document_id": doc_id,
-                            "model_id": model_id,
-                            "model_code": model_name,
-                            "edition_id": None,
-                            "section_path": ["thong_tin_san_pham", current_section],
-                            "page": page_num,
-                            "text_type": "prose",
-                            "confidence": 1.0,
-                            "source_file": doc.document.source_file,
-                            "source_url": doc.document.source_url,
-                            "source_type": "pdf_brochure",
-                            "source_blocks": list(source_blocks_buffer),
-                            "deep_link": f"{doc.document.source_url}#page={page_num}" if doc.document.source_url else None,
-                        },
-                    })
+                            "metadata": {
+                                "collection": "vivu_product_info",
+                                "category": "thong_tin_san_pham",
+                                "document_id": doc_id,
+                                "model_id": model_id,
+                                "model_code": model_name,
+                                "edition_id": None,
+                                "section_path": ["thong_tin_san_pham", current_section],
+                                "page": page_num,
+                                "text_type": "prose",
+                                "confidence": 1.0,
+                                "source_file": doc.document.source_file,
+                                "source_url": doc.document.source_url,
+                                "source_type": "pdf_brochure",
+                                "source_blocks": list(source_blocks_buffer),
+                                "deep_link": f"{doc.document.source_url}#page={page_num}"
+                                if doc.document.source_url
+                                else None,
+                            },
+                        }
+                    )
 
         return chunks

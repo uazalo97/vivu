@@ -1,6 +1,4 @@
-﻿import asyncio
-import json
-import os
+import asyncio
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
@@ -13,7 +11,7 @@ load_dotenv(Path(".env"))
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
-from app.agent.agent_loop import AgentLoop
+from app.agent.agent_loop import AgentLoop  # noqa: E402
 
 
 async def run_tests():
@@ -32,14 +30,13 @@ async def run_tests():
     for idx, query in enumerate(test_queries, 1):
         print(f"\n[{idx}] USER QUERY: {query}")
         print("-" * 80)
-        
+
         t0 = asyncio.get_event_loop().time()
         result = await agent.run(query=query, history=[])
         dt = asyncio.get_event_loop().time() - t0
 
         response_text = result.response if hasattr(result, "response") else str(result)
         sources = getattr(result, "sources", [])
-        decision_log = getattr(result, "decision_log", {})
         decision = getattr(result, "decision", "answer")
 
         print(f"⏱️ Response Time: {dt:.2f}s | Decision: {decision}")

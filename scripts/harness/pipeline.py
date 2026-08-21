@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 pipeline.py — Master Execution Pipeline for Unified Ingestion Harness.
 Single entrypoint to extract, normalize, chunk, and ingest all VinFast data into PostgreSQL & Qdrant.
@@ -8,12 +8,8 @@ Usage:
 """
 
 import argparse
-import json
-import os
 import sys
 import time
-from pathlib import Path
-from typing import Any, Dict
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -57,7 +53,9 @@ def run_pipeline(
         _banner("[Phase 1/5] Extracting & Normalizing Car Configurator Data...")
         conf_ext = ConfiguratorExtractor()
         editions, prices, colors, options = conf_ext.extract_and_normalize()
-        print(f"  ✓ Processed {len(editions)} editions, {len(prices)} price rows, {len(colors)} colors, {len(options)} options.")
+        print(
+            f"  ✓ Processed {len(editions)} editions, {len(prices)} price rows, {len(colors)} colors, {len(options)} options."
+        )
     else:
         print("\n>>> Skipping Phase 1 (Configurator Data).")
 
@@ -108,7 +106,7 @@ def run_pipeline(
     total_dt = time.time() - t_start
     _banner(f"PIPELINE COMPLETED SUCCESSFULLY in {total_dt:.1f}s (Version: {version})")
     print(f"  • Safe Mode: Version '{version}' ingested with is_current=False (Active version remains unchanged).")
-    print(f"  • To check status: python scripts/version_manager.py status")
+    print("  • To check status: python scripts/version_manager.py status")
     print(f"  • To activate:     python scripts/version_manager.py promote --version {version}")
     return 0
 

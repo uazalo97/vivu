@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 text.py — Text normalization and noise cleaning for web/prose data.
 """
@@ -15,7 +15,9 @@ PRICE_REGEXES = [
 
 # Regex for page markers & noise
 PAGE_MARKER_RE = re.compile(r"^[-—\s]*Trang\s+\d+[/–—-]?\d*[-—\s]*$", re.IGNORECASE | re.MULTILINE)
-BOILERPLATE_RE = re.compile(r"^\s*(\*|\*\*|\*\*\*)\s*Hình ảnh chỉ mang tính chất minh họa.*$", re.IGNORECASE | re.MULTILINE)
+BOILERPLATE_RE = re.compile(
+    r"^\s*(\*|\*\*|\*\*\*)\s*Hình ảnh chỉ mang tính chất minh họa.*$", re.IGNORECASE | re.MULTILINE
+)
 
 
 def normalize_unicode_spacing(text: str) -> str:

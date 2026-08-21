@@ -30,7 +30,7 @@ from app.core.cache import (
     get_options_cached,
     list_models_cached,
 )
-from app.agent.nodes.classify import _CROSS_MODEL_RE, _distinct_models
+from app.agent.nodes.classify import _distinct_models
 
 logger = logging.getLogger("bds.graph.call_tools")
 

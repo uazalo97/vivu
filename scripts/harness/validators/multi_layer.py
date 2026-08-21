@@ -10,9 +10,9 @@ Checks:
 """
 
 import re
-from typing import Dict, List, Optional, Tuple
+from typing import Dict
 
-from scripts.harness.schemas import CanonicalBlock, CanonicalPage, SpecItem, ValidationResult
+from scripts.harness.schemas import CanonicalPage, SpecItem, ValidationResult
 
 SANITY_RANGES = {
     "power_kw": (10, 600),

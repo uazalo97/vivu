@@ -9,14 +9,12 @@ Normalizes and routes chunks into collections:
 - vivu_faq
 """
 
-import os
 import re
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 from scripts.harness.config import RAW_DEPOSIT_DIR, RAW_POLICIES_DIR
 from scripts.harness.normalizers.text import clean_prose_block, strip_prices_for_vector
-from scripts.harness.schemas import RetrievalChunk
 
 
 def infer_model_from_name(name: str) -> str | None:
@@ -34,7 +32,9 @@ def infer_model_from_name(name: str) -> str | None:
 
 
 class WebTextExtractor:
-    def __init__(self, policies_dir: Path = RAW_POLICIES_DIR, deposit_dir: Path = RAW_DEPOSIT_DIR, max_chunk_chars: int = 800):
+    def __init__(
+        self, policies_dir: Path = RAW_POLICIES_DIR, deposit_dir: Path = RAW_DEPOSIT_DIR, max_chunk_chars: int = 800
+    ):
         self.policies_dir = Path(policies_dir)
         self.deposit_dir = Path(deposit_dir)
         self.max_chunk_chars = max_chunk_chars
@@ -95,7 +95,9 @@ class WebTextExtractor:
         elif "chinh_sach_ban_hang" in name:
             source_url = "https://vinfastauto.com/vn_vi/chinh-sach-ban-hang"
         elif "dat-coc-xe" in name and model_id:
-            source_url = f"https://shop.vinfastauto.com/vn_vi/dat-coc-o-to-dien-vinfast.html?modelId=Products-Car-{model_id}"
+            source_url = (
+                f"https://shop.vinfastauto.com/vn_vi/dat-coc-o-to-dien-vinfast.html?modelId=Products-Car-{model_id}"
+            )
 
         # Heading-based & paragraph chunking
         sections = self._split_into_sections(content)
@@ -110,24 +112,26 @@ class WebTextExtractor:
             vec_text = strip_prices_for_vector(cleaned)
             full_text = f"{sec_title}: {vec_text}" if sec_title else vec_text
 
-            chunk_id = f"{collection}:{path.stem[:30]}_{len(file_chunks)+1:03d}"
-            file_chunks.append({
-                "id": chunk_id,
-                "text": full_text,
-                "collection": collection,
-                "metadata": {
+            chunk_id = f"{collection}:{path.stem[:30]}_{len(file_chunks) + 1:03d}"
+            file_chunks.append(
+                {
+                    "id": chunk_id,
+                    "text": full_text,
                     "collection": collection,
-                    "category": category,
-                    "model_id": model_id,
-                    "edition_id": None,
-                    "section_path": [category, sec_title] if sec_title else [category],
-                    "text_type": "prose",
-                    "confidence": 1.0,
-                    "source_file": f"data_v2/raw/{path.parent.name}/{path.name}",
-                    "source_url": source_url,
-                    "source_type": "markdown" if path.suffix == ".md" else "raw_html",
+                    "metadata": {
+                        "collection": collection,
+                        "category": category,
+                        "model_id": model_id,
+                        "edition_id": None,
+                        "section_path": [category, sec_title] if sec_title else [category],
+                        "text_type": "prose",
+                        "confidence": 1.0,
+                        "source_file": f"data_v2/raw/{path.parent.name}/{path.name}",
+                        "source_url": source_url,
+                        "source_type": "markdown" if path.suffix == ".md" else "raw_html",
+                    },
                 }
-            })
+            )
 
         return file_chunks
 
@@ -148,7 +152,7 @@ class WebTextExtractor:
             else:
                 if line_str:
                     current_lines.append(line_str)
-                    if sum(len(l) for l in current_lines) > self.max_chunk_chars:
+                    if sum(len(line) for line in current_lines) > self.max_chunk_chars:
                         sections.append((current_title, "\n".join(current_lines)))
                         current_lines = []
 

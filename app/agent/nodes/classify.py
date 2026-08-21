@@ -427,9 +427,7 @@ async def classify_node(state: AgentState) -> dict:
         cr.entities["model_code"] = hist_ctx["model_code"]
     if not cr.entities.get("version") and hist_ctx["version"]:
         cr.entities["version"] = hist_ctx["version"]
-
     has_model = bool(cr.entities.get("model_code"))
-    has_version = bool(cr.entities.get("version"))
     topic = _classify_topic(query)
     raw_topic = topic  # Before history inheritance — used for OOS check
 
@@ -491,7 +489,14 @@ async def classify_node(state: AgentState) -> dict:
         # (e.g. "xe nào có cửa sổ trời", "xe nào 7 chỗ", "giá xe điện", "bảo hành pin")
         # → Default to answering across ALL models
         if _CROSS_MODEL_RE.search(query) or topic != "general" or _CAR_RELATED_RE.search(query):
-            cross_tools = {"list_available_models", "get_price", "get_specs", "get_colors", "get_options", "search_knowledge_base"}
+            cross_tools = {
+                "list_available_models",
+                "get_price",
+                "get_specs",
+                "get_colors",
+                "get_options",
+                "search_knowledge_base",
+            }
             return {
                 "decision": "answer",
                 "reason_code": "sufficient_direct_evidence",
@@ -520,7 +525,14 @@ async def classify_node(state: AgentState) -> dict:
             "entities": cr.entities,
             "specificity": "unclear",
             "category": "tổng_quan",
-            "allowed_tools": {"list_available_models", "get_price", "get_specs", "get_colors", "get_options", "search_knowledge_base"},
+            "allowed_tools": {
+                "list_available_models",
+                "get_price",
+                "get_specs",
+                "get_colors",
+                "get_options",
+                "search_knowledge_base",
+            },
         }
 
     # Out-of-scope guard: even with model from history, if the query itself

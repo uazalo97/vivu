@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 schemas.py — Canonical Document & Data Models for Agentic Ingestion Harness.
 """
@@ -40,7 +40,9 @@ class Evidence(BaseModel):
 
 
 class Provenance(BaseModel):
-    method: Literal["pymupdf_text", "vision_table", "vision_prose", "ocr", "docling", "manual", "web_crawl", "configurator"]
+    method: Literal[
+        "pymupdf_text", "vision_table", "vision_prose", "ocr", "docling", "manual", "web_crawl", "configurator"
+    ]
     model: Optional[str] = None
     confidence: float = Field(default=1.0, ge=0.0, le=1.0)
     extracted_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -56,14 +58,14 @@ class ValidationResult(BaseModel):
 
 
 class SpecItem(BaseModel):
-    category: str                               # Standard English slug or raw category
-    category_vn: Optional[str] = None           # Vietnamese label: Kích thước & trọng lượng, Pin & sạc, etc.
-    attribute: str                              # Raw attribute string from table
-    spec_key: Optional[str] = None              # Standard snake_case key: length_mm, power_kw, etc.
-    spec_key_vn: Optional[str] = None          # Vietnamese label: Chiều dài tổng thể, Công suất tối đa, etc.
-    value: Any                                  # Normalized value: "3190", "150", "LED", "Có"
-    unit: Optional[str] = None                  # "mm", "kW", "kWh", "km", "triệu", or None
-    edition: Optional[str] = None               # "Eco", "Plus", "TieuChuan", or None for all
+    category: str  # Standard English slug or raw category
+    category_vn: Optional[str] = None  # Vietnamese label: Kích thước & trọng lượng, Pin & sạc, etc.
+    attribute: str  # Raw attribute string from table
+    spec_key: Optional[str] = None  # Standard snake_case key: length_mm, power_kw, etc.
+    spec_key_vn: Optional[str] = None  # Vietnamese label: Chiều dài tổng thể, Công suất tối đa, etc.
+    value: Any  # Normalized value: "3190", "150", "LED", "Có"
+    unit: Optional[str] = None  # "mm", "kW", "kWh", "km", "triệu", or None
+    edition: Optional[str] = None  # "Eco", "Plus", "TieuChuan", or None for all
     evidence: Optional[Evidence] = None
     validation: Optional[ValidationResult] = None
     provenance: Optional[Provenance] = None

@@ -1,14 +1,12 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 orchestrator.py — Master Orchestrator for Document Ingestion Harness.
 """
 
 import argparse
-import json
-import sys
 import time
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import List, Optional
 
 import fitz
 
@@ -51,7 +49,7 @@ class DocumentHarnessOrchestrator:
         """Execute the full ingestion harness on a PDF document."""
         t0 = time.time()
         pdf_path = Path(pdf_path)
-        print(f"\n{'='*72}\n[HARNESS] INGESTION START: {pdf_path.name} (model: {model_code})\n{'='*72}")
+        print(f"\n{'=' * 72}\n[HARNESS] INGESTION START: {pdf_path.name} (model: {model_code})\n{'=' * 72}")
 
         # 1. Inspection & Rendering
         print("\n[Step 1/6] Inspecting PDF & Rendering high-resolution page images...")
@@ -168,9 +166,10 @@ class DocumentHarnessOrchestrator:
         print(f"  -> Retrieval Chunks: {chunk_jsonl}")
 
         dt = time.time() - t0
-        print(f"\n{'='*72}\n[HARNESS] FINISHED {doc_id} in {dt:.1f}s\n{'='*72}\n")
+        print(f"\n{'=' * 72}\n[HARNESS] FINISHED {doc_id} in {dt:.1f}s\n{'=' * 72}\n")
 
         return canonical_doc
+
 
 def main():
     parser = argparse.ArgumentParser(description="Single Brochure Ingestion CLI")
@@ -187,6 +186,7 @@ def main():
 
     if args.url and (not pdf_path.exists() or pdf_path.stat().st_size < 1000):
         import urllib.request
+
         pdf_path.parent.mkdir(parents=True, exist_ok=True)
         print(f"Downloading {args.url} -> {pdf_path.name}...")
         req = urllib.request.Request(args.url, headers={"User-Agent": "Mozilla/5.0"})

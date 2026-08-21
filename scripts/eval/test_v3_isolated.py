@@ -1,11 +1,10 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 test_v3_isolated.py — Isolated End-to-End Test Suite for Version v3.
 Runs test queries directly against v3 PostgreSQL rows and v3 Qdrant collections
 WITHOUT touching active aliases or modifying production version.
 """
 
-import json
 import os
 import sys
 from pathlib import Path
@@ -16,9 +15,9 @@ if hasattr(sys.stdout, "reconfigure"):
 
 load_dotenv(Path(".env"))
 
-import psycopg2
-from openai import OpenAI
-from qdrant_client import QdrantClient
+import psycopg2  # noqa: E402
+from openai import OpenAI  # noqa: E402
+from qdrant_client import QdrantClient  # noqa: E402
 
 PG_DSN = os.environ.get("PG_DSN")
 QDRANT_URL = os.environ.get("QDRANT_URL")

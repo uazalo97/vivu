@@ -7,7 +7,7 @@ transforms them into pixel coordinates, and crops the visual evidence block.
 """
 
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Optional
 from PIL import Image
 
 from scripts.harness.schemas import BBox

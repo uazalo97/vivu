@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 qdrant.py — Qdrant Vector Sink for Unified Ingestion Harness.
 Exports retrieval chunks and ingests Dense Embeddings + BM25 Sparse Vectors into Qdrant:
@@ -10,14 +10,12 @@ Exports retrieval chunks and ingests Dense Embeddings + BM25 Sparse Vectors into
 
 import json
 import math
-import os
 import re
-import sys
 import time
 import unicodedata
 import uuid
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List
 
 from openai import OpenAI
 from qdrant_client import QdrantClient
@@ -158,7 +156,7 @@ class QdrantSink:
         # Setup OpenAI client
         embed_client = OpenAI(
             api_key=OPENAI_API_KEY,
-            base_url=OPENAI_BASE_URL if OPENAI_BASE_URL and "openai.com" not in OPENAI_BASE_URL else None
+            base_url=OPENAI_BASE_URL if OPENAI_BASE_URL and "openai.com" not in OPENAI_BASE_URL else None,
         )
         model_name = EMBEDDING_MODEL.split("/")[-1]
 
@@ -279,7 +277,9 @@ class QdrantSink:
             payload["text"] = chunk["text"]
             payload["vector_version"] = version
 
-            sparse_points.append(PointStruct(id=pid, vector={"sparse": SparseVector(indices=indices, values=values)}, payload=payload))
+            sparse_points.append(
+                PointStruct(id=pid, vector={"sparse": SparseVector(indices=indices, values=values)}, payload=payload)
+            )
 
         for i in range(0, len(sparse_points), 100):
             client.upsert(collection_name=sparse_col, points=sparse_points[i : i + 100])

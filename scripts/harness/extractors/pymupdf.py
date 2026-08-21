@@ -7,8 +7,7 @@ headings, paragraphs, footnotes, and lists with bounding boxes in PDF points.
 """
 
 import re
-from pathlib import Path
-from typing import Dict, List, Optional
+from typing import List
 
 import fitz
 
@@ -58,7 +57,7 @@ class PyMuPDFExtractor:
             )
 
             # Heuristics for block type
-            lines = [l.strip() for l in text.splitlines() if l.strip()]
+            lines = [line.strip() for line in text.splitlines() if line.strip()]
             first_line = lines[0] if lines else text
             is_all_caps = first_line.isupper() and len(first_line) > 3
 

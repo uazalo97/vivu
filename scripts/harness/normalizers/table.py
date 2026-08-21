@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 table.py — Robust Spec Normalizer for VinFast Vehicles.
 Maps Vietnamese table attributes to standardized English slugs, VN labels, standard units,
@@ -7,7 +7,7 @@ and standard categories (dimension, powertrain, battery, chassis, exterior, inte
 
 import re
 import unicodedata
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from scripts.harness.schemas import SpecItem
 
@@ -70,7 +70,6 @@ SPEC_MAPPING: Dict[str, Tuple[str, str, str, str]] = {
     "day sac di dong": ("portable_charger", "Dây sạc di động", "", "battery"),
     "thoi gian sac tieu chuan": ("standard_charge_hours", "Thời gian sạc tiêu chuẩn", "giờ", "battery"),
     "he thong phanh tai sinh": ("regenerative_braking", "Hệ thống phanh tái sinh", "", "powertrain"),
-
     # ── Dimensions & Weight ──
     "dai x rong x cao": ("dimension_triple", "Kích thước Dài x Rộng x Cao", "mm", "dimension"),
     "kich thuoc": ("dimension_triple", "Kích thước Dài x Rộng x Cao", "mm", "dimension"),
@@ -91,7 +90,6 @@ SPEC_MAPPING: Dict[str, Tuple[str, str, str, str]] = {
     "linh hoat": ("turning_radius_m", "Bán kính quay vòng tối thiểu", "m", "dimension"),
     "dung tich khoang hanh ly": ("trunk_capacity_l", "Dung tích khoang hành lý", "L", "dimension"),
     "dung tich cop xe": ("trunk_capacity_l", "Dung tích cốp xe", "L", "dimension"),
-
     # ── Chassis, Brakes & Wheels ──
     "he thong treo truoc": ("front_suspension", "Hệ thống treo trước", "", "chassis"),
     "he thong treo sau": ("rear_suspension", "Hệ thống treo sau", "", "chassis"),
@@ -109,7 +107,6 @@ SPEC_MAPPING: Dict[str, Tuple[str, str, str, str]] = {
     "lop xe": ("tire_size", "Kích thước lốp", "", "chassis"),
     "bo va lop": ("tire_repair_kit", "Bộ vá lốp", "", "chassis"),
     "bo dung cu kich xe": ("jack_kit", "Bộ dụng cụ kích xe", "", "chassis"),
-
     # ── Exterior ──
     "den chieu sang phia truoc": ("headlight_type", "Đèn chiếu sáng phía trước", "", "exterior"),
     "den pha": ("headlight_type", "Đèn pha", "", "exterior"),
@@ -127,7 +124,6 @@ SPEC_MAPPING: Dict[str, Tuple[str, str, str, str]] = {
     "kinh cach nhiet": ("privacy_glass", "Kính cách nhiệt", "", "exterior"),
     "noc xe": ("roof_type", "Loại nóc xe", "", "exterior"),
     "tran kinh toan canh": ("panoramic_roof", "Trần kính toàn cảnh", "", "exterior"),
-
     # ── Interior & Convenience ──
     "so cho ngoi": ("seats_count", "Số chỗ ngồi", "chỗ", "interior"),
     "so ghe ngoi": ("seats_count", "Số chỗ ngồi", "chỗ", "interior"),
@@ -147,7 +143,6 @@ SPEC_MAPPING: Dict[str, Tuple[str, str, str, str]] = {
     "loc khong khi": ("air_filter", "Lọc không khí", "", "interior"),
     "guong chieu hau trong xe": ("rearview_mirror", "Gương chiếu hậu trong xe", "", "interior"),
     "den trang tri noi that": ("ambient_light", "Đèn trang trí nội thất", "", "interior"),
-
     # ── Infotainment & Connected ──
     "man hinh thong tin lai": ("driver_display_inch", "Màn hình thông tin lái", "inch", "infotainment"),
     "man hinh giai tri": ("center_display_inch", "Màn hình giải trí cảm ứng", "inch", "infotainment"),
@@ -171,7 +166,6 @@ SPEC_MAPPING: Dict[str, Tuple[str, str, str, str]] = {
     "che do cam trai": ("camping_mode", "Chế độ cắm trại", "", "convenience"),
     "che do thu cung": ("pet_mode", "Chế độ thú cưng", "", "convenience"),
     "che do ngu": ("sleep_mode", "Chế độ ngủ", "", "convenience"),
-
     # ── Safety, Security & ADAS ──
     "tui khi": ("airbags_count", "Số lượng túi khí", "túi", "safety"),
     "he thong tui khi": ("airbags_count", "Hệ thống túi khí", "túi", "safety"),
@@ -196,7 +190,6 @@ SPEC_MAPPING: Dict[str, Tuple[str, str, str, str]] = {
     "khoa cua tu dong khi xe di chuyen": ("auto_door_lock", "Khóa cửa tự động khi xe di chuyển", "", "security"),
     "he thong chong trom": ("anti_theft_system", "Hệ thống báo động chống trộm", "", "security"),
     "moc co dinh ghe tre em isofix": ("isofix_anchor", "Móc cố định ghế trẻ em ISOFIX", "", "safety"),
-
     # ── Pricing & Warranty ──
     "gia ban chinh thuc": ("price_vnd", "Giá bán chính thức", "triệu", "pricing"),
     "gia ban": ("price_vnd", "Giá bán niêm yết", "triệu", "pricing"),
@@ -214,7 +207,7 @@ class TableNormalizer:
         Map raw attribute string to (spec_key, spec_key_vn, unit, category_slug, category_vn).
         """
         na = norm_label(raw_attr)
-        
+
         # Direct exact match
         if na in SPEC_MAPPING:
             key, key_vn, unit, cat = SPEC_MAPPING[na]
@@ -255,7 +248,7 @@ class TableNormalizer:
         # slugify raw attr
         slug_key = no_diacritics(clean_attr).lower().replace(" ", "_")
         slug_key = re.sub(r"[^a-z0-9_]", "", slug_key)[:50] or "custom_spec"
-        
+
         return slug_key, clean_attr, "", cat_slug, CATEGORY_VN_MAP.get(cat_slug, cat_slug.title())
 
     def normalize_number(self, val_str: str) -> Tuple[Optional[float], str]:

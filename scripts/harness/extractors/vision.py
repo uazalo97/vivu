@@ -9,7 +9,6 @@ to extract technical specifications, table cells, editions, and bounding boxes.
 import base64
 import json
 import os
-import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -22,7 +21,6 @@ from scripts.harness.schemas import (
     Evidence,
     Provenance,
     SpecItem,
-    TableRow,
     ValidationResult,
 )
 
