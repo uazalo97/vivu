@@ -1,19 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-orchestrator.py — Master Orchestrator for Agentic Document Ingestion Harness.
-
-Coordinates:
-1. Inspection & Page Signal Analysis (PDFInspector)
-2. Strategy Planning (ExtractionPlanner)
-3. Specialized Extraction (PyMuPDF, Vision Extractor)
-4. Normalization (TableNormalizer)
-5. Evidence Cropping (CropGenerator)
-6. Multi-Layer Validation (MultiLayerValidator)
-7. Canonical Document Assembly & Saving (data_v2/canonical/{doc_id}.json)
-8. Downstream Preview Export (data_v2/structured/ & data_v2/retrieval/)
-
-Usage:
-    python -m scripts.harness.orchestrator --pdf data_v2/raw_pdf/vf6_brochure.pdf --doc-id vf6_brochure --model-code "VF 6" --output-dir data_v2
+orchestrator.py — Master Orchestrator for Document Ingestion Harness.
 """
 
 import argparse
@@ -37,8 +24,8 @@ from scripts.harness.schemas import (
     CanonicalPage,
     DocumentMetadata,
 )
-from scripts.harness.sinks.postgres import PostgresSpecsSink
-from scripts.harness.sinks.qdrant import QdrantChunksSink
+from scripts.harness.sinks.postgres import PostgresSink
+from scripts.harness.sinks.qdrant import QdrantSink
 from scripts.harness.validators.multi_layer import MultiLayerValidator
 
 
@@ -50,8 +37,8 @@ class DocumentHarnessOrchestrator:
         self.crop_generator = CropGenerator(self.output_dir)
         self.validator = MultiLayerValidator()
         self.normalizer = TableNormalizer()
-        self.postgres_sink = PostgresSpecsSink(self.output_dir)
-        self.qdrant_sink = QdrantChunksSink(self.output_dir)
+        self.postgres_sink = PostgresSink(self.output_dir / "structured")
+        self.qdrant_sink = QdrantSink(self.output_dir / "retrieval")
 
     def process_pdf(
         self,
@@ -61,9 +48,7 @@ class DocumentHarnessOrchestrator:
         source_url: str = "",
         page_range: Optional[List[int]] = None,
     ) -> CanonicalDocument:
-        """
-        Execute the full ingestion harness on a PDF document.
-        """
+        """Execute the full ingestion harness on a PDF document."""
         t0 = time.time()
         pdf_path = Path(pdf_path)
         print(f"\n{'='*72}\n[HARNESS] INGESTION START: {pdf_path.name} (model: {model_code})\n{'='*72}")
@@ -108,7 +93,6 @@ class DocumentHarnessOrchestrator:
                     page_size=page_size,
                     source_url=source_url,
                 )
-                # Fallback to PyMuPDF if Vision returned empty
                 if not blocks:
                     print(" (Vision empty -> fallback PyMuPDF)", end="", flush=True)
                     blocks = pymupdf_ext.extract_page(
@@ -177,55 +161,45 @@ class DocumentHarnessOrchestrator:
         print(f"\n[Step 4/6] Saved Canonical Document: {canonical_path}")
 
         # 8. Export Structured Specs & Retrieval Chunks Previews
-        print("\n[Step 5/6] Exporting Downstream Previews (Postgres Specs & Qdrant Chunks)...")
+        print("\n[Step 5/6] Exporting Downstream Previews (Structured Specs & Retrieval Chunks)...")
         json_spec, csv_spec = self.postgres_sink.export_preview(canonical_doc)
         chunk_jsonl = self.qdrant_sink.export_preview(canonical_doc)
         print(f"  -> Structured Specs: {json_spec} and {csv_spec}")
         print(f"  -> Retrieval Chunks: {chunk_jsonl}")
 
-        # 9. Summary Report
-        all_blocks = canonical_doc.get_all_blocks()
-        all_specs = canonical_doc.get_all_spec_items()
         dt = time.time() - t0
-
-        print(f"\n{'='*72}\n[HARNESS] EXECUTION FINISHED in {dt:.1f}s")
-        print(f"  • Total Pages: {len(canonical_pages)}")
-        print(f"  • Total Blocks: {len(all_blocks)}")
-        print(f"  • Total Spec Items Extracted: {len(all_specs)}")
-        print(f"{'='*72}\n")
+        print(f"\n{'='*72}\n[HARNESS] FINISHED {doc_id} in {dt:.1f}s\n{'='*72}\n")
 
         return canonical_doc
 
-
 def main():
-    parser = argparse.ArgumentParser(description="Agentic Document Ingestion Harness")
-    parser.add_argument("--pdf", default="data_v2/raw_pdf/vf6_brochure.pdf", help="Path to PDF file")
-    parser.add_argument("--doc-id", default="vf6_brochure", help="Document ID")
-    parser.add_argument("--model-code", default="VF 6", help="Model code (e.g. VF 6)")
-    parser.add_argument(
-        "--source-url",
-        default="https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
-        help="Source PDF URL for citations",
-    )
-    parser.add_argument("--output-dir", default="data_v2", help="Target output folder")
-    parser.add_argument("--pages", default=None, help="Comma-separated page numbers or range (e.g. 1-20 or 12)")
+    parser = argparse.ArgumentParser(description="Single Brochure Ingestion CLI")
+    parser.add_argument("--pdf", help="Path to local PDF file")
+    parser.add_argument("--url", help="URL to download brochure PDF")
+    parser.add_argument("--model", default="VF 10", help="Model code (e.g. 'VF 10')")
+    parser.add_argument("--doc-id", help="Document identifier (e.g. 'vf10_brochure')")
+    parser.add_argument("--out-dir", default="data_v2", help="Target output directory")
     args = parser.parse_args()
 
-    page_range = None
-    if args.pages:
-        if "-" in args.pages:
-            start, end = args.pages.split("-")
-            page_range = list(range(int(start), int(end) + 1))
-        else:
-            page_range = [int(p.strip()) for p in args.pages.split(",")]
+    out_dir = Path(args.out_dir)
+    doc_id = args.doc_id or args.model.lower().replace(" ", "_") + "_brochure"
+    pdf_path = Path(args.pdf) if args.pdf else (out_dir / "raw" / "pdf" / f"{doc_id}.pdf")
 
-    orchestrator = DocumentHarnessOrchestrator(output_dir=Path(args.output_dir))
+    if args.url and (not pdf_path.exists() or pdf_path.stat().st_size < 1000):
+        import urllib.request
+        pdf_path.parent.mkdir(parents=True, exist_ok=True)
+        print(f"Downloading {args.url} -> {pdf_path.name}...")
+        req = urllib.request.Request(args.url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=60) as resp, open(pdf_path, "wb") as f:
+            f.write(resp.read())
+        print("Download complete.")
+
+    orchestrator = DocumentHarnessOrchestrator(output_dir=out_dir)
     orchestrator.process_pdf(
-        pdf_path=Path(args.pdf),
-        doc_id=args.doc_id,
-        model_code=args.model_code,
-        source_url=args.source_url,
-        page_range=page_range,
+        pdf_path=pdf_path,
+        doc_id=doc_id,
+        model_code=args.model,
+        source_url=args.url or "",
     )
 
 

@@ -487,57 +487,29 @@ async def classify_node(state: AgentState) -> dict:
         }
 
     if not has_model:
-        if _AMBIGUOUS_PRONOUN_RE.search(query):
-            return {
-                "decision": "clarify",
-                "reason_code": "ambiguous_context",
-                "response_text": "Bạn muốn hỏi về xe nào?",
-                "entities": cr.entities,
-                "specificity": "unclear",
-                "category": topic,
-            }
-        # Cross-model queries (xe nào rẻ nhất, giá dưới 600 triệu, nên mua...)
-        # → answer with tools that work across all models
-        if _CROSS_MODEL_RE.search(query):
-            cross_tools = {"list_available_models", "get_price", "get_specs"}
+        # Cross-model / feature / topic queries without a specific model
+        # (e.g. "xe nào có cửa sổ trời", "xe nào 7 chỗ", "giá xe điện", "bảo hành pin")
+        # → Default to answering across ALL models
+        if _CROSS_MODEL_RE.search(query) or topic != "general" or _CAR_RELATED_RE.search(query):
+            cross_tools = {"list_available_models", "get_price", "get_specs", "get_colors", "get_options", "search_knowledge_base"}
             return {
                 "decision": "answer",
                 "reason_code": "sufficient_direct_evidence",
                 "entities": cr.entities,
                 "specificity": "unclear",
-                "category": topic if topic != "general" else "giá",
+                "category": topic if topic != "general" else "tổng_quan",
                 "allowed_tools": cross_tools,
             }
-        if topic != "general":
-            return {
-                "decision": "clarify",
-                "reason_code": "missing_model",
-                "response_text": "Bạn muốn hỏi về xe VinFast nào?",
-                "entities": cr.entities,
-                "specificity": "unclear",
-                "category": topic,
-            }
-        # No model AND no recognized VinFast topic
-        if topic == "general":
-            # If query mentions cars/VinFast → clarify (ask which model)
-            if _CAR_RELATED_RE.search(query):
-                return {
-                    "decision": "clarify",
-                    "reason_code": "missing_model",
-                    "response_text": "Bạn muốn hỏi về xe VinFast nào?",
-                    "entities": cr.entities,
-                    "specificity": "unclear",
-                    "category": "general",
-                }
-            # Otherwise truly out of scope (e.g. weather, cooking, sports)
-            return {
-                "decision": "out_of_scope",
-                "reason_code": "unsupported_topic",
-                "response_text": "Hiện tại mình chỉ hỗ trợ tư vấn thông tin sản phẩm xe VinFast. Bạn có thể hỏi về thông số, tính năng, pin/sạc, phạm vi di chuyển của xe.",
-                "entities": cr.entities,
-                "specificity": "unclear",
-                "category": "general",
-            }
+
+        # Otherwise truly out of scope (e.g. weather, cooking, sports)
+        return {
+            "decision": "out_of_scope",
+            "reason_code": "unsupported_topic",
+            "response_text": "Hiện tại mình chỉ hỗ trợ tư vấn thông tin sản phẩm xe VinFast. Bạn có thể hỏi về thông số, tính năng, pin/sạc, phạm vi di chuyển của xe.",
+            "entities": cr.entities,
+            "specificity": "unclear",
+            "category": "general",
+        }
 
     # Broad/intro topic (model known, topic vague, NOT a follow-up)
     # "giới thiệu về X", "cho tôi biết về X" → trả lời thông tin cơ bản luôn, không hỏi lại.
@@ -548,25 +520,8 @@ async def classify_node(state: AgentState) -> dict:
             "entities": cr.entities,
             "specificity": "unclear",
             "category": "tổng_quan",
-            "allowed_tools": {"list_available_models", "get_price", "get_specs", "get_colors"},
+            "allowed_tools": {"list_available_models", "get_price", "get_specs", "get_colors", "get_options", "search_knowledge_base"},
         }
-
-    # Missing version (only for version-dependent topics).
-    # Query tự nêu model + KHÔNG nêu version → câu hỏi "mới": làm rõ phiên bản lại,
-    # KHÔNG kế thừa version từ turn trước (tránh leak cache của VF 8 Plus khi user
-    # hỏi lại "VF 8 đi được bao nhiêu km").
-    if not VERSION_QUERY_RE.search(query) and topic in _VERSION_DEPENDENT_TOPICS:
-        missing_version = (query_has_model and not query_has_version) or (has_model and not has_version)
-        if missing_version:
-            model = cr.entities["model_code"]
-            return {
-                "decision": "clarify",
-                "reason_code": "missing_version",
-                "response_text": f"Bạn muốn hỏi phiên bản nào của {model}?",
-                "entities": cr.entities,
-                "specificity": "unclear",
-                "category": topic,
-            }
 
     # Out-of-scope guard: even with model from history, if the query itself
     # has no model/version/VinFast keyword and original topic is general → OOS

@@ -65,7 +65,10 @@ pip install -r requirements.txt
 cp .env.example .env
 # Mở file .env và điền các API Key (DeepInfra/OpenRouter, Qdrant Cloud, Neon PostgreSQL...)
 
-# 4. Khởi chạy Server
+# 4. Nạp dữ liệu xe sạch đã chuẩn hóa vào PostgreSQL & Qdrant (mất 2s)
+python scripts/version_manager.py promote --version v3
+
+# 5. Khởi chạy Server
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 

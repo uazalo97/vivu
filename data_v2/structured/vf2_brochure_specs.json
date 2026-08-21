@@ -1,0 +1,762 @@
+[
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "3090",
+    "spec_unit": "mm",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      89.3,
+      188.8,
+      119.1
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1496",
+    "spec_unit": "mm",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      89.3,
+      188.8,
+      119.1
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1663.2",
+    "spec_unit": "mm",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      89.3,
+      188.8,
+      119.1
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2065",
+    "spec_unit": "mm",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      119.1,
+      188.8,
+      148.8
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "166.3",
+    "spec_unit": "mm",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      148.8,
+      188.8,
+      178.6
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Hệ thống truyền động",
+    "spec_key": "power_kw",
+    "spec_value": "30",
+    "spec_unit": "kW",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      178.6,
+      188.8,
+      208.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Hệ thống truyền động",
+    "spec_key": "torque_nm",
+    "spec_value": "65",
+    "spec_unit": "Nm",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      208.3,
+      188.8,
+      238.1
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Hệ thống truyền động",
+    "spec_key": "top_speed_kmh",
+    "spec_value": "80",
+    "spec_unit": "km/h",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      238.1,
+      188.8,
+      267.9
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "210",
+    "spec_unit": "km",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      267.9,
+      188.8,
+      297.6
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "18.3",
+    "spec_unit": "kWh",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      297.6,
+      188.8,
+      327.4
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "Dây sạc di động",
+    "spec_value": "Phụ kiện chính hãng",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      327.4,
+      188.8,
+      357.2
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "power_kw",
+    "spec_value": "24",
+    "spec_unit": "kW",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      357.2,
+      188.8,
+      386.9
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "34",
+    "spec_unit": "phút",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      386.9,
+      188.8,
+      416.7
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Hệ thống truyền động khác",
+    "spec_key": "drivetrain",
+    "spec_value": "RWD/Cầu sau",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      416.7,
+      188.8,
+      446.5
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Hệ thống truyền động khác",
+    "spec_key": "Hệ thống phanh tái sinh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      446.5,
+      188.8,
+      476.2
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Hệ thống truyền động khác",
+    "spec_key": "Chế độ lái",
+    "spec_value": "Eco/Normal",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      476.2,
+      188.8,
+      506.0
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chiếu sáng phía trước",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      506.0,
+      188.8,
+      535.7
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "Halogen",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      535.7,
+      188.8,
+      565.5
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Gương chiếu hậu",
+    "spec_key": "Gương chiếu hậu ngoài",
+    "spec_value": "Chỉnh cơ",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      565.5,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gạt mưa trước",
+    "spec_value": "Điều chỉnh gián đoạn",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Đóng/mở cốp sau",
+    "spec_value": "Chỉnh cơ",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Tính năng thông minh",
+    "spec_key": "Tự chẩn đoán lỗi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Tính năng thông minh",
+    "spec_key": "Thanh toán phí sạc qua mã QR trên ứng dụng điện thoại",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo (trước/sau)",
+    "spec_value": "Macpherson/Macpherson",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống phanh (trước/sau)",
+    "spec_value": "Đĩa/tang trống",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "13",
+    "spec_unit": "mm",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Bộ và lốp",
+    "spec_value": "Phụ kiện chính hãng",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Bộ dụng cụ kích xe",
+    "spec_value": "Phụ kiện chính hãng",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "Máy lạnh, chỉnh cơ",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Màn hình thông tin lái",
+    "spec_value": "7 inch",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống âm thanh",
+    "spec_value": "2 loa",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Chức năng giải trí",
+    "spec_value": "FM",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh cơ 4 hướng",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Bọc ghế",
+    "spec_value": "Nỉ",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Gương chiếu hậu trong xe",
+    "spec_value": "Chế độ ngày & đêm",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh (ABS)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử (EBD)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 2",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Kiểm soát lực kéo (TCS)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf2_brochure",
+    "source_url": "https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      21.0,
+      595.3,
+      188.8,
+      595.3
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.4
+  }
+]

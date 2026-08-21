@@ -1,0 +1,41 @@
+model_code|version_name|spec_category|spec_key|spec_value|spec_unit|source_document|source_url|source_page|source_bbox|source_block_id|confidence
+VF 2||Kích thước|length_mm|3090|mm|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 89.3, 188.8, 119.1]|p02_b02|0.98
+VF 2||Kích thước|width_mm|1496|mm|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 89.3, 188.8, 119.1]|p02_b02|0.98
+VF 2||Kích thước|height_mm|1663.2|mm|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 89.3, 188.8, 119.1]|p02_b02|0.98
+VF 2||Kích thước|wheelbase_mm|2065|mm|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 119.1, 188.8, 148.8]|p02_b02|0.98
+VF 2||Kích thước|ground_clearance_mm|166.3|mm|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 148.8, 188.8, 178.6]|p02_b02|0.98
+VF 2||Hệ thống truyền động|power_kw|30|kW|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 178.6, 188.8, 208.3]|p02_b02|0.98
+VF 2||Hệ thống truyền động|torque_nm|65|Nm|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 208.3, 188.8, 238.1]|p02_b02|0.98
+VF 2||Hệ thống truyền động|top_speed_kmh|80|km/h|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 238.1, 188.8, 267.9]|p02_b02|0.98
+VF 2||Pin|range_km|210|km|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 267.9, 188.8, 297.6]|p02_b02|0.98
+VF 2||Pin|battery_kwh|18.3|kWh|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 297.6, 188.8, 327.4]|p02_b02|0.98
+VF 2||Pin|Dây sạc di động|Phụ kiện chính hãng||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 327.4, 188.8, 357.2]|p02_b02|0.98
+VF 2||Pin|power_kw|24|kW|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 357.2, 188.8, 386.9]|p02_b02|0.98
+VF 2||Pin|fast_charge_min|34|phút|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 386.9, 188.8, 416.7]|p02_b02|0.98
+VF 2||Hệ thống truyền động khác|drivetrain|RWD/Cầu sau||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 416.7, 188.8, 446.5]|p02_b02|0.98
+VF 2||Hệ thống truyền động khác|Hệ thống phanh tái sinh|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 446.5, 188.8, 476.2]|p02_b02|0.98
+VF 2||Hệ thống truyền động khác|Chế độ lái|Eco/Normal||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 476.2, 188.8, 506.0]|p02_b02|0.98
+VF 2||Ngoại thất|Đèn chiếu sáng phía trước|LED||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 506.0, 188.8, 535.7]|p02_b02|0.98
+VF 2||Ngoại thất|Đèn hậu|Halogen||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 535.7, 188.8, 565.5]|p02_b02|0.98
+VF 2||Gương chiếu hậu|Gương chiếu hậu ngoài|Chỉnh cơ||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 565.5, 188.8, 595.3]|p02_b02|0.98
+VF 2||Ngoại thất khác|Gạt mưa trước|Điều chỉnh gián đoạn||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Ngoại thất khác|Đóng/mở cốp sau|Chỉnh cơ||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Tính năng thông minh|Tự chẩn đoán lỗi|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Tính năng thông minh|Thanh toán phí sạc qua mã QR trên ứng dụng điện thoại|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Khung gầm|Hệ thống treo (trước/sau)|Macpherson/Macpherson||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Khung gầm|Hệ thống phanh (trước/sau)|Đĩa/tang trống||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Kích thước|length_mm|13|mm|vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Khung gầm|Bộ và lốp|Phụ kiện chính hãng||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Khung gầm|Bộ dụng cụ kích xe|Phụ kiện chính hãng||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Hệ thống điều hòa|Máy lạnh, chỉnh cơ||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Màn hình thông tin lái|7 inch||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Hệ thống âm thanh|2 loa||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Chức năng giải trí|FM||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Ghế lái|Chỉnh cơ 4 hướng||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Móc cố định ghế trẻ em ISOFIX|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Bọc ghế|Nỉ||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||Nội thất & Tiện nghi|Gương chiếu hậu trong xe|Chế độ ngày & đêm||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||An toàn & An ninh|airbags|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||An toàn & An ninh|Hệ thống chống bó cứng phanh (ABS)|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||An toàn & An ninh|Chức năng phân phối lực phanh điện tử (EBD)|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4
+VF 2||An toàn & An ninh|Kiểm soát lực kéo (TCS)|Có||vf2_brochure|https://static-cms-prod.vinfastauto.com/brochure_vf_2.pdf|2|[21.0, 595.3, 188.8, 595.3]|p02_b02|0.4

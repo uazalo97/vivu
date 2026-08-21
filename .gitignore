@@ -13,9 +13,9 @@ tmp/
 data/clean/*/intermediate/
 # vector cache (artifact lớn — embed cache theo content-hash)
 data/.vector_cache/
-# Ingestion Harness V2 (raw PDFs, rendered page images, crops, local generated data)
-data_v2/
-
+# Ingestion Harness V2 (ignore heavy page images & canonical intermediate json)
+data_v2/artifacts/
+data_v2/canonical/
 # Eval outputs (artifact sinh ra khi chạy smoke test)
 eval/results/
 

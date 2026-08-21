@@ -1,0 +1,2263 @@
+[
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4740",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 3,
+    "source_bbox": [
+      325.6,
+      515.2,
+      560.2,
+      530.4
+    ],
+    "source_block_id": "p03_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1872",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 3,
+    "source_bbox": [
+      325.6,
+      515.2,
+      560.2,
+      530.4
+    ],
+    "source_block_id": "p03_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1734",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 3,
+    "source_bbox": [
+      325.6,
+      515.2,
+      560.2,
+      530.4
+    ],
+    "source_block_id": "p03_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2840",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 3,
+    "source_bbox": [
+      325.6,
+      532.1,
+      487.5,
+      546.4
+    ],
+    "source_block_id": "p03_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "185",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 3,
+    "source_bbox": [
+      325.6,
+      547.2,
+      554.8,
+      562.4
+    ],
+    "source_block_id": "p03_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Trọng lượng không tải",
+    "spec_value": "1.875",
+    "spec_unit": "kg",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 3,
+    "source_bbox": [
+      325.6,
+      563.2,
+      536.9,
+      578.4
+    ],
+    "source_block_id": "p03_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "La-zăng hợp kim",
+    "spec_value": "19",
+    "spec_unit": "inch",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 3,
+    "source_bbox": [
+      381.0,
+      638.2,
+      563.7,
+      655.8
+    ],
+    "source_block_id": "p03_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "150",
+    "spec_unit": "kW",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      129.8,
+      601.1,
+      276.2,
+      632.3
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Mô-men xoắn cực đại",
+    "spec_value": "280",
+    "spec_unit": "Nm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      120.2,
+      601.1,
+      283.4,
+      632.3
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "450",
+    "spec_unit": "km",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      321.4,
+      601.1,
+      516.1,
+      632.3
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "NEDC",
+    "spec_unit": "km",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      321.4,
+      601.1,
+      516.1,
+      632.3
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "Sạc nhanh DC",
+    "spec_value": "Từ 10 – 70% trong 30 phút",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      32.7,
+      724.9,
+      202.4,
+      753.5
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống treo",
+    "spec_key": "Hệ thống treo sau",
+    "spec_value": "Đa liên kết cao cấp",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      264.9,
+      724.0,
+      395.9,
+      752.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Chế độ lái",
+    "spec_value": "Đa dạng",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      462.5,
+      727.4,
+      550.6,
+      739.2
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      54.8,
+      688.7,
+      303.6,
+      710.6
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Trang bị đầy đủ hệ thống an toàn",
+    "spec_value": "ABS, EBD, BA, ESC, TCS",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      54.8,
+      708.0,
+      325.0,
+      734.1
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc (HSA)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      54.8,
+      735.0,
+      319.1,
+      752.6
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng chống lật (ROM)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      339.3,
+      688.7,
+      553.0,
+      710.6
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Ga tự động cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      339.3,
+      708.9,
+      514.9,
+      727.4
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảm biến đỗ xe phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      339.3,
+      727.4,
+      538.1,
+      746.8
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4740",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      336.8,
+      284.5,
+      351.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1872",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      336.8,
+      284.5,
+      351.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1734",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      336.8,
+      284.5,
+      351.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2840",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      351.9,
+      284.5,
+      366.2
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "185",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      366.2,
+      284.5,
+      379.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Tải trọng",
+    "spec_key": "Trọng lượng không tải",
+    "spec_value": "1.875",
+    "spec_unit": "kg",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      394.8,
+      284.5,
+      408.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "150",
+    "spec_unit": "kW",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      442.8,
+      284.5,
+      457.1
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "280",
+    "spec_unit": "Nm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      457.1,
+      284.5,
+      471.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "battery_kwh",
+    "spec_value": "60.13",
+    "spec_unit": "kWh",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      485.8,
+      284.5,
+      500.1
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "450",
+    "spec_unit": "km",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      500.1,
+      284.5,
+      514.4
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "Dây sạc di động",
+    "spec_value": "3,5 (Phụ kiện chính hãng)",
+    "spec_unit": "kW",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      514.4,
+      284.5,
+      528.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "Bộ sạc tại nhà",
+    "spec_value": "7,4 (Phụ kiện chính hãng)",
+    "spec_unit": "kW",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      528.7,
+      284.5,
+      543.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "power_kw",
+    "spec_value": "6.9",
+    "spec_unit": "kW",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      543.0,
+      284.5,
+      557.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "power_kw",
+    "spec_value": "80",
+    "spec_unit": "kW",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      557.3,
+      284.5,
+      571.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "fast_charge_min",
+    "spec_value": "30",
+    "spec_unit": "phút",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      571.6,
+      284.5,
+      586.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Hệ thống phanh tái sinh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      586.0,
+      284.5,
+      600.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Chọn chế độ lái",
+    "spec_value": "Eco/Normal/Sport",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      600.3,
+      284.5,
+      614.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "drivetrain",
+    "spec_value": "Cầu trước (FWD)",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      614.6,
+      284.5,
+      628.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Cần chuyển số sau vô lăng",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      628.9,
+      284.5,
+      643.2
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "MacPherson độc lập",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      682.8,
+      284.5,
+      697.1
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Đa liên kết",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      697.1,
+      284.5,
+      711.4
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Phanh trước",
+    "spec_value": "Đĩa thông gió",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      711.4,
+      284.5,
+      725.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Phanh sau",
+    "spec_value": "Đĩa",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      725.7,
+      284.5,
+      740.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Phanh tay điện tử và Tự động giữ phanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      740.0,
+      284.5,
+      754.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "wheel_size_inch",
+    "spec_value": "19",
+    "spec_unit": "inch",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      754.3,
+      284.5,
+      768.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "235",
+    "spec_unit": "mm",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      768.6,
+      284.5,
+      783.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Trợ lực lái",
+    "spec_value": "Trợ lực điện",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      31.0,
+      783.0,
+      284.5,
+      797.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn pha",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      336.8,
+      554.8,
+      351.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn cho dân đường",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      351.9,
+      554.8,
+      366.2
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn tự động bật/tắt",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      366.2,
+      554.8,
+      379.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Điều khiển độ cao góc chiếu đèn",
+    "spec_value": "Chỉnh cơ",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      379.7,
+      554.8,
+      394.8
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn chiếu sáng ban ngày",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      394.8,
+      554.8,
+      408.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      408.3,
+      554.8,
+      422.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn nhận diện thương hiệu trước và sau",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      422.6,
+      554.8,
+      436.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gương chiếu hậu",
+    "spec_value": "Chỉnh điện, gập điện, tích hợp đèn báo rẽ",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      451.3,
+      554.8,
+      480.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Kính cửa sổ điện",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      480.7,
+      554.8,
+      494.2
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Kính cửa sổ lên/xuống một chạm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      494.2,
+      554.8,
+      509.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gạt mưa",
+    "spec_value": "Điều khiển gián đoạn",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      509.3,
+      554.8,
+      522.8
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Thanh trang trí nóc xe",
+    "spec_value": "Phụ kiện chính hãng",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      522.8,
+      554.8,
+      538.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "seats",
+    "spec_value": "7",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      559.0,
+      554.8,
+      572.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Chất liệu bọc ghế",
+    "spec_value": "Da nhân tạo",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      572.5,
+      554.8,
+      586.8
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh cơ 6 hướng",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      586.8,
+      554.8,
+      601.1
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế phụ",
+    "spec_value": "Chỉnh cơ 4 hướng",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      601.1,
+      554.8,
+      615.4
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hàng ghế thứ 2 điều chỉnh hướng",
+    "spec_value": "Điều chỉnh hàng lưng ghế và trượt tiến/lùi",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      615.4,
+      554.8,
+      644.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Gập lưng ghế hàng ghế thứ 2",
+    "spec_value": "60:40",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      644.9,
+      554.8,
+      659.2
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      659.2,
+      554.8,
+      673.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Gập hàng ghế thứ 3",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      673.5,
+      554.8,
+      687.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Tựa đầu ghế hàng 3",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      687.0,
+      554.8,
+      701.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Vô lăng",
+    "spec_key": "Vô lăng",
+    "spec_value": "Chỉnh cơ 4 hướng",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      715.6,
+      554.8,
+      729.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Vô lăng",
+    "spec_key": "Loại vô lăng",
+    "spec_value": "D-cut",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      729.9,
+      554.8,
+      744.2
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Vô lăng",
+    "spec_key": "Bọc vô lăng",
+    "spec_value": "Da nhân tạo",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      744.2,
+      554.8,
+      757.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Điều hòa",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "Tự động, 1 vùng",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      772.0,
+      554.8,
+      786.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Điều hòa",
+    "spec_key": "Lọc không khí Cabin",
+    "spec_value": "Lọc bụi mịn PM 2.5",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      786.3,
+      554.8,
+      800.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Điều hòa",
+    "spec_key": "Cửa gió điều hòa hàng ghế thứ 2 và thứ 3",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      800.6,
+      554.8,
+      814.9
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Điều hòa",
+    "spec_key": "Sưởi kính sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      301.2,
+      814.9,
+      554.8,
+      828.4
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Hệ thống thông tin giải trí",
+    "spec_key": "Trợ lý ảo",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      109.4,
+      282.8,
+      124.6
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Hệ thống thông tin giải trí",
+    "spec_key": "Màn hình giải trí trung tâm",
+    "spec_value": "10,1",
+    "spec_unit": "inch",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      124.6,
+      282.8,
+      138.9
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Hệ thống thông tin giải trí",
+    "spec_key": "Kết nối với Android Auto và Apple Carplay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      138.9,
+      282.8,
+      153.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Hệ thống thông tin giải trí",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "4",
+    "spec_unit": "loa",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      153.2,
+      282.8,
+      167.5
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Tiện nghi",
+    "spec_key": "Đèn khoang hành lý",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      181.0,
+      282.8,
+      196.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Tiện nghi",
+    "spec_key": "Đèn trần hàng ghế 1 và hàng ghế 2",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      196.2,
+      282.8,
+      210.5
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Tiện nghi",
+    "spec_key": "Gương chiếu hậu trong xe",
+    "spec_value": "Điều chỉnh chế độ ngày/đêm",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      210.5,
+      282.8,
+      224.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Tiện nghi",
+    "spec_key": "Cổng USB",
+    "spec_value": "Hàng ghế thứ nhất: 1 cổng USB-A & 1 cổng USB-C. Hàng ghế thứ hai: 1 cổng USB-A & 1 cổng USB-C",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      224.8,
+      282.8,
+      266.0
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi - Tiện nghi",
+    "spec_key": "Cổng sạc 12V",
+    "spec_value": "Hàng ghế thứ nhất: 1 cổng 12 V. Cốp sau: 1 cổng 12 V",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      266.0,
+      282.8,
+      299.7
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      319.9,
+      282.8,
+      347.7
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      347.7,
+      282.8,
+      362.0
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chìa khóa xe",
+    "spec_value": "Chìa khóa thông minh",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      362.0,
+      282.8,
+      376.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Khóa cửa xe tự động khi xe di chuyển",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      376.3,
+      282.8,
+      390.6
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Khóa cửa trẻ em",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      390.6,
+      282.8,
+      404.9
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chống trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      404.9,
+      282.8,
+      419.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Tính năng khóa động cơ khi có trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      419.3,
+      282.8,
+      433.6
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Căng đai khẩn cấp",
+    "spec_value": "Hàng ghế trước",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      433.6,
+      282.8,
+      447.9
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Xác định hành khách & Cảnh báo dây an toàn",
+    "spec_value": "Hàng ghế trước",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      447.9,
+      282.8,
+      462.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh (ABS)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      462.2,
+      282.8,
+      476.5
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử (EBD)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      476.5,
+      282.8,
+      490.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp (BA)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      490.8,
+      282.8,
+      505.1
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử (ESC)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      505.1,
+      282.8,
+      519.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo (TCS)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      519.4,
+      282.8,
+      533.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc (HSA)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      533.8,
+      282.8,
+      548.1
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng chống lật (ROM)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      548.1,
+      282.8,
+      562.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Đèn báo nguy hiểm khi phanh khẩn cấp (ESS)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      562.4,
+      282.8,
+      576.7
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Ga tự động cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      576.7,
+      282.8,
+      591.0
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Camera lùi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      591.0,
+      282.8,
+      605.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảm biến đỗ xe phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      29.8,
+      605.3,
+      282.8,
+      619.6
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Chế độ vận hành đặc biệt",
+    "spec_value": "Chế độ Cắm trại",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      95.1,
+      566.7,
+      110.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Quản lý thiết bị Bluetooth",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      110.3,
+      566.7,
+      124.6
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Quản lý eSIM",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      124.6,
+      566.7,
+      138.9
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Giám sát tình trạng pin, Giới hạn dung lượng/dòng sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      138.9,
+      566.7,
+      153.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Tạo và ghi nhớ cài đặt theo hồ sơ người lái",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      153.2,
+      566.7,
+      167.5
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Hồ sơ nâng cao",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      167.5,
+      566.7,
+      181.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Giải trí cơ bản (Đài FM, Bluetooth, USB)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      181.8,
+      566.7,
+      196.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Trình duyệt web",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      196.2,
+      566.7,
+      210.5
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Tự chẩn đoán lỗi / Chẩn đoán lỗi từ xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      210.5,
+      566.7,
+      224.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Hệ thống tin giải trí trên xe",
+    "spec_key": "Cập nhật phần mềm không dây (FOTA)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      224.8,
+      566.7,
+      236.6
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ứng dụng điện thoại",
+    "spec_key": "Đồng bộ và Quản lý tài khoản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      254.3,
+      566.7,
+      268.6
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ứng dụng điện thoại",
+    "spec_key": "Nhận thông báo",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      268.6,
+      566.7,
+      282.9
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ứng dụng điện thoại",
+    "spec_key": "Giám sát xe từ xa",
+    "spec_value": "Cơ bản",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      282.9,
+      566.7,
+      297.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ứng dụng điện thoại",
+    "spec_key": "Tìm trạm sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      297.2,
+      566.7,
+      311.5
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF MPV 7",
+    "version_name": null,
+    "spec_category": "Ứng dụng điện thoại",
+    "spec_key": "Hỗ trợ hậu mãi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf_mpv7_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF_MPV%207_Brochure_2026.02.03.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      314.3,
+      311.5,
+      566.7,
+      325.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  }
+]

@@ -1,0 +1,278 @@
+model_code|version_name|spec_category|spec_key|spec_value|spec_unit|source_document|source_url|source_page|source_bbox|source_block_id|confidence
+VF 7|Plus|Kích thước & Trọng lượng|Chiều cao tổng thể|1.635,75|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[128.0, 264.9, 222.3, 410.7]|p06_b02|0.98
+VF 7|Plus|Kích thước & Trọng lượng|Chiều rộng tổng thể|1.890|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[153.2, 430.9, 303.1, 547.6]|p06_b02|0.98
+VF 7|Plus|Kích thước & Trọng lượng|Chiều dài tổng thể|4.545|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[420.9, 369.0, 707.2, 562.5]|p06_b02|0.98
+VF 7|Plus|Kích thước & Trọng lượng|wheelbase_mm|2840|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[420.9, 363.1, 681.9, 514.9]|p06_b02|0.98
+VF 7|Plus|Ngoại thất|Đèn pha LED|tự động bật/tắt chế độ chiếu xa||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[1052.4, 29.8, 1397.5, 291.7]|p06_b02|0.98
+VF 7|Plus|Ngoại thất|Tay nắm ẩn trong thân xe|tạo ra sự liền mạch||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[1414.4, 29.8, 1658.5, 291.7]|p06_b02|0.98
+VF 7|Plus|Ngoại thất|Gương chiếu hậu chống chói tự động|hiện đại & an toàn||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[825.1, 297.6, 1178.6, 488.1]|p06_b02|0.98
+VF 7|Plus|Ngoại thất|Kiểu dáng vuốt coupe|tối ưu khí động học||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[1178.6, 297.6, 1406.0, 488.1]|p06_b02|0.98
+VF 7|Plus|Ngoại thất|Lazang hợp kim|20|inch|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|6|[1406.0, 297.6, 1675.4, 488.1]|p06_b02|0.98
+VF 7||Nội thất & Tiện nghi|HUD|Hiện đại||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|8|[65.7, 171.4, 617.9, 246.4]|p08_b02|0.98
+VF 7||Nội thất & Tiện nghi|Vô lăng|D-cut thể thao||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|8|[65.7, 171.4, 617.9, 246.4]|p08_b02|0.98
+VF 7||Kích thước & Trọng lượng|Dung tích khoang chứa đồ|1.576|L|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|8|[65.7, 226.8, 617.9, 246.4]|p08_b02|0.98
+VF 7|VF 7 Plus AWD|Động cơ & Vận hành|Thời gian tăng tốc|5,8|giây|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|8|[449.6, 432.7, 766.1, 533.3]|p08_b02|0.98
+VF 7||Động cơ & Vận hành|Chế độ lái tùy chỉnh|3 chế độ: Eco/Normal/Sport||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|9|[30.3, 169.6, 185.2, 258.9]|p09_b02|0.98
+VF 7||Động cơ & Vận hành|Hệ thống treo|Đa điểm||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|9|[218.9, 169.6, 319.9, 258.9]|p09_b02|0.98
+VF 7|VF 7 Plus AWD|Động cơ & Vận hành|power_kw|260|kW|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|9|[370.4, 169.6, 530.4, 261.9]|p09_b02|0.98
+VF 7||Pin & Sạc|range_km|496|km|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|9|[530.4, 169.6, 656.7, 264.9]|p09_b02|0.98
+VF 7||Động cơ & Vận hành|Phanh tái sinh|Tiết kiệm năng lượng & giảm khí thải||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|9|[126.3, 339.3, 261.0, 461.3]|p09_b02|0.98
+VF 7|VF 7 Plus AWD|Pin & Sạc|Sạc đầy PIN từ 10-70%|Trong 28 phút||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|9|[294.7, 339.3, 429.4, 473.2]|p09_b02|0.98
+VF 7|VF 7 Plus AWD|Động cơ & Vận hành|torque_nm|500|Nm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|9|[437.8, 339.3, 555.6, 461.3]|p09_b02|0.98
+VF 7|VF 7 Plus|Hệ thống hỗ trợ lái nâng cao ADAS|Giám sát hành trình thích ứng|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|11|[880.6, 129.8, 1059.1, 251.8]|p11_b02|0.98
+VF 7|VF 7 Plus|Hệ thống hỗ trợ lái nâng cao ADAS|Phanh tự động khẩn cấp TRƯỚC|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|11|[1060.8, 129.8, 1229.2, 251.8]|p11_b02|0.98
+VF 7|VF 7 Plus|Hệ thống hỗ trợ lái nâng cao ADAS|Phanh tự động khẩn cấp SAU|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|11|[1229.2, 129.8, 1363.9, 251.8]|p11_b02|0.98
+VF 7|VF 7 Plus|Hệ thống hỗ trợ lái nâng cao ADAS|Hỗ trợ tự động chuyển làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|11|[1363.9, 129.8, 1525.5, 251.8]|p11_b02|0.98
+VF 7|VF 7 Plus|Hệ thống hỗ trợ lái nâng cao ADAS|Kiểm soát đi giữa làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|11|[1525.5, 129.8, 1675.4, 251.8]|p11_b02|0.98
+VF 7|Eco|Động cơ & Vận hành|power_kw|130|kW / hp|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[639.8, 154.8, 1141.6, 190.5]|p12_b02|0.98
+VF 7|Plus|Động cơ & Vận hành|power_kw|150|kW / hp|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1141.6, 154.8, 1342.0, 190.5]|p12_b02|0.98
+VF 7|Plus AWD (Optional)|Động cơ & Vận hành|power_kw|260|kW / hp|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1342.0, 154.8, 538.8, 557.1]|p12_b02|0.4
+VF 7|Eco|Động cơ & Vận hành|torque_nm|250|Nm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[639.8, 190.5, 1141.6, 226.2]|p12_b02|0.98
+VF 7|Plus|Động cơ & Vận hành|torque_nm|310|Nm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1141.6, 190.5, 1342.0, 226.2]|p12_b02|0.98
+VF 7|Plus AWD (Optional)|Động cơ & Vận hành|torque_nm|500|Nm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1342.0, 190.5, 1576.0, 226.2]|p12_b02|0.98
+VF 7|Eco|Động cơ & Vận hành|drivetrain|Dẫn động cầu trước (FWD)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[639.8, 226.2, 1141.6, 261.9]|p12_b02|0.98
+VF 7|Plus|Động cơ & Vận hành|drivetrain|Dẫn động cầu trước (FWD)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1141.6, 226.2, 1342.0, 261.9]|p12_b02|0.98
+VF 7|Plus AWD (Optional)|Động cơ & Vận hành|drivetrain|Hai cầu (AWD)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1342.0, 226.2, 1576.0, 261.9]|p12_b02|0.98
+VF 7|Eco|Pin & Sạc|range_km|498|km (NEDC)|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[639.8, 261.9, 1141.6, 298.2]|p12_b02|0.98
+VF 7|Plus|Pin & Sạc|range_km|Cập nhật sau|km|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1141.6, 261.9, 1342.0, 298.2]|p12_b02|0.98
+VF 7|Plus AWD (Optional)|Pin & Sạc|range_km|496|km (NEDC)|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1342.0, 261.9, 1576.0, 298.2]|p12_b02|0.98
+VF 7|Eco|Pin & Sạc|battery_kwh|59.6|kWh|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[639.8, 298.2, 1141.6, 333.9]|p12_b02|0.98
+VF 7|Plus|Pin & Sạc|battery_kwh|75.6|kWh|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1141.6, 298.2, 1342.0, 333.9]|p12_b02|0.98
+VF 7|Plus AWD (Optional)|Pin & Sạc|battery_kwh|75.6|kWh|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1342.0, 298.2, 1576.0, 333.9]|p12_b02|0.98
+VF 7|Eco|Pin & Sạc|Chi phí sạc pin|0|VNĐ|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[639.8, 333.9, 1141.6, 401.2]|p12_b02|0.98
+VF 7|Plus|Pin & Sạc|Chi phí sạc pin|0|VNĐ|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1141.6, 333.9, 1342.0, 401.2]|p12_b02|0.98
+VF 7|Plus AWD (Optional)|Pin & Sạc|Chi phí sạc pin|0|VNĐ|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|12|[1342.0, 333.9, 1576.0, 401.2]|p12_b02|0.98
+VF 7|Eco|Kích thước|length_mm|4.545|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Eco|Kích thước|width_mm|1.89|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Eco|Kích thước|height_mm|1,635.75|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Plus|Kích thước|length_mm|4.545|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Plus|Kích thước|width_mm|1.89|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Plus|Kích thước|height_mm|1,635.75|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Plus AWD|Kích thước|length_mm|4.545|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Plus AWD|Kích thước|width_mm|1.89|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Plus AWD|Kích thước|height_mm|1,635.75|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 57.1, 648.3, 70.2]|p13_b02|0.4
+VF 7|Eco|Kích thước|wheelbase_mm|2.84|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 70.8, 648.3, 84.5]|p13_b02|0.4
+VF 7|Plus|Kích thước|wheelbase_mm|2.84|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 70.8, 648.3, 84.5]|p13_b02|0.4
+VF 7|Plus AWD|Kích thước|wheelbase_mm|2.84|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 70.8, 648.3, 84.5]|p13_b02|0.4
+VF 7|Eco|Kích thước|ground_clearance_mm|190|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 85.1, 648.3, 98.2]|p13_b02|0.98
+VF 7|Plus|Kích thước|ground_clearance_mm|190|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 85.1, 648.3, 98.2]|p13_b02|0.98
+VF 7|Plus AWD|Kích thước|ground_clearance_mm|190|mm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 85.1, 648.3, 98.2]|p13_b02|0.98
+VF 7|Eco|Động cơ|power_kw|130|kW|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 126.8, 648.3, 140.5]|p13_b02|0.98
+VF 7|Plus|Động cơ|power_kw|150|kW|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 126.8, 648.3, 140.5]|p13_b02|0.98
+VF 7|Plus AWD|Động cơ|power_kw|260|kW|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 126.8, 648.3, 140.5]|p13_b02|0.98
+VF 7|Eco|Động cơ|torque_nm|250|Nm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 140.5, 648.3, 153.6]|p13_b02|0.98
+VF 7|Plus|Động cơ|torque_nm|310|Nm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 140.5, 648.3, 153.6]|p13_b02|0.98
+VF 7|Plus AWD|Động cơ|torque_nm|500|Nm|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 140.5, 648.3, 153.6]|p13_b02|0.98
+VF 7|Eco|Pin|range_km|498|km (NEDC)|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 167.3, 648.3, 180.9]|p13_b02|0.98
+VF 7|Plus|Pin|range_km|Thông báo sau|km|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 167.3, 648.3, 180.9]|p13_b02|0.98
+VF 7|Plus AWD|Pin|range_km|496|km (NEDC)|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 167.3, 648.3, 180.9]|p13_b02|0.98
+VF 7|Eco|Pin|battery_kwh|59.6|kWh|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 180.9, 648.3, 194.6]|p13_b02|0.98
+VF 7|Plus|Pin|battery_kwh|75.6|kWh|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 180.9, 648.3, 194.6]|p13_b02|0.98
+VF 7|Plus AWD|Pin|battery_kwh|75.6|kWh|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 180.9, 648.3, 194.6]|p13_b02|0.98
+VF 7|Eco|Pin|Dây sạc di động|Phụ kiện (AFS 3,5 kW)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 194.6, 648.3, 208.3]|p13_b02|0.98
+VF 7|Plus|Pin|Dây sạc di động|Phụ kiện (AFS 3,5 kW)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 194.6, 648.3, 208.3]|p13_b02|0.98
+VF 7|Plus AWD|Pin|Dây sạc di động|Phụ kiện (AFS 3,5 kW)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 194.6, 648.3, 208.3]|p13_b02|0.98
+VF 7|Eco|Pin|Bộ sạc tại nhà|Phụ kiện (AFS 7,4 kW)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 208.3, 648.3, 222.0]|p13_b02|0.98
+VF 7|Plus|Pin|Bộ sạc tại nhà|Phụ kiện (AFS 7,4 kW)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 208.3, 648.3, 222.0]|p13_b02|0.98
+VF 7|Plus AWD|Pin|Bộ sạc tại nhà|Phụ kiện (AFS 7,4 kW)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 208.3, 648.3, 222.0]|p13_b02|0.98
+VF 7|Eco|Pin|fast_charge_min|24.1|phút|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 222.0, 648.3, 235.7]|p13_b02|0.98
+VF 7|Plus|Pin|fast_charge_min|28.15|phút|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 222.0, 648.3, 235.7]|p13_b02|0.98
+VF 7|Plus AWD|Pin|fast_charge_min|28.15|phút|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 222.0, 648.3, 235.7]|p13_b02|0.98
+VF 7|Eco|Thông số truyền động khác|drivetrain|Cầu trước (FWD)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 250.6, 648.3, 264.3]|p13_b02|0.98
+VF 7|Plus|Thông số truyền động khác|drivetrain|Cầu trước (FWD)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 250.6, 648.3, 264.3]|p13_b02|0.98
+VF 7|Plus AWD|Thông số truyền động khác|drivetrain|Hai cầu (AWD)||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 250.6, 648.3, 264.3]|p13_b02|0.98
+VF 7|Eco|Thông số truyền động khác|Chế độ lái|Eco/ Normal/ Sport||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 264.3, 648.3, 277.4]|p13_b02|0.98
+VF 7|Plus|Thông số truyền động khác|Chế độ lái|Eco/ Normal/ Sport||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 264.3, 648.3, 277.4]|p13_b02|0.98
+VF 7|Plus AWD|Thông số truyền động khác|Chế độ lái|Eco/ Normal/ Sport||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 264.3, 648.3, 277.4]|p13_b02|0.98
+VF 7|Eco|Khung gầm|wheel_size_inch|19|inch|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 291.1, 648.3, 304.7]|p13_b02|0.98
+VF 7|Plus|Khung gầm|wheel_size_inch|20|inch|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 291.1, 648.3, 304.7]|p13_b02|0.98
+VF 7|Plus AWD|Khung gầm|wheel_size_inch|20|inch|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 291.1, 648.3, 304.7]|p13_b02|0.98
+VF 7|Eco|Khung gầm|Hệ thống treo - trước|Độc lập, MacPherson||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 304.7, 648.3, 318.4]|p13_b02|0.98
+VF 7|Plus|Khung gầm|Hệ thống treo - trước|Độc lập, MacPherson||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 304.7, 648.3, 318.4]|p13_b02|0.98
+VF 7|Plus AWD|Khung gầm|Hệ thống treo - trước|Độc lập, MacPherson||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 304.7, 648.3, 318.4]|p13_b02|0.98
+VF 7|Eco|Khung gầm|Hệ thống treo - sau|Thanh điều hướng đa điểm||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 318.4, 648.3, 331.5]|p13_b02|0.98
+VF 7|Plus|Khung gầm|Hệ thống treo - sau|Thanh điều hướng đa điểm||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 318.4, 648.3, 331.5]|p13_b02|0.98
+VF 7|Plus AWD|Khung gầm|Hệ thống treo - sau|Thanh điều hướng đa điểm||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 318.4, 648.3, 331.5]|p13_b02|0.98
+VF 7|Eco|Đèn ngoại thất|Đèn chiếu sáng phía trước|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 359.5, 648.3, 373.2]|p13_b02|0.98
+VF 7|Plus|Đèn ngoại thất|Đèn chiếu sáng phía trước|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 359.5, 648.3, 373.2]|p13_b02|0.98
+VF 7|Plus AWD|Đèn ngoại thất|Đèn chiếu sáng phía trước|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 359.5, 648.3, 373.2]|p13_b02|0.98
+VF 7|Eco|Đèn ngoại thất|Tự động bật/tắt đèn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 373.2, 648.3, 386.9]|p13_b02|0.98
+VF 7|Plus|Đèn ngoại thất|Tự động bật/tắt đèn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 373.2, 648.3, 386.9]|p13_b02|0.98
+VF 7|Plus AWD|Đèn ngoại thất|Tự động bật/tắt đèn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 373.2, 648.3, 386.9]|p13_b02|0.98
+VF 7|Eco|Đèn ngoại thất|Đèn chiếu sáng ban ngày|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 386.9, 648.3, 401.2]|p13_b02|0.98
+VF 7|Plus|Đèn ngoại thất|Đèn chiếu sáng ban ngày|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 386.9, 648.3, 401.2]|p13_b02|0.98
+VF 7|Plus AWD|Đèn ngoại thất|Đèn chiếu sáng ban ngày|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 386.9, 648.3, 401.2]|p13_b02|0.98
+VF 7|Eco|Đèn ngoại thất|Tự động bật/tắt chế độ chiếu xa|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 401.2, 648.3, 414.9]|p13_b02|0.98
+VF 7|Plus|Đèn ngoại thất|Tự động bật/tắt chế độ chiếu xa|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 401.2, 648.3, 414.9]|p13_b02|0.98
+VF 7|Plus AWD|Đèn ngoại thất|Tự động bật/tắt chế độ chiếu xa|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 401.2, 648.3, 414.9]|p13_b02|0.98
+VF 7|Eco|Đèn ngoại thất|Đèn hậu|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 414.9, 648.3, 428.5]|p13_b02|0.98
+VF 7|Plus|Đèn ngoại thất|Đèn hậu|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 414.9, 648.3, 428.5]|p13_b02|0.98
+VF 7|Plus AWD|Đèn ngoại thất|Đèn hậu|LED||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[84.2, 414.9, 648.3, 428.5]|p13_b02|0.98
+VF 7|Eco|Ngoại thất khác|Gương chiếu hậu chỉnh điện, gập điện, tích hợp đèn báo rẽ, sấy mặt gương, tự động chỉnh khi lùi, nhớ vị trí|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 58.9, 1217.4, 101.2]|p13_b02|0.98
+VF 7|Plus|Ngoại thất khác|Gương chiếu hậu chỉnh điện, gập điện, tích hợp đèn báo rẽ, sấy mặt gương, tự động chỉnh khi lùi, nhớ vị trí|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 58.9, 1217.4, 101.2]|p13_b02|0.98
+VF 7|Plus AWD|Ngoại thất khác|Gương chiếu hậu chỉnh điện, gập điện, tích hợp đèn báo rẽ, sấy mặt gương, tự động chỉnh khi lùi, nhớ vị trí|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 58.9, 1217.4, 101.2]|p13_b02|0.98
+VF 7|Eco|Ngoại thất khác|Gương chiếu hậu chống chói tự động|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 101.2, 1217.4, 114.9]|p13_b02|0.98
+VF 7|Plus|Ngoại thất khác|Gương chiếu hậu chống chói tự động|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 101.2, 1217.4, 114.9]|p13_b02|0.98
+VF 7|Plus AWD|Ngoại thất khác|Gương chiếu hậu chống chói tự động|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 101.2, 1217.4, 114.9]|p13_b02|0.98
+VF 7|Eco|Ngoại thất khác|Gạt mưa trước tự động|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 114.9, 1217.4, 128.6]|p13_b02|0.98
+VF 7|Plus|Ngoại thất khác|Gạt mưa trước tự động|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 114.9, 1217.4, 128.6]|p13_b02|0.98
+VF 7|Plus AWD|Ngoại thất khác|Gạt mưa trước tự động|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 114.9, 1217.4, 128.6]|p13_b02|0.98
+VF 7|Eco|Ngoại thất khác|Chìa khóa thông minh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 128.6, 1217.4, 142.3]|p13_b02|0.98
+VF 7|Plus|Ngoại thất khác|Chìa khóa thông minh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 128.6, 1217.4, 142.3]|p13_b02|0.98
+VF 7|Plus AWD|Ngoại thất khác|Chìa khóa thông minh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 128.6, 1217.4, 142.3]|p13_b02|0.98
+VF 7|Eco|Ngoại thất khác|Cốp sau|Chỉnh cơ||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 142.3, 1217.4, 155.9]|p13_b02|0.98
+VF 7|Plus|Ngoại thất khác|Cốp sau|Chỉnh điện||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 142.3, 1217.4, 155.9]|p13_b02|0.98
+VF 7|Plus AWD|Ngoại thất khác|Cốp sau|Chỉnh điện||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 142.3, 1217.4, 155.9]|p13_b02|0.98
+VF 7|Eco|Ngoại thất khác|Tay nắm cửa|Dạng ẩn||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 155.9, 1217.4, 169.6]|p13_b02|0.98
+VF 7|Plus|Ngoại thất khác|Tay nắm cửa|Dạng ẩn||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 155.9, 1217.4, 169.6]|p13_b02|0.98
+VF 7|Plus AWD|Ngoại thất khác|Tay nắm cửa|Dạng ẩn||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 155.9, 1217.4, 169.6]|p13_b02|0.98
+VF 7|Eco|Điều hòa không khí|Hệ thống điều hòa|Tự động, 2 vùng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 205.9, 1217.4, 219.6]|p13_b02|0.98
+VF 7|Plus|Điều hòa không khí|Hệ thống điều hòa|Tự động, 2 vùng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 205.9, 1217.4, 219.6]|p13_b02|0.98
+VF 7|Plus AWD|Điều hòa không khí|Hệ thống điều hòa|Tự động, 2 vùng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 205.9, 1217.4, 219.6]|p13_b02|0.98
+VF 7|Eco|Điều hòa không khí|Hệ thống lọc bụi mịn Combi 1.0 và ion hóa không khí|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 219.6, 1217.4, 244.0]|p13_b02|0.98
+VF 7|Plus|Điều hòa không khí|Hệ thống lọc bụi mịn Combi 1.0 và ion hóa không khí|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 219.6, 1217.4, 244.0]|p13_b02|0.98
+VF 7|Plus AWD|Điều hòa không khí|Hệ thống lọc bụi mịn Combi 1.0 và ion hóa không khí|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 219.6, 1217.4, 244.0]|p13_b02|0.98
+VF 7|Eco|Điều hòa không khí|Cửa gió điều hòa hàng ghế sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 244.0, 1217.4, 257.7]|p13_b02|0.98
+VF 7|Plus|Điều hòa không khí|Cửa gió điều hòa hàng ghế sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 244.0, 1217.4, 257.7]|p13_b02|0.98
+VF 7|Plus AWD|Điều hòa không khí|Cửa gió điều hòa hàng ghế sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 244.0, 1217.4, 257.7]|p13_b02|0.98
+VF 7|Eco|Màn hình và kết nối|Màn hình hiển thị thông tin trên kính lái (HUD)|OPT||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 271.4, 1217.4, 285.1]|p13_b02|0.98
+VF 7|Plus|Màn hình và kết nối|Màn hình hiển thị thông tin trên kính lái (HUD)|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 271.4, 1217.4, 285.1]|p13_b02|0.98
+VF 7|Plus AWD|Màn hình và kết nối|Màn hình hiển thị thông tin trên kính lái (HUD)|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 271.4, 1217.4, 285.1]|p13_b02|0.98
+VF 7|Eco|Màn hình và kết nối|display_inch|12.9|inch|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 285.1, 1217.4, 298.8]|p13_b02|0.98
+VF 7|Plus|Màn hình và kết nối|display_inch|12.9|inch|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 285.1, 1217.4, 298.8]|p13_b02|0.98
+VF 7|Plus AWD|Màn hình và kết nối|display_inch|12.9|inch|vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 285.1, 1217.4, 298.8]|p13_b02|0.98
+VF 7|Eco|Màn hình và kết nối|Kết nối với Android Auto và Apple CarPlay|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 298.8, 1217.4, 312.5]|p13_b02|0.98
+VF 7|Plus|Màn hình và kết nối|Kết nối với Android Auto và Apple CarPlay|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 298.8, 1217.4, 312.5]|p13_b02|0.98
+VF 7|Plus AWD|Màn hình và kết nối|Kết nối với Android Auto và Apple CarPlay|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 298.8, 1217.4, 312.5]|p13_b02|0.98
+VF 7|Eco|Màn hình và kết nối|Hệ thống loa|6||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 312.5, 1217.4, 326.2]|p13_b02|0.98
+VF 7|Plus|Màn hình và kết nối|Hệ thống loa|8||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 312.5, 1217.4, 326.2]|p13_b02|0.98
+VF 7|Plus AWD|Màn hình và kết nối|Hệ thống loa|8||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 312.5, 1217.4, 326.2]|p13_b02|0.98
+VF 7|Eco|Màn hình và kết nối|Sạc không dây|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 326.2, 1217.4, 339.9]|p13_b02|0.98
+VF 7|Plus|Màn hình và kết nối|Sạc không dây|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 326.2, 1217.4, 339.9]|p13_b02|0.98
+VF 7|Plus AWD|Màn hình và kết nối|Sạc không dây|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 326.2, 1217.4, 339.9]|p13_b02|0.98
+VF 7|Eco|Tiện nghi|Ghế lái|Chỉnh điện 8 hướng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 353.6, 1217.4, 367.2]|p13_b02|0.98
+VF 7|Plus|Tiện nghi|Ghế lái|Chỉnh điện 8 hướng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 353.6, 1217.4, 367.2]|p13_b02|0.98
+VF 7|Plus AWD|Tiện nghi|Ghế lái|Chỉnh điện 8 hướng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 353.6, 1217.4, 367.2]|p13_b02|0.98
+VF 7|Eco|Tiện nghi|Chất liệu bọc ghế|Da nhân tạo||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 367.2, 1217.4, 380.9]|p13_b02|0.98
+VF 7|Plus|Tiện nghi|Chất liệu bọc ghế|Da nhân tạo cao cấp||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 367.2, 1217.4, 380.9]|p13_b02|0.98
+VF 7|Plus AWD|Tiện nghi|Chất liệu bọc ghế|Da nhân tạo cao cấp||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 367.2, 1217.4, 380.9]|p13_b02|0.98
+VF 7|Eco|Tiện nghi|Kính cửa sổ chỉnh điện, lên/xuống một chạm|Có, lên/xuống một chạm tất cả các vị trí||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 380.9, 1217.4, 416.0]|p13_b02|0.98
+VF 7|Plus|Tiện nghi|Kính cửa sổ chỉnh điện, lên/xuống một chạm|Có, lên/xuống một chạm tất cả các vị trí||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 380.9, 1217.4, 416.0]|p13_b02|0.98
+VF 7|Plus AWD|Tiện nghi|Kính cửa sổ chỉnh điện, lên/xuống một chạm|Có, lên/xuống một chạm tất cả các vị trí||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 380.9, 1217.4, 416.0]|p13_b02|0.98
+VF 7|Eco|Tiện nghi|Phanh đỗ điện tử và chế độ tự động giữ phanh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 416.0, 1217.4, 429.7]|p13_b02|0.98
+VF 7|Plus|Tiện nghi|Phanh đỗ điện tử và chế độ tự động giữ phanh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 416.0, 1217.4, 429.7]|p13_b02|0.98
+VF 7|Plus AWD|Tiện nghi|Phanh đỗ điện tử và chế độ tự động giữ phanh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 416.0, 1217.4, 429.7]|p13_b02|0.98
+VF 7|Eco|Tiện nghi|Gương chiếu hậu trong xe|Chế độ ngày/đêm||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 429.7, 1217.4, 443.4]|p13_b02|0.98
+VF 7|Plus|Tiện nghi|Gương chiếu hậu trong xe|Chống chói tự động||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 429.7, 1217.4, 443.4]|p13_b02|0.98
+VF 7|Plus AWD|Tiện nghi|Gương chiếu hậu trong xe|Chống chói tự động||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 429.7, 1217.4, 443.4]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|airbags|6||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 457.1, 1217.4, 470.8]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|airbags|8||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 457.1, 1217.4, 470.8]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|airbags|8||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 457.1, 1217.4, 470.8]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Hệ thống chống bó cứng phanh ABS|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 470.8, 1217.4, 484.5]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Hệ thống chống bó cứng phanh ABS|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 470.8, 1217.4, 484.5]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Hệ thống chống bó cứng phanh ABS|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 470.8, 1217.4, 484.5]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Chức năng phân phối lực phanh điện tử EBD|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 484.5, 1217.4, 498.2]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Chức năng phân phối lực phanh điện tử EBD|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 484.5, 1217.4, 498.2]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Chức năng phân phối lực phanh điện tử EBD|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 484.5, 1217.4, 498.2]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Hỗ trợ phanh khẩn cấp BA|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 498.2, 1217.4, 511.9]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Hỗ trợ phanh khẩn cấp BA|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 498.2, 1217.4, 511.9]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Hỗ trợ phanh khẩn cấp BA|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 498.2, 1217.4, 511.9]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Hệ thống cân bằng điện tử ESC|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 511.9, 1217.4, 525.6]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Hệ thống cân bằng điện tử ESC|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 511.9, 1217.4, 525.6]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Hệ thống cân bằng điện tử ESC|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 511.9, 1217.4, 525.6]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Chức năng kiểm soát lực kéo TCS|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 525.6, 1217.4, 539.3]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Chức năng kiểm soát lực kéo TCS|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 525.6, 1217.4, 539.3]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Chức năng kiểm soát lực kéo TCS|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[649.9, 525.6, 1217.4, 539.3]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Hỗ trợ khởi hành ngang dốc HSA|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 58.9, 1658.5, 73.2]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Hỗ trợ khởi hành ngang dốc HSA|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 58.9, 1658.5, 73.2]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Hỗ trợ khởi hành ngang dốc HSA|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 58.9, 1658.5, 73.2]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Chức năng chống lật ROM|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 73.2, 1658.5, 87.5]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Chức năng chống lật ROM|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 73.2, 1658.5, 87.5]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Chức năng chống lật ROM|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 73.2, 1658.5, 87.5]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Giám sát áp suất lốp|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 87.5, 1658.5, 101.8]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Giám sát áp suất lốp|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 87.5, 1658.5, 101.8]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Giám sát áp suất lốp|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 87.5, 1658.5, 101.8]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Cảnh báo điểm mù|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 101.8, 1658.5, 116.1]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Cảnh báo điểm mù|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 101.8, 1658.5, 116.1]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Cảnh báo điểm mù|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 101.8, 1658.5, 116.1]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Cảnh báo phương tiện cắt ngang phía sau|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 116.1, 1658.5, 130.4]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Cảnh báo phương tiện cắt ngang phía sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 116.1, 1658.5, 130.4]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Cảnh báo phương tiện cắt ngang phía sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 116.1, 1658.5, 130.4]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Cảnh báo mở cửa|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 130.4, 1658.5, 144.6]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Cảnh báo mở cửa|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 130.4, 1658.5, 144.6]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Cảnh báo mở cửa|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 130.4, 1658.5, 144.6]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Hỗ trợ tự động chuyển làn|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 144.6, 1658.5, 158.9]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Hỗ trợ tự động chuyển làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 144.6, 1658.5, 158.9]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Hỗ trợ tự động chuyển làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 144.6, 1658.5, 158.9]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Kiểm soát đi giữa làn|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 158.9, 1658.5, 173.2]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Kiểm soát đi giữa làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 158.9, 1658.5, 173.2]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Kiểm soát đi giữa làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 158.9, 1658.5, 173.2]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Cảnh báo chệch làn|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 173.2, 1658.5, 187.5]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Cảnh báo chệch làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 173.2, 1658.5, 187.5]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Cảnh báo chệch làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 173.2, 1658.5, 187.5]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Hỗ trợ giữ làn|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 187.5, 1658.5, 201.8]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Hỗ trợ giữ làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 187.5, 1658.5, 201.8]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Hỗ trợ giữ làn|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 187.5, 1658.5, 201.8]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Giám sát hành trình|Tiêu chuẩn||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 201.8, 1658.5, 216.1]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Giám sát hành trình|Thích ứng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 201.8, 1658.5, 216.1]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Giám sát hành trình|Thích ứng||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 201.8, 1658.5, 216.1]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Nhận biết biển báo giao thông|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 216.1, 1658.5, 230.3]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Nhận biết biển báo giao thông|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 216.1, 1658.5, 230.3]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Nhận biết biển báo giao thông|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 216.1, 1658.5, 230.3]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Điều chỉnh tốc độ thông minh|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 230.3, 1658.5, 244.6]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Điều chỉnh tốc độ thông minh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 230.3, 1658.5, 244.6]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Điều chỉnh tốc độ thông minh|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 230.3, 1658.5, 244.6]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Phanh tự động khẩn cấp trước & sau|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 244.6, 1658.5, 258.9]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Phanh tự động khẩn cấp trước & sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 244.6, 1658.5, 258.9]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Phanh tự động khẩn cấp trước & sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 244.6, 1658.5, 258.9]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Hỗ trợ đỗ phía sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 258.9, 1658.5, 273.2]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Hỗ trợ đỗ phía sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 258.9, 1658.5, 273.2]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Hỗ trợ đỗ phía sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 258.9, 1658.5, 273.2]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Camera lùi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 273.2, 1658.5, 287.5]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Camera lùi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 273.2, 1658.5, 287.5]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Camera lùi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 273.2, 1658.5, 287.5]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Camera 360|Không||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 287.5, 1658.5, 301.8]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Camera 360|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 287.5, 1658.5, 301.8]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Camera 360|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 287.5, 1658.5, 301.8]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Cảnh báo chống trộm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 301.8, 1658.5, 316.1]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Cảnh báo chống trộm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 301.8, 1658.5, 316.1]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Cảnh báo chống trộm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 301.8, 1658.5, 316.1]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Tính năng khóa động cơ khi có trộm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 316.1, 1658.5, 330.3]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Tính năng khóa động cơ khi có trộm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 316.1, 1658.5, 330.3]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Tính năng khóa động cơ khi có trộm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 316.1, 1658.5, 330.3]|p13_b02|0.98
+VF 7|Eco|An toàn & An ninh|Móc cố định ghế trẻ em ISOFIX hàng ghế sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 330.3, 1658.5, 344.6]|p13_b02|0.98
+VF 7|Plus|An toàn & An ninh|Móc cố định ghế trẻ em ISOFIX hàng ghế sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 330.3, 1658.5, 344.6]|p13_b02|0.98
+VF 7|Plus AWD|An toàn & An ninh|Móc cố định ghế trẻ em ISOFIX hàng ghế sau|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 330.3, 1658.5, 344.6]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Lựa chọn chế độ vận hành đặc biệt|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 386.3, 1658.5, 400.6]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Lựa chọn chế độ vận hành đặc biệt|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 386.3, 1658.5, 400.6]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Lựa chọn chế độ vận hành đặc biệt|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 386.3, 1658.5, 400.6]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 400.6, 1658.5, 414.9]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 400.6, 1658.5, 414.9]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 400.6, 1658.5, 414.9]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Giải trí trực tuyến|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 414.9, 1658.5, 429.1]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Giải trí trực tuyến|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 414.9, 1658.5, 429.1]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Giải trí trực tuyến|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 414.9, 1658.5, 429.1]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Điều hướng & dẫn đường trên màn hình trung tâm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 429.1, 1658.5, 443.4]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Điều hướng & dẫn đường trên màn hình trung tâm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 429.1, 1658.5, 443.4]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Điều hướng & dẫn đường trên màn hình trung tâm|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 429.1, 1658.5, 443.4]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Trò chơi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 443.4, 1658.5, 457.7]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Trò chơi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 443.4, 1658.5, 457.7]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Trò chơi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 443.4, 1658.5, 457.7]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Trình duyệt web|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 457.7, 1658.5, 472.0]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Trình duyệt web|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 457.7, 1658.5, 472.0]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Trình duyệt web|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 457.7, 1658.5, 472.0]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Tự chẩn đoán lỗi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 472.0, 1658.5, 486.3]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Tự chẩn đoán lỗi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 472.0, 1658.5, 486.3]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Tự chẩn đoán lỗi|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 472.0, 1658.5, 486.3]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Cập nhật phần mềm từ xa|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 486.3, 1658.5, 500.6]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Cập nhật phần mềm từ xa|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 486.3, 1658.5, 500.6]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Cập nhật phần mềm từ xa|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 486.3, 1658.5, 500.6]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Điều khiển xe và cài đặt bằng giọng nói|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 500.6, 1658.5, 514.9]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Điều khiển xe và cài đặt bằng giọng nói|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 500.6, 1658.5, 514.9]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Điều khiển xe và cài đặt bằng giọng nói|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 500.6, 1658.5, 514.9]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Hỏi đáp trợ lý ảo|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 514.9, 1658.5, 529.1]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Hỏi đáp trợ lý ảo|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 514.9, 1658.5, 529.1]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Hỏi đáp trợ lý ảo|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 514.9, 1658.5, 529.1]|p13_b02|0.98
+VF 7|Eco|Tính năng điều khiển thông minh|Ứng dụng điện thoại|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 529.1, 1658.5, 543.4]|p13_b02|0.98
+VF 7|Plus|Tính năng điều khiển thông minh|Ứng dụng điện thoại|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 529.1, 1658.5, 543.4]|p13_b02|0.98
+VF 7|Plus AWD|Tính năng điều khiển thông minh|Ứng dụng điện thoại|Có||vf7_brochure|https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf|13|[1220.7, 529.1, 1658.5, 543.4]|p13_b02|0.98

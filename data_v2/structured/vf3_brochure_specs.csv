@@ -1,0 +1,34 @@
+model_code|version_name|spec_category|spec_key|spec_value|spec_unit|source_document|source_url|source_page|source_bbox|source_block_id|confidence
+VF 3|Eco|Giá bán|Giá bán chính thức|302|triệu|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|2|[560.1, 178.6, 700.1, 297.6]|p02_b02|0.98
+VF 3|Plus|Giá bán|Giá bán chính thức|315|triệu|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|2|[746.8, 178.6, 886.8, 297.6]|p02_b02|0.98
+VF 3||Kích thước|Chiều dài tổng thể|3190|mm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[46.7, 178.6, 466.7, 208.3]|p04_b02|0.98
+VF 3||Kích thước|Chiều rộng tổng thể|1679|mm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[46.7, 238.1, 466.7, 267.9]|p04_b02|0.98
+VF 3||Kích thước|Chiều cao tổng thể|1652|mm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[46.7, 297.6, 466.7, 327.4]|p04_b02|0.98
+VF 3||Kích thước|wheelbase_mm|2075|mm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[46.7, 357.2, 466.7, 386.9]|p04_b02|0.98
+VF 3||Động cơ & Vận hành|Động cơ|01 Motor||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[513.4, 119.1, 886.8, 148.8]|p04_b02|0.98
+VF 3||Động cơ & Vận hành|power_kw|30|kW|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[513.4, 178.6, 886.8, 208.3]|p04_b02|0.98
+VF 3||Động cơ & Vận hành|torque_nm|110|Nm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[513.4, 238.1, 886.8, 267.9]|p04_b02|0.98
+VF 3||Pin & Sạc|fast_charge_min|36|phút|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[513.4, 297.6, 886.8, 327.4]|p04_b02|0.98
+VF 3||Động cơ & Vận hành|drivetrain|RWD/Cầu sau||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|4|[513.4, 357.2, 886.8, 386.9]|p04_b02|0.98
+VF 3||Tải trọng|Tải trọng|300|kg|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|5|[560.1, 119.1, 746.8, 178.6]|p05_b02|0.98
+VF 3||Nóc xe|Tải hành lý|50|kg|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|5|[186.7, 89.3, 373.4, 148.8]|p05_b02|0.98
+VF 3||Kích thước|length_mm|10|mm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|5|[560.1, 238.1, 746.8, 297.6]|p05_b02|0.4
+VF 3||Bán kính quay đầu|Linh hoạt|4.5|m|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|5|[373.4, 357.2, 560.1, 416.7]|p05_b02|0.98
+VF 3||Quãng đường|Tối đa|215|km|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|5|[186.7, 476.2, 373.4, 535.7]|p05_b02|0.98
+VF 3||Khoảng sáng gầm xe|Cao|175|mm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|5|[560.1, 416.7, 746.8, 476.2]|p05_b02|0.98
+VF 3||Sạc nhanh|Thời gian|36|phút|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|5|[46.7, 535.7, 233.4, 595.3]|p05_b02|0.98
+VF 3||Bảng màu nâng cao|Đỏ|Solar Ruby||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|7|[46.7, 119.1, 280.0, 178.6]|p07_b02|0.98
+VF 3||Bảng màu nâng cao|Hồng|Rose Pink + Nóc Trắng||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|7|[606.7, 119.1, 840.1, 178.6]|p07_b02|0.98
+VF 3||Bảng màu nâng cao|Vàng|Yellow Summer + Nóc Trắng||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|7|[886.8, 119.1, 933.4, 178.6]|p07_b02|0.98
+VF 3||Bảng màu nâng cao|Xanh Dương|Sky Blue + Nóc Trắng||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|7|[886.8, 238.1, 933.4, 297.6]|p07_b02|0.98
+VF 3||Bảng màu cơ bản|Trắng|Infinity Blanc||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|7|[46.7, 238.1, 280.0, 297.6]|p07_b02|0.98
+VF 3||Bảng màu cơ bản|Xám|Zenith Grey||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|7|[46.7, 357.2, 280.0, 416.7]|p07_b02|0.98
+VF 3||Bảng màu cơ bản|Xanh Lá Nhạt|Urban Mint||vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|7|[606.7, 357.2, 840.1, 416.7]|p07_b02|0.98
+VF 3||Bảo hành xe mới|Thời gian bảo hành tiêu chuẩn|7|năm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[93.3, 119.1, 373.4, 148.8]|p08_b02|0.98
+VF 3||Bảo hành xe mới|range_km|160000|km|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[373.4, 119.1, 653.4, 148.8]|p08_b02|0.4
+VF 3||Bảo hành xe mới|Thời gian bảo hành dịch vụ thương mại|3|năm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[93.3, 178.6, 373.4, 208.3]|p08_b02|0.98
+VF 3||Bảo hành xe mới|range_km|100000|km|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[373.4, 178.6, 653.4, 208.3]|p08_b02|0.4
+VF 3||Bảo hành pin cao áp|Thời gian bảo hành tiêu chuẩn|8|năm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[93.3, 238.1, 373.4, 267.9]|p08_b02|0.98
+VF 3||Bảo hành pin cao áp|range_km|160000|km|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[373.4, 238.1, 653.4, 267.9]|p08_b02|0.4
+VF 3||Bảo hành pin cao áp|Thời gian bảo hành dịch vụ thương mại|3|năm|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[93.3, 297.6, 373.4, 327.4]|p08_b02|0.98
+VF 3||Bảo hành pin cao áp|range_km|100000|km|vf3_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf|8|[373.4, 297.6, 653.4, 327.4]|p08_b02|0.4

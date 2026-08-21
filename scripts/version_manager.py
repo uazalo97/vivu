@@ -25,6 +25,7 @@ Usage:
 
 import argparse
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 # Windows console cp1252 → UTF-8 (emoji / tiếng Việt trong print)
@@ -35,16 +36,33 @@ if hasattr(sys.stdout, "reconfigure"):
 import psycopg2
 from qdrant_client import QdrantClient, models
 
-# Chạy trực tiếp (`python scripts/version_manager.py`) → đưa repo root vào sys.path
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+REPO_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.config import CLEAN_DIR, PG_DSN, QDRANT_API_KEY, QDRANT_URL  # noqa: E402
-from scripts.ingest import postgres_ingest  # noqa: E402
 
 SPARSE_ALIAS = "sparse"
 DENSE_ALIASES = ["vivu_product_info", "vivu_policy", "vivu_maintenance", "vivu_faq"]
 
 ALL_ALIASES = DENSE_ALIASES + [SPARSE_ALIAS]
+
+
+def set_current(conn, version: str, rollback: bool = False) -> None:
+    """Flip active version → version (cho promote/rollback). Đúng 1 row is_current=true."""
+    cur = conn.cursor()
+    now = datetime.now(timezone.utc).isoformat()
+    cur.execute("UPDATE ingest_version SET is_current = false")
+    cur.execute(
+        """UPDATE ingest_version
+           SET is_current = true,
+               activated_at = COALESCE(activated_at, %s),
+               rolled_back_at = CASE WHEN %s THEN %s ELSE rolled_back_at END
+           WHERE version = %s""",
+        (now, rollback, now, version),
+    )
+    if cur.rowcount == 0:
+        raise RuntimeError(f"version {version} chưa ingest (không có row trong ingest_version)")
+    conn.commit()
 
 
 # ── helpers ──────────────────────────────────────────────────────────────────
@@ -59,7 +77,12 @@ def _conn():
 
 
 def dense_stems_for_version(version: str) -> list[str]:
-    """Tên collection dense của 1 version (từ vector/*.jsonl stems)."""
+    """Tên collection dense của 1 version (từ vector/*.jsonl stems hoặc data_v2/retrieval)."""
+    vdir2 = REPO_ROOT / "data_v2" / "retrieval" / "policies"
+    if vdir2.exists():
+        stems = sorted(p.stem for p in vdir2.glob("*.jsonl"))
+        if stems:
+            return stems
     vdir = CLEAN_DIR / version / "vector"
     if not vdir.exists():
         return list(DENSE_ALIASES)
@@ -178,7 +201,7 @@ def _activate(version: str, rollback: bool) -> int:
         # 1) alias swap (atomic). Nếu fail → PG không đụng (active cũ giữ)
         cols = swap_aliases(client, version)
         # 2) flip is_current
-        postgres_ingest.set_current(conn, version, rollback=rollback)
+        set_current(conn, version, rollback=rollback)
     except Exception as e:  # noqa: BLE001
         print(f"[{'rollback' if rollback else 'promote'}] FAIL: {e}", file=sys.stderr)
         return 1
@@ -366,35 +389,14 @@ def cmd_migrate_v1(args=None) -> int:
     except Exception as e:  # noqa: BLE001
         print(f"  WARN backfill cache fail (không chặn): {e}", file=sys.stderr)
 
-    # 3) PG: rebuild schema versioned từ v1 CSV, tag version='v1', is_current=v1
+    # 3) PG: tag version='v1', is_current=v1
     conn = _conn()
     try:
-        cur = conn.cursor()
-        # drop bảng unversioned cũ (nếu schema cũ) rồi tạo lại versioned
-        cur.execute("DROP VIEW IF EXISTS edition_active; DROP VIEW IF EXISTS price_list_active;")
-        cur.execute("DROP TABLE IF EXISTS price_list; DROP TABLE IF EXISTS edition;")
-        cur.execute("DROP TABLE IF EXISTS maintenance_schedule;")  # schema cũ, đã bỏ per spec
-        # ingest_version: thêm cột mới (is_current/activated_at/rolled_back_at) nếu thiếu,
-        # giữ rows audit cũ. Không ALTER edition/price_list (vừa drop ở trên).
-        cur.execute(postgres_ingest._MIGRATE_INGEST_VERSION_DDL)
-        cur.execute(postgres_ingest.DDL)
-        conn.commit()
-        # ingest v1 CSV với version tag
-        version_dir = CLEAN_DIR / version
-        pg_dir = version_dir / "postgres"
-        if pg_dir.exists():
-            edition_rows = postgres_ingest.load_csv(pg_dir / "edition.csv")
-            price_rows = postgres_ingest.load_csv(pg_dir / "price_list.csv")
-            postgres_ingest.upsert_edition(conn, version, edition_rows)
-            postgres_ingest.upsert_price_list(conn, version, price_rows)
-            postgres_ingest.record_manifest(conn, version, version_dir)
-        postgres_ingest.set_current(conn, version, rollback=False)
+        set_current(conn, version, rollback=False)
     finally:
         conn.close()
 
     print("[migrate-v1] XONG. active=v1, alias `<col>` → `<col>__v1`.")
-    print("  Consumer query VIEW edition_active / price_list_active (= v1).")
-    print("  Giờ ingest v2: run_pipeline --version v2 --recreate --commit ${...}")
     return 0
 
 
@@ -438,7 +440,7 @@ def cmd_recover(args=None) -> int:
 
         # 3) Sync PG → Qdrant
         print(f"[recover] syncing PG is_current → {qdrant_version}")
-        postgres_ingest.set_current(conn, qdrant_version, rollback=False)
+        set_current(conn, qdrant_version, rollback=False)
         print(f"[recover] ✓ recovered: PG is_current = {qdrant_version}")
         return 0
     except Exception as e:

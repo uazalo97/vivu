@@ -101,7 +101,17 @@ def _get_current_version_from_db() -> str | None:
 
 def _find_latest_sparse_index() -> Path | None:
     """Ưu tiên DB is_current, fallback scan file."""
-    global _sparse_index
+    # 0. Ưu tiên data_v2/retrieval/sparse_index.json từ Unified Harness
+    data_v2_path = Path(__file__).resolve().parents[2] / "data_v2" / "retrieval" / "sparse_index.json"
+    if data_v2_path.exists():
+        try:
+            raw = data_v2_path.read_text(encoding="utf-8")
+            idx = json.loads(raw)
+            _sparse_index = idx
+            return data_v2_path
+        except Exception as e:
+            logger.warning("Failed to load data_v2 sparse_index %s: %s", data_v2_path, e)
+
     if not DATA_CLEAN_DIR.exists():
         return None
     # 1. Thử lấy version active từ DB — đây là source of truth (PG v2 nhưng file chỉ v1 là lệch pipeline)
@@ -144,7 +154,7 @@ def _load_sparse_index() -> dict:
     global _sparse_index
     if _sparse_index is None:
         path = _find_latest_sparse_index()
-        if path is None:
+        if path is None or not isinstance(_sparse_index, dict):
             _sparse_index = {}
         else:
             src = (
@@ -152,7 +162,8 @@ def _load_sparse_index() -> dict:
                 if _pg_current_version and path.name == "sparse_index.json" and path.parent.name == _pg_current_version
                 else "file scan"
             )
-            logger.info("Loaded sparse index from %s (version=%s, src=%s)", path, _sparse_index.get("version"), src)
+            ver = _sparse_index.get("version", "v3")
+            logger.info("Loaded sparse index from %s (version=%s, src=%s)", path, ver, src)
     return _sparse_index or {}
 
 
@@ -289,7 +300,7 @@ class QdrantREST:
                 timeout=30,
             )
             r.raise_for_status()
-            return r.json().get("result", [])
+            return r.json().get("result") or []
         except Exception as e:
             if model_id and "Index required" in str(e):
                 body.pop("filter", None)
@@ -299,7 +310,7 @@ class QdrantREST:
                     timeout=30,
                 )
                 r.raise_for_status()
-                return r.json().get("result", [])
+                return r.json().get("result") or []
             raise
 
     def search_sparse(self, collection: str, sparse: dict, model_id: str = None, limit: int = 10) -> list[dict]:
@@ -324,7 +335,7 @@ class QdrantREST:
                 timeout=30,
             )
             r.raise_for_status()
-            return r.json().get("result", [])
+            return r.json().get("result") or []
         except Exception:
             return []
 
@@ -416,13 +427,17 @@ def _rrf_fusion(result_lists: list[list], k: int = 60) -> list[tuple]:
     scores = {}
     hit_data = {}
     for results in result_lists:
+        if not results:
+            continue
         for rank, hit in enumerate(results):
+            if not hit or not isinstance(hit, dict):
+                continue
             pid = hit.get("id", "")
             scores[pid] = scores.get(pid, 0) + _rrf_score(rank, k)
             if pid not in hit_data:
                 hit_data[pid] = hit
     sorted_ids = sorted(scores.keys(), key=lambda pid: scores[pid], reverse=True)
-    return [(hit_data[pid], scores[pid]) for pid in sorted_ids]
+    return [(hit_data[pid], scores[pid]) for pid in sorted_ids if pid in hit_data]
 
 
 # ── Sparse text resolution ──────────────────────────────────────────────────
@@ -520,7 +535,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
 
     dense_tasks = [_dense_search(col) for col in DENSE_COLLECTIONS]
     dense_results = await asyncio.gather(*dense_tasks)
-    all_dense = [hit for results in dense_results for hit in results]
+    all_dense = [hit for results in dense_results if results for hit in results if hit and isinstance(hit, dict)]
 
     # 3. Sparse search (BM25) — in parallel with nothing (dense already done)
     sparse_results = []
@@ -530,6 +545,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
                 _thread_pool, qdrant.search_sparse, SPARSE_COLLECTION, sparse_vec, model_id, limit
             )
             sparse_results = await loop.run_in_executor(_thread_pool, _resolve_sparse_texts, qdrant, sparse_results)
+            sparse_results = [hit for hit in sparse_results if hit and isinstance(hit, dict)]
         except Exception as e:
             logger.warning("sparse search failed: %s", e)
 
@@ -537,7 +553,7 @@ async def hybrid_search(query: str, model_id: str = None, top_k: int = 5) -> lis
     if sparse_results:
         fused = _rrf_fusion([all_dense, sparse_results])
     else:
-        fused = [(hit, hit.get("score", 0)) for hit in all_dense]
+        fused = [(hit, hit.get("score", 0)) for hit in all_dense if hit and isinstance(hit, dict)]
 
     # 5. Rerank
     reranker = get_reranker()

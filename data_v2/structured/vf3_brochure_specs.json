@@ -1,0 +1,629 @@
+[
+  {
+    "model_code": "VF 3",
+    "version_name": "Eco",
+    "spec_category": "Giá bán",
+    "spec_key": "Giá bán chính thức",
+    "spec_value": "302",
+    "spec_unit": "triệu",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      560.1,
+      178.6,
+      700.1,
+      297.6
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": "Plus",
+    "spec_category": "Giá bán",
+    "spec_key": "Giá bán chính thức",
+    "spec_value": "315",
+    "spec_unit": "triệu",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 2,
+    "source_bbox": [
+      746.8,
+      178.6,
+      886.8,
+      297.6
+    ],
+    "source_block_id": "p02_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "Chiều dài tổng thể",
+    "spec_value": "3190",
+    "spec_unit": "mm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      46.7,
+      178.6,
+      466.7,
+      208.3
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "Chiều rộng tổng thể",
+    "spec_value": "1679",
+    "spec_unit": "mm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      46.7,
+      238.1,
+      466.7,
+      267.9
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "Chiều cao tổng thể",
+    "spec_value": "1652",
+    "spec_unit": "mm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      46.7,
+      297.6,
+      466.7,
+      327.4
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2075",
+    "spec_unit": "mm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      46.7,
+      357.2,
+      466.7,
+      386.9
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Động cơ",
+    "spec_value": "01 Motor",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      513.4,
+      119.1,
+      886.8,
+      148.8
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "30",
+    "spec_unit": "kW",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      513.4,
+      178.6,
+      886.8,
+      208.3
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "110",
+    "spec_unit": "Nm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      513.4,
+      238.1,
+      886.8,
+      267.9
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "fast_charge_min",
+    "spec_value": "36",
+    "spec_unit": "phút",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      513.4,
+      297.6,
+      886.8,
+      327.4
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "drivetrain",
+    "spec_value": "RWD/Cầu sau",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 4,
+    "source_bbox": [
+      513.4,
+      357.2,
+      886.8,
+      386.9
+    ],
+    "source_block_id": "p04_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Tải trọng",
+    "spec_key": "Tải trọng",
+    "spec_value": "300",
+    "spec_unit": "kg",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      560.1,
+      119.1,
+      746.8,
+      178.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Nóc xe",
+    "spec_key": "Tải hành lý",
+    "spec_value": "50",
+    "spec_unit": "kg",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      186.7,
+      89.3,
+      373.4,
+      148.8
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "10",
+    "spec_unit": "mm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      560.1,
+      238.1,
+      746.8,
+      297.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bán kính quay đầu",
+    "spec_key": "Linh hoạt",
+    "spec_value": "4.5",
+    "spec_unit": "m",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      373.4,
+      357.2,
+      560.1,
+      416.7
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Quãng đường",
+    "spec_key": "Tối đa",
+    "spec_value": "215",
+    "spec_unit": "km",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      186.7,
+      476.2,
+      373.4,
+      535.7
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Khoảng sáng gầm xe",
+    "spec_key": "Cao",
+    "spec_value": "175",
+    "spec_unit": "mm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      560.1,
+      416.7,
+      746.8,
+      476.2
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Sạc nhanh",
+    "spec_key": "Thời gian",
+    "spec_value": "36",
+    "spec_unit": "phút",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      46.7,
+      535.7,
+      233.4,
+      595.3
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảng màu nâng cao",
+    "spec_key": "Đỏ",
+    "spec_value": "Solar Ruby",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      46.7,
+      119.1,
+      280.0,
+      178.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảng màu nâng cao",
+    "spec_key": "Hồng",
+    "spec_value": "Rose Pink + Nóc Trắng",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      606.7,
+      119.1,
+      840.1,
+      178.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảng màu nâng cao",
+    "spec_key": "Vàng",
+    "spec_value": "Yellow Summer + Nóc Trắng",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      886.8,
+      119.1,
+      933.4,
+      178.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảng màu nâng cao",
+    "spec_key": "Xanh Dương",
+    "spec_value": "Sky Blue + Nóc Trắng",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      886.8,
+      238.1,
+      933.4,
+      297.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảng màu cơ bản",
+    "spec_key": "Trắng",
+    "spec_value": "Infinity Blanc",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      46.7,
+      238.1,
+      280.0,
+      297.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảng màu cơ bản",
+    "spec_key": "Xám",
+    "spec_value": "Zenith Grey",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      46.7,
+      357.2,
+      280.0,
+      416.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảng màu cơ bản",
+    "spec_key": "Xanh Lá Nhạt",
+    "spec_value": "Urban Mint",
+    "spec_unit": "",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      606.7,
+      357.2,
+      840.1,
+      416.7
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành xe mới",
+    "spec_key": "Thời gian bảo hành tiêu chuẩn",
+    "spec_value": "7",
+    "spec_unit": "năm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      93.3,
+      119.1,
+      373.4,
+      148.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành xe mới",
+    "spec_key": "range_km",
+    "spec_value": "160000",
+    "spec_unit": "km",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      373.4,
+      119.1,
+      653.4,
+      148.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành xe mới",
+    "spec_key": "Thời gian bảo hành dịch vụ thương mại",
+    "spec_value": "3",
+    "spec_unit": "năm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      93.3,
+      178.6,
+      373.4,
+      208.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành xe mới",
+    "spec_key": "range_km",
+    "spec_value": "100000",
+    "spec_unit": "km",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      373.4,
+      178.6,
+      653.4,
+      208.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành pin cao áp",
+    "spec_key": "Thời gian bảo hành tiêu chuẩn",
+    "spec_value": "8",
+    "spec_unit": "năm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      93.3,
+      238.1,
+      373.4,
+      267.9
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành pin cao áp",
+    "spec_key": "range_km",
+    "spec_value": "160000",
+    "spec_unit": "km",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      373.4,
+      238.1,
+      653.4,
+      267.9
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành pin cao áp",
+    "spec_key": "Thời gian bảo hành dịch vụ thương mại",
+    "spec_value": "3",
+    "spec_unit": "năm",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      93.3,
+      297.6,
+      373.4,
+      327.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 3",
+    "version_name": null,
+    "spec_category": "Bảo hành pin cao áp",
+    "spec_key": "range_km",
+    "spec_value": "100000",
+    "spec_unit": "km",
+    "source_document": "vf3_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/29012026/VFVN_VF%203_Brochure%20280126.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      373.4,
+      297.6,
+      653.4,
+      327.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.4
+  }
+]

@@ -1,0 +1,2472 @@
+[
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "3967",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      64.0,
+      103.6,
+      348.5,
+      135.7
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1723",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      64.0,
+      103.6,
+      348.5,
+      135.7
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1579",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      64.0,
+      103.6,
+      348.5,
+      135.7
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2514",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      64.0,
+      195.8,
+      358.6,
+      228.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "seats",
+    "spec_value": "5",
+    "spec_unit": "chỗ",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      64.0,
+      195.8,
+      358.6,
+      228.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Tính năng hỗ trợ lái",
+    "spec_value": "6",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      64.0,
+      284.5,
+      355.3,
+      314.9
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Tính năng thông minh",
+    "spec_value": "21",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      64.0,
+      284.5,
+      355.3,
+      314.9
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Hỗ trợ phát hiện vật cản hay phương tiện di chuyển từ phía sau hoặc hai bên, đặc biệt là các điểm mù.",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      909.2,
+      100.6,
+      1246.0,
+      297.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Hỗ trợ và cảnh báo khi có chướng ngại vật, xe hoặc người từ hai bên hoặc phía sau, giúp tránh va chạm khi mở cửa xe.",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      1276.3,
+      100.6,
+      1609.7,
+      297.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Cảm biến giúp phát hiện người hoặc xe từ phía sau, đưa ra cảnh báo để người lái chú ý quan sát và xử lý tình huống.",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      909.2,
+      339.3,
+      1246.0,
+      532.2
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hỗ trợ đỗ phía sau",
+    "spec_value": "Cụm cảm biến phía sau phát hiện chướng ngại vật và gửi cảnh báo, hỗ trợ bạn đỗ xe an toàn.",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      1276.3,
+      339.3,
+      1609.7,
+      532.2
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ra lệnh bằng giọng nói",
+    "spec_value": "Trợ lý ảo ViVi giúp điều khiển dễ dàng các tính năng trên xe như điều hòa, giải trí, bản đồ và nhiều hơn thế, chỉ bằng giọng nói.",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      909.2,
+      117.9,
+      1335.2,
+      192.9
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hỏi đáp thông tin & hỗ trợ nâng cao",
+    "spec_value": "Trợ lý ảo ViVi có khả năng hỏi đáp những câu hỏi cơ bản như tin tức, thời tiết, truyện cười – mang đến trải nghiệm lái xe sinh động và trọn vẹn hơn.",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      909.2,
+      219.7,
+      1338.6,
+      344.7
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Độ chính xác khi nhận diện ngôn ngữ Tiếng Việt",
+    "spec_value": "98",
+    "spec_unit": "%",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      62.3,
+      437.5,
+      431.0,
+      519.7
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Nghe hiểu được ngôn ngữ tiếng Việt đa vùng miền",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      250.9,
+      437.5,
+      463.0,
+      520.3
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": "VF 5",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đầu xe",
+    "spec_value": "Thiết kế chữ V đặc trưng được mạ crom tinh tế, không có lưới tản nhiệt nhờ công nghệ điện hóa",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      33.7,
+      452.4,
+      210.5,
+      565.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": "VF 5",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Thân xe",
+    "spec_value": "Phối màu sắc độc đáo hai màu của thân và nóc xe; các chi tiết ngoại thất đồng màu của ốp ngoài gương chiếu hậu với nóc xe, tạo sự hài hòa với thân xe, tạo nên phong cách riêng của VF 5",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      210.5,
+      452.4,
+      454.6,
+      565.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": "VF 5",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Mâm xe",
+    "spec_value": "La-zăng hợp kim 17",
+    "spec_unit": "inch",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      454.6,
+      452.4,
+      926.1,
+      565.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính chắn gió chống tia UV",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      1077.6,
+      452.4,
+      1262.8,
+      565.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gương chiếu hậu chỉnh điện",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      1431.2,
+      452.4,
+      1675.4,
+      565.5
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": "VF 5",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đuôi xe",
+    "spec_value": "Thiết kế vuông vức, tối giản; điểm nhấn là dải chữ V được làm từ chất liệu phản quang. Được trang bị đầy đủ hệ thống cảm biến đỗ xe và camera lùi",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      1448.1,
+      238.1,
+      1641.7,
+      381.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Bảng đồng hồ kỹ thuật số sau vô lăng",
+    "spec_value": "7",
+    "spec_unit": "inch",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      52.2,
+      407.2,
+      397.4,
+      482.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Màn hình trung tâm cảm ứng",
+    "spec_value": "8",
+    "spec_unit": "inch",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      52.2,
+      407.2,
+      397.4,
+      482.2
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "4",
+    "spec_unit": "loa",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      50.5,
+      503.0,
+      207.1,
+      529.8
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cổng USB",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      1363.9,
+      74.4,
+      1645.1,
+      214.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Vị trí cổng USB",
+    "spec_value": "2 hàng ghế",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      1363.9,
+      74.4,
+      1645.1,
+      214.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Điều hoà",
+    "spec_value": "Chỉnh cơ 1 vùng, màng lọc bụi PM2.5",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      1363.9,
+      236.9,
+      1645.1,
+      408.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "HỆ THỐNG CHỐNG BÓ CỨNG PHANH ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      858.7,
+      169.7,
+      1060.8,
+      297.6
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "CHỨC NĂNG PHÂN PHỐI LỰC PHANH ĐIỆN TỬ EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1069.2,
+      169.7,
+      1271.3,
+      297.6
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "HỖ TRỢ LỰC PHANH KHẨN CẤP (BA)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1279.7,
+      169.7,
+      1473.3,
+      297.6
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "HỆ THỐNG CÂN BẰNG ĐIỆN TỬ ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1481.7,
+      169.7,
+      1683.8,
+      297.6
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "CHỨC NĂNG KIỂM SOÁT LỰC KÉO TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      858.7,
+      297.6,
+      1060.8,
+      446.5
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "HỖ TRỢ KHỞI HÀNH NGANG DỐC HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1069.2,
+      297.6,
+      1271.3,
+      446.5
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "ĐÈN BÁO PHANH KHẨN CẤP ESS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1279.7,
+      297.6,
+      1473.3,
+      446.5
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "KHÓA CỬA XE TỰ ĐỘNG KHI XE DI CHUYỂN",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1481.7,
+      297.6,
+      1683.8,
+      446.5
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "CĂNG ĐAI KHẨN CẤP",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      858.7,
+      446.5,
+      1128.1,
+      577.4
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "MÓC CỐ ĐỊNH GHẾ TRẺ EM ISOFIX",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1128.1,
+      446.5,
+      1406.0,
+      577.4
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "6",
+    "spec_unit": "túi khí",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1406.0,
+      446.5,
+      1683.8,
+      577.4
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Sạc xe",
+    "spec_key": "Bộ sạc tại nhà",
+    "spec_value": "Bộ sạc di động tiện lợi",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      33.7,
+      165.5,
+      323.3,
+      367.9
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Sạc xe",
+    "spec_key": "Khoảng cách trung bình giữa các trạm sạc",
+    "spec_value": "3.5",
+    "spec_unit": "km",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      33.7,
+      380.4,
+      323.3,
+      567.3
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Sạc xe",
+    "spec_key": "Thời điểm cập nhật thông tin trạm sạc",
+    "spec_value": "09/2023",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      33.7,
+      380.4,
+      323.3,
+      567.3
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Bảo hành",
+    "spec_key": "Bảo hành xe mới",
+    "spec_value": "7 năm hoặc 160.000 km tùy điều kiện nào đến trước",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      885.7,
+      218.5,
+      1252.7,
+      288.1
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Bảo hành",
+    "spec_key": "Bảo hành pin cao áp",
+    "spec_value": "8 năm hoặc 160.000 km tùy điều kiện nào đến trước",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      885.7,
+      218.5,
+      1252.7,
+      288.1
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Dịch vụ hậu mãi",
+    "spec_key": "Cứu hộ bằng xe kéo",
+    "spec_value": "RSA",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      885.7,
+      301.2,
+      1252.7,
+      363.1
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Dịch vụ hậu mãi",
+    "spec_key": "Cứu hộ",
+    "spec_value": "24/7 trong suốt thời gian bảo hành",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      885.7,
+      301.2,
+      1252.7,
+      363.1
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Dịch vụ hậu mãi",
+    "spec_key": "Mạng lưới",
+    "spec_value": "150.000 cộng sự phủ rộng toàn quốc",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 10,
+    "source_bbox": [
+      885.7,
+      301.2,
+      1252.7,
+      363.1
+    ],
+    "source_block_id": "p10_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "100",
+    "spec_unit": "kW (HP)",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      1301.6,
+      54.2,
+      1624.8,
+      111.3
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "135",
+    "spec_unit": "Nm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      1301.6,
+      194.1,
+      1613.1,
+      256.6
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "326",
+    "spec_unit": "Km",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      1301.6,
+      357.2,
+      1611.4,
+      426.2
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2514",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      141.7,
+      234.0,
+      153.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "3967",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      157.7,
+      234.0,
+      168.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1723",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      157.7,
+      234.0,
+      168.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1579",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      157.7,
+      234.0,
+      168.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "160",
+    "spec_unit": "mm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      172.6,
+      234.0,
+      183.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Dung tích khoang chứa hành lý (Có/gập hàng ghế cuối)",
+    "spec_value": "331/1015",
+    "spec_unit": "lít",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      187.5,
+      234.0,
+      208.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Trọng lượng không tải",
+    "spec_value": "1.340",
+    "spec_unit": "kg",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      214.3,
+      234.0,
+      225.0
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Tải trọng",
+    "spec_value": "325",
+    "spec_unit": "kg",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      231.0,
+      234.0,
+      241.7
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "Độc lập, MacPherson",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      303.6,
+      234.0,
+      315.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Dầm xoắn",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      319.1,
+      234.0,
+      330.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống phanh trước/sau",
+    "spec_value": "Đĩa thông gió/đĩa",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      334.5,
+      234.0,
+      345.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Loại la-zăng",
+    "spec_value": "Hợp kim 17 inch",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      349.4,
+      234.0,
+      361.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Trợ lực lái",
+    "spec_value": "EPS/Trợ lực điện",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      365.5,
+      234.0,
+      376.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn pha",
+    "spec_value": "Halogen Tự động bật/tắt",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      435.1,
+      234.0,
+      446.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "Halogen",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      450.6,
+      234.0,
+      461.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gương chiếu hậu",
+    "spec_value": "Chỉnh điện tích hợp báo rẽ",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      466.1,
+      234.0,
+      477.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính cửa sổ chỉnh điện",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      481.6,
+      234.0,
+      492.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính chắn gió",
+    "spec_value": "Lên/xuống một chạm cửa tài xế",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      494.7,
+      234.0,
+      506.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính chắn gió",
+    "spec_value": "Chống tia UV",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      508.4,
+      234.0,
+      519.7
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Tấm bảo vệ dưới thân xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      33.7,
+      523.8,
+      234.0,
+      535.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ truyền động",
+    "spec_key": "Cấu hình động cơ",
+    "spec_value": "1 Motor điện",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      166.7,
+      516.9,
+      177.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ truyền động",
+    "spec_key": "power_kw",
+    "spec_value": "100",
+    "spec_unit": "kW/hp",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      182.7,
+      516.9,
+      193.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ truyền động",
+    "spec_key": "torque_nm",
+    "spec_value": "135",
+    "spec_unit": "Nm",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      198.8,
+      516.9,
+      209.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ truyền động",
+    "spec_key": "Tăng tốc 0 - 100 km/h",
+    "spec_value": "12",
+    "spec_unit": "s",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      214.9,
+      516.9,
+      225.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ truyền động khác",
+    "spec_key": "drivetrain",
+    "spec_value": "FWD/Cầu trước",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      276.8,
+      516.9,
+      287.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ truyền động khác",
+    "spec_key": "Chọn chế độ lái",
+    "spec_value": "Eco/Sport",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      292.9,
+      516.9,
+      303.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "battery_type",
+    "spec_value": "LFP",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      345.3,
+      516.9,
+      356.0
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "37.23",
+    "spec_unit": "kWh",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      361.3,
+      516.9,
+      372.0
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "326",
+    "spec_unit": "km",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      377.4,
+      516.9,
+      401.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "33",
+    "spec_unit": "phút",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      316.6,
+      406.0,
+      516.9,
+      427.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "seats",
+    "spec_value": "5",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      147.6,
+      813.3,
+      158.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Chất liệu bọc ghế",
+    "spec_value": "Giả da",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      163.1,
+      813.3,
+      173.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh cơ 6 hướng",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      178.6,
+      813.3,
+      189.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế phụ",
+    "spec_value": "Chỉnh cơ 4 hướng",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      194.1,
+      813.3,
+      204.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hàng ghế thứ hai",
+    "spec_value": "Có thể gập theo tỷ lệ 60:40",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      209.5,
+      813.3,
+      220.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Vô lăng",
+    "spec_value": "Chỉnh cơ 2 hướng, tích hợp nút bấm điều khiển tính năng giải trí và ga tự động",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      225.0,
+      813.3,
+      246.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "1 vùng",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      263.7,
+      813.3,
+      274.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Lọc không khí Cabin",
+    "spec_value": "PM2.5",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      279.8,
+      813.3,
+      290.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Chức năng làm tan sương/tan băng",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      295.9,
+      813.3,
+      306.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "display_inch",
+    "spec_value": "8",
+    "spec_unit": "inch",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      311.3,
+      813.3,
+      322.0
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Bảng đồng hồ thông tin lái",
+    "spec_value": "7-inch",
+    "spec_unit": "inch",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      327.4,
+      813.3,
+      338.1
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cổng kết nối USB",
+    "spec_value": "Hàng ghế trước: 1 (Cổng dữ liệu và sạc 7,5W); Hàng ghế thứ hai: 1 (Cổng sạc 18W)",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      342.9,
+      813.3,
+      361.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Quản lý WiFi (kết nối/phát hotspot)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      378.6,
+      813.3,
+      389.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Quản lý thiết bị Bluetooth (Điện thoại và nghe nhạc)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      394.7,
+      813.3,
+      405.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Chìa khóa",
+    "spec_value": "Chìa khóa từ xa",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      410.7,
+      813.3,
+      421.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "4",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      586.0,
+      426.2,
+      813.3,
+      436.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      148.2,
+      1118.0,
+      158.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      164.3,
+      1118.0,
+      175.0
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ lực phanh khẩn cấp (BA)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      180.4,
+      1118.0,
+      191.1
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      196.4,
+      1118.0,
+      207.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      212.5,
+      1118.0,
+      223.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      228.6,
+      1118.0,
+      239.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Đèn báo nguy hiểm khi phanh khẩn cấp ESS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      244.7,
+      1118.0,
+      255.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "ITPMS",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      260.7,
+      1118.0,
+      271.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Khóa cửa xe tự động khi xe di chuyển",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      276.8,
+      1118.0,
+      287.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Càng đai khẩn cấp ghế trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      292.9,
+      1118.0,
+      303.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX, hàng ghế thứ 2",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      308.9,
+      1118.0,
+      319.7
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo thắt dây an toàn hàng ghế trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      325.0,
+      1118.0,
+      335.7
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chống trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      341.1,
+      1118.0,
+      351.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Tính năng khóa động cơ khi có trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      357.2,
+      1118.0,
+      367.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "6",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      386.9,
+      1118.0,
+      398.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      405.4,
+      1118.0,
+      416.1
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      420.9,
+      1118.0,
+      431.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      870.5,
+      436.3,
+      1118.0,
+      447.1
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Tính năng ADAS",
+    "spec_key": "Ga tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      148.2,
+      1387.4,
+      158.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Tính năng ADAS",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      164.3,
+      1387.4,
+      175.0
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Tính năng ADAS",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      180.4,
+      1387.4,
+      191.1
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Tính năng ADAS",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      196.4,
+      1387.4,
+      207.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Tính năng ADAS",
+    "spec_key": "Camera lùi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      212.5,
+      1387.4,
+      223.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Tính năng ADAS",
+    "spec_key": "Hỗ trợ đỗ phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      228.6,
+      1387.4,
+      239.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "An ninh an toàn",
+    "spec_key": "Chẩn đoán lỗi trên xe tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      323.8,
+      1387.4,
+      334.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Thông tin & Giải trí",
+    "spec_key": "Đồng bộ tài khoản & Quản lý hồ sơ người lái",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      372.0,
+      1387.4,
+      382.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Thông tin & Giải trí",
+    "spec_key": "Giải trí âm thanh: FM Radio, USB, Bluetooth",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      388.1,
+      1387.4,
+      398.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Thông tin & Giải trí",
+    "spec_key": "Kết nối Android Auto và Apple Carplay không dây",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1143.3,
+      404.2,
+      1387.4,
+      414.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Trợ lý ảo VMi",
+    "spec_key": "Điều khiển xe bằng giọng nói",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1404.3,
+      163.1,
+      1629.9,
+      173.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Trợ lý ảo VMi",
+    "spec_key": "Hỏi đáp thông tin thời tiết, tiện ích, tính năng xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1404.3,
+      179.2,
+      1629.9,
+      189.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ứng dụng VinFast (C-App)",
+    "spec_key": "Giám sát xe từ xa (vị trí, thông số)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1404.3,
+      224.4,
+      1629.9,
+      235.1
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ứng dụng VinFast (C-App)",
+    "spec_key": "Tìm kiếm trạm sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1404.3,
+      240.5,
+      1629.9,
+      251.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ứng dụng VinFast (C-App)",
+    "spec_key": "Thanh toán phí sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1404.3,
+      256.6,
+      1629.9,
+      267.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ứng dụng VinFast (C-App)",
+    "spec_key": "Đặt lịch sửa chữa, bảo dưỡng",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1404.3,
+      272.6,
+      1629.9,
+      283.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 5",
+    "version_name": null,
+    "spec_category": "Ứng dụng VinFast (C-App)",
+    "spec_key": "Thông tin khuyến mại & phụ kiện",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf5_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/09042026/VFVN_VF%205_Brochure%20B%E1%BA%A3n%20s%E1%BB%ADa%20290126_1333PM.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1404.3,
+      288.7,
+      1629.9,
+      299.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  }
+]

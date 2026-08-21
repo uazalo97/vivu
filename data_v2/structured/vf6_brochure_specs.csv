@@ -1,0 +1,87 @@
+model_code|version_name|spec_category|spec_key|spec_value|spec_unit|source_document|source_url|source_page|source_bbox|source_block_id|confidence
+VF 6||Ngoại thất|Dải Đèn Định Vị LED|Tạo Hình Cánh Chim||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|5|[1678.7, 177.3, 1678.7, 206.8]|p05_b02|0.4
+VF 6|VF 6 Plus|Ngoại thất|Đèn Pha tự động|Cải thiện tầm nhìn ban đêm||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|5|[1678.7, 236.3, 1678.7, 265.9]|p05_b02|0.4
+VF 6|VF 6 Plus|Ngoại thất|La-zăng Hợp Kim Nhôm 18 inch|Khỏe khoắn & cứng cáp||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|5|[1678.7, 295.4, 1678.7, 325.0]|p05_b02|0.4
+VF 6||Kích thước|wheelbase_mm|2730|mm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|5|[83.9, 384.1, 419.7, 413.6]|p05_b02|0.98
+VF 6|Plus|Động cơ & Vận hành|torque_nm|310|Nm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|6|[83.9, 472.7, 503.6, 502.2]|p06_b02|0.98
+VF 6|Eco|Động cơ & Vận hành|Phạm vi di chuyển|485|km|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|6|[587.5, 472.7, 1007.2, 502.2]|p06_b02|0.98
+VF 6|Plus|Động cơ & Vận hành|power_kw|150|kW|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|6|[1091.1, 472.7, 1594.7, 502.2]|p06_b02|0.98
+VF 6||Động cơ & Vận hành|Chế độ lái|ECO / NORMAL / SPORT||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|6|[503.6, 472.7, 1594.7, 502.2]|p06_b02|0.98
+VF 6||Ngoại thất|Màu cơ bản|Đỏ - Solar Ruby, Trắng - Infinity Blanc, Xám - Zenith Grey, Đen - Jet Black||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|9|[1678.7, 118.2, 1678.7, 177.3]|p09_b02|0.4
+VF 6||Ngoại thất|Màu nâng cao|Xanh Lá Nhạt - Urban Mint||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|9|[1678.7, 177.3, 1678.7, 206.8]|p09_b02|0.4
+VF 6|Eco|Nội thất|Màu nội thất ECO|Be - Beige, Đen - Granite Black||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|9|[1678.7, 354.5, 1678.7, 413.6]|p09_b02|0.4
+VF 6|Plus|Nội thất|Màu nội thất PLUS|Nâu Mocha - Mocha Brown, Be - Beige||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|9|[1678.7, 413.6, 1678.7, 472.7]|p09_b02|0.4
+VF 6|VF 6 Plus|Kích thước|length_mm|4241|mm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 29.5, 1594.7, 59.1]|p11_b02|0.98
+VF 6|VF 6 Plus|Kích thước|width_mm|1834|mm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 29.5, 1594.7, 59.1]|p11_b02|0.98
+VF 6|VF 6 Plus|Kích thước|height_mm|1580|mm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 29.5, 1594.7, 59.1]|p11_b02|0.98
+VF 6||Kích thước|wheelbase_mm|2730|mm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 59.1, 1594.7, 88.6]|p11_b02|0.98
+VF 6||Kích thước|ground_clearance_mm|170|mm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 88.6, 1594.7, 118.2]|p11_b02|0.98
+VF 6|VF 6 Eco|Động cơ|power_kw|130|kW|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 118.2, 1594.7, 147.7]|p11_b02|0.98
+VF 6|VF 6 Plus|Động cơ|power_kw|150|kW|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 118.2, 1594.7, 147.7]|p11_b02|0.98
+VF 6|VF 6 Eco|Động cơ|torque_nm|250|Nm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 147.7, 1594.7, 177.3]|p11_b02|0.98
+VF 6|VF 6 Plus|Động cơ|torque_nm|310|Nm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 147.7, 1594.7, 177.3]|p11_b02|0.98
+VF 6|VF 6 Eco|Pin|range_km|485|km|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 177.3, 1594.7, 206.8]|p11_b02|0.98
+VF 6|VF 6 Plus|Pin|range_km|460|km|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 177.3, 1594.7, 206.8]|p11_b02|0.98
+VF 6||Pin|battery_kwh|59.6|kWh|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 206.8, 1594.7, 236.3]|p11_b02|0.98
+VF 6|VF 6 Eco|Pin|Dây sạc di động|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 236.3, 1594.7, 265.9]|p11_b02|0.98
+VF 6|VF 6 Plus|Pin|Dây sạc di động|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 236.3, 1594.7, 265.9]|p11_b02|0.98
+VF 6|VF 6 Eco|Pin|Bộ sạc tại nhà|Phù kiện (AFS 3.5kW)||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 265.9, 1594.7, 295.4]|p11_b02|0.98
+VF 6|VF 6 Plus|Pin|Bộ sạc tại nhà|Phù kiện (AFS 7.4kW)||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 265.9, 1594.7, 295.4]|p11_b02|0.98
+VF 6||Pin|fast_charge_min|25|phút|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 295.4, 1594.7, 325.0]|p11_b02|0.98
+VF 6||Thông số truyền động khác|drivetrain|Cầu trước (FWD)||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 325.0, 1594.7, 354.5]|p11_b02|0.98
+VF 6||Thông số truyền động khác|Chế độ lái|Eco/Normal/Sport||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 354.5, 1594.7, 384.1]|p11_b02|0.98
+VF 6||Kích thước|length_mm|17|mm|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 384.1, 1594.7, 413.6]|p11_b02|0.4
+VF 6||Khung gầm|Hệ thống treo - trước|Độc lập, MacPherson||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 413.6, 1594.7, 443.1]|p11_b02|0.98
+VF 6||Khung gầm|Hệ thống treo - sau|Thanh ổn định hướng đa điểm||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 443.1, 1594.7, 472.7]|p11_b02|0.98
+VF 6||Ngoại thất|Đèn chiếu sáng phía trước|LED||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 472.7, 1594.7, 502.2]|p11_b02|0.98
+VF 6||Ngoại thất|Tự động bật/tắt đèn|Không||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 502.2, 1594.7, 531.8]|p11_b02|0.98
+VF 6||Ngoại thất|Đèn chiếu sáng ban ngày|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 531.8, 1594.7, 561.3]|p11_b02|0.98
+VF 6||Ngoại thất|Tự động bật/tắt chế độ chiếu xa|Không||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 561.3, 1594.7, 590.9]|p11_b02|0.98
+VF 6||Ngoại thất|Đèn hậu|LED||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6||Ngoại thất|Đèn nhận diện thương hiệu phía trước|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6||Ngoại thất|Đèn nhận diện thương hiệu phía sau|Không||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Nội thất & Tiện nghi|Màn hình hiển thị thông tin trên kính lái (HUD)|Không||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Nội thất & Tiện nghi|Màn hình hiển thị thông tin trên kính lái (HUD)|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Nội thất & Tiện nghi|display_inch|10|inch|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Nội thất & Tiện nghi|display_inch|12.9|inch|vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Nội thất & Tiện nghi|Kết nối với Android Auto và Apple CarPlay|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Nội thất & Tiện nghi|Kết nối với Android Auto và Apple CarPlay|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Nội thất & Tiện nghi|Hệ thống loa|6 loa||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Nội thất & Tiện nghi|Hệ thống loa|8 loa||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Tiện nghi|Ghế lái|Chỉnh cơ 6 hướng||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Tiện nghi|Ghế lái|Chỉnh điện 8 hướng||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Tiện nghi|Chế độ ga nhàn tay|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Tiện nghi|Chế độ ga nhàn tay|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Tiện nghi|Kính cửa sổ chỉnh điện, lên/xuống một chạm|Tất cả các vị trí||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Tiện nghi|Kính cửa sổ chỉnh điện, lên/xuống một chạm|Tất cả các vị trí||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|Tiện nghi|Phanh đỗ điện tử và chế độ tự động giữ phanh|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|Tiện nghi|Phanh đỗ điện tử và chế độ tự động giữ phanh|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|airbags|4||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|airbags|7||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Hệ thống chống bó cứng phanh ABS|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Hệ thống chống bó cứng phanh ABS|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Chức năng phân phối lực phanh điện tử EBD|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Chức năng phân phối lực phanh điện tử EBD|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Hỗ trợ phanh khẩn cấp BA|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Hỗ trợ phanh khẩn cấp BA|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Hệ thống cân bằng điện tử ESC|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Hệ thống cân bằng điện tử ESC|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Chức năng kiểm soát lực kéo TCS|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Chức năng kiểm soát lực kéo TCS|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Hỗ trợ khởi hành ngang dốc HSA|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Hỗ trợ khởi hành ngang dốc HSA|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Giám sát áp suất lốp|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Giám sát áp suất lốp|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Trợ lái tiên cao tốc/di chuyển tắc đường|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Trợ lái tiên cao tốc/di chuyển tắc đường|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Hỗ trợ di chuyển làn|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Hỗ trợ di chuyển làn|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Giám sát hành trình|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Giám sát hành trình|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Nhận biết biển báo giao thông|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Nhận biết biển báo giao thông|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Eco|An toàn & An ninh|Điều chỉnh tốc độ thông minh|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6|VF 6 Plus|An toàn & An ninh|Điều chỉnh tốc độ thông minh|Có||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|11|[83.9, 590.9, 1594.7, 590.9]|p11_b02|0.4
+VF 6||Dịch vụ|Hệ thống Showroom & Xưởng dịch vụ|không ngày nghỉ||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|12|[83.9, 88.6, 1594.7, 118.2]|p12_b02|0.98
+VF 6||Dịch vụ|Chính sách bảo hành|tốt nhất thị trường||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|12|[83.9, 147.7, 1594.7, 177.3]|p12_b02|0.98
+VF 6||Dịch vụ|Dịch vụ hậu mãi|xuất sắc||vf6_brochure|https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf|12|[83.9, 206.8, 1594.7, 236.3]|p12_b02|0.98

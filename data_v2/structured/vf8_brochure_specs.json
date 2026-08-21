@@ -1,0 +1,5702 @@
+[
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2950",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      282.0,
+      420.3,
+      454.6,
+      449.4
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Chiều dài tổng thể",
+    "spec_value": "4.150",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      261.0,
+      445.3,
+      420.9,
+      476.2
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Chiều rộng tổng thể",
+    "spec_value": "1.934",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      602.8,
+      414.3,
+      685.3,
+      481.0
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Chiều cao tổng thể",
+    "spec_value": "1.667",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      653.3,
+      300.6,
+      715.6,
+      384.0
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gương chiếu hậu",
+    "spec_value": "Tích hợp sấy mặt gương, chống chói tự động, nhớ vị trí và tự động điều chỉnh khi lùi",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      252.6,
+      135.1,
+      522.0,
+      184.5
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "Full LED, nổi bật với nhận diện thương hiệu VinFast",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      526.2,
+      136.3,
+      627.2,
+      186.3
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Cốp",
+    "spec_value": "Cốp chỉnh điện tích hợp đóng/mở cốp đá chân",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      631.4,
+      136.3,
+      703.0,
+      188.1
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Cửa sổ trời toàn cảnh*",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      343.5,
+      84.5,
+      445.4,
+      118.5
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn pha",
+    "spec_value": "Tự động bật/tắt, điều khiển góc chiếu pha thông minh",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      688.7,
+      145.2,
+      795.6,
+      182.2
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính cửa trước",
+    "spec_value": "Cách âm 2 lớp",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      479.0,
+      443.5,
+      620.5,
+      471.5
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính cửa sau",
+    "spec_value": "Màu đen riêng tư",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      356.1,
+      496.5,
+      468.1,
+      523.2
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "La-zăng*",
+    "spec_value": "Hợp kim 20",
+    "spec_unit": "inch",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      261.0,
+      539.3,
+      357.8,
+      565.5
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Gương chiếu hậu chống chói tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      51.4,
+      35.7,
+      154.1,
+      61.3
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Màn hình cảm ứng",
+    "spec_value": "15,6",
+    "spec_unit": "inch",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      698.8,
+      163.7,
+      793.9,
+      181.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Vô lăng chỉnh điện",
+    "spec_value": "4 hướng, tích hợp sưởi và nhớ vị trí",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      53.9,
+      195.3,
+      154.9,
+      222.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Điều hòa tự động",
+    "spec_value": "2 vùng, tích hợp kiểm soát chất lượng không khí, kèm chức năng i-on hóa, lọc không khí cabin Combi 1.0",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      699.6,
+      266.1,
+      806.5,
+      353.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Nút bấm chuyển số",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      53.9,
+      333.9,
+      172.6,
+      352.4
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế lái chỉnh điện",
+    "spec_value": "12 hướng, nhớ vị trí, tích hợp thông gió và sưởi",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      52.2,
+      409.0,
+      162.5,
+      459.0
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế phụ chỉnh điện",
+    "spec_value": "10 hướng, tích hợp thông gió và sưởi",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 7,
+    "source_bbox": [
+      683.6,
+      443.5,
+      792.2,
+      481.6
+    ],
+    "source_block_id": "p07_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "562",
+    "spec_unit": "km",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      71.6,
+      447.6,
+      261.0,
+      539.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "300",
+    "spec_unit": "kW",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      283.7,
+      447.6,
+      433.6,
+      539.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "620",
+    "spec_unit": "Nm/rpm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      458.0,
+      447.6,
+      597.7,
+      539.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Khả năng bứt tốc 0-100km/h",
+    "spec_value": "5,58",
+    "spec_unit": "s",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      639.8,
+      447.6,
+      778.7,
+      539.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo chệch làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      57.2,
+      117.3,
+      170.9,
+      129.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hỗ trợ giữ làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      57.2,
+      142.3,
+      160.0,
+      154.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Kiểm soát đi giữa làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      57.2,
+      166.7,
+      168.4,
+      178.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Giám sát hành trình thích ứng",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      57.2,
+      190.5,
+      202.1,
+      202.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      57.2,
+      212.5,
+      229.8,
+      224.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      336.8,
+      117.3,
+      525.3,
+      129.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo va chạm phía trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      336.8,
+      142.3,
+      525.3,
+      154.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      336.8,
+      166.7,
+      525.3,
+      189.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      336.8,
+      203.6,
+      525.3,
+      215.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      336.8,
+      227.4,
+      525.3,
+      239.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Phanh tự động khẩn cấp trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      336.8,
+      251.8,
+      525.3,
+      263.7
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hỗ trợ giữ làn khẩn cấp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      626.4,
+      117.3,
+      760.2,
+      129.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hỗ trợ đỗ phía trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      626.4,
+      142.3,
+      756.0,
+      154.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hỗ trợ đỗ phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      626.4,
+      166.7,
+      756.0,
+      178.6
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hệ thống camera sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      626.4,
+      190.5,
+      756.0,
+      202.4
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Giám sát xung quanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      626.4,
+      214.9,
+      756.0,
+      226.8
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Đèn pha tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      626.4,
+      239.3,
+      756.0,
+      251.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hệ thống cảnh báo người lái buồn ngủ và mất tập trung",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      626.4,
+      263.1,
+      756.0,
+      288.7
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu tiêu chuẩn",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Xanh lá đậm\nIvy Green",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      27.8,
+      148.8,
+      175.1,
+      288.7
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu tiêu chuẩn",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Trắng\nInfinity Blanc",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      229.8,
+      148.8,
+      385.6,
+      288.7
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu tiêu chuẩn",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Đen\nJet Black",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      430.2,
+      148.8,
+      586.0,
+      288.7
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu tiêu chuẩn",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Đỏ\nCrimson Red",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      633.1,
+      148.8,
+      786.3,
+      288.7
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu nâng cao (*)",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Crimson Velvet\nMystery Bronze Roof",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      27.8,
+      363.1,
+      175.1,
+      509.0
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu nâng cao (*)",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Zenith Grey\nDesat Silver Roof",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      229.8,
+      363.1,
+      385.6,
+      509.0
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu nâng cao (*)",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Infinity Blanc\nZenith Grey Roof",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      430.2,
+      363.1,
+      586.0,
+      509.0
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Màu nâng cao (*)",
+    "spec_key": "Màu ngoại thất",
+    "spec_value": "Jet Black\nMystery Bronze Roof",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 15,
+    "source_bbox": [
+      633.1,
+      363.1,
+      786.3,
+      509.0
+    ],
+    "source_block_id": "p15_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Màu nội thất",
+    "spec_key": "Màu nội thất",
+    "spec_value": "Saddle Brown",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 16,
+    "source_bbox": [
+      144.0,
+      492.9,
+      200.4,
+      539.3
+    ],
+    "source_block_id": "p16_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Màu nội thất",
+    "spec_key": "Màu nội thất",
+    "spec_value": "Granite Black",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 16,
+    "source_bbox": [
+      223.1,
+      492.9,
+      278.7,
+      539.3
+    ],
+    "source_block_id": "p16_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Màu nội thất",
+    "spec_key": "Màu nội thất",
+    "spec_value": "Granite Black",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 16,
+    "source_bbox": [
+      436.1,
+      492.9,
+      554.8,
+      539.3
+    ],
+    "source_block_id": "p16_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Thông tin bộ sạc",
+    "spec_key": "power_kw",
+    "spec_value": "2.2",
+    "spec_unit": "kW",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      231.5,
+      184.5,
+      606.2,
+      241.1
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hướng dẫn sử dụng bộ sạc di động",
+    "spec_key": "Bước 01",
+    "spec_value": "Cắm trực tiếp phích cắm của bộ sạc vào ổ điện loại E/F và chờ đến khi đèn LED màu xanh dương và xanh lá cây sáng. Người dùng có thể thay đổi dòng sạc và dòng điện bằng cách nhấn và giữ nút cài đặt.",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      101.0,
+      282.8,
+      328.3,
+      369.1
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hướng dẫn sử dụng bộ sạc di động",
+    "spec_key": "Bước 02",
+    "spec_value": "Cắm súng sạc vào vị trí sạc trên xe.",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      341.0,
+      282.8,
+      522.0,
+      336.3
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hướng dẫn sử dụng bộ sạc di động",
+    "spec_key": "Bước 03",
+    "spec_value": "Bộ sạc tự động sạc cho xe khi đèn LED đỏ sáng, đèn LED xanh và đèn LED vàng nháy 1 lần.",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      530.4,
+      282.8,
+      774.5,
+      336.3
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hướng dẫn sử dụng bộ sạc di động",
+    "spec_key": "Bước 04",
+    "spec_value": "Trong quá trình sạc, nếu cần tạm dừng chu trình sạc, có 3 cách như sau: nhấn nút dừng sạc trên màn hình sạc của xe, rút phích cắm điện hoặc nhấn và giữ nút cài đặt trong 5 giây.",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      530.4,
+      384.0,
+      774.5,
+      467.3
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hướng dẫn sử dụng bộ sạc di động",
+    "spec_key": "Bước 05",
+    "spec_value": "Rút súng sạc ra khỏi xe để kết thúc chu trình sạc.",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      341.0,
+      384.0,
+      522.0,
+      437.5
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hướng dẫn sử dụng bộ sạc di động",
+    "spec_key": "Bước 06",
+    "spec_value": "Đóng nắp bảo vệ đầu sạc trên xe, sau đó đóng nắp bảo vệ súng sạc.",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      101.0,
+      384.0,
+      328.3,
+      437.5
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hướng dẫn sử dụng bộ sạc di động",
+    "spec_key": "Bước 07",
+    "spec_value": "Rút phích cắm của bộ sạc ra khỏi ổ cắm.",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 17,
+    "source_bbox": [
+      341.0,
+      470.3,
+      522.0,
+      532.8
+    ],
+    "source_block_id": "p17_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2950",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      81.6,
+      811.6,
+      91.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2950",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      81.6,
+      811.6,
+      91.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4750",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      91.7,
+      811.6,
+      101.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1934",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      91.7,
+      811.6,
+      101.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1667",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      91.7,
+      811.6,
+      101.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4750",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      91.7,
+      811.6,
+      101.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1934",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      91.7,
+      811.6,
+      101.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1667",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      91.7,
+      811.6,
+      101.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "162",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      101.8,
+      811.6,
+      111.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "157",
+    "spec_unit": "mm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      101.8,
+      811.6,
+      111.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Dung tích khoang chứa hành lý (L) - Có hàng ghế cuối/ Gập hết ghế (ISO 3832)",
+    "spec_value": "376/1.373",
+    "spec_unit": "L",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      111.9,
+      811.6,
+      122.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Dung tích khoang chứa hành lý (L) - Có hàng ghế cuối/ Gập hết ghế (ISO 3832)",
+    "spec_value": "376/1.373",
+    "spec_unit": "L",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      111.9,
+      811.6,
+      122.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Dung tích khoang chứa hành lý (L) - Phía trước (Phương pháp ngập nước)",
+    "spec_value": "88",
+    "spec_unit": "L",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      122.0,
+      811.6,
+      132.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Dung tích khoang chứa hành lý (L) - Phía trước (Phương pháp ngập nước)",
+    "spec_value": "88",
+    "spec_unit": "L",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      122.0,
+      811.6,
+      132.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Trọng lượng không tải",
+    "spec_value": "2.328",
+    "spec_unit": "kg",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      132.7,
+      811.6,
+      142.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Trọng lượng không tải",
+    "spec_value": "2.520",
+    "spec_unit": "kg",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      132.7,
+      811.6,
+      142.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Tải trọng hành lý nóc xe",
+    "spec_value": "70",
+    "spec_unit": "kg",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      142.9,
+      811.6,
+      153.6
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Kích thước & Tải trọng",
+    "spec_key": "Tải trọng hành lý nóc xe",
+    "spec_value": "70",
+    "spec_unit": "kg",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      142.9,
+      811.6,
+      153.6
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Động cơ",
+    "spec_key": "drivetrain",
+    "spec_value": "FWD/Cầu trước",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      174.4,
+      811.6,
+      184.5
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Động cơ",
+    "spec_key": "drivetrain",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      174.4,
+      811.6,
+      184.5
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "150",
+    "spec_unit": "kW/HP",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      184.5,
+      811.6,
+      195.3
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "300",
+    "spec_unit": "kW/HP",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      184.5,
+      811.6,
+      195.3
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "310",
+    "spec_unit": "Nm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      195.3,
+      811.6,
+      205.4
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "620",
+    "spec_unit": "Nm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      195.3,
+      811.6,
+      205.4
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Động cơ",
+    "spec_key": "Tăng tốc 0-100Km/h",
+    "spec_value": "11,8",
+    "spec_unit": "s",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      205.4,
+      811.6,
+      216.1
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Động cơ",
+    "spec_key": "Tăng tốc 0-100Km/h",
+    "spec_value": "5,58",
+    "spec_unit": "s",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      205.4,
+      811.6,
+      216.1
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "87.7",
+    "spec_unit": "kWh",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      226.8,
+      811.6,
+      236.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "87.7",
+    "spec_unit": "kWh",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      226.8,
+      811.6,
+      236.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "562",
+    "spec_unit": "km",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      236.9,
+      811.6,
+      247.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "457",
+    "spec_unit": "km",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      236.9,
+      811.6,
+      247.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "31",
+    "spec_unit": "phút",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      247.0,
+      811.6,
+      257.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "31",
+    "spec_unit": "phút",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      247.0,
+      811.6,
+      257.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Chọn chế độ lái",
+    "spec_value": "Eco/Normal/Sport",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      267.9,
+      811.6,
+      278.6
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Chọn chế độ lái",
+    "spec_value": "Eco/Normal/Sport",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      267.9,
+      811.6,
+      278.6
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Sưởi pin cao thế",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      278.6,
+      811.6,
+      288.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Sưởi pin cao thế",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      278.6,
+      811.6,
+      288.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "Treo độc lập thông minh",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      299.4,
+      811.6,
+      309.5
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "Treo độc lập thông minh",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      299.4,
+      811.6,
+      309.5
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Thanh điều hướng đa điểm",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      309.5,
+      811.6,
+      320.3
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Thanh điều hướng đa điểm",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      309.5,
+      811.6,
+      320.3
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống phanh trước/sau",
+    "spec_value": "Đĩa thông gió/Đĩa thông gió",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      320.3,
+      811.6,
+      330.4
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống phanh trước/sau",
+    "spec_value": "Đĩa thông gió/Đĩa thông gió",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      320.3,
+      811.6,
+      330.4
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Khung gầm",
+    "spec_key": "Loại la-zăng",
+    "spec_value": "Hợp kim 19inch",
+    "spec_unit": "inch",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      330.4,
+      811.6,
+      341.1
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Khung gầm",
+    "spec_key": "Loại la-zăng",
+    "spec_value": "Hợp kim 20inch",
+    "spec_unit": "inch",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      330.4,
+      811.6,
+      341.1
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Khung gầm",
+    "spec_key": "Trợ lực lái",
+    "spec_value": "Trợ lực điện",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      341.1,
+      811.6,
+      351.2
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Khung gầm",
+    "spec_key": "Trợ lực lái",
+    "spec_value": "Trợ lực điện",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      341.1,
+      811.6,
+      351.2
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn pha",
+    "spec_value": "LED, Tự động bật/tắt, điều chỉnh góc chiếu thông minh",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      361.3,
+      811.6,
+      382.2
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn pha",
+    "spec_value": "LED, Tự động bật/tắt, điều chỉnh góc chiếu thông minh",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      361.3,
+      811.6,
+      382.2
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chờ dẫn đường",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      382.2,
+      811.6,
+      392.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chờ dẫn đường",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      382.2,
+      811.6,
+      392.9
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chiếu sáng ban ngày",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      392.9,
+      811.6,
+      403.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chiếu sáng ban ngày",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      392.9,
+      811.6,
+      403.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn sương mù trước",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      403.0,
+      811.6,
+      413.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn sương mù trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      403.0,
+      811.6,
+      413.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chiếu góc",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      413.7,
+      811.6,
+      423.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chiếu góc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      413.7,
+      811.6,
+      423.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      423.8,
+      811.6,
+      434.6
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      423.8,
+      811.6,
+      434.6
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn phanh trên cao phía sau",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      434.6,
+      811.6,
+      444.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn phanh trên cao phía sau",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      434.6,
+      811.6,
+      444.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gương chiếu hậu",
+    "spec_value": "Chỉnh điện, gập điện\nTích hợp báo rẽ, sấy mặt gương",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      444.7,
+      811.6,
+      476.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gương chiếu hậu",
+    "spec_value": "Chỉnh điện, gập điện, nhớ vị trí\nTích hợp báo rẽ, sấy mặt gương,\nchống chói tự động, tự động chỉnh khi lùi",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      444.7,
+      811.6,
+      476.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kiểu cửa sổ",
+    "spec_value": "Chỉnh điện, lên/xuống\nMột chạm cả 4 cửa\nHàng ghế trước: kính cách âm 2 lớp,\nhàng ghế sau: kính 1 lớp",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      476.8,
+      811.6,
+      517.3
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kiểu cửa sổ",
+    "spec_value": "Chỉnh điện, lên/xuống\nMột chạm cả 4 cửa\nHàng ghế trước: kính cách âm 2 lớp,\nhàng ghế sau: kính 1 lớp",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      476.8,
+      811.6,
+      517.3
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính cửa sổ màu đen (riêng tư)",
+    "spec_value": "Hàng ghế sau",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      517.3,
+      811.6,
+      528.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính cửa sổ màu đen (riêng tư)",
+    "spec_value": "Hàng ghế sau",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      517.3,
+      811.6,
+      528.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Điều chỉnh cốp sau",
+    "spec_value": "Chỉnh cơ",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      528.0,
+      811.6,
+      538.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Điều chỉnh cốp sau",
+    "spec_value": "Chỉnh điện Đóng/mở cốp đá chân",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      528.0,
+      811.6,
+      538.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính chắn gió",
+    "spec_value": "Chống tia UV",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      538.7,
+      811.6,
+      548.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kính chắn gió",
+    "spec_value": "Chống tia UV",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      538.7,
+      811.6,
+      548.8
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gạt mưa trước",
+    "spec_value": "Tự động",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      548.8,
+      811.6,
+      559.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gạt mưa trước",
+    "spec_value": "Tự động",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      548.8,
+      811.6,
+      559.0
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Tấm bảo vệ dưới thân xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      559.0,
+      811.6,
+      569.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Tấm bảo vệ dưới thân xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 18,
+    "source_bbox": [
+      32.8,
+      559.0,
+      811.6,
+      569.7
+    ],
+    "source_block_id": "p18_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "seats",
+    "spec_value": "5",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      88.7,
+      809.9,
+      98.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "seats",
+    "spec_value": "5",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      88.7,
+      809.9,
+      98.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Chất liệu bọc ghế",
+    "spec_value": "Giả da",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      98.8,
+      809.9,
+      109.5
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Chất liệu bọc ghế",
+    "spec_value": "Da nhân tạo",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      98.8,
+      809.9,
+      109.5
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh điện 6 hướng",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      109.5,
+      809.9,
+      129.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh điện 12 hướng, nhớ vị trí; Tích hợp thông gió, sưởi",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      109.5,
+      809.9,
+      129.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế phụ",
+    "spec_value": "Chỉnh điện 6 hướng",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      129.8,
+      809.9,
+      150.6
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ghế phụ",
+    "spec_value": "Chỉnh điện 10 hướng; Tích hợp thông gió, sưởi",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      129.8,
+      809.9,
+      150.6
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hàng ghế thứ hai",
+    "spec_value": "Chỉnh cơ 2 hướng, tỷ lệ gập 60:40",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      150.6,
+      809.9,
+      172.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hàng ghế thứ hai",
+    "spec_value": "Chỉnh cơ 2 hướng, tỷ lệ gập 60:40; Tích hợp thông gió, sưởi",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      150.6,
+      809.9,
+      172.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Loại vô lăng",
+    "spec_value": "Bọc da, dạng D-cut; Chỉnh cơ 4 hướng; Tích hợp nút bấm điều khiển tính năng giải trí và ADAS",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      172.0,
+      809.9,
+      213.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Loại vô lăng",
+    "spec_value": "Bọc da, dạng D-cut; Chỉnh điện 4 hướng; Tích hợp sưởi, nút bấm điều khiển tính năng giải trí và ADAS",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      172.0,
+      809.9,
+      213.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "Tự động, 2 vùng; Tích hợp chức năng kiểm soát chất lượng",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      213.7,
+      809.9,
+      254.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "Tự động, 2 vùng; Tích hợp chức năng kiểm soát chất lượng, chức năng ion hóa không khí",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      213.7,
+      809.9,
+      254.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Lọc không khí Cabin",
+    "spec_value": "Combi 1.0",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      254.8,
+      809.9,
+      265.5
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Lọc không khí Cabin",
+    "spec_value": "Combi 1.0",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      254.8,
+      809.9,
+      265.5
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ống thông gió dưới chân hành khách sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      265.5,
+      809.9,
+      275.6
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Ống thông gió dưới chân hành khách sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      265.5,
+      809.9,
+      275.6
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "display_inch",
+    "spec_value": "15.6",
+    "spec_unit": "inch",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      275.6,
+      809.9,
+      286.3
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "display_inch",
+    "spec_value": "15.6",
+    "spec_unit": "inch",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      275.6,
+      809.9,
+      286.3
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Màn hình hiển thị HUD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      286.3,
+      809.9,
+      296.4
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Màn hình hiển thị HUD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      286.3,
+      809.9,
+      296.4
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cổng kết nối USB loại A",
+    "spec_value": "Hàng ghế trước: 2; Hàng ghế thứ hai: 2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      296.4,
+      809.9,
+      317.3
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cổng kết nối USB loại A",
+    "spec_value": "Hàng ghế trước: 2; Hàng ghế thứ hai: 2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      296.4,
+      809.9,
+      317.3
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cổng kết nối USB loại C",
+    "spec_value": "Có, 90",
+    "spec_unit": "W",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      317.3,
+      809.9,
+      328.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cổng kết nối USB loại C",
+    "spec_value": "Có, 90",
+    "spec_unit": "W",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      317.3,
+      809.9,
+      328.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Sạc không dây",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      328.0,
+      809.9,
+      338.1
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Sạc không dây",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      328.0,
+      809.9,
+      338.1
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Kết nối Wifi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      338.1,
+      809.9,
+      348.2
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Kết nối Wifi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      338.1,
+      809.9,
+      348.2
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Kết nối Bluetooth",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      348.2,
+      809.9,
+      359.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Kết nối Bluetooth",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      348.2,
+      809.9,
+      359.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "8",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      359.0,
+      809.9,
+      369.1
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "10",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      359.0,
+      809.9,
+      369.1
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Loa trầm",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      369.1,
+      809.9,
+      379.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Loa trầm",
+    "spec_value": "1",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      369.1,
+      809.9,
+      379.8
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Đèn trang trí nội thất",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      379.8,
+      809.9,
+      389.9
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Đèn trang trí nội thất",
+    "spec_value": "Đa màu",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      379.8,
+      809.9,
+      389.9
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cửa sổ trời",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      389.9,
+      809.9,
+      400.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Cửa sổ trời",
+    "spec_value": "Toàn cảnh, chỉnh điện",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      389.9,
+      809.9,
+      400.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Gương chiếu hậu trong xe",
+    "spec_value": "Chống chói tự động",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      400.0,
+      809.9,
+      410.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Gương chiếu hậu trong xe",
+    "spec_value": "Chống chói tự động",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      400.0,
+      809.9,
+      410.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      420.9,
+      809.9,
+      431.6
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      420.9,
+      809.9,
+      431.6
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      431.6,
+      809.9,
+      441.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      431.6,
+      809.9,
+      441.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp BA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      441.7,
+      809.9,
+      452.4
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp BA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      441.7,
+      809.9,
+      452.4
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      452.4,
+      809.9,
+      462.5
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      452.4,
+      809.9,
+      462.5
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      462.5,
+      809.9,
+      473.2
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      462.5,
+      809.9,
+      473.2
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      473.2,
+      809.9,
+      483.4
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      473.2,
+      809.9,
+      483.4
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng chống lật ROM",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      483.4,
+      809.9,
+      494.1
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng chống lật ROM",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      483.4,
+      809.9,
+      494.1
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Đèn báo phanh khẩn cấp ESS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      494.1,
+      809.9,
+      504.2
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Đèn báo phanh khẩn cấp ESS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      494.1,
+      809.9,
+      504.2
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "dTPMS",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      504.2,
+      809.9,
+      514.9
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "dTPMS",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      504.2,
+      809.9,
+      514.9
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Khóa cửa xe tự động khi xe di chuyển",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      514.9,
+      809.9,
+      525.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Khóa cửa xe tự động khi xe di chuyển",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      514.9,
+      809.9,
+      525.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảng đai khẩn cấp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      525.0,
+      809.9,
+      535.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảng đai khẩn cấp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      525.0,
+      809.9,
+      535.7
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX, hàng ghế thứ 2",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      535.7,
+      809.9,
+      545.9
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX, hàng ghế thứ 2",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      535.7,
+      809.9,
+      545.9
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo an toàn hàng trước và hàng 2",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      545.9,
+      809.9,
+      556.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo an toàn hàng trước và hàng 2",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 19,
+    "source_bbox": [
+      31.1,
+      545.9,
+      809.9,
+      556.0
+    ],
+    "source_block_id": "p19_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "10",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      88.7,
+      809.9,
+      99.4
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "11",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      88.7,
+      809.9,
+      99.4
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      99.4,
+      809.9,
+      109.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      99.4,
+      809.9,
+      109.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      109.5,
+      809.9,
+      119.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      109.5,
+      809.9,
+      119.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      119.7,
+      809.9,
+      129.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      119.7,
+      809.9,
+      129.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      129.8,
+      809.9,
+      140.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      129.8,
+      809.9,
+      140.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      140.5,
+      809.9,
+      150.6
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "2",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      140.5,
+      809.9,
+      150.6
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "0",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      150.6,
+      809.9,
+      161.3
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống túi khí",
+    "spec_key": "airbags",
+    "spec_value": "1",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      150.6,
+      809.9,
+      161.3
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lái trên cao tốc",
+    "spec_key": "Hỗ trợ di chuyển khi ùn tắc",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      182.2,
+      809.9,
+      192.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lái trên cao tốc",
+    "spec_key": "Hỗ trợ di chuyển khi ùn tắc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      182.2,
+      809.9,
+      192.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lái trên cao tốc",
+    "spec_key": "Hỗ trợ lái trên đường cao tốc",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      192.9,
+      809.9,
+      203.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lái trên cao tốc",
+    "spec_key": "Hỗ trợ lái trên đường cao tốc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      192.9,
+      809.9,
+      203.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ làn",
+    "spec_key": "Cảnh báo chệch làn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      213.1,
+      809.9,
+      223.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ làn",
+    "spec_key": "Cảnh báo chệch làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      213.1,
+      809.9,
+      223.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ làn",
+    "spec_key": "Hỗ trợ giữ làn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      223.8,
+      809.9,
+      233.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ làn",
+    "spec_key": "Hỗ trợ giữ làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      223.8,
+      809.9,
+      233.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ làn",
+    "spec_key": "Kiểm soát đi giữa làn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      233.9,
+      809.9,
+      244.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ làn",
+    "spec_key": "Kiểm soát đi giữa làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      233.9,
+      809.9,
+      244.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hỗ trợ hành trình",
+    "spec_key": "Kiểm soát hành trình",
+    "spec_value": "Ga tự động cơ bản",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      254.8,
+      809.9,
+      265.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hỗ trợ hành trình",
+    "spec_key": "Kiểm soát hành trình",
+    "spec_value": "Ga tự động thích ứng",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      254.8,
+      809.9,
+      265.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hỗ trợ hành trình",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      265.5,
+      809.9,
+      275.6
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hỗ trợ hành trình",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      265.5,
+      809.9,
+      275.6
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hỗ trợ hành trình",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      275.6,
+      809.9,
+      285.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hỗ trợ hành trình",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      275.6,
+      809.9,
+      285.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo va chạm phía trước",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      296.4,
+      809.9,
+      307.2
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo va chạm phía trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      296.4,
+      809.9,
+      307.2
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      307.2,
+      809.9,
+      317.3
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      307.2,
+      809.9,
+      317.3
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      317.3,
+      809.9,
+      328.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      317.3,
+      809.9,
+      328.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      328.0,
+      809.9,
+      338.1
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Cảnh báo va chạm",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      328.0,
+      809.9,
+      338.1
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lái khi có nguy cơ va chạm",
+    "spec_key": "Phanh tự động khẩn cấp phía trước",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      348.8,
+      809.9,
+      359.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lái khi có nguy cơ va chạm",
+    "spec_key": "Phanh tự động khẩn cấp phía trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      348.8,
+      809.9,
+      359.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lái khi có nguy cơ va chạm",
+    "spec_key": "Hỗ trợ giữ làn khẩn cấp",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      359.0,
+      809.9,
+      369.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lái khi có nguy cơ va chạm",
+    "spec_key": "Hỗ trợ giữ làn khẩn cấp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      359.0,
+      809.9,
+      369.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Các tính năng khác",
+    "spec_key": "Đèn pha tự động/Đèn pha thích ứng",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      379.8,
+      809.9,
+      389.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Các tính năng khác",
+    "spec_key": "Đèn pha tự động/Đèn pha thích ứng",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      379.8,
+      809.9,
+      389.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Các tính năng khác",
+    "spec_key": "Hệ thống giám sát lái xe",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      389.9,
+      809.9,
+      400.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Các tính năng khác",
+    "spec_key": "Hệ thống giám sát lái xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      389.9,
+      809.9,
+      400.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Các tính năng khác",
+    "spec_key": "Hệ thống camera 360 độ giám sát xung quanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      400.0,
+      809.9,
+      410.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Các tính năng khác",
+    "spec_key": "Hệ thống camera 360 độ giám sát xung quanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      400.0,
+      809.9,
+      410.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Chế độ xe cơ bản: Cắm trại, Người lái, Thú cưng, Rửa Xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      431.6,
+      809.9,
+      442.3
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Chế độ xe cơ bản: Cắm trại, Người lái, Thú cưng, Rửa Xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      431.6,
+      809.9,
+      442.3
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Giải trí cơ bản (Đài FM, Bluetooth, USB)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      442.3,
+      809.9,
+      453.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Giải trí cơ bản (Đài FM, Bluetooth, USB)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      442.3,
+      809.9,
+      453.0
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Giải trí trực tuyến: games, ứng dụng giải trí, nghe nhạc.",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      453.0,
+      809.9,
+      463.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Giải trí trực tuyến: games, ứng dụng giải trí, nghe nhạc.",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      453.0,
+      809.9,
+      463.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Kết nối với Android Auto và Apple Carplay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      463.7,
+      809.9,
+      473.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Kết nối với Android Auto và Apple Carplay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      463.7,
+      809.9,
+      473.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Bản đồ cơ bản (Tìm địa điểm, Dẫn đường, tình trạng giao thông, hình vệ tinh)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      473.8,
+      809.9,
+      484.6
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Bản đồ cơ bản (Tìm địa điểm, Dẫn đường, tình trạng giao thông, hình vệ tinh)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      473.8,
+      809.9,
+      484.6
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Dẫn đường nâng cao cho xe điện (Tìm trạm sạc, gợi ý đường tối ưu để sạc)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      484.6,
+      809.9,
+      494.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Dẫn đường nâng cao cho xe điện (Tìm trạm sạc, gợi ý đường tối ưu để sạc)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      484.6,
+      809.9,
+      494.7
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Khung tiện ích cơ bản: Lịch dương, thời tiết, media, bản đồ",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      494.7,
+      809.9,
+      505.4
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Khung tiện ích cơ bản: Lịch dương, thời tiết, media, bản đồ",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      494.7,
+      809.9,
+      505.4
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Trình duyệt web",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      505.4,
+      809.9,
+      515.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Hệ thống giải trí trên xe",
+    "spec_key": "Trình duyệt web",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      505.4,
+      809.9,
+      515.5
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Tư vấn tình trạng xe và hỗ trợ xử lý sự cố",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      526.2,
+      809.9,
+      536.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Tư vấn tình trạng xe và hỗ trợ xử lý sự cố",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      526.2,
+      809.9,
+      536.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Hỗ trợ điều khiển các chức năng xe cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      536.9,
+      809.9,
+      547.1
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Hỗ trợ điều khiển các chức năng xe cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      536.9,
+      809.9,
+      547.1
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Hỏi đáp và tìm kiếm thông tin cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      547.1,
+      809.9,
+      557.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Hỏi đáp và tìm kiếm thông tin cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      547.1,
+      809.9,
+      557.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Hỗ trợ điều hướng dẫn đường cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      557.8,
+      809.9,
+      567.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Hỗ trợ điều hướng dẫn đường cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      557.8,
+      809.9,
+      567.9
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 ECO",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Chào hỏi, thực hiện lệnh theo kịch bản tạo sẵn cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      567.9,
+      809.9,
+      576.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "VF 8 PLUS",
+    "spec_category": "Trợ lý ảo",
+    "spec_key": "Chào hỏi, thực hiện lệnh theo kịch bản tạo sẵn cơ bản",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 20,
+    "source_bbox": [
+      31.1,
+      567.9,
+      809.9,
+      576.8
+    ],
+    "source_block_id": "p20_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Đồng bộ tài khoản, ứng dụng, phân quyền tài xế",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      98.8,
+      809.9,
+      108.9
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Đồng bộ tài khoản, ứng dụng, phân quyền tài xế",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      98.8,
+      809.9,
+      108.9
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Thông báo trạng thái cơ bản trên xe (trạng thái, hiệu suất vận hành, thông tin pin, sạc, vv)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      109.5,
+      809.9,
+      119.7
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Thông báo trạng thái cơ bản trên xe (trạng thái, hiệu suất vận hành, thông tin pin, sạc, vv)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      109.5,
+      809.9,
+      119.7
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Quản lý sạc & thanh toán phí sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      119.7,
+      809.9,
+      129.8
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Quản lý sạc & thanh toán phí sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      119.7,
+      809.9,
+      129.8
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Bản đồ trạm sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      130.4,
+      809.9,
+      139.9
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Bản đồ trạm sạc",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      130.4,
+      809.9,
+      139.9
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Dịch vụ hậu mãi: đặt lịch sửa chữa, lái thử",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      140.5,
+      809.9,
+      150.6
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Dịch vụ hậu mãi: đặt lịch sửa chữa, lái thử",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      140.5,
+      809.9,
+      150.6
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Mua bán phụ kiện",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      150.6,
+      809.9,
+      160.7
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Mua bán phụ kiện",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      150.6,
+      809.9,
+      160.7
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Eco",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Cập nhật phần mềm từ xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      161.3,
+      809.9,
+      171.4
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": "Plus",
+    "spec_category": "ỨNG DỤNG ĐIỆN THOẠI",
+    "spec_key": "Cập nhật phần mềm từ xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 21,
+    "source_bbox": [
+      30.3,
+      161.3,
+      809.9,
+      171.4
+    ],
+    "source_block_id": "p21_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Chính sách bảo hành",
+    "spec_key": "Bảo hành xe",
+    "spec_value": "10",
+    "spec_unit": "năm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      54.7,
+      143.5,
+      189.5,
+      188.2
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Chính sách bảo hành",
+    "spec_key": "Thời hạn bảo hành xe",
+    "spec_value": "200.000",
+    "spec_unit": "km",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      54.7,
+      159.0,
+      189.5,
+      188.2
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Chính sách bảo hành",
+    "spec_key": "Điều kiện áp dụng bảo hành xe",
+    "spec_value": "Tùy điều kiện nào đến trước",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      74.1,
+      175.1,
+      183.6,
+      185.2
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Chính sách bảo hành",
+    "spec_key": "Bảo hành pin",
+    "spec_value": "10",
+    "spec_unit": "năm",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      54.7,
+      202.5,
+      189.5,
+      228.1
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Chính sách bảo hành",
+    "spec_key": "Thời hạn bảo hành pin",
+    "spec_value": "200.000",
+    "spec_unit": "km",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      54.7,
+      212.6,
+      189.5,
+      228.1
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Chính sách bảo hành",
+    "spec_key": "Điều kiện áp dụng bảo hành pin",
+    "spec_value": "Tùy điều kiện nào đến trước",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      74.1,
+      227.5,
+      185.3,
+      237.0
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Dịch vụ hậu mãi",
+    "spec_key": "Cứu hộ",
+    "spec_value": "24/7",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      241.7,
+      145.3,
+      363.9,
+      178.1
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Dịch vụ hậu mãi",
+    "spec_key": "Thời gian cung cấp dịch vụ cứu hộ",
+    "spec_value": "Suốt thời gian bảo hành",
+    "spec_unit": "",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      241.7,
+      145.3,
+      363.9,
+      178.1
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hạ tầng sạc",
+    "spec_key": "Mạng lưới cổng sạc",
+    "spec_value": "150.000",
+    "spec_unit": "cổng sạc",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      241.7,
+      201.9,
+      363.9,
+      223.9
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 8",
+    "version_name": null,
+    "spec_category": "Hạ tầng sạc",
+    "spec_key": "Phạm vi phủ rộng",
+    "spec_value": "34/34",
+    "spec_unit": "tỉnh thành",
+    "source_document": "vf8_brochure",
+    "source_url": "https://storage.googleapis.com/vinfast-data-01/brochure/VF8_Brochure_03022026.pdf",
+    "source_page": 22,
+    "source_bbox": [
+      241.7,
+      211.4,
+      363.9,
+      225.1
+    ],
+    "source_block_id": "p22_b02",
+    "confidence": 0.98
+  }
+]

@@ -78,30 +78,27 @@ def build_tool_plan(state) -> list[tuple[str, dict]] | None:
 
     if intent == "price":
         if not model:
-            return None
+            return [("list_available_models", {})]
         return [("get_price", {"model_code": model, "version": version})]
 
-    if intent == "spec_query":
+    if intent in ("spec_query", "feature_presence"):
         if not model:
-            return None
-        return [("get_specs", {"model_code": model, "version": version, "category": category})]
-
-    if intent == "feature_presence":
-        if not model:
-            return None
-        # version=None → get_specs trả về TẤT CẢ phiên bản (đủ để trả lời "bản nào có")
-        # keys=[spec_key] → chỉ lấy đúng field cần (context nhỏ, generate nhanh)
-        args: dict = {"model_code": model, "version": None, "category": category}
+            return [
+                ("search_knowledge_base", {"query": query, "model_id": None}),
+                ("list_available_models", {}),
+            ]
+        args: dict = {"model_code": model, "version": version, "category": category}
         if entities.get("spec_key"):
             args["keys"] = [entities["spec_key"]]
         return [("get_specs", args)]
 
     if intent == "cross_model_feature":
-        # scan toàn bộ model chính — chỉ lấy đúng field cần (feature check)
         args = {"version": None, "category": category}
         if entities.get("spec_key"):
             args["keys"] = [entities["spec_key"]]
-        return [("get_specs", {"model_code": m, **args}) for m in MAIN_MODELS]
+        plans = [("get_specs", {"model_code": m, **args}) for m in MAIN_MODELS]
+        plans.append(("search_knowledge_base", {"query": query, "model_id": None}))
+        return plans
 
     if intent == "compare":
         models = _models_in_query(query, model)

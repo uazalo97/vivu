@@ -1,0 +1,113 @@
+model_code|version_name|version_code|spec_category|spec_category_vn|spec_key|spec_key_vn|spec_value|spec_unit|source_document|source_url|source_page|source_bbox|source_block_id|confidence
+VF 3|Eco||pricing|Pricing|price_vnd|Giá bán chính thức|302|triệu đồng|vf_3_brochure|vf3_brochure.pdf|2|[462.1, 178.6, 679.6, 455.4]|p02_b02|0.98
+VF 3|Eco||convenience|Tiện nghi|xe_kem_pin|Xe kèm pin|Có||vf_3_brochure|vf3_brochure.pdf|2|[462.1, 178.6, 679.6, 455.4]|p02_b02|0.98
+VF 3|Eco||convenience|Tiện nghi|android_auto__apple_carplay|Android Auto & Apple CarPlay|Có||vf_3_brochure|vf3_brochure.pdf|2|[462.1, 178.6, 679.6, 455.4]|p02_b02|0.98
+VF 3|Plus||pricing|Pricing|price_vnd|Giá bán chính thức|315|triệu đồng|vf_3_brochure|vf3_brochure.pdf|2|[695.4, 178.6, 912.9, 455.4]|p02_b02|0.98
+VF 3|Plus||convenience|Tiện nghi|xe_kem_pin|Xe kèm pin|Có||vf_3_brochure|vf3_brochure.pdf|2|[695.4, 178.6, 912.9, 455.4]|p02_b02|0.98
+VF 3|Plus||convenience|Tiện nghi|android_auto__apple_carplay|Android Auto & Apple CarPlay|Có||vf_3_brochure|vf3_brochure.pdf|2|[695.4, 178.6, 912.9, 455.4]|p02_b02|0.98
+VF 3|Plus||convenience|Tiện nghi|op_lung|Ốp lưng|Gương chiếu hậu chỉnh điện & gập điện; camera lùi||vf_3_brochure|vf3_brochure.pdf|2|[695.4, 178.6, 912.9, 455.4]|p02_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|height_mm|Chiều cao tổng thể|1652|mm|vf_3_brochure|vf3_brochure.pdf|4|[32.7, 122.0, 98.0, 256.0]|p04_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|length_mm|Chiều dài tổng thể|3190|mm|vf_3_brochure|vf3_brochure.pdf|4|[93.3, 256.0, 233.4, 306.6]|p04_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|width_mm|Chiều rộng tổng thể|1679|mm|vf_3_brochure|vf3_brochure.pdf|4|[242.7, 256.0, 387.4, 306.6]|p04_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|wheelbase_mm|Chiều dài cơ sở|2075|mm|vf_3_brochure|vf3_brochure.pdf|4|[116.7, 497.1, 247.4, 544.7]|p04_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|engine_type|Loại động cơ|01 Motor||vf_3_brochure|vf3_brochure.pdf|4|[574.1, 187.5, 849.4, 226.2]|p04_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|power_kw|Công suất tối đa|30|kW|vf_3_brochure|vf3_brochure.pdf|4|[578.7, 232.2, 844.8, 256.0]|p04_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|torque_nm|Mô men xoắn cực đại|110|Nm|vf_3_brochure|vf3_brochure.pdf|4|[574.1, 261.9, 849.4, 300.6]|p04_b02|0.98
+VF 3|||battery|Pin & sạc|fast_charge_min|Thời gian nạp pin nhanh nhất|36|phút|vf_3_brochure|vf3_brochure.pdf|4|[574.1, 303.6, 849.4, 339.3]|p04_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|drivetrain|Hệ dẫn động|RWD/Cầu sau||vf_3_brochure|vf3_brochure.pdf|4|[574.1, 339.3, 849.4, 378.0]|p04_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|payload_kg|Tải trọng|300|kg|vf_3_brochure|vf3_brochure.pdf|5|[508.7, 39.9, 695.4, 80.4]|p05_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|payload_kg|Tải trọng|50|kg|vf_3_brochure|vf3_brochure.pdf|5|[319.2, 169.1, 424.7, 239.9]|p05_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|turning_radius_m|Bán kính quay vòng tối thiểu|4.5|m|vf_3_brochure|vf3_brochure.pdf|5|[564.7, 380.4, 681.4, 430.4]|p05_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|ground_clearance_mm|Khoảng sáng gầm xe|175|mm|vf_3_brochure|vf3_brochure.pdf|5|[506.9, 472.1, 629.1, 517.9]|p05_b02|0.98
+VF 3|||battery|Pin & sạc|range_km|Quãng đường di chuyển|215|km|vf_3_brochure|vf3_brochure.pdf|5|[339.8, 445.3, 458.3, 503.0]|p05_b02|0.98
+VF 3|||battery|Pin & sạc|fast_charge_min|Thời gian sạc nhanh|36|phút|vf_3_brochure|vf3_brochure.pdf|5|[197.0, 495.9, 332.3, 541.7]|p05_b02|0.98
+VF 3|||convenience|Tiện nghi|man_hinh|Màn hình|10|inch|vf_3_brochure|vf3_brochure.pdf|5|[623.5, 312.5, 791.6, 356.0]|p05_b02|0.98
+VF 3|||convenience|Tiện nghi|thoi_han_bao_hanh|Thời hạn bảo hành|7|năm|vf_3_brochure|vf3_brochure.pdf|8|[118.5, 160.1, 182.0, 195.8]|p08_b02|0.98
+VF 3|||battery|Pin & sạc|range_km|Quãng đường di chuyển|160000|km|vf_3_brochure|vf3_brochure.pdf|8|[120.4, 198.2, 266.0, 228.6]|p08_b02|0.4
+VF 3|||convenience|Tiện nghi|ieu_kien_su_dung|Điều kiện sử dụng|Điều kiện sử dụng tiêu chuẩn||vf_3_brochure|vf3_brochure.pdf|8|[126.0, 231.6, 262.3, 241.7]|p08_b02|0.98
+VF 3|||convenience|Tiện nghi|thoi_han_bao_hanh|Thời hạn bảo hành|3|năm|vf_3_brochure|vf3_brochure.pdf|8|[301.5, 160.7, 356.6, 195.8]|p08_b02|0.98
+VF 3|||battery|Pin & sạc|range_km|Quãng đường di chuyển|100000|km|vf_3_brochure|vf3_brochure.pdf|8|[305.2, 198.2, 447.1, 228.6]|p08_b02|0.4
+VF 3|||convenience|Tiện nghi|ieu_kien_su_dung|Điều kiện sử dụng|Sử dụng mục đích Dịch vụ thương mại||vf_3_brochure|vf3_brochure.pdf|8|[305.2, 231.6, 447.1, 241.7]|p08_b02|0.98
+VF 3|||convenience|Tiện nghi|thoi_han_bao_hanh|Thời hạn bảo hành|8|năm|vf_3_brochure|vf3_brochure.pdf|8|[118.5, 313.1, 181.1, 345.9]|p08_b02|0.98
+VF 3|||battery|Pin & sạc|range_km|Quãng đường di chuyển|160000|km|vf_3_brochure|vf3_brochure.pdf|8|[121.3, 350.0, 264.2, 377.4]|p08_b02|0.4
+VF 3|||convenience|Tiện nghi|ieu_kien_su_dung|Điều kiện sử dụng|Điều kiện sử dụng tiêu chuẩn||vf_3_brochure|vf3_brochure.pdf|8|[126.9, 379.8, 261.4, 389.9]|p08_b02|0.98
+VF 3|||convenience|Tiện nghi|thoi_han_bao_hanh|Thời hạn bảo hành|3|năm|vf_3_brochure|vf3_brochure.pdf|8|[301.5, 313.1, 356.6, 345.3]|p08_b02|0.98
+VF 3|||battery|Pin & sạc|range_km|Quãng đường di chuyển|100000|km|vf_3_brochure|vf3_brochure.pdf|8|[304.3, 350.0, 447.1, 377.4]|p08_b02|0.4
+VF 3|||convenience|Tiện nghi|ieu_kien_su_dung|Điều kiện sử dụng|Sử dụng mục đích Dịch vụ thương mại||vf_3_brochure|vf3_brochure.pdf|8|[305.2, 380.4, 447.1, 389.9]|p08_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|wheelbase_mm|Chiều dài cơ sở|2075|mm|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 81.0, 252.0, 88.1]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|length_mm|Chiều dài tổng thể|3190|mm|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 87.5, 270.7, 95.2]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|width_mm|Chiều rộng tổng thể|1679|mm|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 87.5, 270.7, 95.2]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|height_mm|Chiều cao tổng thể|1652|mm|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 87.5, 270.7, 95.2]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|ground_clearance_mm|Khoảng sáng gầm xe không tải|175|mm|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 94.1, 252.0, 101.2]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|dung_tich_khoang_chua_hanh_ly_l__dung_hang_ghe_cuo|Dung tích khoang chứa hành lý (L) - Dung hàng ghế cuối|36|L|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 100.0, 270.7, 107.7]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|dung_tich_khoang_chua_hanh_ly_l__gap_hang_ghe_cuoi|Dung tích khoang chứa hành lý (L) - Gập hàng ghế cuối|285|L|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 106.6, 270.7, 114.3]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|turning_radius_m|Bán kính quay vòng tối thiểu|4.5|m|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 113.1, 252.0, 120.8]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|curb_weight_kg|Trọng lượng không tải|857|kg|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 127.4, 252.0, 135.1]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|payload_kg|Tải trọng|300|kg|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 133.9, 252.0, 141.7]|p09_b02|0.98
+VF 3|||dimension|Kích thước & trọng lượng|roof_load_kg|Tải trọng hành lý nóc xe|50|kg|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 140.5, 261.4, 148.2]|p09_b02|0.98
+VF 3|||chassis|Khung gầm & hệ thống treo|suspension_type|Hệ thống treo|Độc lập, MacPherson||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 189.3, 280.0, 197.0]|p09_b02|0.98
+VF 3|||chassis|Khung gầm & hệ thống treo|suspension_type|Hệ thống treo|Phụ thuộc, trục cứng với thanh xoắn Panhard||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 195.8, 317.4, 204.2]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|phanh_truoc|Phanh trước|Phanh đĩa, calip nổi||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 210.1, 289.4, 217.9]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|phanh_sau|Phanh sau|Phanh tang trống||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 216.7, 280.0, 224.4]|p09_b02|0.98
+VF 3|||chassis|Khung gầm & hệ thống treo|tire_size|Kích thước lốp|175 / 75R16||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 241.1, 261.4, 248.8]|p09_b02|0.98
+VF 3|||chassis|Khung gầm & hệ thống treo|tire_repair_kit|Bộ vá lốp|AFS||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 247.6, 252.0, 255.4]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|tro_luc_lai|Trợ lực lái|Có||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 273.8, 252.0, 281.6]|p09_b02|0.98
+VF 3|||exterior|Ngoại thất|headlight_type|Đèn pha|Halogen||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 317.9, 261.4, 325.6]|p09_b02|0.98
+VF 3|||exterior|Ngoại thất|taillight_type|Đèn hậu|Halogen||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 324.4, 261.4, 332.2]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|en_inh_vi|Đèn định vị|Halogen||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 331.0, 261.4, 338.7]|p09_b02|0.98
+VF 3|||exterior|Ngoại thất|tailgate_type|Cốp sau|Chỉnh cơ||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 337.5, 270.7, 345.3]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|canh_huong_gio|Cánh hướng gió|Có||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 344.1, 252.0, 351.8]|p09_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|power_kw|Công suất tối đa|30|kW|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 396.5, 252.0, 404.2]|p09_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|torque_nm|Mô men xoắn cực đại|110|Nm|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 403.0, 252.0, 410.7]|p09_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|top_speed_kmh|Tốc độ tối đa|100|km/h|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 409.5, 326.7, 418.5]|p09_b02|0.98
+VF 3|||battery|Pin & sạc|battery_type|Loại pin|LFP||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 435.1, 252.0, 442.9]|p09_b02|0.98
+VF 3|||battery|Pin & sạc|battery_kwh|Dung lượng pin khả dụng|18.64|kWh|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 441.7, 261.4, 449.4]|p09_b02|0.98
+VF 3|||battery|Pin & sạc|range_km|Quãng đường chạy 1 lần sạc đầy|215|km|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 448.2, 336.0, 457.2]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|tinh_nang_sac_nhanh|Tính năng sạc nhanh|Có||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 455.4, 252.0, 463.1]|p09_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|regenerative_braking|Hệ thống phanh tái sinh|Có||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 461.9, 252.0, 469.7]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|thoi_gian_nap_pin_nhanh|Thời gian nạp pin nhanh|36 phút (10 - 70%)|phút|vf_3_brochure|vf3_brochure.pdf|9|[84.9, 468.5, 298.7, 476.8]|p09_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|drivetrain|Hệ dẫn động|RWD||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 510.7, 252.0, 518.5]|p09_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|drive_modes|Chế độ lái|Có (Eco/Normal)||vf_3_brochure|vf3_brochure.pdf|9|[84.9, 517.3, 289.4, 525.6]|p09_b02|0.98
+VF 3|||interior|Nội thất|seats_count|Số chỗ ngồi|4|chỗ|vf_3_brochure|vf3_brochure.pdf|9|[379.9, 81.0, 532.1, 88.7]|p09_b02|0.98
+VF 3|||interior|Nội thất|seat_material|Chất liệu bọc ghế|Nỉ||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 87.5, 532.1, 95.2]|p09_b02|0.98
+VF 3|||interior|Nội thất|driver_seat|Ghế lái|Chỉnh cơ 4 hướng||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 113.7, 569.4, 121.4]|p09_b02|0.98
+VF 3|||interior|Nội thất|driver_seat|Ghế lái|Có - tích hợp||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 120.2, 569.4, 128.0]|p09_b02|0.98
+VF 3|||interior|Nội thất|passenger_seat|Ghế phụ|Chỉnh cơ 4 hướng||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 142.3, 569.4, 150.0]|p09_b02|0.98
+VF 3|||interior|Nội thất|passenger_seat|Ghế phụ|Có - tích hợp||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 148.8, 569.4, 156.6]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|gap_lung_hang_ghe_2|Gập lưng hàng ghế 2|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 175.0, 550.7, 182.7]|p09_b02|0.98
+VF 3|||interior|Nội thất|second_row_seats|Hàng ghế thứ 2|Có - cố định||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 181.6, 569.4, 189.3]|p09_b02|0.98
+VF 3|||interior|Nội thất|ac_system|Hệ thống điều hòa|Chỉnh cơ, 1 vùng||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 207.8, 578.7, 215.5]|p09_b02|0.98
+VF 3|||interior|Nội thất|air_filter|Lọc không khí|Lọc bụi||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 214.3, 550.7, 222.0]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|chuc_nang_lam_tan_suongtan_bang|Chức năng làm tan sương/tan băng|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 220.8, 578.7, 228.6]|p09_b02|0.98
+VF 3|||infotainment|Giải trí & kết nối|center_display_inch|Màn hình giải trí cảm ứng|10|inch|vf_3_brochure|vf3_brochure.pdf|9|[379.9, 247.6, 578.7, 255.4]|p09_b02|0.98
+VF 3|||infotainment|Giải trí & kết nối|connectivity|Kết nối (Bluetooth/Wifi/USB)|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 254.2, 606.7, 261.9]|p09_b02|0.98
+VF 3|||infotainment|Giải trí & kết nối|connectivity|Kết nối (Bluetooth/Wifi/USB)|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 260.7, 550.7, 268.5]|p09_b02|0.98
+VF 3|||infotainment|Giải trí & kết nối|connectivity|Kết nối (Bluetooth/Wifi/USB)|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 267.3, 560.1, 275.0]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|android_auto__apple_carplay|Android Auto & Apple CarPlay|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 273.8, 588.1, 281.6]|p09_b02|0.98
+VF 3|||infotainment|Giải trí & kết nối|speakers_count|Hệ thống loa|2|loa|vf_3_brochure|vf3_brochure.pdf|9|[379.9, 293.5, 532.1, 301.2]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|phanh_tay|Phanh tay|Điện tử||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 318.5, 560.1, 326.2]|p09_b02|0.98
+VF 3|||interior|Nội thất|rearview_mirror|Gương chiếu hậu trong xe|Chế độ ngày/đêm||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 325.0, 588.1, 332.8]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|en_tran_phia_truoc|Đèn trần phía trước|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 331.6, 550.7, 339.3]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|tam_che_nang|Tấm che nắng|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 338.1, 541.4, 345.9]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|hoc_ung_coc_truocsau|Hộc đựng cốc trước/sau|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 344.7, 569.4, 352.4]|p09_b02|0.98
+VF 3|||safety|An toàn|abs_brake|Hệ thống chống bó cứng phanh (ABS)|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 373.8, 597.4, 381.6]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|chuc_nang_kiem_soat_luc_keo_tcs|Chức năng kiểm soát lực kéo TCS|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 380.4, 597.4, 388.1]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|ho_tro_khoi_hanh_ngang_doc_hsa|Hỗ trợ khởi hành ngang dốc HSA|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 386.9, 597.4, 394.7]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|khoa_cua_xe_tu_ong_khi_o|Khoá cửa xe tự động khi đỗ|Có (6km/h)||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 393.5, 597.4, 401.2]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|cang_ai_khan_cap_ghe_truoc|Căng đai khẩn cấp ghế trước|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 400.0, 597.4, 407.8]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|chuc_nang_phanh_phoi_luc_phanh_ien_tu_ebd|Chức năng phanh phối lực phanh điện tử EBD|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 406.6, 606.7, 414.3]|p09_b02|0.98
+VF 3|||powertrain|Hệ thống truyền động|engine_type|Loại động cơ|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 413.1, 606.7, 420.9]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|canh_bao_chong_trom|Cảnh báo chống trộm|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 419.7, 588.1, 427.4]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|canh_bao_day_an_toan_hang_ghe_truoc|Cảnh báo dây an toàn hàng ghế trước|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 426.2, 606.7, 434.0]|p09_b02|0.98
+VF 3|||safety|An toàn|airbags_count|Số lượng túi khí|Có|túi|vf_3_brochure|vf3_brochure.pdf|9|[379.9, 450.0, 606.7, 457.8]|p09_b02|0.98
+VF 3|||adas|Hỗ trợ lái nâng cao (ADAS)|ho_tro_o_phia_sau|Hỗ trợ đỗ phía sau|Có||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 476.2, 588.1, 484.0]|p09_b02|0.98
+VF 3|||safety|An toàn|rear_camera|Camera lùi|AFS||vf_3_brochure|vf3_brochure.pdf|9|[379.9, 482.8, 560.1, 490.5]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|camping_mode|Chế độ cắm trại|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 81.0, 830.8, 88.7]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|ho_so_nguoi_lai|Hồ sơ người lái|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 87.5, 830.8, 95.2]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|trinh_duyet_web|Trình duyệt web|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 94.1, 830.8, 101.8]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|giam_sat__inh_vi_xe_tu_xa|Giám sát & định vị xe từ xa|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 125.6, 840.1, 133.3]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|tim_kiem_tram_sac__thanh_toan|Tìm kiếm trạm sạc & thanh toán|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 132.2, 840.1, 139.9]|p09_b02|0.98
+VF 3|||convenience|Tiện nghi|nhan_thong_bao__at_dich_vu_hau_mai|Nhận thông báo & đặt dịch vụ hậu mãi|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 138.7, 840.1, 146.4]|p09_b02|0.98
+VF 3|Plus||exterior|Ngoại thất|side_mirrors|Gương chiếu hậu|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 196.4, 840.1, 204.2]|p09_b02|0.98
+VF 3|Plus||safety|An toàn|rear_camera|Camera lùi|Có||vf_3_brochure|vf3_brochure.pdf|9|[666.5, 203.0, 840.1, 210.7]|p09_b02|0.98
+VF 3|Plus||chassis|Khung gầm & hệ thống treo|wheel_size_inch|Kích thước la-zăng|Có|inch|vf_3_brochure|vf3_brochure.pdf|9|[666.5, 209.5, 840.1, 217.3]|p09_b02|0.98

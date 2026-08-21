@@ -1,0 +1,346 @@
+model_code|version_name|spec_category|spec_key|spec_value|spec_unit|source_document|source_url|source_page|source_bbox|source_block_id|confidence
+VF 9||Kích thước|Chiều rộng|2254|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|6|[105.2, 107.1, 206.3, 226.2]|p06_b02|0.98
+VF 9||Kích thước|wheelbase_mm|3149|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|6|[261.0, 357.2, 404.1, 419.7]|p06_b02|0.98
+VF 9||Kích thước|Chiều dài|5119|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|6|[235.7, 395.9, 366.2, 461.3]|p06_b02|0.98
+VF 9||Kích thước|Chiều cao|1697|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|6|[719.8, 253.0, 774.5, 381.0]|p06_b02|0.98
+VF 9||Pin & Sạc|range_km|626|km|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|7|[595.2, 167.3, 770.3, 332.2]|p07_b02|0.98
+VF 9||Động cơ & Vận hành|power_kw|402|hp|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|7|[90.1, 445.3, 319.9, 528.0]|p07_b02|0.98
+VF 9||Động cơ & Vận hành|torque_nm|620|Nm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|7|[343.5, 445.3, 538.0, 528.0]|p07_b02|0.98
+VF 9||Động cơ & Vận hành|drivetrain|HAI CẦU toàn thời gian (AWD)||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|7|[537.1, 445.3, 750.1, 528.0]|p07_b02|0.98
+VF 9|VF 9 ECO|Kích thước|wheelbase_mm|3149|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 45.2, 804.8, 58.3]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|wheelbase_mm|3149|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 45.2, 804.8, 58.3]|p14_b02|0.98
+VF 9|VF 9 ECO|Kích thước|length_mm|5119|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 58.9, 804.8, 72.6]|p14_b02|0.98
+VF 9|VF 9 ECO|Kích thước|width_mm|2254|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 58.9, 804.8, 72.6]|p14_b02|0.98
+VF 9|VF 9 ECO|Kích thước|height_mm|1697|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 58.9, 804.8, 72.6]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|length_mm|5119|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 58.9, 804.8, 72.6]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|width_mm|2254|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 58.9, 804.8, 72.6]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|height_mm|1697|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 58.9, 804.8, 72.6]|p14_b02|0.98
+VF 9|VF 9 ECO|Kích thước|ground_clearance_mm|174|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 73.2, 804.8, 86.3]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|ground_clearance_mm|184|mm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 73.2, 804.8, 86.3]|p14_b02|0.98
+VF 9|VF 9 ECO|Kích thước|Dung tích khoang chứa hành lý - Có hàng ghế cuối|212|L|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 86.9, 804.8, 100.6]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|Dung tích khoang chứa hành lý - Có hàng ghế cuối|212|L|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 86.9, 804.8, 100.6]|p14_b02|0.98
+VF 9|VF 9 ECO|Kích thước|Dung tích khoang chứa hành lý - Gập hàng ghế cuối|926|L|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 101.2, 804.8, 114.3]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|Dung tích khoang chứa hành lý - Gập hàng ghế cuối|926|L|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 101.2, 804.8, 114.3]|p14_b02|0.98
+VF 9|VF 9 ECO|Kích thước|Dung tích khoang chứa hành lý - Phía trước|100|L|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 114.9, 804.8, 128.6]|p14_b02|0.98
+VF 9|VF 9 PLUS|Kích thước|Dung tích khoang chứa hành lý - Phía trước|100|L|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 114.9, 804.8, 128.6]|p14_b02|0.98
+VF 9|VF 9 ECO|Tải trọng|Trọng lượng không tải|2.911|kg|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 142.9, 804.8, 156.6]|p14_b02|0.98
+VF 9|VF 9 PLUS|Tải trọng|Trọng lượng không tải|"7 chỗ: 2.968 | 6 chỗ: 2.932"|kg|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 142.9, 804.8, 156.6]|p14_b02|0.98
+VF 9|VF 9 ECO|Tải trọng|Tải trọng|550|kg|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 157.2, 804.8, 170.8]|p14_b02|0.98
+VF 9|VF 9 PLUS|Tải trọng|Tải trọng|"7 chỗ: 550 | 6 chỗ: 475"|kg|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 157.2, 804.8, 170.8]|p14_b02|0.98
+VF 9|VF 9 ECO|Tải trọng|Tải trọng hành lý nóc xe|75|kg|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 170.8, 804.8, 184.5]|p14_b02|0.98
+VF 9|VF 9 PLUS|Tải trọng|Tải trọng hành lý nóc xe|75|kg|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 170.8, 804.8, 184.5]|p14_b02|0.98
+VF 9|VF 9 ECO|Động cơ|Động cơ|2 motor 150|kW|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 211.9, 804.8, 225.6]|p14_b02|0.98
+VF 9|VF 9 PLUS|Động cơ|Động cơ|2 motor 150|kW|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 211.9, 804.8, 225.6]|p14_b02|0.98
+VF 9|VF 9 ECO|Động cơ|power_kw|402|hp/kW|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 226.2, 804.8, 239.9]|p14_b02|0.98
+VF 9|VF 9 PLUS|Động cơ|power_kw|402|hp/kW|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 226.2, 804.8, 239.9]|p14_b02|0.98
+VF 9|VF 9 ECO|Động cơ|torque_nm|620|Nm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 240.5, 804.8, 254.2]|p14_b02|0.98
+VF 9|VF 9 PLUS|Động cơ|torque_nm|620|Nm|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 240.5, 804.8, 254.2]|p14_b02|0.98
+VF 9|VF 9 ECO|Động cơ|top_speed_kmh|200|km/h|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 254.8, 804.8, 268.5]|p14_b02|0.98
+VF 9|VF 9 PLUS|Động cơ|top_speed_kmh|200|km/h|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 254.8, 804.8, 268.5]|p14_b02|0.98
+VF 9|VF 9 ECO|Pin|battery_type|CATL||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 282.8, 804.8, 296.4]|p14_b02|0.98
+VF 9|VF 9 PLUS|Pin|battery_type|CATL||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 282.8, 804.8, 296.4]|p14_b02|0.98
+VF 9|VF 9 ECO|Pin|battery_kwh|123|kWh|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 297.0, 804.8, 310.7]|p14_b02|0.98
+VF 9|VF 9 PLUS|Pin|battery_kwh|123|kWh|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 297.0, 804.8, 310.7]|p14_b02|0.98
+VF 9|VF 9 ECO|Pin|range_km|626|km|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 311.3, 804.8, 325.0]|p14_b02|0.98
+VF 9|VF 9 PLUS|Pin|range_km|602|km|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 311.3, 804.8, 325.0]|p14_b02|0.98
+VF 9|VF 9 ECO|Pin|power_kw|6.6|kW|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 325.6, 804.8, 339.3]|p14_b02|0.4
+VF 9|VF 9 PLUS|Pin|power_kw|6.6|kW|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 325.6, 804.8, 339.3]|p14_b02|0.4
+VF 9|VF 9 ECO|Pin|Hệ thống phanh tái sinh|Có (Tắt, Thấp, Trung bình, Cao)||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 339.9, 804.8, 353.0]|p14_b02|0.98
+VF 9|VF 9 PLUS|Pin|Hệ thống phanh tái sinh|Có (Tắt, Thấp, Trung bình, Cao)||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 339.9, 804.8, 353.0]|p14_b02|0.98
+VF 9|VF 9 ECO|Pin|fast_charge_min|35|phút (10 - 70%)|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 353.6, 804.8, 367.3]|p14_b02|0.98
+VF 9|VF 9 PLUS|Pin|fast_charge_min|35|phút (10 - 70%)|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 353.6, 804.8, 367.3]|p14_b02|0.98
+VF 9|VF 9 ECO|Thông số truyền động khác|Cách chuyển số|Nút bấm||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 380.4, 804.8, 394.1]|p14_b02|0.98
+VF 9|VF 9 PLUS|Thông số truyền động khác|Cách chuyển số|Nút bấm||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 380.4, 804.8, 394.1]|p14_b02|0.98
+VF 9|VF 9 ECO|Thông số truyền động khác|drivetrain|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 394.7, 804.8, 407.8]|p14_b02|0.98
+VF 9|VF 9 PLUS|Thông số truyền động khác|drivetrain|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 394.7, 804.8, 407.8]|p14_b02|0.98
+VF 9|VF 9 ECO|Thông số truyền động khác|Chọn chế độ lái|Eco/Normal/Sport||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 408.4, 804.8, 422.0]|p14_b02|0.98
+VF 9|VF 9 PLUS|Thông số truyền động khác|Chọn chế độ lái|Eco/Normal/Sport||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 408.4, 804.8, 422.0]|p14_b02|0.98
+VF 9|VF 9 ECO|Thông số truyền động khác|Chế độ thay đổi tốc độ đến dừng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 422.6, 804.8, 435.7]|p14_b02|0.98
+VF 9|VF 9 PLUS|Thông số truyền động khác|Chế độ thay đổi tốc độ đến dừng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 422.6, 804.8, 435.7]|p14_b02|0.98
+VF 9|VF 9 ECO|Giảm xóc|Hệ thống treo - trước|Độc lập, tay đòn kép||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 464.3, 804.8, 478.0]|p14_b02|0.98
+VF 9|VF 9 PLUS|Giảm xóc|Hệ thống treo - trước|Độc lập, tay đòn kép||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 464.3, 804.8, 478.0]|p14_b02|0.98
+VF 9|VF 9 ECO|Giảm xóc|Hệ thống treo - sau|Liên kết đa điểm, giảm chấn khí nén||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 478.6, 804.8, 491.7]|p14_b02|0.98
+VF 9|VF 9 PLUS|Giảm xóc|Hệ thống treo - sau|Liên kết đa điểm, giảm chấn khí nén||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 478.6, 804.8, 491.7]|p14_b02|0.98
+VF 9|VF 9 ECO|Phanh|Phanh trước|Đĩa thông gió||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 520.3, 804.8, 534.0]|p14_b02|0.98
+VF 9|VF 9 PLUS|Phanh|Phanh trước|Đĩa thông gió||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 520.3, 804.8, 534.0]|p14_b02|0.98
+VF 9|VF 9 ECO|Phanh|Phanh sau|Đĩa thông gió||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 534.6, 804.8, 547.7]|p14_b02|0.98
+VF 9|VF 9 PLUS|Phanh|Phanh sau|Đĩa thông gió||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 534.6, 804.8, 547.7]|p14_b02|0.98
+VF 9|VF 9 ECO|Vành và lốp bánh xe|wheel_size_inch|20|Inch|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 548.8, 804.8, 561.9]|p14_b02|0.98
+VF 9|VF 9 PLUS|Vành và lốp bánh xe|wheel_size_inch|21|Inch|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 548.8, 804.8, 561.9]|p14_b02|0.98
+VF 9|VF 9 ECO|Vành và lốp bánh xe|Loại la-zăng|Hợp kim||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 562.5, 804.8, 576.2]|p14_b02|0.98
+VF 9|VF 9 PLUS|Vành và lốp bánh xe|Loại la-zăng|Hợp kim||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|14|[108.6, 562.5, 804.8, 576.2]|p14_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn pha|Đèn pha|LED Matrix||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 45.2, 731.7, 58.9]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn pha|Đèn pha|LED Matrix||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 45.2, 731.7, 58.9]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn pha|Đèn chờ dẫn đường|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 58.9, 731.7, 72.6]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn pha|Đèn chờ dẫn đường|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 58.9, 731.7, 72.6]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn pha|Đèn pha tự động bật/tắt|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 72.6, 731.7, 86.3]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn pha|Đèn pha tự động bật/tắt|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 72.6, 731.7, 86.3]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn pha|Điều khiển góc chiếu pha thông minh|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 86.3, 731.7, 100.6]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn pha|Điều khiển góc chiếu pha thông minh|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 86.3, 731.7, 100.6]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn pha|Tự động quay góc chiếu đèn (Đèn liếc)|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 100.6, 731.7, 114.3]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn pha|Tự động quay góc chiếu đèn (Đèn liếc)|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 100.6, 731.7, 114.3]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn ngoại thất khác|Đèn chiếu sáng ban ngày|LED||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 128.0, 731.7, 142.3]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn ngoại thất khác|Đèn chiếu sáng ban ngày|LED||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 128.0, 731.7, 142.3]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn ngoại thất khác|Đèn định vị|LED, tích hợp cùng đèn chiếu sáng ban ngày||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 142.3, 731.7, 156.0]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn ngoại thất khác|Đèn định vị|LED, tích hợp cùng đèn chiếu sáng ban ngày||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 142.3, 731.7, 156.0]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Đèn ngoại thất khác|Đèn chào mừng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 156.0, 731.7, 170.2]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Đèn ngoại thất khác|Đèn chào mừng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 156.0, 731.7, 170.2]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Gương|Gương chiếu hậu: sấy mặt gương|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 183.9, 731.7, 198.2]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Gương|Gương chiếu hậu: sấy mặt gương|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 183.9, 731.7, 198.2]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Gương|Gương chiếu hậu: tự động chỉnh khi lùi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 198.2, 731.7, 211.9]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Gương|Gương chiếu hậu: tự động chỉnh khi lùi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 198.2, 731.7, 211.9]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Gương|Gương chiếu hậu: chống chói tự động|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 211.9, 731.7, 226.2]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Gương|Gương chiếu hậu: chống chói tự động|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 211.9, 731.7, 226.2]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Gương|Gương chiếu hậu: nhớ vị trí|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 226.2, 731.7, 239.9]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Gương|Gương chiếu hậu: nhớ vị trí|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 226.2, 731.7, 239.9]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cửa|Cơ chế lấy mở cửa|Nút bấm điện||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 254.2, 731.7, 268.5]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cửa|Cơ chế lấy mở cửa|Nút bấm điện||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 254.2, 731.7, 268.5]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cửa|Cửa hít|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 268.5, 731.7, 282.8]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cửa|Cửa hít|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 268.5, 731.7, 282.8]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cửa|Kiểu cửa sổ|"Hàng ghế trước: kính cách âm 2 lớp.
+Hàng ghế sau: kính 1 lớp"||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 282.8, 731.7, 310.1]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cửa|Kiểu cửa sổ|"Hàng ghế trước: kính cách âm 2 lớp
+Hàng ghế sau: kính 1 lớp"||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 282.8, 731.7, 310.1]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cửa|Kính cửa sổ màu đen (riêng tư)|Kính đen mờ||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 310.1, 731.7, 323.8]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cửa|Kính cửa sổ màu đen (riêng tư)|Kính đen mờ||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 310.1, 731.7, 323.8]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cửa|Kính cửa sổ lên/xuống một chạm|4 cửa||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 323.8, 731.7, 338.1]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cửa|Kính cửa sổ lên/xuống một chạm|4 cửa||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 323.8, 731.7, 338.1]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cửa|Đèn chiếu sáng khi mở cửa|Có (Chiếu hình logo)||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 338.1, 731.7, 352.4]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cửa|Đèn chiếu sáng khi mở cửa|Có (Chiếu hình logo)||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 338.1, 731.7, 352.4]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cốp|Điều chỉnh cốp sau|Chỉnh điện||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 366.1, 731.7, 380.4]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cốp|Điều chỉnh cốp sau|Chỉnh điện||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 366.1, 731.7, 380.4]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cốp|Đóng/Mở cốp đá chân|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 380.4, 731.7, 394.7]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cốp|Đóng/Mở cốp đá chân|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 380.4, 731.7, 394.7]|p15_b02|0.98
+VF 9|Eco|Ngoại thất - Cốp|Đèn chiếu logo mặt đường (cảm biến đá cốp)|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 394.7, 731.7, 408.4]|p15_b02|0.98
+VF 9|Plus|Ngoại thất - Cốp|Đèn chiếu logo mặt đường (cảm biến đá cốp)|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 394.7, 731.7, 408.4]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế toàn xe|seats|7||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 436.3, 731.7, 450.6]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế toàn xe|seats|7||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 436.3, 731.7, 450.6]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế toàn xe|Chất liệu bọc ghế|Da nhân tạo||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 450.6, 731.7, 464.3]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế toàn xe|Chất liệu bọc ghế|Da nhân tạo cao cấp||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 450.6, 731.7, 464.3]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế lái|Ghế lái - điều chỉnh hướng|Chỉnh điện 8 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 478.0, 731.7, 492.3]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế lái|Ghế lái - điều chỉnh hướng|Chỉnh điện 12 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 478.0, 731.7, 492.3]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế lái|Ghế lái nhớ vị trí|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 492.3, 731.7, 506.6]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế lái|Ghế lái nhớ vị trí|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 492.3, 731.7, 506.6]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế lái|Ghế lái có massage|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 506.6, 731.7, 520.3]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế lái|Ghế lái có massage|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 506.6, 731.7, 520.3]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế lái|Ghế lái có thông gió|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 520.3, 731.7, 534.6]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế lái|Ghế lái có thông gió|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 520.3, 731.7, 534.6]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế lái|Ghế lái có sưởi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 534.6, 731.7, 548.8]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế lái|Ghế lái có sưởi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 534.6, 731.7, 548.8]|p15_b02|0.98
+VF 9|Eco|Nội thất & Tiện nghi - Ghế phụ|Ghế phụ - điều chỉnh hướng|Chỉnh điện 6 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 562.5, 731.7, 576.2]|p15_b02|0.98
+VF 9|Plus|Nội thất & Tiện nghi - Ghế phụ|Ghế phụ - điều chỉnh hướng|Chỉnh điện 10 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|15|[37.0, 562.5, 731.7, 576.2]|p15_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 1|Ghế phụ có massage|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 17.9, 804.9, 31.5]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 1|Ghế phụ có massage|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 17.9, 804.9, 31.5]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 1|Ghế phụ có thông gió|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 31.5, 804.9, 45.2]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 1|Ghế phụ có thông gió|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 31.5, 804.9, 45.2]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 1|Ghế phụ có sưởi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 45.2, 804.9, 59.5]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 1|Ghế phụ có sưởi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 45.2, 804.9, 59.5]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 2|Hàng ghế thứ 2 điều chỉnh hướng|Chỉnh điện 4 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 73.2, 804.9, 87.5]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 2|Hàng ghế thứ 2 điều chỉnh hướng|Chỉnh điện 8 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 73.2, 804.9, 87.5]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 2|Hàng ghế thứ 2 điều chỉnh gập tỷ lệ|40:20:40, hỗ trợ để vào hàng 3||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 87.5, 804.9, 101.2]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 2|Hàng ghế thứ 2 điều chỉnh gập tỷ lệ|40:20:40, hỗ trợ để vào hàng 3||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 87.5, 804.9, 101.2]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 2|Hàng ghế thứ 2 có thông gió|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 101.2, 804.9, 114.9]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 2|Hàng ghế thứ 2 có thông gió|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 101.2, 804.9, 114.9]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 2|Hàng ghế thứ 2 có sưởi|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 114.9, 804.9, 129.2]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 2|Hàng ghế thứ 2 có sưởi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 114.9, 804.9, 129.2]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ HÀNG 2|Hàng ghế thứ 2 có massage|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 129.2, 804.9, 142.9]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ HÀNG 2|Hàng ghế thứ 2 có massage|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 129.2, 804.9, 142.9]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ VIP|GHẾ VIP|Có, lựa chọn từ đầu khi mua xe||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[222.3, 142.9, 804.9, 156.6]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ VIP|Ghế VIP chỉnh điện|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 156.6, 804.9, 184.5]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ VIP|Ghế VIP chỉnh điện|"6 chỗ: Chỉnh điện 8 hướng
+7 chỗ: Không"||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 156.6, 804.9, 184.5]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ VIP|Hộp đỡ hàng ghế sau|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 184.5, 804.9, 213.1]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ VIP|Hộp đỡ hàng ghế sau|"6 chỗ: Có, tích hợp sạc không dây
+7 chỗ: Không"||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 184.5, 804.9, 213.1]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ VIP|Ghế VIP massage|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 213.1, 804.9, 226.8]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ VIP|Ghế VIP massage|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 213.1, 804.9, 226.8]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ VIP|Ghế VIP có thông gió|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 226.8, 804.9, 240.5]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ VIP|Ghế VIP có thông gió|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 226.8, 804.9, 240.5]|p16_b02|0.98
+VF 9|VF 9 ECO|GHẾ VIP|Ghế VIP có sưởi|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 240.5, 804.9, 254.8]|p16_b02|0.98
+VF 9|VF 9 PLUS|GHẾ VIP|Ghế VIP có sưởi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 240.5, 804.9, 254.8]|p16_b02|0.98
+VF 9|VF 9 ECO|VÔ LĂNG|Điều chỉnh vô lăng|Chỉnh cơ 4 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 269.1, 804.9, 282.8]|p16_b02|0.98
+VF 9|VF 9 PLUS|VÔ LĂNG|Điều chỉnh vô lăng|Chỉnh điện 4 hướng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 269.1, 804.9, 282.8]|p16_b02|0.98
+VF 9|VF 9 ECO|VÔ LĂNG|Sưởi tay lái|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 282.8, 804.9, 296.4]|p16_b02|0.98
+VF 9|VF 9 PLUS|VÔ LĂNG|Sưởi tay lái|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 282.8, 804.9, 296.4]|p16_b02|0.98
+VF 9|VF 9 ECO|VÔ LĂNG|Nhớ vị trí vô lăng|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 296.4, 804.9, 310.7]|p16_b02|0.98
+VF 9|VF 9 PLUS|VÔ LĂNG|Nhớ vị trí vô lăng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 296.4, 804.9, 310.7]|p16_b02|0.98
+VF 9|VF 9 ECO|ĐIỀU HÒA KHÔNG KHÍ|Hệ thống điều hòa|Tự động, 3 vùng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 324.4, 804.9, 338.1]|p16_b02|0.98
+VF 9|VF 9 PLUS|ĐIỀU HÒA KHÔNG KHÍ|Hệ thống điều hòa|Tự động, 3 vùng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 324.4, 804.9, 338.1]|p16_b02|0.98
+VF 9|VF 9 ECO|ĐIỀU HÒA KHÔNG KHÍ|Chức năng kiểm soát chất lượng không khí|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 338.1, 804.9, 352.4]|p16_b02|0.98
+VF 9|VF 9 PLUS|ĐIỀU HÒA KHÔNG KHÍ|Chức năng kiểm soát chất lượng không khí|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 338.1, 804.9, 352.4]|p16_b02|0.98
+VF 9|VF 9 ECO|ĐIỀU HÒA KHÔNG KHÍ|Chức năng ion hóa không khí|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 352.4, 804.9, 366.1]|p16_b02|0.98
+VF 9|VF 9 PLUS|ĐIỀU HÒA KHÔNG KHÍ|Chức năng ion hóa không khí|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 352.4, 804.9, 366.1]|p16_b02|0.98
+VF 9|VF 9 ECO|ĐIỀU HÒA KHÔNG KHÍ|Lọc không khí Cabin|Combi 1.0||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 366.1, 804.9, 380.4]|p16_b02|0.98
+VF 9|VF 9 PLUS|ĐIỀU HÒA KHÔNG KHÍ|Lọc không khí Cabin|Combi 1.0||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 366.1, 804.9, 380.4]|p16_b02|0.98
+VF 9|VF 9 ECO|ĐIỀU HÒA KHÔNG KHÍ|Ống thông gió dưới chân hành khách sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 380.4, 804.9, 394.1]|p16_b02|0.98
+VF 9|VF 9 PLUS|ĐIỀU HÒA KHÔNG KHÍ|Ống thông gió dưới chân hành khách sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 380.4, 804.9, 394.1]|p16_b02|0.98
+VF 9|VF 9 ECO|ĐIỀU HÒA KHÔNG KHÍ|Cửa gió điều hòa hàng ghế thứ 2: trên hộp để đồ trung tâm|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 394.1, 804.9, 407.8]|p16_b02|0.98
+VF 9|VF 9 PLUS|ĐIỀU HÒA KHÔNG KHÍ|Cửa gió điều hòa hàng ghế thứ 2: trên hộp để đồ trung tâm|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 394.1, 804.9, 407.8]|p16_b02|0.98
+VF 9|VF 9 ECO|ĐIỀU HÒA KHÔNG KHÍ|Cửa gió điều hòa hàng ghế thứ 2: trên cột B|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 407.8, 804.9, 422.0]|p16_b02|0.98
+VF 9|VF 9 PLUS|ĐIỀU HÒA KHÔNG KHÍ|Cửa gió điều hòa hàng ghế thứ 2: trên cột B|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 407.8, 804.9, 422.0]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|display_inch|15.6|inch|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 435.7, 804.9, 450.0]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|display_inch|15.6|inch|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 435.7, 804.9, 450.0]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|display_inch|Không|inch|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 450.0, 804.9, 463.7]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|display_inch|8|inch|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 450.0, 804.9, 463.7]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Màn hình hiển thị HUD|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 463.7, 804.9, 478.0]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Màn hình hiển thị HUD|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 463.7, 804.9, 478.0]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại A hàng ghế lái|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 478.0, 804.9, 491.7]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại A hàng ghế lái|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 478.0, 804.9, 491.7]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại A hàng ghế thứ 2|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 491.7, 804.9, 506.0]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại A hàng ghế thứ 2|"7 chỗ: 2  |  6 chỗ: 4"||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 491.7, 804.9, 506.0]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại A hàng ghế thứ 3|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 506.0, 804.9, 519.7]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại A hàng ghế thứ 3|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 506.0, 804.9, 519.7]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại C|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 519.7, 804.9, 534.0]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng kết nối USB loại C|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 519.7, 804.9, 534.0]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng sạc 12V khoang hành lý|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 534.0, 804.9, 547.7]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Cổng sạc 12V khoang hành lý|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 534.0, 804.9, 547.7]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Ổ điện xoay chiều|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 547.7, 804.9, 561.9]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Ổ điện xoay chiều|230 V/150 W||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 547.7, 804.9, 561.9]|p16_b02|0.98
+VF 9|VF 9 ECO|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Sạc không dây|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 561.9, 804.9, 576.2]|p16_b02|0.98
+VF 9|VF 9 PLUS|MÀN HÌNH, KẾT NỐI, GIẢI TRÍ, TIỆN NGHI|Sạc không dây|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|16|[108.6, 561.9, 804.9, 576.2]|p16_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG LOA|HỆ THỐNG LOA|11||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 15.5, 732.4, 31.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG LOA|HỆ THỐNG LOA|13||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 15.5, 732.4, 31.0]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG LOA|Loa trầm|0||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 31.0, 732.4, 44.1]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG LOA|Loa trầm|1||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 31.0, 732.4, 44.1]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG LOA|Âm ly|Không||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 44.1, 732.4, 58.3]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG LOA|Âm ly|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 44.1, 732.4, 58.3]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG ĐÈN NỘI THẤT|Đèn trang trí nội thất|Có (Đa màu)||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 58.3, 732.4, 72.6]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG ĐÈN NỘI THẤT|Đèn trang trí nội thất|Có (Đa màu)||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 58.3, 732.4, 72.6]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG ĐÈN NỘI THẤT|Đèn đọc ghế trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 72.6, 732.4, 86.3]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG ĐÈN NỘI THẤT|Đèn đọc ghế trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 72.6, 732.4, 86.3]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG ĐÈN NỘI THẤT|Đèn khoang hành lý|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 86.3, 732.4, 100.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG ĐÈN NỘI THẤT|Đèn khoang hành lý|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 86.3, 732.4, 100.0]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG ĐÈN NỘI THẤT|Đèn khoang hành lý trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 100.0, 732.4, 113.7]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG ĐÈN NỘI THẤT|Đèn khoang hành lý trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 100.0, 732.4, 113.7]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG ĐÈN NỘI THẤT|Tấm che nắng, có gương|Ghế lái và ghế phụ, thêm đèn||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 113.7, 732.4, 128.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG ĐÈN NỘI THẤT|Tấm che nắng, có gương|Ghế lái và ghế phụ, thêm đèn||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 113.7, 732.4, 128.0]|p17_b02|0.98
+VF 9|VF 9 ECO|NỘI THẤT & TIỆN NGHI KHÁC|Phanh tay|Điện tử||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 141.7, 732.4, 156.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|NỘI THẤT & TIỆN NGHI KHÁC|Phanh tay|Điện tử||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 141.7, 732.4, 156.0]|p17_b02|0.98
+VF 9|VF 9 ECO|NỘI THẤT & TIỆN NGHI KHÁC|Gương chiếu hậu trong xe|Chống chói tự động||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 156.0, 732.4, 169.7]|p17_b02|0.98
+VF 9|VF 9 PLUS|NỘI THẤT & TIỆN NGHI KHÁC|Gương chiếu hậu trong xe|Chống chói tự động||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 156.0, 732.4, 169.7]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Hệ thống chống bó cứng phanh ABS|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 198.2, 732.4, 211.9]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Hệ thống chống bó cứng phanh ABS|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 198.2, 732.4, 211.9]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Chức năng phân phối lực phanh điện tử EBD|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 211.9, 732.4, 226.2]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Chức năng phân phối lực phanh điện tử EBD|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 211.9, 732.4, 226.2]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Hỗ trợ phanh khẩn cấp BA|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 226.2, 732.4, 239.9]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Hỗ trợ phanh khẩn cấp BA|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 226.2, 732.4, 239.9]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Hệ thống cân bằng điện tử ESC|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 239.9, 732.4, 254.2]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Hệ thống cân bằng điện tử ESC|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 239.9, 732.4, 254.2]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Chức năng kiểm soát lực kéo TCS|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 254.2, 732.4, 267.9]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Chức năng kiểm soát lực kéo TCS|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 254.2, 732.4, 267.9]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Hỗ trợ khởi hành ngang dốc HSA|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 267.9, 732.4, 282.2]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Hỗ trợ khởi hành ngang dốc HSA|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 267.9, 732.4, 282.2]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Chức năng chống lật ROM|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 282.2, 732.4, 295.9]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Chức năng chống lật ROM|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 282.2, 732.4, 295.9]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Đèn báo phanh khẩn cấp ESS|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 295.9, 732.4, 310.1]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Đèn báo phanh khẩn cấp ESS|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 295.9, 732.4, 310.1]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Giám sát áp suất lốp|dTPMS||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 310.1, 732.4, 323.8]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Giám sát áp suất lốp|dTPMS||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 310.1, 732.4, 323.8]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Cảnh báo chống trộm|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 323.8, 732.4, 338.1]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Cảnh báo chống trộm|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 323.8, 732.4, 338.1]|p17_b02|0.98
+VF 9|VF 9 ECO|AN TOÀN & AN NINH|Gọi cứu hộ tự động và dịch vụ hỗ trợ trên đường|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 338.1, 732.4, 352.4]|p17_b02|0.98
+VF 9|VF 9 PLUS|AN TOÀN & AN NINH|Gọi cứu hộ tự động và dịch vụ hỗ trợ trên đường|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 338.1, 732.4, 352.4]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG TÚI KHÍ|airbags|11||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 352.4, 732.4, 366.7]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG TÚI KHÍ|airbags|11||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 352.4, 732.4, 366.7]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 366.7, 732.4, 380.4]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 366.7, 732.4, 380.4]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 380.4, 732.4, 394.1]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 380.4, 732.4, 394.1]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 394.1, 732.4, 408.4]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 394.1, 732.4, 408.4]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 408.4, 732.4, 422.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 408.4, 732.4, 422.0]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 422.0, 732.4, 436.3]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG TÚI KHÍ|airbags|2||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 422.0, 732.4, 436.3]|p17_b02|0.98
+VF 9|VF 9 ECO|HỆ THỐNG TÚI KHÍ|airbags|1||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 436.3, 732.4, 450.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|HỆ THỐNG TÚI KHÍ|airbags|1||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 436.3, 732.4, 450.0]|p17_b02|0.98
+VF 9|VF 9 ECO|TRỢ LÁI TRÊN CAO TỐC|Hỗ trợ di chuyển khi ùn tắc|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 478.0, 732.4, 492.3]|p17_b02|0.98
+VF 9|VF 9 PLUS|TRỢ LÁI TRÊN CAO TỐC|Hỗ trợ di chuyển khi ùn tắc|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 478.0, 732.4, 492.3]|p17_b02|0.98
+VF 9|VF 9 ECO|TRỢ LÁI TRÊN CAO TỐC|Hỗ trợ lái trên đường cao tốc|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 492.3, 732.4, 506.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|TRỢ LÁI TRÊN CAO TỐC|Hỗ trợ lái trên đường cao tốc|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 492.3, 732.4, 506.0]|p17_b02|0.98
+VF 9|VF 9 ECO|TRỢ LÀN|Cảnh báo chệch làn|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 520.3, 732.4, 534.0]|p17_b02|0.98
+VF 9|VF 9 PLUS|TRỢ LÀN|Cảnh báo chệch làn|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 520.3, 732.4, 534.0]|p17_b02|0.98
+VF 9|VF 9 ECO|TRỢ LÀN|Hỗ trợ giữ làn|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 534.0, 732.4, 548.2]|p17_b02|0.98
+VF 9|VF 9 PLUS|TRỢ LÀN|Hỗ trợ giữ làn|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 534.0, 732.4, 548.2]|p17_b02|0.98
+VF 9|VF 9 ECO|TRỢ LÀN|Kiểm soát đi giữa làn|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 548.2, 732.4, 562.5]|p17_b02|0.98
+VF 9|VF 9 PLUS|TRỢ LÀN|Kiểm soát đi giữa làn|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|17|[37.9, 548.2, 732.4, 562.5]|p17_b02|0.98
+VF 9|VF 9 ECO|GIÁM SÁT HÀNH TRÌNH THÍCH ỨNG|Giám sát hành trình thích ứng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 31.5, 804.0, 45.8]|p18_b02|0.98
+VF 9|VF 9 PLUS|GIÁM SÁT HÀNH TRÌNH THÍCH ỨNG|Giám sát hành trình thích ứng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 31.5, 804.0, 45.8]|p18_b02|0.98
+VF 9|VF 9 ECO|GIÁM SÁT HÀNH TRÌNH THÍCH ỨNG|Điều chỉnh tốc độ thông minh|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 45.8, 804.0, 60.1]|p18_b02|0.98
+VF 9|VF 9 PLUS|GIÁM SÁT HÀNH TRÌNH THÍCH ỨNG|Điều chỉnh tốc độ thông minh|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 45.8, 804.0, 60.1]|p18_b02|0.98
+VF 9|VF 9 ECO|GIÁM SÁT HÀNH TRÌNH THÍCH ỨNG|Nhận biết biển báo giao thông|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 60.1, 804.0, 74.4]|p18_b02|0.98
+VF 9|VF 9 PLUS|GIÁM SÁT HÀNH TRÌNH THÍCH ỨNG|Nhận biết biển báo giao thông|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 60.1, 804.0, 74.4]|p18_b02|0.98
+VF 9|VF 9 ECO|CẢNH BÁO VA CHẠM|Cảnh báo va chạm phía trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 88.1, 804.0, 101.8]|p18_b02|0.98
+VF 9|VF 9 PLUS|CẢNH BÁO VA CHẠM|Cảnh báo va chạm phía trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 88.1, 804.0, 101.8]|p18_b02|0.98
+VF 9|VF 9 ECO|CẢNH BÁO VA CHẠM|Cảnh báo phương tiện cắt ngang phía sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 101.8, 804.0, 115.5]|p18_b02|0.98
+VF 9|VF 9 PLUS|CẢNH BÁO VA CHẠM|Cảnh báo phương tiện cắt ngang phía sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 101.8, 804.0, 115.5]|p18_b02|0.98
+VF 9|VF 9 ECO|CẢNH BÁO VA CHẠM|Cảnh báo điểm mù|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 115.5, 804.0, 129.8]|p18_b02|0.98
+VF 9|VF 9 PLUS|CẢNH BÁO VA CHẠM|Cảnh báo điểm mù|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 115.5, 804.0, 129.8]|p18_b02|0.98
+VF 9|VF 9 ECO|CẢNH BÁO VA CHẠM|Cảnh báo mở cửa|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 129.8, 804.0, 143.5]|p18_b02|0.98
+VF 9|VF 9 PLUS|CẢNH BÁO VA CHẠM|Cảnh báo mở cửa|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 129.8, 804.0, 143.5]|p18_b02|0.98
+VF 9|VF 9 ECO|TRỢ LÁI KHI CÓ NGUY CƠ VA CHẠM|Phanh tự động khẩn cấp trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 157.7, 804.0, 171.4]|p18_b02|0.98
+VF 9|VF 9 PLUS|TRỢ LÁI KHI CÓ NGUY CƠ VA CHẠM|Phanh tự động khẩn cấp trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 157.7, 804.0, 171.4]|p18_b02|0.98
+VF 9|VF 9 ECO|TRỢ LÁI KHI CÓ NGUY CƠ VA CHẠM|Hỗ trợ giữ làn khẩn cấp|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 171.4, 804.0, 185.1]|p18_b02|0.98
+VF 9|VF 9 PLUS|TRỢ LÁI KHI CÓ NGUY CƠ VA CHẠM|Hỗ trợ giữ làn khẩn cấp|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 171.4, 804.0, 185.1]|p18_b02|0.98
+VF 9|VF 9 ECO|HỖ TRỢ ĐỖ XE|Hỗ trợ đỗ phía trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 199.4, 804.0, 213.1]|p18_b02|0.98
+VF 9|VF 9 PLUS|HỖ TRỢ ĐỖ XE|Hỗ trợ đỗ phía trước|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 199.4, 804.0, 213.1]|p18_b02|0.98
+VF 9|VF 9 ECO|HỖ TRỢ ĐỖ XE|Hỗ trợ đỗ phía sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 213.1, 804.0, 227.4]|p18_b02|0.98
+VF 9|VF 9 PLUS|HỖ TRỢ ĐỖ XE|Hỗ trợ đỗ phía sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 213.1, 804.0, 227.4]|p18_b02|0.98
+VF 9|VF 9 ECO|HỖ TRỢ ĐỖ XE|Hệ thống camera sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 227.4, 804.0, 241.1]|p18_b02|0.98
+VF 9|VF 9 PLUS|HỖ TRỢ ĐỖ XE|Hệ thống camera sau|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 227.4, 804.0, 241.1]|p18_b02|0.98
+VF 9|VF 9 ECO|HỖ TRỢ ĐỖ XE|Giám sát xung quanh|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 241.1, 804.0, 255.4]|p18_b02|0.98
+VF 9|VF 9 PLUS|HỖ TRỢ ĐỖ XE|Giám sát xung quanh|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 241.1, 804.0, 255.4]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG KHÁC|Đèn pha thích ứng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 269.7, 804.0, 283.9]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG KHÁC|Đèn pha thích ứng|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 269.7, 804.0, 283.9]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG KHÁC|Hệ thống giám sát lái xe|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 283.9, 804.0, 297.6]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG KHÁC|Hệ thống giám sát lái xe|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 283.9, 804.0, 297.6]|p18_b02|0.98
+VF 9|VF 9 ECO|THIẾT KẾ KIỂU DÁNG NGOẠI THẤT|Tay nắm cửa|Loại ẩn||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 311.9, 804.0, 325.6]|p18_b02|0.98
+VF 9|VF 9 PLUS|THIẾT KẾ KIỂU DÁNG NGOẠI THẤT|Tay nắm cửa|Loại ẩn||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 311.9, 804.0, 325.6]|p18_b02|0.98
+VF 9|VF 9 ECO|THIẾT KẾ KIỂU DÁNG NGOẠI THẤT|Bậc lên xuống|AFS||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 325.6, 804.0, 339.3]|p18_b02|0.98
+VF 9|VF 9 PLUS|THIẾT KẾ KIỂU DÁNG NGOẠI THẤT|Bậc lên xuống|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 325.6, 804.0, 339.3]|p18_b02|0.98
+VF 9|VF 9 ECO|THIẾT KẾ KIỂU DÁNG NGOẠI THẤT|Thanh trang trí nóc xe|AFS||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 339.3, 804.0, 353.6]|p18_b02|0.98
+VF 9|VF 9 PLUS|THIẾT KẾ KIỂU DÁNG NGOẠI THẤT|Thanh trang trí nóc xe|AFS||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 339.3, 804.0, 353.6]|p18_b02|0.98
+VF 9|VF 9 ECO|VÔ LĂNG|Loại vô lăng|Dạng D-cut||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 381.6, 804.0, 395.3]|p18_b02|0.98
+VF 9|VF 9 PLUS|VÔ LĂNG|Loại vô lăng|Dạng D-cut||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 381.6, 804.0, 395.3]|p18_b02|0.98
+VF 9|VF 9 ECO|VÔ LĂNG|Bọc vô lăng|Da thân thiện môi trường||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 395.3, 804.0, 409.0]|p18_b02|0.98
+VF 9|VF 9 PLUS|VÔ LĂNG|Bọc vô lăng|Da thân thiện môi trường||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 395.3, 804.0, 409.0]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Lựa chọn chế độ vận hành đặc biệt|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 423.2, 804.0, 436.9]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Lựa chọn chế độ vận hành đặc biệt|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 423.2, 804.0, 436.9]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 436.9, 804.0, 450.6]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 436.9, 804.0, 450.6]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Giải trí trực tuyến|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 450.6, 804.0, 464.9]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Giải trí trực tuyến|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 450.6, 804.0, 464.9]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Trò chơi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 464.9, 804.0, 479.2]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Trò chơi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 464.9, 804.0, 479.2]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Điều hướng và dẫn đường trên màn hình trung tâm|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 479.2, 804.0, 493.5]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Điều hướng và dẫn đường trên màn hình trung tâm|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 479.2, 804.0, 493.5]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Trình duyệt web|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 493.5, 804.0, 507.2]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Trình duyệt web|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 493.5, 804.0, 507.2]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Tự chẩn đoán lỗi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 507.2, 804.0, 521.5]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Tự chẩn đoán lỗi|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 507.2, 804.0, 521.5]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Hỏi đáp trợ lý ảo|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 521.5, 804.0, 535.2]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Hỏi đáp trợ lý ảo|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 521.5, 804.0, 535.2]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Điều khiển xe và cài đặt bằng giọng nói|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 535.2, 804.0, 549.4]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Điều khiển xe và cài đặt bằng giọng nói|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 535.2, 804.0, 549.4]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Ứng dụng điện thoại|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 549.4, 804.0, 563.7]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Ứng dụng điện thoại|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 549.4, 804.0, 563.7]|p18_b02|0.98
+VF 9|VF 9 ECO|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Cập nhật phần mềm từ xa|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 563.7, 804.0, 577.4]|p18_b02|0.98
+VF 9|VF 9 PLUS|CÁC TÍNH NĂNG ĐIỀU KHIỂN THÔNG MINH (*)|Cập nhật phần mềm từ xa|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|18|[108.6, 563.7, 804.0, 577.4]|p18_b02|0.98
+VF 9||Chính sách Bảo hành tốt nhất thị trường|Bảo hành xe mới|10 hoặc 200.000|năm hoặc km|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[92.4, 169.7, 264.7, 219.7]|p20_b02|0.98
+VF 9||Chính sách Bảo hành tốt nhất thị trường|Điều kiện áp dụng bảo hành xe mới|Tùy điều kiện nào đến trước||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[121.8, 203.6, 264.7, 219.7]|p20_b02|0.98
+VF 9||Chính sách Bảo hành tốt nhất thị trường|Bảo hành pin|10 hoặc 200.000|năm hoặc km|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[92.4, 239.9, 264.7, 288.1]|p20_b02|0.98
+VF 9||Chính sách Bảo hành tốt nhất thị trường|Điều kiện áp dụng bảo hành pin|Tùy điều kiện nào đến trước||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[121.8, 273.8, 264.7, 288.1]|p20_b02|0.98
+VF 9||Dịch vụ Hậu mãi xuất sắc|Sửa chữa lưu động (Mobile Service) & Cứu hộ 24/7 trong suốt thời gian bảo hành|Có||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[352.9, 175.0, 500.0, 223.2]|p20_b02|0.98
+VF 9||Dịch vụ Hậu mãi xuất sắc|Mạng lưới cổng sạc|150.000|cổng sạc|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[352.9, 242.3, 500.0, 275.6]|p20_b02|0.98
+VF 9||Dịch vụ Hậu mãi xuất sắc|Phạm vi mạng lưới cổng sạc|34/34|tỉnh, thành phố|vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[361.3, 257.2, 500.0, 275.6]|p20_b02|0.98
+VF 9||Hệ thống showroom, xưởng dịch vụ không ngừng được mở rộng|Hệ thống showroom và xưởng dịch vụ|Không ngừng được mở rộng||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|20|[569.7, 108.9, 748.7, 151.2]|p20_b02|0.98
+VF 9|Tiêu chuẩn|Ngoại thất|Màu ngoại thất|INFINITY BLANC||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[195.3, 98.2, 488.3, 153.6]|p22_b02|0.98
+VF 9|Tiêu chuẩn|Ngoại thất|Màu ngoại thất|CRIMSON RED||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[512.7, 98.8, 804.8, 154.2]|p22_b02|0.98
+VF 9|Tiêu chuẩn|Ngoại thất|Màu ngoại thất|ZENITH GREY||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[195.3, 173.2, 488.3, 228.0]|p22_b02|0.98
+VF 9|Tiêu chuẩn|Ngoại thất|Màu ngoại thất|URBAN MINT||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[512.7, 173.2, 804.8, 228.0]|p22_b02|0.98
+VF 9|Tiêu chuẩn|Ngoại thất|Màu ngoại thất|JET BLACK||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[195.3, 251.8, 488.3, 307.8]|p22_b02|0.98
+VF 9|Nâng cao|Ngoại thất|Màu ngoại thất|IVY GREEN||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[193.6, 363.7, 484.9, 418.5]|p22_b02|0.98
+VF 9|Nâng cao|Ngoại thất|Màu ngoại thất|DESAT SILVER||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[512.7, 363.7, 804.8, 418.5]|p22_b02|0.98
+VF 9|ECO|Nội thất & Tiện nghi|Màu nội thất|Black||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[346.9, 458.4, 412.5, 497.1]|p22_b02|0.98
+VF 9|PLUS|Nội thất & Tiện nghi|Màu nội thất|Black||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[577.5, 458.4, 644.0, 497.1]|p22_b02|0.98
+VF 9|PLUS|Nội thất & Tiện nghi|Màu nội thất|Saddle Brown||vf9_brochure|https://storage.googleapis.com/vinfast-data-01/brochure/VF%209_%20Brochure.pdf|22|[658.4, 458.4, 724.9, 497.1]|p22_b02|0.98

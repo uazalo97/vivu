@@ -199,12 +199,11 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
     # (e.g. battery/range) when earlier ones (adas) exceed the cap.
     try:
         rows = await conn.fetch(
-            f"SELECT version_name, version_code, spec_category, spec_key, spec_value, spec_unit, source_url, page "
+            f"SELECT version_name, version_code, spec_category, spec_category_vn, spec_key, spec_key_vn, spec_value, spec_unit, source_url, COALESCE(page, source_page) as page "
             f"FROM car_specs WHERE {where} ORDER BY spec_category, spec_key, version_name",
             *params,
         )
     except Exception:
-        # page column may not exist in all DB schemas
         rows = await conn.fetch(
             f"SELECT version_name, version_code, spec_category, spec_key, spec_value, spec_unit, source_url "
             f"FROM car_specs WHERE {where} ORDER BY spec_category, spec_key, version_name",
@@ -217,8 +216,9 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
     )
     await conn.close()
 
-    source_urls = set(r["source_url"] for r in rows if r["source_url"])
-    primary_source = source_urls.pop() if source_urls else ""
+    pdf_urls = [r["source_url"] for r in rows if r.get("source_url") and ".pdf" in r["source_url"].lower()]
+    all_urls = [r["source_url"] for r in rows if r.get("source_url")]
+    primary_source = pdf_urls[0] if pdf_urls else (all_urls[0] if all_urls else "")
 
     related_models = [{"model_code": r["model_code"]} for r in related]
 
@@ -228,11 +228,12 @@ async def get_specs(model_code: str, version: str = None, category: str = None) 
         "specs": [
             {
                 "version_name": r["version_name"] or "ALL",
-                "category": r["spec_category"],
-                "key": r["spec_key"],
+                "category": r.get("spec_category_vn") or r["spec_category"],
+                "key": r.get("spec_key_vn") or r["spec_key"],
                 "value": r["spec_value"],
                 "unit": r["spec_unit"] or "",
                 "page": r.get("page") or "",
+                "source_url": r.get("source_url") or primary_source,
             }
             for r in rows
         ],

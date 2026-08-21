@@ -1,0 +1,1636 @@
+[
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Dải Đèn Định Vị LED",
+    "spec_value": "Tạo Hình Cánh Chim",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      1678.7,
+      177.3,
+      1678.7,
+      206.8
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn Pha tự động",
+    "spec_value": "Cải thiện tầm nhìn ban đêm",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      1678.7,
+      236.3,
+      1678.7,
+      265.9
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "La-zăng Hợp Kim Nhôm 18 inch",
+    "spec_value": "Khỏe khoắn & cứng cáp",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      1678.7,
+      295.4,
+      1678.7,
+      325.0
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2730",
+    "spec_unit": "mm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 5,
+    "source_bbox": [
+      83.9,
+      384.1,
+      419.7,
+      413.6
+    ],
+    "source_block_id": "p05_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "310",
+    "spec_unit": "Nm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      83.9,
+      472.7,
+      503.6,
+      502.2
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "Eco",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Phạm vi di chuyển",
+    "spec_value": "485",
+    "spec_unit": "km",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      587.5,
+      472.7,
+      1007.2,
+      502.2
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "150",
+    "spec_unit": "kW",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      1091.1,
+      472.7,
+      1594.7,
+      502.2
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Chế độ lái",
+    "spec_value": "ECO / NORMAL / SPORT",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      503.6,
+      472.7,
+      1594.7,
+      502.2
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Màu cơ bản",
+    "spec_value": "Đỏ - Solar Ruby, Trắng - Infinity Blanc, Xám - Zenith Grey, Đen - Jet Black",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1678.7,
+      118.2,
+      1678.7,
+      177.3
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Màu nâng cao",
+    "spec_value": "Xanh Lá Nhạt - Urban Mint",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1678.7,
+      177.3,
+      1678.7,
+      206.8
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "Eco",
+    "spec_category": "Nội thất",
+    "spec_key": "Màu nội thất ECO",
+    "spec_value": "Be - Beige, Đen - Granite Black",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1678.7,
+      354.5,
+      1678.7,
+      413.6
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "Plus",
+    "spec_category": "Nội thất",
+    "spec_key": "Màu nội thất PLUS",
+    "spec_value": "Nâu Mocha - Mocha Brown, Be - Beige",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      1678.7,
+      413.6,
+      1678.7,
+      472.7
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4241",
+    "spec_unit": "mm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      29.5,
+      1594.7,
+      59.1
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1834",
+    "spec_unit": "mm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      29.5,
+      1594.7,
+      59.1
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1580",
+    "spec_unit": "mm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      29.5,
+      1594.7,
+      59.1
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2730",
+    "spec_unit": "mm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      59.1,
+      1594.7,
+      88.6
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "170",
+    "spec_unit": "mm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      88.6,
+      1594.7,
+      118.2
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "130",
+    "spec_unit": "kW",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      118.2,
+      1594.7,
+      147.7
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "150",
+    "spec_unit": "kW",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      118.2,
+      1594.7,
+      147.7
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "250",
+    "spec_unit": "Nm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      147.7,
+      1594.7,
+      177.3
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "310",
+    "spec_unit": "Nm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      147.7,
+      1594.7,
+      177.3
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "485",
+    "spec_unit": "km",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      177.3,
+      1594.7,
+      206.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "460",
+    "spec_unit": "km",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      177.3,
+      1594.7,
+      206.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "59.6",
+    "spec_unit": "kWh",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      206.8,
+      1594.7,
+      236.3
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Pin",
+    "spec_key": "Dây sạc di động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      236.3,
+      1594.7,
+      265.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Pin",
+    "spec_key": "Dây sạc di động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      236.3,
+      1594.7,
+      265.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Pin",
+    "spec_key": "Bộ sạc tại nhà",
+    "spec_value": "Phù kiện (AFS 3.5kW)",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      265.9,
+      1594.7,
+      295.4
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Pin",
+    "spec_key": "Bộ sạc tại nhà",
+    "spec_value": "Phù kiện (AFS 7.4kW)",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      265.9,
+      1594.7,
+      295.4
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "25",
+    "spec_unit": "phút",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      295.4,
+      1594.7,
+      325.0
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "drivetrain",
+    "spec_value": "Cầu trước (FWD)",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      325.0,
+      1594.7,
+      354.5
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Chế độ lái",
+    "spec_value": "Eco/Normal/Sport",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      354.5,
+      1594.7,
+      384.1
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "17",
+    "spec_unit": "mm",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      384.1,
+      1594.7,
+      413.6
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "Độc lập, MacPherson",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      413.6,
+      1594.7,
+      443.1
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Thanh ổn định hướng đa điểm",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      443.1,
+      1594.7,
+      472.7
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chiếu sáng phía trước",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      472.7,
+      1594.7,
+      502.2
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Tự động bật/tắt đèn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      502.2,
+      1594.7,
+      531.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn chiếu sáng ban ngày",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      531.8,
+      1594.7,
+      561.3
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Tự động bật/tắt chế độ chiếu xa",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      561.3,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn nhận diện thương hiệu phía trước",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn nhận diện thương hiệu phía sau",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Màn hình hiển thị thông tin trên kính lái (HUD)",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Màn hình hiển thị thông tin trên kính lái (HUD)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "display_inch",
+    "spec_value": "10",
+    "spec_unit": "inch",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "display_inch",
+    "spec_value": "12.9",
+    "spec_unit": "inch",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Kết nối với Android Auto và Apple CarPlay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Kết nối với Android Auto và Apple CarPlay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "6 loa",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "8 loa",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh cơ 6 hướng",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh điện 8 hướng",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Chế độ ga nhàn tay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Chế độ ga nhàn tay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Kính cửa sổ chỉnh điện, lên/xuống một chạm",
+    "spec_value": "Tất cả các vị trí",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Kính cửa sổ chỉnh điện, lên/xuống một chạm",
+    "spec_value": "Tất cả các vị trí",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Phanh đỗ điện tử và chế độ tự động giữ phanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Phanh đỗ điện tử và chế độ tự động giữ phanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "4",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "7",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp BA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp BA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Trợ lái tiên cao tốc/di chuyển tắc đường",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Trợ lái tiên cao tốc/di chuyển tắc đường",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ di chuyển làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ di chuyển làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát hành trình",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát hành trình",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": "VF 6 Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      83.9,
+      590.9,
+      1594.7,
+      590.9
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Dịch vụ",
+    "spec_key": "Hệ thống Showroom & Xưởng dịch vụ",
+    "spec_value": "không ngày nghỉ",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      83.9,
+      88.6,
+      1594.7,
+      118.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Dịch vụ",
+    "spec_key": "Chính sách bảo hành",
+    "spec_value": "tốt nhất thị trường",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      83.9,
+      147.7,
+      1594.7,
+      177.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 6",
+    "version_name": null,
+    "spec_category": "Dịch vụ",
+    "spec_key": "Dịch vụ hậu mãi",
+    "spec_value": "xuất sắc",
+    "spec_unit": "",
+    "source_document": "vf6_brochure",
+    "source_url": "https://xeotovinfast.com.vn/wp-content/uploads/2024/03/VF6_Brochure_VN.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      83.9,
+      206.8,
+      1594.7,
+      236.3
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  }
+]

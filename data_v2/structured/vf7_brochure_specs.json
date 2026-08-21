@@ -1,0 +1,5265 @@
+[
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Chiều cao tổng thể",
+    "spec_value": "1.635,75",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      128.0,
+      264.9,
+      222.3,
+      410.7
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Chiều rộng tổng thể",
+    "spec_value": "1.890",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      153.2,
+      430.9,
+      303.1,
+      547.6
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Chiều dài tổng thể",
+    "spec_value": "4.545",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      420.9,
+      369.0,
+      707.2,
+      562.5
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2840",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      420.9,
+      363.1,
+      681.9,
+      514.9
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Đèn pha LED",
+    "spec_value": "tự động bật/tắt chế độ chiếu xa",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      1052.4,
+      29.8,
+      1397.5,
+      291.7
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Tay nắm ẩn trong thân xe",
+    "spec_value": "tạo ra sự liền mạch",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      1414.4,
+      29.8,
+      1658.5,
+      291.7
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Gương chiếu hậu chống chói tự động",
+    "spec_value": "hiện đại & an toàn",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      825.1,
+      297.6,
+      1178.6,
+      488.1
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Kiểu dáng vuốt coupe",
+    "spec_value": "tối ưu khí động học",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      1178.6,
+      297.6,
+      1406.0,
+      488.1
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất",
+    "spec_key": "Lazang hợp kim",
+    "spec_value": "20",
+    "spec_unit": "inch",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 6,
+    "source_bbox": [
+      1406.0,
+      297.6,
+      1675.4,
+      488.1
+    ],
+    "source_block_id": "p06_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "HUD",
+    "spec_value": "Hiện đại",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      65.7,
+      171.4,
+      617.9,
+      246.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": null,
+    "spec_category": "Nội thất & Tiện nghi",
+    "spec_key": "Vô lăng",
+    "spec_value": "D-cut thể thao",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      65.7,
+      171.4,
+      617.9,
+      246.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": null,
+    "spec_category": "Kích thước & Trọng lượng",
+    "spec_key": "Dung tích khoang chứa đồ",
+    "spec_value": "1.576",
+    "spec_unit": "L",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      65.7,
+      226.8,
+      617.9,
+      246.4
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus AWD",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Thời gian tăng tốc",
+    "spec_value": "5,8",
+    "spec_unit": "giây",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 8,
+    "source_bbox": [
+      449.6,
+      432.7,
+      766.1,
+      533.3
+    ],
+    "source_block_id": "p08_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Chế độ lái tùy chỉnh",
+    "spec_value": "3 chế độ: Eco/Normal/Sport",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      30.3,
+      169.6,
+      185.2,
+      258.9
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Hệ thống treo",
+    "spec_value": "Đa điểm",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      218.9,
+      169.6,
+      319.9,
+      258.9
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus AWD",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "260",
+    "spec_unit": "kW",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      370.4,
+      169.6,
+      530.4,
+      261.9
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": null,
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "496",
+    "spec_unit": "km",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      530.4,
+      169.6,
+      656.7,
+      264.9
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": null,
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "Phanh tái sinh",
+    "spec_value": "Tiết kiệm năng lượng & giảm khí thải",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      126.3,
+      339.3,
+      261.0,
+      461.3
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus AWD",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "Sạc đầy PIN từ 10-70%",
+    "spec_value": "Trong 28 phút",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      294.7,
+      339.3,
+      429.4,
+      473.2
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus AWD",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "500",
+    "spec_unit": "Nm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 9,
+    "source_bbox": [
+      437.8,
+      339.3,
+      555.6,
+      461.3
+    ],
+    "source_block_id": "p09_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus",
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Giám sát hành trình thích ứng",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      880.6,
+      129.8,
+      1059.1,
+      251.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus",
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Phanh tự động khẩn cấp TRƯỚC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      1060.8,
+      129.8,
+      1229.2,
+      251.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus",
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Phanh tự động khẩn cấp SAU",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      1229.2,
+      129.8,
+      1363.9,
+      251.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus",
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Hỗ trợ tự động chuyển làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      1363.9,
+      129.8,
+      1525.5,
+      251.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "VF 7 Plus",
+    "spec_category": "Hệ thống hỗ trợ lái nâng cao ADAS",
+    "spec_key": "Kiểm soát đi giữa làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 11,
+    "source_bbox": [
+      1525.5,
+      129.8,
+      1675.4,
+      251.8
+    ],
+    "source_block_id": "p11_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "130",
+    "spec_unit": "kW / hp",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      639.8,
+      154.8,
+      1141.6,
+      190.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "150",
+    "spec_unit": "kW / hp",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1141.6,
+      154.8,
+      1342.0,
+      190.5
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD (Optional)",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "power_kw",
+    "spec_value": "260",
+    "spec_unit": "kW / hp",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1342.0,
+      154.8,
+      538.8,
+      557.1
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "250",
+    "spec_unit": "Nm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      639.8,
+      190.5,
+      1141.6,
+      226.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "310",
+    "spec_unit": "Nm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1141.6,
+      190.5,
+      1342.0,
+      226.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD (Optional)",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "torque_nm",
+    "spec_value": "500",
+    "spec_unit": "Nm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1342.0,
+      190.5,
+      1576.0,
+      226.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "drivetrain",
+    "spec_value": "Dẫn động cầu trước (FWD)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      639.8,
+      226.2,
+      1141.6,
+      261.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "drivetrain",
+    "spec_value": "Dẫn động cầu trước (FWD)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1141.6,
+      226.2,
+      1342.0,
+      261.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD (Optional)",
+    "spec_category": "Động cơ & Vận hành",
+    "spec_key": "drivetrain",
+    "spec_value": "Hai cầu (AWD)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1342.0,
+      226.2,
+      1576.0,
+      261.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "498",
+    "spec_unit": "km (NEDC)",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      639.8,
+      261.9,
+      1141.6,
+      298.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "Cập nhật sau",
+    "spec_unit": "km",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1141.6,
+      261.9,
+      1342.0,
+      298.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD (Optional)",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "range_km",
+    "spec_value": "496",
+    "spec_unit": "km (NEDC)",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1342.0,
+      261.9,
+      1576.0,
+      298.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "battery_kwh",
+    "spec_value": "59.6",
+    "spec_unit": "kWh",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      639.8,
+      298.2,
+      1141.6,
+      333.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "battery_kwh",
+    "spec_value": "75.6",
+    "spec_unit": "kWh",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1141.6,
+      298.2,
+      1342.0,
+      333.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD (Optional)",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "battery_kwh",
+    "spec_value": "75.6",
+    "spec_unit": "kWh",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1342.0,
+      298.2,
+      1576.0,
+      333.9
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "Chi phí sạc pin",
+    "spec_value": "0",
+    "spec_unit": "VNĐ",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      639.8,
+      333.9,
+      1141.6,
+      401.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "Chi phí sạc pin",
+    "spec_value": "0",
+    "spec_unit": "VNĐ",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1141.6,
+      333.9,
+      1342.0,
+      401.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD (Optional)",
+    "spec_category": "Pin & Sạc",
+    "spec_key": "Chi phí sạc pin",
+    "spec_value": "0",
+    "spec_unit": "VNĐ",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 12,
+    "source_bbox": [
+      1342.0,
+      333.9,
+      1576.0,
+      401.2
+    ],
+    "source_block_id": "p12_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4.545",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1.89",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1,635.75",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4.545",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1.89",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1,635.75",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Kích thước",
+    "spec_key": "length_mm",
+    "spec_value": "4.545",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Kích thước",
+    "spec_key": "width_mm",
+    "spec_value": "1.89",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Kích thước",
+    "spec_key": "height_mm",
+    "spec_value": "1,635.75",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      57.1,
+      648.3,
+      70.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2.84",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      70.8,
+      648.3,
+      84.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2.84",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      70.8,
+      648.3,
+      84.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Kích thước",
+    "spec_key": "wheelbase_mm",
+    "spec_value": "2.84",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      70.8,
+      648.3,
+      84.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.4
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Kích thước",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "190",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      85.1,
+      648.3,
+      98.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Kích thước",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "190",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      85.1,
+      648.3,
+      98.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Kích thước",
+    "spec_key": "ground_clearance_mm",
+    "spec_value": "190",
+    "spec_unit": "mm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      85.1,
+      648.3,
+      98.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "130",
+    "spec_unit": "kW",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      126.8,
+      648.3,
+      140.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "150",
+    "spec_unit": "kW",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      126.8,
+      648.3,
+      140.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Động cơ",
+    "spec_key": "power_kw",
+    "spec_value": "260",
+    "spec_unit": "kW",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      126.8,
+      648.3,
+      140.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "250",
+    "spec_unit": "Nm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      140.5,
+      648.3,
+      153.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "310",
+    "spec_unit": "Nm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      140.5,
+      648.3,
+      153.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Động cơ",
+    "spec_key": "torque_nm",
+    "spec_value": "500",
+    "spec_unit": "Nm",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      140.5,
+      648.3,
+      153.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "498",
+    "spec_unit": "km (NEDC)",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      167.3,
+      648.3,
+      180.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "Thông báo sau",
+    "spec_unit": "km",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      167.3,
+      648.3,
+      180.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Pin",
+    "spec_key": "range_km",
+    "spec_value": "496",
+    "spec_unit": "km (NEDC)",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      167.3,
+      648.3,
+      180.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "59.6",
+    "spec_unit": "kWh",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      180.9,
+      648.3,
+      194.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "75.6",
+    "spec_unit": "kWh",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      180.9,
+      648.3,
+      194.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Pin",
+    "spec_key": "battery_kwh",
+    "spec_value": "75.6",
+    "spec_unit": "kWh",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      180.9,
+      648.3,
+      194.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin",
+    "spec_key": "Dây sạc di động",
+    "spec_value": "Phụ kiện (AFS 3,5 kW)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      194.6,
+      648.3,
+      208.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin",
+    "spec_key": "Dây sạc di động",
+    "spec_value": "Phụ kiện (AFS 3,5 kW)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      194.6,
+      648.3,
+      208.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Pin",
+    "spec_key": "Dây sạc di động",
+    "spec_value": "Phụ kiện (AFS 3,5 kW)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      194.6,
+      648.3,
+      208.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin",
+    "spec_key": "Bộ sạc tại nhà",
+    "spec_value": "Phụ kiện (AFS 7,4 kW)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      208.3,
+      648.3,
+      222.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin",
+    "spec_key": "Bộ sạc tại nhà",
+    "spec_value": "Phụ kiện (AFS 7,4 kW)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      208.3,
+      648.3,
+      222.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Pin",
+    "spec_key": "Bộ sạc tại nhà",
+    "spec_value": "Phụ kiện (AFS 7,4 kW)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      208.3,
+      648.3,
+      222.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "24.1",
+    "spec_unit": "phút",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      222.0,
+      648.3,
+      235.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "28.15",
+    "spec_unit": "phút",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      222.0,
+      648.3,
+      235.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Pin",
+    "spec_key": "fast_charge_min",
+    "spec_value": "28.15",
+    "spec_unit": "phút",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      222.0,
+      648.3,
+      235.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "drivetrain",
+    "spec_value": "Cầu trước (FWD)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      250.6,
+      648.3,
+      264.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "drivetrain",
+    "spec_value": "Cầu trước (FWD)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      250.6,
+      648.3,
+      264.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "drivetrain",
+    "spec_value": "Hai cầu (AWD)",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      250.6,
+      648.3,
+      264.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Chế độ lái",
+    "spec_value": "Eco/ Normal/ Sport",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      264.3,
+      648.3,
+      277.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Chế độ lái",
+    "spec_value": "Eco/ Normal/ Sport",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      264.3,
+      648.3,
+      277.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Thông số truyền động khác",
+    "spec_key": "Chế độ lái",
+    "spec_value": "Eco/ Normal/ Sport",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      264.3,
+      648.3,
+      277.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Khung gầm",
+    "spec_key": "wheel_size_inch",
+    "spec_value": "19",
+    "spec_unit": "inch",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      291.1,
+      648.3,
+      304.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Khung gầm",
+    "spec_key": "wheel_size_inch",
+    "spec_value": "20",
+    "spec_unit": "inch",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      291.1,
+      648.3,
+      304.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Khung gầm",
+    "spec_key": "wheel_size_inch",
+    "spec_value": "20",
+    "spec_unit": "inch",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      291.1,
+      648.3,
+      304.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "Độc lập, MacPherson",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      304.7,
+      648.3,
+      318.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "Độc lập, MacPherson",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      304.7,
+      648.3,
+      318.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - trước",
+    "spec_value": "Độc lập, MacPherson",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      304.7,
+      648.3,
+      318.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Thanh điều hướng đa điểm",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      318.4,
+      648.3,
+      331.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Thanh điều hướng đa điểm",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      318.4,
+      648.3,
+      331.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Khung gầm",
+    "spec_key": "Hệ thống treo - sau",
+    "spec_value": "Thanh điều hướng đa điểm",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      318.4,
+      648.3,
+      331.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn chiếu sáng phía trước",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      359.5,
+      648.3,
+      373.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn chiếu sáng phía trước",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      359.5,
+      648.3,
+      373.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn chiếu sáng phía trước",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      359.5,
+      648.3,
+      373.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Tự động bật/tắt đèn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      373.2,
+      648.3,
+      386.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Tự động bật/tắt đèn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      373.2,
+      648.3,
+      386.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Tự động bật/tắt đèn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      373.2,
+      648.3,
+      386.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn chiếu sáng ban ngày",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      386.9,
+      648.3,
+      401.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn chiếu sáng ban ngày",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      386.9,
+      648.3,
+      401.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn chiếu sáng ban ngày",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      386.9,
+      648.3,
+      401.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Tự động bật/tắt chế độ chiếu xa",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      401.2,
+      648.3,
+      414.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Tự động bật/tắt chế độ chiếu xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      401.2,
+      648.3,
+      414.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Tự động bật/tắt chế độ chiếu xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      401.2,
+      648.3,
+      414.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      414.9,
+      648.3,
+      428.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      414.9,
+      648.3,
+      428.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Đèn ngoại thất",
+    "spec_key": "Đèn hậu",
+    "spec_value": "LED",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      84.2,
+      414.9,
+      648.3,
+      428.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gương chiếu hậu chỉnh điện, gập điện, tích hợp đèn báo rẽ, sấy mặt gương, tự động chỉnh khi lùi, nhớ vị trí",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      58.9,
+      1217.4,
+      101.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gương chiếu hậu chỉnh điện, gập điện, tích hợp đèn báo rẽ, sấy mặt gương, tự động chỉnh khi lùi, nhớ vị trí",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      58.9,
+      1217.4,
+      101.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gương chiếu hậu chỉnh điện, gập điện, tích hợp đèn báo rẽ, sấy mặt gương, tự động chỉnh khi lùi, nhớ vị trí",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      58.9,
+      1217.4,
+      101.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gương chiếu hậu chống chói tự động",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      101.2,
+      1217.4,
+      114.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gương chiếu hậu chống chói tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      101.2,
+      1217.4,
+      114.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gương chiếu hậu chống chói tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      101.2,
+      1217.4,
+      114.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gạt mưa trước tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      114.9,
+      1217.4,
+      128.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gạt mưa trước tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      114.9,
+      1217.4,
+      128.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Gạt mưa trước tự động",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      114.9,
+      1217.4,
+      128.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Chìa khóa thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      128.6,
+      1217.4,
+      142.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Chìa khóa thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      128.6,
+      1217.4,
+      142.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Chìa khóa thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      128.6,
+      1217.4,
+      142.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Cốp sau",
+    "spec_value": "Chỉnh cơ",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      142.3,
+      1217.4,
+      155.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Cốp sau",
+    "spec_value": "Chỉnh điện",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      142.3,
+      1217.4,
+      155.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Cốp sau",
+    "spec_value": "Chỉnh điện",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      142.3,
+      1217.4,
+      155.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Tay nắm cửa",
+    "spec_value": "Dạng ẩn",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      155.9,
+      1217.4,
+      169.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Tay nắm cửa",
+    "spec_value": "Dạng ẩn",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      155.9,
+      1217.4,
+      169.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Ngoại thất khác",
+    "spec_key": "Tay nắm cửa",
+    "spec_value": "Dạng ẩn",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      155.9,
+      1217.4,
+      169.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "Tự động, 2 vùng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      205.9,
+      1217.4,
+      219.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "Tự động, 2 vùng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      205.9,
+      1217.4,
+      219.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Hệ thống điều hòa",
+    "spec_value": "Tự động, 2 vùng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      205.9,
+      1217.4,
+      219.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Hệ thống lọc bụi mịn Combi 1.0 và ion hóa không khí",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      219.6,
+      1217.4,
+      244.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Hệ thống lọc bụi mịn Combi 1.0 và ion hóa không khí",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      219.6,
+      1217.4,
+      244.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Hệ thống lọc bụi mịn Combi 1.0 và ion hóa không khí",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      219.6,
+      1217.4,
+      244.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Cửa gió điều hòa hàng ghế sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      244.0,
+      1217.4,
+      257.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Cửa gió điều hòa hàng ghế sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      244.0,
+      1217.4,
+      257.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Điều hòa không khí",
+    "spec_key": "Cửa gió điều hòa hàng ghế sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      244.0,
+      1217.4,
+      257.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Màn hình hiển thị thông tin trên kính lái (HUD)",
+    "spec_value": "OPT",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      271.4,
+      1217.4,
+      285.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Màn hình hiển thị thông tin trên kính lái (HUD)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      271.4,
+      1217.4,
+      285.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Màn hình hiển thị thông tin trên kính lái (HUD)",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      271.4,
+      1217.4,
+      285.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "display_inch",
+    "spec_value": "12.9",
+    "spec_unit": "inch",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      285.1,
+      1217.4,
+      298.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "display_inch",
+    "spec_value": "12.9",
+    "spec_unit": "inch",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      285.1,
+      1217.4,
+      298.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "display_inch",
+    "spec_value": "12.9",
+    "spec_unit": "inch",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      285.1,
+      1217.4,
+      298.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Kết nối với Android Auto và Apple CarPlay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      298.8,
+      1217.4,
+      312.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Kết nối với Android Auto và Apple CarPlay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      298.8,
+      1217.4,
+      312.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Kết nối với Android Auto và Apple CarPlay",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      298.8,
+      1217.4,
+      312.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "6",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      312.5,
+      1217.4,
+      326.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "8",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      312.5,
+      1217.4,
+      326.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Hệ thống loa",
+    "spec_value": "8",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      312.5,
+      1217.4,
+      326.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Sạc không dây",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      326.2,
+      1217.4,
+      339.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Sạc không dây",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      326.2,
+      1217.4,
+      339.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Màn hình và kết nối",
+    "spec_key": "Sạc không dây",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      326.2,
+      1217.4,
+      339.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh điện 8 hướng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      353.6,
+      1217.4,
+      367.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh điện 8 hướng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      353.6,
+      1217.4,
+      367.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Ghế lái",
+    "spec_value": "Chỉnh điện 8 hướng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      353.6,
+      1217.4,
+      367.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Chất liệu bọc ghế",
+    "spec_value": "Da nhân tạo",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      367.2,
+      1217.4,
+      380.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Chất liệu bọc ghế",
+    "spec_value": "Da nhân tạo cao cấp",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      367.2,
+      1217.4,
+      380.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Chất liệu bọc ghế",
+    "spec_value": "Da nhân tạo cao cấp",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      367.2,
+      1217.4,
+      380.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Kính cửa sổ chỉnh điện, lên/xuống một chạm",
+    "spec_value": "Có, lên/xuống một chạm tất cả các vị trí",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      380.9,
+      1217.4,
+      416.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Kính cửa sổ chỉnh điện, lên/xuống một chạm",
+    "spec_value": "Có, lên/xuống một chạm tất cả các vị trí",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      380.9,
+      1217.4,
+      416.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Kính cửa sổ chỉnh điện, lên/xuống một chạm",
+    "spec_value": "Có, lên/xuống một chạm tất cả các vị trí",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      380.9,
+      1217.4,
+      416.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Phanh đỗ điện tử và chế độ tự động giữ phanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      416.0,
+      1217.4,
+      429.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Phanh đỗ điện tử và chế độ tự động giữ phanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      416.0,
+      1217.4,
+      429.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Phanh đỗ điện tử và chế độ tự động giữ phanh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      416.0,
+      1217.4,
+      429.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Gương chiếu hậu trong xe",
+    "spec_value": "Chế độ ngày/đêm",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      429.7,
+      1217.4,
+      443.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Gương chiếu hậu trong xe",
+    "spec_value": "Chống chói tự động",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      429.7,
+      1217.4,
+      443.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tiện nghi",
+    "spec_key": "Gương chiếu hậu trong xe",
+    "spec_value": "Chống chói tự động",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      429.7,
+      1217.4,
+      443.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "6",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      457.1,
+      1217.4,
+      470.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "8",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      457.1,
+      1217.4,
+      470.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "airbags",
+    "spec_value": "8",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      457.1,
+      1217.4,
+      470.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      470.8,
+      1217.4,
+      484.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      470.8,
+      1217.4,
+      484.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống chống bó cứng phanh ABS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      470.8,
+      1217.4,
+      484.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      484.5,
+      1217.4,
+      498.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      484.5,
+      1217.4,
+      498.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng phân phối lực phanh điện tử EBD",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      484.5,
+      1217.4,
+      498.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp BA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      498.2,
+      1217.4,
+      511.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp BA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      498.2,
+      1217.4,
+      511.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ phanh khẩn cấp BA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      498.2,
+      1217.4,
+      511.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      511.9,
+      1217.4,
+      525.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      511.9,
+      1217.4,
+      525.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hệ thống cân bằng điện tử ESC",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      511.9,
+      1217.4,
+      525.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      525.6,
+      1217.4,
+      539.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      525.6,
+      1217.4,
+      539.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng kiểm soát lực kéo TCS",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      649.9,
+      525.6,
+      1217.4,
+      539.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      58.9,
+      1658.5,
+      73.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      58.9,
+      1658.5,
+      73.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ khởi hành ngang dốc HSA",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      58.9,
+      1658.5,
+      73.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng chống lật ROM",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      73.2,
+      1658.5,
+      87.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng chống lật ROM",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      73.2,
+      1658.5,
+      87.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Chức năng chống lật ROM",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      73.2,
+      1658.5,
+      87.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      87.5,
+      1658.5,
+      101.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      87.5,
+      1658.5,
+      101.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát áp suất lốp",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      87.5,
+      1658.5,
+      101.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      101.8,
+      1658.5,
+      116.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      101.8,
+      1658.5,
+      116.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo điểm mù",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      101.8,
+      1658.5,
+      116.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      116.1,
+      1658.5,
+      130.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      116.1,
+      1658.5,
+      130.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo phương tiện cắt ngang phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      116.1,
+      1658.5,
+      130.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      130.4,
+      1658.5,
+      144.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      130.4,
+      1658.5,
+      144.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo mở cửa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      130.4,
+      1658.5,
+      144.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ tự động chuyển làn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      144.6,
+      1658.5,
+      158.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ tự động chuyển làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      144.6,
+      1658.5,
+      158.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ tự động chuyển làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      144.6,
+      1658.5,
+      158.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Kiểm soát đi giữa làn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      158.9,
+      1658.5,
+      173.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Kiểm soát đi giữa làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      158.9,
+      1658.5,
+      173.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Kiểm soát đi giữa làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      158.9,
+      1658.5,
+      173.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chệch làn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      173.2,
+      1658.5,
+      187.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chệch làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      173.2,
+      1658.5,
+      187.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chệch làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      173.2,
+      1658.5,
+      187.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ giữ làn",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      187.5,
+      1658.5,
+      201.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ giữ làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      187.5,
+      1658.5,
+      201.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ giữ làn",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      187.5,
+      1658.5,
+      201.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát hành trình",
+    "spec_value": "Tiêu chuẩn",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      201.8,
+      1658.5,
+      216.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát hành trình",
+    "spec_value": "Thích ứng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      201.8,
+      1658.5,
+      216.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Giám sát hành trình",
+    "spec_value": "Thích ứng",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      201.8,
+      1658.5,
+      216.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      216.1,
+      1658.5,
+      230.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      216.1,
+      1658.5,
+      230.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Nhận biết biển báo giao thông",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      216.1,
+      1658.5,
+      230.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      230.3,
+      1658.5,
+      244.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      230.3,
+      1658.5,
+      244.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Điều chỉnh tốc độ thông minh",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      230.3,
+      1658.5,
+      244.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Phanh tự động khẩn cấp trước & sau",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      244.6,
+      1658.5,
+      258.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Phanh tự động khẩn cấp trước & sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      244.6,
+      1658.5,
+      258.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Phanh tự động khẩn cấp trước & sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      244.6,
+      1658.5,
+      258.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ đỗ phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      258.9,
+      1658.5,
+      273.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ đỗ phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      258.9,
+      1658.5,
+      273.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Hỗ trợ đỗ phía sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      258.9,
+      1658.5,
+      273.2
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Camera lùi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      273.2,
+      1658.5,
+      287.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Camera lùi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      273.2,
+      1658.5,
+      287.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Camera lùi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      273.2,
+      1658.5,
+      287.5
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Camera 360",
+    "spec_value": "Không",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      287.5,
+      1658.5,
+      301.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Camera 360",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      287.5,
+      1658.5,
+      301.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Camera 360",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      287.5,
+      1658.5,
+      301.8
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chống trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      301.8,
+      1658.5,
+      316.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chống trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      301.8,
+      1658.5,
+      316.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Cảnh báo chống trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      301.8,
+      1658.5,
+      316.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Tính năng khóa động cơ khi có trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      316.1,
+      1658.5,
+      330.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Tính năng khóa động cơ khi có trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      316.1,
+      1658.5,
+      330.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Tính năng khóa động cơ khi có trộm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      316.1,
+      1658.5,
+      330.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX hàng ghế sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      330.3,
+      1658.5,
+      344.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX hàng ghế sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      330.3,
+      1658.5,
+      344.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "An toàn & An ninh",
+    "spec_key": "Móc cố định ghế trẻ em ISOFIX hàng ghế sau",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      330.3,
+      1658.5,
+      344.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Lựa chọn chế độ vận hành đặc biệt",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      386.3,
+      1658.5,
+      400.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Lựa chọn chế độ vận hành đặc biệt",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      386.3,
+      1658.5,
+      400.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Lựa chọn chế độ vận hành đặc biệt",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      386.3,
+      1658.5,
+      400.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      400.6,
+      1658.5,
+      414.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      400.6,
+      1658.5,
+      414.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Cài đặt Giới hạn thời gian hoạt động & khu vực hoạt động của xe",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      400.6,
+      1658.5,
+      414.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Giải trí trực tuyến",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      414.9,
+      1658.5,
+      429.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Giải trí trực tuyến",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      414.9,
+      1658.5,
+      429.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Giải trí trực tuyến",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      414.9,
+      1658.5,
+      429.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Điều hướng & dẫn đường trên màn hình trung tâm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      429.1,
+      1658.5,
+      443.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Điều hướng & dẫn đường trên màn hình trung tâm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      429.1,
+      1658.5,
+      443.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Điều hướng & dẫn đường trên màn hình trung tâm",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      429.1,
+      1658.5,
+      443.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Trò chơi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      443.4,
+      1658.5,
+      457.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Trò chơi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      443.4,
+      1658.5,
+      457.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Trò chơi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      443.4,
+      1658.5,
+      457.7
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Trình duyệt web",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      457.7,
+      1658.5,
+      472.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Trình duyệt web",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      457.7,
+      1658.5,
+      472.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Trình duyệt web",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      457.7,
+      1658.5,
+      472.0
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Tự chẩn đoán lỗi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      472.0,
+      1658.5,
+      486.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Tự chẩn đoán lỗi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      472.0,
+      1658.5,
+      486.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Tự chẩn đoán lỗi",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      472.0,
+      1658.5,
+      486.3
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Cập nhật phần mềm từ xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      486.3,
+      1658.5,
+      500.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Cập nhật phần mềm từ xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      486.3,
+      1658.5,
+      500.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Cập nhật phần mềm từ xa",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      486.3,
+      1658.5,
+      500.6
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Điều khiển xe và cài đặt bằng giọng nói",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      500.6,
+      1658.5,
+      514.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Điều khiển xe và cài đặt bằng giọng nói",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      500.6,
+      1658.5,
+      514.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Điều khiển xe và cài đặt bằng giọng nói",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      500.6,
+      1658.5,
+      514.9
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Hỏi đáp trợ lý ảo",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      514.9,
+      1658.5,
+      529.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Hỏi đáp trợ lý ảo",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      514.9,
+      1658.5,
+      529.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Hỏi đáp trợ lý ảo",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      514.9,
+      1658.5,
+      529.1
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Eco",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Ứng dụng điện thoại",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      529.1,
+      1658.5,
+      543.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Ứng dụng điện thoại",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      529.1,
+      1658.5,
+      543.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  },
+  {
+    "model_code": "VF 7",
+    "version_name": "Plus AWD",
+    "spec_category": "Tính năng điều khiển thông minh",
+    "spec_key": "Ứng dụng điện thoại",
+    "spec_value": "Có",
+    "spec_unit": "",
+    "source_document": "vf7_brochure",
+    "source_url": "https://vinfastnamtuliem.vn/wp-content/uploads/2025/02/VF7_Brochure_T062025.pdf",
+    "source_page": 13,
+    "source_bbox": [
+      1220.7,
+      529.1,
+      1658.5,
+      543.4
+    ],
+    "source_block_id": "p13_b02",
+    "confidence": 0.98
+  }
+]

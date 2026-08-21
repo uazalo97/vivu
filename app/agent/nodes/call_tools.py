@@ -106,16 +106,12 @@ async def call_tools_node(state: AgentState) -> dict:
     cache_hits: set[str] = set()
     if category == "utility":
         tool_results = await _call_utility_tools(query)
-    elif (
-        len(state_models) >= 2
-        or len(_distinct_models(query)) >= 2
-        or (not model_code and _CROSS_MODEL_RE.search(query))
-    ):
+    elif len(state_models) >= 2 or len(_distinct_models(query)) >= 2 or not model_code:
         tool_results = await _call_cross_model_tools(query, state_models)
     elif model_code:
         tool_results, cache_hits = await _call_model_tools(model_code, version, category, query)
     else:
-        tool_results = []
+        tool_results = await _call_cross_model_tools(query, state_models)
 
     # Build system prompt for generate_node
     system_prompt = await get_system_prompt()
