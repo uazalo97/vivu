@@ -72,19 +72,25 @@ async def readiness_probe(response: Response):
     # 2. Check Qdrant Vector DB
     t0 = time.monotonic()
     try:
-        from app.core.retrieval import get_qdrant_client
+        import requests
 
-        q_client = get_qdrant_client()
-        if q_client:
-            cols = await q_client.get_collections()
-            q_latency_ms = round((time.monotonic() - t0) * 1000, 2)
+        q_url = settings.qdrant_url.rstrip("/")
+        headers = {"api-key": settings.qdrant_api_key} if settings.qdrant_api_key else {}
+        r = requests.get(f"{q_url}/collections", headers=headers, timeout=3.0)
+        q_latency_ms = round((time.monotonic() - t0) * 1000, 2)
+        if r.status_code == 200:
+            cols = r.json().get("result", {}).get("collections", [])
             checks["qdrant"] = {
                 "status": "ok",
                 "latency_ms": q_latency_ms,
-                "collections_count": len(cols.collections) if cols else 0,
+                "collections_count": len(cols),
             }
         else:
-            checks["qdrant"] = {"status": "not_configured"}
+            checks["qdrant"] = {
+                "status": "degraded",
+                "latency_ms": q_latency_ms,
+                "status_code": r.status_code,
+            }
     except Exception as e:
         q_latency_ms = round((time.monotonic() - t0) * 1000, 2)
         checks["qdrant"] = {
@@ -92,20 +98,17 @@ async def readiness_probe(response: Response):
             "latency_ms": q_latency_ms,
             "error": str(e),
         }
-        # Qdrant là core service cho RAG
         is_ready = False
 
     # 3. Check Cache (Redis / Upstash)
     try:
-        from app.core.cache import cache
+        from app.core.memory import get_redis
 
-        if cache.enabled:
-            # Test cache ping / set-get
-            test_key = "health:ping"
-            await cache.set_json(test_key, {"ping": "pong"}, ttl=10)
-            res = await cache.get_json(test_key)
+        r_client = get_redis()
+        if r_client:
+            pong = await r_client.ping()
             checks["cache"] = {
-                "status": "ok" if res and res.get("ping") == "pong" else "degraded",
+                "status": "ok" if pong else "degraded",
                 "enabled": True,
             }
         else:
@@ -114,17 +117,15 @@ async def readiness_probe(response: Response):
         checks["cache"] = {"status": "error", "error": str(e), "enabled": True}
 
     # 4. Check LLM Configuration & Credentials
-    has_deepinfra = bool(settings.deepinfra_api_key)
-    has_openrouter = bool(settings.openrouter_api_key)
+    has_openai = bool(settings.openai_api_key)
     checks["llm_config"] = {
         "chat_model": settings.llm_model,
         "fallback_model": settings.llm_fallback_model,
-        "deepinfra_configured": has_deepinfra,
-        "openrouter_configured": has_openrouter,
+        "openai_configured": has_openai,
+        "status": "ok" if has_openai else "error_missing_openai_key",
     }
-
-    if not has_deepinfra:
-        checks["llm_config"]["status"] = "warning_missing_deepinfra_key"
+    if not has_openai:
+        is_ready = False
 
     status_code = status.HTTP_200_OK if is_ready else status.HTTP_503_SERVICE_UNAVAILABLE
     return JSONResponse(
