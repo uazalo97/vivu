@@ -1,4 +1,5 @@
-﻿# ── Production Dockerfile for Vivu Backend (FastAPI + Agentic RAG) ────────────
+# ── Production Dockerfile for Vivu Backend (FastAPI + Agentic RAG) ────────────
+# Chi dong goi backend (app/), khong keo theo frontend / lib / docs / data.
 FROM python:3.11-slim
 
 # Thiet lap bien moi truong chuan cho Python container
@@ -16,13 +17,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy va cai dat dependencies Python
-COPY requirements.txt .
+# Copy va cai dat dependencies Python (chi file requirements cua backend)
+COPY app/requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy toan bo source code
-COPY . .
+# Chi copy source backend (app/) de image nhe va khong chua frontend/docs...
+COPY app ./app
+
+# Sparse index (BM25) can cho hybrid retrieval - chi copy cac file runtime that su can
+# (dung copy ca data_v2 379MB gom input ingest pipeline/scripts):
+COPY data_v2/retrieval/sparse_index.json data_v2/retrieval/sparse_index.json
+# Fallback sparse index tu pipeline cu:
+COPY data/clean/v1/sparse_index.json data/clean/v1/sparse_index.json
+COPY data/clean/v2/sparse_index.json data/clean/v2/sparse_index.json
 
 # Expose port (Render se truyen bien $PORT)
 EXPOSE 8000

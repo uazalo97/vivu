@@ -93,6 +93,7 @@ def _get_current_version_from_db() -> str | None:
 
 def _find_latest_sparse_index() -> Path | None:
     """Ưu tiên DB is_current, fallback scan file."""
+    global _sparse_index
     # 0. Ưu tiên data_v2/retrieval/sparse_index.json từ Unified Harness
     data_v2_path = Path(__file__).resolve().parents[2] / "data_v2" / "retrieval" / "sparse_index.json"
     if data_v2_path.exists():

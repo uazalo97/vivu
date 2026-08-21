@@ -59,7 +59,7 @@ python -m venv .venv
 source .venv/bin/activate  # Hoặc .venv\Scripts\activate trên Windows
 
 # 2. Cài đặt dependencies
-pip install -r requirements.txt
+pip install -r app/requirements.txt
 
 # 3. Cấu hình biến môi trường
 cp .env.example .env
