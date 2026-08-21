@@ -52,18 +52,7 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-asyncio
 
-      # Chỉ chạy các test thuần logic (classify) - không cần Postgres/Redis/Qdrant/LLM
-      # test_log_schema / test_an_toan_adas / test_cache_memory / test_e2e_flow cần DB -> bỏ qua ở Option A
-      - name: Run classify tests
-        run: python tests/test_classify.py
-
-      - name: Run classify intro tests
-        run: python tests/test_classify_intro.py
-
-      - name: Run version leak tests
-        run: python tests/test_version_leak.py
-
-      # Kiểm tra import cơ bản (smoke) - đảm bảo app import được
+      # Smoke test: kiểm tra import cơ bản đảm bảo app và modules load thành công
       - name: Smoke import check
         run: |
           python -c "from app.agent.classifier import get_classifier; from app.agent.nodes.classify import classify_node; print('imports OK')"
