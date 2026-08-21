@@ -22,7 +22,7 @@ File `.env` đã có sẵn cloud endpoints. Chỉ cần verify:
 ```
 OPENAI_API_KEY=sk-xxx
 OPENAI_BASE_URL=https://api.tokenrouter.com/v1
-LLM_MODEL=openai/gpt-4o-mini
+LLM_MODEL=gpt-5.6-luna
 
 POSTGRES_URL=postgresql+asyncpg://neondb_owner:...@neon.tech/neondb?sslmode=require
 PG_DSN=postgresql://neondb_owner:...@neon.tech/neon.db?sslmode=require

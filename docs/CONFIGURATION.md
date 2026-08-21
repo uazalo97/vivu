@@ -10,7 +10,7 @@ Toàn bộ biến môi trường dùng trong nhánh `feature/admin`. File gốc:
 |---|---|---|---|
 | `OPENAI_API_KEY` | ✅ (hoặc fallback cũ) | — | Key chính. Nếu trống, fallback `OPENROUTER_API_KEY` → `DEEPINFRA_API_KEY` (migration) |
 | `OPENAI_BASE_URL` | — | `https://api.openai.com/v1` | Endpoint OpenAI-compatible (đổi được nếu dùng proxy/OpenRouter) |
-| `LLM_MODEL` | — | `gpt-4o-mini` | Model chat. Tự động strip prefix `openai/...` |
+| `LLM_MODEL` | — | `gpt-5.6-luna` | Model chat chính. Tự động strip prefix `openai/...` và tự động sanitize tham số cho reasoning model (`reasoning_effort="none"`, `max_completion_tokens`, không gửi `temperature`/`top_p`) |
 | `LLM_FALLBACK_MODEL` | — | (từ `DEEPINFRA_FALLBACK_MODEL`) | Model thay thế khi model chính lỗi **trước token đầu** |
 | `OPENAI_EMBED_MODEL` | — | `text-embedding-3-small` | Model embedding (strip prefix) |
 | `EMBEDDING_DIM` | — | `1536` | Chiều vector embedding |
@@ -18,7 +18,7 @@ Toàn bộ biến môi trường dùng trong nhánh `feature/admin`. File gốc:
 Token limits (dùng bởi `app/agent/llm.py`):
 `LLM_MAX_OUTPUT_TOKENS=1024`, `LLM_TOOL_CALL_MAX_TOKENS=512`, `LLM_USER_INPUT_MAX_TOKENS=4000`, `LLM_INPUT_MAX_TOKENS=8000`.
 
-> Lưu ý: `OPENROUTER_*` / `DEEPINFRA_*` vẫn được đọc làm fallback cho tương thích, nhưng pipeline data + LLM hiện **thuần OpenAI** (`lib/openai_client.py`, `backend/lib/openai_client.py` — trước là `openrouter.py`, còn shim deprecation).
+> Lưu ý: Hệ thống hỗ trợ hoàn chỉnh các mô hình reasoning như **Luna 5.6 (`gpt-5.6-luna`)**, tự động chuyển đổi `max_tokens` thành `max_completion_tokens`, cấu hình `reasoning_effort="none"` cho function calling và loại bỏ `temperature` theo chuẩn OpenAI API. Pipeline data + LLM hiện **thuần OpenAI** (`lib/openai_client.py`, `backend/lib/openai_client.py`).
 
 ---
 
@@ -83,7 +83,7 @@ Cache tầng (xem `docs/CACHE_SYSTEM.md`): `ans:` 30m, `tool:price` 15m, `tool:s
 ```env
 # LLM
 OPENAI_API_KEY=sk-...
-LLM_MODEL=gpt-4o-mini
+LLM_MODEL=gpt-5.6-luna
 OPENAI_EMBED_MODEL=text-embedding-3-small
 
 # DB

@@ -11,7 +11,7 @@ class Settings:
             _env.get("OPENAI_API_KEY", "") or _env.get("OPENROUTER_API_KEY", "") or _env.get("DEEPINFRA_API_KEY", "")
         )
         self.openai_base_url: str = _env.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
-        raw_llm = _env.get("LLM_MODEL", "gpt-4o-mini").strip()
+        raw_llm = _env.get("LLM_MODEL", "gpt-5.6-luna").strip()
         # Strip prefix "openai/" nếu .env cũ để OPENAI_API_KEY qua OpenRouter/TokenRouter
         self.llm_model: str = raw_llm.split("/", 1)[-1] if "/" in raw_llm else raw_llm
         # Embed model: ưu tiên OPENAI_EMBED_MODEL, fallback OPENROUTER_EMBED_MODEL để tương thích .env cũ
@@ -79,10 +79,11 @@ class Settings:
 
 
 def llm_extra_kwargs(model: str) -> dict:
-    # reasoning chỉ cho model reasoning, gpt-* sẽ 400 nếu gửi
-    if model and not model.lower().startswith("gpt-"):
-        # có thể đọc OPENROUTER_CHAT_REASONING nếu cần, hiện tắt
-        return {}
+    """Reasoning models (luna, o1, o3, o4) cần tắt reasoning tokens (reasoning_effort='none')
+    để giảm TTFT và tương thích với function tools trên /v1/chat/completions."""
+    m = (model or "").lower()
+    if any(k in m for k in ("luna", "o1", "o3", "o4", "reasoning")):
+        return {"reasoning_effort": "none"}
     return {}
 
 

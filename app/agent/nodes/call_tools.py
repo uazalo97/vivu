@@ -58,7 +58,7 @@ _QUERY_SPEC_REFINE = [
     (
         re.compile(
             r"(công\s*suất|mô[\s-]*men|xoắn|tăng\s*tốc|tốc\s*độ|"
-            r"power|torque|acceleration|speed|km/h|\bkW\b|\bNm\b)",
+            r"power|torque|acceleration|speed|km/h|\bkW\b|\bNm\b|mã\s*lực|động\s*cơ|dẫn\s*động|\bawd\b|\bfwd\b)",
             re.I,
         ),
         "powertrain",
@@ -78,6 +78,35 @@ _QUERY_SPEC_REFINE = [
             re.I,
         ),
         "dimension",
+    ),
+    (
+        re.compile(
+            r"(cửa\s*sổ\s*trời|sunroof|trần\s*kính|kính\s*trần|nội\s*thất|ghế|màn\s*hình|"
+            r"loa|âm\s*thanh|điều\s*hòa|vô\s*lăng|hud|sưởi|thông\s*gió|massage|chỗ\s*ngồi)",
+            re.I,
+        ),
+        "interior",
+    ),
+    (
+        re.compile(
+            r"(ngoại\s*thất|đèn|mâm|la[\s-]*zăng|gương|màu\s*sơn|lốp)",
+            re.I,
+        ),
+        "exterior",
+    ),
+    (
+        re.compile(
+            r"(túi\s*khí|airbag|phanh|abs|esc|an\s*toàn|isofix|tpms)",
+            re.I,
+        ),
+        "safety",
+    ),
+    (
+        re.compile(
+            r"(adas|cruise|lane|va\s*chạm|aeb|blind\s*spot|điểm\s*mù|đỗ\s*xe|parking|giữ\s*làn)",
+            re.I,
+        ),
+        "adas",
     ),
 ]
 

@@ -115,6 +115,32 @@ class PartialStreamError(Exception):
     """Lỗi xảy ra SAU khi đã stream token → không được fallback/retry."""
 
 
+def sanitize_chat_params(model: str, kwargs: dict) -> dict:
+    """Chuẩn hóa kwargs gửi tới OpenAI/OpenRouter cho phù hợp từng model.
+
+    Với reasoning models (luna, o1, o3, o4...):
+    - Đổi `max_tokens` thành `max_completion_tokens`
+    - Xóa `temperature` (luna/o1/o3 trả lỗi 400 nếu truyền temperature != default 1)
+    - Xóa `top_p`, `presence_penalty`, `frequency_penalty`
+    - Đảm bảo `reasoning_effort="none"` nếu không được chỉ định (tránh lỗi 400 khi dùng function tools)
+    """
+    m = (model or "").lower()
+    kw = dict(kwargs)
+    is_reasoning = any(k in m for k in ("luna", "o1", "o3", "o4", "reasoning"))
+    if is_reasoning:
+        if "max_tokens" in kw:
+            val = kw.pop("max_tokens")
+            if "max_completion_tokens" not in kw and val is not None:
+                kw["max_completion_tokens"] = val
+        kw.pop("temperature", None)
+        kw.pop("top_p", None)
+        kw.pop("presence_penalty", None)
+        kw.pop("frequency_penalty", None)
+        if "reasoning_effort" not in kw:
+            kw["reasoning_effort"] = "none"
+    return kw
+
+
 def _models_chain() -> list[str]:
     chain = [settings.llm_model]
     fb = settings.llm_fallback_model
@@ -129,8 +155,9 @@ async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tup
     tool_calls_acc: dict[int, dict] = {}
     got_chunk = False
     word_buffer = ""
+    sanitized_kwargs = sanitize_chat_params(model, kwargs)
     try:
-        stream = await llm.chat.completions.create(model=model, messages=messages, stream=True, **kwargs)
+        stream = await llm.chat.completions.create(model=model, messages=messages, stream=True, **sanitized_kwargs)
         async for chunk in stream:
             if not chunk.choices:
                 continue

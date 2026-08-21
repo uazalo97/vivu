@@ -2,6 +2,28 @@ import re
 
 _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 
+# Vietnamese category name -> English category key mapping
+_CATEGORY_VN_TO_EN = {
+    "nội thất": "interior",
+    "ngoại thất": "exterior",
+    "pin & sạc": "battery",
+    "pin và sạc": "battery",
+    "hệ thống truyền động": "powertrain",
+    "truyền động": "powertrain",
+    "kích thước & trọng lượng": "dimension",
+    "kích thước và trọng lượng": "dimension",
+    "an toàn": "safety",
+    "hỗ trợ lái nâng cao (adas)": "adas",
+    "hỗ trợ lái nâng cao": "adas",
+    "giải trí & kết nối": "infotainment",
+    "giải trí và kết nối": "infotainment",
+    "khung gầm & hệ thống treo": "chassis",
+    "khung gầm và hệ thống treo": "chassis",
+    "tiện nghi": "convenience",
+    "kết nối thông minh": "connected",
+    "an ninh": "security",
+}
+
 # Query keywords → relevant spec categories
 _QUERY_TOPIC_MAP = {
     # battery
@@ -71,6 +93,10 @@ _QUERY_TOPIC_MAP = {
     "thông gió": ["interior"],
     "massage": ["interior"],
     "cửa sổ trời": ["interior"],
+    "sunroof": ["interior"],
+    "trần kính": ["interior"],
+    "kính trần": ["interior"],
+    "panoramic": ["interior"],
     # exterior
     "ngoại thất": ["exterior"],
     "đèn": ["exterior"],
@@ -314,12 +340,20 @@ def _format_options(result: dict) -> str:
     return "\n".join(lines)
 
 
+def _is_cat_relevant(spec_cat: str, relevant_cats: set[str] | None) -> bool:
+    if relevant_cats is None:
+        return True
+    cat_lower = spec_cat.lower().strip()
+    en_cat = _CATEGORY_VN_TO_EN.get(cat_lower, cat_lower)
+    return en_cat in relevant_cats or cat_lower in relevant_cats
+
+
 def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
     """Format specs, deduplicating identical values across versions to cut tokens."""
     source_url = result.get("source_url", "")
     lines = [f"Thông số kỹ thuật {result['model_code']}:"]
 
-    specs = [s for s in result.get("specs", []) if relevant_cats is None or s["category"] in relevant_cats]
+    specs = [s for s in result.get("specs", []) if _is_cat_relevant(s.get("category", ""), relevant_cats)]
 
     # Group by (category, key) while preserving order
     grouped: dict[tuple, list] = {}
@@ -343,12 +377,14 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
 
         # All versions share the same value → collapse to one line
         first_val = rows[0]["value"]
+        first_page = next((r["page"] for r in rows if r.get("page")), None)
+        first_page_str = f" (Trang {first_page})" if first_page else ""
         if all(r["value"] == first_val for r in rows):
             vers = sorted({r["version_name"] for r in rows})
             if vers == ["ALL"]:
-                lines.append(f"    {key}{label_str}: {first_val}{unit}")
+                lines.append(f"    {key}{label_str}: {first_val}{unit}{first_page_str}")
             else:
-                lines.append(f"    {key}{label_str}: {first_val}{unit} (mọi phiên bản)")
+                lines.append(f"    {key}{label_str}: {first_val}{unit} (mọi phiên bản){first_page_str}")
         else:
             # Values differ → show per-version, but dedupe identical values
             seen = {}
@@ -359,10 +395,12 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
                 seen[v] = True
                 vers = sorted({x["version_name"] for x in rows if x["value"] == v})
                 ver_str = ", ".join(vers)
-                lines.append(f"    {ver_str} — {key}{label_str}: {v}{unit}")
+                r_page = r.get("page") or first_page
+                r_page_str = f" (Trang {r_page})" if r_page else ""
+                lines.append(f"    {ver_str} — {key}{label_str}: {v}{unit}{r_page_str}")
 
     if source_url:
-        lines.append(f"\n  Nguồn: {source_url}")
+        lines.append(f"\n  Nguồn tài liệu chính thức (Brochure PDF): {source_url}")
     note = result.get("note", "")
     if note:
         lines.append(f"\n  Lưu ý: {note}")
@@ -375,8 +413,8 @@ def _format_search_results(result: dict) -> str:
         src = r.get("source_url", "")
         lines.append(f"\n  [{i}] ({r['source_type']}, score={r['score']})")
         lines.append(f"      {r['text']}")
-        if src:
-            lines.append(f"      Nguồn: {src}")
+        if src and "dat-coc" not in src.lower():
+            lines.append(f"      Nguồn tham khảo: {src}")
     return "\n".join(lines)
 
 

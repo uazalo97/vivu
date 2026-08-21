@@ -125,7 +125,7 @@ def _strip_prefix(m: str) -> str:
 EMBED_MODEL = _strip_prefix(
     os.environ.get("OPENAI_EMBED_MODEL") or os.environ.get("EMBEDDING_MODEL") or "text-embedding-3-small"
 )
-CHAT_MODEL = _strip_prefix(os.environ.get("LLM_MODEL") or os.environ.get("OPENAI_CHAT_MODEL") or "gpt-4o-mini")
+CHAT_MODEL = _strip_prefix(os.environ.get("LLM_MODEL") or os.environ.get("OPENAI_CHAT_MODEL") or "gpt-5.6-luna")
 # Reasoning của chat model: "" (không gửi param — giữ nguyên mặc định của model)
 #   | "off" (tắt reasoning → TTFT giảm mạnh) | "low" | "high" | "max"
 CHAT_REASONING = ""  # reasoning disabled for pure OpenAI
@@ -210,17 +210,22 @@ def embed_text(text: str, model: str = EMBED_MODEL) -> list[float]:
 
 
 def _chat_body(messages: list[dict], model: str, temperature: float, max_tokens: int, stream: bool) -> dict:
-    """Body cho /chat/completions — chỉ thêm reasoning khi model thực sự cần."""
+    """Body cho /chat/completions — tự động sanitize theo model (luna, o1, o3, etc.)."""
+    m = model.lower()
+    is_reasoning = any(k in m for k in ("luna", "o1", "o3", "o4", "reasoning"))
     body: dict = {
         "model": model,
         "messages": messages,
-        "temperature": temperature,
-        "max_tokens": max_tokens,
         "stream": stream,
     }
-    # CHAT_REASONING chỉ áp dụng cho reasoning models; gpt-* của OpenAI sẽ 400 nếu gửi
-    if CHAT_REASONING and not model.lower().startswith("gpt-"):
-        body["reasoning"] = {"effort": CHAT_REASONING}
+    if is_reasoning:
+        body["max_completion_tokens"] = max_tokens
+        body["reasoning_effort"] = "none"
+    else:
+        body["temperature"] = temperature
+        body["max_tokens"] = max_tokens
+        if CHAT_REASONING and not m.startswith("gpt-"):
+            body["reasoning"] = {"effort": CHAT_REASONING}
     return body
 
 

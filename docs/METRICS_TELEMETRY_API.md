@@ -1,4 +1,4 @@
-﻿# Tài Liệu Kỹ Thuật: Hệ Thống Admin Telemetry & Metrics (Dashboard Giám Sát)
+# Tài Liệu Kỹ Thuật: Hệ Thống Admin Telemetry & Metrics (Dashboard Giám Sát)
 
 Tài liệu này hướng dẫn chi tiết về hệ thống theo dõi vận hành, cơ chế tính toán chi phí LLM, thời hạn dữ liệu, đo lường độ trễ và cung cấp các REST API cho Dashboard quản trị / Frontend.
 
@@ -44,6 +44,7 @@ Hệ thống định nghĩa bảng giá USD trên 1 Triệu tokens (1M tokens) t
 
 | Nhà cung cấp / Model | Giá Input (USD / 1M tokens) | Giá Output (USD / 1M tokens) |
 | :--- | :--- | :--- |
+| **OpenAI GPT-5.6 Luna (`gpt-5.6-luna`)** | $0.15 | $0.60 |
 | **OpenAI GPT-4o-mini** | $0.15 | $0.60 |
 | **OpenAI GPT-4o** | $2.50 | $10.00 |
 | **DeepSeek V4 Flash / Chat** | $0.14 | $0.28 |

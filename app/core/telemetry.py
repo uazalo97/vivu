@@ -24,6 +24,8 @@ logger = logging.getLogger("bds.telemetry")
 # Bảng giá USD trên 1 triệu tokens (1M tokens)
 MODEL_PRICING = {
     # OpenAI
+    "gpt-5.6-luna": {"input_per_m": 0.15, "output_per_m": 0.60},
+    "luna": {"input_per_m": 0.15, "output_per_m": 0.60},
     "gpt-4o-mini": {"input_per_m": 0.15, "output_per_m": 0.60},
     "openai/gpt-4o-mini": {"input_per_m": 0.15, "output_per_m": 0.60},
     "gpt-4o": {"input_per_m": 2.50, "output_per_m": 10.00},

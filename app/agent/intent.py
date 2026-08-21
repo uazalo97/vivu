@@ -440,7 +440,8 @@ def _validate_llm_result(data: dict) -> dict | None:
 
 async def llm_classify_fallback(query: str, history: list[dict]) -> dict | None:
     """1 LLM call strict-JSON khi rule intent = general. Trả entities hoặc None."""
-    from app.agent.llm import get_llm
+    from app.agent.llm import get_llm, sanitize_chat_params
+    from app.config import settings
 
     try:
         import json as _json
@@ -461,12 +462,19 @@ async def llm_classify_fallback(query: str, history: list[dict]) -> dict | None:
                 }
             )
         msgs.append({"role": "user", "content": prompt})
+        model = settings.llm_model
+        call_kwargs = sanitize_chat_params(
+            model,
+            {
+                "max_tokens": 150,
+                "temperature": 0,
+                "response_format": {"type": "json_object"},
+            },
+        )
         resp = await client.chat.completions.create(
-            model="deepseek-ai/DeepSeek-V4-Flash",
+            model=model,
             messages=msgs,
-            max_tokens=150,
-            temperature=0,
-            response_format={"type": "json_object"},
+            **call_kwargs,
         )
         content = resp.choices[0].message.content or ""
         return _validate_llm_result(_json.loads(content))

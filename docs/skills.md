@@ -147,7 +147,7 @@ User query → Pre-guardrails → Classify → Agent Loop → Synthesize → Pos
 | Agent | Agentic RAG thuần (OpenAI function calling + loop) | Không dùng LangGraph |
 | Backend | Python + FastAPI | Hệ sinh thái RAG mạnh nhất |
 | Embedding | sentence-transformers (local) | paraphrase-multilingual-MiniLM-L12-v2, 384 dims |
-| LLM | openai/gpt-4o-mini qua TokenRouter | API key riêng, base URL tùy chỉnh |
+| LLM | gpt-5.6-luna (OpenAI Luna 5.6) | Reasoning model với reasoning_effort=none, max_completion_tokens |
 | Vector DB | Qdrant | Dense + native sparse (SparseVectorParams + IDF) |
 | Reranker | FlashRank (ms-marco-MultiBERT-L-12) | Lightweight ONNX, multilingual |
 | Crawl/Parse | Firecrawl | HTML → markdown, PDF → markdown, structured extraction |

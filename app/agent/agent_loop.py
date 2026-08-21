@@ -116,18 +116,22 @@ class AgentLoop:
                             seen = set()
                             formatted = []
                             for c in sorted(result.sources, key=lambda x: x.get("score", 0), reverse=True):
+                                if c.get("score", 0) < 0.4:
+                                    continue
                                 url = c.get("source_url", "")
-                                if url and not url.startswith("http"):
-                                    model = c.get("model_code", "")
-                                    model_slug = model.lower().replace(" ", "")
-                                    url = f"https://shop.vinfastauto.com/vn_vi/dat-coc-xe-{model_slug}.html"
-                                if not url or url in seen:
+                                if not url or not url.startswith("http"):
+                                    continue
+                                if "dat-coc" in url and c.get("source_type") != "pricing":
+                                    continue
+                                if url in seen:
                                     continue
                                 seen.add(url)
                                 model = c.get("model_code", "")
                                 label = c.get("source_type", "")
+                                page = c.get("page", "")
+                                page_str = f" - Trang {page}" if page else ""
                                 score = round(c.get("score", 0), 3)
-                                text = f"{model} — {label}" if model and label else (label or url)
+                                text = f"{model} ({label}{page_str})" if model and label else (label or url)
                                 formatted.append({"text": text, "url": url, "type": label, "score": score})
                                 if len(formatted) >= 5:
                                     break

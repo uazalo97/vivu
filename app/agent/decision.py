@@ -437,6 +437,20 @@ _SPEC_QUERY_KEYWORDS = {
         "rear_ac_vents",
         "cửa gió",
         "loa trầm",
+        "cửa sổ trời",
+        "sunroof",
+        "trần kính",
+        "kính trần",
+    ],
+    "cửa_sổ_trời": [
+        "sunroof_type",
+        "sunroof",
+        "cửa sổ trời",
+        "cửa sổ trời toàn cảnh",
+        "trần kính",
+        "trần kính toàn cảnh",
+        "kính trần",
+        "panoramic",
     ],
     "ngoại_thất": [
         "headlight",
@@ -521,26 +535,46 @@ def _query_models(query: str) -> set[str]:
     return {m.upper().replace(" ", "").replace("\u00a0", "") for m in matches}
 
 
-def _spec_relevance_score(query_tokens: set[str], spec_key: str, spec_value: str) -> float:
+def _spec_relevance_score(query: str, query_tokens: set[str], spec_key: str, spec_value: str) -> float:
     """Score 0.0-1.0 indicating how relevant a spec is to the query."""
     key_lower = spec_key.lower()
     value_lower = spec_value.lower()
-    key_tokens = set(_TOKEN_RE.findall(key_lower + " " + value_lower))
+    spec_text = key_lower + " " + value_lower
+    key_tokens = set(_TOKEN_RE.findall(spec_text))
+    query_lower = query.lower()
 
-    for group_tokens in _SPEC_QUERY_KEYWORDS.values():
-        # Tokenize multi-word phrases (e.g. "công suất" → {"công", "suất"})
-        group_set: set[str] = set()
-        for phrase in group_tokens:
-            group_set.update(_TOKEN_RE.findall(phrase.lower()))
-        query_match = group_set & query_tokens
-        spec_match = group_set & key_tokens
-        if query_match and spec_match:
-            return 0.9
+    # Check if query matches any specific known topic keywords
+    query_matched_topic = False
+    for group_phrases in _SPEC_QUERY_KEYWORDS.values():
+        matched_in_query = False
+        for phrase in group_phrases:
+            phrase_lower = phrase.lower()
+            if " " in phrase_lower:
+                if phrase_lower in query_lower:
+                    matched_in_query = True
+                    if phrase_lower in spec_text:
+                        return 0.95
+            else:
+                if phrase_lower in query_tokens:
+                    matched_in_query = True
+                    if phrase_lower in key_tokens:
+                        return 0.95
+        if matched_in_query:
+            query_matched_topic = True
 
-    if key_tokens & query_tokens:
-        return 0.7
+    # If query is about a specific recognized topic, do not give high score to random unigram overlaps
+    if query_matched_topic:
+        return 0.0
 
-    return 0.3
+    # Direct token overlap with query tokens (excluding stop words)
+    meaningful_qtokens = query_tokens - _CITATION_STOP_WORDS
+    overlap = key_tokens & meaningful_qtokens
+    if len(overlap) >= 2:
+        return 0.8
+    if len(overlap) == 1 and any(len(w) >= 4 for w in overlap):
+        return 0.6
+
+    return 0.0
 
 
 def _price_relevance_score(query_tokens: set[str]) -> float:
@@ -591,15 +625,15 @@ def _score_specs_rerank(query: str, specs: list[dict], qtokens: set[str]) -> lis
     """Score specs using keyword matching first, embedding only for ambiguous specs.
 
     Keyword matching is instant (no API call). Embedding is only used for specs
-    where keyword score is ambiguous (0.3-0.5). This avoids 200+ embedding calls
+    where keyword score is ambiguous (0.4-0.8). This avoids 200+ embedding calls
     when most specs are clearly relevant or irrelevant.
     """
-    keyword_scores = [_spec_relevance_score(qtokens, s.get("key", ""), s.get("value", "")) for s in specs]
+    keyword_scores = [_spec_relevance_score(query, qtokens, s.get("key", ""), s.get("value", "")) for s in specs]
 
     # Find indices where keyword score is ambiguous (needs embedding)
-    ambiguous = [i for i, s in enumerate(keyword_scores) if 0.25 <= s < 0.5]
+    ambiguous = [i for i, s in enumerate(keyword_scores) if 0.4 <= s < 0.8]
 
-    if not ambiguous:
+    if not ambiguous or len(ambiguous) > 10:
         return keyword_scores  # All clear, no embedding needed
 
     # Only embed ambiguous specs
@@ -639,12 +673,15 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
                 score = scores[i] if i < len(scores) else 0.0
                 page = s.get("page", "")
                 page_str = f" (trang {page})" if page else ""
+                spec_url = s.get("source_url") or result.get("source_url", "")
+                if spec_url and page and ".pdf" in spec_url.lower() and "#page=" not in spec_url:
+                    spec_url = f"{spec_url}#page={page}"
                 valid_sources.append(
                     {
                         "tool": tool,
                         "model_code": result.get("model_code", ""),
                         "text": f"{s.get('key', '')}: {s.get('value', '')} {s.get('unit', '')}{page_str}",
-                        "source_url": result.get("source_url", ""),
+                        "source_url": spec_url,
                         "source_type": "specs",
                         "score": round(score, 4),
                         "page": page,
@@ -735,6 +772,7 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
 
         elif tool == "list_available_models" and result.get("models"):
             mentioned = _query_models(query)
+            is_catalog_query = any(k in query.lower() for k in ("danh sách", "những dòng xe", "những mẫu xe", "có những xe nào", "các dòng xe", "các mẫu xe", "tất cả xe", "mẫu xe nào", "dòng xe nào"))
             found_any = False
             for m in result["models"]:
                 mc = m.get("model_code", "")
@@ -749,12 +787,14 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
                         "text": f"{mc} — Phiên bản: {vers}",
                         "source_url": m.get("source_url", ""),
                         "source_type": "catalog",
-                        "score": 0.9,
+                        "score": 0.9 if is_catalog_query else 0.1,
                     }
                 )
                 found_any = True
-            if found_any:
+            if found_any and is_catalog_query:
                 has_direct = True
+            elif found_any:
+                has_partial = True
 
         # Catch-all: utility tools that return URLs (showroom, booking, loan, etc.)
         elif tool not in ("get_specs", "get_price", "search_knowledge_base", "list_available_models", "get_colors"):
@@ -784,25 +824,36 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
     return "insufficient", valid_sources
 
 
+_CITATION_STOP_WORDS = {
+    "xe", "vinfast", "vf", "của", "và", "là", "cho", "tôi", "bạn",
+    "có", "không", "nào", "gì", "mấy", "ở", "với", "được", "các",
+    "những", "như", "thế", "này", "đó", "ra", "sao", "thì", "bao", "nhiêu",
+}
+
+
 def validate_citations(sources: list[dict], query: str = "") -> list[dict]:
     """Filter citations: must have valid source reference AND be relevant to the query."""
     valid = []
     qtokens = _query_tokens(query) if query else set()
+    meaningful_qtokens = qtokens - _CITATION_STOP_WORDS
     for s in sources:
         url = s.get("source_url", "")
-        # Accept any non-empty source reference (HTTP URL, file path, document name)
-        if not url:
+        # Accept only valid HTTP URLs
+        if not url or not url.startswith("http"):
             continue
-        # Content relevance gate: if we have query tokens, check that the
-        # source text has at least some overlap with the query.
+        # Don't include deposit links for technical/spec queries
+        if "dat-coc" in url and s.get("source_type") != "pricing":
+            continue
+        # Content relevance gate
         text = s.get("text", "").lower()
         score = s.get("score", 0)
-        if qtokens and text:
+        if meaningful_qtokens and text:
             text_tokens = set(_TOKEN_RE.findall(text))
-            overlap = qtokens & text_tokens - {"xe", "vinfast", "vf", "của", "và", "là", "cho", "tôi", "bạn"}
-            # Accept if score is high (from reranker/embedding) OR has meaningful token overlap
-            if score < 0.3 and len(overlap) == 0:
+            overlap = meaningful_qtokens & text_tokens
+            if score < 0.4 and len(overlap) == 0:
                 continue
+        elif score < 0.4:
+            continue
         valid.append(s)
     return valid
 
@@ -898,7 +949,7 @@ def build_retrieved_chunks(tool_results: list[dict], query: str = "", topic: str
             # Use keyword scoring for log (more granular than hybrid embedding).
             # Hybrid scoring is used in assess_evidence for validation decisions.
             scores = (
-                [_spec_relevance_score(qtokens, s.get("key", ""), s.get("value", "")) for s in specs]
+                [_spec_relevance_score(query, qtokens, s.get("key", ""), s.get("value", "")) for s in specs]
                 if qtokens
                 else [0.5] * len(specs)
             )

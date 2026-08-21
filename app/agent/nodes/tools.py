@@ -5,10 +5,11 @@ import time
 
 from openai import AsyncOpenAI
 
-from app.config import settings
+from app.agent.graph_state import AgentState
+from app.agent.llm import sanitize_chat_params
 from app.agent.schemas import build_tool_schemas
 from app.agent.tools import TOOL_REGISTRY
-from app.agent.graph_state import AgentState
+from app.config import settings
 
 logger = logging.getLogger("bds.graph.tools")
 
@@ -67,31 +68,27 @@ async def execute_tools_node(state: AgentState) -> dict:
 
     # Force tool calls on first iteration when classify decided "answer"
     decision = state.get("decision", "answer")
-    # DeepSeek models don't support tool_choice="required" in thinking mode
     _model_lower = settings.llm_model.lower()
-    _no_force_tools = (
-        "deepseek" in _model_lower or "luna" in _model_lower or "o1" in _model_lower or "o3" in _model_lower
-    )
+    _no_force_tools = any(k in _model_lower for k in ("deepseek", "luna", "o1", "o3", "o4", "reasoning"))
     force_tool = "auto" if _no_force_tools else ("required" if (decision == "answer" and not tool_results) else "auto")
 
     # Retry once on rate limit / timeout
     resp = None
-    # Reasoning params chỉ cho luna/qwen/deepseek; OpenAI sẽ 400 nếu gửi
-    extra_kwargs = {}
-    if any(k in _model_lower for k in ("luna", "qwen", "deepseek", "reasoning", "o1", "o3")):
-        # OpenAI gpt-* không hỗ trợ reasoning_effort, chỉ reasoning models cần
-        if "gpt" not in _model_lower:
-            extra_kwargs["reasoning_effort"] = "none"
+    call_kwargs = sanitize_chat_params(
+        settings.llm_model,
+        {
+            "tools": tool_schemas,
+            "tool_choice": force_tool,
+            "max_tokens": 4096,
+        },
+    )
 
     for attempt in range(2):
         try:
             resp = await llm.chat.completions.create(
                 model=settings.llm_model,
                 messages=messages,
-                tools=tool_schemas,
-                tool_choice=force_tool,
-                max_tokens=4096,
-                **extra_kwargs,
+                **call_kwargs,
             )
             break
         except Exception as e:
