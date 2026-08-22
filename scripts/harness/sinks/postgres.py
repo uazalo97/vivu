@@ -19,7 +19,7 @@ from typing import Any, Dict, List, Tuple
 import psycopg2
 from psycopg2.extras import execute_values
 
-from scripts.harness.config import PG_DSN, STRUCTURED_DIR
+from scripts.harness.config import INGEST_PREV_VERSION, INGEST_VALID_FROM, INGEST_YEAR_RANGE, PG_DSN, STRUCTURED_DIR
 from scripts.harness.normalizers.table import TableNormalizer
 from scripts.harness.schemas import CanonicalDocument
 
@@ -47,7 +47,17 @@ class PostgresSink:
             block_id = ev.source_block if ev else None
             conf = item.validation.confidence if item.validation else 1.0
 
-            s_key, s_key_vn, unit, cat_slug, cat_vn = self.normalizer.map_attribute(item.attribute, item.category)
+            # C1 fix: reuse already-normalized fields from orchestrator to avoid redundant
+            # map_attribute call (which re-parses Vietnamese aliases and is costly).
+            # Only fall back to mapping when normalized fields are missing.
+            if item.spec_key and item.category and item.category_vn:
+                cat_slug = item.category
+                cat_vn = item.category_vn
+                s_key = item.spec_key
+                s_key_vn = item.spec_key_vn or item.attribute
+                unit = item.unit or ""
+            else:
+                s_key, s_key_vn, unit, cat_slug, cat_vn = self.normalizer.map_attribute(item.attribute, item.category)
 
             rows.append(
                 {
@@ -116,6 +126,20 @@ class PostgresSink:
             (self.output_dir / "specs").glob("*_specs.json")
         )
 
+        VALID_CATEGORIES = [
+            "dimension",
+            "powertrain",
+            "battery",
+            "chassis",
+            "exterior",
+            "interior",
+            "infotainment",
+            "convenience",
+            "safety",
+            "security",
+            "adas",
+            "connected",
+        ]
         seen_files = set()
         for f in candidate_files:
             if f.name != "all_models_specs.json" and f.resolve() not in seen_files:
@@ -123,29 +147,26 @@ class PostgresSink:
                 with open(f, "r", encoding="utf-8") as fp:
                     items = json.load(fp)
                     for it in items:
-                        s_key, s_key_vn, unit, cat_slug, cat_vn = self.normalizer.map_attribute(
-                            it.get("spec_key_vn") or it.get("spec_key", ""), it.get("spec_category")
-                        )
-                        if it.get("spec_category") not in [
-                            "dimension",
-                            "powertrain",
-                            "battery",
-                            "chassis",
-                            "exterior",
-                            "interior",
-                            "infotainment",
-                            "convenience",
-                            "safety",
-                            "security",
-                            "adas",
-                            "connected",
-                        ]:
+                        cat = it.get("spec_category")
+                        # C1 fix: only call map_attribute when category is invalid/missing.
+                        # Previously called for every row (even valid) and fed English spec_key
+                        # into Vietnamese matcher, causing fallback mis-categorization.
+                        if cat not in VALID_CATEGORIES:
+                            attr_for_map = it.get("spec_key_vn") or it.get("spec_key") or ""
+                            _, mapped_s_key_vn, _, cat_slug, mapped_cat_vn = self.normalizer.map_attribute(
+                                attr_for_map, cat
+                            )
                             it["spec_category"] = cat_slug
-                            it["spec_category_vn"] = cat_vn
-                        if not it.get("spec_category_vn"):
-                            it["spec_category_vn"] = cat_vn
-                        if not it.get("spec_key_vn"):
-                            it["spec_key_vn"] = s_key_vn
+                            if not it.get("spec_category_vn"):
+                                it["spec_category_vn"] = mapped_cat_vn
+                            if not it.get("spec_key_vn") and mapped_s_key_vn:
+                                it["spec_key_vn"] = mapped_s_key_vn
+                        else:
+                            # Category valid but missing VN label -> fill from CATEGORY map without full remap
+                            if not it.get("spec_category_vn"):
+                                from scripts.harness.normalizers.table import CATEGORY_VN_MAP
+
+                                it["spec_category_vn"] = CATEGORY_VN_MAP.get(cat, cat.title())
                         all_rows.append(it)
 
         master_json = self.output_dir / "all_models_specs.json"
@@ -207,11 +228,11 @@ class PostgresSink:
             cur.execute("DELETE FROM car_options WHERE ingest_version = %s", (version,))
 
             # ── 2. Ingest edition (Parent Table) ───────────────────────────
+            ed_values: list = []  # C4 fix: init outside to avoid locals() check
             ed_file = self.output_dir / "edition.csv"
             if ed_file.exists():
                 ed_rows = self._read_csv(ed_file)
                 seen_ed = set()
-                ed_values = []
                 for r in ed_rows:
                     m_id = r["model_id"]
                     e_id = r["edition_id"]
@@ -224,7 +245,7 @@ class PostgresSink:
                                 e_id,
                                 r["model_label"],
                                 r["edition_label"],
-                                r.get("year_range") or "2026",
+                                r.get("year_range") or INGEST_YEAR_RANGE,
                                 r.get("is_active", "True").lower() in ("true", "1", "yes"),
                             )
                         )
@@ -244,14 +265,14 @@ class PostgresSink:
                 seen_prices = set()
                 price_values = []
                 # Only insert if (model_id, edition_id) exists in edition
-                valid_ed_keys = set((r[1], r[2]) for r in ed_values) if "ed_values" in locals() else set()
+                valid_ed_keys = set((r[1], r[2]) for r in ed_values) if ed_values else set()
 
                 for r in price_rows:
                     m_id = r["model_id"]
                     e_id = r["edition_id"]
                     if (m_id, e_id) not in valid_ed_keys:
                         continue
-                    v_from = r.get("valid_from") or "2026-07-01"
+                    v_from = r.get("valid_from") or INGEST_VALID_FROM
                     pk = (m_id, e_id, v_from)
                     if pk not in seen_prices:
                         seen_prices.add(pk)
@@ -286,6 +307,12 @@ class PostgresSink:
                 with open(specs_file, "r", encoding="utf-8") as f:
                     specs_data = json.load(f)
 
+                from scripts.harness.config import BROCHURE_CATALOG
+
+                url_map = {b["pdf_name"]: b["url"] for b in BROCHURE_CATALOG}
+                url_map.update({b["doc_id"]: b["url"] for b in BROCHURE_CATALOG})
+                url_map.update({b["model_code"]: b["url"] for b in BROCHURE_CATALOG})
+
                 seen_specs = set()
                 specs_values = []
                 for r in specs_data:
@@ -294,12 +321,6 @@ class PostgresSink:
                     v_code = r.get("version_code") or None
                     s_cat = r.get("spec_category") or "convenience"
                     s_key = r.get("spec_key") or "custom_spec"
-
-                    from scripts.harness.config import BROCHURE_CATALOG
-
-                    url_map = {b["pdf_name"]: b["url"] for b in BROCHURE_CATALOG}
-                    url_map.update({b["doc_id"]: b["url"] for b in BROCHURE_CATALOG})
-                    url_map.update({b["model_code"]: b["url"] for b in BROCHURE_CATALOG})
 
                     p_num = r.get("source_page") or r.get("page")
                     p_int = int(p_num) if p_num is not None and str(p_num).isdigit() else None
@@ -317,6 +338,9 @@ class PostgresSink:
                     if s_url and p_int and "#page=" not in s_url and (".pdf" in s_url.lower()):
                         s_url = f"{s_url}#page={p_int}"
 
+                    # R3: dedup by key only to satisfy DB unique constraint
+                    # (ingest_version, model_code, version_code, version_name, spec_category, spec_key).
+                    # File has 1559 rows, DB can only store ~1429 distinct keys; extra values (e.g. duplicate length_mm with different value) are correctly deduped to first occurrence.
                     uniq_k = (version, m_code, v_code or "", v_name or "", s_cat, s_key)
                     if uniq_k not in seen_specs:
                         seen_specs.add(uniq_k)
@@ -441,7 +465,7 @@ class PostgresSink:
                 (
                     version,
                     datetime.now(timezone.utc),
-                    "v2",
+                    INGEST_PREV_VERSION,
                     total_pg_rows,
                     "Ingested by scripts.harness.sinks.postgres",
                 ),

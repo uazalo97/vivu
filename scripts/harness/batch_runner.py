@@ -4,6 +4,7 @@ batch_runner.py — Batch Runner for Brochure Ingestion across all 9 VinFast mod
 """
 
 import argparse
+import json
 import sys
 import time
 import urllib.request
@@ -34,6 +35,32 @@ def download_file(url: str, dest_path: Path) -> bool:
         return False
 
 
+def _is_valid_canonical(canonical_path: Path) -> bool:
+    """C6 fix: robust check for existing canonical JSON.
+    Returns True only if file exists, size > 100, valid JSON, has document/pages."""
+    if not canonical_path.exists():
+        return False
+    if canonical_path.stat().st_size <= 100:
+        return False
+    try:
+        with open(canonical_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        # Must have document and pages with at least 1 page
+        if not isinstance(data, dict):
+            return False
+        doc = data.get("document")
+        pages = data.get("pages")
+        if not doc or not isinstance(pages, list) or len(pages) == 0:
+            return False
+        # total_pages should match actual pages length if present
+        total = doc.get("total_pages")
+        if total is not None and total != len(pages):
+            return False
+        return True
+    except Exception:
+        return False
+
+
 def run_brochure_batch(
     data_dir: Path = DATA_V2_DIR,
     models_filter: Optional[List[str]] = None,
@@ -47,7 +74,6 @@ def run_brochure_batch(
     canonical_dir.mkdir(parents=True, exist_ok=True)
 
     orchestrator = DocumentHarnessOrchestrator(output_dir=data_dir)
-    postgres_sink = PostgresSink(output_dir=data_dir / "structured")
 
     print("\n" + "=" * 80)
     print("AGENTIC DOCUMENT INGESTION HARNESS — BROCHURE BATCH RUNNER")
@@ -55,6 +81,9 @@ def run_brochure_batch(
         print(f"Target Models Filter: {', '.join(models_filter)}")
     print(f"Skip Existing: {skip_existing} (Force: {force})")
     print("=" * 80)
+
+    # C4 fix: pre-compute filter lowercasing once, not per iteration
+    m_filter_lower = [f.strip().lower() for f in models_filter] if models_filter else []
 
     stats = []
 
@@ -66,8 +95,7 @@ def run_brochure_batch(
         pdf_path = raw_pdf_dir / pdf_name
         canonical_path = canonical_dir / f"{doc_id}.json"
 
-        if models_filter:
-            m_filter_lower = [f.strip().lower() for f in models_filter]
+        if m_filter_lower:
             doc_matches = any(
                 f in doc_id.lower() or f in m_code.lower() or f == doc_id.replace("_brochure", "").lower()
                 for f in m_filter_lower
@@ -75,7 +103,8 @@ def run_brochure_batch(
             if not doc_matches:
                 continue
 
-        if skip_existing and not force and canonical_path.exists() and canonical_path.stat().st_size > 100:
+        # C6 fix: robust canonical validation instead of exists()+size check
+        if skip_existing and not force and _is_valid_canonical(canonical_path):
             print(f"\n>>> [SKIPPED - ALREADY EXISTS] {m_code} ({doc_id})")
             stats.append({"model": m_code, "status": "ALREADY_EXISTS"})
             continue
@@ -105,10 +134,9 @@ def run_brochure_batch(
             print(f"[ERROR] Failed processing {m_code}: {e}")
             stats.append({"model": m_code, "status": "ERROR", "error": str(e)})
 
-    # Consolidate all specs
-    master_json, master_csv = postgres_sink.consolidate_all_specs()
-    print(f"\n[Consolidation] Saved Master Specs: {master_json} and {master_csv}")
-
+    # C6 fix: no longer consolidate here to avoid double consolidation
+    # when called via pipeline.py Phase 4. Pipeline will consolidate once.
+    # Standalone CLI ( __main__ ) will consolidate explicitly after batch.
     total_time = time.time() - t_start
     print(f"\nBrochure Batch finished in {total_time:.1f}s")
     return {"status": "DONE", "duration": total_time, "stats": stats}
@@ -119,4 +147,11 @@ if __name__ == "__main__":
     parser.add_argument("--filter", nargs="+", help="Filter models (e.g. vf3 vf6)")
     parser.add_argument("--force", action="store_true", help="Force re-extraction")
     args = parser.parse_args()
-    run_brochure_batch(models_filter=args.filter, skip_existing=not args.force, force=args.force)
+    result = run_brochure_batch(models_filter=args.filter, skip_existing=not args.force, force=args.force)
+    # C6 fix: standalone mode still consolidates (pipeline mode does not double-consolidate)
+    try:
+        sink = PostgresSink(output_dir=DATA_V2_DIR / "structured")
+        master_json, master_csv = sink.consolidate_all_specs()
+        print(f"\n[Consolidation] Saved Master Specs: {master_json} and {master_csv}")
+    except Exception as e:
+        print(f"[WARN] Consolidation failed: {e}")

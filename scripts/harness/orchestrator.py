@@ -52,94 +52,99 @@ class DocumentHarnessOrchestrator:
         print(f"\n{'=' * 72}\n[HARNESS] INGESTION START: {pdf_path.name} (model: {model_code})\n{'=' * 72}")
 
         # 1. Inspection & Rendering
-        print("\n[Step 1/6] Inspecting PDF & Rendering high-resolution page images...")
+        print("\n[Step 1/5] Inspecting PDF & Rendering high-resolution page images...")
         signals_list, rendered_images = self.inspector.inspect_pdf(pdf_path, doc_id=doc_id)
         print(f"  -> Analyzed {len(signals_list)} pages, rendered images saved to data_v2/artifacts/{doc_id}/pages/")
 
         # 2. Strategy Planning
-        print("\n[Step 2/6] Planning extraction strategies per page...")
+        print("\n[Step 2/5] Planning extraction strategies per page...")
         plan = self.planner.plan_document(signals_list)
         for p_num, strat in sorted(plan.items()):
             sig = signals_list[p_num - 1]
             print(f"  Page {p_num:02d}: type={sig.page_type:<15} overlap={sig.overlap_ratio:.2f} -> Strategy: {strat}")
 
         # 3. Execution
-        print("\n[Step 3/6] Extracting blocks using specialized extractors...")
+        print("\n[Step 3/5] Extracting blocks using specialized extractors...")
         doc_fitz = fitz.open(pdf_path)
         pymupdf_ext = PyMuPDFExtractor(doc_id=doc_id)
         vision_ext = VisionExtractor(doc_id=doc_id)
 
         canonical_pages: List[CanonicalPage] = []
         pages_to_process = page_range if page_range else list(range(1, len(doc_fitz) + 1))
+        try:
+            for p_num in pages_to_process:
+                page_idx = p_num - 1
+                fitz_page = doc_fitz[page_idx]
+                rect = fitz_page.rect
+                page_size = {"width": float(rect.width), "height": float(rect.height)}
+                img_path = rendered_images[page_idx]
+                strategy = plan.get(p_num, "pymupdf")
+                signals = signals_list[page_idx]
 
-        for p_num in pages_to_process:
-            page_idx = p_num - 1
-            fitz_page = doc_fitz[page_idx]
-            rect = fitz_page.rect
-            page_size = {"width": float(rect.width), "height": float(rect.height)}
-            img_path = rendered_images[page_idx]
-            strategy = plan.get(p_num, "pymupdf")
-            signals = signals_list[page_idx]
+                print(f"  Processing Page {p_num:02d} ({strategy})...", end="", flush=True)
 
-            print(f"  Processing Page {p_num:02d} ({strategy})...", end="", flush=True)
-
-            blocks: List[CanonicalBlock] = []
-            if strategy in ("vision_table", "vision_prose"):
-                blocks = vision_ext.extract_page(
-                    image_path=img_path,
-                    page_num=p_num,
-                    page_size=page_size,
-                    source_url=source_url,
-                )
-                if not blocks:
-                    print(" (Vision empty -> fallback PyMuPDF)", end="", flush=True)
+                blocks: List[CanonicalBlock] = []
+                if strategy in ("vision_table", "vision_prose"):
+                    blocks = vision_ext.extract_page(
+                        image_path=img_path,
+                        page_num=p_num,
+                        page_size=page_size,
+                        source_url=source_url,
+                    )
+                    if not blocks:
+                        print(" (Vision empty -> fallback PyMuPDF)", end="", flush=True)
+                        blocks = pymupdf_ext.extract_page(
+                            page=fitz_page,
+                            page_num=p_num,
+                            source_url=source_url,
+                        )
+                else:
                     blocks = pymupdf_ext.extract_page(
                         page=fitz_page,
                         page_num=p_num,
                         source_url=source_url,
                     )
-            else:
-                blocks = pymupdf_ext.extract_page(
-                    page=fitz_page,
-                    page_num=p_num,
-                    source_url=source_url,
+
+                # 4. Normalization of table specs
+                for b in blocks:
+                    if b.items:
+                        normalized_items = []
+                        for item in b.items:
+                            normalized_items.extend(self.normalizer.normalize_spec_item(item))
+                        b.items = normalized_items
+
+                # 5. Crop visual evidence (C4 fix: only for table/spec blocks)
+                for b in blocks:
+                    if b.evidence and b.evidence.bbox and (b.type == "table" or b.items):
+                        crop_path = self.crop_generator.crop_block(
+                            page_image_path=img_path,
+                            bbox=b.evidence.bbox,
+                            doc_id=doc_id,
+                            block_id=b.block_id,
+                        )
+                        if crop_path:
+                            # C4 fix: store relative path for portability
+                            try:
+                                rel_path = crop_path.relative_to(self.output_dir)
+                            except ValueError:
+                                rel_path = crop_path
+                            b.evidence.crop_path = rel_path.as_posix()
+
+                # 6. Validation
+                canonical_page = CanonicalPage(
+                    page_number=p_num,
+                    page_size=page_size,
+                    image_path=str(img_path.as_posix()),
+                    signals=signals,
+                    blocks=blocks,
                 )
+                canonical_page = self.validator.validate_page(canonical_page)
+                canonical_pages.append(canonical_page)
+                print(f" -> Extracted {len(blocks)} blocks")
+        finally:
+            doc_fitz.close()
 
-            # 4. Normalization of table specs
-            for b in blocks:
-                if b.items:
-                    normalized_items = []
-                    for item in b.items:
-                        normalized_items.extend(self.normalizer.normalize_spec_item(item))
-                    b.items = normalized_items
-
-            # 5. Crop visual evidence
-            for b in blocks:
-                if b.evidence and b.evidence.bbox:
-                    crop_path = self.crop_generator.crop_block(
-                        page_image_path=img_path,
-                        bbox=b.evidence.bbox,
-                        doc_id=doc_id,
-                        block_id=b.block_id,
-                    )
-                    if crop_path:
-                        b.evidence.crop_path = str(crop_path.as_posix())
-
-            # 6. Validation
-            canonical_page = CanonicalPage(
-                page_number=p_num,
-                page_size=page_size,
-                image_path=str(img_path.as_posix()),
-                signals=signals,
-                blocks=blocks,
-            )
-            canonical_page = self.validator.validate_page(canonical_page)
-            canonical_pages.append(canonical_page)
-            print(f" -> Extracted {len(blocks)} blocks")
-
-        doc_fitz.close()
-
-        # 7. Assemble Master Canonical Document
+        # 4. Assemble Master Canonical Document
         meta = DocumentMetadata(
             id=doc_id,
             source_file=str(pdf_path.name),
@@ -156,10 +161,10 @@ class DocumentHarnessOrchestrator:
         with open(canonical_path, "w", encoding="utf-8") as f:
             f.write(canonical_doc.model_dump_json(indent=2))
 
-        print(f"\n[Step 4/6] Saved Canonical Document: {canonical_path}")
+        print(f"\n[Step 4/5] Saved Canonical Document: {canonical_path}")
 
-        # 8. Export Structured Specs & Retrieval Chunks Previews
-        print("\n[Step 5/6] Exporting Downstream Previews (Structured Specs & Retrieval Chunks)...")
+        # 5. Export Structured Specs & Retrieval Chunks Previews
+        print("\n[Step 5/5] Exporting Downstream Previews (Structured Specs & Retrieval Chunks)...")
         json_spec, csv_spec = self.postgres_sink.export_preview(canonical_doc)
         chunk_jsonl = self.qdrant_sink.export_preview(canonical_doc)
         print(f"  -> Structured Specs: {json_spec} and {csv_spec}")
@@ -175,7 +180,7 @@ def main():
     parser = argparse.ArgumentParser(description="Single Brochure Ingestion CLI")
     parser.add_argument("--pdf", help="Path to local PDF file")
     parser.add_argument("--url", help="URL to download brochure PDF")
-    parser.add_argument("--model", default="VF 10", help="Model code (e.g. 'VF 10')")
+    parser.add_argument("--model", default="VF 6", help="Model code (e.g. 'VF 6')")
     parser.add_argument("--doc-id", help="Document identifier (e.g. 'vf10_brochure')")
     parser.add_argument("--out-dir", default="data_v2", help="Target output directory")
     args = parser.parse_args()

@@ -80,9 +80,16 @@ class PyMuPDFExtractor:
                 deep_link=f"{source_url}#page={page_num}" if source_url else None,
             )
 
+            # C4 fix: dynamic version instead of hardcoded 1.24
+            try:
+                _ver = getattr(fitz, "VersionBind", None) or getattr(fitz, "__version__", "unknown")
+                # fitz.VersionBind is like "1.24.3"
+                pymupdf_ver = str(_ver).split()[0] if isinstance(_ver, str) else str(_ver)
+            except Exception:
+                pymupdf_ver = "unknown"
             provenance = Provenance(
                 method="pymupdf_text",
-                model="pymupdf_1.24",
+                model=f"pymupdf_{pymupdf_ver}",
                 confidence=0.98 if b_type_str != "footnote" else 0.92,
             )
 

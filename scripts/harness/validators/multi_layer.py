@@ -25,6 +25,7 @@ SANITY_RANGES = {
     "width_mm": (1000, 2500),
     "height_mm": (1000, 2500),
     "seats": (2, 9),
+    "seats_count": (2, 9),
     "wheel_size_inch": (12, 24),
 }
 

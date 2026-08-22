@@ -94,17 +94,47 @@ class QdrantSink:
 
         all_chunks: List[Dict[str, Any]] = []
 
-        # 1. Read all brochure chunks
+        # 1. Read all brochure chunks (C4-hotfix: handle both brochures/ subdir and legacy flat files)
+        # New path: retrieval/brochures/*.jsonl ; Legacy: retrieval/*.jsonl (flat)
         brochures_dir = self.output_dir / "brochures"
+        seen_chunk_ids: set = set()
+        brochure_files: List[Path] = []
         if brochures_dir.exists():
-            for f in sorted(brochures_dir.glob("*.jsonl")):
+            brochure_files.extend(sorted(brochures_dir.glob("*.jsonl")))
+        # Legacy flat files in retrieval root (e.g., vf2_brochure_chunks.jsonl) - for backward compat
+        # Exclude master, sparse, and policies output files
+        for flat in sorted(self.output_dir.glob("*.jsonl")):
+            if flat.name in ("all_models_chunks.jsonl", "sparse_index.json") or flat.name.startswith("sparse_index__"):
+                continue
+            # Skip if already in brochures list (same resolved path)
+            if flat.resolve() in {p.resolve() for p in brochure_files}:
+                continue
+            # Only include brochure-like files (contain _chunks and not in policies)
+            if "_chunks" in flat.name:
+                brochure_files.append(flat)
+        for f in sorted(brochure_files):
+            try:
                 with open(f, "r", encoding="utf-8") as fp:
                     for line in fp:
                         if line.strip():
-                            all_chunks.append(json.loads(line))
+                            chunk = json.loads(line)
+                            cid = chunk.get("id")
+                            if cid and cid in seen_chunk_ids:
+                                continue
+                            if cid:
+                                seen_chunk_ids.add(cid)
+                            all_chunks.append(chunk)
+            except Exception as e:
+                print(f"[QdrantSink] Warning: failed to read {f}: {e}")
 
-        # 2. Add web chunks
-        all_chunks.extend(web_chunks)
+        # 2. Add web chunks (deduplicate by id as well)
+        for wc in web_chunks:
+            cid = wc.get("id")
+            if cid and cid in seen_chunk_ids:
+                continue
+            if cid:
+                seen_chunk_ids.add(cid)
+            all_chunks.append(wc)
 
         # 3. Write master all_models_chunks.jsonl
         master_path = self.output_dir / "all_models_chunks.jsonl"
@@ -153,12 +183,20 @@ class QdrantSink:
             col = c.get("collection") or c.get("metadata", {}).get("collection") or "vivu_product_info"
             by_col.setdefault(col, []).append(c)
 
-        # Setup OpenAI client
-        embed_client = OpenAI(
-            api_key=OPENAI_API_KEY,
-            base_url=OPENAI_BASE_URL if OPENAI_BASE_URL and "openai.com" not in OPENAI_BASE_URL else None,
-        )
-        model_name = EMBEDDING_MODEL.split("/")[-1]
+        # C5 fix: guard for missing API key (dense requires it, sparse does not)
+        has_api_key = bool(OPENAI_API_KEY)
+        if not has_api_key:
+            print(
+                "[QdrantSink] WARNING: OPENAI_API_KEY not set - skipping dense embedding ingestion (sparse BM25 will still be built)."
+            )
+            embed_client = None
+            model_name = EMBEDDING_MODEL.split("/")[-1]
+        else:
+            embed_client = OpenAI(
+                api_key=OPENAI_API_KEY,
+                base_url=OPENAI_BASE_URL if OPENAI_BASE_URL and "openai.com" not in OPENAI_BASE_URL else None,
+            )
+            model_name = EMBEDDING_MODEL.split("/")[-1]
 
         stats: Dict[str, int] = {}
 
@@ -166,6 +204,11 @@ class QdrantSink:
         for col_name, items in by_col.items():
             physical_col = f"{col_name}__{version}"
             print(f"  -> Ingesting dense collection: {physical_col} ({len(items)} chunks)...")
+
+            if not has_api_key:
+                print(f"  [SKIP] Dense {physical_col} skipped due to missing API key.")
+                stats[physical_col] = 0
+                continue
 
             if recreate or not client.collection_exists(physical_col):
                 if client.collection_exists(physical_col):
@@ -176,8 +219,8 @@ class QdrantSink:
                 )
                 try:
                     client.create_payload_index(physical_col, "model_id", PayloadSchemaType.KEYWORD)
-                except Exception:
-                    pass
+                except Exception as e:
+                    print(f"[QdrantSink] Payload index for {physical_col} exists or failed: {e}")
 
             # Embed in batches
             batch_size = 64
@@ -204,6 +247,34 @@ class QdrantSink:
             for i in range(0, len(points), 100):
                 client.upsert(collection_name=physical_col, points=points[i : i + 100])
 
+            # C5 fix: cleanup stale points when not recreating (delete points not in new set)
+            if not recreate:
+                try:
+                    new_ids = {p.id for p in points}
+                    # Scroll existing points to find stale ones (only if collection existed before)
+                    existing_ids = set()
+                    offset = None
+                    while True:
+                        batch, offset = client.scroll(
+                            collection_name=physical_col,
+                            limit=256,
+                            offset=offset,
+                            with_payload=False,
+                            with_vectors=False,
+                        )
+                        for pt in batch:
+                            existing_ids.add(str(pt.id))
+                        if offset is None:
+                            break
+                    stale_ids = list(existing_ids - new_ids)
+                    if stale_ids:
+                        print(f"  [CLEANUP] Deleting {len(stale_ids)} stale points from {physical_col}")
+                        # Qdrant delete by ids in batches
+                        for i in range(0, len(stale_ids), 100):
+                            client.delete(collection_name=physical_col, points_selector=stale_ids[i : i + 100])
+                except Exception as e:
+                    print(f"[QdrantSink] Stale cleanup for {physical_col} failed: {e}")
+
             stats[physical_col] = len(points)
 
         # 2. Ingest BM25 Sparse Collection
@@ -219,8 +290,8 @@ class QdrantSink:
             )
             try:
                 client.create_payload_index(sparse_col, "model_id", PayloadSchemaType.KEYWORD)
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[QdrantSink] Payload index for {sparse_col} exists or failed: {e}")
 
         # Build BM25 Vocabulary & IDF
         vocab: Dict[str, int] = {}
@@ -244,10 +315,17 @@ class QdrantSink:
         for tid, doc_freq in df.items():
             idf[tid] = math.log((N - doc_freq + 0.5) / (doc_freq + 0.5) + 1.0)
 
-        # Save sparse index metadata
-        sparse_index_file = self.output_dir / "sparse_index.json"
+        # Save sparse index metadata (C5 fix: versioned file + legacy for backward compat)
+        sparse_index_file = self.output_dir / f"sparse_index__{version}.json"
         with open(sparse_index_file, "w", encoding="utf-8") as f:
             json.dump({"vocab": vocab, "idf": {str(k): v for k, v in idf.items()}}, f, ensure_ascii=False)
+        # Keep legacy path for existing code that expects sparse_index.json
+        legacy_sparse = self.output_dir / "sparse_index.json"
+        try:
+            with open(legacy_sparse, "w", encoding="utf-8") as f:
+                json.dump({"vocab": vocab, "idf": {str(k): v for k, v in idf.items()}}, f, ensure_ascii=False)
+        except Exception:
+            pass
 
         # Compute Sparse Vectors & Upsert
         sparse_points: List[PointStruct] = []

@@ -64,6 +64,48 @@ class SemanticChunker:
             },
         }
 
+    def _prose_chunk(
+        self,
+        doc_id: str,
+        page_num: int,
+        current_section: str,
+        text: str,
+        source_blocks: List[str],
+        doc: CanonicalDocument,
+        model_id: str,
+        model_name: str,
+        chunk_idx: int,
+        link_block: CanonicalBlock | None = None,
+    ) -> Dict[str, Any]:
+        """C4 fix: DRY helper for prose chunks (was duplicated 3 times)."""
+        deep_link = None
+        if link_block and link_block.evidence and link_block.evidence.deep_link:
+            deep_link = link_block.evidence.deep_link
+        elif doc.document.source_url:
+            deep_link = f"{doc.document.source_url}#page={page_num}"
+        return {
+            "id": f"{doc_id}_p{page_num:02d}_c{chunk_idx:02d}",
+            "text": text,
+            "collection": "vivu_product_info",
+            "metadata": {
+                "collection": "vivu_product_info",
+                "category": "thong_tin_san_pham",
+                "document_id": doc_id,
+                "model_id": model_id,
+                "model_code": model_name,
+                "edition_id": None,
+                "section_path": ["thong_tin_san_pham", current_section],
+                "page": page_num,
+                "text_type": "prose",
+                "confidence": 1.0,
+                "source_file": doc.document.source_file,
+                "source_url": doc.document.source_url,
+                "source_type": "pdf_brochure",
+                "source_blocks": list(source_blocks),
+                "deep_link": deep_link,
+            },
+        }
+
     def chunk_document(self, doc: CanonicalDocument) -> List[Dict[str, Any]]:
         """Chunk an entire canonical document into retrieval chunks."""
         chunks: List[Dict[str, Any]] = []
@@ -83,34 +125,18 @@ class SemanticChunker:
                         text = " ".join(prose_buffer).strip()
                         if text:
                             chunks.append(
-                                {
-                                    "id": f"{doc_id}_p{page_num:02d}_c{len(chunks) + 1:02d}",
-                                    "text": text,
-                                    "collection": "vivu_product_info",
-                                    "metadata": {
-                                        "collection": "vivu_product_info",
-                                        "category": "thong_tin_san_pham",
-                                        "document_id": doc_id,
-                                        "model_id": model_id,
-                                        "model_code": model_name,
-                                        "edition_id": None,
-                                        "section_path": ["thong_tin_san_pham", current_section],
-                                        "page": page_num,
-                                        "text_type": "prose",
-                                        "confidence": 1.0,
-                                        "source_file": doc.document.source_file,
-                                        "source_url": doc.document.source_url,
-                                        "source_type": "pdf_brochure",
-                                        "source_blocks": list(source_blocks_buffer),
-                                        "deep_link": block.evidence.deep_link
-                                        if block.evidence
-                                        else (
-                                            f"{doc.document.source_url}#page={page_num}"
-                                            if doc.document.source_url
-                                            else None
-                                        ),
-                                    },
-                                }
+                                self._prose_chunk(
+                                    doc_id,
+                                    page_num,
+                                    current_section,
+                                    text,
+                                    source_blocks_buffer,
+                                    doc,
+                                    model_id,
+                                    model_name,
+                                    len(chunks) + 1,
+                                    link_block=block,
+                                )
                             )
                         prose_buffer = []
                         source_blocks_buffer = []
@@ -127,34 +153,18 @@ class SemanticChunker:
                         if sum(len(p) for p in prose_buffer) > self.max_chunk_chars:
                             text = " ".join(prose_buffer).strip()
                             chunks.append(
-                                {
-                                    "id": f"{doc_id}_p{page_num:02d}_c{len(chunks) + 1:02d}",
-                                    "text": text,
-                                    "collection": "vivu_product_info",
-                                    "metadata": {
-                                        "collection": "vivu_product_info",
-                                        "category": "thong_tin_san_pham",
-                                        "document_id": doc_id,
-                                        "model_id": model_id,
-                                        "model_code": model_name,
-                                        "edition_id": None,
-                                        "section_path": ["thong_tin_san_pham", current_section],
-                                        "page": page_num,
-                                        "text_type": "prose",
-                                        "confidence": 1.0,
-                                        "source_file": doc.document.source_file,
-                                        "source_url": doc.document.source_url,
-                                        "source_type": "pdf_brochure",
-                                        "source_blocks": list(source_blocks_buffer),
-                                        "deep_link": block.evidence.deep_link
-                                        if block.evidence
-                                        else (
-                                            f"{doc.document.source_url}#page={page_num}"
-                                            if doc.document.source_url
-                                            else None
-                                        ),
-                                    },
-                                }
+                                self._prose_chunk(
+                                    doc_id,
+                                    page_num,
+                                    current_section,
+                                    text,
+                                    source_blocks_buffer,
+                                    doc,
+                                    model_id,
+                                    model_name,
+                                    len(chunks) + 1,
+                                    link_block=block,
+                                )
                             )
                             prose_buffer = [f"{current_section}:"]
                             source_blocks_buffer = []
@@ -164,34 +174,23 @@ class SemanticChunker:
                     if t_chunk:
                         chunks.append(t_chunk)
 
-            if prose_buffer and len(prose_buffer) > 1:
+            if prose_buffer:
                 text = " ".join(prose_buffer).strip()
-                if text:
+                # R1 fix: flush even when buffer has single paragraph (len==1)
+                is_header_only = text == f"{current_section}:"
+                if text and not is_header_only:
                     chunks.append(
-                        {
-                            "id": f"{doc_id}_p{page_num:02d}_c{len(chunks) + 1:02d}",
-                            "text": text,
-                            "collection": "vivu_product_info",
-                            "metadata": {
-                                "collection": "vivu_product_info",
-                                "category": "thong_tin_san_pham",
-                                "document_id": doc_id,
-                                "model_id": model_id,
-                                "model_code": model_name,
-                                "edition_id": None,
-                                "section_path": ["thong_tin_san_pham", current_section],
-                                "page": page_num,
-                                "text_type": "prose",
-                                "confidence": 1.0,
-                                "source_file": doc.document.source_file,
-                                "source_url": doc.document.source_url,
-                                "source_type": "pdf_brochure",
-                                "source_blocks": list(source_blocks_buffer),
-                                "deep_link": f"{doc.document.source_url}#page={page_num}"
-                                if doc.document.source_url
-                                else None,
-                            },
-                        }
+                        self._prose_chunk(
+                            doc_id,
+                            page_num,
+                            current_section,
+                            text,
+                            source_blocks_buffer,
+                            doc,
+                            model_id,
+                            model_name,
+                            len(chunks) + 1,
+                        )
                     )
 
         return chunks

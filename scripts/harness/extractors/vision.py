@@ -9,11 +9,13 @@ to extract technical specifications, table cells, editions, and bounding boxes.
 import base64
 import json
 import os
+import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import requests
 from dotenv import load_dotenv
+from scripts.harness.config import REPO_ROOT
 
 from scripts.harness.schemas import (
     BBox,
@@ -24,7 +26,7 @@ from scripts.harness.schemas import (
     ValidationResult,
 )
 
-load_dotenv()
+load_dotenv(REPO_ROOT / ".env")
 
 
 VISION_SYSTEM_PROMPT = """You are a precision Vision Data Extractor for VinFast vehicle brochure technical specification pages.
@@ -91,8 +93,10 @@ class VisionExtractor:
                 or "gpt-5.6-luna"
             )
         self.model = raw_model.split("/")[-1] if "/" in raw_model else raw_model
-        if "mini" in self.model:
-            self.model = "gpt-5.6-luna"  # ensure full vision fidelity for technical specs
+        if "mini" in self.model.lower():
+            print(
+                f"[VisionExtractor] Warning: model '{self.model}' is mini variant with reduced vision fidelity; consider gpt-5.6-luna for best results."
+            )
 
     def _encode_image(self, image_path: Path) -> str:
         with open(image_path, "rb") as image_file:
@@ -111,6 +115,9 @@ class VisionExtractor:
         y1 = max(0.0, min(ph, (ymin / 1000.0) * ph))
         x2 = max(0.0, min(pw, (xmax / 1000.0) * pw))
         y2 = max(0.0, min(ph, (ymax / 1000.0) * ph))
+        # C3 fix: LLM may return inverted coordinates; normalize to ensure x1<x2 and y1<y2
+        x1, x2 = (min(x1, x2), max(x1, x2))
+        y1, y2 = (min(y1, y2), max(y1, y2))
 
         return BBox(x1=round(x1, 1), y1=round(y1, 1), x2=round(x2, 1), y2=round(y2, 1), page_size=page_size)
 
@@ -156,28 +163,52 @@ class VisionExtractor:
         if not any(k in _model_lower for k in ("luna", "o1", "o3", "reasoning", "gpt-5")):
             payload["temperature"] = 0.0
 
-        try:
-            resp = requests.post(
-                f"{self.base_url}/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                },
-                json=payload,
-                timeout=180,
-            )
-            if resp.status_code != 200:
-                print(f"[VisionExtractor] API call HTTP {resp.status_code} on page {page_num}: {resp.text[:200]}")
-            resp.raise_for_status()
-            data = resp.json()["choices"][0]["message"]["content"]
-            cleaned_data = data.strip()
-            if "```json" in cleaned_data:
-                cleaned_data = cleaned_data.split("```json")[1].split("```")[0].strip()
-            elif "```" in cleaned_data:
-                cleaned_data = cleaned_data.split("```")[1].split("```")[0].strip()
-            parsed = json.loads(cleaned_data)
-        except Exception as e:
-            print(f"[VisionExtractor] API call failed on page {page_num}: {e}")
+        # C3 fix: retry with exponential backoff for transient errors (429, 5xx, timeout)
+        parsed = None
+        last_exc = None
+        for attempt in range(3):
+            try:
+                resp = requests.post(
+                    f"{self.base_url}/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json=payload,
+                    timeout=180,
+                )
+                # Treat 429 and 5xx as retriable
+                if resp.status_code == 429 or 500 <= resp.status_code < 600:
+                    print(
+                        f"[VisionExtractor] API transient HTTP {resp.status_code} on page {page_num} attempt {attempt + 1}/3: {resp.text[:200]}"
+                    )
+                    raise requests.HTTPError(f"HTTP {resp.status_code}", response=resp)
+                if resp.status_code != 200:
+                    print(f"[VisionExtractor] API call HTTP {resp.status_code} on page {page_num}: {resp.text[:200]}")
+                resp.raise_for_status()
+                data = resp.json()["choices"][0]["message"]["content"]
+                cleaned_data = data.strip()
+                if "```json" in cleaned_data:
+                    cleaned_data = cleaned_data.split("```json")[1].split("```")[0].strip()
+                elif "```" in cleaned_data:
+                    cleaned_data = cleaned_data.split("```")[1].split("```")[0].strip()
+                parsed = json.loads(cleaned_data)
+                break
+            except (requests.Timeout, requests.ConnectionError, requests.HTTPError) as e:
+                last_exc = e
+                if attempt < 2:
+                    wait = 2 ** (attempt + 1)  # 2s, 4s
+                    print(f"[VisionExtractor] Retry {attempt + 1}/3 after {wait}s on page {page_num}: {e}")
+                    time.sleep(wait)
+                    continue
+                else:
+                    print(f"[VisionExtractor] API call failed on page {page_num} after 3 attempts: {e}")
+                    return []
+            except Exception as e:
+                print(f"[VisionExtractor] API call failed on page {page_num}: {e}")
+                return []
+        if parsed is None:
+            print(f"[VisionExtractor] Failed to parse response on page {page_num}: {last_exc}")
             return []
 
         blocks: List[CanonicalBlock] = []

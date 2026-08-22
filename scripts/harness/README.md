@@ -8,7 +8,7 @@ Unified data extraction and ingestion engine for VinFast vehicle specifications,
 scripts/harness/
 ├── pipeline.py                 # Master pipeline entrypoint (Phase 1-5)
 ├── batch_runner.py             # Batch brochure PDF processor
-├── orchestrator.py             # Single brochure processing pipeline (6-step)
+├── orchestrator.py             # Single brochure processing pipeline (5-step: inspect→plan→extract→save→export)
 ├── config.py                   # Centralized configuration & environment paths
 ├── schemas.py                  # Pydantic data models
 ├── inspector.py                # PDF layout analysis & page signal computation
@@ -16,7 +16,7 @@ scripts/harness/
 ├── crop_generator.py           # Visual bounding box crop generator
 ├── extractors/
 │   ├── pymupdf.py              # Native text block extractor
-│   ├── vision.py               # Multimodal Gemini Vision extractor
+│   ├── vision.py               # Multimodal Vision extractor (OpenAI-compatible, gpt-5.6-luna)
 │   ├── configurator.py         # Configurator CSV extractor
 │   └── web_text.py             # Web policy & maintenance text extractor
 ├── normalizers/

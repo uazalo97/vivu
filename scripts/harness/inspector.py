@@ -16,6 +16,7 @@ from typing import List, Tuple
 
 import fitz  # PyMuPDF
 
+from scripts.harness.config import OVERLAP_VISION_THRESHOLD, TEXT_QUALITY_THRESHOLD
 from scripts.harness.schemas import PageSignals
 
 # Keywords indicating technical specifications or table layouts
@@ -110,7 +111,10 @@ class PDFInspector:
                 spec_matches >= 3 or (drawings_count >= 8 and words_count > 30) or "thông số kỹ thuật" in full_text
             )
 
-            # 6. Classify page type & recommended strategy
+            # C2 fix: compute quality before strategy and use centralized thresholds
+            text_layer_quality = round(max(0.0, 1.0 - (overlap_ratio * 1.5) - (0.5 if is_scanned else 0.0)), 2)
+
+            # 6. Classify page type & recommended strategy (C2: planner is source of truth, inspector mirrors it)
             page_type = "prose"
             recommended_strategy = "pymupdf"
 
@@ -122,9 +126,8 @@ class PDFInspector:
                 recommended_strategy = "ocr"
             elif spec_matches >= 4 or "thông số kỹ thuật" in full_text:
                 page_type = "spec_table"
-                # If table has high overlap or complex layout, use vision_table
                 recommended_strategy = "vision_table"
-            elif overlap_ratio > 0.15:
+            elif overlap_ratio > OVERLAP_VISION_THRESHOLD or text_layer_quality < TEXT_QUALITY_THRESHOLD:
                 page_type = "mixed"
                 recommended_strategy = "vision_prose"
             elif "bảng giá" in full_text or "giá bán" in full_text or "chi phí" in full_text:
@@ -133,8 +136,6 @@ class PDFInspector:
             else:
                 page_type = "prose"
                 recommended_strategy = "pymupdf"
-
-            text_layer_quality = round(max(0.0, 1.0 - (overlap_ratio * 1.5) - (0.5 if is_scanned else 0.0)), 2)
 
             signals = PageSignals(
                 page_number=page_num,

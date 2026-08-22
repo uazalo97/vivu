@@ -27,7 +27,30 @@ OPENAI_BASE_URL = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1")
 
 raw_model = os.environ.get("OPENAI_EMBED_MODEL") or os.environ.get("OPENROUTER_EMBED_MODEL") or "text-embedding-3-small"
 EMBEDDING_MODEL = raw_model.split("/")[-1] if "/" in raw_model else raw_model
-EMBEDDING_DIM = 1536
+# R5 fix: EMBEDDING_DIM now inferred from model, not hard-coded. Env EMBEDDING_DIM overrides.
+MODEL_DIM_MAP = {
+    "text-embedding-3-small": 1536,
+    "text-embedding-3-large": 3072,
+    "text-embedding-ada-002": 1536,
+    "bge-m3": 1024,
+    "bge-small-en-v1.5": 384,
+    "bge-base-en-v1.5": 768,
+    "all-MiniLM-L6-v2": 384,
+}
+_env_dim = os.environ.get("EMBEDDING_DIM", "").strip()
+if _env_dim.isdigit():
+    EMBEDDING_DIM = int(_env_dim)
+else:
+    EMBEDDING_DIM = MODEL_DIM_MAP.get(EMBEDDING_MODEL, 1536)
+
+# C2 fix: single source of truth for extraction thresholds (inspector + planner)
+OVERLAP_VISION_THRESHOLD = float(os.environ.get("OVERLAP_VISION_THRESHOLD", "0.15"))
+TEXT_QUALITY_THRESHOLD = float(os.environ.get("TEXT_QUALITY_THRESHOLD", "0.6"))
+
+# C4/C7 fix: centralized ingestion defaults (avoid hardcoded "2026", "v2" scattered)
+INGEST_YEAR_RANGE = os.environ.get("INGEST_YEAR_RANGE", "2026")
+INGEST_VALID_FROM = os.environ.get("INGEST_VALID_FROM", "2026-07-01")
+INGEST_PREV_VERSION = os.environ.get("INGEST_PREV_VERSION", "v2")
 
 CONSUMER_MODELS = ["VF 2", "VF 3", "VF 5", "VF 6", "VF 7", "VF 8", "VF 8 All New", "VF 9", "VF MPV 7"]
 

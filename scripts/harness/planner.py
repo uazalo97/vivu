@@ -9,6 +9,7 @@ Analyzes PageSignals from PDFInspector and assigns optimal extraction strategy:
 """
 
 from typing import Dict, List
+from scripts.harness.config import OVERLAP_VISION_THRESHOLD, TEXT_QUALITY_THRESHOLD
 from scripts.harness.schemas import PageSignals
 
 
@@ -25,7 +26,10 @@ class ExtractionPlanner:
                 plan[p_num] = "ocr"
             elif sig.page_type == "spec_table" or sig.has_table_structure:
                 plan[p_num] = "vision_table"
-            elif sig.overlap_ratio > 0.18 or sig.text_layer_quality < 0.6:
+            elif sig.page_type == "pricing":
+                # C2 fix: explicit pricing handling to match inspector
+                plan[p_num] = "vision_table" if sig.has_table_structure else "pymupdf"
+            elif sig.overlap_ratio > OVERLAP_VISION_THRESHOLD or sig.text_layer_quality < TEXT_QUALITY_THRESHOLD:
                 plan[p_num] = "vision_prose"
             else:
                 plan[p_num] = "pymupdf"

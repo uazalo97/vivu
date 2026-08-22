@@ -19,14 +19,20 @@ from scripts.harness.normalizers.text import clean_prose_block, strip_prices_for
 
 def infer_model_from_name(name: str) -> str | None:
     n = name.lower()
-    for m in ["vf 8 all new", "vf8_2026", "the-all-new"]:
-        if m in n:
-            return "VF8NEW"
-    for m in ["vf mpv 7", "vf-mpv7", "mpv7"]:
-        if m in n:
-            return "VFMPV7"
+    # Normalize without separators for robust matching (vf8_all_new -> vf8allnew)
+    n_norm = re.sub(r"[^a-z0-9]", "", n)
+    # VF8NEW must be checked before generic vf8
+    vf8new_aliases_norm = ["vf8allnew", "vf8new", "allnew", "vf82026", "theallnew"]
+    if any(alias in n_norm for alias in vf8new_aliases_norm) or any(
+        m in n for m in ["vf 8 all new", "vf8_2026", "the-all-new", "vf8 all new"]
+    ):
+        return "VF8NEW"
+    # VF MPV 7 variants
+    vfmpv_aliases_norm = ["vfmpv7", "vfmpv", "mpv7"]
+    if any(alias in n_norm for alias in vfmpv_aliases_norm) or any(m in n for m in ["vf mpv 7", "vf-mpv7"]):
+        return "VFMPV7"
     for m in ["vf2", "vf3", "vf5", "vf6", "vf7", "vf8", "vf9"]:
-        if m in n:
+        if m in n_norm:
             return m.upper()
     return None
 
