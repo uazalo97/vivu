@@ -5,7 +5,6 @@ from collections.abc import Awaitable, Callable
 from typing import TypeVar
 
 import asyncpg
-from dotenv import dotenv_values
 
 from app.config import settings
 
