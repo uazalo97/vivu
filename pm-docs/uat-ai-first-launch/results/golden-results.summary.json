@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-08-22T15:19:44.978490+00:00",
+  "total": 15,
+  "statuses": {
+    "AUTO_FAIL": 10,
+    "AUTO_PASS": 3,
+    "REVIEW": 2
+  },
+  "release_blocker_candidates": [
+    "F01-V1",
+    "F01-V2",
+    "F01-V3",
+    "F07-V1",
+    "F07-V2",
+    "C12-V3",
+    "G21-V1",
+    "G21-V2",
+    "G21-V3",
+    "G24-V1"
+  ]
+}

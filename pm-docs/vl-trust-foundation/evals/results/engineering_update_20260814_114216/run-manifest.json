@@ -1,0 +1,51 @@
+{
+  "status": "completed",
+  "branch": "duyen/eval-2",
+  "git_head": "0d07c3e",
+  "working_tree_clean_at_run_start": true,
+  "input": {
+    "path": "eval/smoke_test.csv",
+    "sha256": "8d5359ab71d7aaae1a59a4444fe0b5f37f7f81458b1ef8590afecf5e1e4283b8",
+    "record_count": 25,
+    "matches_smoke_set_v1": true
+  },
+  "evaluation_run": {
+    "run_id": "eval_20260814_114301_80f78a",
+    "decision_pass": 15,
+    "decision_fail": 10,
+    "pass_rate": 60.0,
+    "must_not_do_violations": 3,
+    "jsonl_sha256": "3b6c71090d40cfee1b13aaba68af72c2934c9df86452101191bd18c71fddefcc",
+    "json_sha256": "448e549a902ae32019abda4e0538a6c37f55fc14767472f214af2b05e0c688f4",
+    "summary_sha256": "13e398bc0c09f73906a96f893ebf592b8569b11d9f7fd9111f3d62617e0f8e89"
+  },
+  "full_log_run": {
+    "run_id": "run_20260814_114727_7baff3",
+    "decision_pass": 15,
+    "decision_fail": 10,
+    "pass_rate": 60.0,
+    "jsonl_sha256": "51530d06af18d122bb2fbbf977025b960f8bfba36816178e7e3321899e6ae0fa",
+    "json_sha256": "2bcfc9ad92f23c4c9dc10efed4b7e545bc9ae34d115331ca8b2ad8a580a7b2da"
+  },
+  "runtime_identity": {
+    "build_version": "0d07c3e",
+    "prompt_version": "e3b0c44298fc",
+    "data_snapshot_id": "v2_2026-08-14"
+  },
+  "logging_validation": {
+    "record_count": 25,
+    "retrieved_chunk_fields_complete": true,
+    "displayed_citation_fields_complete": true,
+    "missing_sample_top_level_fields": [
+      "environment",
+      "error_message",
+      "error_stage",
+      "error_type",
+      "pm_review",
+      "previous_request_id",
+      "requested_top_k",
+      "retrieval_config_version",
+      "retrieval_query"
+    ]
+  }
+}
