@@ -326,7 +326,7 @@ async def list_models_cached():
     return data, False
 
 
-async def search_kb_cached(query: str, model_id: str | None = None, collections: list[str] | None = None) -> dict:
+async def search_kb_cached(query: str, model_id: str | None = None, collections: list[str] | None = None, skip_rerank: bool = False) -> dict:
     """KB search cache (TTL 2h). `model_id` đã được chuẩn hóa `_model_id` ở tools."""
     dv = await data_version()
     key = _kb_key(dv, query, model_id, collections)
@@ -336,7 +336,7 @@ async def search_kb_cached(query: str, model_id: str | None = None, collections:
 
     from app.core.retrieval import hybrid_search
 
-    results = await hybrid_search(query, model_id=model_id, top_k=5, collections=collections)
+    results = await hybrid_search(query, model_id=model_id, top_k=5, collections=collections, skip_rerank=skip_rerank)
     data = {
         "query": query,
         "results": [

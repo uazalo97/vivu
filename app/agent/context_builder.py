@@ -328,7 +328,7 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
 
     current_cat = None
     count = 0
-    MAX_SPEC_KEYS = 30  # cap total spec lines to keep context small (TPM budget)
+    MAX_SPEC_KEYS = 20  # cap total spec lines to keep context small (TPM budget + LLM latency)
     for (cat, key), rows in grouped.items():
         if count >= MAX_SPEC_KEYS:
             lines.append("\n  ... (còn nhiều thông số khác)")

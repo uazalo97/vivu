@@ -45,14 +45,19 @@ async def main():
         ("đăng ký lái thử vf8", [], "answer", None, "utility: test drive + model"),
         ("trả góp vf6", [], "answer", None, "utility: loan + model"),
         ("khuyến mãi vf3", [], "answer", None, "utility: promotions + model"),
-        # Clarify: missing topic (broad)
-        ("cho tôi biết về vf6", [], "clarify", "missing_topic", "clarify: broad query"),
-        ("vf8 thế nào", [], "clarify", "missing_topic", "clarify: broad query 2"),
-        ("thông tin về vf3", [], "clarify", "missing_topic", "clarify: broad query 3"),
+        # Broad query → answer/tổng_quan (not clarify)
+        ("cho tôi biết về vf6", [], "answer", None, "broad: overview vf6"),
+        ("vf8 thế nào", [], "answer", None, "broad: overview vf8"),
+        ("thông tin về vf3", [], "answer", None, "broad: overview vf3"),
         # Clarify: missing model
-        ("xe nào có camera 360", [], "clarify", "missing_model", "clarify: no model"),
         ("pin bao nhiêu kWh", [], "clarify", "missing_model", "clarify: no model 2"),
         ("có mấy phiên bản", [], "clarify", "missing_model", "clarify: no model 3"),
+        # Cross-model feature scan (no model → scan all models, don't clarify)
+        ("xe nào có camera 360", [], "answer", None, "cross-model feature: camera 360"),
+        ("xe nào có cửa sổ trời", [], "answer", None, "cross-model feature: sunroof"),
+        ("xe nào có ghế massage", [], "answer", None, "cross-model feature: massage"),
+        ("những xe nào có HUD", [], "answer", None, "cross-model feature: HUD"),
+        ("dòng nào có sưởi ghế", [], "answer", None, "cross-model feature: heated seat"),
         # Clarify: ambiguous pronoun
         ("xe này có an toàn không", [], "clarify", "ambiguous", "clarify: pronoun 'xe này'"),
         ("mẫu này đi được bao xa", [], "clarify", "ambiguous", "clarify: pronoun 'mẫu này'"),

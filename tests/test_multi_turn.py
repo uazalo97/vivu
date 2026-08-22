@@ -63,15 +63,18 @@ CONVERSATIONS = [
         "name": "Model continuity (no switch)",
         "turns": [
             ("VF 6 có những phiên bản nào?", {"decision": "answer", "model": "VF 6"}),
-            ("công suất bao nhiêu?", {"decision": "answer", "model": "VF 6"}),
+            # "công suất" → thông_số_kỹ_thuật (version-dependent) → clarify
+            ("công suất bao nhiêu?", {"decision": "clarify", "reason": "missing_version", "model": "VF 6"}),
             ("pin thế nào?", {"decision": "answer", "model": "VF 6"}),
         ],
     },
     {
         "name": "Model switch — memory recency (fix)",
         "turns": [
-            ("thông số vf6", {"decision": "answer", "model": "VF 6"}),
-            ("vf8 thì sao", {"decision": "answer", "model": "VF 8"}),
+            # "thông số" → version-dependent → clarify
+            ("thông số vf6", {"decision": "clarify", "reason": "missing_version", "model": "VF 6"}),
+            # inherits topic "thông_số_kỹ_thuật" → version-dependent → clarify
+            ("vf8 thì sao", {"decision": "clarify", "reason": "missing_version", "model": "VF 8"}),
             # follow-up không nhắc model → phải dùng VF 8 (mới nhất), KHÔNG phải VF 6
             ("pin xe bao nhiêu", {"decision": "answer", "model": "VF 8"}),
         ],
@@ -79,16 +82,17 @@ CONVERSATIONS = [
     {
         "name": "Switch back to earlier model",
         "turns": [
-            ("thông số vf6", {"decision": "answer", "model": "VF 6"}),
-            ("vf8 thì sao", {"decision": "answer", "model": "VF 8"}),
-            ("còn vf6 thì sao", {"decision": "answer", "model": "VF 6"}),
+            ("thông số vf6", {"decision": "clarify", "reason": "missing_version", "model": "VF 6"}),
+            ("vf8 thì sao", {"decision": "clarify", "reason": "missing_version", "model": "VF 8"}),
+            ("còn vf6 thì sao", {"decision": "clarify", "reason": "missing_version", "model": "VF 6"}),
             ("giá bao nhiêu", {"decision": "answer", "model": "VF 6"}),
         ],
     },
     {
         "name": "Version follow-up",
         "turns": [
-            ("VF 8 đi được bao xa?", {"decision": "answer", "model": "VF 8"}),
+            # "đi được bao xa" → phạm_vi_di_chuyển (version-dependent) → clarify
+            ("VF 8 đi được bao xa?", {"decision": "clarify", "reason": "missing_version", "model": "VF 8"}),
             ("còn bản Plus thì sao?", {"decision": "answer", "model": "VF 8", "version": "Plus"}),
         ],
     },
@@ -119,7 +123,8 @@ CONVERSATIONS = [
     {
         "name": "Broad → topic follow-up (retain model)",
         "turns": [
-            ("cho tôi biết về VF 6", {"decision": "clarify", "reason": "missing_topic", "model": "VF 6"}),
+            # "cho tôi biết về" → _is_broad_topic → answer/tổng_quan (not clarify)
+            ("cho tôi biết về VF 6", {"decision": "answer", "model": "VF 6"}),
             ("kích thước xe", {"decision": "answer", "model": "VF 6"}),
             ("còn trọng lượng?", {"decision": "answer", "model": "VF 6"}),
         ],
@@ -127,8 +132,9 @@ CONVERSATIONS = [
     {
         "name": "Switch to VF 8 All New",
         "turns": [
-            ("thông số vf6", {"decision": "answer", "model": "VF 6"}),
-            ("vf8 thế hệ mới thì sao", {"decision": "answer", "model": "VF 8 All New"}),
+            ("thông số vf6", {"decision": "clarify", "reason": "missing_version", "model": "VF 6"}),
+            # "thế hệ mới" → MODEL_RE matches → VF 8 All New; inherits topic → version-dependent → clarify
+            ("vf8 thế hệ mới thì sao", {"decision": "clarify", "reason": "missing_version", "model": "VF 8 All New"}),
             ("pin bao nhiêu", {"decision": "answer", "model": "VF 8 All New"}),
         ],
     },

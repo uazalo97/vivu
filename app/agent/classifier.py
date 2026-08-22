@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 
 # Matches any VinFast model pattern (including multi-word like "VF 8 All New")
 MODEL_RE = re.compile(
-    r"(VF\s*\d+(?:\s*All\s*New)?|VF\s*MPV\s*\d+|VF\s*e34|"
+    r"(VF[-\s]*\d+(?:\s*All\s*New|\s*thế\s*hệ\s*mới)?|VF\s*MPV\s*\d+|VF\s*e34|"
     r"Herio\s*Green|Minio\s*Green|Limo\s*Green|EC\s*VAN|Nerio\s*Green)",
     re.IGNORECASE,
 )
@@ -47,8 +47,11 @@ def _normalize_version(raw: str) -> str | None:
 
 
 def normalize_model(raw: str) -> str:
-    """Chuẩn hóa model code về dạng DB: 'vf8' → 'VF 8', 'vf 8 all new' → 'VF 8 All New'."""
-    clean = re.sub(r"(VF)\s*(\d+)", r"\1 \2", (raw or "").strip(), flags=re.IGNORECASE).strip()
+    """Chuẩn hóa model code về dạng DB: 'vf8' → 'VF 8', 'vf-8' → 'VF 8',
+    'vf 8 all new' → 'VF 8 All New', 'vf8 thế hệ mới' → 'VF 8 All New'."""
+    clean = re.sub(r"(VF)\s*[-]?\s*(\d+)", r"\1 \2", (raw or "").strip(), flags=re.IGNORECASE).strip()
+    # Normalize "thế hệ mới" → "All New"
+    clean = re.sub(r"thế\s*hệ\s*mới", "All New", clean, flags=re.IGNORECASE)
     parts = clean.split()
     return " ".join(p.upper() if p.upper().startswith("VF") or p.isdigit() else p.capitalize() for p in parts)
 

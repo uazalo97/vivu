@@ -514,11 +514,12 @@ _thread_pool = concurrent.futures.ThreadPoolExecutor(max_workers=4)
 
 
 async def hybrid_search(
-    query: str, model_id: str = None, top_k: int = 5, collections: list[str] | None = None
+    query: str, model_id: str = None, top_k: int = 5, collections: list[str] | None = None,
+    skip_rerank: bool = False,
 ) -> list[dict]:
     from app.core.cache import get_hybrid_cached, set_hybrid_cached
 
-    skip_rerank = not settings.rerank_enabled
+    skip_rerank = skip_rerank or not settings.rerank_enabled
     cols = list(collections) if collections else DENSE_COLLECTIONS
 
     # 0. Check hybrid search cache (hs:) — skip entire pipeline on hit
@@ -587,9 +588,10 @@ async def hybrid_search(
         _deduped.append((hit, score))
     fused = _deduped
 
-    # 5. Rerank
+    # 5. Rerank (skip when skip_rerank=True — cross-model queries synthesize from
+    # multiple sources; Cohere adds 2-3s with minimal benefit there)
     reranker = get_reranker()
-    if reranker and len(fused) > 0:
+    if reranker and len(fused) > 0 and not skip_rerank:
         pairs = [(query, hit.get("payload", {}).get("text", "")) for hit, _ in fused]
         non_empty = [(i, q, d) for i, (q, d) in enumerate(pairs) if d.strip()]
         if non_empty:

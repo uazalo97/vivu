@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from contextlib import asynccontextmanager
 
@@ -35,6 +36,22 @@ async def lifespan(_app: FastAPI):
         logger.info("Warmup done: PG pool + data_version")
     except Exception as e:  # non-blocking
         logger.warning("Warmup failed (non-blocking): %s", e)
+    # Warm retrieval stack (sparse index file scan ~3s on first query) — off the hot path.
+    # Non-blocking: chạy nền, request đầu vẫn phục vụ được nếu chưa xong.
+    try:
+        def _warm_retrieval():
+            try:
+                from app.core.retrieval import _load_sparse_index
+
+                _load_sparse_index()
+                logger.info("Warmup done: sparse index")
+            except Exception as e:
+                logger.warning("Sparse index warmup failed (non-blocking): %s", e)
+
+        loop = asyncio.get_running_loop()
+        await loop.run_in_executor(None, _warm_retrieval)
+    except Exception as e:
+        logger.warning("Retrieval warmup skipped (non-blocking): %s", e)
     yield
 
 

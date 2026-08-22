@@ -3,6 +3,7 @@ import re
 
 from app.agent.classifier import get_classifier, MODEL_RE
 from app.agent.graph_state import AgentState
+from app.agent.intent import MAIN_MODELS
 
 logger = logging.getLogger("bds.graph.classify")
 
@@ -71,6 +72,17 @@ _CROSS_MODEL_RE = re.compile(
     r"|(so\s*sánh|nên\s*mua|phù\s*hợp\s*với|tư\s*vấn\s*mua)"
     r"|(giá\s*(dưới|trên|khoảng|từ|đến|bao\s*nhiêu))"
     r"|((rẻ|đắt|tốt|bền|đẹp|nhỏ|lớn|ổn)\s*nhất))",
+    re.IGNORECASE,
+)
+
+# Cross-model FEATURE queries — "xe nào có cửa sổ trời", "những xe nào có ghế massage",
+# "dòng nào có camera 360", "xe nào được trang bị HUD"…
+# User không biết model nào có tính năng → KHÔNG clarify, scan tất cả model và trả lời.
+_CROSS_MODEL_FEATURE_RE = re.compile(
+    r"((xe|mẫu|con|dòng|model)\s*nào\s*(có|được\s*trang\s*bị|trang\s*bị)"
+    r"|những\s*(xe|mẫu|con|dòng|model)\s*nào"
+    r"|có\s*trên\s*(những\s*)?(xe|mẫu|con|dòng|model)\s*nào"
+    r"|có\s*ở\s*(những\s*)?(xe|mẫu|con|dòng|model)\s*nào)",
     re.IGNORECASE,
 )
 
@@ -347,12 +359,15 @@ def _is_broad_topic(query: str) -> bool:
 def _extract_history_context(history: list[dict]) -> dict:
     """Extract model, version, and topic from conversation history.
 
-    Walks history newest-first so the most recent model wins. Version is only
-    paired with its own model message (e.g. "The All New" from a "VF 8 All New"
-    turn must NOT leak onto a later "VF 3" turn).
+    Pass 1 (newest→oldest): most recent model/version/topic win.
+    Pass 2 (oldest→newest): cross-model comparison context — ghép cặp
+    "so sánh với VF X" (1 model + keyword) với model của turn trước, nhưng
+    KHÔNG cộng dồn 2 câu hỏi đơn lẻ ("VF 8" rồi "VF 8 All New") thành 2 model giả.
     """
     ctx: dict = {"model_code": None, "version": None, "topic": None, "models": []}
     classifier = get_classifier()
+
+    # Pass 1: newest-first — model_code / version / topic
     for msg in reversed(history):
         if msg.get("role") != "user":
             continue
@@ -364,23 +379,42 @@ def _extract_history_context(history: list[dict]) -> dict:
         except Exception:
             m = v = None
 
-        # Collect ALL distinct models mentioned (for multi-model comparison context)
-        for mm in _distinct_models(text):
-            if mm not in ctx["models"]:
-                ctx["models"].append(mm)
-
         if m and not ctx["model_code"]:
-            # First (most recent) model found — version pairs with it directly
             ctx["model_code"] = m
-            if v:
-                ctx["version"] = v
+            # Always set version from the SAME message as model (even if None).
+            # Prevents version leakage from older turns about different models.
+            # E.g. "bản Plus" (VF3) must NOT leak into "tôi muốn biết về VF5".
+            ctx["version"] = v
         elif not m and v and not ctx["version"]:
-            # Follow-up version with no model (e.g. "Plus") for the found model
             ctx["version"] = v
 
         t = _classify_topic(text)
         if t != "general" and not ctx["topic"]:
             ctx["topic"] = t
+
+    # Pass 2: oldest-first — multi-model comparison context.
+    prior_model = None
+    for msg in history:
+        if msg.get("role") != "user":
+            continue
+        text = msg.get("content", "")
+        text_models = _distinct_models(text)
+        if len(text_models) >= 2:
+            # So sánh tường minh ("so sánh VF 8 và VF 9")
+            for mm in text_models:
+                if mm not in ctx["models"]:
+                    ctx["models"].append(mm)
+        elif len(text_models) == 1 and _CROSS_MODEL_RE.search(text):
+            # "so sánh với VF X" → ghép cặp model turn trước với VF X
+            mm = text_models[0]
+            if prior_model and prior_model != mm and prior_model not in ctx["models"]:
+                ctx["models"].append(prior_model)
+            if mm not in ctx["models"]:
+                ctx["models"].append(mm)
+        # Cập nhật model gần nhất (để ghép cặp ở turn "so sánh với X" sau)
+        if text_models:
+            prior_model = text_models[0]
+
     return ctx
 
 
@@ -453,8 +487,10 @@ async def classify_node(state: AgentState) -> dict:
 
     # Version-pair comparison ("vf8 eco và plus", "eco vs plus") → phiên_bản
     # (chỉ khi query không có topic cụ thể; topic feature như giá/camera vẫn thắng)
+    # Clear version: get_specs cần trả TẤT CẢ versions để so sánh, không chỉ 1 version.
     if topic == "general" and len(_distinct_versions(query)) >= 2:
         topic = "phiên_bản"
+        cr.entities.pop("version", None)
 
     # Inherit topic from history if current query topic is general
     if topic == "general" and hist_ctx["topic"]:
@@ -495,10 +531,30 @@ async def classify_node(state: AgentState) -> dict:
             "model_codes": multi_models,
         }
 
+    # "so sánh với VF 8 Plus" — keyword so sánh + 1 model trong query + model context KHÁC → cross-model.
+    # (Không nhầm với version-pair "so sánh vf8 eco và plus" — có 2 version thì đi phiên_bản, không vào đây.)
+    if _CROSS_MODEL_RE.search(query) and query_has_model and len(_distinct_versions(query)) < 2:
+        q_model = cr.entities.get("model_code")
+        hist_model = hist_ctx.get("model_code")
+        if hist_model and hist_model != q_model:
+            return {
+                "decision": "answer",
+                "reason_code": "sufficient_direct_evidence",
+                "entities": {},
+                "specificity": "clear",
+                "category": "so_sánh",
+                "allowed_tools": {"list_available_models", "get_price", "get_specs"},
+                "model_codes": [hist_model, q_model],
+            }
+
     # Follow-up to a multi-model comparison (e.g. "vậy giá thì sao" after
     # "so sánh VF 8 và VF 9") — query has no model but history had 2+ models.
+    # Only trigger if the most recent model context is still one of the comparison
+    # models. If user moved to a different model ("tôi muốn biết về VF5"), the
+    # comparison context is stale — don't force so_sánh.
     hist_models = hist_ctx.get("models", [])
-    if not query_has_model and len(hist_models) >= 2:
+    recent_model = hist_ctx.get("model_code")
+    if not query_has_model and len(hist_models) >= 2 and (not recent_model or recent_model in hist_models):
         return {
             "decision": "answer",
             "reason_code": "sufficient_direct_evidence",
@@ -507,6 +563,22 @@ async def classify_node(state: AgentState) -> dict:
             "category": "so_sánh",
             "allowed_tools": {"list_available_models", "get_price", "get_specs"},
             "model_codes": hist_models,
+        }
+
+    # Cross-model FEATURE queries ("xe nào có cửa sổ trời", "những xe nào có ghế massage",
+    # "dòng nào có camera 360") — user không biết model nào có tính năng →
+    # KHÔNG clarify thiếu model, scan TẤT CẢ model chính và trả lời luôn.
+    # Đặt TRƯỚC merge history model: có model từ turn trước vẫn là câu hỏi cross-model mới.
+    if not query_has_model and _CROSS_MODEL_FEATURE_RE.search(query):
+        cross_topic = _classify_topic(query)
+        return {
+            "decision": "answer",
+            "reason_code": "sufficient_direct_evidence",
+            "entities": {},
+            "specificity": "unclear",
+            "category": cross_topic if cross_topic != "general" else "tính_năng_nổi_bật",
+            "allowed_tools": {"get_specs", "search_knowledge_base"},
+            "model_codes": list(MAIN_MODELS),
         }
 
     if not has_model:
@@ -591,9 +663,9 @@ async def classify_node(state: AgentState) -> dict:
                 "category": topic,
             }
 
-    # Out-of-scope guard: even with model from history, if the query itself
-    # has no model/version/VinFast keyword and original topic is general → OOS
-    if raw_topic == "general" and not query_has_model and not query_has_version:
+    # Out-of-scope guard: chỉ OOS khi KHÔNG có chút context xe nào (query lẫn history).
+    # Query follow-up ("các thông tin khác thì sao") có model ở history → giữ context, không OOS.
+    if raw_topic == "general" and not query_has_model and not query_has_version and not has_model:
         if not _CAR_RELATED_RE.search(query) and not _UTILITY_QUERY_RE.search(query):
             return {
                 "decision": "out_of_scope",

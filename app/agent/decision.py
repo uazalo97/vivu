@@ -437,6 +437,20 @@ _SPEC_QUERY_KEYWORDS = {
         "rear_ac_vents",
         "cửa gió",
         "loa trầm",
+        "sunroof",
+        "sunroof_type",
+        "cửa sổ trời",
+        "trần kính",
+        "kính trần",
+        "toàn cảnh",
+        "panorama",
+        "panoramic",
+        "massage",
+        "ghế massage",
+        "second_row_massage",
+        "vip_seat_massage",
+        "sưởi",
+        "thông gió",
     ],
     "ngoại_thất": [
         "headlight",
@@ -591,13 +605,18 @@ def _score_specs_rerank(query: str, specs: list[dict], qtokens: set[str]) -> lis
     """Score specs using keyword matching first, embedding only for ambiguous specs.
 
     Keyword matching is instant (no API call). Embedding is only used for specs
-    where keyword score is ambiguous (0.3-0.5). This avoids 200+ embedding calls
-    when most specs are clearly relevant or irrelevant.
+    where keyword score is ambiguous (0.35-0.5). Specs scoring 0.3 (no keyword
+    match at all) are skipped — embedding cosine similarity won't help when
+    there's zero token overlap, and skipping them avoids 7+ embedding API calls
+    on cross-model scans with 700+ irrelevant specs.
     """
     keyword_scores = [_spec_relevance_score(qtokens, s.get("key", ""), s.get("value", "")) for s in specs]
 
-    # Find indices where keyword score is ambiguous (needs embedding)
-    ambiguous = [i for i, s in enumerate(keyword_scores) if 0.25 <= s < 0.5]
+    # Find indices where keyword score is ambiguous (needs embedding).
+    # 0.3 = base score (no match) → skip (embedding won't help).
+    # 0.7 = key_tokens overlap → already clear, no embedding needed.
+    # 0.35-0.5 = rare edge case where embedding might disambiguate.
+    ambiguous = [i for i, s in enumerate(keyword_scores) if 0.35 <= s < 0.5]
 
     if not ambiguous:
         return keyword_scores  # All clear, no embedding needed
@@ -625,6 +644,7 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
     has_partial = False
     rank = 0  # noqa: F841
     qtokens = _query_tokens(query)
+    MAX_VALID_SOURCES = 100  # Cap to avoid 300+ sources slowing down validate/respond
 
     for tr in tool_results:
         if not tr.get("success"):
@@ -637,23 +657,28 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
             scores = _score_specs_rerank(query, specs, qtokens)
             for i, s in enumerate(specs):
                 score = scores[i] if i < len(scores) else 0.0
-                page = s.get("page", "")
-                page_str = f" (trang {page})" if page else ""
-                valid_sources.append(
-                    {
-                        "tool": tool,
-                        "model_code": result.get("model_code", ""),
-                        "text": f"{s.get('key', '')}: {s.get('value', '')} {s.get('unit', '')}{page_str}",
-                        "source_url": result.get("source_url", ""),
-                        "source_type": "specs",
-                        "score": round(score, 4),
-                        "page": page,
-                    }
-                )
                 if score >= 0.5:
                     has_direct = True
                 elif score >= 0.2:
                     has_partial = True
+                else:
+                    continue  # Skip irrelevant specs — don't add to valid_sources
+                # Only add directly relevant specs to valid_sources (cap to avoid
+                # 300+ sources slowing down validate_citations + build_retrieved_chunks)
+                if score >= 0.5 and len(valid_sources) < MAX_VALID_SOURCES:
+                    page = s.get("page", "")
+                    page_str = f" (trang {page})" if page else ""
+                    valid_sources.append(
+                        {
+                            "tool": tool,
+                            "model_code": result.get("model_code", ""),
+                            "text": f"{s.get('key', '')}: {s.get('value', '')} {s.get('unit', '')}{page_str}",
+                            "source_url": result.get("source_url", ""),
+                            "source_type": "specs",
+                            "score": round(score, 4),
+                            "page": page,
+                        }
+                    )
 
         elif tool == "get_colors" and result.get("colors"):
             mc = result.get("model_code", "")
@@ -817,7 +842,7 @@ def build_retrieved_chunks(tool_results: list[dict], query: str = "", topic: str
 
     chunks = []
     rank = 0
-    MAX_CHUNKS = 30
+    MAX_CHUNKS = 15  # Reduced from 30 — decision log only, not user-facing; saves embedding calls
     MIN_SCORE = 0.3
     qtokens = _query_tokens(query) if query else set()
 

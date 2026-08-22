@@ -30,7 +30,7 @@ from app.core.cache import (
     get_options_cached,
     list_models_cached,
 )
-from app.agent.nodes.classify import _CROSS_MODEL_RE, _distinct_models
+from app.agent.nodes.classify import _CROSS_MODEL_RE, _CROSS_MODEL_FEATURE_RE, _distinct_models
 
 logger = logging.getLogger("bds.graph.call_tools")
 
@@ -79,6 +79,38 @@ _QUERY_SPEC_REFINE = [
         ),
         "dimension",
     ),
+    (
+        re.compile(
+            r"(nội\s*thất|ghế|bọc\s*da|số\s*chỗ|táp\s*lô|vô\s*lăng|"
+            r"điều\s*hòa|loa|màn\s*hình|interior|seat|"
+            r"cửa\s*sổ\s*trời|kính\s*trần|trần\s*kính|sunroof|panoram\w*|"
+            r"massage|sưởi|thông\s*gió|\bhud\b)",
+            re.I,
+        ),
+        "interior",
+    ),
+    (
+        re.compile(
+            r"(ngoại\s*thất|đèn\s*pha|la[\s-]*zăng|mâm|gương|lốp|exterior)",
+            re.I,
+        ),
+        "exterior",
+    ),
+    (
+        re.compile(
+            r"(adas|camera|làn\s*đường|cruise|giữ\s*làn|điểm\s*mù|"
+            r"cảnh\s*báo|hỗ\s*trợ\s*lái|đỗ\s*xe)",
+            re.I,
+        ),
+        "adas",
+    ),
+    (
+        re.compile(
+            r"(an\s*toàn|túi\s*khí|airbag|abs|esc|\bphanh\b|ebd|isofix)",
+            re.I,
+        ),
+        "safety",
+    ),
 ]
 
 
@@ -104,12 +136,16 @@ async def call_tools_node(state: AgentState) -> dict:
     logger.info("CALL_TOOLS: category=%s model=%s version=%s", category, model_code, version)
 
     cache_hits: set[str] = set()
+
+    # Run system prompt fetch IN PARALLEL with tool calls (saves ~200ms PG query)
+    system_prompt_task = asyncio.create_task(get_system_prompt())
+
     if category == "utility":
         tool_results = await _call_utility_tools(query)
     elif (
         len(state_models) >= 2
         or len(_distinct_models(query)) >= 2
-        or (not model_code and _CROSS_MODEL_RE.search(query))
+        or (not model_code and (_CROSS_MODEL_RE.search(query) or _CROSS_MODEL_FEATURE_RE.search(query)))
     ):
         tool_results = await _call_cross_model_tools(query, state_models)
     elif model_code:
@@ -117,8 +153,8 @@ async def call_tools_node(state: AgentState) -> dict:
     else:
         tool_results = []
 
-    # Build system prompt for generate_node
-    system_prompt = await get_system_prompt()
+    # Await system prompt (should already be done by now)
+    system_prompt = await system_prompt_task
 
     t_end = time.time()
     logger.info(
@@ -158,9 +194,9 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
         await _cached("get_price", "price", get_price_cached, model_code, version)
 
     elif category == "tổng_quan":
-        # Thông tin cơ bản: phiên bản + giá + thông số then chốt + màu sắc (chạy SONG SONG)
+        # Thông tin cơ bản về 1 model cụ thể: giá + thông số then chốt + màu sắc (chạy SONG SONG).
+        # KHÔNG gọi list_available_models (danh sách 9 xe là noise cho query giới thiệu 1 model).
         await asyncio.gather(
-            _cached("list_available_models", "list_models", list_models_cached),
             _cached("get_price", "price", get_price_cached, model_code, version),
             _cached("get_specs", "specs", get_specs_cached, model_code, version, "powertrain"),
             _cached("get_specs", "specs", get_specs_cached, model_code, version, "battery"),
@@ -216,6 +252,14 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
     return results, cache_hits
 
 
+# Default spec categories for cross-model comparison when no specific topic.
+# Covers the most commonly compared dimensions without fetching ALL specs
+# (which can be 380+ rows per model → huge context → slow LLM + many embedding calls).
+# Kept to 3 categories to control latency: 3 cats × 2 models = 6 get_specs calls
+# instead of 5 cats × 2 = 10 (which caused 51s total latency).
+_COMPARISON_CATEGORIES = ["powertrain", "battery", "interior"]
+
+
 async def _call_cross_model_tools(query: str, model_codes: list[str] | None = None) -> list[dict]:
     """Call tools for cross-model / comparison queries.
 
@@ -226,6 +270,10 @@ async def _call_cross_model_tools(query: str, model_codes: list[str] | None = No
     is_price = re.search(r"(giá|price|rẻ|đắt|triệu|tỷ)", query, re.I)
     spec_cat = _refine_spec_category(query)
     mentioned = list(model_codes) if model_codes else _distinct_models(query)
+
+    # When no specific spec category is detected, use key comparison categories
+    # instead of fetching ALL specs (380+ rows/model → context explosion).
+    spec_cats = [spec_cat] if spec_cat else _COMPARISON_CATEGORIES
 
     if mentioned:
         # Fetch specs/price for the models explicitly mentioned (vf6 hay vf8)
@@ -239,7 +287,8 @@ async def _call_cross_model_tools(query: str, model_codes: list[str] | None = No
 
                 tasks.append(_price_task())
             else:
-                tasks.append(_safe_call("get_specs", get_specs, mc, None, spec_cat))
+                for cat in spec_cats:
+                    tasks.append(_safe_call("get_specs", get_specs, mc, None, cat))
         results.extend(await asyncio.gather(*tasks))
     else:
         # Generic cross-model: list all models + per-model specs/price
@@ -260,12 +309,15 @@ async def _call_cross_model_tools(query: str, model_codes: list[str] | None = No
 
                     tasks.append(_price_task())
                 else:
-                    tasks.append(_safe_call("get_specs", get_specs, mc))
+                    for cat in spec_cats:
+                        tasks.append(_safe_call("get_specs", get_specs, mc, None, cat))
             results.extend(await asyncio.gather(*tasks))
 
     # Comparison/recommendation benefit from knowledge base context.
     # Chỉ search vivu_product_info — tránh nhiễu từ policy/maintenance (bảo hành, cứu hộ).
-    r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, None, ["vivu_product_info"])
+    # skip_rerank=True: cross-model queries synthesize from multiple sources —
+    # LLM handles relevance, Cohere rerank adds 2-3s latency with minimal benefit here.
+    r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, None, ["vivu_product_info"], True)
     results.append(r_kb)
 
     return results

@@ -259,14 +259,17 @@ async def test_classify():
         ("hotline vinfast", [], "answer", "utility", "T-CLS-07C"),
         ("đăng ký lái thử vf8", [], "answer", None, "T-CLS-07D"),
         ("trả góp vf6", [], "answer", None, "T-CLS-07E"),
-        # ── Clarify: missing topic (broad query) ──
-        ("cho tôi biết về vf6", [], "clarify", "missing_topic", "T-CLS-08"),
-        ("vf8 thế nào", [], "clarify", "missing_topic", "T-CLS-08B"),
-        ("thông tin về vf3", [], "clarify", "missing_topic", "T-CLS-08C"),
+        # ── Broad query → answer/tổng_quan (not clarify) ──
+        ("cho tôi biết về vf6", [], "answer", None, "T-CLS-08"),
+        ("vf8 thế nào", [], "answer", None, "T-CLS-08B"),
+        ("thông tin về vf3", [], "answer", None, "T-CLS-08C"),
         # ── Clarify: missing model ──
-        ("xe nào có camera 360", [], "clarify", "missing_model", "T-CLS-10"),
         ("pin bao nhiêu kWh", [], "clarify", "missing_model", "T-CLS-10B"),
         ("có mấy phiên bản", [], "clarify", "missing_model", "T-CLS-10C"),
+        # ── Cross-model feature scan (no model → scan all, don't clarify) ──
+        ("xe nào có camera 360", [], "answer", None, "T-CLS-10"),
+        ("xe nào có cửa sổ trời", [], "answer", None, "T-CLS-10D"),
+        ("xe nào có ghế massage", [], "answer", None, "T-CLS-10E"),
         # ── Clarify: ambiguous pronoun ──
         ("xe này có an toàn không", [], "clarify", "ambiguous", "T-CLS-11"),
         ("mẫu này đi được bao xa", [], "clarify", "ambiguous", "T-CLS-11B"),

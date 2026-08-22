@@ -33,8 +33,8 @@ QUAN TRỌNG:
 - CHỈ dùng thông tin trong context. KHÔNG thêm thông tin ngoài context.
 - KHÔNG tự bịa số liệu. KHÔNG dùng kiến thức sẵn có.
 - KHI SO SÁNH: mỗi model có specs riêng. KHÔNG lấy specs model A gán cho model B.
-- Nếu context không có thông tin được hỏi → nói rõ: "Thông tin về [topic] hiện chưa có trong dữ liệu đã được phê duyệt cho [model]."
-- Nếu context chỉ có một phần thông tin → trả lời phần có, nói rõ phần chưa có.
+- Liệt kê ĐẦY ĐỦ các mục có trong context: giá, thông số kỹ thuật, màu sắc, danh sách phiên bản.
+- CHỈ nói "chưa có trong dữ liệu đã được phê duyệt" cho mục CỤ THỂ người dùng hỏi mà context thực sự không có. Không dùng câu này cho màu sắc/giá/thông số đang có sẵn trong context.
 - Nếu context có specs cho model A nhưng không có cho model B → chỉ trả lời cho model A, nói rõ model B chưa có dữ liệu.
 
 Context:

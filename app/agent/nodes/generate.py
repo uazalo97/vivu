@@ -65,8 +65,14 @@ async def generate_node(state: AgentState) -> dict:
     llm = _get_llm()
     t_generate_start = time.time()
 
+    # Reduce max tokens for comparison/cross-model queries — shorter answer, faster generation
+    max_tokens = OUTPUT_MAX_TOKENS
+    category = state.get("category", "")
+    if category in ("so_sánh", "phiên_bản") or state.get("model_codes"):
+        max_tokens = min(OUTPUT_MAX_TOKENS, 768)
+
     try:
-        new_response, _, _ = await stream_chat_with_fallback(llm, messages, max_tokens=OUTPUT_MAX_TOKENS)
+        new_response, _, _ = await stream_chat_with_fallback(llm, messages, max_tokens=max_tokens)
         if new_response:
             final_response = new_response
     except Exception as e:

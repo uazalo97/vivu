@@ -6,14 +6,14 @@
 
 ## 1. Yêu cầu
 
-| Thành phần | Yêu cầu | Ghi chú |
-|---|---|---|
-| Python | 3.11+ | |
-| LLM | OpenAI API key | hoặc endpoint OpenAI-compatible khác (TokenRouter/Groq/OpenRouter) |
-| PostgreSQL | Neon Cloud (hoặc local) | specs / colors / options / price / telemetry |
-| Qdrant | Cloud (hoặc local) | vector store (product_info / policy / maintenance) |
-| Redis | Upstash (hoặc local) | session store + tool-result cache (fail-open, không bắt buộc) |
-| Rerank | Cohere API key | optional — fallback CrossEncoder nếu thiếu |
+| Thành phần | Yêu cầu                | Ghi chú                                                             |
+| ------------ | ------------------------ | -------------------------------------------------------------------- |
+| Python       | 3.11+                    |                                                                      |
+| LLM          | OpenAI API key           | hoặc endpoint OpenAI-compatible khác (TokenRouter/Groq/OpenRouter) |
+| PostgreSQL   | Neon Cloud (hoặc local) | specs / colors / options / price / telemetry                         |
+| Qdrant       | Cloud (hoặc local)      | vector store (product_info / policy / maintenance)                   |
+| Redis        | Upstash (hoặc local)    | session store + tool-result cache (fail-open, không bắt buộc)     |
+| Rerank       | Cohere API key           | optional — fallback CrossEncoder nếu thiếu                        |
 
 ---
 
@@ -103,6 +103,10 @@ npm run dev        # dev server hot-reload
 
 ---
 
+
+
+Mở **[http://localhost:5173/admin](http://localhost:5173/admin)**
+
 ## 5. Kiến trúc
 
 ```
@@ -174,38 +178,39 @@ vivu/
 
 ## 6. API endpoints
 
-| Method | Path | Mô tả |
-|---|---|---|
-| POST | `/api/chat` | Chat (sync, trả full response) |
-| POST | `/api/chat/stream` | Chat streaming (SSE) |
-| GET | `/api/logs` | Logs session hiện tại |
-| GET | `/api/logs/export` | Export logs JSONL |
-| GET | `/api/admin/metrics/overview` | KPI tổng quan |
-| GET | `/api/admin/metrics/timeseries` | Request/latency/cost theo giờ |
-| GET | `/api/admin/metrics/intents` | Phân bổ intent |
-| GET | `/api/admin/metrics/logs` | Request logs chi tiết |
-| POST | `/api/admin/metrics/feedback` | Ghi 👍/👎 (rating 1/-1) |
-| GET | `/api/admin/metrics/realtime` | Requests/phút gần đây |
-| GET | `/healthz` / `/ready` / `/api/health` | Health probe |
-| GET | `/api/admin/prompts/*` | Prompt management |
+| Method | Path                                        | Mô tả                         |
+| ------ | ------------------------------------------- | ------------------------------- |
+| POST   | `/api/chat`                               | Chat (sync, trả full response) |
+| POST   | `/api/chat/stream`                        | Chat streaming (SSE)            |
+| GET    | `/api/logs`                               | Logs session hiện tại         |
+| GET    | `/api/logs/export`                        | Export logs JSONL               |
+| GET    | `/api/admin/metrics/overview`             | KPI tổng quan                  |
+| GET    | `/api/admin/metrics/timeseries`           | Request/latency/cost theo giờ  |
+| GET    | `/api/admin/metrics/intents`              | Phân bổ intent                |
+| GET    | `/api/admin/metrics/logs`                 | Request logs chi tiết          |
+| POST   | `/api/admin/metrics/feedback`             | Ghi 👍/👎 (rating 1/-1)         |
+| GET    | `/api/admin/metrics/realtime`             | Requests/phút gần đây       |
+| GET    | `/healthz` / `/ready` / `/api/health` | Health probe                    |
+| GET    | `/api/admin/prompts/*`                    | Prompt management               |
 
 ---
 
 ## 7. Cache & Memory (Redis)
 
-| Tầng | Key | TTL | Ý nghĩa |
-|---|---|---|---|
-| Session history | `session:{sid}:history` | 6h | multi-turn (LIST, RPUSH+LTRIM) |
-| Session context | `session:{sid}:context` | 6h | model/version/topic (fallback ellipsis) |
-| Long-term memory | `user:{uid}:profile` | 30d | fact/preference theo user |
-| Tool cache | `cache:{dv}:{specs,colors,options,models}` | 6–24h | key theo entity |
-| Embedding | `emb:{model}:{sha1}` | 7d | deterministic |
-| Hybrid search | `hs:{dv}:…:{collections}` | 2h | full pipeline |
-| KB search | `cache:kb:{dv}:…` | 2h | search_knowledge_base |
-| Dedupe | `dedup:{sha1}` | 1h | chống trùng message_id |
-| Rate limit | `rl:s:{sid}` / `rl:ip:{ip}` | 10s/60s | chống spam |
+| Tầng            | Key                                          | TTL     | Ý nghĩa                               |
+| ---------------- | -------------------------------------------- | ------- | --------------------------------------- |
+| Session history  | `session:{sid}:history`                    | 6h      | multi-turn (LIST, RPUSH+LTRIM)          |
+| Session context  | `session:{sid}:context`                    | 6h      | model/version/topic (fallback ellipsis) |
+| Long-term memory | `user:{uid}:profile`                       | 30d     | fact/preference theo user               |
+| Tool cache       | `cache:{dv}:{specs,colors,options,models}` | 6–24h  | key theo entity                         |
+| Embedding        | `emb:{model}:{sha1}`                       | 7d      | deterministic                           |
+| Hybrid search    | `hs:{dv}:…:{collections}`                 | 2h      | full pipeline                           |
+| KB search        | `cache:kb:{dv}:…`                         | 2h      | search_knowledge_base                   |
+| Dedupe           | `dedup:{sha1}`                             | 1h      | chống trùng message_id                |
+| Rate limit       | `rl:s:{sid}` / `rl:ip:{ip}`              | 10s/60s | chống spam                             |
 
 Nguyên tắc:
+
 - **Fail-open**: Redis tắt → trả default (history rỗng, miss cache), không crash.
 - **`data_version()`** đọc `ingest_version.is_current` (memo 60s) → promote v2→v3 tự đổi cache key.
 - **Không cache giá/khuyến mãi** (volatile) — luôn query trực tiếp.
@@ -259,6 +264,7 @@ python tests/test_cache_memory.py    # cần Redis/PG (integration)
 ```
 
 CI (`.github/workflows/ci.yml`) chạy tự động khi push `main`, `chore/ci`, `feature/*`, `fix/*`, `multi-turn-cache-redis`:
+
 - `lint` job: `ruff check .` + `ruff format --check`
 - `test` job: classify/intro/version-leak tests + smoke import (offline, không cần DB)
 
@@ -266,30 +272,30 @@ CI (`.github/workflows/ci.yml`) chạy tự động khi push `main`, `chore/ci`,
 
 ## 11. Test queries tham khảo
 
-| Query | Decision | Route |
-|---|---|---|
-| `VF 2 có mấy chỗ ngồi?` | answer | nội_thất → get_specs |
-| `VF 8 đi được bao nhiêu km?` | clarify (missing_version) | phạm_vi_di_chuyển (version-dependent) |
-| `giới thiệu về vf2` | answer | tổng_quan (giá + spec then chốt + màu) |
-| `so sánh vf5 vf7 và vf8` | answer | so_sánh (cross-model) |
-| `so sánh vf8 eco và plus` | answer | phiên_bản (version-pair) |
-| `VF 9 có camera 360 không?` | answer | an_toàn (safety + adas) |
-| `còn màu nào khác?` (follow-up) | answer | màu_sắc (qua current_context) |
+| Query                                 | Decision                  | Route                                      |
+| ------------------------------------- | ------------------------- | ------------------------------------------ |
+| `VF 2 có mấy chỗ ngồi?`         | answer                    | nội_thất → get_specs                    |
+| `VF 8 đi được bao nhiêu km?`   | clarify (missing_version) | phạm_vi_di_chuyển (version-dependent)    |
+| `giới thiệu về vf2`              | answer                    | tổng_quan (giá + spec then chốt + màu) |
+| `so sánh vf5 vf7 và vf8`          | answer                    | so_sánh (cross-model)                     |
+| `so sánh vf8 eco và plus`         | answer                    | phiên_bản (version-pair)                 |
+| `VF 9 có camera 360 không?`       | answer                    | an_toàn (safety + adas)                   |
+| `còn màu nào khác?` (follow-up) | answer                    | màu_sắc (qua current_context)            |
 
 ---
 
 ## 12. Lỗi thường gặp
 
-| Lỗi | Nguyên nhân | Fix |
-|---|---|---|
-| `400 Unrecognized request arguments: reasoning_effort` | gửi param reasoning cho model OpenAI không phải reasoning | đã xử lý ở `llm.py`/`llm_extra_kwargs` — kiểm tra model name |
-| Redis `Connection refused` | `REDIS_URL` sai / Redis không chạy | app vẫn chạy (fail-open), check `.env` `REDIS_URL` |
-| `Connection refused` PostgreSQL | sai `POSTGRES_URL`/`PG_DSN` | check `.env` |
-| `Connection refused` Qdrant | sai `QDRANT_URL`/`QDRANT_API_KEY` | check `.env` |
-| `403 Forbidden` OpenAI | sai `OPENAI_API_KEY` | check `.env` |
-| `ModuleNotFoundError: ragas` | chưa cài | `pip install ragas datasets` |
-| `normalize_model not found` (cũ) | import thiếu | đã thêm `normalize_model` vào `app/agent/classifier.py` |
-| Phoenix không cần | tracing mặc định tắt | set `PHOENIX_ENABLED=true` nếu muốn |
+| Lỗi                                                     | Nguyên nhân                                                | Fix                                                                    |
+| -------------------------------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `400 Unrecognized request arguments: reasoning_effort` | gửi param reasoning cho model OpenAI không phải reasoning | đã xử lý ở`llm.py`/`llm_extra_kwargs` — kiểm tra model name |
+| Redis`Connection refused`                              | `REDIS_URL` sai / Redis không chạy                       | app vẫn chạy (fail-open), check`.env` `REDIS_URL`                |
+| `Connection refused` PostgreSQL                        | sai`POSTGRES_URL`/`PG_DSN`                               | check`.env`                                                          |
+| `Connection refused` Qdrant                            | sai`QDRANT_URL`/`QDRANT_API_KEY`                         | check`.env`                                                          |
+| `403 Forbidden` OpenAI                                 | sai`OPENAI_API_KEY`                                        | check`.env`                                                          |
+| `ModuleNotFoundError: ragas`                           | chưa cài                                                   | `pip install ragas datasets`                                         |
+| `normalize_model not found` (cũ)                      | import thiếu                                                | đã thêm`normalize_model` vào `app/agent/classifier.py`         |
+| Phoenix không cần                                      | tracing mặc định tắt                                     | set`PHOENIX_ENABLED=true` nếu muốn                                 |
 
 ---
 

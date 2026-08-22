@@ -351,12 +351,11 @@ async def test_overview_classify():
 
 
 async def test_overview_fetches_multiple_tools():
-    """tổng_quan → list_models + get_price + get_specs(4 categories) + get_colors."""
+    """tổng_quan → get_price + get_specs(4 categories) + get_colors (không có list_models — noise)."""
     from app.agent.nodes.call_tools import _call_model_tools
 
     results, _ = await _call_model_tools("VF 2", None, "tổng_quan", "giới thiệu về vf2")
     tools = {r["tool"] for r in results}
-    assert "list_available_models" in tools
     assert "get_price" in tools
     assert "get_colors" in tools
 
