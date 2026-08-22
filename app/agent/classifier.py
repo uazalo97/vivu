@@ -73,14 +73,18 @@ class QueryClassifier:
         if normalized:
             entities["model_code"] = normalized
 
-        # Version detection: match known versions + multi-word patterns
+        # Version detection — chạy trên query ĐÃ bỏ phần model match.
+        # "vf8 all new" → 'All New' là một phần TÊN MODEL, không phải phiên bản;
+        # nếu không bỏ sẽ set version='The All New' → get_price/get_specs lọc
+        # edition không tồn tại → 0 rows → refuse oan.
+        version_query = query.replace(raw, " ") if raw else query
         version_match = re.search(
             r"(Eco|Plus|PlusCaptain|Plus\s*AWD|"
             r"Ti[êe]u\s*[Cc]hu[ẩẩ]?n|TieuChuan|"
             r"N[ââ]ng\s*[Cc]ao|NangCao|"
             r"Cao\s*[Cc][ấấ]?p|CaoCap|"
             r"The\s*All\s*New|All\s*New)",
-            query,
+            version_query,
             re.IGNORECASE,
         )
         if version_match:

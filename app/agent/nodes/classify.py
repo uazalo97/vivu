@@ -381,10 +381,12 @@ def _extract_history_context(history: list[dict]) -> dict:
 
         if m and not ctx["model_code"]:
             ctx["model_code"] = m
-            # Always set version from the SAME message as model (even if None).
-            # Prevents version leakage from older turns about different models.
-            # E.g. "bản Plus" (VF3) must NOT leak into "tôi muốn biết về VF5".
-            ctx["version"] = v
+            # Chỉ nhận version từ CÙNG message có model, KHÔNG reset về None —
+            # để version mới hơn từ message model-less ("còn bản Eco thì sao?")
+            # vẫn giữ được khi model đến từ message cũ hơn ("VF 8 đi được bao xa?").
+            # Leak chéo-model được chặn ở merge site (q_model != hist_model).
+            if v:
+                ctx["version"] = v
         elif not m and v and not ctx["version"]:
             ctx["version"] = v
 
@@ -478,7 +480,15 @@ async def classify_node(state: AgentState) -> dict:
     if not cr.entities.get("model_code") and hist_ctx["model_code"]:
         cr.entities["model_code"] = hist_ctx["model_code"]
     if not cr.entities.get("version") and hist_ctx["version"]:
-        cr.entities["version"] = hist_ctx["version"]
+        # Chỉ kế thừa version khi VẪN cùng context model:
+        #  - query KHÔNG nêu model (follow-up "pin bao nhiêu?") → giữ version đang nói
+        #  - query nêu model MỚI ("còn VF 3 thì sao?" sau "VF 8 All New") → version cũ
+        #    thuộc model cũ, KHÔNG leak sang model mới (VF 3 không có bản All New).
+        #  - query hỏi về versions ("bản nào rẻ hơn?") → không khoá cứng 1 version.
+        q_model = cr.entities.get("model_code")
+        same_model_ctx = (not q_model) or (q_model == hist_ctx["model_code"])
+        if same_model_ctx and not VERSION_QUERY_RE.search(query):
+            cr.entities["version"] = hist_ctx["version"]
 
     has_model = bool(cr.entities.get("model_code"))
     has_version = bool(cr.entities.get("version"))
@@ -531,9 +541,17 @@ async def classify_node(state: AgentState) -> dict:
             "model_codes": multi_models,
         }
 
-    # "so sánh với VF 8 Plus" — keyword so sánh + 1 model trong query + model context KHÁC → cross-model.
-    # (Không nhầm với version-pair "so sánh vf8 eco và plus" — có 2 version thì đi phiên_bản, không vào đây.)
-    if _CROSS_MODEL_RE.search(query) and query_has_model and len(_distinct_versions(query)) < 2:
+    # "so sánh với VF 8 Plus" — keyword so sánh TƯỜNG MINH + 1 model trong query +
+    # model context KHÁC → cross-model.
+    # (Không nhầm với version-pair "so sánh vf8 eco và plus" — có 2 version thì đi phiên_bản,
+    # không vào đây. Cũng KHÔNG bắt "giá bao nhiêu" đơn thuần thành so sánh —
+    # "bản plus của vf6 giá bao nhiêu?" là câu hỏi giá VF6, không phải so sánh với hist model.)
+    if (
+        _CROSS_MODEL_RE.search(query)
+        and re.search(r"(so\s*sánh|so\s*với|\bvs\b|\.?\bhay\b)", query, re.I)
+        and query_has_model
+        and len(_distinct_versions(query)) < 2
+    ):
         q_model = cr.entities.get("model_code")
         hist_model = hist_ctx.get("model_code")
         if hist_model and hist_model != q_model:
@@ -569,7 +587,15 @@ async def classify_node(state: AgentState) -> dict:
     # "dòng nào có camera 360") — user không biết model nào có tính năng →
     # KHÔNG clarify thiếu model, scan TẤT CẢ model chính và trả lời luôn.
     # Đặt TRƯỚC merge history model: có model từ turn trước vẫn là câu hỏi cross-model mới.
-    if not query_has_model and _CROSS_MODEL_FEATURE_RE.search(query):
+    #
+    # Continuation: turn trước cũng model-less (cross-scan hoặc câu hỏi mơ hồ cùng loại)
+    # và query là follow-up ("còn ghế massage thì sao?", "trần kính thì sao?") →
+    # tiếp tục scan tất cả model thay vì clarify lại "Bạn muốn hỏi về xe nào?".
+    _followup_marker = re.search(r"(^còn\b|thì\s*sao|thế\s*nào|nào\s*nữa|còn\s*không)", query, re.I)
+    _scan_all_models = _CROSS_MODEL_FEATURE_RE.search(query) or (
+        not query_has_model and not hist_ctx["model_code"] and topic != "general" and bool(_followup_marker)
+    )
+    if not query_has_model and _scan_all_models:
         cross_topic = _classify_topic(query)
         return {
             "decision": "answer",
