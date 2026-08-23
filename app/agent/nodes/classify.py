@@ -1,7 +1,7 @@
 import logging
 import re
 
-from app.agent.classifier import get_classifier, MODEL_RE
+from app.agent.classifier import get_classifier, MODEL_RE, normalize_model
 from app.agent.graph_state import AgentState
 from app.agent.intent import MAIN_MODELS
 
@@ -13,8 +13,13 @@ VERSION_QUERY_RE = re.compile(
 )
 
 # Match ONE version name (dùng để đếm version trong query cho so sánh version-pair)
+# "Plus hai cầu"/"Plus AWD (+suffix)" là MỘT trim — phải khớp trước "Plus" đơn.
 _VERSION_TOKEN_RE = re.compile(
-    r"(PlusCaptain|Plus\s*AWD|Plus|Eco|"
+    r"(PlusCaptain"
+    r"|Plus\s+Hai\s*c[ầa]u(?:\s*(?:Panoramic|c[ửu]a\s*s[ổo]\s*tr[ờo]i|tr[ầa]n\s*k[íi]nh|to[àa]n\s*c[ảa]nh))?"
+    r"|Plus\s*AWD(?:\s*(?:Panoramic|c[ửu]a\s*s[ổo]\s*tr[ờo]i|tr[ầa]n\s*k[íi]nh|to[àa]n\s*c[ảa]nh))?"
+    r"|Hai\s*c[ầa]u|\bAWD\b"
+    r"|Plus|Eco|"
     r"Ti[êe]u\s*[Cc]hu[ẩẩ]?n|N[ââ]ng\s*[Cc]ao|Cao\s*[Cc][ấấ]?p|"
     r"The\s*All\s*New|All\s*New)",
     re.IGNORECASE,
@@ -67,23 +72,90 @@ _CAR_RELATED_RE = re.compile(
 # Cross-model queries — inherently about ALL models, don't require a specific one.
 # Route as "answer" with list_available_models + get_price/get_specs tools.
 _CROSS_MODEL_RE = re.compile(
-    r"((xe|mẫu|con)\s*nào\s*(rẻ|đắt|tốt|bền|đẹp|an\s*toàn|tiết\s*kiệm|phù\s*hợp|hot|bán\s*chạy)"
-    r"|((xe|mẫu|con)\s*nào\s*(giá|price))"
+    r"((?:xe|mẫu|con)(?:\s+\w+){0,2}\s*nào\s*(rẻ|đắt|tốt|bền|đẹp|an\s*toàn|tiết\s*kiệm|phù\s*hợp|hot|bán\s*chạy)"
+    r"|((xe|mẫu|con)(?:\s+\w+){0,2}\s*nào\s*(giá|price))"
     r"|(so\s*sánh|nên\s*mua|phù\s*hợp\s*với|tư\s*vấn\s*mua)"
     r"|(giá\s*(dưới|trên|khoảng|từ|đến|bao\s*nhiêu))"
-    r"|((rẻ|đắt|tốt|bền|đẹp|nhỏ|lớn|ổn)\s*nhất))",
+    r"|((rẻ|đắt|tốt|bền|đẹp|nhỏ|lớn|ổn|thấp|cao)\s*nhất))",
     re.IGNORECASE,
 )
 
-# Cross-model FEATURE queries — "xe nào có cửa sổ trời", "những xe nào có ghế massage",
-# "dòng nào có camera 360", "xe nào được trang bị HUD"…
-# User không biết model nào có tính năng → KHÔNG clarify, scan tất cả model và trả lời.
+# Cross-model FEATURE queries — "xe nào có cửa sổ trời", "những xe VinFast nào có HUD",
+# "dòng nào có camera 360", "xe nào được trang bị massage"…
+# Cho phép tối đa 2 từ chèn giữa danh-nghĩa và "nào" ("xe VinFast nào", "mẫu xe nào").
 _CROSS_MODEL_FEATURE_RE = re.compile(
-    r"((xe|mẫu|con|dòng|model)\s*nào\s*(có|được\s*trang\s*bị|trang\s*bị)"
-    r"|những\s*(xe|mẫu|con|dòng|model)\s*nào"
-    r"|có\s*trên\s*(những\s*)?(xe|mẫu|con|dòng|model)\s*nào"
-    r"|có\s*ở\s*(những\s*)?(xe|mẫu|con|dòng|model)\s*nào)",
+    r"((?:xe|mẫu|con|dòng|model)(?:\s+\w+){0,2}\s*nào\s*(có|được\s*trang\s*bị|trang\s*bị)"
+    r"|những\s*(?:xe|mẫu|con|dòng|model)(?:\s+\w+){0,2}\s*nào"
+    r"|có\s*trên\s*(những\s*)?(?:xe|mẫu|con|dòng|model)(?:\s+\w+){0,2}\s*nào"
+    r"|có\s*ở\s*(những\s*)?(?:xe|mẫu|con|dòng|model)(?:\s+\w+){0,2}\s*nào)",
     re.IGNORECASE,
+)
+
+# Recommendation theo nhu cầu / ngân sách — "tôi có 800 triệu nên mua xe nào",
+# "xe gia đình", "chạy grab thì chọn xe nào". Không bắt buộc model đầu vào (R17).
+_RECOMMEND_RE = re.compile(
+    r"(nên\s*mua|nên\s*chọn|chọn\s*xe|xe\s*nào\s*phù\s*hợp|phù\s*hợp\s*với"
+    r"|tư\s*vấn(\s+mua|\s+chọn)?"
+    r"|gia\s*đình"
+    r"|\d+\s*(người|chỗ)"
+    r"|chạy\s*(grab|taxi|kinh\s*doanh|tech)"
+    r"|công\s*tác"
+    r"|ngân\s*sách"
+    r"|\d+\s*(triệu|tỷ)\b"
+    r"|khoảng\s*\d+\s*(triệu|tỷ))",
+    re.IGNORECASE,
+)
+
+# ── BLK-01: Safety / Privacy / Human-handoff gate — deterministic, TRƯỚC retrieval,
+# không cho LLM synthesize hướng dẫn tự xử lý sự cố hoặc claim liên hệ. ──
+_SAFETY_RE = re.compile(
+    r"(b[áa]o\s*l[ổô]i.{0,24}(pin|s[ạa]c|đi[êe]n|h[ệe]\s*th[ốong])"
+    r"|pin\s*(đỏ|do\b|lỗi)"
+    r"|h[ệe]\s*th[ốong]\s*đi[êe]n\s*(cao\s*[áa]p)?"
+    r"|cao\s*[áa]p"
+    r"|(m[ùu]i\s*)?kh[oó]i\b"
+    r"|m[ùu]i\s*kh[eé]t"
+    r"|b[ịi] ch[áa]y|ch[áa]y\s*n[oó]"
+    r"|r[òo]\s*đi[êe]n|gi[ậa]t\s*đi[êe]n"
+    r"|qu[áa]\s*nhi[ệe]t"
+    r"|tai\s*n[ạa]n"
+    r"|c[oó]\s*đi\s*ti[ếep]\s*đ[ưuo][ợjc]\s*kh[oó]ng)",
+    re.IGNORECASE,
+)
+_PRIVACY_RE = re.compile(
+    r"(\bvin\b\s*(của|xe)?|otp|m[ậa]t\s*kh[ẩe]u"
+    r"|tài\s*[khoản]{2,}|th[ẻo]\s*ng[âa]n\s*h[àa]ng"
+    r"|l[ịi]ch\s*s[ửu]\s*(dịch\s*vụ|sửa\s*chữa|bảo\s*dưỡng|của\s*tôi)"
+    r"|\bcccd\b|\bcmnd\b)",
+    re.IGNORECASE,
+)
+_HANDOFF_RE = re.compile(
+    r"(gặp\s*(nhân\s*viên|người\s*vinfast|sales)"
+    r"|c[ầa]n\s*(gặp\s*)?nhân\s*viên"
+    r"|x[áa]c\s*nh[ậa]n\s*gi[áa].{0,24}(đại\s*lý|hôm\s*nay)"
+    r"|nói\s*chuyện\s*với\s*nhân\s*viên"
+    r"|muốn\s*khiếu\s*nại|khiếu\s*nại|phàn\s*n[àa]n"
+    r"|nói\s*trực\s*tiếp\s*với)",
+    re.IGNORECASE,
+)
+_VIVU_HOTLINE = "1900 23 23 89"
+
+_SAFETY_RESPONSE = (
+    "Để đảm bảo an toàn tuyệt đối, bạn vui lòng DỪNG ngay việc sử dụng xe/sạc và KHÔNG tự xử lý "
+    "các sự cố về pin/điện. Vui lòng liên hệ:\n"
+    f"- Hotline VinFast (24/7): {_VIVU_HOTLINE}\n"
+    "- Hoặc đặt lịch cứu hộ/dịch vụ qua app VinFast — đội kỹ thuật sẽ hỗ trợ nhanh nhất."
+)
+_PRIVACY_RESPONSE = (
+    "Mình không thể truy cập hay nhận thông tin cá nhân của bạn (VIN, OTP, mật khẩu, tài khoản, "
+    "lịch sử dịch vụ) vì lý do bảo mật. Để kiểm tra thông tin, bạn vui lòng:\n"
+    "- Mở app VinFast → mục Cá nhân/Dịch vụ, hoặc\n"
+    f"- Gọi hotline {_VIVU_HOTLINE} để được xác minh bởi nhân viên."
+)
+_HANDOFF_RESPONSE = (
+    "Mình kết nối bạn với đội VinFast để được hỗ trợ trực tiếp nhé:\n"
+    f"- Hotline (24/7): {_VIVU_HOTLINE}\n"
+    "- Hoặc để lại thông tin tại showroom gần nhất — yêu cầu khiếu nại/hỗ trợ sẽ được tiếp nhận chính thức."
 )
 
 # ── Topic classification (spec's 9 supported topics) ────────────────────────
@@ -110,6 +182,17 @@ _TOPIC_KEYWORDS = {
         r"tỷ\b",
         r"trả\s*góp",
         r"vay\s*mua",
+        # Viết tắt phổ biến: "bn tiền", "gia bn", "giá bn"
+        r"\bti[ềe]n\b",
+        r"\bbn\s*ti[ềe]n\b",
+        r"gi[áa]\s+bn\b",
+        r"\bbn\s+gi[áa]\b",
+        # Upgrade-fee / option-fee: "phải thêm bao nhiêu", "thêm bao nhiêu", "Plus bao nhiêu"
+        r"phải\s*thêm",
+        r"thêm\s*bao\s*nhiêu",
+        r"cộng\s*thêm",
+        r"mất\s*bao\s*nhiêu",
+        r"(Plus|Eco|bản)\s+bao\s*nhiêu\b",
     ],
     "pin_và_sạc": [
         r"sạc\s*nhanh",
@@ -131,12 +214,23 @@ _TOPIC_KEYWORDS = {
     ],
     "phạm_vi_di_chuyển": [
         r"đi\s*được\s*bao\s*xa",
+        r"chạy\s*được\s*bao\s*xa",
         r"di\s*chuyển",
         r"range",
         r"phạm\s*vi",
         r"đi\s*được\s*bao\s*nhiêu\s*km",
         r"đi\s*được\s*bao\s*km",
+        r"chạy\s*được\s*bao\s*nhiêu\s*km",
+        r"chạy\s*được\s*mấy\s*km",
+        r"chạy\s*được\s*bao\s*km",
+        r"đi\s*được\s*mấy\s*km",
         r"quãng\s*đường",
+        r"đi\s*dc\s*bn",
+        r"chạy\s*dc\s*bn",
+        r"sạc.*đi\s*được",
+        r"một\s*lần\s*sạc.*chạy",
+        r"một\s*lần\s*sạc.*đi",
+        r"1\s*lần\s*sạc",
     ],
     "an_toàn": [
         r"túi\s*khí",
@@ -177,6 +271,10 @@ _TOPIC_KEYWORDS = {
         r"mâm\s*(hợp\s*kim|lõi\s*thép)",
         r"trần\s*kính",
         r"hệ\s*dẫn\s*động",
+        r"dẫn\s*động\s*hai\s*cầu",
+        r"dẫn\s*động\s*\d+\s*cầu",
+        r"\bawd\b",
+        r"\bfwd\b",
     ],
     "nội_thất": [
         r"nội\s*thất",
@@ -323,13 +421,15 @@ def _classify_topic(query: str) -> str:
 
 
 def _distinct_models(query: str) -> list[str]:
-    """Return all distinct normalized model codes mentioned in the query."""
+    """Return all distinct normalized model codes mentioned in the query.
+
+    Dùng normalize_model (không tự capitalize thủ công) để "VF8 thế hệ mới"
+    → 'VF 8 All New' khớp model_id DB (VF8NEW) — nếu không, get_price/get_specs
+    nhận model code lạ và trả rỗng (bug F04-V3).
+    """
     seen: list[str] = []
     for m in MODEL_RE.finditer(query):
-        raw = m.group(1).strip()
-        clean = re.sub(r"(VF)\s*(\d+)", r"\1 \2", raw, flags=re.IGNORECASE).strip()
-        parts = clean.split()
-        clean = " ".join(p.upper() if p.upper().startswith("VF") or p.isdigit() else p.capitalize() for p in parts)
+        clean = normalize_model(m.group(1))
         if clean not in seen:
             seen.append(clean)
     return seen
@@ -460,6 +560,38 @@ async def classify_node(state: AgentState) -> dict:
             "specificity": "unclear",
         }
 
+    # ── BLK-01: Safety / Privacy / Handoff gate — deterministic, TRƯỚC retrieval.
+    # Không cho LLM synthesize hướng dẫn tự xử lý sự cố an toàn, không nhận dữ liệu
+    # cá nhân, không bịa kênh liên hệ. Trả message cứng kèm hotline chính thức.
+    # decision="refuse": route thẳng respond (dùng response_text), runner UAT chấp nhận. ──
+    if _SAFETY_RE.search(query):
+        return {
+            "decision": "refuse",
+            "reason_code": "safety_diagnosis",
+            "response_text": _SAFETY_RESPONSE,
+            "entities": {},
+            "specificity": "clear",
+            "category": "general",
+        }
+    if _PRIVACY_RE.search(query):
+        return {
+            "decision": "refuse",
+            "reason_code": "personal_data",
+            "response_text": _PRIVACY_RESPONSE,
+            "entities": {},
+            "specificity": "clear",
+            "category": "general",
+        }
+    if _HANDOFF_RE.search(query):
+        return {
+            "decision": "refuse",
+            "reason_code": "human_handoff",
+            "response_text": _HANDOFF_RESPONSE,
+            "entities": {},
+            "specificity": "clear",
+            "category": "general",
+        }
+
     # ── Extract history context for multi-turn ──
     hist_ctx = _extract_history_context(history)
     # Fallback sang current_context (Redis session store) khi history bị cắt
@@ -490,6 +622,20 @@ async def classify_node(state: AgentState) -> dict:
         if same_model_ctx and not VERSION_QUERY_RE.search(query):
             cr.entities["version"] = hist_ctx["version"]
 
+    # VF 7 AWD: query nhắc trần kính/toàn cảnh/cửa sổ trời → edition PanoramicRoof.
+    # Xử lý cả "thêm trần kính" (suffix không nằm trong capture) lẫn follow-up
+    # "Thêm trần kính toàn cảnh nữa?" (version kế thừa Plus_AWD từ turn trước).
+    # "không lấy nóc kính" (F01-V3) không khớp positive list → giữ Plus_AWD.
+    if (
+        cr.entities.get("version") == "Plus_AWD"
+        and re.search(
+            r"(panoramic|tr[ầa]n\s*k[íi]nh|c[ửu]a\s*s[ổo]\s*tr[ờo]i|to[àa]n\s*c[ảa]nh|k[íi]nh\s*to[àa]n\s*c[ảa]nh)",
+            query,
+            re.I,
+        )
+    ):
+        cr.entities["version"] = "Plus_AWD_PanoramicRoof"
+
     has_model = bool(cr.entities.get("model_code"))
     has_version = bool(cr.entities.get("version"))
     topic = _classify_topic(query)
@@ -497,10 +643,19 @@ async def classify_node(state: AgentState) -> dict:
 
     # Version-pair comparison ("vf8 eco và plus", "eco vs plus") → phiên_bản
     # (chỉ khi query không có topic cụ thể; topic feature như giá/camera vẫn thắng)
-    # Clear version: get_specs cần trả TẤT CẢ versions để so sánh, không chỉ 1 version.
-    if topic == "general" and len(_distinct_versions(query)) >= 2:
-        topic = "phiên_bản"
-        cr.entities.pop("version", None)
+    # Clear version: get_specs/get_price cần trả TẤT CẢ versions để so sánh,
+    # kể cả khi topic là giá ("VF 6 Eco và Plus giá từng bản bao nhiêu?").
+    # KHÔNG clear version cho upgrade-fee queries ("lên AWD phải thêm bao nhiêu")
+    # — "Plus" và "AWD" là 2 version tokens nhưng user hỏi phí nâng cấp, không phải so sánh.
+    _is_upgrade_fee = bool(re.search(
+        r"(lên|nâng\s*cấp|đổi|thêm|lấy)\s+.*\s*(thêm|phải\s*thêm|bao\s*nhiêu|chi\s*phí)",
+        query, re.I,
+    ))
+    if len(_distinct_versions(query)) >= 2:
+        if topic == "general":
+            topic = "phiên_bản"
+        if not _is_upgrade_fee:
+            cr.entities.pop("version", None)
 
     # Inherit topic from history if current query topic is general
     if topic == "general" and hist_ctx["topic"]:
@@ -526,6 +681,24 @@ async def classify_node(state: AgentState) -> dict:
             "entities": cr.entities,
             "specificity": "unclear",
             "category": "utility",
+        }
+
+    # Recommendation theo nhu cầu/ngân sách KHÔNG cần model đầu vào (R17):
+    # "tôi có 800 triệu nên mua xe nào", "xe gia đình 5 người" → cross-model scan.
+    # Chỉ khi FRESH (không có model nào ở history) — nếu đang có context xe
+    # ("nên chọn bản nào?") thì fall through để dùng context như thường.
+    # model_codes=MAIN_MODELS để call_tools route vào _call_cross_model_tools
+    # (get_price toàn danh mục cho tư vấn ngân sách).
+    if not query_has_model and not hist_ctx["model_code"] and _RECOMMEND_RE.search(query):
+        rec_topic = _classify_topic(query)
+        return {
+            "decision": "answer",
+            "reason_code": "sufficient_direct_evidence",
+            "entities": {},
+            "specificity": "unclear",
+            "category": rec_topic if rec_topic != "general" else "giá",
+            "allowed_tools": {"list_available_models", "get_price", "get_specs"},
+            "model_codes": list(MAIN_MODELS),
         }
 
     # Comparison between 2+ distinct models (vf6 hay vf8, so sánh ...) → cross-model

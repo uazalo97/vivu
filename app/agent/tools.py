@@ -29,6 +29,11 @@ def _model_id(model_code: str) -> str:
     MODEL_ID_MAP = {
         "vf 8 all new": "VF8NEW",
         "vf8 all new": "VF8NEW",
+        # Alias an toàn: một số đường cũ có thể truyền "thế hệ mới" chưa chuẩn hoá
+        "vf 8 thế hệ mới": "VF8NEW",
+        "vf8 thế hệ mới": "VF8NEW",
+        "vf 8 the all new": "VF8NEW",
+        "vf8 the all new": "VF8NEW",
     }
     return MODEL_ID_MAP.get(model_code.lower().strip(), model_code.replace(" ", ""))
 

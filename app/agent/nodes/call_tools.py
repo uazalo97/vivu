@@ -14,6 +14,7 @@ from app.agent.prompts import get_system_prompt
 from app.agent.tools import (
     get_specs,
     get_price,  # noqa: F401 — kept for _safe_call fallback, primary is get_price_cached
+    get_options,
     list_available_models,
     search_knowledge_base,
     get_active_promotions,
@@ -66,7 +67,8 @@ _QUERY_SPEC_REFINE = [
     (
         re.compile(
             r"(pin|battery|sạc|charge|dung\s*lượng|kwh|range|"
-            r"đi\s*được|quãng\s*đường|bao\s*xa|xa\s*hơn)",
+            r"đi\s*được|chạy\s*được|quãng\s*đường|bao\s*xa|xa\s*hơn|"
+            r"đi\s*dc|chạy\s*dc|bn\s*km|mấy\s*km)",
             re.I,
         ),
         "battery",
@@ -192,6 +194,13 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
 
     if category == "giá":
         await _cached("get_price", "price", get_price_cached, model_code, version)
+        # "Thêm trần kính thì tổng bao nhiêu?" — cần phí option trong context
+        # để LLM tính 879 + 20 = 899 triệu.
+        if re.search(r"(tr[ầa]n\s*k[íi]nh|\bhud\b|\bawd\b|hai\s*c[ầa]u|to[àa]n\s*c[ảa]nh|dẫn\s*động)", query, re.I):
+            await _cached("get_options", "options", get_options_cached, model_code, None)
+        # "màu Urban Mint cộng thêm bao nhiêu" — cần color fee từ get_colors
+        if re.search(r"(màu|color|sơn)", query, re.I):
+            await _cached("get_colors", "colors", get_colors_cached, model_code, None)
 
     elif category == "tổng_quan":
         # Thông tin cơ bản về 1 model cụ thể: giá + thông số then chốt + màu sắc (chạy SONG SONG).
@@ -206,22 +215,29 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
         )
 
     elif category == "phiên_bản":
+        # Refine spec theo query: "HUD trên VF6 Eco và Plus khác nhau thế nào?"
+        # cần interior/adas thay vì powertrain mặc định.
+        spec_cat = _refine_spec_category(query)
         _, spec_r = await asyncio.gather(
             _cached("list_available_models", "list_models", list_models_cached),
-            _safe_call("get_specs", get_specs, model_code, None, "powertrain"),
+            _safe_call("get_specs", get_specs, model_code, None, spec_cat),
         )
         results.append(spec_r)
 
     elif category == "màu_sắc":
+        # KHÔNG filter theo version: color fee có thể áp dụng chung hoặc khác
+        # theo version — lấy tất cả để LLM trả lời đúng.
         _, kb_r = await asyncio.gather(
-            _cached("get_colors", "colors", get_colors_cached, model_code, version),
+            _cached("get_colors", "colors", get_colors_cached, model_code, None),
             _safe_call("search_knowledge_base", search_knowledge_base, query, model_code),
         )
         results.append(kb_r)
 
     elif category == "option":
+        # KHÔNG filter theo version: option như AWD/panoramic có thể khác version
+        # đang nói ("VF7 Plus lên AWD thêm bao nhiêu?" cần option của Plus_AWD).
         _, kb_r = await asyncio.gather(
-            _cached("get_options", "options", get_options_cached, model_code, version),
+            _cached("get_options", "options", get_options_cached, model_code, None),
             _safe_call("search_knowledge_base", search_knowledge_base, query, model_code),
         )
         results.append(kb_r)
@@ -245,9 +261,14 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
             r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
             results.append(r_kb)
 
+        # F10-style: HUD/AWD/hai cầu/trần kính là OPTION có phí (car_options),
+        # không nằm trong specs — bổ sung options khi query nhắc tới.
+        if re.search(r"(\bhud\b|\bawd\b|hai\s*c[ầa]u|tr[ầa]n\s*k[íi]nh|dẫn\s*động)", query, re.I) and category != "option":
+            await _cached("get_options", "options", get_options_cached, model_code, None)
+
         # Color queries under exterior
         if category == "ngoại_thất" and re.search(r"(màu|color)", query, re.I):
-            await _cached("get_colors", "colors", get_colors_cached, model_code, version)
+            await _cached("get_colors", "colors", get_colors_cached, model_code, None)
 
     return results, cache_hits
 
@@ -319,6 +340,15 @@ async def _call_cross_model_tools(query: str, model_codes: list[str] | None = No
     # LLM handles relevance, Cohere rerank adds 2-3s latency with minimal benefit here.
     r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, None, ["vivu_product_info"], True)
     results.append(r_kb)
+
+    # Feature-scan ("xe nào có HUD") — HUD/trần kính là OPTION có phí trong
+    # car_options, không nằm trong specs; bổ sung để LLM biết xe nào có.
+    if _CROSS_MODEL_FEATURE_RE.search(query):
+        opt_tasks = []
+        for m in (mentioned or []):
+            opt_tasks.append(_safe_call("get_options", get_options, m, None))
+        if opt_tasks:
+            results.extend(await asyncio.gather(*opt_tasks))
 
     return results
 

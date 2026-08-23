@@ -36,6 +36,7 @@ QUAN TRỌNG:
 - Liệt kê ĐẦY ĐỦ các mục có trong context: giá, thông số kỹ thuật, màu sắc, danh sách phiên bản.
 - CHỈ nói "chưa có trong dữ liệu đã được phê duyệt" cho mục CỤ THỂ người dùng hỏi mà context thực sự không có. Không dùng câu này cho màu sắc/giá/thông số đang có sẵn trong context.
 - Nếu context có specs cho model A nhưng không có cho model B → chỉ trả lời cho model A, nói rõ model B chưa có dữ liệu.
+- KHUYẾN MÃI/ƯU ĐÃI: CHỈ nêu khi context có chi tiết cụ thể từ tool. Nếu không có → nói "chưa thể xác nhận ưu đãi hiện hành" và dẫn link/hotline chính thức. TUYỆT ĐỐI không tự nêu mức giảm, thời hạn hay điều kiện.
 
 Context:
 {context}

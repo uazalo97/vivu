@@ -69,22 +69,35 @@ async def readiness_probe(response: Response):
         }
         is_ready = False
 
-    # 2. Check Qdrant Vector DB
+    # 2. Check Qdrant Vector DB — REST ping /collections
+    #    (retrieval.QdrantREST chỉ có search/retrieve; probe dùng HTTP trực tiếp,
+    #     KHÔNG import symbol không tồn tại như trước — nguyên nhân 503 BLK-03)
     t0 = time.monotonic()
     try:
-        from app.core.retrieval import get_qdrant_client
+        import requests as _requests
 
-        q_client = get_qdrant_client()
-        if q_client:
-            cols = await q_client.get_collections()
-            q_latency_ms = round((time.monotonic() - t0) * 1000, 2)
+        _headers = {"api-key": settings.qdrant_api_key} if settings.qdrant_api_key else {}
+        resp_q = _requests.get(
+            f"{settings.qdrant_url.rstrip('/')}/collections",
+            headers=_headers,
+            timeout=5,
+        )
+        q_latency_ms = round((time.monotonic() - t0) * 1000, 2)
+        if resp_q.status_code == 200:
+            cols = resp_q.json().get("result", {}).get("collections", [])
             checks["qdrant"] = {
                 "status": "ok",
                 "latency_ms": q_latency_ms,
-                "collections_count": len(cols.collections) if cols else 0,
+                "collections_count": len(cols),
             }
         else:
-            checks["qdrant"] = {"status": "not_configured"}
+            checks["qdrant"] = {
+                "status": "error",
+                "latency_ms": q_latency_ms,
+                "error": f"HTTP {resp_q.status_code}",
+            }
+            # Qdrant là core service cho RAG
+            is_ready = False
     except Exception as e:
         q_latency_ms = round((time.monotonic() - t0) * 1000, 2)
         checks["qdrant"] = {
@@ -95,23 +108,30 @@ async def readiness_probe(response: Response):
         # Qdrant là core service cho RAG
         is_ready = False
 
-    # 3. Check Cache (Redis / Upstash)
+    # 3. Check Cache (Redis / Upstash) — fail-open theo thiết kế:
+    #    Redis chết KHÔNG chặn traffic (cache miss → query DB bình thường),
+    #    nên chỉ báo degraded, KHÔNG đánh not_ready.
+    t0 = time.monotonic()
     try:
-        from app.core.cache import cache
+        from app.core.memory import get_redis
 
-        if cache.enabled:
-            # Test cache ping / set-get
-            test_key = "health:ping"
-            await cache.set_json(test_key, {"ping": "pong"}, ttl=10)
-            res = await cache.get_json(test_key)
-            checks["cache"] = {
-                "status": "ok" if res and res.get("ping") == "pong" else "degraded",
-                "enabled": True,
-            }
-        else:
+        r = get_redis()
+        if r is None:
             checks["cache"] = {"status": "disabled", "enabled": False}
+        else:
+            pong = await r.ping()
+            checks["cache"] = {
+                "status": "ok" if pong else "degraded",
+                "enabled": True,
+                "latency_ms": round((time.monotonic() - t0) * 1000, 2),
+            }
     except Exception as e:
-        checks["cache"] = {"status": "error", "error": str(e), "enabled": True}
+        checks["cache"] = {
+            "status": "degraded",
+            "error": str(e),
+            "enabled": True,
+            "note": "fail-open — cache miss vẫn phục vụ request",
+        }
 
     # 4. Check LLM Configuration & Credentials
     has_deepinfra = bool(settings.deepinfra_api_key)

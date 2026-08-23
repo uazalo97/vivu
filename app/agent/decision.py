@@ -93,6 +93,10 @@ _REASON_MAP = {
     "sufficient_direct": ReasonCode.SUFFICIENT_DIRECT_EVIDENCE,
     "unsupported_topic": ReasonCode.EXTERNAL_SOURCE_REQUESTED,
     "utility_query": ReasonCode.SUFFICIENT_DIRECT_EVIDENCE,
+    # BLK-01 gates
+    "safety_diagnosis": ReasonCode.UNSUPPORTED_SAFETY_DIAGNOSIS,
+    "personal_data": ReasonCode.PERSONAL_DATA_OR_TRANSACTION,
+    "human_handoff": ReasonCode.UNSUPPORTED_CONTACT_WORKFLOW,
 }
 
 
