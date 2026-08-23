@@ -1,0 +1,10 @@
+{
+  "generated_at": "2026-08-23T07:53:11.976970+00:00",
+  "total": 75,
+  "statuses": {
+    "AUTO_PASS": 27,
+    "REVIEW": 42,
+    "MANUAL_REQUIRED": 6
+  },
+  "release_blocker_candidates": []
+}
