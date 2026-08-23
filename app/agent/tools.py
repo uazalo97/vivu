@@ -17,6 +17,15 @@ def _model_id(model_code: str) -> str:
     MODEL_ID_MAP = {
         "vf 8 all new": "VF8NEW",
         "vf8 all new": "VF8NEW",
+        "vf 8 new": "VF8NEW",
+        "vf8 new": "VF8NEW",
+        "vf 8 thế hệ mới": "VF8NEW",
+        "vf8 thế hệ mới": "VF8NEW",
+        "the all new": "VF8NEW",
+        "vf mpv 7": "VFMPV7",
+        "vf mpv7": "VFMPV7",
+        "vfmpv7": "VFMPV7",
+        "vf mpv": "VFMPV7",
     }
     return MODEL_ID_MAP.get(model_code.lower().strip(), model_code.replace(" ", ""))
 
@@ -28,16 +37,35 @@ async def get_price(model_code: str, version: str = None) -> dict:
     if version:
         rows = await conn.fetch(
             "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
-            "FROM price_list_active WHERE model_id=$1 AND edition_id=$2 ORDER BY price_list_vnd",
+            "FROM price_list_active WHERE model_id=$1 AND (edition_id = $2 OR edition_id ILIKE $2 || '_%' OR edition_id ILIKE '%' || $2 || '%') "
+            "ORDER BY price_list_vnd",
             mid,
             version,
         )
+        if not rows:
+            rows = await conn.fetch(
+                "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
+                "FROM price_list_active WHERE model_id=$1 ORDER BY price_list_vnd",
+                mid,
+            )
     else:
         rows = await conn.fetch(
             "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
             "FROM price_list_active WHERE model_id=$1 ORDER BY price_list_vnd",
             mid,
         )
+
+    rows_list = [dict(r) for r in rows]
+    # If user asks about VF 8, also append VF8NEW to give full picture
+    if mid == "VF8":
+        new_rows = await conn.fetch(
+            "SELECT edition_id, price_list_vnd, price_promo_vnd, promo_label, source_url "
+            "FROM price_list_active WHERE model_id='VF8NEW' ORDER BY price_list_vnd"
+        )
+        for nr in new_rows:
+            d = dict(nr)
+            d["edition_id"] = f"VF 8 The All New ({d['edition_id']})"
+            rows_list.append(d)
 
     related = await conn.fetch(
         "SELECT model_id, edition_id, price_list_vnd, price_promo_vnd "
@@ -46,7 +74,7 @@ async def get_price(model_code: str, version: str = None) -> dict:
     )
     await conn.close()
 
-    source_url = rows[0]["source_url"] if rows and rows[0].get("source_url") else ""
+    source_url = rows_list[0]["source_url"] if rows_list and rows_list[0].get("source_url") else ""
     related_models = []
     seen = set()
     for r in related:
@@ -71,7 +99,7 @@ async def get_price(model_code: str, version: str = None) -> dict:
                 "promo_price_vnd": r["price_promo_vnd"],
                 "promo_label": r["promo_label"] or "",
             }
-            for r in rows
+            for r in rows_list
         ],
         "related_models": related_models,
         "note": "Giá niêm yết chưa bao gồm chi phí lăn bánh. Khuyến mãi có thể thay đổi theo thời gian và khu vực.",
@@ -288,7 +316,8 @@ UTILITY_LINKS = {
     "loan_appraisal": {"url": "https://shop.vinfastauto.com/vn_vi/tham-dinh-vay", "label": "Thẩm định vay"},
     "showroom_charging": {
         "url": "https://vinfastauto.com/vn_vi/tim-kiem-showroom-tram-sac",
-        "label": "Tìm Showroom & Trạm sạc",
+        "label": "Tìm Showroom, Xưởng dịch vụ & Trạm sạc VinFast (Hotline 24/7: 1900 23 23 89)",
+        "hotline": "1900 23 23 89",
     },
     "maintenance_booking": {
         "url": "https://shop.vinfastauto.com/vn_vi/dat-lich-dich-vu-bao-duong.html",

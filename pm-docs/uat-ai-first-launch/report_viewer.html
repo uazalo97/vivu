@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivu UAT Report Viewer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .fade-in { animation: fadeIn .25s ease-in; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .drop-active { border-color: #2C72C6 !important; background: #EBF2FC !important; }
+  .toast { animation: toastIn .3s ease, toastOut .3s ease 1.7s forwards; }
+  @keyframes toastIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes toastOut { from{opacity:1} to{opacity:0} }
+  pre { white-space: pre-wrap; word-break: break-word; }
+</style>
+<script>
+tailwind.config = { theme: { extend: { colors: { brand: '#2C72C6', 'brand-dark': '#1E4D83' } } } }
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- Header -->
+<header class="bg-brand text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-[1400px] mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-bold text-sm">V</div>
+      <div>
+        <h1 class="text-lg font-bold">Vivu UAT Report Viewer</h1>
+        <p class="text-xs text-blue-200" id="fileInfo">Chưa tải file kết quả</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="exportFiltered()" id="btnExport" class="hidden px-3 py-1.5 text-xs bg-white/20 hover:bg-white/30 rounded-lg transition">📥 Xuất JSON</button>
+      <label class="px-3 py-1.5 text-xs bg-white/20 hover:bg-white/30 rounded-lg cursor-pointer transition">
+        📂 Chọn file JSONL
+        <input type="file" accept=".jsonl,.json" class="hidden" onchange="handleFile(event)">
+      </label>
+    </div>
+  </div>
+</header>
+
+<!-- Drop Zone -->
+<div id="dropZone" class="max-w-[1400px] mx-auto px-4 mt-8">
+  <div id="dropArea" class="border-2 border-dashed border-gray-300 rounded-2xl p-16 text-center cursor-pointer hover:border-brand transition-colors"
+       onclick="this.querySelector('input').click()">
+    <div class="text-5xl mb-4">📊</div>
+    <h2 class="text-xl font-bold text-gray-700 mb-2">Kéo thả file kết quả vào đây</h2>
+    <p class="text-gray-500 mb-4">Hỗ trợ file <code class="bg-gray-100 px-2 py-0.5 rounded">.jsonl</code> từ <code class="bg-gray-100 px-2 py-0.5 rounded">uat_launch_runner.py</code></p>
+    <button class="px-4 py-2 bg-brand text-white rounded-xl font-semibold hover:bg-brand-dark transition">Hoặc nhấn để chọn file</button>
+    <input type="file" accept=".jsonl,.json" class="hidden" onchange="handleFile(event)">
+  </div>
+</div>
+
+<!-- Main Content (hidden until data loaded) -->
+<div id="mainContent" class="hidden max-w-[1400px] mx-auto px-4 py-4 space-y-4">
+
+  <!-- KPI Cards -->
+  <div id="kpiCards" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3"></div>
+
+  <!-- Filters -->
+  <div class="bg-white rounded-xl shadow-sm border p-3 flex flex-wrap items-center gap-3">
+    <div class="flex items-center gap-1 flex-wrap" id="statusFilters"></div>
+    <div class="h-6 w-px bg-gray-200 hidden sm:block"></div>
+    <select id="sevFilter" onchange="applyFilters()" class="border rounded-lg px-2 py-1.5 text-sm">
+      <option value="">Severity: Tất cả</option>
+      <option value="S0">🚨 S0</option><option value="S1">⚠️ S1</option><option value="S2">S2</option>
+    </select>
+    <select id="groupFilter" onchange="applyFilters()" class="border rounded-lg px-2 py-1.5 text-sm">
+      <option value="">Nhóm: Tất cả</option>
+      <option value="FACT">FACT</option><option value="CONTEXT">CONTEXT</option>
+      <option value="RECOMMEND">RECOMMEND</option><option value="GUARDRAIL">GUARDRAIL</option><option value="UI">UI</option>
+    </select>
+    <div class="flex-1 min-w-[200px]">
+      <input type="text" id="searchBox" oninput="applyFilters()" placeholder="🔍 Tìm Run ID, mẫu xe, prompt..."
+             class="w-full border rounded-lg px-3 py-1.5 text-sm">
+    </div>
+    <span id="countLabel" class="text-xs text-gray-500 whitespace-nowrap"></span>
+  </div>
+
+  <!-- Results Table -->
+  <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-gray-50 text-left text-xs uppercase text-gray-500">
+        <tr>
+          <th class="px-3 py-2.5">Run ID</th>
+          <th class="px-3 py-2.5">Tiêu đề</th>
+          <th class="px-3 py-2.5">Nhóm</th>
+          <th class="px-3 py-2.5">Sev</th>
+          <th class="px-3 py-2.5">Variant</th>
+          <th class="px-3 py-2.5">Status</th>
+          <th class="px-3 py-2.5">Latency</th>
+          <th class="px-3 py-2.5">Lỗi</th>
+        </tr>
+      </thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="hidden fixed bottom-6 right-6 bg-gray-900 text-white px-4 py-2.5 rounded-xl shadow-lg text-sm z-50"></div>
+
+<script>
+// ─── State ───
+let allCases = [];
+let filtered = [];
+let activeStatus = '';
+let expandedId = null;
+
+const GOLDEN = new Set(['F01','F07','C12','G21','G24']);
+const STATUS_COLORS = {
+  'AUTO_PASS':'bg-emerald-100 text-emerald-700','AUTO_FAIL':'bg-red-100 text-red-700',
+  'REVIEW':'bg-amber-100 text-amber-700','MANUAL_REQUIRED':'bg-blue-100 text-blue-700',
+  'NOT_RUN':'bg-gray-100 text-gray-500'
+};
+const SEV_COLORS = { S0:'bg-red-600 text-white', S1:'bg-orange-500 text-white', S2:'bg-gray-400 text-white' };
+const GROUP_COLORS = {
+  FACT:'bg-indigo-100 text-indigo-700', CONTEXT:'bg-purple-100 text-purple-700',
+  RECOMMEND:'bg-teal-100 text-teal-700', GUARDRAIL:'bg-rose-100 text-rose-700',
+  UI:'bg-cyan-100 text-cyan-700'
+};
+
+// ─── File Handling ───
+document.addEventListener('DOMContentLoaded', () => {
+  const da = document.getElementById('dropArea');
+  ['dragenter','dragover'].forEach(e => document.addEventListener(e, ev => { ev.preventDefault(); da.classList.add('drop-active'); }));
+  ['dragleave','drop'].forEach(e => document.addEventListener(e, ev => { ev.preventDefault(); da.classList.remove('drop-active'); }));
+  document.addEventListener('drop', ev => {
+    const f = ev.dataTransfer.files[0];
+    if (f) loadFile(f);
+  });
+});
+
+function handleFile(ev) { const f = ev.target.files[0]; if(f) loadFile(f); }
+
+function loadFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = e.target.result;
+    try {
+      // Try JSONL first
+      allCases = text.trim().split('\n').filter(l=>l.trim()).map(l => JSON.parse(l));
+    } catch {
+      try { const j = JSON.parse(text); allCases = Array.isArray(j) ? j : [j]; } catch(e2) { alert('Không đọc được file: ' + e2.message); return; }
+    }
+    document.getElementById('fileInfo').textContent = `${file.name} · ${allCases.length} cases · ${new Date().toLocaleString('vi-VN')}`;
+    document.getElementById('dropZone').classList.add('hidden');
+    document.getElementById('mainContent').classList.remove('hidden');
+    document.getElementById('btnExport').classList.remove('hidden');
+    renderKPIs();
+    renderStatusFilters();
+    applyFilters();
+  };
+  reader.readAsText(file, 'utf-8');
+}
+
+// ─── KPIs ───
+function renderKPIs() {
+  const counts = {}; allCases.forEach(c => counts[c.auto_status] = (counts[c.auto_status]||0) + 1);
+  const total = allCases.length;
+  const pass = counts['AUTO_PASS']||0;
+  const runnable = total - (counts['MANUAL_REQUIRED']||0) - (counts['NOT_RUN']||0);
+  const rate = runnable > 0 ? (pass / runnable * 100).toFixed(1) : '0';
+  const s0Blockers = allCases.filter(c => c.severity === 'S0' && c.auto_status === 'AUTO_FAIL').length;
+
+  document.getElementById('kpiCards').innerHTML = `
+    ${kpiCard('Tổng Case', total, 'bg-white')}
+    ${kpiCard('AUTO_PASS', pass, 'bg-emerald-50 border-emerald-200', '🟢')}
+    ${kpiCard('AUTO_FAIL', counts['AUTO_FAIL']||0, 'bg-red-50 border-red-200', '🔴')}
+    ${kpiCard('REVIEW', counts['REVIEW']||0, 'bg-amber-50 border-amber-200', '🟡')}
+    ${kpiCard('MANUAL', counts['MANUAL_REQUIRED']||0, 'bg-blue-50 border-blue-200', '🔵')}
+    ${kpiCard('Pass Rate', rate + '%', 'bg-white', '📈')}
+    ${kpiCard('S0 Blockers', s0Blockers, s0Blockers > 0 ? 'bg-red-100 border-red-300' : 'bg-green-50 border-green-200', s0Blockers > 0 ? '🚨' : '✅')}
+  `;
+}
+function kpiCard(label, value, cls, icon='') {
+  return `<div class="rounded-xl border p-3 ${cls} shadow-sm">
+    <div class="text-xs text-gray-500 font-medium">${icon} ${label}</div>
+    <div class="text-2xl font-bold mt-1">${value}</div>
+  </div>`;
+}
+
+// ─── Status Filter Pills ───
+function renderStatusFilters() {
+  const statuses = ['', 'AUTO_FAIL', 'REVIEW', 'AUTO_PASS', 'MANUAL_REQUIRED'];
+  const labels = ['Tất cả', '🔴 AUTO_FAIL', '🟡 REVIEW', '🟢 AUTO_PASS', '🔵 MANUAL'];
+  document.getElementById('statusFilters').innerHTML = statuses.map((s,i) =>
+    `<button onclick="setStatus('${s}')" data-status="${s}"
+      class="status-pill px-3 py-1 rounded-full text-xs font-semibold border transition
+      ${s === activeStatus ? 'bg-brand text-white border-brand' : 'bg-white text-gray-600 border-gray-200 hover:border-brand'}">${labels[i]}</button>`
+  ).join('');
+}
+function setStatus(s) { activeStatus = s; renderStatusFilters(); applyFilters(); }
+
+// ─── Filtering ───
+function applyFilters() {
+  const sev = document.getElementById('sevFilter').value;
+  const grp = document.getElementById('groupFilter').value;
+  const q = document.getElementById('searchBox').value.toLowerCase();
+
+  filtered = allCases.filter(c => {
+    if (activeStatus && c.auto_status !== activeStatus) return false;
+    if (sev && c.severity !== sev) return false;
+    if (grp && c.group !== grp) return false;
+    if (q) {
+      const hay = [c.run_id, c.scenario_title, c.variant_label, c.oracle,
+        ...(c.auto_failures||[]),
+        ...(c.transcript||[]).map(t=>t.user+' '+t.assistant)
+      ].join(' ').toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  // Sort: AUTO_FAIL first, S0 first within
+  const statusOrder = { AUTO_FAIL:0, REVIEW:1, MANUAL_REQUIRED:2, NOT_RUN:3, AUTO_PASS:4 };
+  const sevOrder = { S0:0, S1:1, S2:2 };
+  filtered.sort((a,b) => (statusOrder[a.auto_status]||9) - (statusOrder[b.auto_status]||9)
+    || (sevOrder[a.severity]||9) - (sevOrder[b.severity]||9));
+
+  document.getElementById('countLabel').textContent = `Hiển thị ${filtered.length} / ${allCases.length} cases`;
+  renderTable();
+}
+
+// ─── Table ───
+function renderTable() {
+  const body = document.getElementById('resultsBody');
+  body.innerHTML = filtered.map(c => {
+    const isGolden = GOLDEN.has(c.scenario_id);
+    const lat = c.transcript && c.transcript[0] ? c.transcript[0].latency_ms : null;
+    const latStr = lat ? (lat >= 1000 ? (lat/1000).toFixed(1)+'s' : Math.round(lat)+'ms') : '-';
+    const failShort = (c.auto_failures||[]).join('; ').slice(0, 80);
+    const expanded = expandedId === c.run_id;
+
+    return `<tr class="border-t hover:bg-gray-50 cursor-pointer ${expanded ? 'bg-blue-50' : ''}" onclick="toggleDetail('${c.run_id}')">
+      <td class="px-3 py-2 font-mono font-semibold text-sm whitespace-nowrap">
+        ${isGolden ? '<span title="Golden Smoke">⭐</span> ' : ''}${c.run_id}
+      </td>
+      <td class="px-3 py-2 max-w-[200px] truncate">${esc(c.scenario_title)}</td>
+      <td class="px-3 py-2"><span class="px-2 py-0.5 rounded-full text-xs font-medium ${GROUP_COLORS[c.group]||''}">${c.group}</span></td>
+      <td class="px-3 py-2"><span class="px-2 py-0.5 rounded-full text-xs font-bold ${SEV_COLORS[c.severity]||''}">${c.severity}</span></td>
+      <td class="px-3 py-2 text-xs text-gray-500">${esc(c.variant_label||'')}</td>
+      <td class="px-3 py-2"><span class="px-2 py-0.5 rounded-full text-xs font-semibold ${STATUS_COLORS[c.auto_status]||''}">${c.auto_status}</span></td>
+      <td class="px-3 py-2 text-xs text-gray-600 font-mono">${latStr}</td>
+      <td class="px-3 py-2 text-xs text-red-600 max-w-[200px] truncate">${esc(failShort)}</td>
+    </tr>
+    ${expanded ? `<tr><td colspan="8" class="p-0"><div class="fade-in">${renderDetail(c)}</div></td></tr>` : ''}`;
+  }).join('');
+}
+
+function toggleDetail(id) { expandedId = expandedId === id ? null : id; renderTable(); }
+
+// ─── Detail Panel ───
+function renderDetail(c) {
+  return `<div class="bg-gray-50 border-t-2 border-brand/30 p-4 space-y-4">
+    <!-- Header -->
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="font-bold text-lg">${esc(c.run_id)}</span>
+      <span class="text-gray-500">—</span>
+      <span class="font-semibold">${esc(c.scenario_title)}</span>
+      <span class="px-2 py-0.5 rounded-full text-xs font-bold ${SEV_COLORS[c.severity]||''}">${c.severity}</span>
+      <span class="px-2 py-0.5 rounded-full text-xs font-semibold ${STATUS_COLORS[c.auto_status]||''}">${c.auto_status}</span>
+      <span class="ml-auto">
+        <button onclick="event.stopPropagation(); copyBugPacket('${c.run_id}')"
+          class="px-3 py-1.5 bg-brand text-white rounded-lg text-xs font-semibold hover:bg-brand-dark transition">
+          📋 Copy Bug Packet
+        </button>
+      </span>
+    </div>
+
+    <!-- Oracle -->
+    ${c.oracle ? `<div class="text-xs bg-indigo-50 border border-indigo-200 rounded-lg p-2"><strong>Oracle:</strong> ${esc(c.oracle)}</div>` : ''}
+
+    <!-- Must Have / Must Not -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+        <div class="text-xs font-bold text-green-700 mb-1">✅ Must-Have</div>
+        ${(c.must_have||[]).map(m => `<div class="text-xs text-green-800">• ${esc(m)}</div>`).join('')}
+      </div>
+      <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+        <div class="text-xs font-bold text-red-700 mb-1">🚫 Must-Not</div>
+        ${(c.must_not||[]).map(m => `<div class="text-xs text-red-800">• ${esc(m)}</div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Transcript -->
+    <div class="space-y-3">
+      <div class="text-sm font-bold text-gray-700">💬 Transcript</div>
+      ${(c.transcript||[]).map(t => renderTurn(t, c)).join('')}
+    </div>
+
+    <!-- Auto Failures Summary -->
+    ${(c.auto_failures||[]).length > 0 ? `
+    <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+      <div class="text-xs font-bold text-red-700 mb-1">❌ Lỗi tự động phát hiện</div>
+      ${c.auto_failures.map(f => `<div class="text-xs text-red-800">• ${esc(f)}</div>`).join('')}
+    </div>` : ''}
+  </div>`;
+}
+
+function renderTurn(t, c) {
+  const lat = t.latency_ms ? (t.latency_ms >= 1000 ? (t.latency_ms/1000).toFixed(1)+'s' : Math.round(t.latency_ms)+'ms') : '';
+  const expDec = c.steps && c.steps[t.turn-1] ? (c.steps[t.turn-1].expected_decisions||[]).join(', ') : '';
+  const decMatch = !expDec || (expDec.includes(t.decision));
+  const assertions = c.steps && c.steps[t.turn-1] ? (c.steps[t.turn-1].assertions||[]) : [];
+  const aFails = new Set(t.assertion_failures || []);
+
+  return `<div class="bg-white rounded-xl border p-3 space-y-2">
+    <div class="text-xs text-gray-400 font-semibold">Turn ${t.turn} ${lat ? '· ⏱️ '+lat : ''}</div>
+
+    <!-- User -->
+    <div class="flex gap-2">
+      <div class="w-7 h-7 rounded-full bg-brand text-white flex items-center justify-center text-xs font-bold shrink-0">U</div>
+      <div class="bg-blue-50 border border-blue-200 rounded-xl px-3 py-2 text-sm flex-1">${esc(t.user)}</div>
+    </div>
+
+    <!-- Assistant -->
+    <div class="flex gap-2">
+      <div class="w-7 h-7 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center text-xs font-bold shrink-0">V</div>
+      <div class="bg-white border rounded-xl px-3 py-2 text-sm flex-1 max-h-[300px] overflow-y-auto">
+        <pre class="text-sm text-gray-700">${esc(t.assistant || '(không có phản hồi)')}</pre>
+      </div>
+    </div>
+
+    <!-- Decision check -->
+    <div class="flex flex-wrap gap-3 text-xs">
+      ${expDec ? `<span class="${decMatch ? 'text-green-600' : 'text-red-600'} font-semibold">
+        ${decMatch ? '✅' : '❌'} Decision: Expected <code>${esc(expDec)}</code> → Actual <code>${esc(t.decision||'?')}</code>
+      </span>` : ''}
+    </div>
+
+    <!-- Assertions -->
+    ${assertions.length > 0 ? `<div class="space-y-1">
+      ${assertions.map(a => {
+        const desc = a.type === 'contains_any' ? `Chứa: ${a.values.join(' / ')}` : `Không chứa: ${a.values.join(' / ')}`;
+        const failed = (t.assertion_failures||[]).some(af =>
+          a.values.some(v => af.includes(v)) || af.includes(a.type));
+        return `<div class="text-xs ${failed ? 'text-red-600' : 'text-green-600'} font-medium">
+          ${failed ? '❌ FAIL' : '✅ PASS'} · ${esc(desc)}
+        </div>`;
+      }).join('')}
+    </div>` : ''}
+
+    <!-- Sources -->
+    ${(t.sources||[]).length > 0 ? `<div class="text-xs text-gray-500">
+      <span class="font-semibold">Nguồn:</span>
+      ${t.sources.map(s => `<a href="${esc(s.source_url||'#')}" target="_blank" class="text-brand hover:underline ml-1">${esc(s.tool||'')}(${esc(s.model_code||'')})</a>`).join(', ')}
+    </div>` : ''}
+  </div>`;
+}
+
+// ─── Bug Packet ───
+function copyBugPacket(runId) {
+  const c = allCases.find(x => x.run_id === runId);
+  if (!c) return;
+  const t1 = c.transcript && c.transcript[0] ? c.transcript[0] : {};
+  const expDec = c.steps && c.steps[0] ? (c.steps[0].expected_decisions||[]).join(', ') : '';
+  const assistShort = (t1.assistant||'').slice(0, 300);
+  const sources = (t1.sources||[]).map(s => `${s.tool}(${s.model_code}): ${s.source_url||''}`).join('\n  ');
+
+  const md = `**Title:** [${c.auto_status}] ${c.scenario_title} (${c.run_id})
+**Severity:** ${c.severity}
+**Run ID:** ${c.run_id}
+**Group:** ${c.group}
+**Oracle:** ${c.oracle || 'N/A'}
+
+**Reproduction:**
+1. Gửi: "${t1.user || ''}"
+2. Expected decision: ${expDec}
+3. Actual decision: ${t1.decision || '?'}
+4. Actual response: ${assistShort}...
+
+**Must-Have:**
+${(c.must_have||[]).map(m => '- ' + m).join('\n')}
+
+**Must-Not:**
+${(c.must_not||[]).map(m => '- ' + m).join('\n')}
+
+**Failed Assertions:**
+${(c.auto_failures||[]).map(f => '- ' + f).join('\n')}
+
+**Sources:**
+  ${sources || 'N/A'}
+
+**Root cause:**
+**Owner:**`;
+
+  navigator.clipboard.writeText(md).then(() => showToast('📋 Đã copy bug packet!')).catch(() => showToast('❌ Lỗi clipboard'));
+}
+
+// ─── Export ───
+function exportFiltered() {
+  const blob = new Blob([JSON.stringify(filtered, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `uat-filtered-${Date.now()}.json`;
+  a.click();
+  showToast('📥 Đã xuất ' + filtered.length + ' cases');
+}
+
+// ─── Utils ───
+function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'fixed bottom-6 right-6 bg-gray-900 text-white px-4 py-2.5 rounded-xl shadow-lg text-sm z-50 toast';
+  setTimeout(() => t.className = 'hidden', 2200);
+}
+</script>
+</body>
+</html>

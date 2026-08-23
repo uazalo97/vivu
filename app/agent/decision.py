@@ -547,20 +547,23 @@ def _spec_relevance_score(query: str, query_tokens: set[str], spec_key: str, spe
     query_matched_topic = False
     for group_phrases in _SPEC_QUERY_KEYWORDS.values():
         matched_in_query = False
+        matched_in_spec = False
         for phrase in group_phrases:
             phrase_lower = phrase.lower()
             if " " in phrase_lower:
                 if phrase_lower in query_lower:
                     matched_in_query = True
-                    if phrase_lower in spec_text:
-                        return 0.95
+                if phrase_lower in spec_text:
+                    matched_in_spec = True
             else:
                 if phrase_lower in query_tokens:
                     matched_in_query = True
-                    if phrase_lower in key_tokens:
-                        return 0.95
+                if phrase_lower in key_tokens or phrase_lower in spec_text:
+                    matched_in_spec = True
         if matched_in_query:
             query_matched_topic = True
+            if matched_in_spec:
+                return 0.95
 
     # If query is about a specific recognized topic, do not give high score to random unigram overlaps
     if query_matched_topic:
@@ -691,6 +694,8 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
                     has_direct = True
                 elif score >= 0.2:
                     has_partial = True
+            if specs:
+                has_direct = True
 
         elif tool == "get_colors" and result.get("colors"):
             mc = result.get("model_code", "")
@@ -736,10 +741,7 @@ def assess_evidence(tool_results: list[dict], query: str) -> tuple[str, list[dic
                         "score": score,
                     }
                 )
-            if score >= 0.7:
-                has_direct = True
-            else:
-                has_partial = True
+            has_direct = True
 
         elif tool == "search_knowledge_base" and result.get("results"):
             is_supplementary = tr.get("auto_injected", False)
@@ -902,19 +904,13 @@ def build_retrieved_chunks(tool_results: list[dict], query: str = "", topic: str
     All chunks scored by embedding cosine similarity (same model as retrieval).
     Falls back to keyword scoring if embedding unavailable.
     """
-    from app.agent.nodes.classify import _TOPIC_KEYWORDS
-
     chunks = []
     rank = 0
     MAX_CHUNKS = 30
     MIN_SCORE = 0.3
     qtokens = _query_tokens(query) if query else set()
 
-    topic_keywords: set[str] = set()
-    if topic and topic in _TOPIC_KEYWORDS:
-        for pattern in _TOPIC_KEYWORDS[topic]:
-            topic_keywords.update(_TOKEN_RE.findall(pattern.lower()))
-    topic_keywords |= qtokens - {
+    topic_keywords: set[str] = set(qtokens) - {
         "xe",
         "vinfast",
         "vf",

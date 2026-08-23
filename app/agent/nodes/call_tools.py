@@ -13,7 +13,9 @@ from app.agent.graph_state import AgentState
 from app.agent.prompts import get_system_prompt
 from app.agent.tools import (
     get_specs,
-    get_price,  # noqa: F401 — kept for _safe_call fallback, primary is get_price_cached
+    get_price,
+    get_colors,
+    get_options,
     list_available_models,
     search_knowledge_base,
     get_active_promotions,
@@ -28,97 +30,10 @@ from app.core.cache import (
     get_specs_cached,
     get_colors_cached,
     get_options_cached,
-    list_models_cached,
 )
 from app.agent.nodes.classify import _distinct_models
 
 logger = logging.getLogger("bds.graph.call_tools")
-
-# Topic → spec category filter for get_specs.
-# Tuple = query multiple categories (an_toàn spans safety + adas).
-_TOPIC_SPEC_CATEGORY = {
-    "pin_và_sạc": "battery",
-    "phạm_vi_di_chuyển": "battery",
-    "an_toàn": ("safety", "adas"),  # ADAS keywords (camera 360, camera lùi, ADAS...) nằm ở adas
-    "nội_thất": "interior",
-    "ngoại_thất": "exterior",
-    "tính_năng_nổi_bật": None,  # spans adas + infotainment + connected + security + convenience
-    "kích_thước": "dimension",
-    "thông_số_kỹ_thuật": None,  # powertrain + chassis + all specs
-    # "giá": handled separately via get_price
-    # "phiên_bản": handled separately via list_available_models
-}
-
-# Topics that need search_knowledge_base auto-injection
-_NEEDS_KB = {"an_toàn", "nội_thất", "ngoại_thất", "tính_năng_nổi_bật"}
-
-# Query → spec-category refinement for thông_số_kỹ_thuật (broad topic).
-# Order matters: first match wins.
-_QUERY_SPEC_REFINE = [
-    (
-        re.compile(
-            r"(công\s*suất|mô[\s-]*men|xoắn|tăng\s*tốc|tốc\s*độ|"
-            r"power|torque|acceleration|speed|km/h|\bkW\b|\bNm\b|mã\s*lực|động\s*cơ|dẫn\s*động|\bawd\b|\bfwd\b)",
-            re.I,
-        ),
-        "powertrain",
-    ),
-    (
-        re.compile(
-            r"(pin|battery|sạc|charge|dung\s*lượng|kwh|range|"
-            r"đi\s*được|quãng\s*đường|bao\s*xa|xa\s*hơn)",
-            re.I,
-        ),
-        "battery",
-    ),
-    (
-        re.compile(
-            r"(kích\s*thước|dài|rộng|cao|trọng\s*lượng|wheelbase|"
-            r"khoảng\s*sáng|gầm|cốp|ground\s*clearance|weight)",
-            re.I,
-        ),
-        "dimension",
-    ),
-    (
-        re.compile(
-            r"(cửa\s*sổ\s*trời|sunroof|trần\s*kính|kính\s*trần|nội\s*thất|ghế|màn\s*hình|"
-            r"loa|âm\s*thanh|điều\s*hòa|vô\s*lăng|hud|sưởi|thông\s*gió|massage|chỗ\s*ngồi)",
-            re.I,
-        ),
-        "interior",
-    ),
-    (
-        re.compile(
-            r"(ngoại\s*thất|đèn|mâm|la[\s-]*zăng|gương|màu\s*sơn|lốp)",
-            re.I,
-        ),
-        "exterior",
-    ),
-    (
-        re.compile(
-            r"(túi\s*khí|airbag|phanh|abs|esc|an\s*toàn|isofix|tpms)",
-            re.I,
-        ),
-        "safety",
-    ),
-    (
-        re.compile(
-            r"(adas|cruise|lane|va\s*chạm|aeb|blind\s*spot|điểm\s*mù|đỗ\s*xe|parking|giữ\s*làn)",
-            re.I,
-        ),
-        "adas",
-    ),
-]
-
-
-def _refine_spec_category(query: str) -> str | None:
-    """Map a broad spec query to a concrete spec_category, or None to get all."""
-    if not query:
-        return None
-    for pattern, cat in _QUERY_SPEC_REFINE:
-        if pattern.search(query):
-            return cat
-    return None
 
 
 async def call_tools_node(state: AgentState) -> dict:
@@ -165,125 +80,60 @@ async def call_tools_node(state: AgentState) -> dict:
 
 
 async def _call_model_tools(model_code: str, version: str, category: str, query: str) -> tuple[list[dict], set[str]]:
-    """Call tools for a specific model based on topic. Returns (results, cache_hit_types)."""
-    results: list[dict] = []
+    """Fetch complete context for the model in parallel: prices, options, colors, all specs, and KB."""
     cache_hits: set[str] = set()
 
     async def _cached(name: str, cache_type: str, func, *args):
         try:
             data, hit = await func(*args)
-            results.append({"tool": name, "result": data, "success": True, "cache_hit": hit})
             if hit:
                 cache_hits.add(cache_type)
+            return {"tool": name, "result": data, "success": True, "cache_hit": hit}
         except Exception as e:
             logger.warning("Tool %s failed: %s", name, e)
-            results.append({"tool": name, "result": {"error": str(e)}, "success": False})
+            return {"tool": name, "result": {"error": str(e)}, "success": False}
 
-    if category == "giá":
-        await _cached("get_price", "price", get_price_cached, model_code, version)
+    # Parallel retrieval of all dimensions for this car model
+    tasks = [
+        _cached("get_price", "price", get_price_cached, model_code, None),
+        _cached("get_options", "options", get_options_cached, model_code, None),
+        _cached("get_colors", "colors", get_colors_cached, model_code, None),
+        _cached("get_specs", "specs", get_specs_cached, model_code, None, None),
+        _safe_call("search_knowledge_base", search_knowledge_base, query, model_code),
+    ]
 
-    elif category == "tổng_quan":
-        # Thông tin cơ bản: phiên bản + giá + thông số then chốt + màu sắc
-        await _cached("list_available_models", "list_models", list_models_cached)
-        await _cached("get_price", "price", get_price_cached, model_code, version)
-        # Spec then chốt: công suất/tốc độ, pin/quãng đường, kích thước, nội thất (số chỗ)
-        for cat in ("powertrain", "battery", "dimension", "interior"):
-            await _cached("get_specs", "specs", get_specs_cached, model_code, version, cat)
-        await _cached("get_colors", "colors", get_colors_cached, model_code, version)
-
-    elif category == "phiên_bản":
-        await _cached("list_available_models", "list_models", list_models_cached)
-        # Only get version-related specs, not ALL specs
-        r2 = await _safe_call("get_specs", get_specs, model_code, None, "powertrain")
-        results.append(r2)
-
-    elif category == "màu_sắc":
-        await _cached("get_colors", "colors", get_colors_cached, model_code, version)
-        r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
-        results.append(r_kb)
-
-    elif category == "option":
-        await _cached("get_options", "options", get_options_cached, model_code, version)
-        r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
-        results.append(r_kb)
-
-    else:
-        # Spec-based topics
-        spec_cat = _TOPIC_SPEC_CATEGORY.get(category)  # None = all categories; tuple = multiple
-        # Refine broad spec topics (thông_số_kỹ_thuật) by query keyword
-        if spec_cat is None:
-            spec_cat = _refine_spec_category(query)
-        # an_toàn spans safety + adas (camera 360, ADAS in adas; airbags, ABS in safety)
-        if isinstance(spec_cat, (list, tuple)):
-            for sc in spec_cat:
-                await _cached("get_specs", "specs", get_specs_cached, model_code, version, sc)
-        else:
-            await _cached("get_specs", "specs", get_specs_cached, model_code, version, spec_cat)
-
-        # Auto-inject KB for certain topics
-        if category in _NEEDS_KB:
-            r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query, model_code)
-            results.append(r_kb)
-
-        # Color queries under exterior
-        if category == "ngoại_thất" and re.search(r"(màu|color)", query, re.I):
-            await _cached("get_colors", "colors", get_colors_cached, model_code, version)
-
-    return results, cache_hits
+    results = await asyncio.gather(*tasks)
+    return list(results), cache_hits
 
 
 async def _call_cross_model_tools(query: str, model_codes: list[str] | None = None) -> list[dict]:
-    """Call tools for cross-model / comparison queries.
-
-    model_codes: explicit models from state (multi-turn comparison follow-up).
-    """
-    results = []
-
-    is_price = re.search(r"(giá|price|rẻ|đắt|triệu|tỷ)", query, re.I)
-    spec_cat = _refine_spec_category(query)
+    """Call tools for cross-model / comparison queries or fleet-wide questions."""
     mentioned = list(model_codes) if model_codes else _distinct_models(query)
 
     if mentioned:
-        # Fetch specs/price for the models explicitly mentioned (vf6 hay vf8)
+        # Fetch complete info for each mentioned model
         tasks = []
         for mc in mentioned:
-            if is_price:
-                # Price cache 15m theo docs — wrap get_price_cached (trả tuple)
-                async def _price_task(m=mc):
-                    data, _hit = await get_price_cached(m)
-                    return {"tool": "get_price", "result": data, "success": True}
-
-                tasks.append(_price_task())
-            else:
-                tasks.append(_safe_call("get_specs", get_specs, mc, None, spec_cat))
-        results.extend(await asyncio.gather(*tasks))
+            tasks.append(_safe_call("get_price", get_price, mc, None))
+            tasks.append(_safe_call("get_options", get_options, mc, None))
+            tasks.append(_safe_call("get_colors", get_colors, mc, None))
+            tasks.append(_safe_call("get_specs", get_specs, mc, None, None))
+        tasks.append(_safe_call("search_knowledge_base", search_knowledge_base, query))
+        return list(await asyncio.gather(*tasks))
     else:
-        # Generic cross-model: list all models + per-model specs/price
+        # Fleet-wide catalog
         r_models = await _safe_call("list_available_models", list_available_models)
-        results.append(r_models)
-        if r_models.get("success"):
-            models = r_models["result"].get("models", [])
-            tasks = []
-            for m in models:
-                mc = m.get("model_code", "")
-                if not mc:
-                    continue
-                if is_price:
-
-                    async def _price_task(m=mc):
-                        data, _hit = await get_price_cached(m)
-                        return {"tool": "get_price", "result": data, "success": True}
-
-                    tasks.append(_price_task())
-                else:
-                    tasks.append(_safe_call("get_specs", get_specs, mc))
-            results.extend(await asyncio.gather(*tasks))
-
-    # Comparison/recommendation benefit from knowledge base context
-    r_kb = await _safe_call("search_knowledge_base", search_knowledge_base, query)
-    results.append(r_kb)
-
-    return results
+        results = [r_models]
+        active_models = ["VF 3", "VF 5", "VF 6", "VF 7", "VF 8", "VF 9", "VF 8 All New", "VF MPV 7"]
+        tasks = []
+        for m in active_models:
+            tasks.append(_safe_call("get_price", get_price, m))
+            tasks.append(_safe_call("get_specs", get_specs, m, None, None))
+            tasks.append(_safe_call("get_options", get_options, m, None))
+        tasks.append(_safe_call("search_knowledge_base", search_knowledge_base, query))
+        res = await asyncio.gather(*tasks)
+        results.extend(res)
+        return results
 
 
 async def _call_utility_tools(query: str) -> list[dict]:
@@ -292,7 +142,7 @@ async def _call_utility_tools(query: str) -> list[dict]:
 
     _PATTERNS = [
         (
-            r"(showroom|trạm\s*sạc|đại\s*lý|cửa\s*hàng|chi\s*nhánh|hotline|liên\s*hệ|gặp\s*sales)",
+            r"(showroom|trạm\s*sạc|đại\s*lý|cửa\s*hàng|chi\s*nhánh|hotline|liên\s*hệ|gặp\s*sales|nhân\s*viên|tư\s*vấn\s*viên|tổng\s*đài|hỗ\s*trợ|chăm\s*sóc\s*khách\s*hàng|khiếu\s*nại|cứu\s*hộ|khẩn\s*cấp)",
             [("get_showroom_charging_link", get_showroom_charging_link)],
         ),
         (r"(lái\s*thử|test\s*drive|đăng\s*ký\s*lái)", [("get_booking_link", get_booking_link, "test_drive")]),
@@ -309,7 +159,7 @@ async def _call_utility_tools(query: str) -> list[dict]:
         ),
         (r"(khuyến\s*mãi|ưu\s*đãi|voucher)", [("get_active_promotions", get_active_promotions)]),
         (
-            r"(báo\s*lỗi|sửa\s*chữa|hỏng|trục\s*trặc|bảo\s*hành|tự\s*xử\s*lý)",
+            r"(báo\s*lỗi|sửa\s*chữa|hỏng|trục\s*trặc|bảo\s*hành|tự\s*xử\s*lý|mùi\s*khét|cháy\s*nổ|lỗi\s*pin|pin\s*đỏ)",
             [
                 ("get_maintenance_link", get_maintenance_link, "all"),
                 ("get_showroom_charging_link", get_showroom_charging_link),

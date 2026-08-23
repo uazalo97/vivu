@@ -2,181 +2,9 @@ import re
 
 _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 
-# Vietnamese category name -> English category key mapping
-_CATEGORY_VN_TO_EN = {
-    "nội thất": "interior",
-    "ngoại thất": "exterior",
-    "pin & sạc": "battery",
-    "pin và sạc": "battery",
-    "hệ thống truyền động": "powertrain",
-    "truyền động": "powertrain",
-    "kích thước & trọng lượng": "dimension",
-    "kích thước và trọng lượng": "dimension",
-    "an toàn": "safety",
-    "hỗ trợ lái nâng cao (adas)": "adas",
-    "hỗ trợ lái nâng cao": "adas",
-    "giải trí & kết nối": "infotainment",
-    "giải trí và kết nối": "infotainment",
-    "khung gầm & hệ thống treo": "chassis",
-    "khung gầm và hệ thống treo": "chassis",
-    "tiện nghi": "convenience",
-    "kết nối thông minh": "connected",
-    "an ninh": "security",
-}
-
-# Query keywords → relevant spec categories
-_QUERY_TOPIC_MAP = {
-    # battery
-    "sạc": ["battery"],
-    "pin": ["battery"],
-    "charge": ["battery"],
-    "kwh": ["battery"],
-    "range": ["battery"],
-    "phạm vi": ["battery"],
-    "đi được": ["battery"],
-    "quãng đường": ["battery"],
-    # powertrain
-    "công suất": ["powertrain"],
-    "power": ["powertrain"],
-    "torque": ["powertrain"],
-    "mô-men": ["powertrain"],
-    "xoắn": ["powertrain"],
-    "tốc độ": ["powertrain"],
-    "tăng tốc": ["powertrain"],
-    "acceleration": ["powertrain"],
-    "drivetrain": ["powertrain"],
-    "mô tơ": ["powertrain"],
-    "dẫn động": ["powertrain"],
-    # dimension
-    "kích thước": ["dimension"],
-    "chiều dài": ["dimension"],
-    "chiều rộng": ["dimension"],
-    "chiều cao": ["dimension"],
-    "trọng lượng": ["dimension"],
-    "wheelbase": ["dimension"],
-    "khoảng sáng gầm": ["dimension"],
-    "cốp": ["dimension"],
-    "trunk": ["dimension"],
-    # safety
-    "túi khí": ["safety"],
-    "airbag": ["safety"],
-    "phanh": ["safety"],
-    "abs": ["safety"],
-    "esc": ["safety"],
-    "an toàn": ["safety"],
-    "isofix": ["safety"],
-    "tpms": ["safety"],
-    "seatbelt": ["safety"],
-    "đai an toàn": ["safety"],
-    # adas
-    "adas": ["adas"],
-    "cruise": ["adas"],
-    "lane": ["adas"],
-    "collision": ["adas"],
-    "aeb": ["adas"],
-    "blind spot": ["adas"],
-    "parking": ["adas"],
-    "tự lái": ["adas"],
-    "hỗ trợ lái": ["adas"],
-    "ga tự động": ["adas"],
-    # interior
-    "nội thất": ["interior"],
-    "ghế": ["interior"],
-    "màn hình": ["interior"],
-    "loa": ["interior"],
-    "điều hòa": ["interior"],
-    "hud": ["interior"],
-    "display": ["interior"],
-    "vô lăng": ["interior"],
-    "âm thanh": ["interior"],
-    "sưởi": ["interior"],
-    "thông gió": ["interior"],
-    "massage": ["interior"],
-    "cửa sổ trời": ["interior"],
-    "sunroof": ["interior"],
-    "trần kính": ["interior"],
-    "kính trần": ["interior"],
-    "panoramic": ["interior"],
-    # exterior
-    "ngoại thất": ["exterior"],
-    "đèn": ["exterior"],
-    "mâm": ["exterior"],
-    "wheel": ["exterior"],
-    "la-zăng": ["exterior"],
-    "headlight": ["exterior"],
-    "màu xe": ["exterior"],
-    "gương": ["exterior"],
-    "lốp": ["exterior"],
-    # infotainment
-    "navigation": ["infotainment"],
-    "bản đồ": ["infotainment"],
-    "bluetooth": ["infotainment"],
-    "gaming": ["infotainment"],
-    "trò chơi": ["infotainment"],
-    "ota": ["infotainment"],
-    "cập nhật": ["infotainment"],
-    "trợ lý ảo": ["infotainment"],
-    "voice": ["infotainment"],
-    "giọng nói": ["infotainment"],
-    "karaoke": ["infotainment"],
-    "web": ["infotainment"],
-    "app": ["infotainment"],
-    "ứng dụng": ["infotainment"],
-    "kết nối": ["infotainment"],
-    # chassis
-    "phanh": ["chassis", "safety"],  # noqa: F601
-    "giảm xóc": ["chassis"],
-    "suspension": ["chassis"],
-    "lái": ["chassis"],
-    "handling": ["chassis"],
-    "vô lăng": ["chassis", "interior"],  # noqa: F601
-    # connected
-    "sạc từ xa": ["connected"],
-    "quản lý sạc": ["connected"],
-    "điều khiển từ xa": ["connected"],
-    "theo dõi": ["connected"],
-    "gps": ["connected"],
-    "esim": ["connected"],
-    # security
-    "chống trộm": ["security"],
-    "khóa": ["security"],
-    "immobilizer": ["security"],
-    "báo động": ["security"],
-    "alarm": ["security"],
-    # convenience
-    "phanh tay điện": ["convenience"],
-    "epb": ["convenience"],
-    "auto hold": ["convenience"],
-    # price
-    "giá": ["price"],
-    "price": ["price"],
-    # all categories
-    "phiên bản": [],
-    "version": [],  # All categories
-    "so sánh": [],
-    "compare": [],  # All categories
-    "tính năng": ["adas", "interior", "exterior", "safety", "infotainment", "connected", "security", "convenience"],
-    "trang bị": ["adas", "interior", "exterior", "safety", "infotainment", "connected", "security", "convenience"],
-}
-
-
-def _query_relevant_categories(query: str) -> set[str] | None:
-    """Extract relevant spec categories from query. None = all categories."""
-    if not query:
-        return None
-    q_lower = query.lower()
-    cats = set()
-    for keyword, categories in _QUERY_TOPIC_MAP.items():
-        if keyword in q_lower:
-            if not categories:  # Empty = all categories
-                return None
-            cats.update(categories)
-    return cats if cats else None
-
 
 def build_structured_context(tool_results: list[dict], query: str = "") -> str:
     sections = []
-    relevant_cats = _query_relevant_categories(query)
 
     for tr in tool_results:
         if not tr.get("success", True):
@@ -188,7 +16,7 @@ def build_structured_context(tool_results: list[dict], query: str = "") -> str:
         if tool == "get_price":
             sections.append(_format_prices(result))
         elif tool == "get_specs":
-            sections.append(_format_specs(result, relevant_cats))
+            sections.append(_format_specs(result))
         elif tool == "search_knowledge_base":
             sections.append(_format_search_results(result))
         elif tool == "get_colors":
@@ -340,20 +168,12 @@ def _format_options(result: dict) -> str:
     return "\n".join(lines)
 
 
-def _is_cat_relevant(spec_cat: str, relevant_cats: set[str] | None) -> bool:
-    if relevant_cats is None:
-        return True
-    cat_lower = spec_cat.lower().strip()
-    en_cat = _CATEGORY_VN_TO_EN.get(cat_lower, cat_lower)
-    return en_cat in relevant_cats or cat_lower in relevant_cats
-
-
-def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
+def _format_specs(result: dict) -> str:
     """Format specs, deduplicating identical values across versions to cut tokens."""
     source_url = result.get("source_url", "")
     lines = [f"Thông số kỹ thuật {result['model_code']}:"]
 
-    specs = [s for s in result.get("specs", []) if _is_cat_relevant(s.get("category", ""), relevant_cats)]
+    specs = result.get("specs", [])
 
     # Group by (category, key) while preserving order
     grouped: dict[tuple, list] = {}

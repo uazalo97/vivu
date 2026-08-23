@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-08-23T02:51:51.728166+00:00",
+  "total": 75,
+  "statuses": {
+    "AUTO_FAIL": 27,
+    "AUTO_PASS": 17,
+    "REVIEW": 25,
+    "MANUAL_REQUIRED": 6
+  },
+  "release_blocker_candidates": [
+    "F01-V1",
+    "F01-V2",
+    "F01-V3",
+    "F02-V1",
+    "F02-V2",
+    "F02-V3",
+    "F04-V2",
+    "F04-V3",
+    "F06-V1",
+    "F06-V2",
+    "F08-V1",
+    "F08-V3",
+    "F09-V3",
+    "F10-V1",
+    "F10-V2",
+    "F10-V3",
+    "C11-V2",
+    "C12-V1",
+    "C12-V3",
+    "G21-V1",
+    "G22-V1",
+    "G24-V1"
+  ]
+}

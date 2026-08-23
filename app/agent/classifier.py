@@ -69,19 +69,26 @@ class QueryClassifier:
             entities["model_code"] = normalized
 
         # Version detection: match known versions + multi-word patterns
-        version_match = re.search(
-            r"(Eco|Plus|PlusCaptain|Plus\s*AWD|"
-            r"Ti[êe]u\s*[Cc]hu[ẩẩ]?n|TieuChuan|"
-            r"N[ââ]ng\s*[Cc]ao|NangCao|"
-            r"Cao\s*[Cc][ấấ]?p|CaoCap|"
-            r"The\s*All\s*New|All\s*New)",
+        multi_version = re.search(
+            r"(eco\s*(?:và|với|hay|hoặc|and|so\s*với)\s*plus|plus\s*(?:và|với|hay|hoặc|and|so\s*với)\s*eco|"
+            r"từng\s*bản|các\s*bản|mấy\s*bản|tất\s*cả|mọi\s*bản|những\s*bản|danh\s*sách|so\s*sánh)",
             query,
             re.IGNORECASE,
         )
-        if version_match:
-            nv = _normalize_version(version_match.group(1))
-            if nv:
-                entities["version"] = nv
+        if not multi_version:
+            version_match = re.search(
+                r"(Plus\s*AWD\s*Panoramic\s*Roof|Plus\s*AWD|PlusCaptain|The\s*All\s*New|All\s*New|"
+                r"Ti[êe]u\s*[Cc]hu[ẩẩ]?n|TieuChuan|"
+                r"N[ââ]ng\s*[Cc]ao|NangCao|"
+                r"Cao\s*[Cc][ấấ]?p|CaoCap|"
+                r"Eco|Plus)",
+                query,
+                re.IGNORECASE,
+            )
+            if version_match:
+                nv = _normalize_version(version_match.group(1))
+                if nv:
+                    entities["version"] = nv
 
         has_model = "model_code" in entities
         specificity = "clear" if has_model else "unclear"
