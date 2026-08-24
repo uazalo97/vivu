@@ -151,6 +151,7 @@ def _query_relevant_categories(query: str) -> set[str] | None:
 def build_structured_context(tool_results: list[dict], query: str = "") -> str:
     sections = []
     relevant_cats = _query_relevant_categories(query)
+    price_results = []
 
     for tr in tool_results:
         if not tr.get("success", True):
@@ -161,6 +162,7 @@ def build_structured_context(tool_results: list[dict], query: str = "") -> str:
 
         if tool == "get_price":
             sections.append(_format_prices(result))
+            price_results.append(result)
         elif tool == "get_specs":
             sections.append(_format_specs(result, relevant_cats))
         elif tool == "search_knowledge_base":
@@ -184,6 +186,10 @@ def build_structured_context(tool_results: list[dict], query: str = "") -> str:
         elif tool == "get_maintenance_link":
             sections.append(_format_maintenance(result))
 
+    # Deterministic price summary for cheapest/most-expensive queries
+    if price_results and re.search(r"(rẻ|đắt|thấp|cao)\s*nhất", query, re.I):
+        sections.append(_build_price_summary(price_results, query))
+
     return "\n\n".join(sections)
 
 
@@ -206,6 +212,46 @@ def _format_prices(result: dict) -> str:
     if note:
         lines.append(f"\n  Lưu ý: {note}")
     return "\n".join(lines)
+
+
+def _build_price_summary(price_results: list[dict], query: str) -> str:
+    """Deterministic cheapest/most-expensive summary — prevents LLM hallucination on min/max."""
+    all_prices = []
+    for pr in price_results:
+        mc = pr.get("model_code", "")
+        for p in pr.get("prices", []):
+            price = p.get("price_vnd")
+            if price:
+                all_prices.append({
+                    "model_code": mc,
+                    "version": p.get("version_name", ""),
+                    "price": price,
+                })
+    # Also collect related_models prices
+    for pr in price_results:
+        for rm in pr.get("related_models", []):
+            price = rm.get("price_vnd")
+            if price:
+                all_prices.append({
+                    "model_code": rm.get("model_code", ""),
+                    "version": rm.get("version_name", ""),
+                    "price": price,
+                })
+
+    if not all_prices:
+        return ""
+
+    is_cheapest = bool(re.search(r"(rẻ|thấp)\s*nhất", query, re.I))
+    sorted_prices = sorted(all_prices, key=lambda x: x["price"], reverse=not is_cheapest)
+    top = sorted_prices[0]
+
+    label = "rẻ nhất" if is_cheapest else "đắt nhất"
+    price_str = f"{top['price']:,} VNĐ"
+    return (
+        f"\n  [TỔNG HỢP GIÁ — DỮ LIỆU TỰ ĐỘNG]\n"
+        f"  Xe VinFast {label} hiện nay: {top['model_code']} ({top['version']}): {price_str}\n"
+        f"  (Đây là kết quả so sánh deterministic từ database, KHÔNG cần LLM suy luận)"
+    )
 
 
 _SPEC_KEY_LABELS = {
