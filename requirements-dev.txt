@@ -1,0 +1,36 @@
+# Dev / Pipeline / Eval — cài NẾU cần chạy crawler, ingest, eval, tracing.
+# Bao trùm requirements.txt (runtime). Cài: pip install -r requirements-dev.txt
+# API deploy production KHÔNG cần file này.
+
+-r requirements.txt
+
+# ── Crawl + data pipeline (scripts/) ─────────────────────────────────────────
+crawl4ai>=0.9.2
+beautifulsoup4>=4.12
+pypdf>=5.0              # Crawl4AI PDF content strategy
+pymupdf>=1.24           # rút text PDF (fitz)
+# pdfplumber>=0.11      # fallback PDF (tuỳ chọn)
+jinja2>=3.1             # clean brochure mục 02
+pyyaml>=6.0
+
+# ── Ingest vector (scripts/ingest) ───────────────────────────────────────────
+qdrant-client>=1.10
+
+# ── Eval (scripts/ragas_eval.py) ─────────────────────────────────────────────
+ragas>=0.1
+datasets>=2.14
+pandas>=2.0
+
+# ── Tracing (optional — PHOENIX_ENABLED=true) ────────────────────────────────
+arize-phoenix>=4.0
+openinference-instrumentation-openai>=0.1
+opentelemetry-api>=1.20
+opentelemetry-sdk>=1.20
+
+# ── Rerank fallback khi không có COHERE_API_KEY (app/core/retrieval.py) ─────
+sentence-transformers>=2.7
+
+# ── Test + lint ──────────────────────────────────────────────────────────────
+pytest>=8.0
+pytest-asyncio>=0.23
+ruff>=0.4

@@ -427,9 +427,14 @@ def get_reranker():
         if settings.cohere_api_key:
             _reranker = CohereReranker(settings.cohere_api_key)
         else:
-            from sentence_transformers import CrossEncoder
+            # sentence-transformers là dependency DEV (requirements-dev.txt) —
+            # image runtime không có. Thiếu → degrade về no-rerank, không crash.
+            try:
+                from sentence_transformers import CrossEncoder
 
-            _reranker = CrossEncoder(settings.rerank_model)
+                _reranker = CrossEncoder(settings.rerank_model)
+            except ImportError:
+                logger.warning("sentence-transformers chưa cài (requirements-dev.txt) — bỏ qua rerank local")
     return _reranker
 
 
