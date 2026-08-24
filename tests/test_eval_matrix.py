@@ -323,7 +323,7 @@ async def test_data_correctness():
     from app.agent.tools import get_specs
 
     # VF 6: sau khi lọc sentinel 'Không', KHÔNG còn 'Không' và không có seats giả
-    r = await get_specs("VF 6", category="interior", keys=["seats", "driver_seat_type", "leatherette_seats"])
+    r = await get_specs("VF 6", category="interior")
     khong = [x for x in r["specs"] if x["value"] == "Không"]
     fake_seats = [x for x in r["specs"] if x["key"] == "seats"]
     report(
@@ -334,17 +334,17 @@ async def test_data_correctness():
     )
 
     # VF 8: có seat thật cho cả 2 bản
-    r = await get_specs("VF 8", category="interior", keys=["seats"])
+    r = await get_specs("VF 8", category="interior")
     seats = {x["version_name"]: x["value"] for x in r["specs"] if x["key"] == "seats"}
     report("DATA-VF8", seats.get("Eco") == "5" and seats.get("Plus") == "5", "specs", f"VF 8 seats={seats}")
 
     # VF 9: Eco 7, Plus 7 hoặc 6
-    r = await get_specs("VF 9", category="interior", keys=["seats"])
+    r = await get_specs("VF 9", category="interior")
     seats9 = {x["version_name"]: x["value"] for x in r["specs"] if x["key"] == "seats"}
     report("DATA-VF9", seats9.get("Eco") == "7", "specs", f"VF 9 seats={seats9}")
 
     # VF MPV 7: 7 chỗ (fix viết hoa MPV)
-    r = await get_specs("VF MPV 7", category="interior", keys=["seats"])
+    r = await get_specs("VF MPV 7", category="interior")
     seats7 = [x["value"] for x in r["specs"] if x["key"] == "seats"]
     report("DATA-VFMPV7", seats7 == ["7"], "specs", f"VF MPV 7 seats={seats7}")
 
