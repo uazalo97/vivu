@@ -426,9 +426,9 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
             # Exact key match
             if query_lower in key_lower or key_lower in query_lower:
                 return 0
-            # Label contains query
+            # Label contains query (skip empty labels)
             label = _SPEC_KEY_LABELS.get(key, "").lower()
-            if query_lower in label or label in query_lower:
+            if label and (query_lower in label or label in query_lower):
                 return 0
             return 1
         grouped = dict(sorted(grouped.items(), key=_relevance))
