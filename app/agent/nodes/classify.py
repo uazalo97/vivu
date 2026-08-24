@@ -165,8 +165,9 @@ _TOPIC_KEYWORDS = {
         r"giá\s*bao\s*nhiêu",
         r"giá\s*bán",
         r"giá\s*niêm\s*yết",
-        r"\bgiá\b",
-        r"bao\s*nhiêu\s*tiền",
+        # \bgi[áa]\b: khớp cả "giá" lẫn không dấu "gia" ("gia vf8 plus bao nhieu")
+        r"\bgi[áa]\b",
+        r"bao\s*nhi[êe]u\s*ti[ềe]n",
         r"chi\s*phí",
         r"ưu\s*đãi",
         r"giá\s*(xe|VF)",
@@ -188,11 +189,11 @@ _TOPIC_KEYWORDS = {
         r"gi[áa]\s+bn\b",
         r"\bbn\s+gi[áa]\b",
         # Upgrade-fee / option-fee: "phải thêm bao nhiêu", "thêm bao nhiêu", "Plus bao nhiêu"
-        r"phải\s*thêm",
-        r"thêm\s*bao\s*nhiêu",
-        r"cộng\s*thêm",
-        r"mất\s*bao\s*nhiêu",
-        r"(Plus|Eco|bản)\s+bao\s*nhiêu\b",
+        r"ph[ảa]i\s*th[êe]m",
+        r"th[êe]m\s*bao\s*nh[iî]eu",
+        r"c[ộo]ng\s*th[êe]m",
+        r"m[ấa]t\s*bao\s*nh[iî]eu",
+        r"(Plus|Eco|bản|ban)\s+bao\s*nh[iî]eu\b",
     ],
     "pin_và_sạc": [
         r"sạc\s*nhanh",
