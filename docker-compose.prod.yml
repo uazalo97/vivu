@@ -19,6 +19,10 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    volumes:
+      # config.py đọc dotenv_values(".env") từ CWD /app — mount file thay vì
+      # COPY vào image (secrets không bake vào layer)
+      - ./.env:/app/.env:ro
     environment:
       - PORT=8000
       - PYTHONUTF8=1

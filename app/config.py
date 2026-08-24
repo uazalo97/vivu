@@ -1,6 +1,11 @@
+import os
+
 from dotenv import dotenv_values
 
-_env = dotenv_values(".env")
+# Merge .env file (nếu có) + os.environ — env thật (compose env_file, PaaS dashboard)
+# ưu tiên hơn file. Container/PaaS không có file .env vẫn đọc được biến môi trường.
+_file_env = {k: v for k, v in (dotenv_values(".env") or {}).items() if v is not None}
+_env = {**_file_env, **os.environ}
 
 
 class Settings:
