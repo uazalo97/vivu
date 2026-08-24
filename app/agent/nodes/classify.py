@@ -877,11 +877,17 @@ async def classify_node(state: AgentState) -> dict:
             }
 
     # Answer
+    # When user mentions a model but no specific topic (e.g. "vf2", "VF 8"),
+    # treat as "tổng_quan" so call_tools fetches price + specs + colors together.
+    effective_topic = topic
+    if topic == "general" and has_model:
+        effective_topic = "tổng_quan"
+
     return {
         "decision": "answer",
         "reason_code": "sufficient_direct_evidence",
         "entities": cr.entities,
         "specificity": cr.specificity,
-        "category": topic,
-        "allowed_tools": _TOPIC_TOOLS.get(topic),
+        "category": effective_topic,
+        "allowed_tools": _TOPIC_TOOLS.get(effective_topic),
     }
