@@ -9,6 +9,7 @@ Lưu ý: follow-up sau tool call của Gemini trên DeepInfra luôn lỗi 400
 (thiếu thought_signature) → fallback Haiku xử lý tiếp được loop đó.
 """
 
+import asyncio
 import logging
 
 from openai import AsyncOpenAI
@@ -44,6 +45,8 @@ OUTPUT_MAX_TOKENS: int = getattr(settings, "llm_max_output_tokens", 1024)
 TOOL_CALL_MAX_TOKENS: int = getattr(settings, "llm_tool_call_max_tokens", 512)
 USER_INPUT_MAX_TOKENS: int = getattr(settings, "llm_user_input_max_tokens", 4000)
 INPUT_MAX_TOKENS: int = getattr(settings, "llm_input_max_tokens", 8000)
+# Timeout (giây) cho toàn bộ 1 LLM streaming call — tránh hang vô hạn khi provider stuck
+LLM_STREAM_TIMEOUT_S: int = getattr(settings, "llm_stream_timeout_s", 30)
 
 
 def estimate_tokens(text: str) -> int:
@@ -150,13 +153,18 @@ def _models_chain() -> list[str]:
 
 
 async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tuple[str, dict]:
-    """Stream 1 call, accumulate content + tool-call deltas. Trả (content, acc)."""
+    """Stream 1 call, accumulate content + tool-call deltas. Trả (content, acc).
+
+    Có timeout LLM_STREAM_TIMEOUT_S giây để tránh hang vô hạn khi provider stuck.
+    """
     content_parts: list[str] = []
     tool_calls_acc: dict[int, dict] = {}
     got_chunk = False
     word_buffer = ""
     sanitized_kwargs = sanitize_chat_params(model, kwargs)
-    try:
+
+    async def _do_stream():
+        nonlocal got_chunk, word_buffer
         stream = await llm.chat.completions.create(model=model, messages=messages, stream=True, **sanitized_kwargs)
         async for chunk in stream:
             if not chunk.choices:
@@ -197,6 +205,15 @@ async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tup
         if writer and word_buffer:
             writer({"type": "token", "content": word_buffer})
             word_buffer = ""
+
+    try:
+        await asyncio.wait_for(_do_stream(), timeout=LLM_STREAM_TIMEOUT_S)
+    except asyncio.TimeoutError:
+        logger.error("LLM %s timeout after %ss (got_chunk=%s)", model, LLM_STREAM_TIMEOUT_S, got_chunk)
+        if got_chunk:
+            # Đã stream một phần → không fallback, tránh duplicate token
+            raise PartialStreamError(f"Stream timeout after {LLM_STREAM_TIMEOUT_S}s (partial response)")
+        raise TimeoutError(f"LLM {model} did not respond within {LLM_STREAM_TIMEOUT_S}s")
     except Exception as e:
         if got_chunk:
             raise PartialStreamError(str(e)) from e

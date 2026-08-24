@@ -6,7 +6,7 @@ from app.agent.nodes.call_tools import call_tools_node
 from app.agent.nodes.generate import generate_node
 from app.agent.nodes.validate import validate_node
 from app.agent.nodes.respond import respond_node
-from app.agent.edges import route_after_classify, route_after_validate
+from app.agent.edges import route_after_classify
 
 
 def build_graph() -> StateGraph:
@@ -37,14 +37,8 @@ def build_graph() -> StateGraph:
     # generate → validate
     g.add_edge("generate", "validate")
 
-    # validate → respond
-    g.add_conditional_edges(
-        "validate",
-        route_after_validate,
-        {
-            "respond": "respond",
-        },
-    )
+    # validate → respond (always — conditional edge was redundant, route_after_validate always returned "respond")
+    g.add_edge("validate", "respond")
 
     g.add_edge("respond", END)
 

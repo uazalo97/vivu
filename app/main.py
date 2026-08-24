@@ -4,6 +4,7 @@ from app.tracing import setup_tracing
 
 from pathlib import Path
 
+import asyncpg
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
@@ -13,6 +14,7 @@ from app.api.admin_prompts import router as admin_prompts_router
 from app.api.chat import router as chat_router
 from app.api.health import router as health_router
 from app.api.metrics import router as metrics_router
+from app.config import settings
 
 # Configure logging so bds.* loggers appear in terminal
 logging.basicConfig(
@@ -23,6 +25,35 @@ logging.basicConfig(
 logging.getLogger("bds").setLevel(logging.INFO)
 
 app = FastAPI(title="Vivu Chatbot & Telemetry API")
+
+
+@app.on_event("startup")
+async def _startup_pg_pool():
+    """Tạo asyncpg connection pool cho prompts module — tránh tạo raw connection mỗi request."""
+    import app.agent.prompts as _prompts_module
+
+    try:
+        pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
+        _prompts_module._pg_pool = await asyncpg.create_pool(
+            pg_url,
+            min_size=1,
+            max_size=5,
+            command_timeout=10,
+        )
+        logging.getLogger("bds").info("PG pool created (min=1, max=5)")
+    except Exception as e:
+        logging.getLogger("bds").warning("PG pool creation failed (will use direct connect fallback): %s", e)
+
+
+@app.on_event("shutdown")
+async def _shutdown_pg_pool():
+    """Đóng PG pool khi shutdown để không leak connections."""
+    import app.agent.prompts as _prompts_module
+
+    if _prompts_module._pg_pool is not None:
+        await _prompts_module._pg_pool.close()
+        logging.getLogger("bds").info("PG pool closed")
+
 
 # Allow cross-origin calls from any frontend
 app.add_middleware(

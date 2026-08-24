@@ -279,7 +279,6 @@ def _check_grounding(response: str, tool_results: list[dict], query: str = "") -
 
 
 async def validate_node(state: AgentState) -> dict:
-    final_response = state.get("final_response", "")  # noqa: F841
     tool_results = state.get("tool_results", [])
     decision = state.get("decision", "answer")
 

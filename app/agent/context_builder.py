@@ -2,9 +2,96 @@ import re
 
 _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 
+# ── Bảng mapping từ khóa người dùng → nhóm spec_key tương ứng ───────────────
+_FEATURE_KEYWORD_MAP: list[tuple[set[str], tuple[str, ...]]] = [
+    (
+        {"head_up_display", "display_inch"},
+        (r"\bhud\b", r"màn\s*hình\s*hud", r"hiển\s*thị\s*kính\s*lái", r"hắt\s*kính", r"kính\s*lái"),
+    ),
+    ({"sunroof_type"}, (r"cửa\s*sổ\s*trời", r"kính\s*trần", r"\bsunroof\b", r"\bpanoramic\b", r"trần\s*kính")),
+    (
+        {"range_km", "battery_kwh", "fast_charge_min"},
+        (
+            r"quãng\s*đường",
+            r"đi\s*được\s*bao\s*xa",
+            r"chạy\s*được\s*bao\s*xa",
+            r"phạm\s*vi",
+            r"tầm\s*di\s*chuyển",
+            r"\brange\b",
+            r"pin",
+            r"\bkwh\b",
+            r"sạc\s*nhanh",
+            r"thời\s*gian\s*sạc",
+        ),
+    ),
+    ({"wheel_size_inch"}, (r"mâm", r"la[\s-]*zăng", r"lazang", r"vành", r"kích\s*thước\s*lốp", r"bánh\s*xe")),
+    (
+        {"seats", "leatherette_seats"},
+        (r"số\s*chỗ", r"chỗ\s*ngồi", r"mấy\s*chỗ", r"bao\s*nhiêu\s*chỗ", r"ghế\s*da", r"ghế"),
+    ),
+    (
+        {
+            "length_mm",
+            "width_mm",
+            "height_mm",
+            "wheelbase_mm",
+            "ground_clearance_mm",
+            "curb_weight_kg",
+            "trunk_capacity",
+        },
+        (
+            r"kích\s*thước",
+            r"chiều\s*dài",
+            r"chiều\s*rộng",
+            r"chiều\s*cao",
+            r"khoảng\s*sáng\s*gầm",
+            r"trục\s*cơ\s*sở",
+            r"trọng\s*lượng",
+            r"cốp",
+        ),
+    ),
+    (
+        {"power_kw", "torque_nm", "acceleration_0_100_s", "top_speed_kmh", "drivetrain"},
+        (
+            r"công\s*suất",
+            r"mã\s*lực",
+            r"mô[\s-]*men",
+            r"tăng\s*tốc",
+            r"tốc\s*độ",
+            r"dẫn\s*động",
+            r"động\s*cơ",
+            r"\bmotor\b",
+            r"\bawd\b",
+        ),
+    ),
+    (
+        {"airbags", "surround_view_camera", "tpms", "rollover_mitigation"},
+        (r"an\s*toàn", r"túi\s*khí", r"camera\s*360", r"phanh"),
+    ),
+]
+
+
+def _extract_query_feature_keys(query: str) -> set[str] | None:
+    """Trích xuất danh sách spec_key mà câu hỏi người dùng đang quan tâm."""
+    if not query:
+        return None
+    q = query.lower()
+    matched_keys: set[str] = set()
+    for keys, patterns in _FEATURE_KEYWORD_MAP:
+        for p in patterns:
+            if re.search(p, q):
+                matched_keys.update(keys)
+                break
+    return matched_keys or None
+
 
 def build_structured_context(tool_results: list[dict], query: str = "") -> str:
     sections = []
+
+    # Kiểm tra xem đây có phải truy vấn đa model (fleet-wide / comparison) không
+    model_count = sum(1 for tr in tool_results if tr.get("tool") == "get_specs")
+    is_fleet = model_count >= 2
+    target_keys = _extract_query_feature_keys(query) if is_fleet else None
 
     for tr in tool_results:
         if not tr.get("success", True):
@@ -14,17 +101,24 @@ def build_structured_context(tool_results: list[dict], query: str = "") -> str:
         result = tr["result"]
 
         if tool == "get_price":
-            sections.append(_format_prices(result))
+            if is_fleet and target_keys:
+                continue
+            sections.append(_format_prices(result, is_fleet_query=is_fleet))
         elif tool == "get_specs":
-            sections.append(_format_specs(result))
+            sections.append(_format_specs(result, target_keys=target_keys, is_fleet_query=is_fleet))
         elif tool == "search_knowledge_base":
             sections.append(_format_search_results(result))
         elif tool == "get_colors":
+            if is_fleet and target_keys:
+                continue
             sections.append(_format_colors(result))
         elif tool == "get_options":
-            sections.append(_format_options(result))
+            opt_str = _format_options(result, target_keys=target_keys)
+            if opt_str:
+                sections.append(opt_str)
         elif tool == "list_available_models":
-            sections.append(_format_models(result))
+            if not is_fleet or not target_keys:
+                sections.append(_format_models(result))
         elif tool == "get_active_promotions":
             sections.append(_format_promotions(result))
         elif tool == "get_onroad_cost_link":
@@ -38,10 +132,10 @@ def build_structured_context(tool_results: list[dict], query: str = "") -> str:
         elif tool == "get_maintenance_link":
             sections.append(_format_maintenance(result))
 
-    return "\n\n".join(sections)
+    return "\n\n".join(s for s in sections if s and s.strip())
 
 
-def _format_prices(result: dict) -> str:
+def _format_prices(result: dict, is_fleet_query: bool = False) -> str:
     source_url = result.get("source_url", "")
     lines = [f"Giá xe {result['model_code']}:"]
     for p in result.get("prices", []):
@@ -49,15 +143,15 @@ def _format_prices(result: dict) -> str:
         price = f"{p['price_vnd']:,} VNĐ" if p.get("price_vnd") else "N/A"
         lines.append(f"  - {p['version_name']}: Giá niêm yết {price} | Giá ưu đãi {promo}")
     if source_url:
-        lines.append(f"\n  Nguồn: {source_url}")
+        lines.append(f"  Nguồn: {source_url}")
     related = result.get("related_models", [])
-    if related:
+    if related and not is_fleet_query:
         lines.append("\n  Model liên quan:")
         for rm in related:
             rm_price = f"{rm['price_vnd']:,} VNĐ" if rm.get("price_vnd") else "N/A"
             lines.append(f"    - {rm['model_code']} ({rm.get('version_name', '')}): từ {rm_price}")
     note = result.get("note", "")
-    if note:
+    if note and not is_fleet_query:
         lines.append(f"\n  Lưu ý: {note}")
     return "\n".join(lines)
 
@@ -148,10 +242,39 @@ _OPTION_GROUP_LABELS = {
 }
 
 
-def _format_options(result: dict) -> str:
+def _format_options(result: dict, target_keys: set[str] | None = None) -> str:
+    options = result.get("options", [])
+    if target_keys:
+        if "head_up_display" in target_keys:
+            options = [
+                o
+                for o in options
+                if "hud" in o.get("group", "").lower()
+                or "hud" in o.get("option_name", "").lower()
+                or "hud" in o.get("value_name", "").lower()
+            ]
+        elif "sunroof_type" in target_keys:
+            options = [
+                o
+                for o in options
+                if "roof" in o.get("group", "").lower()
+                or "trần" in o.get("value_name", "").lower()
+                or "kính" in o.get("value_name", "").lower()
+            ]
+        elif "wheel_size_inch" in target_keys:
+            options = [
+                o
+                for o in options
+                if "wheel" in o.get("group", "").lower()
+                or "mâm" in o.get("value_name", "").lower()
+                or "lazang" in o.get("value_name", "").lower()
+            ]
+        if not options:
+            return ""
+
     lines = [f"Tùy chọn (option) {result.get('model_code', '')}:"]
     cur_group = None
-    for o in result.get("options", []):
+    for o in options:
         g = o.get("group", "")
         if g != cur_group:
             cur_group = g
@@ -168,12 +291,40 @@ def _format_options(result: dict) -> str:
     return "\n".join(lines)
 
 
-def _format_specs(result: dict) -> str:
-    """Format specs, deduplicating identical values across versions to cut tokens."""
+_SUMMARY_FLEET_KEYS = {
+    "range_km",
+    "battery_kwh",
+    "power_kw",
+    "torque_nm",
+    "seats",
+    "top_speed_kmh",
+    "head_up_display",
+    "sunroof_type",
+}
+
+
+def _format_specs(result: dict, target_keys: set[str] | None = None, is_fleet_query: bool = False) -> str:
+    """Format specs, deduplicating identical values across versions to cut tokens.
+
+    Tối ưu hóa token:
+    - Nếu có target_keys: chỉ trích xuất đúng các spec_key người dùng hỏi.
+    - Nếu là fleet_query chung: chỉ giữ các thông số cốt lõi để tránh tràn context.
+    """
     source_url = result.get("source_url", "")
     lines = [f"Thông số kỹ thuật {result['model_code']}:"]
 
     specs = result.get("specs", [])
+
+    # Lọc specs theo target_keys hoặc fleet summary nếu là fleet query
+    if target_keys:
+        specs = [s for s in specs if s.get("key") in target_keys]
+        if not specs:
+            lines.append("  - Không có thông tin trang bị này trong dữ liệu.")
+            if source_url:
+                lines.append(f"  Nguồn: {source_url}")
+            return "\n".join(lines)
+    elif is_fleet_query:
+        specs = [s for s in specs if s.get("key") in _SUMMARY_FLEET_KEYS]
 
     # Group by (category, key) while preserving order
     grouped: dict[tuple, list] = {}
@@ -182,7 +333,7 @@ def _format_specs(result: dict) -> str:
 
     current_cat = None
     count = 0
-    MAX_SPEC_KEYS = 30  # cap total spec lines to keep context small (TPM budget)
+    MAX_SPEC_KEYS = 10 if is_fleet_query else 30  # cap total spec lines
     for (cat, key), rows in grouped.items():
         if count >= MAX_SPEC_KEYS:
             lines.append("\n  ... (còn nhiều thông số khác)")
@@ -222,17 +373,25 @@ def _format_specs(result: dict) -> str:
     if source_url:
         lines.append(f"\n  Nguồn tài liệu chính thức (Brochure PDF): {source_url}")
     note = result.get("note", "")
-    if note:
+    if note and not is_fleet_query:
         lines.append(f"\n  Lưu ý: {note}")
     return "\n".join(lines)
 
 
 def _format_search_results(result: dict) -> str:
+    results = result.get("results", [])
+    if not results:
+        return ""
+    # Chỉ lấy các kết quả có score tốt (>= 0.15) hoặc tối đa 2 kết quả đầu để tránh context pollution
+    relevant = [r for r in results if r.get("score", 0) >= 0.15]
+    if not relevant:
+        relevant = results[:2]
+
     lines = [f'Kết quả tìm kiếm cho: "{result["query"]}":']
-    for i, r in enumerate(result.get("results", []), 1):
+    for i, r in enumerate(relevant, 1):
         src = r.get("source_url", "")
-        lines.append(f"\n  [{i}] ({r['source_type']}, score={r['score']})")
-        lines.append(f"      {r['text']}")
+        lines.append(f"\n  [{i}] ({r.get('source_type', '')}, score={r.get('score', 0):.3f})")
+        lines.append(f"      {r.get('text', '')}")
         if src and "dat-coc" not in src.lower():
             lines.append(f"      Nguồn tham khảo: {src}")
     return "\n".join(lines)

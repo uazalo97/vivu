@@ -7,7 +7,3 @@ def route_after_classify(state: AgentState) -> str:
     if decision in ("out_of_scope", "clarify", "refuse", "greeting"):
         return "respond"
     return "call_tools"
-
-
-def route_after_validate(state: AgentState) -> str:
-    return "respond"

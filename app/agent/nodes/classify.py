@@ -3,6 +3,7 @@ import re
 
 from app.agent.classifier import get_classifier, MODEL_RE
 from app.agent.graph_state import AgentState
+from app.agent.utility_patterns import UTILITY_QUERY_RE as _UTILITY_QUERY_RE
 
 logger = logging.getLogger("bds.graph.classify")
 
@@ -19,19 +20,6 @@ _GREETING_RESPONSE = (
     "Tôi có thể giúp bạn tra cứu thông số, giá, màu sắc, tùy chọn "
     "của các dòng xe VinFast (VF 2, VF 3, VF 5, VF 6, VF 7, VF 8, VF 9, VF MPV 7). "
     "Bạn muốn tìm hiểu về xe nào?"
-)
-
-# Utility queries — don't require model, calls utility tools directly
-_UTILITY_QUERY_RE = re.compile(
-    r"(showroom|trạm\s*sạc|đại\s*lý|cửa\s*hàng|chi\s*nhánh|"
-    r"lái\s*thử|test\s*drive|đăng\s*ký\s*lái|"
-    r"bảo\s*dưỡng|đặt\s*lịch|booking|"
-    r"trả\s*góp|vay|thẩm\s*định|lăn\s*bánh|"
-    r"khuyến\s*mãi|ưu\s*đãi|voucher|"
-    r"hotline|liên\s*hệ|gặp\s*sales|nhân\s*viên|tư\s*vấn\s*viên|tổng\s*đài|hỗ\s*trợ|chăm\s*sóc\s*khách\s*hàng|khiếu\s*nại|"
-    r"báo\s*lỗi|sửa\s*chữa|hỏng|trục\s*trặc|mùi\s*khét|cháy\s*nổ|lỗi\s*pin|pin\s*đỏ|cứu\s*hộ|"
-    r"bảo\s*hành|tự\s*xử\s*lý)",
-    re.IGNORECASE,
 )
 
 # Car/VinFast-related keywords — queries matching these are in-scope

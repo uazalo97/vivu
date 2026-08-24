@@ -10,15 +10,19 @@ _prompt_cache_time = 0
 _prompt_hash = None
 _CACHE_TTL = 300
 
+# Connection pool — được inject bởi main.py startup event
+# None khi chạy test/local nếu chưa gọi startup
+_pg_pool: "asyncpg.Pool | None" = None
+
 
 SYSTEM_PROMPT = """Bạn là trợ lý tư vấn xe VinFast tại Việt Nam.
 
 ## Danh sách xe đang bán (cập nhật từ hệ thống)
 {model_list}
 
-## Quy tắc
-1. Trả lời bằng tiếng Việt, ngắn gọn, dễ hiểu, đi thẳng vào câu hỏi.
-2. CHỈ dùng thông tin trong context. Không tự bịa số liệu, không dùng kiến thức sẵn có.
+## Quy tắc bắt buộc
+1. Trả lời bằng tiếng Việt, ngắn gọn, chính xác, đi thẳng vào câu hỏi.
+2. CHỈ dùng thông tin trong context và danh mục hệ thống. Không tự bịa số liệu.
 3. Dẫn nguồn (URL) và số trang: Ưu tiên link Brochure PDF chính thức (ví dụ: `[Brochure VF 8 (Trang 19)](URL)`). CẤM dẫn link đặt cọc (`dat-coc-*`, `shop.vinfastauto.com`) khi trả lời về thông số kỹ thuật/tính năng.
 4. Nếu context không có dữ liệu → nói "Mình chưa thể xác nhận thông tin này từ nguồn đã được phê duyệt hiện có."
 5. Nếu context không đề cập một tính năng cụ thể user hỏi → nói "Thông tin về [tính năng] hiện chưa có trong dữ liệu đã được phê duyệt." KHÔNG khẳng định "không có".
@@ -27,27 +31,32 @@ SYSTEM_PROMPT = """Bạn là trợ lý tư vấn xe VinFast tại Việt Nam.
    - "Trần kính toàn cảnh" (Panoramic Glass Roof): Mặt kính cố định lấy sáng, KHÔNG mở được ra ngoài (tùy chọn trên VF 7 Plus, trang bị trên VF 9 Plus). CẤM gọi trần kính cố định là cửa sổ trời đóng mở được.
    - TUYỆT ĐỐI KHÔNG gán tính năng của xe A (đóng mở bằng giọng nói của VF 8) sang cho xe B (VF 7).
 7. ĐÚNG TRỌNG TÂM PHIÊN BẢN: Khi người dùng hỏi về một phiên bản cụ thể (ví dụ: VF 7 Plus AWD), CHỈ trả lời giá và thông tin của đúng phiên bản đó (879 triệu đồng). KHÔNG tự ý liệt kê thêm các phiên bản biến thể khác (như bản trần kính 899 triệu) nếu người dùng không hỏi đến.
+8. AN TOÀN KHẨN CẤP & CỨU HỘ: Khi phát hiện xe báo lỗi điện cao áp, mùi khét, sự cố pin/sạc nghiêm trọng: Khuyên người dùng dừng xe nơi an toàn, tắt máy, tuyệt đối không tự ý tháo lắp bộ sạc/pin, và liên hệ ngay Hotline Cứu hộ VinFast 24/7: **1900 23 23 89** hoặc mang xe đến Trung tâm dịch vụ/Xưởng dịch vụ gần nhất.
+9. BẢO MẬT VIN & THÔNG TIN CÁ NHÂN: Trợ lý AI không có quyền truy cập dữ liệu cá nhân (số VIN, tài khoản, lịch sử bảo dưỡng riêng của xe). Cảnh báo người dùng tuyệt đối KHÔNG cung cấp mã OTP hay thông tin bảo mật cho AI. Hướng dẫn kiểm tra trực tiếp qua ứng dụng VinFast hoặc liên hệ Hotline **1900 23 23 89**.
+10. GẶP NHÂN VIÊN & KHIẾU NẠI DỊCH VỤ: Khi người dùng muốn gặp nhân viên hỗ trợ, khiếu nại dịch vụ đại lý hoặc cần đại lý xác nhận giá chốt: Hướng dẫn liên hệ Tổng đài Chăm sóc khách hàng VinFast **1900 23 23 89** hoặc đến trực tiếp Showroom/Đại lý VinFast gần nhất.
+11. TỔNG HỢP TÍNH NĂNG TOÀN DANH MỤC: Khi người dùng hỏi xe nào có tính năng gì (ví dụ: "Xe nào có màn hình HUD?", "Xe nào có cửa sổ trời?"): Hãy rà soát toàn bộ context và trả lời trực tiếp danh sách xe trang bị (ví dụ: VF 8 Plus, VF 9 Plus có màn hình HUD), không hỏi lại người dùng khi context đã có dữ liệu.
 """
 
 
 SYNTHESIZE_PROMPT = """Bạn là trợ lý tư vấn xe VinFast. Tổng hợp thông tin dưới đây thành câu trả lời ngắn gọn, chính xác.
 
+## Yêu cầu của người dùng:
+{query}
+
+## Dữ liệu tham khảo (Context):
+{context}
+
 QUAN TRỌNG:
-- Context cung cấp đầy đủ thông tin về xe (Bảng giá các phiên bản, Tùy chọn nâng cấp options, Bảng màu sắc & phụ phí, Toàn bộ thông số kỹ thuật, Tài liệu chính thức). Hãy đọc kỹ toàn bộ context để trả lời đúng và đầy đủ nhất.
+- Đọc kỹ toàn bộ context để trả lời đúng và đầy đủ nhất cho câu hỏi của người dùng ở trên.
 - QUY TẮC DẪN NGUỒN:
   * ƯU TIÊN link Brochure PDF chính thức (ví dụ: [Brochure VF 8 - Trang 19](https://.../VF8_Brochure_03022026.pdf)).
   * CẤM dẫn link đặt cọc (`dat-coc-*.html`, `shop.vinfastauto.com/vn_vi/dat-coc-*`) khi người dùng hỏi về thông số/tính năng xe.
 - CHỈ dùng thông tin trong context. KHÔNG thêm thông tin ngoài context. KHÔNG tự bịa số liệu.
-- KHI SO SÁNH / HỎI CHUNG XE NÀO CÓ TÍNH NĂNG: Mỗi model có specs riêng. TUYỆT ĐỐI KHÔNG lấy specs/tính năng của model A gán cho model B.
+- KHI HỎI CHUNG XE NÀO CÓ TÍNH NĂNG: Rà soát context của từng xe và nêu rõ model nào có / không có trang bị.
 - PHÂN BIỆT RÕ RÀNG:
   * "Cửa sổ trời" (Sunroof): Mở trượt lật được, chỉnh điện & giọng nói (VF 8 Plus).
-  * "Trần kính toàn cảnh" (Panoramic Glass Roof): Kính trần cố định lấy sáng, KHÔNG mở được (VF 7 Plus - tùy chọn, VF 9 Plus). Nếu user hỏi cửa sổ trời, chỉ khẳng định VF 8 Plus có cửa sổ trời mở được, và có thể chú thích thêm VF 7/VF 9 có trần kính cố định.
-- Nếu context không có thông tin được hỏi → nói rõ: "Thông tin về [topic] hiện chưa có trong dữ liệu đã được phê duyệt cho [model]."
-
-Context:
-{context}
-
-Câu hỏi: {query}
+  * "Trần kính toàn cảnh" (Panoramic Glass Roof): Kính trần cố định lấy sáng, KHÔNG mở được (VF 7 Plus - tùy chọn, VF 9 Plus).
+- TÌNH HUỐNG KHẨN CẤP / BẢO MẬT / HOTLINE: Luôn cung cấp số Hotline VinFast **1900 23 23 89** khi gặp sự cố kỹ thuật khẩn cấp, tra cứu cá nhân hoặc yêu cầu khiếu nại.
 """
 
 
@@ -85,6 +94,7 @@ _STATIC_FALLBACK_CATALOG = """### Dòng xe: VF 2 (Mã: VF2)
   - Giá niêm yết: Eco: 898.000.000 VNĐ | Plus: 1.079.000.000 VNĐ
   - Thông số: Quãng đường Eco: 562 km (NEDC) / 471 km (WLTP) | Plus: 457 km (NEDC) / 400 km (WLTP).
   - Cửa sổ trời: Bản Plus có cửa sổ trời mở trượt/lật chỉnh điện và giọng nói. Bản Eco không có.
+  - Màn hình HUD: Trang bị tiêu chuẩn trên VF 8 Plus.
 
 ### Dòng xe: VF 8 The All New (Mã: VF8NEW)
   - Giá niêm yết: The All New (2026): 899.000.000 VNĐ
@@ -92,12 +102,13 @@ _STATIC_FALLBACK_CATALOG = """### Dòng xe: VF 2 (Mã: VF2)
 ### Dòng xe: VF 9 (Mã: VF9)
   - Giá niêm yết: Eco: 1.348.000.000 VNĐ | Plus (7 chỗ): 1.529.000.000 VNĐ | PlusCaptain (6 chỗ): 1.561.000.000 VNĐ
   - Trần kính: Trang bị sẵn trần kính toàn cảnh cố định trên bản Plus.
+  - Màn hình HUD: Trang bị tiêu chuẩn trên VF 9 Plus.
 
 ### Dòng xe: VF MPV 7 (Mã: VFMPV7)
   - Giá niêm yết: Eco: 750.000.000 VNĐ
 
 ### Hotline & Kênh Hỗ trợ Khách hàng:
-- Hotline VinFast 24/7: **1900 23 23 89** (Hỗ trợ tư vấn, cứu hộ khẩn cấp, khiếu nại).
+- Hotline VinFast 24/7: **1900 23 23 89** (Hỗ trợ tư vấn, cứu hộ khẩn cấp 24/7, khiếu nại dịch vụ).
 """
 
 
@@ -107,52 +118,71 @@ async def get_system_prompt() -> str:
         return _prompt_cache
 
     try:
-        pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
-        conn = await asyncpg.connect(pg_url)
+        pool = _pg_pool
+        if pool is not None:
+            async with pool.acquire() as conn:
+                price_rows = await conn.fetch(
+                    "SELECT model_id, edition_id, price_list_vnd, price_promo_vnd "
+                    "FROM price_list_active ORDER BY model_id, price_list_vnd"
+                )
+                opt_rows = await conn.fetch(
+                    "SELECT model_id, version_name, option_name, value_name, price_extra_vnd "
+                    "FROM car_options_active ORDER BY model_id, version_name, option_name"
+                )
+                col_rows = await conn.fetch(
+                    "SELECT model_id, version_name, color_name, color_type, color_fee_vnd "
+                    "FROM car_colors_active ORDER BY model_id, version_name, color_name"
+                )
+                spec_rows = await conn.fetch(
+                    "SELECT model_code, version_name, spec_key, spec_value, spec_unit "
+                    "FROM car_specs "
+                    "WHERE spec_key IN ('range_km', 'power_kw', 'torque_nm', 'battery_kwh', 'seats', 'top_speed_kmh', 'head_up_display', 'sunroof_type', 'surround_view_camera') "
+                    "ORDER BY model_code, version_name, spec_key"
+                )
+        else:
+            pg_url = settings.postgres_url.replace("postgresql+asyncpg://", "postgresql://")
+            conn = await asyncpg.connect(pg_url)
+            try:
+                price_rows = await conn.fetch(
+                    "SELECT model_id, edition_id, price_list_vnd, price_promo_vnd "
+                    "FROM price_list_active ORDER BY model_id, price_list_vnd"
+                )
+                opt_rows = await conn.fetch(
+                    "SELECT model_id, version_name, option_name, value_name, price_extra_vnd "
+                    "FROM car_options_active ORDER BY model_id, version_name, option_name"
+                )
+                col_rows = await conn.fetch(
+                    "SELECT model_id, version_name, color_name, color_type, color_fee_vnd "
+                    "FROM car_colors_active ORDER BY model_id, version_name, color_name"
+                )
+                spec_rows = await conn.fetch(
+                    "SELECT model_code, version_name, spec_key, spec_value, spec_unit "
+                    "FROM car_specs "
+                    "WHERE spec_key IN ('range_km', 'power_kw', 'torque_nm', 'battery_kwh', 'seats', 'top_speed_kmh', 'head_up_display', 'sunroof_type', 'surround_view_camera') "
+                    "ORDER BY model_code, version_name, spec_key"
+                )
+            finally:
+                await conn.close()
 
-        # 1. Prices by model & edition
-        price_rows = await conn.fetch(
-            "SELECT model_id, edition_id, price_list_vnd, price_promo_vnd "
-            "FROM price_list_active ORDER BY model_id, price_list_vnd"
-        )
         prices_by_model = {}
         for r in price_rows:
             mid = r["model_id"]
             prices_by_model.setdefault(mid, []).append(r)
 
-        # 2. Options by model & version
-        opt_rows = await conn.fetch(
-            "SELECT model_id, version_name, option_name, value_name, price_extra_vnd "
-            "FROM car_options_active ORDER BY model_id, version_name, option_name"
-        )
         opts_by_model = {}
         for r in opt_rows:
             mid = r["model_id"]
             opts_by_model.setdefault(mid, []).append(r)
 
-        # 3. Colors by model & version
-        col_rows = await conn.fetch(
-            "SELECT model_id, version_name, color_name, color_type, color_fee_vnd "
-            "FROM car_colors_active ORDER BY model_id, version_name, color_name"
-        )
         cols_by_model = {}
         for r in col_rows:
             mid = r["model_id"]
             cols_by_model.setdefault(mid, []).append(r)
 
-        # 4. Key specs by model
-        spec_rows = await conn.fetch(
-            "SELECT model_code, version_name, spec_key, spec_value, spec_unit "
-            "FROM car_specs "
-            "WHERE spec_key IN ('range_km', 'power_kw', 'torque_nm', 'battery_kwh', 'seats', 'top_speed_kmh', 'head_up_display', 'sunroof_type', 'surround_view_camera') "
-            "ORDER BY model_code, version_name, spec_key"
-        )
         specs_by_model = {}
         for r in spec_rows:
             mc = r["model_code"]
             specs_by_model.setdefault(mc, []).append(r)
-
-        await conn.close()
 
         models = [
             ("VF 2", "VF2"),

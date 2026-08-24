@@ -1,7 +1,15 @@
-"""Direct fetch node — chạy tool plan deterministic (không cần LLM chọn tool).
+"""
+DEPRECATED — direct_fetch_node KHÔNG được đăng ký trong graph hiện tại.
 
-Kết quả cùng shape với execute_tools_node để validate/generate/respond
-dùng lại nguyên vẹn.
+Lý do: tham chiếu state.get("intent") và state.get("summary") không tồn tại
+trong AgentState → crash ngay nếu nối vào graph.
+
+Để sử dụng lại:
+  1. Thêm "intent: str" và "summary: str | None" vào AgentState (graph_state.py)
+  2. Implement classify → direct_fetch route trong graph.py
+  3. Chạy full test suite trước khi deploy
+
+Hiện tại graph dùng call_tools_node thay thế.
 """
 
 import asyncio

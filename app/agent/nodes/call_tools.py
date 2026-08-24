@@ -12,10 +12,6 @@ import time
 from app.agent.graph_state import AgentState
 from app.agent.prompts import get_system_prompt
 from app.agent.tools import (
-    get_specs,
-    get_price,
-    get_colors,
-    get_options,
     list_available_models,
     search_knowledge_base,
     get_active_promotions,
@@ -79,26 +75,28 @@ async def call_tools_node(state: AgentState) -> dict:
     }
 
 
+async def _cached_call(name: str, cache_type: str, func, *args, cache_hits: set) -> dict:
+    """Helper dùng chung: gọi cached function, track cache hit. Thread-safe qua tham số cache_hits."""
+    try:
+        data, hit = await func(*args)
+        if hit:
+            cache_hits.add(cache_type)
+        return {"tool": name, "result": data, "success": True, "cache_hit": hit}
+    except Exception as e:
+        logger.warning("Tool %s failed: %s", name, e)
+        return {"tool": name, "result": {"error": str(e)}, "success": False}
+
+
 async def _call_model_tools(model_code: str, version: str, category: str, query: str) -> tuple[list[dict], set[str]]:
     """Fetch complete context for the model in parallel: prices, options, colors, all specs, and KB."""
     cache_hits: set[str] = set()
 
-    async def _cached(name: str, cache_type: str, func, *args):
-        try:
-            data, hit = await func(*args)
-            if hit:
-                cache_hits.add(cache_type)
-            return {"tool": name, "result": data, "success": True, "cache_hit": hit}
-        except Exception as e:
-            logger.warning("Tool %s failed: %s", name, e)
-            return {"tool": name, "result": {"error": str(e)}, "success": False}
-
     # Parallel retrieval of all dimensions for this car model
     tasks = [
-        _cached("get_price", "price", get_price_cached, model_code, None),
-        _cached("get_options", "options", get_options_cached, model_code, None),
-        _cached("get_colors", "colors", get_colors_cached, model_code, None),
-        _cached("get_specs", "specs", get_specs_cached, model_code, None, None),
+        _cached_call("get_price", "price", get_price_cached, model_code, None, cache_hits=cache_hits),
+        _cached_call("get_options", "options", get_options_cached, model_code, None, cache_hits=cache_hits),
+        _cached_call("get_colors", "colors", get_colors_cached, model_code, None, cache_hits=cache_hits),
+        _cached_call("get_specs", "specs", get_specs_cached, model_code, None, None, cache_hits=cache_hits),
         _safe_call("search_knowledge_base", search_knowledge_base, query, model_code),
     ]
 
@@ -107,29 +105,39 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
 
 
 async def _call_cross_model_tools(query: str, model_codes: list[str] | None = None) -> list[dict]:
-    """Call tools for cross-model / comparison queries or fleet-wide questions."""
+    """Call tools for cross-model / comparison queries or fleet-wide questions.
+
+    Fix #7: Dùng cached functions thay vì gọi thẳng DB để giảm latency query so sánh.
+    """
+
     mentioned = list(model_codes) if model_codes else _distinct_models(query)
 
     if mentioned:
-        # Fetch complete info for each mentioned model
+        # Fetch complete info for each mentioned model — dùng cache để giảm latency
+        cache_hits: set[str] = set()
         tasks = []
         for mc in mentioned:
-            tasks.append(_safe_call("get_price", get_price, mc, None))
-            tasks.append(_safe_call("get_options", get_options, mc, None))
-            tasks.append(_safe_call("get_colors", get_colors, mc, None))
-            tasks.append(_safe_call("get_specs", get_specs, mc, None, None))
+            tasks.append(_cached_call("get_price", "price", get_price_cached, mc, None, cache_hits=cache_hits))
+            tasks.append(_cached_call("get_options", "options", get_options_cached, mc, None, cache_hits=cache_hits))
+            tasks.append(_cached_call("get_colors", "colors", get_colors_cached, mc, None, cache_hits=cache_hits))
+            tasks.append(_cached_call("get_specs", "specs", get_specs_cached, mc, None, None, cache_hits=cache_hits))
         tasks.append(_safe_call("search_knowledge_base", search_knowledge_base, query))
         return list(await asyncio.gather(*tasks))
     else:
-        # Fleet-wide catalog
+        # Fleet-wide catalog — lấy tất cả model (không cache để đảm bảo fresh data)
         r_models = await _safe_call("list_available_models", list_available_models)
         results = [r_models]
         active_models = ["VF 3", "VF 5", "VF 6", "VF 7", "VF 8", "VF 9", "VF 8 All New", "VF MPV 7"]
+        cache_hits_fleet: set[str] = set()
         tasks = []
         for m in active_models:
-            tasks.append(_safe_call("get_price", get_price, m))
-            tasks.append(_safe_call("get_specs", get_specs, m, None, None))
-            tasks.append(_safe_call("get_options", get_options, m, None))
+            tasks.append(_cached_call("get_price", "price", get_price_cached, m, None, cache_hits=cache_hits_fleet))
+            tasks.append(
+                _cached_call("get_specs", "specs", get_specs_cached, m, None, None, cache_hits=cache_hits_fleet)
+            )
+            tasks.append(
+                _cached_call("get_options", "options", get_options_cached, m, None, cache_hits=cache_hits_fleet)
+            )
         tasks.append(_safe_call("search_knowledge_base", search_knowledge_base, query))
         res = await asyncio.gather(*tasks)
         results.extend(res)
