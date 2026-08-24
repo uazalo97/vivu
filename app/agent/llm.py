@@ -129,6 +129,9 @@ async def _stream_chat(llm, model: str, messages: list, writer, **kwargs) -> tup
     tool_calls_acc: dict[int, dict] = {}
     got_chunk = False
     word_buffer = ""
+    # Newer models (gpt-5+, o1, o3) require max_completion_tokens instead of max_tokens
+    if "max_tokens" in kwargs and not model.lower().startswith("gpt-4"):
+        kwargs["max_completion_tokens"] = kwargs.pop("max_tokens")
     try:
         stream = await llm.chat.completions.create(model=model, messages=messages, stream=True, **kwargs)
         async for chunk in stream:
