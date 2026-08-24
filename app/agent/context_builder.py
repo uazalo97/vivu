@@ -1,6 +1,7 @@
 import re
 
 _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
+_last_query = ""  # Set by build_structured_context for spec relevance sorting
 
 # Query keywords → relevant spec categories
 _QUERY_TOPIC_MAP = {
@@ -149,6 +150,8 @@ def _query_relevant_categories(query: str) -> set[str] | None:
 
 
 def build_structured_context(tool_results: list[dict], query: str = "") -> str:
+    global _last_query
+    _last_query = query
     sections = []
     relevant_cats = _query_relevant_categories(query)
     price_results = []
@@ -371,6 +374,25 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
     grouped: dict[tuple, list] = {}
     for s in specs:
         grouped.setdefault((s["category"], s["key"]), []).append(s)
+
+    # Sort by relevance: keys matching query keywords come first
+    query_lower = _last_query.lower()
+    if query_lower:
+        def _relevance(item):
+            (_cat, key), rows = item
+            key_lower = key.lower()
+            # Exact key match → highest priority
+            if query_lower in key_lower or key_lower in query_lower:
+                return 0
+            # Value contains query keywords
+            if any(query_lower in str(r.get("value", "")).lower() for r in rows):
+                return 1
+            # Label contains query
+            label = _SPEC_KEY_LABELS.get(key, "").lower()
+            if query_lower in label or label in query_lower:
+                return 0
+            return 2
+        grouped = dict(sorted(grouped.items(), key=_relevance))
 
     current_cat = None
     count = 0
