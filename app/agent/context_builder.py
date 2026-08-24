@@ -3,6 +3,39 @@ import re
 _TOKEN_RE = re.compile(r"[a-zà-ỹ0-9]+", re.UNICODE)
 _last_query = ""  # Set by build_structured_context for spec relevance sorting
 
+# Query keyword → spec_key aliases for relevance sorting
+_QUERY_SPEC_ALIASES = {
+    "hud": "head_up_display",
+    "head up": "head_up_display",
+    "màn hình hiển thị": "head_up_display",
+    "camera 360": "surround_view_camera",
+    "camera lùi": "rearview_camera",
+    "túi khí": "airbags",
+    "airbag": "airbags",
+    "phanh": "brake_type",
+    "abs": "abs",
+    "công suất": "power_kw",
+    "mô men": "torque_nm",
+    "xoắn": "torque_nm",
+    "tốc độ": "top_speed_kmh",
+    "pin": "battery_kwh",
+    "sạc": "fast_charge_min",
+    "quãng đường": "range_km",
+    "phạm vi": "range_km",
+    "chỗ ngồi": "seats",
+    "số chỗ": "seats",
+    "kích thước": "length_mm",
+    "chiều dài": "length_mm",
+    "chiều rộng": "width_mm",
+    "chiều cao": "height_mm",
+    "trọng lượng": "curb_weight_kg",
+    "khoảng sáng": "ground_clearance_mm",
+    "gầm": "ground_clearance_mm",
+    "dẫn động": "drivetrain",
+    "la zăng": "wheel_size_inch",
+    "mâm": "wheel_size_inch",
+}
+
 # Query keywords → relevant spec categories
 _QUERY_TOPIC_MAP = {
     # battery
@@ -378,20 +411,26 @@ def _format_specs(result: dict, relevant_cats: set[str] | None = None) -> str:
     # Sort by relevance: keys matching query keywords come first
     query_lower = _last_query.lower()
     if query_lower:
+        # Resolve query aliases to spec keys
+        alias_keys = set()
+        for alias, spec_key in _QUERY_SPEC_ALIASES.items():
+            if alias in query_lower:
+                alias_keys.add(spec_key)
+
         def _relevance(item):
             (_cat, key), rows = item
             key_lower = key.lower()
-            # Exact key match → highest priority
+            # Alias match (e.g., "hud" → head_up_display) → highest priority
+            if key in alias_keys:
+                return 0
+            # Exact key match
             if query_lower in key_lower or key_lower in query_lower:
                 return 0
-            # Value contains query keywords
-            if any(query_lower in str(r.get("value", "")).lower() for r in rows):
-                return 1
             # Label contains query
             label = _SPEC_KEY_LABELS.get(key, "").lower()
             if query_lower in label or label in query_lower:
                 return 0
-            return 2
+            return 1
         grouped = dict(sorted(grouped.items(), key=_relevance))
 
     current_cat = None
