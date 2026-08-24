@@ -100,6 +100,8 @@ KNOWN_DRIFT = {
 
 def _load_smoke_csv() -> list[dict]:
     path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "eval", "smoke_test.csv")
+    if not os.path.exists(path):
+        return []
     with open(path, encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 

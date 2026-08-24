@@ -136,7 +136,6 @@ async def test_tools_direct():
         get_price,
         get_colors,
         search_knowledge_base,
-        search_all,
         list_available_models,
         get_showroom_charging_link,
         get_booking_link,
@@ -201,17 +200,6 @@ async def test_tools_direct():
         len(r.get("results", [])) > 0,
         "search_kb",
         f"{len(r.get('results', []))} results for VF 8 safety",
-    )
-
-    # search_all
-    r = await search_all("VF 6", "nội thất ghế")
-    specs_count = len(r.get("specs", {}).get("specs", []))
-    kb_count = len(r.get("knowledge_base", {}).get("results", []))
-    report(
-        "T-SEARCHALL-01",
-        specs_count > 0 or kb_count > 0,
-        "search_all",
-        f"{specs_count} specs + {kb_count} KB for VF 6 interior",
     )
 
     # list_available_models

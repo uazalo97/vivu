@@ -673,6 +673,20 @@ async def classify_node(state: AgentState) -> dict:
             "response_text": _GREETING_RESPONSE,
         }
 
+    # Ambiguous pronoun ("mẫu này", "xe này") without a clear model → clarify FIRST,
+    # before utility/other keyword checks that might match incidentally
+    # (e.g. "Mẫu này giá lăn bánh bao nhiêu?" — "lăn bánh" matches utility but
+    # "mẫu này" is ambiguous).
+    if not has_model and _AMBIGUOUS_PRONOUN_RE.search(query):
+        return {
+            "decision": "clarify",
+            "reason_code": "ambiguous_context",
+            "response_text": "Bạn muốn hỏi về xe nào?",
+            "entities": cr.entities,
+            "specificity": "unclear",
+            "category": topic,
+        }
+
     # Utility queries (showroom, charging station, booking, loan, promotions)
     # take precedence over model/topic routing — they don't need a model.
     if _UTILITY_QUERY_RE.search(query):
@@ -767,7 +781,8 @@ async def classify_node(state: AgentState) -> dict:
     # tiếp tục scan tất cả model thay vì clarify lại "Bạn muốn hỏi về xe nào?".
     _followup_marker = re.search(r"(^còn\b|thì\s*sao|thế\s*nào|nào\s*nữa|còn\s*không)", query, re.I)
     _scan_all_models = _CROSS_MODEL_FEATURE_RE.search(query) or (
-        not query_has_model and not hist_ctx["model_code"] and topic != "general" and bool(_followup_marker)
+        not query_has_model and not hist_ctx["model_code"] and topic != "general"
+        and bool(_followup_marker) and _CAR_RELATED_RE.search(query)
     )
     if not query_has_model and _scan_all_models:
         cross_topic = _classify_topic(query)
@@ -782,15 +797,6 @@ async def classify_node(state: AgentState) -> dict:
         }
 
     if not has_model:
-        if _AMBIGUOUS_PRONOUN_RE.search(query):
-            return {
-                "decision": "clarify",
-                "reason_code": "ambiguous_context",
-                "response_text": "Bạn muốn hỏi về xe nào?",
-                "entities": cr.entities,
-                "specificity": "unclear",
-                "category": topic,
-            }
         # Cross-model queries (xe nào rẻ nhất, giá dưới 600 triệu, nên mua...)
         # → answer with tools that work across all models
         if _CROSS_MODEL_RE.search(query):
