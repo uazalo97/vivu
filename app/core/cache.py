@@ -160,6 +160,8 @@ def _is_cacheable(
     """L1 gate: history==[] (falsy) + session_id truthy + intent not in blocklist.
 
     - history: chỉ cache khi falsy hoặc rỗng (single-turn). multi-turn → False
+      Đặc biệt: history chỉ chứa assistant welcome (không có role=user) thì vẫn coi là single-turn
+      (frontend persist luôn gửi WELCOME_MESSAGE trong history).
     - session_id: phải non-empty
     - intent: None → cho qua (agent_loop sẽ classify sau); lower() so với blocklist
     - CACHE_ENABLED=false → False (không cache)
@@ -167,7 +169,17 @@ def _is_cacheable(
     if not getattr(settings, "cache_enabled", True):
         return False
     if history:
-        return False
+        # Nếu history chỉ chứa non-user (assistant welcome / system) thì vẫn single-turn
+        try:
+            has_user = any(
+                isinstance(h, dict) and h.get("role") == "user" and str(h.get("content", "")).strip() != ""
+                for h in history
+            )
+            if has_user:
+                return False
+            # history truthy nhưng không có user -> vẫn cacheable (welcome only) -> fall through
+        except Exception:
+            return False
     if not session_id:
         return False
     if intent is not None:
@@ -178,7 +190,6 @@ def _is_cacheable(
         if iv in _ANS_NON_CACHEABLE_INTENTS:
             return False
     return True
-
 
 async def make_answer_key(
     query: str | None = None,
