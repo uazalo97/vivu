@@ -7,6 +7,30 @@ from app.agent.nodes.respond import AgentResult
 logger = logging.getLogger("bds.agent")
 
 
+def _chunk_cached_response(text: str, chunk_size: int = 24):
+    """Split cached answer into chunks for SSE streaming simulation."""
+    if not text:
+        return
+        yield  # make it a generator
+    # Split by words to keep natural boundaries, but limit chunk size
+    words = text.split(" ")
+    cur = ""
+    for w in words:
+        # +1 for space
+        if len(cur) + len(w) + 1 > chunk_size:
+            if cur:
+                yield cur + " "
+                cur = w
+            else:
+                # single long word
+                yield w + " "
+                cur = ""
+        else:
+            cur = cur + (" " if cur else "") + w
+    if cur:
+        yield cur
+
+
 class AgentLoop:
     def __init__(self):
         self.graph = get_compiled_graph()
@@ -177,18 +201,27 @@ class AgentLoop:
                         _dec = _cached.get("decision", "answer")
                         if not isinstance(_src, list):
                             _src = []
-                        # SSE replay: status -> cache -> answer/clarify -> sources -> done (no tool_call)
+                        # SSE replay: status -> cache -> streamed answer -> sources -> done (mimic LLM streaming)
                         yield {"type": "status", "content": "Đang tìm câu trả lời…"}
                         yield {"type": "cache", "content": {"hit": True, "type": "ans"}}
                         if _dec == "out_of_scope":
-                            yield {"type": "answer", "content": _resp}
+                            # stream even out_of_scope for consistency
+                            for _ch in _chunk_cached_response(_resp):
+                                yield {"type": "token", "content": _ch}
+                                await asyncio.sleep(0.015)
                         elif _dec == "clarify":
-                            yield {"type": "clarify", "content": _resp}
+                            for _ch in _chunk_cached_response(_resp):
+                                yield {"type": "token", "content": _ch}
+                                await asyncio.sleep(0.015)
                             yield {"type": "sources", "content": []}
                         elif _dec == "greeting":
-                            yield {"type": "answer", "content": _resp}
+                            for _ch in _chunk_cached_response(_resp):
+                                yield {"type": "token", "content": _ch}
+                                await asyncio.sleep(0.015)
                         else:
-                            yield {"type": "answer", "content": _resp}
+                            for _ch in _chunk_cached_response(_resp):
+                                yield {"type": "token", "content": _ch}
+                                await asyncio.sleep(0.015)
                             yield {"type": "sources", "content": _src}
                         yield {"type": "done"}
                         return
