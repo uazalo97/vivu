@@ -1,11 +1,13 @@
 import hashlib
 import json
 import logging
+import os
 import re
 import subprocess
 import time  # noqa: F401
 import unicodedata
 import uuid
+from collections import deque
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from enum import Enum
@@ -36,6 +38,7 @@ class ReasonCode(str, Enum):
     SOURCE_CONFLICT = "source_conflict"
     CITATION_FAILURE = "citation_failure"
     SYSTEM_ERROR = "system_error"
+    LLM_ERROR = "llm_error"
     GROUNDING_FAILURE = "grounding_failure"
     # out_of_scope
     UNSUPPORTED_MODEL = "unsupported_model"
@@ -75,6 +78,7 @@ _REASON_MAP = {
     "insufficient_evidence": ReasonCode.INSUFFICIENT_EVIDENCE,
     "no_citation": ReasonCode.CITATION_FAILURE,
     "grounding_fail": ReasonCode.GROUNDING_FAILURE,
+    "llm_error": ReasonCode.LLM_ERROR,
     "system_error": ReasonCode.SYSTEM_ERROR,
     "comparison": ReasonCode.UNSUPPORTED_COMPARISON,
     "recommendation": ReasonCode.UNSUPPORTED_RECOMMENDATION,
@@ -261,12 +265,40 @@ class DecisionLog:
         return d
 
 
+def _resolve_log_store_maxlen() -> int:
+    """Resolve LOG_STORE_MAXLEN from settings or env, default 5000."""
+    # ưu tiên settings.log_store_maxlen nếu có (đã load từ env trong app.config)
+    try:
+        v = getattr(settings, "log_store_maxlen", None)
+        if v is not None:
+            iv = int(v)
+            if iv > 0:
+                return iv
+    except Exception:
+        pass
+    # fallback: đọc trực tiếp env (hỗ trợ khi settings chưa có field)
+    env_val = os.getenv("LOG_STORE_MAXLEN")
+    if env_val:
+        try:
+            iv = int(env_val.strip())
+            if iv > 0:
+                return iv
+        except ValueError:
+            pass
+    return 5000
+
+
+LOG_STORE_MAXLEN = _resolve_log_store_maxlen()
+
+
 # ── Log Store (in-memory, exportable) ──────────────────────────────────────
 class LogStore:
-    """In-memory store for decision logs. Export to JSONL."""
+    """In-memory store for decision logs. Export to JSONL. FIFO capped at maxlen."""
 
-    def __init__(self):
-        self._logs: list[dict] = []
+    def __init__(self, maxlen: int | None = None):
+        resolved = maxlen if maxlen is not None else _resolve_log_store_maxlen()
+        self._maxlen = resolved
+        self._logs: deque[dict] = deque(maxlen=resolved)
         self._run_id = ""
         self._run_timestamp = ""
 
@@ -302,6 +334,9 @@ class LogStore:
     def clear(self):
         self._logs.clear()
 
+    def __len__(self) -> int:
+        return len(self._logs)
+
 
 log_store = LogStore()
 
@@ -313,6 +348,7 @@ REFUSAL_MESSAGES = {
     "no_citation": "Mình chưa thể xác nhận vì chưa có nguồn kiểm chứng hợp lệ.",
     "grounding_fail": "Mình chưa thể xác nhận thông tin này từ nguồn đã được phê duyệt hiện có.",
     "system_error": "Mình chưa thể hoàn tất câu trả lời lúc này. Vui lòng thử lại.",
+    "llm_error": "Mình chưa thể hoàn tất câu trả lời lúc này do kết nối AI gián đoạn. Bạn thử lại sau ít giây nhé.",
 }
 
 

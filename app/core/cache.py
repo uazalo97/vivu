@@ -369,4 +369,10 @@ async def invalidate_all() -> int:
     # Reset data_version memo để key mới sinh ngay sau promote
     global _dv_cache_time
     _dv_cache_time = 0.0
+    try:
+        from app.core.retrieval import invalidate_sparse_cache
+
+        invalidate_sparse_cache()
+    except Exception:
+        pass
     return total

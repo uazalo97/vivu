@@ -28,8 +28,11 @@ from app.core.cache import (
     get_options_cached,
 )
 from app.agent.nodes.classify import _distinct_models
+from app.agent.context_builder import _extract_query_feature_keys
 
 logger = logging.getLogger("bds.graph.call_tools")
+
+_HIGH_ACCURACY_KEYS = {"price_vnd", "promo_price_vnd", "range_km", "battery_kwh", "fast_charge_min", "specs", "colors", "options"}
 
 
 async def call_tools_node(state: AgentState) -> dict:
@@ -97,8 +100,12 @@ async def _call_model_tools(model_code: str, version: str, category: str, query:
         _cached_call("get_options", "options", get_options_cached, model_code, None, cache_hits=cache_hits),
         _cached_call("get_colors", "colors", get_colors_cached, model_code, None, cache_hits=cache_hits),
         _cached_call("get_specs", "specs", get_specs_cached, model_code, None, None, cache_hits=cache_hits),
-        _safe_call("search_knowledge_base", search_knowledge_base, query, model_code),
     ]
+
+    target_keys = _extract_query_feature_keys(query)
+    is_high_accuracy = bool(model_code) and bool(target_keys) and target_keys.issubset(_HIGH_ACCURACY_KEYS)
+    if not is_high_accuracy:
+        tasks.append(_safe_call("search_knowledge_base", search_knowledge_base, query, model_code))
 
     results = await asyncio.gather(*tasks)
     return list(results), cache_hits

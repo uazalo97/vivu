@@ -306,7 +306,7 @@ async def validate_node(state: AgentState) -> dict:
         [tr.get("tool") for tr in tool_results if tr.get("success")],
     )
 
-    # Only block on insufficient evidence — no grounding check (deferred to guardrails)
+    # Chặn insufficient evidence; grounding check áp dụng cho KB-backed answers (bên dưới)
     if assessment == "insufficient":
         logger.warning("VALIDATE: refuse — insufficient_evidence")
         return {
@@ -317,8 +317,24 @@ async def validate_node(state: AgentState) -> dict:
             "citations": [],
         }
 
+    # Grounding check chỉ áp dụng khi Qdrant đã được query (ngữ cảnh có nguồn KB).
+    # Case high-accuracy (giá/specs từ Postgres) không có search_knowledge_base → skip.
+    final_response = state.get("final_response", "")
+    kb_used = any(tr.get("tool") == "search_knowledge_base" and tr.get("success") for tr in tool_results)
+    if final_response and kb_used and not _check_grounding(final_response, tool_results, query):
+        logger.warning("VALIDATE: refuse — grounding_fail")
+        return {
+            "decision": "refuse",
+            "reason_code": "grounding_fail",
+            "response_text": REFUSAL_MESSAGES["grounding_fail"],
+            "assessment": assessment,
+            "citations": [],
+            "grounding_ok": False,
+        }
+
     return {
         "decision": "answer",
         "assessment": assessment,
+        "grounding_ok": True,
         "citations": citations,
     }

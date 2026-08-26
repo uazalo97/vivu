@@ -16,7 +16,7 @@ import logging
 import os
 import sys
 import time
-from collections import Counter  # noqa: F401
+from collections import Counter, deque  # noqa: F401
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -51,9 +51,8 @@ _SESSION = requests.Session()
 _adapter = HTTPAdapter(pool_connections=8, pool_maxsize=8, max_retries=_RETRY)
 _SESSION.mount("https://", _adapter)
 _SESSION.mount("http://", _adapter)
-
 # ── Metrics tích lũy: mỗi API call ghi 1 record ───────────────────────────
-_METRICS: list[dict] = []
+_METRICS: deque[dict] = deque(maxlen=2000)
 
 
 def record_metric(
@@ -87,7 +86,7 @@ def summarize_metrics() -> dict:
     """Tổng hợp metrics: số call, tổng latency, TTFT trung bình, token theo op."""
     by_op: dict[str, dict] = {}
     total = {"calls": 0, "latency_ms": 0.0, "ttft_ms": 0.0, "ttft_calls": 0, "input_tokens": 0, "output_tokens": 0}
-    for m in _METRICS:
+    for m in list(_METRICS):
         op = m["op"]
         acc = by_op.setdefault(
             op, {"calls": 0, "latency_ms": 0.0, "ttft_ms": 0.0, "ttft_calls": 0, "input_tokens": 0, "output_tokens": 0}
@@ -107,7 +106,6 @@ def summarize_metrics() -> dict:
         total["input_tokens"] += m["input_tokens"] or 0
         total["output_tokens"] += m["output_tokens"] or 0
     return {"by_op": by_op, "total": total}
-
 
 # Load .env từ repo root (backend/lib/../../.env)
 load_dotenv(Path(__file__).resolve().parents[2] / ".env")

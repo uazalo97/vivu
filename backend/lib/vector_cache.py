@@ -77,9 +77,47 @@ class VectorCache:
 
     def commit(self) -> None:
         self._conn.commit()
-
     def stats(self) -> dict:
         return {"hits": self.hits, "misses": self.misses}
+
+    def prune(self, max_age_days: int = 30, max_rows: int = 50000) -> dict:
+        """Xóa cache cũ / dư. Return {aged, trimmed, total}."""
+        cur = self._conn.cursor()
+        # 1) xóa theo age: created_at < now - N days
+        cur.execute(
+            "DELETE FROM vector_cache WHERE created_at < datetime('now', ?)",
+            (f"-{max_age_days} days",),
+        )
+        aged = cur.rowcount if cur.rowcount != -1 else 0
+        # 2) xóa theo size: giữ max_rows mới nhất (created_at ASC)
+        cur.execute("SELECT COUNT(*) FROM vector_cache")
+        row = cur.fetchone()
+        total = row[0] if row else 0
+        trimmed = 0
+        if total > max_rows:
+            to_delete = total - max_rows
+            cur.execute(
+                "DELETE FROM vector_cache WHERE hash IN ("
+                " SELECT hash FROM vector_cache ORDER BY created_at ASC LIMIT ?"
+                ")",
+                (to_delete,),
+            )
+            trimmed = cur.rowcount if cur.rowcount != -1 else to_delete
+        self._conn.commit()
+        # 3) thu hồi disk
+        if aged + trimmed > 0:
+            try:
+                self._conn.execute("VACUUM")
+            except Exception:
+                pass
+        cur.execute("SELECT COUNT(*) FROM vector_cache")
+        final_total = cur.fetchone()[0]
+        return {"aged": aged, "trimmed": trimmed, "total": final_total}
+
+    def stats_extended(self) -> dict:
+        cur = self._conn.execute("SELECT COUNT(*), SUM(LENGTH(vector)) FROM vector_cache")
+        cnt, sz = cur.fetchone()
+        return {"rows": cnt or 0, "bytes": sz or 0, "hits": self.hits, "misses": self.misses}
 
     def close(self) -> None:
         self._conn.commit()

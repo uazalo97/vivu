@@ -3,7 +3,8 @@ import time
 
 from app.agent.context_builder import build_structured_context
 from app.agent.graph_state import AgentState
-from app.agent.llm import OUTPUT_MAX_TOKENS, INPUT_MAX_TOKENS, stream_chat_with_fallback, get_llm, truncate_messages
+from app.agent.llm import OUTPUT_MAX_TOKENS, INPUT_MAX_TOKENS, stream_chat_with_fallback, get_llm, truncate_messages, PartialStreamError
+from app.agent.decision import REFUSAL_MESSAGES
 from app.agent.prompts import SYNTHESIZE_PROMPT
 
 logger = logging.getLogger("bds.graph.generate")
@@ -49,10 +50,21 @@ async def generate_node(state: AgentState) -> dict:
         new_response, _, _ = await stream_chat_with_fallback(llm, messages, max_tokens=OUTPUT_MAX_TOKENS)
         if new_response:
             final_response = new_response
+    except PartialStreamError:
+        # Đã stream được một phần token qua writer → giữ nguyên phần đã có, không ghi đè
+        logger.warning("generate_node: partial stream interrupted — keeping partial response")
+        return {
+            "final_response": final_response,
+            "t_generate_start": t_generate_start,
+            "t_generate_end": time.time(),
+        }
     except Exception as e:
         logger.error("generate_node LLM error (all models): %s", e)
         return {
-            "final_response": final_response,
+            "final_response": "",
+            "decision": "refuse",
+            "reason_code": "llm_error",
+            "response_text": REFUSAL_MESSAGES["llm_error"],
             "t_generate_start": t_generate_start,
             "t_generate_end": time.time(),
         }

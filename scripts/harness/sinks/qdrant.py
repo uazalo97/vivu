@@ -363,4 +363,14 @@ class QdrantSink:
             client.upsert(collection_name=sparse_col, points=sparse_points[i : i + 100])
 
         stats[sparse_col] = len(sparse_points)
+        # B1: prune VectorCache (fail-open, không ảnh hưởng ingest)
+        try:
+            from lib.vector_cache import VectorCache
+
+            vc = VectorCache()
+            res = vc.prune()
+            print(f"[VectorCache] prune {res}")
+            vc.close()
+        except Exception as e:
+            print(f"[VectorCache] prune failed (fail-open): {e}")
         return stats

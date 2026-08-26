@@ -68,6 +68,12 @@ _FEATURE_KEYWORD_MAP: list[tuple[set[str], tuple[str, ...]]] = [
         {"airbags", "surround_view_camera", "tpms", "rollover_mitigation"},
         (r"an\s*toàn", r"túi\s*khí", r"camera\s*360", r"phanh"),
     ),
+    (
+        {"price_vnd", "promo_price_vnd"},
+        (r"\bgi[aá]\b", r"bao\s*nhiêu\s*ti[eề]n", r"niêm\s*y[eế]t", r"ưu\s+[đd][ãa]i", r"tr[aả]\s+g[oó]p", r"\bcoc\b", r"lăn\s*bánh"),
+    ),
+    ({"colors"}, (r"\bmàu\b", r"màu\s*s[ắa]c", r"nội\s*thất\s*màu", r"mấy\s*màu")),
+    ({"options"}, (r"\boption\b", r"tùy\s*chọn", r"trang\s*bị\s*(gì|nào)", r"phụ\s*kiện")),
 ]
 
 

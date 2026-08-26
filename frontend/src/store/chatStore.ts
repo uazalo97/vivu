@@ -3,7 +3,7 @@
  * Widget chat tự chứa store riêng → độc lập, dễ nhúng vào trang khác.
  */
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 import { chatOnce, chatStream, setApiBase } from "../api/chat";
 import type { SseEvent, Source } from "../api/types";
 import { BRAND, HISTORY_LIMIT, WELCOME_MESSAGE } from "../config";
@@ -42,6 +42,61 @@ function uid(): string {
 
 let abortController: AbortController | null = null;
 let lastAborted = false;
+
+const vivuStorage = {
+  getItem(name: string): string | null {
+    try {
+      return localStorage.getItem(name);
+    } catch {
+      return null;
+    }
+  },
+  setItem(name: string, value: string): void {
+    try {
+      localStorage.setItem(name, value);
+    } catch (e) {
+      const err = e as { name?: string; code?: number };
+      const isQuota =
+        (e instanceof DOMException && (e.name === "QuotaExceededError" || e.code === 22 || e.code === 1014)) ||
+        err?.name === "QuotaExceededError" ||
+        err?.code === 22 ||
+        err?.code === 1014;
+      if (isQuota) {
+        console.warn("[vivu_chat_storage] QuotaExceededError, pruning to last 20 and retrying", e);
+        try {
+          const parsed = JSON.parse(value) as { state?: { messages?: unknown[] } };
+          if (Array.isArray(parsed?.state?.messages) && parsed.state.messages.length > 20) {
+            parsed.state.messages = parsed.state.messages.slice(-20);
+            localStorage.setItem(name, JSON.stringify(parsed));
+            return;
+          }
+        } catch {
+          // ignore parse error
+        }
+        try {
+          localStorage.removeItem(name);
+        } catch {
+          // ignore
+        }
+        console.warn("[vivu_chat_storage] cleared storage after QuotaExceeded");
+      } else {
+        console.warn("[vivu_chat_storage] setItem failed", e);
+        try {
+          localStorage.removeItem(name);
+        } catch {
+          // ignore
+        }
+      }
+    }
+  },
+  removeItem(name: string): void {
+    try {
+      localStorage.removeItem(name);
+    } catch {
+      // ignore
+    }
+  },
+};
 
 export const useChatStore = create<ChatState>()(
   persist(
@@ -214,10 +269,25 @@ export const useChatStore = create<ChatState>()(
     }),
     {
       name: "vivu_chat_storage",
+      version: 2,
+      storage: createJSONStorage(() => vivuStorage as unknown as Storage),
       partialize: (state) => ({
         sessionId: state.sessionId,
-        messages: state.messages,
+        messages: state.messages.slice(-50),
       }),
+      migrate: (persistedState: unknown, version: number) => {
+        const s = persistedState as { messages?: ChatMessage[] } | null | undefined;
+        if (version < 2 && s && typeof s === "object") {
+          s.messages = (s.messages?.slice(-50) ?? []) as ChatMessage[];
+        }
+        return persistedState as ChatState;
+      },
+      onRehydrateStorage: () => (state, error) => {
+        void state;
+        if (error) {
+          console.warn("[vivu_chat_storage] rehydrate failed", error);
+        }
+      },
     }
   )
 );

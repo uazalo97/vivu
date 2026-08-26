@@ -10,6 +10,7 @@ Theo dõi chỉ số vận hành của chatbot:
 """
 
 import asyncio
+import datetime
 import json
 import logging
 import time  # noqa: F401
@@ -597,3 +598,62 @@ async def get_metrics_realtime(window_min: int = 5) -> dict[str, Any]:
         for r in rows
     ]
     return {"status": "success", "window_min": window_min, "points": points}
+
+# ── Retention / Prune (B6) ───────────────────────────────────────────────────
+
+
+async def prune_old_metrics(days: int = 90) -> int:
+    """Xóa request_metrics cũ hơn N ngày. Trả số dòng đã xóa."""
+    # sanitize
+    try:
+        days_int = int(days)
+    except (TypeError, ValueError):
+        days_int = 90
+    if days_int < 0:
+        days_int = 0
+    try:
+        await ensure_telemetry_schema()
+        async def _prune() -> int:
+            pool = await get_pool()
+            # asyncpg expects datetime.timedelta for interval; dùng $1::interval với timedelta
+            status: str = await pool.execute(
+                "DELETE FROM request_metrics WHERE created_at < now() - $1::interval",
+                datetime.timedelta(days=days_int),
+            )
+            # status dạng "DELETE <n>"
+            try:
+                return int(status.split()[-1])
+            except Exception:
+                return 0
+
+        deleted = await run_with_db_retry(_prune, label="prune_old_metrics")
+    except Exception as exc:
+        logger.warning("prune_old_metrics failed: %s", exc)
+        return 0
+    logger.info("prune_old_metrics: deleted=%s older_than=%sd", deleted, days_int)
+    return deleted
+
+
+async def get_metrics_retention_info() -> dict[str, Any]:
+    """Trả thống kê retention: total + oldest/newest timestamp."""
+    try:
+        await ensure_telemetry_schema()
+
+        async def _fetch():
+            pool = await get_pool()
+            row = await pool.fetchrow(
+                "SELECT COUNT(*) AS total, MIN(created_at) AS oldest, MAX(created_at) AS newest FROM request_metrics"
+            )
+            return row
+
+        row = await run_with_db_retry(_fetch, label="get_metrics_retention_info")
+    except Exception as exc:
+        logger.warning("get_metrics_retention_info failed: %s", exc)
+        return {"total": 0, "oldest": None, "newest": None}
+    if row is None:
+        return {"total": 0, "oldest": None, "newest": None}
+    return {
+        "total": int(row["total"] or 0),
+        "oldest": row["oldest"].isoformat() if row["oldest"] else None,
+        "newest": row["newest"].isoformat() if row["newest"] else None,
+    }

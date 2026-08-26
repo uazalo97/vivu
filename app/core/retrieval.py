@@ -1,6 +1,7 @@
 import json
 import logging
 import re
+import time
 import unicodedata
 from collections import Counter
 from pathlib import Path
@@ -14,6 +15,7 @@ logger = logging.getLogger("retrieval")
 
 _reranker = None
 _sparse_index = None
+_sparse_index_time: float = 0.0
 _embed_client = None
 
 
@@ -64,36 +66,80 @@ def tokenize(text: str) -> list[str]:
 
 # ── Sparse index auto-detection (DB is source of truth) ─────────────────────
 _pg_current_version: str | None = None
-_pg_version_checked = False
+_pg_version_time: float = 0.0
+_pg_version_checked_at: float = 0.0  # alias for _pg_version_time — compat with cache invalidate tests
+_pg_version_checked = False  # legacy bool, kept for compat; TTL is source of truth
+_RETRIEVAL_TTL = 60  # giây — giống cache.data_version(), promote lan toả ≤60s không cần restart
+_TTL = 60  # alias
+_RETRIEVAL_ERROR_TTL = 10  # PG lỗi → retry sớm hơn, không khoá vĩnh viễn
+
+
+def invalidate_sparse_cache() -> None:
+    """Invalidate memo for sparse index + PG version — used by ingestion/promote hook & tests."""
+    global _sparse_index, _sparse_index_time, _pg_current_version, _pg_version_time, _pg_version_checked_at, _pg_version_checked
+    _sparse_index = None
+    _sparse_index_time = 0.0
+    _pg_current_version = None
+    _pg_version_time = 0.0
+    _pg_version_checked_at = 0.0
+    _pg_version_checked = False
+
+
+def _sync_pg_time(new_time: float) -> None:
+    global _pg_version_time, _pg_version_checked_at
+    _pg_version_time = new_time
+    _pg_version_checked_at = new_time
 
 
 def _get_current_version_from_db() -> str | None:
-    """Đọc version is_current từ PG ingest_version — DB là source of truth."""
-    global _pg_current_version, _pg_version_checked
-    if _pg_version_checked and _pg_current_version is not None:
+    """Đọc version is_current từ PG ingest_version — DB là source of truth, TTL 60s."""
+    global _pg_current_version, _pg_version_time, _pg_version_checked_at, _pg_version_checked
+    now = time.time()
+    # Compat: _pg_version_time và _pg_version_checked_at đồng bộ; lấy max để an toàn
+    pg_time = max(_pg_version_time, _pg_version_checked_at)
+    ttl = _RETRIEVAL_TTL if _pg_current_version is not None else _RETRIEVAL_ERROR_TTL
+    if now - pg_time < ttl:
         return _pg_current_version
     try:
         import psycopg2
 
         pg_url = settings.postgres_url.replace("+asyncpg://", "postgresql://").replace("+asyncpg", "")
         conn = psycopg2.connect(pg_url)
-        cur = conn.cursor()
-        cur.execute("SELECT version FROM ingest_version WHERE is_current LIMIT 1")
-        row = cur.fetchone()
-        conn.close()
+        cur = None
+        try:
+            cur = conn.cursor()
+            cur.execute("SELECT version FROM ingest_version WHERE is_current LIMIT 1")
+            row = cur.fetchone()
+        finally:
+            if cur is not None:
+                try:
+                    cur.close()
+                except Exception:
+                    pass
+            conn.close()
         if row and row[0]:
             _pg_current_version = str(row[0]).strip()
+            _sync_pg_time(time.time())
             _pg_version_checked = True
             return _pg_current_version
+        # DB trả về rỗng — vẫn là kết quả hợp lệ, cache TTL thường
+        _sync_pg_time(time.time())
+        _pg_version_checked = True
+        return None
     except Exception as e:
         logger.debug("PG current version query failed (fallback to file scan): %s", e)
-    _pg_version_checked = True
-    return None
+        # Fail giữ TTL ngắn 10s: nếu đã có version cũ, đặt time sao cho hết hạn sau 10s
+        if _pg_current_version is not None:
+            _sync_pg_time(time.time() - _RETRIEVAL_TTL + _RETRIEVAL_ERROR_TTL)
+        else:
+            _sync_pg_time(time.time())
+        _pg_version_checked = True
+        return None
 
 
 def _find_latest_sparse_index() -> Path | None:
     """Ưu tiên DB is_current, fallback scan file."""
-    global _sparse_index
+    global _sparse_index, _sparse_index_time
     # 0. Ưu tiên data_v2/retrieval/sparse_index.json từ Unified Harness
     data_v2_path = Path(__file__).resolve().parents[2] / "data_v2" / "retrieval" / "sparse_index.json"
     if data_v2_path.exists():
@@ -101,6 +147,7 @@ def _find_latest_sparse_index() -> Path | None:
             raw = data_v2_path.read_text(encoding="utf-8")
             idx = json.loads(raw)
             _sparse_index = idx
+            _sparse_index_time = time.time()
             return data_v2_path
         except Exception as e:
             logger.warning("Failed to load data_v2 sparse_index %s: %s", data_v2_path, e)
@@ -116,6 +163,7 @@ def _find_latest_sparse_index() -> Path | None:
                 raw = db_path.read_text(encoding="utf-8")
                 idx = json.loads(raw)
                 _sparse_index = idx
+                _sparse_index_time = time.time()
                 return db_path
             except Exception as e:
                 logger.warning("Failed to load DB version sparse_index %s: %s, falling back to scan", db_path, e)
@@ -128,6 +176,7 @@ def _find_latest_sparse_index() -> Path | None:
     # 2. Fallback: scan file lấy version cao nhất (hành vi cũ)
     best_num = -1
     best_path = None
+    best_idx = None
     for p in DATA_CLEAN_DIR.glob("*/sparse_index.json"):
         try:
             raw = p.read_text(encoding="utf-8")
@@ -137,27 +186,33 @@ def _find_latest_sparse_index() -> Path | None:
             if num > best_num:
                 best_num = num
                 best_path = p
-                _sparse_index = idx
+                best_idx = idx
         except Exception:
             continue
+    if best_path is not None and isinstance(best_idx, dict):
+        _sparse_index = best_idx
+        _sparse_index_time = time.time()
     return best_path
 
 
 def _load_sparse_index() -> dict:
-    global _sparse_index
-    if _sparse_index is None:
-        path = _find_latest_sparse_index()
-        if path is None or not isinstance(_sparse_index, dict):
-            _sparse_index = {}
+    global _sparse_index, _sparse_index_time
+    now = time.time()
+    if _sparse_index is not None and now - _sparse_index_time < _RETRIEVAL_TTL:
+        return _sparse_index or {}
+    path = _find_latest_sparse_index()
+    if _sparse_index is not None and isinstance(_sparse_index, dict):
+        if path is not None:
+            _sparse_index_time = time.time()  # reload thành công (kể cả cùng dữ liệu)
         else:
-            src = (
-                "DB is_current"
-                if _pg_current_version and path.name == "sparse_index.json" and path.parent.name == _pg_current_version
-                else "file scan"
-            )
-            ver = _sparse_index.get("version", "v3")
-            logger.info("Loaded sparse index from %s (version=%s, src=%s)", path, ver, src)
-    return _sparse_index or {}
+            _sparse_index_time = now  # negative cache ngắn: giữ index cũ, retry sau TTL
+        return _sparse_index
+    # Chưa từng load thành công
+    _sparse_index = {}
+    _sparse_index_time = now
+    if path is not None:
+        logger.warning("Sparse index path found (%s) but payload invalid — using empty index", path)
+    return _sparse_index
 
 
 def _query_to_sparse(query: str) -> dict | None:
