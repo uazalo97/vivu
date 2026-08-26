@@ -244,6 +244,7 @@ async def chat_stream(request: ChatRequest, http_request: Request):
 
         try:
             async for event in agent.run_stream(request.message, history, current_context, session_id=session_id):
+                etype = event.get("type")
                 if etype == "token" and first_token:
                     ttft_ms = int((time.time() - t0) * 1000)
                     first_token = False
