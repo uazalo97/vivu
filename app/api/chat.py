@@ -131,7 +131,7 @@ async def chat(request: ChatRequest, http_request: Request):
     current_context = session["current_context"]
 
     agent = get_agent()
-    result = await agent.run(request.message, history, current_context)
+    result = await agent.run(request.message, history, current_context, session_id=session_id)
     total_latency_ms = int((time.time() - t0) * 1000)
 
     # Persist turn + context + long-term memory (fail-open)
@@ -242,11 +242,8 @@ async def chat_stream(request: ChatRequest, http_request: Request):
         entities = {}
         category = ""
 
-        yield f"data: {json.dumps({'type': 'session', 'content': session_id}, ensure_ascii=False)}\n\n"
-
         try:
-            async for event in agent.run_stream(request.message, history, current_context):
-                etype = event.get("type")
+            async for event in agent.run_stream(request.message, history, current_context, session_id=session_id):
                 if etype == "token" and first_token:
                     ttft_ms = int((time.time() - t0) * 1000)
                     first_token = False

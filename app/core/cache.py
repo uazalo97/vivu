@@ -146,6 +146,208 @@ def _hs_key(dv: str, query: str, model_id: str | None, top_k: int, skip_rerank: 
     qh = _sha1(_norm_query(query))
     mid = _norm(model_id)
     return f"hs:{dv}:{qh}:{mid}:{top_k}:{int(skip_rerank)}"
+# ── Answer cache (ans:) — L1 exact-match single-turn ─────────────────────────
+# Chỉ cache khi single-turn (history == []), session_id non-empty,
+# intent ∉ {greeting,clarify,out_of_scope,chitchat}. Fail-open.
+_ANS_NON_CACHEABLE_INTENTS = {"greeting", "clarify", "out_of_scope", "chitchat"}
+
+
+def _is_cacheable(
+    history: list | None,
+    session_id: str | None,
+    intent: str | None = None,
+) -> bool:
+    """L1 gate: history==[] (falsy) + session_id truthy + intent not in blocklist.
+
+    - history: chỉ cache khi falsy hoặc rỗng (single-turn). multi-turn → False
+    - session_id: phải non-empty
+    - intent: None → cho qua (agent_loop sẽ classify sau); lower() so với blocklist
+    - CACHE_ENABLED=false → False (không cache)
+    """
+    if not getattr(settings, "cache_enabled", True):
+        return False
+    if history:
+        return False
+    if not session_id:
+        return False
+    if intent is not None:
+        try:
+            iv = str(intent).strip().lower()
+        except Exception:
+            iv = ""
+        if iv in _ANS_NON_CACHEABLE_INTENTS:
+            return False
+    return True
+
+
+async def make_answer_key(
+    query: str | None = None,
+    model_code: str | None = None,
+    version: str | None = None,
+    intent: str | None = None,
+    entities: dict | None = None,
+    **kwargs,
+) -> str:
+    """Build deterministic L1 ans key: ``ans:{dv}:{prompt_hash}:{llm}:{sha1(entities|norm_query)}``.
+
+    Hỗ trợ nhiều kiểu gọi để tương thích legacy test và spec:
+    - ``await make_answer_key(query, model_code, version)``
+    - ``await make_answer_key(query="...", entities={"model": "VF 8", ...})``
+    - ``await make_answer_key(entities={...}, query="...")``
+    - ``await make_answer_key(query, entities)`` (entities là dict vị trí thứ 2)
+
+    - ``dv``: await data_version() memo 60s LIVE
+    - ``prompt_hash``: local import ``get_prompt_hash()`` 12-char (tránh import cycle)
+    - ``llm``: settings.llm_model (đã strip prefix trong config)
+    - ``sha``: _sha1(entities_str|norm_query)[:16] với entities_str = norm(model_code)|norm(version)
+      (kèm intent nếu có để phân biệt intent khác nhau)
+    """
+    # --- Resolve flexible args / aliases ---
+    # query có thể bị truyền như dict ở vị trí đầu (swap)
+    if isinstance(query, dict) and entities is None:
+        entities = query
+        query = kwargs.pop("query", kwargs.pop("q", "")) or ""
+
+    if query is None:
+        query = kwargs.pop("query", None)
+        if query is None:
+            query = kwargs.pop("q", None)
+        if query is None:
+            query = ""
+
+    if not isinstance(query, str):
+        query = str(query) if query is not None else ""
+
+    # model_code là dict → thực chất là entities positional
+    if isinstance(model_code, dict) and entities is None:
+        entities = model_code
+        model_code = None
+
+    if entities is None:
+        entities = kwargs.pop("entities", None)
+        if entities is None:
+            entities = kwargs.pop("entity", None)
+
+    # kwargs aliases cho model_code / version / intent
+    if model_code is None:
+        model_code = kwargs.pop("model_code", None)
+        if model_code is None:
+            model_code = kwargs.pop("model", None)
+            if model_code is None:
+                model_code = kwargs.pop("model_id", None)
+                if model_code is None:
+                    model_code = kwargs.pop("modelCode", None)
+    if version is None:
+        version = kwargs.pop("version", None)
+        if version is None:
+            version = kwargs.pop("ver", None)
+    if intent is None:
+        intent = kwargs.pop("intent", None)
+
+    # Trích từ entities dict nếu còn thiếu
+    if isinstance(entities, dict):
+        if model_code is None:
+            model_code = entities.get("model_code")
+            if model_code is None:
+                model_code = entities.get("model")
+                if model_code is None:
+                    model_code = entities.get("model_id")
+        if version is None:
+            version = entities.get("version")
+        if intent is None:
+            intent = entities.get("intent")
+
+    # Fallback deterministic via classifier nếu vẫn thiếu model/version
+    if (model_code is None or version is None) and query:
+        try:
+            from app.agent.classifier import get_classifier
+
+            cls = get_classifier()
+            try:
+                cr = cls.classify(query)
+                if cr is not None and getattr(cr, "entities", None):
+                    ents = cr.entities or {}
+                    if model_code is None:
+                        mc = ents.get("model_code")
+                        if mc:
+                            model_code = mc
+                    if version is None:
+                        vc = ents.get("version")
+                        if vc:
+                            version = vc
+                elif model_code is None:
+                    try:
+                        detected, _raw = cls._detect_model(query)  # type: ignore[attr-defined]
+                        if detected:
+                            model_code = detected
+                    except Exception:
+                        pass
+            except Exception:
+                if model_code is None:
+                    try:
+                        detected, _raw = cls._detect_model(query)  # type: ignore[attr-defined]
+                        if detected:
+                            model_code = detected
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+
+    norm_q = _norm_query(query or "")
+    entities_str = f"{_norm(model_code)}|{_norm(version)}"
+    if intent is not None and str(intent).strip() != "":
+        hash_input = f"{entities_str}|{_norm(intent)}|{norm_q}"
+    else:
+        hash_input = f"{entities_str}|{norm_q}"
+    sha = _sha1(hash_input)
+
+    dv = await data_version()
+
+    # prompt_hash via local import (tránh cycle), sync 12-char
+    prompt_hash = "unknown"
+    try:
+        from app.agent.prompts import get_prompt_hash  # local import
+
+        ph = get_prompt_hash()
+        import inspect
+
+        if inspect.isawaitable(ph):
+            ph = await ph  # type: ignore[func-returns-value]
+        if isinstance(ph, str) and ph:
+            prompt_hash = ph
+        elif ph is not None:
+            prompt_hash = str(ph)
+    except Exception as e:  # pragma: no cover - fail-open
+        logger.debug("get_prompt_hash failed (fail-open): %s", e)
+        prompt_hash = "unknown"
+
+    llm_model = getattr(settings, "llm_model", "unknown")
+    if isinstance(llm_model, str) and "/" in llm_model:
+        llm_model = llm_model.split("/", 1)[-1]
+    llm_model = llm_model.strip() if isinstance(llm_model, str) else str(llm_model)
+    if not llm_model:
+        llm_model = "unknown"
+
+    return f"ans:{dv}:{prompt_hash}:{llm_model}:{sha}"
+
+
+async def get_ans_cached(key: str) -> dict | None:
+    """Lấy cached answer via _get_json (fail-open)."""
+    try:
+        return await _get_json(key)
+    except Exception as e:  # pragma: no cover - fail-open
+        logger.debug("get_ans_cached failed (fail-open): %s", e)
+        return None
+
+
+async def set_ans_cached(key: str, value: dict) -> None:
+    """Set cached answer via _set_json với ANS_TTL 30m (fail-open, CACHE_ENABLED gate)."""
+    try:
+        await _set_json(key, value, ANS_TTL)
+    except Exception as e:  # pragma: no cover - fail-open
+        logger.debug("set_ans_cached failed (fail-open): %s", e)
+        return
+
 
 
 # ── Redis get/set/delete (fail-open) ─────────────────────────────────────────
