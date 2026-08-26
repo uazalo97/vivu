@@ -325,19 +325,23 @@ class AgentLoop:
                         # if answer but yielded_tokens true, sources already handled; keep _sources_for_cache as above
                     # keep decision/sources for outer scope even before respond (default)
             if graph_error is not None:
+                logger.error("GRAPH ERROR %s", graph_error, exc_info=graph_error)
                 yield {"type": "error", "content": "Có lỗi xảy ra khi xử lý câu hỏi. Vui lòng thử lại."}
         finally:
             if not task.done():
                 task.cancel()
-        # Miss: SET ans cache if cacheable and answer (fail-open)
-        if _ans_cache_enabled and _ans_cache_key and _final_response_for_cache and _decision_for_cache == "answer":
-            try:
-                from app.core.cache import set_ans_cached
+            # Miss: SET ans cache if cacheable and answer (fail-open) — must be in finally to run even if client disconnects (GeneratorExit)
+            if _ans_cache_enabled and _ans_cache_key and _final_response_for_cache and _decision_for_cache == "answer":
+                try:
+                    from app.core.cache import set_ans_cached
 
-                await set_ans_cached(
-                    _ans_cache_key,
-                    {"response": _final_response_for_cache, "sources": _sources_for_cache, "decision": _decision_for_cache},
-                )
-            except Exception as e:
-                logger.debug("ans cache set failed (fail-open): %s", e)
+                    await set_ans_cached(
+                        _ans_cache_key,
+                        {"response": _final_response_for_cache, "sources": _sources_for_cache, "decision": _decision_for_cache},
+                    )
+                    logger.info("ANS SET DONE key=%s", _ans_cache_key)
+                except Exception as e:
+                    logger.debug("ans cache set failed (fail-open): %s", e)
+            else:
+                logger.info("ANS SET SKIP enabled=%s key=%s resp_len=%s decision=%s", _ans_cache_enabled, _ans_cache_key, len(_final_response_for_cache) if _final_response_for_cache else 0, _decision_for_cache)
         yield {"type": "done"}
