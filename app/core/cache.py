@@ -156,14 +156,18 @@ def _is_cacheable(
     history: list | None,
     session_id: str | None,
     intent: str | None = None,
+    query: str | None = None,
 ) -> bool:
     """L1 gate: history==[] (falsy) + session_id truthy + intent not in blocklist.
 
-    - history: chỉ cache khi falsy hoặc rỗng (single-turn). multi-turn → False
+    - history: chỉ cache khi falsy hoặc rỗng (single-turn) hoặc multi-turn nhưng query độc lập.
       Đặc biệt: history chỉ chứa assistant welcome (không có role=user) thì vẫn coi là single-turn
       (frontend persist luôn gửi WELCOME_MESSAGE trong history).
+      Multi-turn có user nhưng query độc lập (có model VF...) thì vẫn cache được
+      (ví dụ: giá vf7 -> price -> cache, xe này thông số -> cần context -> no cache, vf8 giá -> có model -> cache).
     - session_id: phải non-empty
     - intent: None → cho qua (agent_loop sẽ classify sau); lower() so với blocklist
+    - query: nếu history có user, kiểm tra query có model explicit thì vẫn cache
     - CACHE_ENABLED=false → False (không cache)
     """
     if not getattr(settings, "cache_enabled", True):
@@ -176,7 +180,21 @@ def _is_cacheable(
                 for h in history
             )
             if has_user:
-                return False
+                # Multi-turn: chỉ cache nếu query độc lập (có model explicit)
+                if query is not None and str(query).strip() != "":
+                    try:
+                        from app.agent.classifier import MODEL_RE  # local import tránh cycle
+
+                        if MODEL_RE.search(str(query)):
+                            # Query có model VF... -> độc lập, không cần history
+                            pass  # fall through -> check intent/session
+                        else:
+                            # Không có model -> cần context (xe này, còn, thông số) -> không cache
+                            return False
+                    except Exception:
+                        return False
+                else:
+                    return False
             # history truthy nhưng không có user -> vẫn cacheable (welcome only) -> fall through
         except Exception:
             return False
@@ -190,7 +208,6 @@ def _is_cacheable(
         if iv in _ANS_NON_CACHEABLE_INTENTS:
             return False
     return True
-
 async def make_answer_key(
     query: str | None = None,
     model_code: str | None = None,

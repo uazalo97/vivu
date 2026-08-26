@@ -33,7 +33,7 @@ class AgentLoop:
                         _intent_for_cache = "greeting"
                 except Exception:
                     pass
-            if _is_cacheable(history, session_id, _intent_for_cache):
+            if _is_cacheable(history, session_id, _intent_for_cache, query):
                 _model_code = None
                 _version = None
                 try:
@@ -139,7 +139,7 @@ class AgentLoop:
                         _intent_for_cache = "greeting"
                 except Exception:
                     pass
-            if _is_cacheable(history, session_id, _intent_for_cache):
+            if _is_cacheable(history, session_id, _intent_for_cache, query):
                 _model_code = None
                 _version = None
                 try:
